@@ -169,7 +169,7 @@ const doctoringPartOne: ReadingPart = {
     {
       id: "c6t4-p1-yes-no",
       type: "choice",
-      instruction: "Do the following statements agree with the views of the writer in Reading Passage 1? Write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the views of the writer in Reading Passage 1? In boxes 8-13 on your answer sheet, write YES if the statement agrees with the views of the writer NO if the statement contradicts the views of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [8], prompt: "Sales representatives like Kim Schaefer work to a very limited budget.", options: yesNoNotGiven },
         { questionNumbers: [9], prompt: "Kim Schaefer’s marketing technique may be open to criticism on moral grounds.", options: yesNoNotGiven },
@@ -221,7 +221,7 @@ const literateMothersPartTwo: ReadingPart = {
     {
       id: "c6t4-p2-yes-no",
       type: "choice",
-      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 2? Write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 2? In boxes 19-24 on your answer sheet, write YES if the statement agrees with the claims of the writer NO if the statement contradicts the claims of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [19], prompt: "About a thousand of the women interviewed by the researchers had learnt to read when they were children.", options: yesNoNotGiven },
         { questionNumbers: [20], prompt: "Before the National Literacy Crusade, illiterate women had approximately the same levels of infant mortality as those who had learnt to read in primary school.", options: yesNoNotGiven },

@@ -3,7 +3,7 @@ import { supabase } from "@/lib/supabase/client";
 
 export const SAT_QUESTION_OVERRIDE_SLUG = "sat-question-overrides";
 export type SatQuestionOverridePatch = Partial<Pick<SatQuestion, "contentBlocks" | "prompt" | "choices" | "correctAnswer" | "rationale" | "choiceRationales">>;
-export type SatQuestionOverride = { deleted?: boolean; patch?: SatQuestionOverridePatch; updatedAt?: string; updatedBy?: string };
+export type SatQuestionOverride = { deleted?: boolean; patch?: SatQuestionOverridePatch; created?: SatQuestion; setId?: string; updatedAt?: string; updatedBy?: string };
 export type SatQuestionOverrides = Record<string, SatQuestionOverride>;
 
 export async function loadSatQuestionOverrides(): Promise<SatQuestionOverrides> {
@@ -31,5 +31,14 @@ export async function saveSatQuestionOverrides(adminUserId: string, overrides: S
 }
 
 export function applySatQuestionOverrides(set: SatSet, overrides: SatQuestionOverrides): SatSet {
-  return { ...set, questions: set.questions.filter((question) => !overrides[question.id]?.deleted).map((question) => ({ ...question, ...(overrides[question.id]?.patch ?? {}) })) };
+  const questions = set.questions
+    .filter((question) => !overrides[question.id]?.deleted)
+    .map((question) => ({ ...question, ...(overrides[question.id]?.patch ?? {}) }));
+  const existingIds = new Set(questions.map((question) => question.id));
+  Object.entries(overrides).forEach(([id, override]) => {
+    if (!override.deleted && override.setId === set.id && override.created && !existingIds.has(id)) {
+      questions.push({ ...override.created, ...(override.patch ?? {}) });
+    }
+  });
+  return { ...set, questions, questionIds: questions.map((question) => question.id), expectedCount: questions.length };
 }

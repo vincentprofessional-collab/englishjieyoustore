@@ -160,6 +160,63 @@ test("word selection, paragraph matching and dictation retain distinct response 
   }
 });
 
+test("CET-4 passages, questions and options contain no exact duplicates or common OCR debris", () => {
+  const blockText = (block) => [block?.text || "", ...(block?.runs || []).filter((run) => run.type === "text").map((run) => run.text || "")].join(" ").replace(/\s+/gu, " ").trim();
+  const normalize = (text) => text.replace(/\s+/gu, " ").trim().toLocaleLowerCase();
+  const optionText = (option) => normalize((option.blocks || []).map(blockText).join(" "));
+  const wordBankLabels = "ABCDEFGHIJKLMNO".split("");
+
+  for (const { set } of sets) for (const section of set.sections) for (const group of section.groups) {
+    const passageTexts = group.stimulusBlocks.map(blockText).map(normalize).filter(Boolean);
+    assert.equal(new Set(passageTexts).size, passageTexts.length, `${set.id}/${group.id}: repeated passage block`);
+    const passageSet = new Set(passageTexts);
+    const surface = JSON.stringify({ instructions: group.instructions, stimulusBlocks: group.stimulusBlocks, questions: group.questions.map((question) => ({ promptBlocks: question.promptBlocks, options: question.options, referenceAnswer: question.answerSpec.kind === "reference" ? question.answerSpec.referenceAnswer : undefined })) });
+    assert.doesNotMatch(surface, /[\uFFFD\uE000-\uF8FF©®€₺]/u, `${set.id}/${group.id}: corrupted OCR marker remains`);
+    assert.doesNotMatch(surface, /\b(?:gowing|prople|subeay|HRIKILE|HSPORELF|EWE\s+GA)\b/iu, `${set.id}/${group.id}: known OCR error remains`);
+
+    for (const question of group.questions) {
+      const contentBlocks = [...question.promptBlocks, ...question.options.flatMap((option) => option.blocks)];
+      for (const block of contentBlocks) {
+        const text = normalize(blockText(block));
+        if (text && !/^\[附:答题卡/u.test(text)) assert.equal(passageSet.has(text), false, `${set.id}/${group.id}/${question.id}: question content is duplicated in the passage`);
+      }
+      if (question.type === "single_choice") {
+        const choices = question.options.map(optionText).filter(Boolean);
+        assert.equal(new Set(choices).size, choices.length, `${question.id}: repeated single-choice option`);
+      }
+    }
+
+    if (group.questions.some((question) => question.typeLabel === "选词填空")) {
+      const options = group.sharedOptions || [];
+      assert.deepEqual(options.map((option) => option.id), wordBankLabels, `${set.id}/${group.id}: word bank labels`);
+      const choices = options.map(optionText);
+      assert.ok(choices.every(Boolean), `${set.id}/${group.id}: empty word-bank option`);
+      assert.equal(new Set(choices).size, choices.length, `${set.id}/${group.id}: repeated word-bank option`);
+    }
+  }
+});
+
+test("repaired CET-4 writing references meet the prompt word limit", () => {
+  const blockText = (block) => [block?.text || "", ...(block?.runs || []).filter((run) => run.type === "text").map((run) => run.text || "")].join(" ").replace(/\s+/gu, " ").trim();
+  const ids = [
+    "cet4-paper-2018061-writing-response", "cet4-paper-2018062-writing-response", "cet4-paper-2018063-writing-response",
+    "cet4-paper-2019061-writing-response", "cet4-paper-2019062-writing-response",
+    "cet4-paper-2017061-writing-response", "cet4-paper-2017062-writing-response", "cet4-paper-2017063-writing-response",
+    "cet4-paper-2019121-writing-response", "cet4-paper-2019122-writing-response", "cet4-paper-2019123-writing-response",
+    "cet4-paper-2018121-writing-response", "cet4-paper-2018123-writing-response",
+    "cet4-paper-2016061-writing-response", "cet4-paper-2016062-writing-response", "cet4-paper-2016063-writing-response",
+    "cet4-paper-2016122-writing-response",
+  ];
+  const byId = new Map(sets.flatMap(({ set }) => set.sections.flatMap((section) => section.groups.flatMap((group) => group.questions.map((question) => [question.id, question])))));
+  for (const id of ids) {
+    const question = byId.get(id);
+    assert.ok(question, `${id}: writing question missing`);
+    const body = question.answerSpec.referenceAnswer.slice(1).map((block) => blockText(block)).join(" ");
+    const wordCount = body.match(/\b[A-Za-z]+(?:[’'][A-Za-z]+)?\b/gu)?.length || 0;
+    assert.ok(wordCount >= 120 && wordCount <= 180, `${id}: reference response has ${wordCount} words`);
+  }
+});
+
 test("old writing instructions use their actual outline topic", () => {
   const writing = practice.find(({ set }) => set.id === "practice-cet4-writing").set;
   for (const q of writing.sections.flatMap((section) => section.groups.flatMap((group) => group.questions))) {
@@ -266,7 +323,7 @@ test("CET-4 writing and dictation render; word-bank blanks drag and long-reading
   const paperPassage = renderToStaticMarkup(createElement(BlockRenderer, { ...common, basePath: "/cet4", onOptionDrop: () => {}, assets: new Map(), bindings: paperWordBankBindings, blocks: paperWordBankGroup.stimulusBlocks, wordBankQuestions: paperWordBankQuestions }));
   assert.match(paperPassage, /<b>26<\/b><button[^>]*data-senior-high-drop-target="true"/);
   assert.doesNotMatch(paperPassage, /_{2,}26_{2,}/);
-  assert.match(runnerSource, /group\.sharedOptions\.filter\(\(option\) => isCetExam\(basePath \|\| ""\) \|\| group\.sharedOptionsReusable/);
+  assert.match(runnerSource, /displaySharedOptions\.filter\(\(option\) => isCetExam\(basePath \|\| ""\) \|\| group\.sharedOptionsReusable \|\| basePath === "\/kaoyan" \|\| !assignedOptionIds\.has\(option\.id\)\)/);
   const longReading = practice.find(({ set }) => set.id === "practice-cet4-matching").set;
   const longReadingGroups = longReading.sections.flatMap((section) => section.groups).filter((group) => group.questions.some((question) => question.typeLabel === "长篇阅读"));
   assert.equal(longReadingGroups.length, 30);

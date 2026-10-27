@@ -1,0 +1,533 @@
+{
+  "id": "sat-2025-10-asia-a-math-m1",
+  "assessment": "SAT",
+  "test": "Math",
+  "domain": "SAT 数学",
+  "skill": "Math · Module 1",
+  "difficulty": "Unrated",
+  "expectedCount": 8,
+  "questionIds": [
+    "sat-2025-10-asia-a-math-m1-q01",
+    "sat-2025-10-asia-a-math-m1-q02",
+    "sat-2025-10-asia-a-math-m1-q05",
+    "sat-2025-10-asia-a-math-m1-q06",
+    "sat-2025-10-asia-a-math-m1-q08",
+    "sat-2025-10-asia-a-math-m1-q11",
+    "sat-2025-10-asia-a-math-m1-q21",
+    "sat-2025-10-asia-a-math-m1-q22"
+  ],
+  "sourceRefs": [
+    {
+      "role": "question",
+      "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+      "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6"
+    },
+    {
+      "role": "answer",
+      "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+      "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6"
+    }
+  ],
+  "questions": [
+    {
+      "id": "sat-2025-10-asia-a-math-m1-q01",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The graph shows the lines y = 3 and a line passing through (0, −2) and (4, 3). What is the solution (x, y) to the system?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "(5,3)"
+        },
+        {
+          "id": "B",
+          "text": "(4,3)"
+        },
+        {
+          "id": "C",
+          "text": "(3,3)"
+        },
+        {
+          "id": "D",
+          "text": "(0,3)"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "两条直线的交点就是方程组的解。交点为 (4,3)，所以选 B。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            44
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            79
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph-derived information kept editable."
+      ],
+      "sectionLabel": "Math · Module 1",
+      "number": 1
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m1-q02",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The area of a rectangle is 70 square inches. The length of the longest side is 14 inches. What is the length, in inches, of the shortest side?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "5"
+        },
+        {
+          "id": "B",
+          "text": "14"
+        },
+        {
+          "id": "C",
+          "text": "28"
+        },
+        {
+          "id": "D",
+          "text": "56"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "长方形面积等于长乘宽，因此较短边长为 70÷14=5，选 A。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            45
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            79
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph-derived information kept editable."
+      ],
+      "sectionLabel": "Math · Module 1",
+      "number": 2
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m1-q05",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The given equation j/5 = k + 9m relates the distinct positive numbers j, k, and m. Which equation correctly expresses j in terms of k and m?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "j = k + 5(9m)"
+        },
+        {
+          "id": "B",
+          "text": "j = 5(k + 9m)"
+        },
+        {
+          "id": "C",
+          "text": "j = 5k + 9m"
+        },
+        {
+          "id": "D",
+          "text": "j = (k + 9m)/5"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "将方程两边乘以 5，得到 j=5(k+9m)，选 B。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            48
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            79
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph-derived information kept editable."
+      ],
+      "sectionLabel": "Math · Module 1",
+      "number": 5
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m1-q06",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The function h is defined by h(x) = 5|x|. What is the value of h(−4)?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "−20"
+        },
+        {
+          "id": "B",
+          "text": "1"
+        },
+        {
+          "id": "C",
+          "text": "9"
+        },
+        {
+          "id": "D",
+          "text": "20"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "代入 x=−4：h(−4)=5|−4|=20，选 D。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            48
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            79
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph-derived information kept editable."
+      ],
+      "sectionLabel": "Math · Module 1",
+      "number": 6
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m1-q08",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "For two acute angles X and Y, the measure of angle Y is 32°, and sin X / cos Y = 1. What is the measure, in degrees, of angle X?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "77"
+        },
+        {
+          "id": "B",
+          "text": "58"
+        },
+        {
+          "id": "C",
+          "text": "45"
+        },
+        {
+          "id": "D",
+          "text": "32"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "sin X=cos Y，且 X、Y 都是锐角，因此 X+Y=90°。X=90°−32°=58°，选 B。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            49
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            80
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph-derived information kept editable."
+      ],
+      "sectionLabel": "Math · Module 1",
+      "number": 8
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m1-q11",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The graph shows line k with a slope of 4/5. Line n is perpendicular to line k and passes through (4, 7). Which equation defines line n?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "y = −(5/4)x + 2"
+        },
+        {
+          "id": "B",
+          "text": "y = −(5/4)x + 12"
+        },
+        {
+          "id": "C",
+          "text": "y = (5/4)x + 2"
+        },
+        {
+          "id": "D",
+          "text": "y = (5/4)x + 12"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "直线 n 的斜率为 −5/4。代入点 (4,7) 得截距 12，因此方程为 y=−(5/4)x+12，选 B。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            50
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            80
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph-derived information kept editable."
+      ],
+      "sectionLabel": "Math · Module 1",
+      "number": 11
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m1-q21",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The positive number a is 290% of b, and a is 90% of c. If c is p% of b, which of the following is closest to p?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "211"
+        },
+        {
+          "id": "B",
+          "text": "222"
+        },
+        {
+          "id": "C",
+          "text": "261"
+        },
+        {
+          "id": "D",
+          "text": "322"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "由 a=2.9b 且 a=0.9c，得 c/b=2.9/0.9≈3.222，因此 p≈322，选 D。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            55
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            81
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph-derived information kept editable."
+      ],
+      "sectionLabel": "Math · Module 1",
+      "number": 21
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m1-q22",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "A computer program models the total mass of the population of a certain type of algae after the algae was placed in an environment where it has no natural predators. According to the model, the estimated total mass of this population of algae at the end of every 6-hour period is 129% greater than the estimated total mass at the end of the previous 6-hour period, and the estimated total mass is 613.90 grams after 18 hours. Which equation best represents this model, where A is the estimated total mass, in grams, after x hours, and x < 50?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "A = 34.11(1.29)^(x/6)"
+        },
+        {
+          "id": "B",
+          "text": "A = 34.11(2.29)^(x/6)"
+        },
+        {
+          "id": "C",
+          "text": "A = 51.12(2.29)^(x/6)"
+        },
+        {
+          "id": "D",
+          "text": "A = 285.98(1.29)^(x/6)"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "每 6 小时增长到原来的 2.29 倍，所以指数为 x/6。用 A(18)=613.90 可得初始系数约为 51.12，因此选 C。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            56
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            82
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph-derived information kept editable."
+      ],
+      "sectionLabel": "Math · Module 1",
+      "number": 22
+    }
+  ],
+  "title": "2025年10月 亚太 A 套 · 数学 · M1",
+  "year": 2025,
+  "month": 10,
+  "region": "亚太 A"
+}

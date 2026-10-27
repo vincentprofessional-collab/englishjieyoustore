@@ -1,4 +1,4 @@
-"""Assemble reviewed text and sanitized guide pages; exclude damaged CI3 scans."""
+"""Assemble reviewed text and sanitized guide pages for Cambridge 4–21."""
 import argparse
 import hashlib
 import json
@@ -17,7 +17,7 @@ def main():
     parser.add_argument('--repo',default='.')
     args=parser.parse_args()
     repo=Path(args.repo).resolve();state=Path(args.state_root).resolve();root=state/'explanations'
-    tests=json.loads((state/'reading-page-map.json').read_text())
+    tests=[test for test in json.loads((state/'reading-page-map.json').read_text()) if 4<=int(test['book'])<=21]
     authored=json.loads((repo/'scripts/data/reading-authored-explanations.json').read_text())
     guides=json.loads((root/'candidate-explanations.json').read_text())
     index=json.loads((root/'render-index.json').read_text())
@@ -49,7 +49,7 @@ def main():
                 output[part_id]={'reviewed':True,'kind':'guide','answers':{},'pages':guide['pages'],
                                  'matchedKeywords':guide['matchedKeywords'],'sourceName':guide['sourceName'],
                                  'attribution':f"精讲解析｜{guide['sourceName']}，对应阅读章节"}
-    assert len(output)+len(not_required)==252
+    assert len(output)+len(not_required)==216
     target=repo/'public/reading/explanations';target.mkdir(parents=True,exist_ok=True)
     for name,evidence in assets.items():
         destination=target/name
@@ -67,7 +67,9 @@ def main():
             'authoredQuestions':authored_questions,'guideParts':sum(v['kind']=='guide' for v in output.values()),
             'sanitizedGuideImages':len(assets),'notRequiredByLatestScope':not_required,'assets':assets}
     (repo/'docs/ielts-reading-analysis-review-20261021.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
-    shutil.copyfile(state/'answer-corrections.json',repo/'scripts/data/reading-answer-corrections.json')
+    corrections=json.loads((state/'answer-corrections.json').read_text())
+    corrections={key:value for key,value in corrections.items() if not re.match(r'^cambridge-[123]-test-',key)}
+    (repo/'scripts/data/reading-answer-corrections.json').write_text(json.dumps(corrections,ensure_ascii=False,indent=2)+'\n')
     print({k:v for k,v in report.items() if k!='assets'})
 
 

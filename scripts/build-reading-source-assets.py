@@ -26,7 +26,9 @@ def main():
     state=Path(args.state_root).resolve() if args.state_root else root
     state.mkdir(parents=True,exist_ok=True)
     manifest = json.loads((root / "source-manifest.json").read_text())
+    manifest['books'] = [book for book in manifest['books'] if 4 <= int(book['book']) <= 21]
     tests = json.loads(((state if (state/'reading-page-map.json').exists() else root) / "reading-page-map.json").read_text())
+    tests = [test for test in tests if 4 <= int(test['book']) <= 21]
     evidence = {row["id"]: row for row in json.loads((root / "answer-evidence.json").read_text())}
     local_plan=state/'reading-image-safety-plan.json'
     page_plan = json.loads((local_plan if local_plan.exists() else root / "reading-image-safety-plan.json").read_text())
@@ -40,9 +42,14 @@ def main():
     asset_dir, md_dir = repo / "public/reading/source-pages", repo / "public/reading/sources"
     asset_dir.mkdir(parents=True, exist_ok=True)
     md_dir.mkdir(parents=True, exist_ok=True)
+    for path in asset_dir.glob('ci*-p*.webp'):
+        if re.fullmatch(r'ci[123]-p\d{3}\.webp', path.name): path.unlink()
+    for path in md_dir.glob('cambridge-*-test-*.md'):
+        if re.fullmatch(r'cambridge-[123]-test-[1-4]\.md', path.name): path.unlink()
     index_file = state / "rendered-page-index.json"
     initial_index = index_file if index_file.exists() else root / 'rendered-page-index.json'
     index = json.loads(initial_index.read_text()) if initial_index.exists() else {}
+    index = {key: value for key, value in index.items() if not re.fullmatch(r'ci[123]-p\d{3}', key)}
     pages_by_book = {}
     source_map = importlib.machinery.SourceFileLoader('reading_source_map', str(repo / 'scripts/ielts-source-map.py')).load_module()
     key_pages = {(test['book'],p) for test in tests for p in test['answerPages']}
@@ -52,9 +59,7 @@ def main():
         pages_by_book[number] = source_map.load_pages(root, book,state/'repaired-primary')
         with fitz.open(book['source']) as document:
             for no in page_plan[str(number)]:
-                # CI1 mixes answer tables with study-method pages; publish the reviewed answers
-                # as structured data, never its unrelated study-method furniture.
-                if (number, no) in key_pages and (number == 1 or args.only_passages):
+                if (number, no) in key_pages and args.only_passages:
                     continue
                 scan_file = root / "safety-scan" / f"ci{number}" / f"{no:03}.json"
                 repaired_scan=state/'repaired-primary'/'safety-scan'/f'ci{number}'/f'{no:03}.json'
@@ -168,10 +173,6 @@ def main():
             first_heading=re.compile(rf'^\s*Questions?\s+{part["firstQuestion"]}(?!\d)',re.I|re.M)
             start=next((i for i,no in enumerate(part['pages']) if first_heading.search(pages_by_book[test['book']][no])),0)
             questions=[all_images[(test['book'],no)] for no in part['pages'][start:] if (test['book'],no) in all_images]
-            # In this scan the matching-headings instructions precede the article
-            # on the previous physical page, whose heading OCR is damaged.
-            if test['id']=='cambridge-2-test-3' and part['number']==3:
-                questions.insert(0,all_images[(2,66)])
             numbers = list(range(part['firstQuestion'],part['lastQuestion']+1))
             answer_pages = [all_images[(test['book'],p)] for p in test['answerPages'] if (test['book'],p) in all_images]
             approved=analysis.get('reviewed') is True

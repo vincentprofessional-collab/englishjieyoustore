@@ -1,0 +1,1861 @@
+{
+  "id": "sat-2026-06-set1-rw-m2",
+  "assessment": "SAT",
+  "test": "Reading and Writing",
+  "domain": "SAT 阅读与写作",
+  "skill": "Reading and Writing · Module 2",
+  "difficulty": "Unrated",
+  "expectedCount": 27,
+  "questionIds": [
+    "sat-2026-06-set1-rw-m2-q01",
+    "sat-2026-06-set1-rw-m2-q02",
+    "sat-2026-06-set1-rw-m2-q03",
+    "sat-2026-06-set1-rw-m2-q04",
+    "sat-2026-06-set1-rw-m2-q05",
+    "sat-2026-06-set1-rw-m2-q06",
+    "sat-2026-06-set1-rw-m2-q07",
+    "sat-2026-06-set1-rw-m2-q08",
+    "sat-2026-06-set1-rw-m2-q09",
+    "sat-2026-06-set1-rw-m2-q10",
+    "sat-2026-06-set1-rw-m2-q11",
+    "sat-2026-06-set1-rw-m2-q12",
+    "sat-2026-06-set1-rw-m2-q13",
+    "sat-2026-06-set1-rw-m2-q14",
+    "sat-2026-06-set1-rw-m2-q15",
+    "sat-2026-06-set1-rw-m2-q16",
+    "sat-2026-06-set1-rw-m2-q17",
+    "sat-2026-06-set1-rw-m2-q18",
+    "sat-2026-06-set1-rw-m2-q19",
+    "sat-2026-06-set1-rw-m2-q20",
+    "sat-2026-06-set1-rw-m2-q21",
+    "sat-2026-06-set1-rw-m2-q22",
+    "sat-2026-06-set1-rw-m2-q23",
+    "sat-2026-06-set1-rw-m2-q24",
+    "sat-2026-06-set1-rw-m2-q25",
+    "sat-2026-06-set1-rw-m2-q26",
+    "sat-2026-06-set1-rw-m2-q27"
+  ],
+  "sourceRefs": [
+    {
+      "role": "question",
+      "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+      "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e"
+    },
+    {
+      "role": "answer",
+      "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+      "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69"
+    }
+  ],
+  "questions": [
+    {
+      "id": "sat-2026-06-set1-rw-m2-q01",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Both overwatering and underwatering can significantly reduce agricultural yields and waste valuable resources. To avoid these problems, farmers’ management of agricultural irrigation systems must be _____. Following the careful consideration of crop requirements, soil conditions, and weather patterns, farmers need to make precise, minute adjustments to water allocations to ensure the best outcomes. Which choice completes the text with the most logical and precise word or phrase?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "serendipitous"
+        },
+        {
+          "id": "B",
+          "text": "meticulous"
+        },
+        {
+          "id": "C",
+          "text": "perfunctory"
+        },
+        {
+          "id": "D",
+          "text": "resolute"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "精确、细微的水量调整需要仔细管理，meticulous 表示细致严谨。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            24
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            11
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 1
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q02",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Lauren Hoult, Michael Smith, and colleagues reviewed 51 studies about positive expressive writing (writing about positive experiences and emotions like happiness) in an attempt to determine what therapeutic outcomes this kind of writing most reliably achieves. However, large _____ across the studies in the methodologies used and health effects assessed prevented a definitive universal conclusion. Which choice completes the text with the most logical and precise word or phrase?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "vulnerabilities"
+        },
+        {
+          "id": "B",
+          "text": "compensations"
+        },
+        {
+          "id": "C",
+          "text": "discrepancies"
+        },
+        {
+          "id": "D",
+          "text": "endorsements"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "研究在方法和评估的健康影响方面存在较大差异，因此难以得出普遍结论。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            24
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            11
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 2
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q03",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Microhistories tackle “big questions” about broad phenomena via narrow subjects. The questions they ask are often _____. Distinct strains of microhistory emerged at different times in Italy and Iceland, for example, and while microhistories of the 1980s reflected the era’s interest in labor history, the “global turn” in recent historiography sparked a wave of globally contextualized microhistories. Which choice completes the text with the most logical and precise word or phrase?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "peripheral to the practitioner’s discipline"
+        },
+        {
+          "id": "B",
+          "text": "contingent on the practitioner’s milieu"
+        },
+        {
+          "id": "C",
+          "text": "indicative of the practitioner’s ingenuity"
+        },
+        {
+          "id": "D",
+          "text": "controversial within the practitioner’s specialty"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "不同地区和时代的微观史研究主题随历史与社会环境变化，说明问题取决于研究者所处的环境。水印遮住的地名已删去，前后论证不受影响。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            25
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            11
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 3
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q04",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Zoochorous trees—those whose seeds are dispersed mainly by animals—are much more prevalent in the Xishuangbanna rainforest plot than in the Harvard Forest, making species distribution in Xishuangbanna considerably more _____. Animal dispersers may congregate at varying distances from parent trees, may carry seeds for varying lengths of time, and may have idiosyncratic spatial trajectories. Which choice completes the text with the most logical and precise word or phrase?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "symmetrical"
+        },
+        {
+          "id": "B",
+          "text": "anachronistic"
+        },
+        {
+          "id": "C",
+          "text": "discontinuous"
+        },
+        {
+          "id": "D",
+          "text": "iterative"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "动物传播种子的距离、时间和路线各异，会造成种子分布不连续。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            25
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            11
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 4
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q05",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Early television analysis in the 1970s and 1980s was shaped by film studies, though media scholar Horace Newcomb notes that tools borrowed from that field often proved inadequate when applied to TV’s distinct characteristics. A recognition of the limitations led researchers to approaches that accounted for a domestic viewing context, embedded advertisements, and serialized narratives, and to a shift in audience research toward ethnographic methods that emphasized viewer engagement. By the 1990s, television studies had emerged as a widely recognized academic field, with scholars founding dedicated journals. Which choice best states the function of the underlined portion in the text as a whole?",
+          "runs": [
+            {
+              "text": "Early television analysis in the 1970s and 1980s was shaped by film studies, though "
+            },
+            {
+              "text": "media scholar Horace Newcomb notes that tools borrowed from that field often proved inadequate when applied to TV’s distinct characteristics.",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " A recognition of the limitations led researchers to approaches that accounted for a domestic viewing context, embedded advertisements, and serialized narratives, and to a shift in audience research toward ethnographic methods that emphasized viewer engagement. By the 1990s, television studies had emerged as a widely recognized academic field, with scholars founding dedicated journals. Which choice best states the function of the underlined portion in the text as a whole?"
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "It implies that the development of television studies as a discipline was slowed by scholars’ early reluctance to accept that television and film have different characteristics."
+        },
+        {
+          "id": "B",
+          "text": "It suggests that Newcomb’s observations were the primary catalyst for the emergence of television studies as a formal academic field."
+        },
+        {
+          "id": "C",
+          "text": "It introduces an expert opinion that establishes the impetus for a change in scholarly methods of studying television."
+        },
+        {
+          "id": "D",
+          "text": "It questions the extent to which the methodologies of film studies informed methodologies in the emerging field of television studies."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Newcomb 的专家意见指出电影研究工具用于电视研究时的不足，为之后的方法转变提供了理由。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            26
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            11
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 5
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q06",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Dziga Vertov’s Man with a Movie Camera (1929) not only exhibits striking visual effects like multiple exposure, but it also has as a central idea that the camera itself is a character in the film. The camera’s presence is continually accentuated by showing the operator position it, for example, placing it atop a steel structure, where he then adjusts the camera to capture a view of traffic passing underneath, to which the film cuts immediately after. Which choice best describes the function of the underlined portion in the text as a whole?",
+          "runs": [
+            {
+              "text": "Dziga Vertov’s Man with a Movie Camera (1929) not only exhibits striking visual effects like multiple exposure, but it also has as a central idea "
+            },
+            {
+              "text": "that the camera itself is a character in the film.",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " The camera’s presence is continually accentuated by showing the operator position it, for example, placing it atop a steel structure, where he then adjusts the camera to capture a view of traffic passing underneath, to which the film cuts immediately after. Which choice best describes the function of the underlined portion in the text as a whole?"
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "It introduces a conceit of the film that helps explain Vertov’s choices as described later in the text."
+        },
+        {
+          "id": "B",
+          "text": "It introduces a concept attributed to Vertov, which the remainder of the text affirms is rightly attributed."
+        },
+        {
+          "id": "C",
+          "text": "It presents Vertov’s intended message for the film, which the remainder of the text uses as a basis to evaluate how successful the film was at conveying it."
+        },
+        {
+          "id": "D",
+          "text": "It presents a metaphor that the text indicates inspired Vertov to structure the film as he did."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "“摄影机本身是角色”这一构想解释了后文强调摄影机位置、拍摄视角和镜头切换的选择。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            27
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            12
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 6
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q07",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "twoText",
+          "texts": [
+            {
+              "label": "Text 1",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "text": "For decades, ornithologists assumed that if they saw a singing Bell’s vireo—a bird species found in temperate North America—they must be observing a male trying to attract a mate or claim territory. As Peter J. B. Slater and Nigel I. Mann have emphasized, however, a similar assumption can’t be made about birds in the tropics, where females sing as often as males do. Slater and Mann call for more research on this discrepancy between tropical and temperate female birdsong."
+                }
+              ]
+            },
+            {
+              "label": "Text 2",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "text": "Recent evidence shows that a female Bell’s vireo is as capable of song as a male is. In fact, female birdsong is more common among temperate species than currently assumed, claim Evangeline Rose and colleagues. These female songbirds sing less frequently than males do, and in duller tones, making it “easy for researchers to miss the quiet and hidden females and focus on the loud and colorful males,” says Rose."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Based on the texts, how would Rose and colleagues (Text 2) most likely respond to the assertion by Slater and Mann (Text 1) about the different prevalence of female birdsong in temperate and tropical areas?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "They would concede that the geographic difference in prevalence is real but argue that the frequency with which male tropical birds sing has been overstated by previous researchers."
+        },
+        {
+          "id": "B",
+          "text": "They would argue that the apparent difference in prevalence may partly reflect a difference in the ease with which female birdsong and male birdsong can be detected."
+        },
+        {
+          "id": "C",
+          "text": "They would caution that the seeming difference in prevalence may be an artifact of researchers’ tendency to study birdsong among temperate species more frequently than among tropical species."
+        },
+        {
+          "id": "D",
+          "text": "They would raise the possibility that the difference in prevalence may be due to differences in the timing of the mating season among temperate and tropical bird species."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Rose 等人认为温带雌鸟鸣唱比以往估计更常见，而且较难被观察到；表面差异可能源自鸣唱可察觉程度不同。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            28
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            12
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 7
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q08",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "twoText",
+          "texts": [
+            {
+              "label": "Text 1",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "text": "Studies contributing to the body of evidence that people generally enjoy socializing have routinely focused on interactions in ongoing relationships (from close confidants to neighbors), but psychologist Selin Salman-Engin and colleagues have demonstrated the benefit of making connections with strangers. Greater positive affect was reported by participants in their study who warmly thanked a shuttle driver than by those who didn’t speak to the driver."
+                }
+              ]
+            },
+            {
+              "label": "Text 2",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "text": "Social relations research commonly draws on a model that centers an individual within three concentric circles. The innermost circle holds one’s strongest ties (e.g., a treasured friend), the next holds close but less important ties (e.g., a teammate), and the outermost holds weak ties (those more distant but important enough to be counted as part of one’s social network)."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Based on the texts, what would Salman-Engin and colleagues (Text 1) most likely say about the discussion of the model in Text 2?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "It underscores that most research on social interactions fails to capture a category of connection that has the capacity to contribute positively to individuals’ sense of well-being."
+        },
+        {
+          "id": "B",
+          "text": "It explains researchers’ observations that individuals typically expect interactions with familiar people to be more positive than their interactions with unfamiliar people would be."
+        },
+        {
+          "id": "C",
+          "text": "It reflects an overemphasis on relationship longevity in researchers’ evaluations of the relative importance of various connections in an individual’s social network."
+        },
+        {
+          "id": "D",
+          "text": "It emphasizes distinctions among types of close connections that aren’t adequately represented in social relations research, since most studies categorize relationships as either close or casual."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "现有关系模型谈到弱联系，却没有涵盖与陌生人短暂互动带来的积极影响；研究通常也未充分关注这一类互动。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            29
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            12
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 8
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q09",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Biologist Grace Herzel and colleagues conducted a study of how butterfly color and weather conditions relate to butterfly behavior, which wouldn’t have been possible without data gathered by students and other amateur science enthusiasts in the community. Considering over three years’ worth of data, the researchers found that white butterflies were observed on green flowers more often than any other butterflies were, and that butterflies were observed to feed more often on cloudy days than on other days. According to the text, which factors seemed to be linked to the behavior of butterflies in Grace Herzel and colleagues’ study?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Butterfly color but not weather conditions"
+        },
+        {
+          "id": "B",
+          "text": "Weather conditions but not butterfly color"
+        },
+        {
+          "id": "C",
+          "text": "Neither butterfly color nor weather conditions"
+        },
+        {
+          "id": "D",
+          "text": "Both butterfly color and weather conditions"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "研究同时发现蝴蝶颜色与花色有关，也发现阴天时取食更常见，因此两项因素都有关联。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            30
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            12
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 9
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q10",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Participants’ Openness to Marketing Message Content"
+        },
+        {
+          "type": "table",
+          "title": "Average openness rating by condition (approximate values read from the graph)",
+          "rows": [
+            [
+              "Condition",
+              "Average rating"
+            ],
+            [
+              "Supplement",
+              "about 3.6"
+            ],
+            [
+              "Substitute",
+              "about 4.1"
+            ],
+            [
+              "Control",
+              "about 4.2"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Having found that emoji images of objects generally have a negative effect when used in social media marketing, Lura Forcum and team studied reactions to three versions of a cafe’s message about coffee: one with a coffee cup emoji after the text (supplement), one with the emoji standing in for the word “coffee” (substitute), and one with no emoji (control). Participants rated their openness to the content of the version of the message they saw on a scale from 1 (not at all open) to 7 (very open). The team hypothesized that the general effect they’d previously observed would be reduced when an emoji replaces the word it represents. Which choice best describes data from the graph that support the team’s hypothesis?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "The substitute condition and the control condition both received an average rating of about 4."
+        },
+        {
+          "id": "B",
+          "text": "The highest average rating for any of the three conditions was well below the maximum rating of 7."
+        },
+        {
+          "id": "C",
+          "text": "The average rating for the control condition was higher than the average rating for the supplement condition."
+        },
+        {
+          "id": "D",
+          "text": "The average rating for the substitute condition was higher than the average rating for the supplement condition."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "图中替代型评分约为 4.1，高于补充型约 3.6；这符合团队提出的替代表情符号会减弱负面影响的假设。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            31
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            12
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 10
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q11",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Number of Days to Construct Modular Retail Facilities"
+        },
+        {
+          "type": "table",
+          "title": "Construction duration for modular retail facilities",
+          "rows": [
+            [
+              "Retail facility",
+              "Construction company",
+              "Days to complete construction",
+              "Location"
+            ],
+            [
+              "Constitutional Hill Coffee Shop",
+              "Modular Site Solutions",
+              "23",
+              "Johannesburg, South Africa"
+            ],
+            [
+              "Harrison Street Oasis",
+              "UrbanBloc",
+              "106",
+              "California, USA"
+            ],
+            [
+              "Sundance Ridge Sales Center",
+              "WillScot",
+              "136",
+              "Kansas, USA"
+            ],
+            [
+              "St. Regis Residences–Rye",
+              "Cassone Leasing",
+              "443",
+              "New York, USA"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The rapid completion of the Specialty Granules Field Office, a modular structure (a structure built in pieces elsewhere and assembled on site) located in the United States, led an employee at another company to collect data on other facilities built using modular construction methods. The employee concluded that modular construction is more efficient than other construction methods. Based on the text and the table, is the employee’s conclusion supported?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "No, because the data in the table show that modular construction projects vary considerably in their number of construction days."
+        },
+        {
+          "id": "B",
+          "text": "Yes, because the Constitutional Hill Coffee Shop was completed in only 23 days."
+        },
+        {
+          "id": "C",
+          "text": "Yes, because even the project with the longest construction time shown in the table was completed more quickly than it would have been if a different method had been used."
+        },
+        {
+          "id": "D",
+          "text": "No, because not enough information has been provided to allow a comparison of different construction methods’ efficiency."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "表格只列出模块化建筑工期，没有其他建造方法的对照数据，无法据此比较效率。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            32
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            13
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 11
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q12",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Estimated Electricity Requirements for Green Hydrogen Production in 2020 and 2050"
+        },
+        {
+          "type": "table",
+          "title": "Estimated electricity and direct-use electricity capacity",
+          "rows": [
+            [
+              "Country",
+              "Green hydrogen electricity (kW per capita), 2020",
+              "Direct-use capacity (%), 2020",
+              "Green hydrogen electricity (kW per capita), 2050",
+              "Direct-use capacity (%), 2050"
+            ],
+            [
+              "Indonesia",
+              "0.1",
+              "51",
+              "0.1",
+              "63"
+            ],
+            [
+              "Netherlands",
+              "0.6",
+              "79",
+              "0.8",
+              "79"
+            ],
+            [
+              "South Africa",
+              "0.0",
+              "9",
+              "0.3",
+              "30"
+            ],
+            [
+              "Taiwan",
+              "0.0",
+              "1",
+              "0.5",
+              "17"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Estimated electricity for green hydrogen production data are rounded to the first decimal place. In 2020, most hydrogen was produced through steam methane reforming, which emits carbon gases. Using electricity from renewable sources to produce green hydrogen sourced from water would enable countries to reduce industrial carbon emissions, but doing so depends on countries’ capacity for direct-use electricity (electricity produced and used at the same facility). Researchers estimated the amount of electricity needed in 2020 if green hydrogen had been adopted and the amount needed to meet projected green hydrogen demand in 2050. Comparison between these estimates and estimates of capacity suggests that in most countries, projected green hydrogen production would require a larger share of electricity produced on-site. One exception is _____. Which choice most effectively uses data from the table to complete the statement?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Taiwan, since the percentage of direct-use electricity needed to produce green hydrogen there in 2050 is the lowest of the countries listed."
+        },
+        {
+          "id": "B",
+          "text": "the Netherlands, since the percentage of direct-use electricity needed to produce green hydrogen in 2050 is expected to be the same as it was in 2020."
+        },
+        {
+          "id": "C",
+          "text": "South Africa, since the estimated electricity needed for green hydrogen production in 2050 is expected to be lower there than in any other country listed."
+        },
+        {
+          "id": "D",
+          "text": "Indonesia, since the estimated electricity needed for green hydrogen production in 2050 is expected to be the same as it was in 2020."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "荷兰可直接使用的电力容量占比在 2020 年和 2050 年都为 79%，因此是大多数国家趋势的例外。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            33
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            13
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 12
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q13",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Having demonstrated that the power conversion efficiency of new perovskite photovoltaic cells is nearly indistinguishable from that of cells recycled multiple times, Xun Xiao and colleagues evaluated the levelized cost of electricity (LCOE)—a measure of cost per produced electricity unit that incorporates materials acquisition costs as well as operating costs—for power plants utilizing each type of cell. With a modeled 15-year cell lifetime, the LCOE of plants using new cells was 4.99 cents per kilowatt hour, whereas that of plants using cells recycled three times was 4.05 cents per kilowatt hour. Moreover, the LCOE differential grew from 18.8% to 31.3% when the modeled cell lifetime was reduced by two-thirds. Based on the text, which choice, if true, best accounts for the observation presented in the underlined sentence?",
+          "runs": [
+            {
+              "text": "Having demonstrated that the power conversion efficiency of new perovskite photovoltaic cells is nearly indistinguishable from that of cells recycled multiple times, Xun Xiao and colleagues evaluated the levelized cost of electricity (LCOE)—a measure of cost per produced electricity unit that incorporates materials acquisition costs as well as operating costs—for power plants utilizing each type of cell. With a modeled 15-year cell lifetime, the LCOE of plants using new cells was 4.99 cents per kilowatt hour, whereas that of plants using cells recycled three times was 4.05 cents per kilowatt hour. "
+            },
+            {
+              "text": "Moreover, the LCOE differential grew from 18.8% to 31.3% when the modeled cell lifetime was reduced by two-thirds.",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": " Based on the text, which choice, if true, best accounts for the observation presented in the underlined sentence?"
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Although less expensive than producing new cells, recycling cells does incur costs, and thus reducing cell lifetimes entails greater cumulative costs."
+        },
+        {
+          "id": "B",
+          "text": "Securing new cell materials is more expensive than recycling cell materials, and thus more frequent cell replacement entails greater disparity in cumulative costs."
+        },
+        {
+          "id": "C",
+          "text": "Cells can be recycled multiple times without a significant decrease in power conversion efficiency, and thus recycling cells more frequently does not change the LCOE for plants using recycled cells."
+        },
+        {
+          "id": "D",
+          "text": "As the modeled cell lifetime decreases, plant operating costs increase, and thus the LCOE for plants using new cells diverges from that of plants using recycled cells."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "新材料成本高于回收材料；寿命缩短使新电池更频繁替换，因此累计成本差距扩大。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            34
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            13
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 13
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q14",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "From larks to buzzards, many birds fly in flocks. But starlings uniquely form murmurations, large flocks that swirl in changing shapes before the birds roost together overnight. The two leading explanations for this behavior are the “warmer together” hypothesis, which holds that the goal is to attract more starlings to increase body heat in cold roosts, and the “safer together” hypothesis, which centers on defenses like crowding to make it hard for peregrine falcons and other predators to target a single bird. A study of over 3,000 murmurations across a range of climates found that local temperature was not associated with size, but the presence of a predator correlated with increases in both size and duration. Thus, researchers suggest that _____."
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "starlings’ flocking behavior likely evolved as a response to predation from birds such as peregrine falcons rather than as a response to cold overnight temperatures."
+        },
+        {
+          "id": "B",
+          "text": "starlings are unlikely to form murmurations in climates where overnight temperatures tend to be warm, regardless of the prevalence of local predators."
+        },
+        {
+          "id": "C",
+          "text": "starlings’ movements are likely less predictable when a peregrine falcon poses an imminent threat to the flock than when other types of avian predators do."
+        },
+        {
+          "id": "D",
+          "text": "starlings differ from both smaller birds like larks and larger birds like buzzards in that starlings engage in flocking behaviors primarily when predators are present."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "温度与群体大小无关，但捕食者与群体大小和持续时间增加有关，证据支持防御捕食者而非保暖的解释。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            35
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            13
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 14
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q15",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Animal fossils from the Arabian Peninsula come primarily from two time periods and locations: a late Miocene (7.0–7.7 million years ago) site in the Baynunah Formation and a Pleistocene (12,000–500,000 years ago) site in the Nefud Desert. The 6.5-million-year gap between these fossil assemblages occurs in the context of considerable evidence of concurrent African-Eurasian faunal exchange. While limited exchange may have occurred via island hopping across the 5.3-million-year-old Mediterranean Sea, many of the species that moved between the continents were adapted to grasslands that could not have existed in sufficient size on Mediterranean islands, leaving only the Peninsula as a viable exchange route, a fact suggesting that _____. Which choice most logically completes the text?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "the gap in the fossil record between 7.0 million years ago and 500,000 years ago could be reflective of poor preservation conditions in the Arabian Peninsula at that time, inadequate fossil recovery efforts, or both."
+        },
+        {
+          "id": "B",
+          "text": "even though grasslands likely flourished on the Arabian Peninsula between 7.0 million years ago and 500,000 years ago, the Peninsula was not the only route by which grassland-adapted animals traveled between Africa and Eurasia."
+        },
+        {
+          "id": "C",
+          "text": "conditions in the Arabian Peninsula were likely more conducive to fossilization before 7.7 million years ago and after 500,000 years ago than they were in the intervening period."
+        },
+        {
+          "id": "D",
+          "text": "the absence of any evidence for African-Eurasian faunal exchange between 7.7 million years ago and 500,000 years ago should not be taken as evidence that the Arabian Peninsula formed a barrier to such exchange."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "阿拉伯半岛是唯一可能的交流路线；化石记录的空白不能证明半岛阻断了动物迁徙，可能反映保存或采集不足。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            36
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            13
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 15
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q16",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "According to Roxana Silbert, former artistic director of Hampstead Theatre, the past five decades have seen UK theater companies—once operated as artist cooperatives like the Royal Exchange (with its five founding artistic directors)—evolving toward increasingly corporate structures, with executives rather than creatives _____ decision-making power over programming. Which choice completes the text so that it conforms to the conventions of Standard English?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "have been given"
+        },
+        {
+          "id": "B",
+          "text": "been given"
+        },
+        {
+          "id": "C",
+          "text": "being given"
+        },
+        {
+          "id": "D",
+          "text": "are being given"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "with executives rather than creatives being given 是 with 引导的独立结构，需用非谓语形式。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            37
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            14
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 16
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q17",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The scientific team using the Dark Energy Spectroscopic Instrument (DESI) to conduct a cosmological survey, which has generated the largest 3D map of our universe to date, plans to observe roughly 50 million celestial objects. Mounted on a telescope in Arizona, _____."
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "the distribution of matter throughout our universe is tracked by researchers using this remarkable instrument that can measure 5,000 galaxies simultaneously."
+        },
+        {
+          "id": "B",
+          "text": "researchers track how matter is distributed throughout our universe with this remarkable instrument that can measure 5,000 galaxies simultaneously."
+        },
+        {
+          "id": "C",
+          "text": "5,000 galaxies can be measured simultaneously by this remarkable instrument, tracking how matter is distributed throughout our universe."
+        },
+        {
+          "id": "D",
+          "text": "this remarkable instrument can measure 5,000 galaxies simultaneously, tracking how matter is distributed throughout our universe."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "句首分词短语 Mounted on a telescope 修饰 DESI 仪器；D 的主语与其逻辑匹配。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            37
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            14
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 17
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q18",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Noise from human activity poses significant challenges to animal _____. Ambient noise from automobile traffic, for example, may mask environmental signals that animals depend on for their survival. Which choice completes the text so that it conforms to the conventions of Standard English?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "populations and"
+        },
+        {
+          "id": "B",
+          "text": "populations,"
+        },
+        {
+          "id": "C",
+          "text": "populations"
+        },
+        {
+          "id": "D",
+          "text": "populations:"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "冒号引出对动物种群所面临挑战的具体例子。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            38
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            14
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 18
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q19",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "While calling the frogfish (family Antennariidae) a “walking fish” might suggest a creature that has fully transitioned to terrestrial life, the frogfish’s unique locomotion represents a specialized adaptation for movement along the ocean _____. The frogfish’s modified pectoral fins function similarly to legs, allowing this unusual marine predator to “walk” across the seafloor in the tropical and subtropical waters it inhabits. Which choice completes the text so that it conforms to the conventions of Standard English?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "floor,"
+        },
+        {
+          "id": "B",
+          "text": "floor:"
+        },
+        {
+          "id": "C",
+          "text": "floor and"
+        },
+        {
+          "id": "D",
+          "text": "floor"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "第二句解释海底移动方式，冒号能引出对前一句的说明。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            38
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            14
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 19
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q20",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In recent years, the English writer Mary Robinson (1758–1800), whose poetry was widely read during her lifetime, has been rediscovered by contemporary audiences—a resurgence of interest that is largely due to literary scholars such as Anne Janowitz, whose work _____ the richness of Robinson’s poems and the poet’s historical importance to the Romantic literary movement encourages a broader rethinking of British Romanticism itself. Which choice completes the text so that it conforms to the conventions of Standard English?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "highlights"
+        },
+        {
+          "id": "B",
+          "text": "has highlighted"
+        },
+        {
+          "id": "C",
+          "text": "highlighting"
+        },
+        {
+          "id": "D",
+          "text": "is highlighting"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "highlighting 引出修饰 work 的分词短语，后面的 encourages 才是主句谓语。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            39
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            14
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 20
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q21",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In Danger Mouse’s Grey Album, each of the instrumental samples—isolated from the Beatles’ White Album and then reconstructed into entirely new arrangements—_____ raw material used in the instrumental collage that backs unaltered vocal tracks from Jay-Z’s Black Album, resulting in a remarkable integration of two disparate musical genres. Which choice completes the text so that it conforms to the conventions of Standard English?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "have become"
+        },
+        {
+          "id": "B",
+          "text": "becoming"
+        },
+        {
+          "id": "C",
+          "text": "becomes"
+        },
+        {
+          "id": "D",
+          "text": "become"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "主语中心词 each 为单数，谓语用 becomes。已删除插入在题干中的机构宣传水印。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            39
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            14
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 21
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q22",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Forrest Myers’s steel sculpture Four Corners is displayed at Storm King Art Center, an outdoor sculpture park in New York. _____ it endures rain, snow, heat, and humidity. Myers’s sculpture is particularly well suited to withstand these elements, though, because it is made of corrosion-resistant steel. Which choice completes the text with the most logical transition?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "In addition,"
+        },
+        {
+          "id": "B",
+          "text": "Nevertheless,"
+        },
+        {
+          "id": "C",
+          "text": "There,"
+        },
+        {
+          "id": "D",
+          "text": "However,"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "There 指前句提到的 Storm King Art Center，说明雕塑在那里承受各种天气。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            40
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            15
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 22
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q23",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Shards of ceramic husking trays have been recovered across northwestern Mesopotamia, dating back to the Late Neolithic Period. Taranto et al. wanted to determine whether the use-wear patterns on the husking tray shards were consistent with the baking of lipid-infused doughs. _____, they baked such doughs in replicas of the husking trays and compared the use-wear patterns on the replicas with those on the shards. Which choice completes the text with the most logical transition?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Nevertheless,"
+        },
+        {
+          "id": "B",
+          "text": "In addition,"
+        },
+        {
+          "id": "C",
+          "text": "To that end,"
+        },
+        {
+          "id": "D",
+          "text": "In other words,"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "后句描述研究者为实现前述目标采取的实验方法，To that end 表示目的与手段的衔接。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            40
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            15
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 23
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q24",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Quantum entanglement, in which two particles seem to influence each other instantly even when separated by vast distances, appears to contradict classical physics, which holds that nothing can travel faster than light and that causality is unidirectional—causes precede effects. _____, physicist Emily Adlam has argued that retrocausality—though also seemingly at odds with classical ideas—may help account for quantum entanglement without violating classical physics by allowing future and past states to be correlated within a fixed space-time. Which choice completes the text with the most logical transition?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Paradoxically,"
+        },
+        {
+          "id": "B",
+          "text": "By extension,"
+        },
+        {
+          "id": "C",
+          "text": "Essentially,"
+        },
+        {
+          "id": "D",
+          "text": "Predictably,"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "逆向因果关系是在因果概念基础上的延伸；By extension 与后句提出的相关观点衔接最合理。源页将 causes precede 写成了 causes precedes，已修正这一不影响答案的语法错误。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            41
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            15
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 24
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q25",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In a 2003 study, Hall and Fransson identified a distinct time-pressure effect on avian molting behaviors in lesser whitethroats, with potential implications for migration fitness. _____, the researchers observed that birds exposed to shifted daylight patterns suggesting a more imminent departure molted quicker and grew shorter wing feathers than did the controls, likely resulting in decreased migration speeds. Which choice completes the text with the most logical transition?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "That is,"
+        },
+        {
+          "id": "B",
+          "text": "In addition,"
+        },
+        {
+          "id": "C",
+          "text": "Granted,"
+        },
+        {
+          "id": "D",
+          "text": "Therefore,"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "后句具体解释所谓 time-pressure effect 的表现，That is 用于进一步说明。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            41
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            15
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 25
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q26",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "While phenomenology and liberal political philosophy are both associated with philosophy’s contemporary period (early 1900s to the present day), these two schools of thought propose distinctly different answers to questions about the nature of knowledge, reality, and the human condition. _____, the term “contemporary period” describes a period of wide-ranging philosophical discourse rather than an era of homogeneity and agreement. Which choice completes the text with the most logical transition?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Similarly,"
+        },
+        {
+          "id": "B",
+          "text": "However,"
+        },
+        {
+          "id": "C",
+          "text": "Indeed,"
+        },
+        {
+          "id": "D",
+          "text": "For example,"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "后句强化前句所说的思想差异，Indeed 用于强调并进一步确认。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            42
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            15
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 26
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m2-q27",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "While researching a topic, a student has taken the following notes:"
+        },
+        {
+          "type": "notes",
+          "items": [
+            "Swimming was celebrated in ancient Rome but fell out of favor throughout Europe’s Dark Ages.",
+            "English theologian Everard Digby wrote the first modern swimming manual, De Arte Natandi, in 1587.",
+            "Digby’s manual described and illustrated a variety of aquatic stunts he had developed (e.g., “ringing the bells” and “the leap of the goat”).",
+            "Historian Vicki Valosik claims: “In providing instructions for these aquatic ‘refinements,’ Digby hoped to revive swimming—a once revered skill that had all but died out during Europe’s Dark Ages—and elevate it from a crude, mechanical function of the hands and feet to an artful science.”"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The student wants to cite a historian to explain why Digby wrote De Arte Natandi. Which choice most effectively uses relevant information from the notes to accomplish this goal?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "In De Arte Natandi, Digby wrote that he “hoped to... elevate [swimming] from a crude, mechanical function of the hands and feet” by “providing instructions for... aquatic refinements.”"
+        },
+        {
+          "id": "B",
+          "text": "According to Valosik, Digby wrote De Arte Natandi to describe and illustrate “once revered” aquatic stunts from ancient Rome, such as “ringing the bells” and “the leap of the goat.”"
+        },
+        {
+          "id": "C",
+          "text": "Valosik claims that, by writing De Arte Natandi, “Digby hoped to revive swimming... and elevate it from a crude, mechanical function... to an artful science.”"
+        },
+        {
+          "id": "D",
+          "text": "As Valosik claims, with De Arte Natandi, Digby developed the first modern swimming manual in order to illustrate why “a once revered skill... had all but died out during Europe’s Dark Ages.”"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "C 引用 Valosik 的观点，直接说明 Digby 写作手册是希望恢复游泳并将其提升为一门艺术。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            43
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            16
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 2",
+      "number": 27
+    }
+  ],
+  "title": "2026年6月第1套 · 阅读与写作 M2",
+  "year": 2026,
+  "month": 6,
+  "region": "第1套（地区未标注）"
+}

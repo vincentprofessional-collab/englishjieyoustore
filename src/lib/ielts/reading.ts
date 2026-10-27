@@ -363,7 +363,7 @@ function attachReviewedReadingText(test: ReadingTest): ReadingTest {
 
 export const READING_TESTS = (sourceReadingTests as ReadingTest[])
   .map(attachReviewedReadingText)
-  .filter((test) => test.source?.verified && test.source.sanitized)
+  .filter((test) => test.source?.verified && test.source.sanitized && Number(test.bookCode.replace("cambridge-", "")) >= 4)
   .sort((a, b) => Number(a.bookCode.replace("cambridge-", "")) - Number(b.bookCode.replace("cambridge-", "")) || a.testNo - b.testNo);
 
 export const DEFAULT_READING_TEST = READING_TESTS[0];

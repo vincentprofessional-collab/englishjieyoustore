@@ -40,6 +40,7 @@ function uploadToR2(ticket: UploadTicket, file: File, onProgress: (value: number
 export function AdminBbcArticleUpload() {
   const [text, setText] = useState("");
   const [audioFile, setAudioFile] = useState<File | null>(null);
+  const [subtitleFile, setSubtitleFile] = useState<File | null>(null);
   const [audioProgress, setAudioProgress] = useState(0);
   const [audioStatus, setAudioStatus] = useState<
     "waiting" | "analyzing" | "analysis-failed" | "uploading" | "uploaded" | "failed"
@@ -59,7 +60,7 @@ export function AdminBbcArticleUpload() {
     const parsed = parseBbcArticlePaste(text);
     return typeof parsed === "string" ? undefined : splitBbcArticleParagraphs(parsed.english, "en").length;
   }, [text]);
-  const audioJob = useRef<{ file: File; sentenceKey: string; preparation?: AudioPreparation; objectPath?: string; uploaded: Map<number, string> } | null>(null);
+  const audioJob = useRef<{ file: File; subtitleFile: File | null; sentenceKey: string; preparation?: AudioPreparation; objectPath?: string; uploaded: Map<number, string> } | null>(null);
 
   async function loadArticles() {
     const result = await adminRequest("/api/admin/bbc-articles");
@@ -72,7 +73,7 @@ export function AdminBbcArticleUpload() {
       const result = await adminRequest(`/api/admin/bbc-articles?articleId=${encodeURIComponent(id)}`);
       setText(serializeBbcArticlePaste(result.article));
       setPdfQuiz(result.article.quiz ?? null); setPdfMessage("");
-      setEditingId(id); setAudioFile(null); setAudioProgress(0); setAudioStatus("waiting");
+      setEditingId(id); setAudioFile(null); setSubtitleFile(null); setAudioProgress(0); setAudioStatus("waiting");
       audioJob.current = null;
       setExistingAudio(result.article.fullAudioUrl ? { objectPath: result.objectPath } : null);
       setPublishedHref(`/articles/${id}`);
@@ -129,6 +130,15 @@ export function AdminBbcArticleUpload() {
       setMessage("MP3 文件不能超过 200 MB。");
       return;
     }
+    if (subtitleFile && !/\.(?:srt|vtt)$/i.test(subtitleFile.name)) {
+      setError(true); setMessage("字幕文件请使用 SRT 或 VTT 格式。"); return;
+    }
+    if (subtitleFile && subtitleFile.size > 5 * 1024 * 1024) {
+      setError(true); setMessage("字幕文件不能超过 5 MB。"); return;
+    }
+    if (subtitleFile && !audioFile) {
+      setError(true); setMessage("请同时选择这份字幕对应的整篇 MP3，系统才能按时间戳重新切分。"); return;
+    }
     if (!audioFile && !existingAudio) { setError(true); setMessage("请选择本篇 MP3，以自动切分逐句小音频。"); return; }
 
     setBusy(true);
@@ -149,11 +159,11 @@ export function AdminBbcArticleUpload() {
       let sentenceAudioFiles: { sentenceNo: number; objectPath: string }[] | undefined;
       if (audioFile) {
         const sentenceKey = JSON.stringify((prepared.article.sentences ?? []).map((sentence) => sentence.english));
-        if (audioJob.current?.file !== audioFile || audioJob.current.sentenceKey !== sentenceKey) {
-          audioJob.current = { file: audioFile, sentenceKey, uploaded: new Map() };
+        if (audioJob.current?.file !== audioFile || audioJob.current.subtitleFile !== subtitleFile || audioJob.current.sentenceKey !== sentenceKey) {
+          audioJob.current = { file: audioFile, subtitleFile, sentenceKey, uploaded: new Map() };
         }
         const job = audioJob.current;
-        alignment = job.preparation ?? await analyzeBbcAudio(audioFile, prepared.article.sentences ?? [], setMessage);
+        alignment = job.preparation ?? await analyzeBbcAudio(audioFile, prepared.article.sentences ?? [], setMessage, subtitleFile ?? undefined);
         job.preparation = alignment;
         const title = text.replace(/^\uFEFF/, "").split(/\r?\n/).find((line) => line.trim())?.replace(/^\s*#{1,6}\s*/, "").trim() ?? "";
         const totalBytes = audioFile.size + alignment.clips.reduce((total, clip) => total + clip.file.size, 0);
@@ -199,9 +209,16 @@ export function AdminBbcArticleUpload() {
       setEditingId(articleId);
       if (objectPath) setExistingAudio({ objectPath });
       setAudioFile(null);
+      setSubtitleFile(null);
       audioJob.current = null;
       setPublishedHref(`/articles/${articleId}${isPublished ? "" : "?preview=draft"}`);
       const reviewSentenceNos = alignment?.reviewSentenceNos ?? [];
+      const autoAdjustedSentenceNos = alignment?.autoAdjustedSentenceNos ?? [];
+      const alignmentMessage = alignment?.alignmentSource === "subtitle"
+        ? "已优先采用上传字幕的时间戳切分。"
+        : alignment?.alignmentSource === "recognition" && subtitleFile
+          ? "字幕未能逐句匹配，已改用本地语音识别。"
+          : alignment ? "已使用本地语音识别切分。" : "";
       const pastedSyntaxTotalCount = prepared.pastedSyntaxTotalCount ?? 0;
       const unmatchedSyntaxSentenceNos = prepared.unmatchedSyntaxSentenceNos ?? [];
       const syntaxMessage = pastedSyntaxTotalCount
@@ -210,7 +227,7 @@ export function AdminBbcArticleUpload() {
           ? "检测到语法标注标题，但没有解析到句子标注；请检查是否按“## 句1”单独分行。"
           : "";
       setMessage(
-        `${isPublished ? `已更新 ${payload.year} 年 ${payload.month} 月的已发布文章` : `已保存为 ${payload.year} 年 ${payload.month} 月的草稿，用户暂时看不到`}；${payload.paragraphCount} 段正文、${payload.sentenceCount} 句、${payload.vocabularyCount} 条词汇、${payload.sentenceAudioCount ?? 0} 个独立小音频。${syntaxMessage}未提供标注的句子已自动分析；可打开前端预览检查。${reviewSentenceNos.length ? `第 ${reviewSentenceNos.join("、")} 句识别词与原文存在差异，请试听核对。` : ""}`,
+        `${isPublished ? `已更新 ${payload.year} 年 ${payload.month} 月的已发布文章` : `已保存为 ${payload.year} 年 ${payload.month} 月的草稿，用户暂时看不到`}；${payload.paragraphCount} 段正文、${payload.sentenceCount} 句、${payload.vocabularyCount} 条词汇、${payload.sentenceAudioCount ?? 0} 个独立小音频。${alignmentMessage}${syntaxMessage}未提供标注的句子已自动分析；可打开前端预览检查。${autoAdjustedSentenceNos.length ? `系统已自动调整第 ${autoAdjustedSentenceNos.join("、")} 句的音频边界。` : ""}${reviewSentenceNos.length ? `第 ${reviewSentenceNos.join("、")} 句建议试听复核。` : ""}`,
       );
       void loadArticles().catch(() => undefined);
     } catch (uploadError) {
@@ -228,7 +245,7 @@ export function AdminBbcArticleUpload() {
         <div>
           <span>BBC · ARTICLE PUBLISHING</span>
           <h2>{editingId ? "修改 BBC 文章" : "上传 BBC 文章"}</h2>
-          <p>上传后自动整理中英文与词汇、完成词性和语法成分标注，并按原声切分独立小音频。添加练习 PDF 后会同时形成文章练习和口语复述的段落大意。新文章先保存为草稿，可预览后发布。</p>
+          <p>上传后自动整理中英文与词汇、完成词性和语法成分标注，并按字幕时间戳或原声识别切分独立小音频。添加练习 PDF 后会同时形成文章练习和口语复述的段落大意。新文章先保存为草稿，可预览后发布。</p>
         </div>
       </header>
 
@@ -268,16 +285,21 @@ export function AdminBbcArticleUpload() {
           <input accept=".mp3,audio/mpeg" disabled={busy} onChange={(event) => { setAudioFile(event.target.files?.[0] ?? null); audioJob.current = null; setAudioProgress(0); setAudioStatus("waiting"); }} type="file" />
           <small>{audioFile ? `${audioFile.name} · ${(audioFile.size / 1024 / 1024).toFixed(1)} MB` : existingAudio ? "已关联原音频；只改词汇、中文或语法时保留原有小音频。修改英文句子后请重新选择 MP3。" : "最大 200 MB；自动按句间停顿切分 MP3，并逐句上传。"}</small>
         </label>
+        <label className={styles.full}>
+          <span>时间戳字幕（可选）</span>
+          <input accept=".srt,.vtt,application/x-subrip,text/vtt" disabled={busy} onChange={(event) => { setSubtitleFile(event.target.files?.[0] ?? null); audioJob.current = null; }} type="file" />
+          <small>{subtitleFile ? `${subtitleFile.name} · 优先使用字幕时间戳切分` : "支持 SRT/VTT；请与上方整篇 MP3 对应。系统会先按字幕切分，匹配不上时再自动识别。最大 5 MB。"}</small>
+        </label>
         {audioFile ? (
           <div aria-label="MP3 音频上传进度" aria-valuemax={100} aria-valuemin={0} aria-valuenow={audioProgress} className={styles.progress} role="progressbar">
-            <span>{audioStatus === "uploaded" ? "原声和独立小音频已上传" : audioStatus === "analyzing" ? "正在识别原声并切分小音频" : audioStatus === "analysis-failed" ? "自动对齐未完成，请查看下方原因" : audioStatus === "uploading" ? `音频上传中 ${audioProgress}%` : audioStatus === "failed" ? "音频上传失败，请重试" : "等待上传"}</span>
+            <span>{audioStatus === "uploaded" ? "原声和独立小音频已上传" : audioStatus === "analyzing" ? subtitleFile ? "正在按字幕时间戳切分小音频" : "正在识别原声并切分小音频" : audioStatus === "analysis-failed" ? "自动对齐未完成，请查看下方原因" : audioStatus === "uploading" ? `音频上传中 ${audioProgress}%` : audioStatus === "failed" ? "音频上传失败，请重试" : "等待上传"}</span>
             <div className={styles.progressTrack}><i style={{ width: `${audioProgress}%` }} /></div>
           </div>
         ) : null}
         {message ? <p aria-live="polite" className={`${styles.message} ${error ? styles.error : ""} ${styles.full}`}>{message}</p> : null}
         {publishedHref ? <Link className={`${styles.publishedLink} ${styles.full}`} href={publishedHref} target="_blank">{publishedHref.includes("preview=draft") ? "打开草稿前端校改 ↗" : "打开文章前端 ↗"}</Link> : null}
         <div className={`${styles.actions} ${styles.full}`}>
-          {editingId ? <button className="button secondary" disabled={busy || pdfBusy} onClick={() => { setEditingId(null); setExistingAudio(null); setText(""); setAudioFile(null); setPdfQuiz(null); setPdfMessage(""); setMessage(""); setPublishedHref(""); }} type="button">新建文章</button> : null}
+          {editingId ? <button className="button secondary" disabled={busy || pdfBusy} onClick={() => { setEditingId(null); setExistingAudio(null); setText(""); setAudioFile(null); setSubtitleFile(null); audioJob.current = null; setPdfQuiz(null); setPdfMessage(""); setMessage(""); setPublishedHref(""); }} type="button">新建文章</button> : null}
           <button className="button primary" disabled={busy || pdfBusy || !text.trim()} type="submit">
             {busy ? "解析并保存中…" : editingId ? "解析并保存修改" : "解析并保存为草稿"}
           </button>

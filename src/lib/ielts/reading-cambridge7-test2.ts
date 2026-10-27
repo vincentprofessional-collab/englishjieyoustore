@@ -106,7 +106,7 @@ const pagodaPassage: ReadingPart = {
     {
       id: "c7t2-p1-yes-no",
       type: "choice",
-      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 1? Write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 1? In boxes 1-4 on your answer sheet, write YES if the statement agrees with the claims of the writer NO if the statement contradicts the claims of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [1], prompt: "Only two Japanese pagodas have collapsed in 1400 years.", options: yesNoNotGiven },
         { questionNumbers: [2], prompt: "The Hanshin earthquake of 1995 destroyed the pagoda at the Toji temple.", options: yesNoNotGiven },
@@ -247,7 +247,7 @@ const foodPassage: ReadingPart = {
     {
       id: "c7t2-p2-yes-no",
       type: "choice",
-      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 2? Write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 2? In boxes 18-21 on your answer sheet, write YES if the statement agrees with the claims of the writer NO if the statement contradicts the claims of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [18], prompt: "Several species of wildlife in the British countryside are declining.", options: yesNoNotGiven },
         { questionNumbers: [19], prompt: "The taste of food has deteriorated in recent years.", options: yesNoNotGiven },
@@ -376,7 +376,7 @@ const transportPassage: ReadingPart = {
     {
       id: "c7t2-p3-yes-no",
       type: "choice",
-      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 3? Write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 3? In boxes 31-35 on your answer sheet, write YES if the statement agrees with the claims of the writer NO if the statement contradicts the claims of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [31], prompt: "MIRTP was divided into five phases.", options: yesNoNotGiven },
         { questionNumbers: [32], prompt: "Prior to the start of MIRTP the Makete district was almost inaccessible during the rainy season.", options: yesNoNotGiven },

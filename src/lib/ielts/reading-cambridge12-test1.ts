@@ -78,7 +78,7 @@ const cork: ReadingPart = {
       id: "cambridge-12-test-1-part1-questions-1-5",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 1–5 on your answer sheet, write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 1–5 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [1], prompt: "The cork oak has the thickest bark of any living tree.", options: judgmentOptions },
         { questionNumbers: [2], prompt: "Scientists have developed a synthetic cork with the same cellular structure as natural cork.", options: judgmentOptions },
@@ -143,7 +143,7 @@ const collecting: ReadingPart = {
       id: "cambridge-12-test-1-part2-questions-22-26",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the information given in Reading Passage 2? In boxes 22–26 on your answer sheet, write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 2? In boxes 22–26 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [22], prompt: "The number of people buying dolls has grown over the centuries.", options: judgmentOptions },
         { questionNumbers: [23], prompt: "Sixteenth-century European dolls were normally made of wax and porcelain.", options: judgmentOptions },
@@ -174,19 +174,19 @@ const knowledge: ReadingPart = {
       id: "cambridge-12-test-1-part3-section-a",
       heading: "A",
       format: "pre",
-      paragraphs: ["‘I would found an institution where any person can find instruction in any subject.’ That was the founder’s motto for Cornell University, and it seems an apt characterization of the different university, also in the USA, where I currently teach philosophy. A student can prepare for a career in resort management, engineering, interior design, accounting, music, law enforcement, you name it. But what would the founders of these two institutions have thought of a course called ‘Arson for Profit’? I kid you not: we have it on the books. Any undergraduates who have met the academic requirements can sign up for the course in our programme in ‘fire science’."],
+      paragraphs: ["‘I would found an institution where any person can find instruction in any subject.’ That was the founder’s motto for Cornell University, and it seems an apt characterization of the different university, also in the USA, where I currently teach philosophy. A student can prepare for a career in resort management, engineering, interior design, accounting, music, law enforcement, you name it. But what would the founders of these two institutions have thought of a course called ‘Arson for Profit’? I kid you not: we have it on the books. Any undergraduates who have met the academic requirements can sign up for the course in our program in ‘fire science’."],
     },
     {
       id: "cambridge-12-test-1-part3-section-b",
       heading: "B",
       format: "pre",
-      paragraphs: ["Naturally, the course is intended for prospective arson investigators, who can learn all the tricks of the trade for detecting whether a fire was deliberately set, discovering who did it, and establishing a chain of evidence for effective prosecution in a court of law. But wouldn’t this also be the perfect course for prospective arsonists to sign up for? My point is not to criticize academic programmes in fire science: they are highly welcome as part of the increasing professionalization of this and many other occupations. However, it’s not unknown for a firefighter to torch a building. This example suggests how dishonest and illegal behaviour, with the help of higher education, can creep into every aspect of public and business life."],
+      paragraphs: ["Naturally, the course is intended for prospective arson investigators, who can learn all the tricks of the trade for detecting whether a fire was deliberately set, discovering who did it, and establishing a chain of evidence for effective prosecution in a court of law. But wouldn’t this also be the perfect course for prospective arsonists to sign up for? My point is not to criticize academic programs in fire science: they are highly welcome as part of the increasing professionalization of this and many other occupations. However, it’s not unknown for a firefighter to torch a building. This example suggests how dishonest and illegal behavior, with the help of higher education, can creep into every aspect of public and business life."],
     },
     {
       id: "cambridge-12-test-1-part3-section-c",
       heading: "C",
       format: "pre",
-      paragraphs: ["I realized this anew when I was invited to speak before a class in marketing, which is another of our degree programmes. The regular instructor is a colleague who appreciates the kind of ethical perspective I can bring as a philosopher. There are endless ways I could have approached this assignment, but I took my cue from the title of the course: ‘Principles of Marketing’. It made me think to ask the students, ‘Is marketing principled?’ After all, a subject matter can have principles in the sense of being codified, having rules, as with football or chess, without being principled in the sense of being ethical. Many of the students immediately assumed that the answer to my question about marketing principles was obvious: no. Just look at the ways in which everything under the sun has been marketed; obviously it need not be done in a principled (=ethical) fashion."],
+      paragraphs: ["I realized this anew when I was invited to speak before a class in marketing, which is another of our degree programs. The regular instructor is a colleague who appreciates the kind of ethical perspective I can bring as a philosopher. There are endless ways I could have approached this assignment, but I took my cue from the title of the course: ‘Principles of Marketing’. It made me think to ask the students, ‘Is marketing principled?’ After all, a subject matter can have principles in the sense of being codified, having rules, as with football or chess, without being principled in the sense of being ethical. Many of the students immediately assumed that the answer to my question about marketing principles was obvious: no. Just look at the ways in which everything under the sun has been marketed; obviously it need not be done in a principled (=ethical) fashion."],
     },
     {
       id: "cambridge-12-test-1-part3-section-d",
@@ -198,13 +198,13 @@ const knowledge: ReadingPart = {
       id: "cambridge-12-test-1-part3-section-e",
       heading: "E",
       format: "pre",
-      paragraphs: ["Let us apply both the terms ‘means’ and ‘end’ to marketing. The students have signed up for a course in order to learn how to market effectively. But to what end? There seem to be two main attitudes toward that question. One is that the answer is obvious: the purpose of marketing is to sell things and to make money. The other attitude is that the purpose of marketing is irrelevant: each person comes to the programme and course with his or her own plans, and these need not even concern the acquisition of marketing expertise as such. My proposal, which I believe would also be Kant’s, is that neither of these attitudes captures the significance of the end to the means for marketing. A field of knowledge or a professional endeavour is defined by both the means and the end; hence both deserve scrutiny. Students need to study both how to achieve X, and also what X is."],
+      paragraphs: ["Let us apply both the terms ‘means’ and ‘end’ to marketing. The students have signed up for a course in order to learn how to market effectively. But to what end? There seem to be two main attitudes toward that question. One is that the answer is obvious: the purpose of marketing is to sell things and to make money. The other attitude is that the purpose of marketing is irrelevant: each person comes to the program and course with his or her own plans, and these need not even concern the acquisition of marketing expertise as such. My proposal, which I believe would also be Kant’s, is that neither of these attitudes captures the significance of the end to the means for marketing. A field of knowledge or a professional endeavor is defined by both the means and the end; hence both deserve scrutiny. Students need to study both how to achieve X, and also what X is."],
     },
     {
       id: "cambridge-12-test-1-part3-section-f",
       heading: "F",
       format: "pre",
-      paragraphs: ["It is at this point that ‘Arson for Profit’ becomes supremely relevant. That course is presumably all about means: how to detect and prosecute criminal activity. It is therefore assumed that the end is good in an ethical sense. When I ask fire science students to articulate the end, or purpose, of their field, they eventually generalize to something like, ‘The safety and welfare of society,’ which seems right. As we have seen, someone could use the very same knowledge of means to achieve a much less noble end, such as personal profit via destructive, dangerous, reckless activity. But we would not call that firefighting. We have a separate word for it: arson. Similarly, if you employed the ‘principles of marketing’ in an unprincipled way, you would not be doing marketing. We have another term for it: fraud. Kant gives the example of a doctor and a poisoner, who use the identical knowledge to achieve their divergent ends. We would say that one is practising medicine, the other, murder."],
+      paragraphs: ["It is at this point that ‘Arson for Profit’ becomes supremely relevant. That course is presumably all about means: how to detect and prosecute criminal activity. It is therefore assumed that the end is good in an ethical sense. When I ask fire science students to articulate the end, or purpose, of their field, they eventually generalize to something like, ‘The safety and welfare of society,’ which seems right. As we have seen, someone could use the very same knowledge of means to achieve a much less noble end, such as personal profit via destructive, dangerous, reckless activity. But we would not call that firefighting. We have a separate word for it: arson. Similarly, if you employed the ‘principles of marketing’ in an unprincipled way, you would not be doing marketing. We have another term for it: fraud. Kant gives the example of a doctor and a poisoner, who use the identical knowledge to achieve their divergent ends. We would say that one is practicing medicine, the other, murder."],
     },
   ],
   questionBlocks: [
@@ -238,7 +238,7 @@ const knowledge: ReadingPart = {
       id: "cambridge-12-test-1-part3-questions-37-40",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the views of the writer in Reading Passage 3? In boxes 37–40 on your answer sheet, write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the views of the writer in Reading Passage 3? In boxes 37–40 on your answer sheet, write YES if the statement agrees with the views of the writer NO if the statement contradicts the views of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [37], prompt: "It is difficult to attract students onto courses that do not focus on a career.", options: yesNoOptions },
         { questionNumbers: [38], prompt: "The ‘Arson for Profit’ course would be useful for people intending to set fire to buildings.", options: yesNoOptions },

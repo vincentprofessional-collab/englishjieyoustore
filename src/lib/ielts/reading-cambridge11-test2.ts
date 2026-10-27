@@ -87,7 +87,7 @@ const maryRose: ReadingPart = {
       id: "cambridge-11-test-2-part1-questions-1-4",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 1–4 on your answer sheet, write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 1–4 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [1], prompt: "There is some doubt about what caused the Mary Rose to sink.", options: judgmentOptions },
         { questionNumbers: [2], prompt: "The Mary Rose was the only ship to sink in the battle of 19 July 1545.", options: judgmentOptions },
@@ -297,7 +297,7 @@ const neuroaesthetics: ReadingPart = {
       id: "cambridge-11-test-2-part3-questions-34-39",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the views of the writer in Reading Passage 3? In boxes 34–39 on your answer sheet, write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the views of the writer in Reading Passage 3? In boxes 34–39 on your answer sheet, write YES if the statement agrees with the views of the writer NO if the statement contradicts the views of the writer NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [34], prompt: "Forsythe’s findings contradicted previous beliefs on the function of ‘fractals’ in art.", options: yesNoOptions },
         { questionNumbers: [35], prompt: "Certain ideas regarding the link between ‘mirror neurons’ and art appreciation require further verification.", options: yesNoOptions },

@@ -34,17 +34,18 @@ test("reading: missing keys remain ungraded rather than being marked wrong", () 
   assert.equal(gradeSourceReading([41], {}, [], { 41: "a" })[0].correct, null);
 });
 
-test("reading: all 84 source papers cover exactly 3358 questions and their reviewed keys give full marks", () => {
+test("reading: all 72 Cambridge 4–21 source papers cover exactly 2880 questions and their reviewed keys give full marks", () => {
   const papers=JSON.parse(readFileSync(new URL('../src/lib/ielts/source-reading-tests.json',import.meta.url),'utf8'));
-  assert.equal(papers.length,84);
-  assert.equal(new Set(papers.map(p=>p.id)).size,84);
+  assert.equal(papers.length,72);
+  assert.equal(new Set(papers.map(p=>p.id)).size,72);
+  assert.ok(papers.every(p=>Number(p.bookCode.slice('cambridge-'.length))>=4));
   let total=0;
   const example=value=>value.split(/\s*\/\s*/)[0].replace(/\(([^)]+)\)/g,'').replace(/\s+/g,' ').trim();
   for(const paper of papers){
     assert.equal(paper.source.verified,true,paper.id);
     assert.equal(paper.source.sanitized,true,paper.id);
     const numbers=paper.parts.flatMap(p=>p.questionBlocks.flatMap(b=>b.questions.map(q=>q.number)));
-    const count=paper.bookCode==='cambridge-1'?[40,41,38,39][paper.testNo-1]:40;
+    const count=40;
     assert.deepEqual(numbers,Array.from({length:count},(_,i)=>i+1),paper.id);
     assert.equal(Object.keys(paper.source.answers).length,count,paper.id);
     const user=Object.fromEntries(numbers.map(n=>{const a=paper.source.answers[n];return [n,a.mode==='all'?a.values.map(example).join(' and '):example(a.values[0])]}));
@@ -57,7 +58,7 @@ test("reading: all 84 source papers cover exactly 3358 questions and their revie
     }
     total+=count;
   }
-  assert.equal(total,3358);
+  assert.equal(total,2880);
 });
 
 test("reading: source-verified editable text covers Cambridge 21 Test 1 with its exact question map and PDF pages", () => {
@@ -1726,7 +1727,7 @@ test("reading: completed analysis is retained and only approved guide images are
       guideParts++;
     }
   }
-  assert.equal(authoredQuestions,1398);assert.equal(guideParts,114);assert.equal(withoutAnalysis,33);
+  assert.equal(authoredQuestions,920);assert.equal(guideParts,114);assert.equal(withoutAnalysis,33);
   const directory=new URL('../public/reading/explanations/',import.meta.url);
   assert.deepEqual(readdirSync(directory).sort(),Object.keys(review.assets).sort());
   for(const [name,evidence] of Object.entries(review.assets)){
@@ -1737,21 +1738,6 @@ test("reading: completed analysis is retained and only approved guide images are
     assert.doesNotMatch(name,/-exp11-p(?:030|100|110|155|165)\./);
     assert.doesNotMatch(name,/^cambridge-11-test-1-part1-/);
   }
-});
-
-test("reading: academic keys and the preceding matching-headings page remain attached to the right paper", () => {
-  const papers=JSON.parse(readFileSync(new URL('../src/lib/ielts/source-reading-tests.json',import.meta.url),'utf8'));
-  assert.deepEqual(papers.find(p=>p.id==='cambridge-2-test-1').source.answers['18'].values,['vii']);
-  const fourth=papers.find(p=>p.id==='cambridge-2-test-4');
-  assert.deepEqual(fourth.source.answers['1'].values,['YES']);
-  assert.deepEqual(fourth.source.answers['27'].values,['Apollo (space) programme']);
-  assert.deepEqual(fourth.source.answers['40'].values,['A']);
-  assert.equal(fourth.source.groups.length,0);
-  assert.ok(fourth.parts.every(p=>p.source.answerPages.every(page=>page.page===152)));
-  assert.equal(existsSync(new URL('../public/reading/source-pages/ci2-p153.webp',import.meta.url)),false);
-  const third=papers.find(p=>p.id==='cambridge-2-test-3').parts[2];
-  assert.equal(third.source.questionPages[0].page,66);
-  assert.equal(third.source.questionPages.at(-1).page,69);
 });
 
 test("reading: all downloadable source documents contain the checked images and analysis", () => {
@@ -1770,7 +1756,7 @@ test("reading: all downloadable source documents contain the checked images and 
 test("reading: every original page survives heading placement and matches the reviewed derivative", () => {
   const papers=JSON.parse(readFileSync(new URL('../src/lib/ielts/source-reading-tests.json',import.meta.url),'utf8'));
   const review=JSON.parse(readFileSync(new URL('../docs/ielts-reading-source-review-20261022.json',import.meta.url),'utf8'));
-  assert.equal(review.tests,84);assert.equal(review.parts,252);assert.equal(review.questions,3358);
+  assert.equal(review.tests,72);assert.equal(review.parts,216);assert.equal(review.questions,2880);
   for(const paper of papers)for(const part of paper.parts){
     assert.deepEqual(part.source.passagePages.map(p=>p.page),review.papers[paper.id].parts[part.id].originalPages,part.id);
     const text=readFileSync(new URL(`../public/reading/sources/${paper.id}.md`,import.meta.url),'utf8');

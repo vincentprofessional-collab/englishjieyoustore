@@ -106,7 +106,7 @@ const cambridge4Test4PartOne: ReadingPart = {
     {
       id: "c4t4-p1-true-false",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 1–6 on your answer sheet write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 1–6 on your answer sheet write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [1], prompt: "Modern official athletic records date from about 1900.", options: trueFalseNotGiven },
         { questionNumbers: [2], prompt: "There was little improvement in athletic performance before the twentieth century.", options: trueFalseNotGiven },
@@ -240,7 +240,7 @@ const cambridge4Test4PartTwo: ReadingPart = {
     {
       id: "c4t4-p2-yes-no",
       type: "choice",
-      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 2? In boxes 14–19 on your answer sheet write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 2? In boxes 14–19 on your answer sheet write YES if the statement agrees with the claims of the writer NO if the statement contradicts the claims of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [14], prompt: "Archaeology involves creativity as well as careful investigative work.", options: yesNoNotGiven },
         { questionNumbers: [15], prompt: "Archaeologists must be able to translate texts from ancient languages.", options: yesNoNotGiven },
@@ -366,7 +366,7 @@ const cambridge4Test4PartThree: ReadingPart = {
     {
       id: "c4t4-p3-yes-no",
       type: "choice",
-      instruction: "Do the following statements agree with the views of the writer in Reading Passage 3? In boxes 36–40 on your answer sheet write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the views of the writer in Reading Passage 3? In boxes 36–40 on your answer sheet write YES if the statement agrees with the views of the writer NO if the statement contradicts the views of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [36], prompt: "Personal liberty and independence have never been regarded as directly linked to health-care.", options: yesNoNotGiven },
         { questionNumbers: [37], prompt: "Health-care came to be seen as a right at about the same time that the limits of health-care resources became evident.", options: yesNoNotGiven },

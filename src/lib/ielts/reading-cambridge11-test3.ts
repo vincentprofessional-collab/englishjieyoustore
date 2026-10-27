@@ -75,7 +75,7 @@ const silk: ReadingPart = {
       id: "cambridge-11-test-3-part1-questions-10-13",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the information in Reading Passage 1? In boxes 10–13 on your answer sheet, write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information in Reading Passage 1? In boxes 10–13 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [10], prompt: "Gold was the most valuable material transported along the Silk Road.", options: judgmentOptions },
         { questionNumbers: [11], prompt: "Most tradesmen only went along certain sections of the Silk Road.", options: judgmentOptions },
@@ -123,7 +123,7 @@ const migrations: ReadingPart = {
       id: "cambridge-11-test-3-part2-questions-14-18",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the information given in Reading Passage 2? In boxes 14–18 on your answer sheet, write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 2? In boxes 14–18 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [14], prompt: "Local gulls and migrating Arctic terns behave in the same way when offered food.", options: judgmentOptions },
         { questionNumbers: [15], prompt: "Experts’ definitions of migration tend to vary according to their area of study.", options: judgmentOptions },

@@ -225,7 +225,7 @@ const lostCity: ReadingPart = {
       id: "cambridge-12-test-2-part2-questions-21-24",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the information given in Reading Passage 2? Write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 2? In boxes 21-24 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [21], prompt: "Bingham went to South America in search of an Inca city.", options: judgmentOptions },
         { questionNumbers: [22], prompt: "Bingham chose a particular route down the Urubamba valley because it was the most common route used by travellers.", options: judgmentOptions },
@@ -297,7 +297,7 @@ const bilingual: ReadingPart = {
       id: "cambridge-12-test-2-part3-questions-32-36",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 3? Write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 3? In boxes 32-36 on your answer sheet, write YES if the statement agrees with the claims of the writer NO if the statement contradicts the claims of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [32], prompt: "Attitudes towards bilingualism have changed in recent years.", options: yesNoOptions },
         { questionNumbers: [33], prompt: "Bilingual people are better than monolingual people at guessing correctly what words are before they are finished.", options: yesNoOptions },

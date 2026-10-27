@@ -1,0 +1,1085 @@
+{
+  "id": "sat-2026-06-set1-math-m2",
+  "assessment": "SAT",
+  "test": "Math",
+  "domain": "SAT Math",
+  "skill": "Math · Module 2",
+  "difficulty": "Unrated",
+  "expectedCount": 16,
+  "questionIds": [
+    "sat-2026-06-set1-math-m2-q02",
+    "sat-2026-06-set1-math-m2-q04",
+    "sat-2026-06-set1-math-m2-q05",
+    "sat-2026-06-set1-math-m2-q06",
+    "sat-2026-06-set1-math-m2-q08",
+    "sat-2026-06-set1-math-m2-q09",
+    "sat-2026-06-set1-math-m2-q10",
+    "sat-2026-06-set1-math-m2-q11",
+    "sat-2026-06-set1-math-m2-q12",
+    "sat-2026-06-set1-math-m2-q13",
+    "sat-2026-06-set1-math-m2-q14",
+    "sat-2026-06-set1-math-m2-q15",
+    "sat-2026-06-set1-math-m2-q16",
+    "sat-2026-06-set1-math-m2-q17",
+    "sat-2026-06-set1-math-m2-q20",
+    "sat-2026-06-set1-math-m2-q21"
+  ],
+  "sourceRefs": [
+    {
+      "role": "question",
+      "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+      "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e"
+    },
+    {
+      "role": "answer",
+      "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+      "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69"
+    }
+  ],
+  "title": "2026年6月第1套 · 数学 M2",
+  "year": 2026,
+  "month": 6,
+  "region": "第1套（地区未标注）",
+  "questions": [
+    {
+      "id": "sat-2026-06-set1-math-m2-q02",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The given equation relates the distinct numbers v, w, and x: v = −w/(119x). Which equation correctly expresses w in terms of v and x?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "w = −119vx"
+        },
+        {
+          "id": "B",
+          "text": "w = −119v/x"
+        },
+        {
+          "id": "C",
+          "text": "w = −x/(119v)"
+        },
+        {
+          "id": "D",
+          "text": "w = v + 119x"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "将等式两边乘以 119x，得到 119xv = −w，因此 w = −119vx。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            52
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            21
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 2",
+      "number": 2
+    },
+    {
+      "id": "sat-2026-06-set1-math-m2-q04",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The graph opens upward and crosses the x-axis at x = −1 and x = 4. Which equation represents the graph, where y = f(x)?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "f(x) = x² − 4"
+        },
+        {
+          "id": "B",
+          "text": "f(x) = x² + 3x − 4"
+        },
+        {
+          "id": "C",
+          "text": "f(x) = x² − 3x − 4"
+        },
+        {
+          "id": "D",
+          "text": "f(x) = 2x² − 3x − 4"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "零点为 −1 和 4，因此 f(x) = (x + 1)(x − 4) = x² − 3x − 4。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            53
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            21
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 2",
+      "number": 4
+    },
+    {
+      "id": "sat-2026-06-set1-math-m2-q05",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In a relationship between x and y, each increase of 1 in x decreases y by 7/2. When x = −2, y = 5. Which equation represents this relationship?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "y = −(7/2)x − 2"
+        },
+        {
+          "id": "B",
+          "text": "y = −(7/2)x + 2"
+        },
+        {
+          "id": "C",
+          "text": "y = (7/2)x − 2"
+        },
+        {
+          "id": "D",
+          "text": "y = (7/2)x + 2"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "斜率为 −7/2。代入点 (−2, 5) 得截距 −2，所以 y = −(7/2)x − 2。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            53
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            21
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 2",
+      "number": 5
+    },
+    {
+      "id": "sat-2026-06-set1-math-m2-q06",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The function f is defined by f(x) = (x − 3) + 2. If f(a) = 7, what is the value of a + 3?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "5"
+        },
+        {
+          "id": "B",
+          "text": "10"
+        },
+        {
+          "id": "C",
+          "text": "11"
+        },
+        {
+          "id": "D",
+          "text": "21"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "由 (a − 3) + 2 = 7 得 a = 8，因此 a + 3 = 11。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            54
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            21
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 2",
+      "number": 6
+    },
+    {
+      "id": "sat-2026-06-set1-math-m2-q08",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The function f is defined by f(x) = 9((1/8)^x + 7). For all values of x, f(x) is greater than k, where k is a constant. What is the greatest possible value of k?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "0"
+        },
+        {
+          "id": "B",
+          "text": "7"
+        },
+        {
+          "id": "C",
+          "text": "63"
+        },
+        {
+          "id": "D",
+          "text": "504"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "因为 (1/8)^x 始终大于 0，所以 f(x) 始终大于 9 × 7 = 63；k 的最大值为 63。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            54
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            22
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 2",
+      "number": 8
+    },
+    {
+      "id": "sat-2026-06-set1-math-m2-q09",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "A line models the possible combinations of boxes of cups (x) and boxes of mugs (y) that a company can purchase for a total price of $880."
+        },
+        {
+          "type": "table",
+          "title": "Line intercepts shown in the graph",
+          "rows": [
+            [
+              "x (boxes of cups)",
+              "y (boxes of mugs)"
+            ],
+            [
+              "0",
+              "10"
+            ],
+            [
+              "20",
+              "0"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "What is the price, in dollars, per box of cups?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "10"
+        },
+        {
+          "id": "B",
+          "text": "20"
+        },
+        {
+          "id": "C",
+          "text": "44"
+        },
+        {
+          "id": "D",
+          "text": "88"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "当 y = 0 时，最多可以买 20 盒纸杯，因此每盒价格为 $880 ÷ 20 = $44。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            55
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            22
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 2",
+      "number": 9
+    },
+    {
+      "id": "sat-2026-06-set1-math-m2-q10",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "12x + 11y = c and 11x − 12y = c, where c is a positive constant. Which point could be where the graphs of the equations intersect in the xy-plane?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "(c, 0)"
+        },
+        {
+          "id": "B",
+          "text": "(c, c/23)"
+        },
+        {
+          "id": "C",
+          "text": "(10, 230)"
+        },
+        {
+          "id": "D",
+          "text": "(10, −10/23)"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "两个方程右侧相同，因此在交点处 12x + 11y = 11x − 12y，化简得 x = −23y。只有选项 D 满足该关系。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            55
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            22
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 2",
+      "number": 10
+    },
+    {
+      "id": "sat-2026-06-set1-math-m2-q11",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The system of inequalities is y > 2x + k and y < 9 − x, where k is a positive constant. Which choice represents the x-coordinates of all points (x, y) that satisfy this system in the xy-plane?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "x > k/9"
+        },
+        {
+          "id": "B",
+          "text": "x < k/9"
+        },
+        {
+          "id": "C",
+          "text": "x > (9 − k)/3"
+        },
+        {
+          "id": "D",
+          "text": "x < (9 − k)/3"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "要存在满足条件的 y，必须有 2x + k < 9 − x。解得 3x < 9 − k，即 x < (9 − k)/3。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            56
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            22
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 2",
+      "number": 11
+    },
+    {
+      "id": "sat-2026-06-set1-math-m2-q12",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "An online store offers a bulk discount and a coupon discount on sweaters. For an order of n sweaters, where 10 < n < 50, an n% bulk discount is applied to the original price of $44 per sweater. If a coupon is also applied, an additional $3 is subtracted from the discounted price of each sweater. The total price after both discounts is $834. How many sweaters were purchased?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "19"
+        },
+        {
+          "id": "B",
+          "text": "20"
+        },
+        {
+          "id": "C",
+          "text": "30"
+        },
+        {
+          "id": "D",
+          "text": "42"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "总价满足 n(44(1 − n/100) − 3) = 834。代入选项，n = 30 时总价为 30 × (44 × 0.70 − 3) = 834。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            56
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            22
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 2",
+      "number": 12
+    },
+    {
+      "id": "sat-2026-06-set1-math-m2-q13",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "An insect population begins at 8 organisms and increases by 160% every 24 days. Which equation models the predicted population y after x days?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "y = 8(1.60)^(24x)"
+        },
+        {
+          "id": "B",
+          "text": "y = 8(2.60)^(24x)"
+        },
+        {
+          "id": "C",
+          "text": "y = 8(1.60)^(x/24)"
+        },
+        {
+          "id": "D",
+          "text": "y = 8(2.60)^(x/24)"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "增加 160% 对应每 24 天乘以 2.60；经过 x 天经历 x/24 个周期，因此模型为 y = 8(2.60)^(x/24)。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            57
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            23
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 2",
+      "number": 13
+    },
+    {
+      "id": "sat-2026-06-set1-math-m2-q14",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In a figure, L, R, and Q are collinear, and M, R, and P are collinear. Segment LM is parallel to segment PQ. The lengths MR, LR, and RP are 9, 10, and 13, respectively. What is the length of LQ?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "130/9"
+        },
+        {
+          "id": "B",
+          "text": "220/13"
+        },
+        {
+          "id": "C",
+          "text": "211/9"
+        },
+        {
+          "id": "D",
+          "text": "220/9"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "由 LM ∥ PQ 可得三角形 LMR 与 QPR 相似，LR/QR = MR/PR，即 10/QR = 9/13，所以 QR = 130/9。故 LQ = LR + QR = 10 + 130/9 = 220/9。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            57
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            23
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 2",
+      "number": 14
+    },
+    {
+      "id": "sat-2026-06-set1-math-m2-q15",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The scatterplot shows data set A. Approximate coordinates read from the plotted points are shown below; the values are estimates because the source graph does not label individual points."
+        },
+        {
+          "type": "table",
+          "title": "Approximate coordinates from the scatterplot",
+          "rows": [
+            [
+              "x",
+              "−3",
+              "−1",
+              "0",
+              "1",
+              "2",
+              "2.5",
+              "3",
+              "3.5",
+              "4"
+            ],
+            [
+              "Approximate y",
+              "0",
+              "1",
+              "5",
+              "8",
+              "20",
+              "32",
+              "45",
+              "70",
+              "100"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Data set B is created by multiplying each y-value in data set A by 30. Which equation is the most appropriate model for data set B?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "y = 5(2.03)^x"
+        },
+        {
+          "id": "B",
+          "text": "y = 151(2.03)^x"
+        },
+        {
+          "id": "C",
+          "text": "y = 5(2.03)^x + 30"
+        },
+        {
+          "id": "D",
+          "text": "y = 30(2.03)^x + 30"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "原图在 x = 0 时 y 约为 5；将每个 y 值乘以 30 后，新的初始值约为 150，指数底数不变，最符合 y = 151(2.03)^x。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            58
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            23
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "Source page 58 visually checked; approximate plotted coordinates are entered as editable data and marked approximate."
+      ],
+      "sectionLabel": "Math · Module 2",
+      "number": 15
+    },
+    {
+      "id": "sat-2026-06-set1-math-m2-q16",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "table",
+          "title": "Data set A: value frequencies",
+          "rows": [
+            [
+              "Data value",
+              "Frequency"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "1",
+              "7"
+            ],
+            [
+              "2",
+              "8"
+            ],
+            [
+              "3",
+              "9"
+            ],
+            [
+              "4",
+              "8"
+            ],
+            [
+              "5",
+              "7"
+            ],
+            [
+              "16",
+              "1"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The data value 16 was recorded in error and is removed from data set A to create data set B, which consists of the remaining 40 values. Which statement best compares the median of data set A and the median of data set B?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "The median of data set B is less than the median of data set A."
+        },
+        {
+          "id": "B",
+          "text": "The median of data set B is equal to the median of data set A."
+        },
+        {
+          "id": "C",
+          "text": "The median of data set B is greater than the median of data set A."
+        },
+        {
+          "id": "D",
+          "text": "There is not enough information to compare the medians of the two data sets."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "数据集 A 中第 20、21 个值都为 3；删除最大值 16 后，数据集 B 的第 20、21 个值仍为 3，所以两个中位数相等。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            59
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            23
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 2",
+      "number": 16
+    },
+    {
+      "id": "sat-2026-06-set1-math-m2-q17",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In the equation 51x² + (51b + a)x + ab = 0, a and b are positive constants. The product of the solutions is kab, where k is a constant. What is the value of k?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "51"
+        },
+        {
+          "id": "B",
+          "text": "1"
+        },
+        {
+          "id": "C",
+          "text": "1/3"
+        },
+        {
+          "id": "D",
+          "text": "1/51"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "一元二次方程两根之积为常数项除以二次项系数，即 ab/51。因此 k = 1/51。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            59
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            23
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 2",
+      "number": 17
+    },
+    {
+      "id": "sat-2026-06-set1-math-m2-q20",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Which expression has a factor of x + 2b, where b is a positive integer constant?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "3x² + 9x + 18b"
+        },
+        {
+          "id": "B",
+          "text": "3x² + 30x + 18b"
+        },
+        {
+          "id": "C",
+          "text": "3x² + 42x + 18b"
+        },
+        {
+          "id": "D",
+          "text": "3x² + 51x + 18b"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "设另一个因式为 3x + k，则常数项要求 2bk = 18b，所以 k = 9。x 项系数应为 9 + 6b；只有 51 可使 b = 7 为正整数。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            60
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            24
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 2",
+      "number": 20
+    },
+    {
+      "id": "sat-2026-06-set1-math-m2-q21",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In right triangle XYZ, angle X is 90°. Point W lies on segment YZ, and WX is perpendicular to YZ. WY = 588 and WX = 441. What is the value of tan Z?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "3/5"
+        },
+        {
+          "id": "B",
+          "text": "3/4"
+        },
+        {
+          "id": "C",
+          "text": "4/5"
+        },
+        {
+          "id": "D",
+          "text": "4/3"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "由直角三角形斜边上的高定理，WX² = WY × WZ，所以 WZ = 441²/588 = 330.75。tan Z = WX/WZ = 441/330.75 = 4/3。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            60
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            24
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 2",
+      "number": 21
+    }
+  ]
+}

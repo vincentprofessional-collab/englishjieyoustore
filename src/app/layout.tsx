@@ -9,6 +9,7 @@ import { SiteAnalyticsTracker } from "@/components/site-analytics-tracker";
 import { SiteFooter } from "@/components/site-footer";
 import { MobileBottomNav, SiteNav } from "@/components/site-nav";
 import { CommunityInboxProvider } from "@/components/community-inbox-provider";
+import { SiteMessageOverlay } from "@/components/site-message-overlay";
 import { AccountProgressProvider } from "@/components/account-progress-provider";
 import { getCachedPublishedSiteChromeConfig } from "@/lib/content/site-chrome-server";
 import { DEFAULT_SITE_CHROME_CONFIG, mergeSiteChromeConfig, type SiteChromeConfig } from "@/lib/content/site-chrome";
@@ -72,6 +73,7 @@ export default async function RootLayout({
             <PublishedNavigation config={siteChromeConfig} />
           </Suspense>
           <LearningProgressConsentPrompt />
+          <SiteMessageOverlay />
           <MobileBottomNav />
           <Suspense fallback={null}>
             <GlobalVocabularySearch />

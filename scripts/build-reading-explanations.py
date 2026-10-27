@@ -23,10 +23,10 @@ def tokens(text):return set(w.lower() for w in re.findall(r'[A-Za-z]{5,}',text) 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--state-root',required=True);p.add_argument('--repo',default='.');p.add_argument('--render',action='store_true');args=p.parse_args()
     state=Path(args.state_root);root=state/'explanations';repo=Path(args.repo)
-    chapters=json.loads((root/'chapter-map.json').read_text());sources={s['book']:s for s in json.loads((root/'source-manifest.json').read_text())['books']}
-    tests={t['id']:t for t in json.loads((state/'reading-page-map.json').read_text())}
+    chapters=[c for c in json.loads((root/'chapter-map.json').read_text()) if 4<=int(c['book'])<=21];sources={s['book']:s for s in json.loads((root/'source-manifest.json').read_text())['books'] if 4<=int(s['book'])<=21}
+    tests={t['id']:t for t in json.loads((state/'reading-page-map.json').read_text()) if 4<=int(t['book'])<=21}
     primary={f"{t['id']}-part{part['number']}":tokens(part['text']) for t in tests.values() for part in t['parts']}
-    frequencies={b:Counter(w for key,words in primary.items() if key.startswith(f'cambridge-{b}-') for w in words) for b in range(3,19)}
+    frequencies={b:Counter(w for key,words in primary.items() if key.startswith(f'cambridge-{b}-') for w in words) for b in range(4,22)}
     # Unreviewed analysis derivatives stay outside public/ and cannot enter a deployment.
     public=root/'review-pages';public.mkdir(parents=True,exist_ok=True)
     index_file=root/'render-index.json';index=json.loads(index_file.read_text()) if index_file.exists() else {}
@@ -61,8 +61,6 @@ def main():
                 # "参考译文" also labels individual question cells. It is not a
                 # safe end marker: cutting there would remove the later answers.
                 if re.match(r'^WRITINGTASK',text,re.I):ends.append((position,y))
-                if c['id']=='cambridge-3-test-3-part1' and '人种史馆藏品概况' in text:ends.append((position,y))
-                if c['id']=='cambridge-3-test-3-part2' and '森林的奥秘' in text:ends.append((position,y))
         if first_starts:starts=first_starts
         if c['id'] in START_OVERRIDES:
             number,y=START_OVERRIDES[c['id']];item=next(p for p in c['pages'] if p['page']==number)

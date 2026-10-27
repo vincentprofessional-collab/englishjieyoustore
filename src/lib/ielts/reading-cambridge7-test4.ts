@@ -86,7 +86,7 @@ const pyramidPassage: ReadingPart = {
     {
       id: "c7t4-p1-true-false-not-given",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 1? Write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 1-7 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [1], prompt: "It is generally believed that large numbers of people were needed to build the pyramids.", options: trueFalseNotGiven },
         { questionNumbers: [2], prompt: "Clemmons found a strange hieroglyph on the wall of an Egyptian monument.", options: trueFalseNotGiven },
@@ -196,7 +196,7 @@ const salmonPassage: ReadingPart = {
     {
       id: "c7t4-p2-true-false-not-given",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 2? Write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 2? In boxes 14-20 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [14], prompt: "The inhabitants of the Aleutian Islands renamed their islands ‘Aleyska’.", options: trueFalseNotGiven },
         { questionNumbers: [15], prompt: "Alaska's fisheries are owned by some of the world's largest companies.", options: trueFalseNotGiven },

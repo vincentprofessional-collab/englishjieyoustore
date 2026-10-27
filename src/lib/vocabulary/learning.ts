@@ -47,6 +47,7 @@ export type LearningWord = {
   etymologySource: string;
   etymologyStory: string;
   formation: string;
+  frequencyRank?: number;
   id: string;
   inflections: VocabularyInflection[];
   level: string;

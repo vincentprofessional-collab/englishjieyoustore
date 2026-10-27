@@ -17,6 +17,7 @@ export type SpeakingEditableContent = {
   answerHeading: string;
   answerTranslation: string[];
   approach: string;
+  audioAlternateUrl?: string;
   audioSegments?: SpeakingAudioSegment[];
   audioUrl: string;
   band: SpeakingAnswerBand;

@@ -574,6 +574,15 @@ export default function SpeakingModelAnswerContent({
             </audio>
           </div>
         ) : null}
+
+        {content.audioAlternateUrl ? (
+          <div className={styles.audioBlock}>
+            <h3>备用录音</h3>
+            <audio controls preload="none" src={content.audioAlternateUrl}>
+              您的浏览器暂不支持音频播放。
+            </audio>
+          </div>
+        ) : null}
       </section>
 
       <section className={styles.section}>

@@ -1,0 +1,1531 @@
+{
+  "id": "sat-2024-03-d-rw-m1",
+  "assessment": "SAT",
+  "test": "Reading and Writing",
+  "domain": "SAT 阅读与写作",
+  "skill": "2024年3月 D · Reading Module 1",
+  "difficulty": "Unrated",
+  "expectedCount": 23,
+  "questionIds": [
+    "sat-2024-03-d-rw-m1-q01",
+    "sat-2024-03-d-rw-m1-q03",
+    "sat-2024-03-d-rw-m1-q04",
+    "sat-2024-03-d-rw-m1-q05",
+    "sat-2024-03-d-rw-m1-q06",
+    "sat-2024-03-d-rw-m1-q08",
+    "sat-2024-03-d-rw-m1-q09",
+    "sat-2024-03-d-rw-m1-q10",
+    "sat-2024-03-d-rw-m1-q11",
+    "sat-2024-03-d-rw-m1-q12",
+    "sat-2024-03-d-rw-m1-q13",
+    "sat-2024-03-d-rw-m1-q14",
+    "sat-2024-03-d-rw-m1-q15",
+    "sat-2024-03-d-rw-m1-q16",
+    "sat-2024-03-d-rw-m1-q17",
+    "sat-2024-03-d-rw-m1-q18",
+    "sat-2024-03-d-rw-m1-q19",
+    "sat-2024-03-d-rw-m1-q20",
+    "sat-2024-03-d-rw-m1-q22",
+    "sat-2024-03-d-rw-m1-q24",
+    "sat-2024-03-d-rw-m1-q25",
+    "sat-2024-03-d-rw-m1-q26",
+    "sat-2024-03-d-rw-m1-q27"
+  ],
+  "sourceRefs": [
+    {
+      "role": "question",
+      "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+      "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521"
+    },
+    {
+      "role": "answer",
+      "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+      "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24"
+    }
+  ],
+  "questions": [
+    {
+      "id": "sat-2024-03-d-rw-m1-q01",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The following text is from Rudolfo Anaya’s 1972 novel Bless Me, Ultima.\nThe young narrator is eating breakfast with his two sisters in their home in rural\nNew Mexico.\n     I sat across the table from Deborah and Teresa and ate my atole and the\nhot tortilla with butter. I said very little. I usually spoke very little to my two\nsisters. They were older than I and they were very close. They usually spent the\nentire day in the attic, playing dolls and giggling. I did not concern myself with\nthose things.\n     ©1972 by Rudolfo Anaya\n\n\nAs used in the text, what does the phrase “concern myself with” most\nnearly mean?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Trade"
+        },
+        {
+          "id": "B",
+          "text": "Create"
+        },
+        {
+          "id": "C",
+          "text": "Get angry about"
+        },
+        {
+          "id": "D",
+          "text": "Care about"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 1
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q03",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Some robots such as KHR-1 (developed in 2004) and Sophia (developed in\n2015) feature humanoid characteristics like bipedal locomotion so that people\nwill find it easier to interact with them. While these features can help to _____\nfeelings of comfort in people, a robot that looks too human can fall into the\n“uncanny valley,” meaning that its appearance unintentionally unsettles those\nwho encounter it.\n\n\nWhich choice completes the text with the most logical and precise word\nor phrase?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "counterbalance"
+        },
+        {
+          "id": "B",
+          "text": "repudiate"
+        },
+        {
+          "id": "C",
+          "text": "constrict"
+        },
+        {
+          "id": "D",
+          "text": "engender"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            3
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 3
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q04",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Karam Kang has demonstrated that lobbying does little to alter the probability\nthat a particular energy policy under consideration by the United States\nCongress will be enacted, but lobbying is not as _____ as this finding seems\nto suggest. As Kang herself notes, lobbying can shape which policy proposals\nmembers of Congress bring forward for consideration in the first place.\n\n\nWhich choice completes the text with the most logical and precise word\nor phrase?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "ineffectual"
+        },
+        {
+          "id": "B",
+          "text": "cynical"
+        },
+        {
+          "id": "C",
+          "text": "counterproductive"
+        },
+        {
+          "id": "D",
+          "text": "biased"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            3
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 4
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q05",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "People sometimes dismiss a claim if it comes from a source they regard as\nself-interested, but from a strictly logical perspective, the source of a claim is\n_____: it has no direct bearing on whether the claim is true.\n\n\nWhich choice completes the text with the most logical and precise word\nor phrase?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "implicit"
+        },
+        {
+          "id": "B",
+          "text": "indisputable"
+        },
+        {
+          "id": "C",
+          "text": "irrelevant"
+        },
+        {
+          "id": "D",
+          "text": "indistinct"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            4
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 5
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q06",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "When people think of dinosaurs with feathers, they typically think of winged\ndinosaurs, such as the four-winged Microraptor. However, many dinosaurs\nthat didn’t have wings also had feathers on their bodies. For instance, research\nindicates that the wingless, peacock-sized Caudipteryx likely had feathers.\n\n\nWhich choice best describes the function of the underlined sentence in\nthe text as a whole?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "It defines a term related to the type of dinosaur feathers mentioned earlier in the text."
+        },
+        {
+          "id": "B",
+          "text": "It indicates that the dinosaurs mentioned earlier in the text weren’t the only ones that had feathers."
+        },
+        {
+          "id": "C",
+          "text": "It reveals that the dinosaurs mentioned earlier in the text used their feathers for an important purpose."
+        },
+        {
+          "id": "D",
+          "text": "It gives an example of a dinosaur with the characteristics mentioned earlier in the text."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            4
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 6
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q08",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Joseph A. Walker’s award-winning play The River Niger was produced in 1972\nby Che groundbreaking Negro Ensemble Company (NEC). NEC cofounder\nRobert Hooks, an actor, producer, and activist, had met actor and playwright\nDouglas Turner Ward while they were performing in a 1960 touring production\nof Lorraine Hansberry’s play A Raisin in the Sun. Together, they envisioned a\ntheater company that would nurture and showcase the work of Black theater\nprofessionals. Since NEC’s founding in 1967, its workshops and performances\nhave given Black playwrights, including Walker, a forum for their compelling\nstories.\nWhich choice best states the main purpose of the text?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "To describe how Hooks and Ward’s creative partnership changed over time"
+        },
+        {
+          "id": "B",
+          "text": "To show how the play A Raisin in the Sun influenced Hooks and Ward"
+        },
+        {
+          "id": "C",
+          "text": "To bring attention to a work by Joseph A. Walker"
+        },
+        {
+          "id": "D",
+          "text": "To discuss the origin and importance of the NEC"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            5
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 8
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q09",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The food industry has long used thermal technologies to preserve food in\nlarge batches. Recent advancements in ohmic heating were made through\nresearch in Brazil on the preservation of acerola pulp. Ohmic heating is\ngenerally considered to be an improvement over more\nconventional thermal preservation methods: whereas conventional\nmethods transfer energy from the surface of a food to its interior, ohmic\nheating passes electric current through food products to generate heat\nwithin the food itself, thus reducing industrial cooking times.\nBased on the text, what is one disadvantage of some\nconventional thermal preservation methods?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Their cooking times are longer than those of other methods."
+        },
+        {
+          "id": "B",
+          "text": "They are especially vulnerable to technological breakdowns."
+        },
+        {
+          "id": "C",
+          "text": "They are only effective in heating foods that are lightweight and small in size."
+        },
+        {
+          "id": "D",
+          "text": "They require more energy than other methods do."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            6
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 9
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q10",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "“Tomato” is an example of a loanword—that is, a word that originated in one\nlanguage and was later adopted by another. The word came to English\nindirectly from tomate, the Spanish word for the widely cultivated plant.\nSpanish had borrowed it from Nahuatl, an Indigenous language of Central\nMexico, in which the word’s original form is tomatl. “Barbecue” is also\nIndigenous in origin and entered English through Spanish. But in this case, the\noriginal source was Taino, a language of the Caribbean islands, in which the\nword for the cooking technique is barbakoa.\nThe author makes which point about the Spanish language?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "It adopted Nahuatl and Taino words in approximately equal numbers."
+        },
+        {
+          "id": "B",
+          "text": "Its contribution to English vocabulary roughly equals the collective contribution by Indigenous languages."
+        },
+        {
+          "id": "C",
+          "text": "It has served as a medium through which Indigenous languages have influenced English."
+        },
+        {
+          "id": "D",
+          "text": "It has borrowed words from Indigenous languages and contributed words to them."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            6
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 10
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q11",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "table",
+          "title": "Total Areas of Five Tribal Nations around the United States",
+          "rows": [
+            [
+              "Tribal nation",
+              "Location",
+              "Area (square miles)"
+            ],
+            [
+              "Blackfeet Nation",
+              "Montana",
+              "2,285"
+            ],
+            [
+              "Mandan, Hidatsa, and Arikara Nation",
+              "North Dakota",
+              "1,583"
+            ],
+            [
+              "Northern Cheyenne Tribe",
+              "Montana",
+              "707"
+            ],
+            [
+              "Cherokee Nation",
+              "Oklahoma",
+              "6,963"
+            ],
+            [
+              "Muscogee Nation",
+              "Oklahoma",
+              "4,867"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "In terms of total area, the Navajo Nation is the largest tribal nation in the United\nStates. It covers 24,425 square miles in Arizona, Colorado, and New Mexico.\nMost tribal nations in the US are much smaller. For example, the total area of\nthe Muscogee Nation in Oklahoma is 4,867 square miles. And in Montana, the\ntotal area of the Blackfeet Nation is _____\n\n\nWhich choice most effectively uses data from the table to complete the\nstatement?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "2,285 square miles."
+        },
+        {
+          "id": "B",
+          "text": "707 square miles."
+        },
+        {
+          "id": "C",
+          "text": "1,583 square miles."
+        },
+        {
+          "id": "D",
+          "text": "6,693 square miles."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            7
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 11
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q12",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "table",
+          "title": "Millions of Metric Tons of Copper Mined in 1995 and 2020",
+          "rows": [
+            [
+              "Country",
+              "1995",
+              "2020"
+            ],
+            [
+              "United States",
+              "1.85",
+              "1.20"
+            ],
+            [
+              "Mexico",
+              "0.33",
+              "0.73"
+            ],
+            [
+              "Poland",
+              "0.38",
+              "0.39"
+            ],
+            [
+              "China",
+              "0.37",
+              "1.72"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "While doing research for a paper about copper mining, a student finds a table\nwith information about four different countries. The student notes that the\ncountry that mined 0.73 million metric tons of copper in 2020 had mined ____\n\n\nWhich choice most effectively uses data from the table to complete the\nstatement?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "0.33 million metric tons of copper in 1995."
+        },
+        {
+          "id": "B",
+          "text": "1.20 million metric tons of copper in 1995."
+        },
+        {
+          "id": "C",
+          "text": "0.37 million metric tons of copper in 1995."
+        },
+        {
+          "id": "D",
+          "text": "0.38 million metric tons of copper in 1995."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            8
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 12
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q13",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "“A Pair of Silk Stockings” is an 1897 short story written by Kate Chopin. In the\nstory, Chopin suggests that the protagonist, Mrs. Sommers, experiences a\nshift in her sense of self as a result of putting on certain articles of clothing,\nwriting, ____\n\n\nWhich quotation from “A Pair of Silk Stockings” most effectively\nillustrates the claim?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "“She did not wish to act hastily, to do anything she might afterward regret.”"
+        },
+        {
+          "id": "B",
+          "text": "“She held back her skirts and turned her feet one way and her head another way as she glanced down at the polished, pointed- tipped boots.”"
+        },
+        {
+          "id": "C",
+          "text": "“Mrs. Sommers was one who knew the value of bargains; who could stand for hours making her way inch by inch toward the desired object that was selling below cost.\""
+        },
+        {
+          "id": "D",
+          "text": "“Her stockings and boots and well fitting gloves had worked marvels in her bearing—had given her a feeling of assurance, a sense of belonging to the well-dressed multitude.”"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            9
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 13
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q14",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "table",
+          "title": "Average Hours Worked per Person per Year in 1950 and 2017",
+          "rows": [
+            [
+              "Country",
+              "1950",
+              "2017",
+              "Change in hours",
+              "Percent change in hours"
+            ],
+            [
+              "Mexico",
+              "2,432",
+              "2,255",
+              "-177",
+              "-7%"
+            ],
+            [
+              "Austria",
+              "2,086",
+              "1,613",
+              "-473",
+              "-23%"
+            ],
+            [
+              "Brazil",
+              "2,042",
+              "1,709",
+              "-333",
+              "-16%"
+            ],
+            [
+              "Belgium",
+              "2,106",
+              "1,544",
+              "-562",
+              "-27%"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Calculations may be inexact due to rounding."
+        },
+        {
+          "type": "paragraph",
+          "text": "A student in an economics course is examining the decline since 1950 in\naverage hours worked per person per year in various nations due to both\nincreased productivity and the adoption of policies that limit working hours.\nThe first task in this investigation is to determine how the decline in Brazil\ncompares to that in other countries. The student finds that ____\nWhich choice most effectively uses data from the table to complete the\nstudent's conclusion?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "the decline in number of hours worked was greater in Brazil than it was in Belgium, Austria, or Mexico."
+        },
+        {
+          "id": "B",
+          "text": "though the percent decrease in hours worked in Brazil was less than that in Belgium and Austria, it was greater than that in Mexico."
+        },
+        {
+          "id": "C",
+          "text": "though the percent decrease in hours worked in Brazil was greater than that in Belgium and Mexico, it was less than that in Austria."
+        },
+        {
+          "id": "D",
+          "text": "while the number of hours worked rose in Brazil between 1950 and 2017, it declined in Belgium, Austria, and Mexico."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            10
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 14
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q15",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The Mammillaria cactus M. phitauiana occurs naturally only in the state of Baja\nCalifornia Sur in Mexico, and the smallness of its range makes it especially\nvulnerable to extinction. The traditional single-species approach\nto conservation emphasizes the need to focus on individual species most at\nrisk, like M. phitauiana, but recently, conservationists have argued that an\necosystem-based approach that incorporates the many interactions between\nthe climate, terrain, and various species of a given geographical area may lead\nto better outcomes for all the species in a given location. If this view is correct,\nthe single-species approach to the conservation of M. phitauiana could thus\n_____\nWhich choice most logically completes the text?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "fail to consider the ways in which the survival of M. phitauiana may be influenced by changes in the populations of other species that inhabit Baja California Sur."
+        },
+        {
+          "id": "B",
+          "text": "allow conservationists to better consider how climatic changes affecting Baja California Sur may reduce the number of species competing with M. phitauiana."
+        },
+        {
+          "id": "C",
+          "text": "erroneously shift the focus of conservation efforts away from M. phitauiana itself."
+        },
+        {
+          "id": "D",
+          "text": "lead to a better understanding of how the distribution of Mammillaria species throughout Mexico has affected their survival."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            11
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 15
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q16",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "It is widely known that New York City’s Museum of Modern Art (MoMA) _____\na vast collection of oil paintings, including Franz Marc’s The World Cow and\nKatherine S. Dreier’s Abstract Portrait of Marcel Duchamp.\nWhich choice completes the text so that it conforms to the conventions\nof Standard English?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "housing"
+        },
+        {
+          "id": "B",
+          "text": "houses"
+        },
+        {
+          "id": "C",
+          "text": "to have housed"
+        },
+        {
+          "id": "D",
+          "text": "to house"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            11
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "Source answer sheet lists a conflicting key; question wording and grammar were checked independently. Corrected answer: B."
+      ],
+      "sectionLabel": "Reading Module 1",
+      "number": 16
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q17",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "An accomplished birder might be able to spot thousands of different species\nover the course of a career, from Milvus migrans to Gallinula chloropus, but no\nbirder has ever achieved the ultimate ____ an in-person glimpse of all 10,000-\nplus species of birds.\n\n\nWhich choice completes the text so that it conforms to the conventions\nof Standard English?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "goal: catching"
+        },
+        {
+          "id": "B",
+          "text": "goal; catching"
+        },
+        {
+          "id": "C",
+          "text": "goal. Catching"
+        },
+        {
+          "id": "D",
+          "text": "goal catching"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            12
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "Source answer sheet lists a conflicting key; question wording and grammar were checked independently. Corrected answer: A."
+      ],
+      "sectionLabel": "Reading Module 1",
+      "number": 17
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q18",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In 1987, chemist Ahmed Zewail devised a novel technique in optical\nspectroscopy that allowed him to study ultrafast chemical reactions occurring\nwithin molecules. Years later, he _____ for this groundbreaking research with\nthe Robert A. Welch Award and the Priestley Medal from the American\nChemical Society and hence would become known as the father of\nfemtochemistry.\n\n\nWhich choice completes the text so that it conforms to the conventions\nof Standard English?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "had been honored"
+        },
+        {
+          "id": "B",
+          "text": "is honored"
+        },
+        {
+          "id": "C",
+          "text": "will be honored"
+        },
+        {
+          "id": "D",
+          "text": "would be honored"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            12
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "Source answer sheet lists a conflicting key; question wording and grammar were checked independently. Corrected answer: D."
+      ],
+      "sectionLabel": "Reading Module 1",
+      "number": 18
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q19",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Today, the Michelin Guide is widely known as the arbiter of fine dining, with its\ncoveted 3-star rating being awarded to top restaurants like Jade Dragon\nin_____     when brothers Andre and Edouard Michelin created the guide in\n1900, it was little more than a marketing gimmick—a way to increase profits\nfor their tire company by encouraging their customers to drive across France,\nvisiting the guide’s recommended hotels and restaurants along the way.\n\n\nWhich choice completes the text so that it conforms to the conventions\nof Standard English?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Macau,"
+        },
+        {
+          "id": "B",
+          "text": "Macau; however,"
+        },
+        {
+          "id": "C",
+          "text": "Macau, however,"
+        },
+        {
+          "id": "D",
+          "text": "Macau"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            13
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "Source answer sheet lists a conflicting key; question wording and grammar were checked independently. Corrected answer: B."
+      ],
+      "sectionLabel": "Reading Module 1",
+      "number": 19
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q20",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "When attempting to determine a fault’s seismic history, geophysicists like Dr.\nEstella Atekwana at the University of Delaware rely in part on data about the\nfault’s physical dimensions and geological _____ the Juniper Mountain fault in\nMalheur County, Oregon, the US Geological Survey compiles such data in\nseveral ways: by exchanging information with state geological surveys, by\nlinking maps of the fault with sources that offer detailed descriptions of it, and\nby maintaining a database of quantitative data such as the fault’s length (17\nkm).\n\n\nWhich choice completes the text so that it conforms to the conventions\nof Standard English?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "features and for"
+        },
+        {
+          "id": "B",
+          "text": "features. For"
+        },
+        {
+          "id": "C",
+          "text": "features for"
+        },
+        {
+          "id": "D",
+          "text": "features, for"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            13
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "Source answer sheet lists a conflicting key; question wording and grammar were checked independently. Corrected answer: B."
+      ],
+      "sectionLabel": "Reading Module 1",
+      "number": 20
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q22",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "If you could travel in a spaceship to Elara, one of Jupiter’s many moons, you’d\nfind a moon with a prograde orbit. This means that Elara orbits Jupiter in the\nsame direction that Jupiter rotates on its axis. _____ at Harpalyke, another\nJovian moon, you’d find an example of a retrograde orbit, with the moon\nrevolving around Jupiter in the opposite direction.\n\n\nWhich choice completes the text with the most logical transition?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Specifically,"
+        },
+        {
+          "id": "B",
+          "text": "In other words,"
+        },
+        {
+          "id": "C",
+          "text": "For example,"
+        },
+        {
+          "id": "D",
+          "text": "Elsewhere,"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            14
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 22
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q24",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "• Maya Lin is a US artist known for her memorials and large-scale installation\nartworks.\n     • She became famous in 1982 when she completed the Vietnam Veterans Memorial,\nwhich consists of two 246-foot granite walls.\n     • She completed Groundswell in 1993.\n     • It is an installation composed of glass that fills an entire gallery room.\n     • She completed Water Line in 2006.\n     • It is an installation composed of aluminum tubing that fills an entire gallery room.\n\n\nWhich choice most effectively uses information from the given sentences\nto emphasize a difference between Groundswell and Water Line?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Maya Lin’s Groundswell is composed of glass; Water Line, by contrast, is composed of aluminum tubing."
+        },
+        {
+          "id": "B",
+          "text": "After completing the Vietnam Veterans Memorial, Maya Lin completed Groundswell, another large-scale work."
+        },
+        {
+          "id": "C",
+          "text": "The sprawling size of Maya Lin’s Vietnam Veterans Memorial is echoed in Groundswell, a work made of glass that fills an entire gallery room."
+        },
+        {
+          "id": "D",
+          "text": "Maya Lin is known for her memorials and installation art, such as Groundswell and Water Line."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            16
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 24
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q25",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "While researching a topic, a student has taken the following notes:\n\n\n     • The El Carmen-Verde Mountains are a mountain range located in northwestern\nMexico.\n     • The range is one of the dozens of “sky islands” in the southwestern US and\nnorthwestern Mexico.\n     • A sky island is an isolated mountain range whose environment differs drastically\nfrom that of the surrounding lowlands.\n     • The US Forest Service (USFS) said, “The mountains are ‘islands’ surrounded by\ndeserts that are ‘seas.’”\n     • The USFS said, “Each Sky Island is a unique ecosystem.”\n\n\nThe student wants to explain what a sky island is. Which choice most\neffectively uses relevant information from the notes to accomplish this\ngoal?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "The El Carmen-Verde Mountains are an isolated mountain range located in northwestern Mexico whose environment differs drastically from that of the surrounding lowlands."
+        },
+        {
+          "id": "B",
+          "text": "The USFS considers the El Carmen-Verde Mountains to be a “unique ecosystem.”"
+        },
+        {
+          "id": "C",
+          "text": "The El Carmen-Verde Mountains, which are considered to be a sky island, are located in northwestern Mexico."
+        },
+        {
+          "id": "D",
+          "text": "A sky island is an isolated mountain range, such as the El Carmen-Verde Mountains in northwestern Mexico, whose environment differs drastically from that of the surrounding lowlands."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            17
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 25
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q26",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "• The Paralympic Games are a series of international sporting events involving\nathletes with an impairment.\n     • A gold medal indicates that an athlete finished in first place.\n     • Frank Höfle competed as a Paralympic cross-country skier from 1988 to 2006.\n     • He won seventeen medals, ten of which were gold.\n     • Daniel Dias competed as a Paralympic swimmer from 2008 to 2020.\n     • He won thirty-eight medals, twenty-five of which were gold.\n\n\nWhich choice most effectively uses information from the given sentences\nto emphasize the number of gold medals won by Daniel Dias?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "In his career as a Paralympic swimmer, Daniel Dias won thirty-eight total medals—twenty-five of them were gold."
+        },
+        {
+          "id": "B",
+          "text": "An accomplished Paralympian with thirty-eight total medals, Daniel Dias competed as a swimmer from 2008 to 2020."
+        },
+        {
+          "id": "C",
+          "text": "At the Paralympic Games, a gold medal indicates a first- place finish, and some accomplished athletes like Frank Höfle have won many."
+        },
+        {
+          "id": "D",
+          "text": "Both multiple gold medalists, Frank Höfle and Daniel Dias debuted at the Paralympic Games in 1988 and 2008, respectively."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            18
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 26
+    },
+    {
+      "id": "sat-2024-03-d-rw-m1-q27",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "While researching a topic, a student has taken the following notes:\n    • The human tongue contains taste receptors for a rich, savory flavor called umami.\n    • Umami is triggered by the compounds in a variety of foods, including salmon and\ncaramelized onions.\n    • Participants in a study tasted a sample of sugar kelp, a type of brown seaweed.\n    • They rated its umami intensity as moderate.\n    • The participants tasted a sample of hidaka-konbu, another type of brown seaweed.\n    • They rated its umami intensity as high.\n\n\nThe student wants to make a generalization about brown seaweed. Which\nchoice most effectively uses relevant information from the notes to\naccomplish this goal?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "In a research study, participants tasted samples of sugar kelp and hidaka-konbu, two types of brown seaweed."
+        },
+        {
+          "id": "B",
+          "text": "Some types of brown seaweed trigger umami flavor in human taste buds."
+        },
+        {
+          "id": "C",
+          "text": "Participants in a study rated the umami intensity of various seaweeds."
+        },
+        {
+          "id": "D",
+          "text": "Sugar kelp is a type of brown seaweed, as is hidakakonbu."
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/2024年3月 D.pdf",
+          "sha256": "5d04ad38a81d0d6986373aec405a8dff2b8122be52a01a5d0e16db6413d9c521",
+          "pages": [
+            19
+          ],
+          "extractionMethod": "PDF文字层"
+        },
+        {
+          "role": "answer",
+          "path": "2023-2024年SAT亚太北美真题47套/2024年3月SAT亚太北美真题4套/24年3月A-D答案.pdf",
+          "sha256": "c7562b043cdd59a852cbccd366fbd0fc3c3529ca5071c164ed41e71dc39ded24",
+          "pages": [
+            2
+          ],
+          "extractionMethod": "答案/解析页文字层"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading Module 1",
+      "number": 27
+    }
+  ],
+  "title": "2024年3月 D 套 · 阅读与写作 M1",
+  "year": 2024,
+  "month": 3,
+  "region": "D套（地区未标注）"
+}

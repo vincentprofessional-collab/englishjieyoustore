@@ -228,7 +228,7 @@ const waterPartTwo: ReadingPart = {
     {
       id: "c7t1-p2-yes-no",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 2? Write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 2? In boxes 21-26 on your answer sheet, write YES if the statement agrees with the claims of the writer NO if the statement contradicts the claims of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [21], prompt: "Water use per person is higher in the industrial world than it was in Ancient Rome.", options: yesNoNotGiven },
         { questionNumbers: [22], prompt: "Feeding increasing populations is possible due primarily to improved irrigation systems.", options: yesNoNotGiven },
@@ -321,7 +321,7 @@ const psychePartThree: ReadingPart = {
     {
       id: "c7t1-p3-true-false",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 3? Write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 3? In boxes 31-36 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [31], prompt: "In the example of suggestopedic teaching in the fourth paragraph, the only variable that changes is the music.", options: trueFalseNotGiven },
         { questionNumbers: [32], prompt: "Prior to the suggestopedia class, students are made aware that the language experience will be demanding.", options: trueFalseNotGiven },

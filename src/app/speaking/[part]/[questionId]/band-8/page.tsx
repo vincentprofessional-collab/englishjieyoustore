@@ -73,7 +73,7 @@ export default async function SpeakingBand8Page({ params }: SpeakingBand8PagePro
     answerHeading: "8 分范文",
     answerTranslation: modelAnswer.band8AnswerTranslation ?? [],
     approach: band8Approach,
-    audioUrl: "",
+    audioUrl: modelAnswer.band8AudioUrl ?? "",
     band: "band-8",
     followUp: question.followUp,
     frames: band8Frames,

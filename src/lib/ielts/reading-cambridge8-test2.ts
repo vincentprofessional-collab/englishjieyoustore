@@ -115,7 +115,7 @@ const glassPassage: ReadingPart = {
     {
       id: "c8t2-p1-true-false-not-given",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 1? Write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 9–13 on your answer sheet, write TRUE if the statement agrees with the information, FALSE if it contradicts the information, or NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [9], prompt: "The metal used in the float process had to have specific properties.", options: trueFalseNotGiven },
         { questionNumbers: [10], prompt: "Pilkington invested some of his own money in his float plant.", options: trueFalseNotGiven },

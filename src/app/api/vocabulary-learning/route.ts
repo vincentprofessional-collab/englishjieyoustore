@@ -14,6 +14,7 @@ import {
 } from "@/lib/vocabulary/learning";
 import { getSupplementalLearningWords } from "@/lib/vocabulary/supplemental-learning-books";
 import { withExistingStudyExamples } from "@/lib/vocabulary/study-examples";
+import totalFrequencyData from "@/data/vocabulary/total-frequency-ranks.json";
 
 export const dynamic = "force-dynamic";
 
@@ -21,6 +22,7 @@ const validBookKeys = new Set<LearningBookKey | "全部">([
   ...LEARNING_BOOKS.map((book) => book.key),
   "全部",
 ]);
+const totalFrequencyRanks = (totalFrequencyData as { rankByWord: Record<string, number> }).rankByWord;
 
 let supplementalFavoriteIndex: Map<string, LearningWord> | null = null;
 
@@ -51,7 +53,10 @@ export function GET(request: Request) {
     }
   }
   const entries = getAllVocabularyEntries();
-  const words = getLearningBookEntries(entries, book).map(toLearningWord).map(withExistingStudyExamples);
+  const words = getLearningBookEntries(entries, book)
+    .map(toLearningWord)
+    .map((word) => ({ ...word, frequencyRank: totalFrequencyRanks[word.id] }))
+    .map(withExistingStudyExamples);
 
   return NextResponse.json(
     {

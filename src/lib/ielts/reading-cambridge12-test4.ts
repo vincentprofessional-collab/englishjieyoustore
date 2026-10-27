@@ -185,7 +185,7 @@ const bringBackBigCats: ReadingPart = {
       id: "cambridge-12-test-4-part2-questions-23-26",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 2? Write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 2? In boxes 23-26 on your answer sheet, write YES if the statement agrees with the claims of the writer NO if the statement contradicts the claims of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [23], prompt: "Britain could become the first European country to reintroduce the lynx.", options: yesNoOptions },
         { questionNumbers: [24], prompt: "The large growth in the European lynx population since 1970 has exceeded conservationists’ expectations.", options: yesNoOptions },
@@ -276,7 +276,7 @@ const effectiveBoards: ReadingPart = {
       id: "cambridge-12-test-4-part3-questions-34-37",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 3? Write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 3? In boxes 34-37 on your answer sheet, write YES if the statement agrees with the claims of the writer NO if the statement contradicts the claims of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [34], prompt: "Close scrutiny of the behaviour of boards has increased since the economic downturn.", options: yesNoOptions },
         { questionNumbers: [35], prompt: "Banks have been mismanaged to a greater extent than other businesses.", options: yesNoOptions },

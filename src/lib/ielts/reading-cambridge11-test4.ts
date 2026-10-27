@@ -83,7 +83,7 @@ const twinEpigenetics: ReadingPart = {
       id: "cambridge-11-test-4-part1-questions-1-4",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 1–4 on your answer sheet, write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 1–4 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [1], prompt: "There may be genetic causes for the differences in how young the skin of identical twins looks.", options: judgmentOptions },
         { questionNumbers: [2], prompt: "Twins are at greater risk of developing certain illnesses than non-twins.", options: judgmentOptions },
@@ -187,7 +187,7 @@ const filmSound: ReadingPart = {
       id: "cambridge-11-test-4-part2-questions-19-23",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the information given in Reading Passage 2? In boxes 19–23 on your answer sheet, write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 2? In boxes 19–23 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [19], prompt: "Audiences are likely to be surprised if a film lacks background music.", options: judgmentOptions },
         { questionNumbers: [20], prompt: "Background music may anticipate a development in a film.", options: judgmentOptions },
@@ -308,7 +308,7 @@ const language: ReadingPart = {
       id: "cambridge-11-test-4-part3-questions-37-40",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the views of the writer in Reading Passage 3? In boxes 37–40 on your answer sheet, write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the views of the writer in Reading Passage 3? In boxes 37–40 on your answer sheet, write YES if the statement agrees with the views of the writer NO if the statement contradicts the views of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [37], prompt: "Human beings might have achieved their present position without language.", options: yesNoOptions },
         { questionNumbers: [38], prompt: "The Port-Royal grammarians did justice to the nature of language.", options: yesNoOptions },

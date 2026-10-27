@@ -96,7 +96,7 @@ const cambridge5Test3PartOne: ReadingPart = {
     {
       id: "c5t3-p1-true-false",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 11–13 on your answer sheet write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 11–13 on your answer sheet write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [11], prompt: "Most ‘Missouri’ programme three-year-olds scored highly in areas such as listening, speaking, reasoning and interacting with others.", options: trueFalseNotGiven },
         { questionNumbers: [12], prompt: "‘Missouri’ programme children of young, uneducated, single parents scored less highly on the tests.", options: trueFalseNotGiven },
@@ -195,7 +195,7 @@ const cambridge5Test3PartTwo: ReadingPart = {
     {
       id: "c5t3-p2-yes-no",
       type: "choice",
-      instruction: "Do the following statements reflect the claims of the writer in Reading Passage 2? In boxes 18–23 on your answer sheet write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements reflect the claims of the writer in Reading Passage 2? In boxes 18–23 on your answer sheet write YES if the statement reflects the claims of the writer NO if the statement contradicts the claims of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [18], prompt: "Coastal erosion occurred along Egypt’s Mediterranean coast before the building of the Aswan dams.", options: yesNoNotGiven },
         { questionNumbers: [19], prompt: "Some people predicted that the Aswan dams would cause land loss before they were built.", options: yesNoNotGiven },
@@ -297,7 +297,7 @@ const cambridge5Test3PartThree: ReadingPart = {
     {
       id: "c5t3-p3-true-false",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 3? In boxes 32–37 on your answer sheet write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 3? In boxes 32–37 on your answer sheet write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information about this",
       questions: [
         { questionNumbers: [32], prompt: "The researchers who launched the field of AI had worked together on other projects in the past.", options: trueFalseNotGiven },
         { questionNumbers: [33], prompt: "In 1985, AI was at its lowest point.", options: trueFalseNotGiven },

@@ -149,7 +149,7 @@ const cinemaPartOne: ReadingPart = {
     {
       id: "c6t3-p1-yes-no",
       type: "choice",
-      instruction: "Do the following statements agree with the views of the writer in Reading Passage 1? Write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the views of the writer in Reading Passage 1? In boxes 6-9 on your answer sheet, write YES if the statement agrees with the views of the writer NO if the statement contradicts the views of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [6], prompt: "It is important to understand how the first audiences reacted to the cinema.", options: yesNoNotGiven },
         { questionNumbers: [7], prompt: "The Lumière Brothers’ film about the train was one of the greatest films ever made.", options: yesNoNotGiven },
@@ -302,7 +302,7 @@ const cambridge6Test3PartTwo: ReadingPart = {
     {
       id: "c6t3-p2-yes-no",
       type: "choice",
-      instruction: "Do the following statements agree with the views of the writer in Reading Passage 2? Write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the views of the writer in Reading Passage 2? In boxes 19-24 on your answer sheet, write YES if the statement agrees with the views of the writer NO if the statement contradicts the views of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [19], prompt: "A shrinking organisation tends to lose its less skilled employees rather than its more skilled employees.", options: yesNoNotGiven },
         { questionNumbers: [20], prompt: "It is easier to manage a small business than a large business.", options: yesNoNotGiven },
@@ -372,7 +372,7 @@ const antiAgingPartThree: ReadingPart = {
     {
       id: "c6t3-p3-yes-no",
       type: "choice",
-      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 3? Write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 3? In boxes 28-32 on your answer sheet, write YES if the statement agrees with the claims of the writer NO if the statement contradicts the claims of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [28], prompt: "Studies show drugs available today can delay the process of growing old.", options: yesNoNotGiven },
         { questionNumbers: [29], prompt: "There is scientific evidence that eating fewer calories may extend human life.", options: yesNoNotGiven },

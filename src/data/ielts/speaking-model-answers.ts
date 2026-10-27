@@ -10,7 +10,9 @@ export type SpeakingModelAnswer = {
   answer: string[];
   answerTranslation: string[];
   approach: string;
+  audioAlternateUrl?: string;
   audioUrl?: string;
+  band8AudioUrl?: string;
   band8Answer?: string[];
   band8AnswerTranslation?: string[];
   band8Approach?: string;
@@ -75,6 +77,7 @@ export const speakingModelAnswers = [
       "我最喜欢的部分大概是客厅，因为它真的有生活气息。我们会在那里吃晚饭，聊聊一天发生的事，有空的时候也会一起看点东西。人都忙起来时，公寓确实会有点拥挤压抑，但这个社区有一种安静的互助氛围，所以我在那里挺有归属感的。",
     ],
     audioUrl: "/speaking/audio/speaking-part-1-001.mp3",
+    band8AudioUrl: "/speaking/audio/speaking-part-1-001-home-accommodation-band-8.mp3",
   },
   {
     partId: "part-1",
@@ -122,6 +125,7 @@ export const speakingModelAnswers = [
       "它确实已经被发展重塑了。新的地铁线路和商业综合体让日常生活方便了很多，但老城市肌理的一部分也变得不那么明显了。我觉得这座城市正在尝试在便利和身份感之间取得平衡。它并不是停留在过去，但仍然保留了足够的魅力，让我觉得它是家乡。",
     ],
     audioUrl: "/speaking/audio/speaking-part-1-002.mp3",
+    band8AudioUrl: "/speaking/audio/speaking-part-1-002-hometown-band-8.mp3",
   },
   {
     partId: "part-1",
@@ -169,6 +173,7 @@ export const speakingModelAnswers = [
       "这门课程的学习曲线相当陡，因为有些理论比较抽象，阅读量也很大。话虽如此，我很喜欢实践型项目，比如分析短视频或策划一个小型传播活动。它们让我能更批判地观察数字行为，所以我觉得这个专业既实用，也有思考价值。",
     ],
     audioUrl: "/speaking/audio/speaking-part-1-003.mp3",
+    band8AudioUrl: "/speaking/audio/speaking-part-1-003-work-or-study-band-8.mp3",
   },
   {
     partId: "part-1",
@@ -216,6 +221,7 @@ export const speakingModelAnswers = [
       "我更喜欢在能感知周围环境的地方走路，比如绿树成荫的街道或安静的公园。它能让我理清思绪，而且不需要专门制定一个运动计划。从某种意义上说，散步对我也是一种小型数字排毒，因为它减少了屏幕时间，也让大脑有机会重新调整。",
     ],
     audioUrl: "/speaking/audio/speaking-part-1-004.mp3",
+    band8AudioUrl: "/speaking/audio/speaking-part-1-004-walking-band-8.mp3",
   },
   {
     partId: "part-1",
@@ -263,10 +269,14 @@ export const speakingModelAnswers = [
       "我小时候家里养过一只橘猫，我做作业时它常常陪在我身边。我喜欢的是我们之间那种安静的关系。你会学着读懂动物的肢体语言，也会尊重它的空间，这和与人互动很不一样。等我的生活规律更稳定后，我很想再养一只猫。",
     ],
     audioUrl: "/speaking/audio/speaking-part-1-005.mp3",
+    band8AudioUrl: "/speaking/audio/speaking-part-1-005-pets-and-animals-band-8.mp3",
   },
   {
     partId: "part-1",
     questionId: "speaking-part-1-006",
+    audioUrl: "/speaking/audio/speaking-part-1-006-reading.mp3",
+    audioAlternateUrl: "/speaking/audio/speaking-part-1-006-reading-alternate.mp3",
+    band8AudioUrl: "/speaking/audio/speaking-part-1-006-reading-band-8.mp3",
     approach: "阅读题不要只说喜欢或不喜欢。先讲常读类型，再补固定阅读场景和它对情绪的作用，答案会更像真实学生。",
     frames: [
       "Yes, I do enjoy reading, especially ...",
@@ -313,6 +323,8 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-007",
+    audioUrl: "/speaking/audio/speaking-part-1-007-names.mp3",
+    band8AudioUrl: "/speaking/audio/speaking-part-1-007-names-band-8.mp3",
     approach: "名字题可以讲含义、家人期待和身份感。不要编得太宏大，用一个具体解释加个人态度即可。",
     frames: [
       "My name was chosen by ...",
@@ -359,6 +371,8 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-008",
+    audioUrl: "/speaking/audio/speaking-part-1-008-hobbies.mp3",
+    band8AudioUrl: "/speaking/audio/speaking-part-1-008-hobbies-band-8.mp3",
     approach: "爱好题聚焦一个真实爱好，讲开始方式、坚持原因和情绪价值。比列举很多爱好更容易拿高分。",
     frames: [
       "My main hobby is ...",
@@ -405,6 +419,8 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-009",
+    audioUrl: "/speaking/audio/speaking-part-1-009-daily-routine.mp3",
+    band8AudioUrl: "/speaking/audio/speaking-part-1-009-daily-routine-band-8.mp3",
     approach: "日常题按早晨、白天、晚上三个节点回答，再强调是弹性安排，不要讲成机械时间表。",
     frames: [
       "On weekdays, I usually start my day with ...",
@@ -451,6 +467,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-010",
+    band8AudioUrl: "/speaking/audio/speaking-part-1-010-scenery-band-8.mp3",
     approach: "风景题把自然景观和情绪修复联系起来。地点可以普通，但要说出为什么比打卡更有意义。",
     frames: [
       "Yes, I’m drawn to ...",
@@ -617,6 +634,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-016",
+    audioUrl: "/speaking/audio/speaking-part-1-016-mathematics.mp3",
     approach: "数学题不要把自己说成天才或学渣。用“以前害怕—后来找到方法—现实作用”来回答，更自然也更完整。",
     frames: [
       "I wouldn’t say I’m naturally gifted at maths, but ...",
@@ -641,6 +659,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-017",
+    audioUrl: "/speaking/audio/speaking-part-1-017-science.mp3",
     approach: "科学题用具体学科和体验回答。把科学从课本拉回生活，比如实验、博物馆和好奇心。",
     frames: [
       "I studied science at school, mainly ...",
@@ -665,6 +684,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-018",
+    audioUrl: "/speaking/audio/speaking-part-1-018-teachers.mp3",
     approach: "老师题讲一个具体老师的教学方式和情感支持，不要只说 nice。最后说明是否保持联系即可。",
     frames: [
       "My favourite teacher was ...",
@@ -785,6 +805,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-023",
+    audioUrl: "/speaking/audio/speaking-part-1-023-evening-time.mp3",
     approach: "晚间题用 morning/evening person 做对比，再讲晚上如何放松。不要和 morning routine 题重复太多。",
     frames: [
       "I’m more of an evening person because ...",
@@ -809,6 +830,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-024",
+    audioUrl: "/speaking/audio/speaking-part-1-024-morning-routines.mp3",
     approach: "晨间习惯题重点是顺序和稳定感。和 Morning time 区分开：这里讲具体动作流程。",
     frames: [
       "After waking up, I usually ...",
@@ -833,6 +855,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-025",
+    audioUrl: "/speaking/audio/speaking-part-1-025-perfume.mp3",
     approach: "香水题讲频率、场合和气味偏好。注意表达适度，不要说得像广告文案。",
     frames: [
       "I don’t wear perfume every day, but ...",
@@ -857,6 +880,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-026",
+    audioUrl: "/speaking/audio/speaking-part-1-026-tidiness.mp3",
     approach: "整洁题不要只说 yes/no。先承认现在比小时候整洁，再用房间或书桌细节说明整洁如何影响学习状态。",
     frames: [
       "I’m fairly tidy now, although ...",
@@ -881,6 +905,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-027",
+    audioUrl: "/speaking/audio/speaking-part-1-027-time-management.mp3",
     approach: "时间管理题要体现学生真实感：不是完美自律，而是用简单计划和缓冲时间避免拖延。",
     frames: [
       "I’m reasonably good at managing time, especially when ...",
@@ -905,6 +930,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-028",
+    audioUrl: "/speaking/audio/speaking-part-1-028-watches.mp3",
     approach: "手表题可区分普通手表、智能手表和手机看时间。答案重点是实用性，不必硬说手表很重要。",
     frames: [
       "I don’t wear a watch every day because ...",
@@ -1481,6 +1507,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-052",
+    audioUrl: "/speaking/audio/speaking-part-1-052-day-off.mp3",
     approach: "休息日题按“睡懒觉—补生活事务—轻松活动”展开。体现恢复精力，不要像旅游计划。",
     frames: [
       "On a day off, I usually ...",
@@ -1505,6 +1532,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-053",
+    audioUrl: "/speaking/audio/speaking-part-1-053-fix-things.mp3",
     approach: "修理东西题用诚实口吻：会做基础排查，但复杂问题找专业人士。顺带讲环保和省钱。",
     frames: [
       "I can fix simple things, but ...",
@@ -1529,6 +1557,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-054",
+    audioUrl: "/speaking/audio/speaking-part-1-054-food.mp3",
     approach: "食物题从日常饮食、偏好和健康平衡回答。不要只说最喜欢的菜，补一点饮食习惯。",
     frames: [
       "I’m not a very picky eater, but ...",
@@ -1601,6 +1630,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-057",
+    audioUrl: "/speaking/audio/speaking-part-1-057-health.mp3",
     approach: "健康题从生活习惯入手，承认不完美但有意识。涵盖运动、饮食、睡眠和心理健康。",
     frames: [
       "I try to stay healthy by ...",
@@ -1673,6 +1703,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-060",
+    audioUrl: "/speaking/audio/speaking-part-1-060-museum.mp3",
     approach: "博物馆题讲是否喜欢、喜欢哪类展览和为什么。强调互动展览比背历史更吸引你。",
     frames: [
       "I like museums when ...",
@@ -1769,6 +1800,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-064",
+    audioUrl: "/speaking/audio/speaking-part-1-064-carrying-things.mp3",
     approach: "携带物品题讲日常包里带什么、为什么带、如何避免带太多。用 essentials 做归纳。",
     frames: [
       "When I go out, I usually carry ...",
@@ -8382,6 +8414,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-3",
     questionId: "speaking-part-3-001",
+    audioUrl: "/speaking/audio/speaking-part-3-001-technology-communication-band-7.mp3",
     approach: "先讲便利，再讲代价。用“扩展了交流，但未必加深了关系”收束，逻辑清楚且不绝对。",
     frames: [
       "That’s incredibly useful, especially for ...",
@@ -8408,6 +8441,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-3",
     questionId: "speaking-part-3-002",
+    audioUrl: "/speaking/audio/speaking-part-3-002-ai-art-regulation.mp3",
     approach: "不要一上来只表态。区分普通创作自由与商业、版权、署名透明度，论证会更成熟。",
     frames: [
       "I wouldn’t regulate every ..., but I would regulate ...",
@@ -8434,6 +8468,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-3",
     questionId: "speaking-part-3-003",
+    audioUrl: "/speaking/audio/speaking-part-3-003-social-media-relationships.mp3",
     approach: "承认社媒维持联系的好处，再指出浅层互动的问题。不要把社媒讲成纯坏事。",
     frames: [
       "It helps people stay in touch, especially when ...",

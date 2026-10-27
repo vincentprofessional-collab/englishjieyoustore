@@ -127,7 +127,7 @@ const antPassage: ReadingPart = {
     {
       id: "c7t3-p1-true-false-not-given",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 1? Write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 1-6 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [1], prompt: "Ants use the same channels of communication as humans do.", options: trueFalseNotGiven },
         { questionNumbers: [2], prompt: "City life is one factor that encourages the development of intelligence.", options: trueFalseNotGiven },
@@ -191,7 +191,7 @@ const migrationPassage: ReadingPart = {
       heading: "Section C",
       headingQuestionNumber: 16,
       paragraphs: [
-        "An important project, led by the biological anthropologist Robert Williams, focused on the variants (called Gm allotypes) of one particular protein — immunoglobin G — found in the fluid portion of human blood. All proteins ‘drift’, or produce variants, over the generations, and members of an interbreeding human population will share a set of such variants. Thus, by comparing the Gm allotypes of two different populations (e.g. two Indian tribes), one can establish their genetic ‘distance’, which itself can be calibrated to give an indication of the length of time since these populations last interbred.",
+        "An important project, led by the biological anthropologist Robert Williams, focused on the variants (called Gm allotypes) of one particular protein — immunoglobulin G — found in the fluid portion of human blood. All proteins ‘drift’, or produce variants, over the generations, and members of an interbreeding human population will share a set of such variants. Thus, by comparing the Gm allotypes of two different populations (e.g. two Indian tribes), one can establish their genetic ‘distance’, which itself can be calibrated to give an indication of the length of time since these populations last interbred.",
       ],
     },
     {
@@ -338,7 +338,7 @@ const forestPassage: ReadingPart = {
     {
       id: "c7t3-p3-true-false-not-given",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 3? Write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 3? In boxes 27-33 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [27], prompt: "Forest problems of Mediterranean countries are to be discussed at the next meeting of experts.", options: trueFalseNotGiven },
         { questionNumbers: [28], prompt: "Problems in Nordic countries were excluded because they are outside the European Economic Community.", options: trueFalseNotGiven },

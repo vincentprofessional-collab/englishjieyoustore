@@ -6,6 +6,8 @@ export type SatSourceRef = {
   extractionMethod: string;
 };
 
+export type SatTest = "Reading and Writing" | "Math" | "All";
+
 export type SatTextRun = { text: string; marks?: Array<"bold" | "italic" | "underline"> };
 export type SatParagraphBlock = { type: "paragraph" | "quote"; text: string; runs?: SatTextRun[] };
 export type SatNotesBlock = { type: "notes"; items: string[] };
@@ -39,7 +41,7 @@ export type SatDifficulty = "Easy" | "Medium" | "Hard" | "Unrated";
 export type SatQuestion = {
   id: string;
   assessment: "SAT";
-  test: "Reading and Writing";
+  test: Exclude<SatTest, "All">;
   domain: string;
   skill: string;
   difficulty: SatDifficulty;
@@ -53,12 +55,14 @@ export type SatQuestion = {
   reviewStatus: "verified" | "review_required";
   reviewFlags: string[];
   contentDuplicateGroup?: string;
+  sectionLabel?: string;
+  number?: number;
 };
 
 export type SatSet = {
   id: string;
   assessment: "SAT";
-  test: "Reading and Writing";
+  test: SatTest;
   domain: string;
   skill: string;
   difficulty: SatDifficulty;
@@ -66,6 +70,27 @@ export type SatSet = {
   questionIds: string[];
   sourceRefs: Array<Pick<SatSourceRef, "role" | "path" | "sha256">>;
   questions: SatQuestion[];
+  title?: string;
+  year?: number;
+  month?: number;
+  region?: string;
+};
+
+export type SatPastPaperSummary = {
+  id: string;
+  title: string;
+  year: number;
+  month?: number;
+  region: string;
+  sectionLabel: string;
+  questionCount: number;
+  duplicateCount: number;
+  sourceRefs: Array<Pick<SatSourceRef, "role" | "path" | "sha256">>;
+};
+
+export type SatPastPaperIndex = {
+  generatedAt: string;
+  papers: SatPastPaperSummary[];
 };
 
 export type SatSetSummary = Omit<SatSet, "questions" | "sourceRefs"> & {

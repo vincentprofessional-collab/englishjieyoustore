@@ -99,6 +99,96 @@ function formatQuestionNumbers(questionNumbers: number[]) {
   return `${questionNumbers[0]}–${questionNumbers.at(-1)}`;
 }
 
+function isBinaryReadingOptions(options: ReadingChoiceQuestion["options"] | undefined) {
+  return Boolean(
+    options?.length &&
+      options.length <= 3 &&
+      options.every((option) => CHOICE_TEXT_AS_ANSWER_KEY.has(option.letter.trim().toUpperCase())),
+  );
+}
+
+function getBinaryInstructionParts(instructions: string[]) {
+  const text = instructions.join(" ").replace(/\s+/g, " ").trim();
+  const definitionPattern = /\b(TRUE|FALSE|NOT GIVEN|YES|NO)\s+if\s+([\s\S]*?)(?=\s*(?:,\s*)?(?:or\s+)?(?:TRUE|FALSE|NOT GIVEN|YES|NO)\s+if\b|$)/gi;
+  const definitions: Array<{ label: string; text: string }> = [];
+  let match: RegExpExecArray | null;
+
+  while ((match = definitionPattern.exec(text))) {
+    definitions.push({ label: match[1].toUpperCase(), text: match[2].replace(/[,.\s]+$/, "").trim() });
+  }
+
+  if (definitions.length === 0) return { definitions, direction: "", lead: text };
+
+  const firstDefinitionIndex = text.search(/\b(?:TRUE|FALSE|NOT GIVEN|YES|NO)\s+if\b/i);
+  const beforeDefinitions = text.slice(0, firstDefinitionIndex).trim().replace(/[,:;\s]+$/, "");
+  const questionEnd = beforeDefinitions.indexOf("?");
+  return {
+    definitions,
+    direction: questionEnd >= 0 ? beforeDefinitions.slice(questionEnd + 1).replace(/^[,\s]+/, "").trim() : "",
+    lead: questionEnd >= 0 ? beforeDefinitions.slice(0, questionEnd + 1).trim() : beforeDefinitions,
+  };
+}
+
+function ReadingBinaryInstructions({ instructions }: { instructions: string[] }) {
+  const { definitions, direction, lead } = getBinaryInstructionParts(instructions);
+
+  if (definitions.length === 0) {
+    return <p className="reading-binary-instruction-copy">{lead}</p>;
+  }
+
+  return (
+    <div className="reading-binary-instructions">
+      {lead ? <p className="reading-binary-instruction-copy">{lead}</p> : null}
+      {direction ? <p className="reading-binary-instruction-copy">{direction}</p> : null}
+      <div className="reading-binary-instruction-definitions">
+        {definitions.map((definition) => (
+          <p className="reading-binary-instruction-definition" key={definition.label}>
+            <strong>{definition.label}</strong>
+          <span>if {definition.text}</span>
+          </p>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ReadingBinaryOptionDefinitions({ options }: { options: ReadingChoiceQuestion["options"] }) {
+  return (
+    <div className="reading-binary-instruction-definitions">
+      {options.map((option) => (
+        <p className="reading-binary-instruction-definition" key={option.letter}>
+          <strong>{option.letter}</strong>
+          <span>
+            {/^(?:if\b)/i.test(option.text.trim())
+              ? option.text.trim()
+              : `if ${option.text.trim().replace(/\.$/, "").replace(/^./, (letter) => letter.toLowerCase())}`}
+          </span>
+        </p>
+      ))}
+    </div>
+  );
+}
+
+function ReadingFillInstructions({ instructions }: { instructions: string[] }) {
+  const lines = instructions.flatMap((instruction) =>
+    instruction.replace(/\.\s+(?=(?:Choose|Complete|Write)\b)/gi, ".\n").split("\n").map((line) => line.trim()).filter(Boolean),
+  );
+  const answerLimit = /(NO MORE THAN\s+(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN)\s+WORDS?(?:\s+AND\/OR\s+A\s+NUMBER)?|(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN)\s+WORDS?(?:\s+AND\/OR\s+A\s+NUMBER|\s+ONLY)?|(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN)\s+LETTERS?)/gi;
+  const isAnswerLimit = (part: string) => /^(?:NO MORE THAN\s+(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN)\s+WORDS?(?:\s+AND\/OR\s+A\s+NUMBER)?|(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN)\s+WORDS?(?:\s+AND\/OR\s+A\s+NUMBER|\s+ONLY)?|(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN)\s+LETTERS?)$/i.test(part);
+
+  return lines.map((line, index) => (
+    <p className="reading-raw-fill-instruction" key={`${index}-${line}`}>
+      <em>
+        {line.split(answerLimit).map((part, partIndex) =>
+          isAnswerLimit(part)
+            ? <strong key={`${partIndex}-${part}`}>{part}</strong>
+            : <span key={`${partIndex}-${part}`}>{part}</span>,
+        )}
+      </em>
+    </p>
+  ));
+}
+
 const MULTI_FILL_SEPARATOR = "\u001f";
 
 function getFillInputValues(value: string, inputCount: number) {
@@ -355,15 +445,6 @@ function parseRawQuestion(value: string, validQuestionNumbers: Set<number>) {
   };
 }
 
-function shouldHideRawInstruction(value: string) {
-  return (
-    /^Write your answers? in boxes/i.test(value) ||
-    /^Write the appropriate letter/i.test(value) ||
-    /^In boxes \d/i.test(value) ||
-    /on your answer sheet\.?$/i.test(value)
-  );
-}
-
 function getRawQuestionMode(section: Omit<RawQuestionSection, "mode">): RawQuestionSection["mode"] {
   const text = [
     section.heading,
@@ -482,9 +563,7 @@ function getRawQuestionSections(text: string, questionNumbers: number[]) {
     }
 
     if (line.kind === "instruction") {
-      if (!shouldHideRawInstruction(line.text)) {
-        section.instructions.push(line.text);
-      }
+      section.instructions.push(line.text);
       continue;
     }
 
@@ -529,17 +608,30 @@ function setRawDragPayload(
 
 function RawQuestionText({
   fillAnswers,
+  instruction,
   onAnswerChange,
   questions,
   text,
+  title,
 }: {
   fillAnswers: FillMap;
+  instruction?: string;
   onAnswerChange: (number: number, value: string) => void;
   questions: ReadingFillQuestion[];
   text: string;
+  title?: string;
 }) {
   const questionNumbers = questions.map((question) => question.number);
-  const sections = getRawQuestionSections(text, questionNumbers);
+  const normalizedText = text.replace(/\s+/g, " ").trim().toLowerCase();
+  const sourceText = [
+    /^Questions?\s+\d{1,2}/im.test(text) || questionNumbers.length === 0
+      ? ""
+      : `Questions ${formatQuestionNumbers(questionNumbers)}`,
+    instruction && !normalizedText.includes(instruction.replace(/\s+/g, " ").trim().toLowerCase()) ? instruction : "",
+    title && !normalizedText.includes(title.trim().toLowerCase()) ? title : "",
+    text,
+  ].filter(Boolean).join("\n");
+  const sections = getRawQuestionSections(sourceText, questionNumbers);
 
   function renderFillInput(number: number, options: { showNumber?: boolean } = {}) {
     const showNumber = options.showNumber ?? true;
@@ -560,7 +652,7 @@ function RawQuestionText({
     );
   }
 
-  function renderFillLine(value: string, key: string) {
+  function renderFillLine(value: string, key: string, bullet = false) {
     const pieces: ReactNode[] = [];
     const pattern = /\b(\d{1,2})\b\s*(?:[._·•\-–—]{2,}|…+)|!\s*(?:[._·•\-–—]{2,}|…+)/g;
     let lastIndex = 0;
@@ -576,39 +668,16 @@ function RawQuestionText({
     }
 
     pieces.push(value.slice(lastIndex));
-    return <p className="reading-raw-fill-line" key={key}>{pieces}</p>;
+    return (
+      <p className={`reading-raw-fill-line ${bullet ? "reading-raw-note-item" : ""}`} key={key}>
+        {bullet ? <span aria-hidden="true" className="reading-raw-note-bullet">•</span> : null}
+        <span>{pieces}</span>
+      </p>
+    );
   }
 
   function getFillTextParagraphs(lines: string[]) {
-    const paragraphs: string[] = [];
-    let currentParagraph = "";
-
-    lines.forEach((line, index) => {
-      const trimmedLine = line.trim();
-      if (!trimmedLine) return;
-
-      const isLikelySubheading =
-        index === 0 &&
-        trimmedLine.length <= 60 &&
-        !/[.!?]$/.test(trimmedLine) &&
-        !/\d{1,2}\s*(?:[._·•\-–—]{2,}|…+)/.test(trimmedLine) &&
-        lines.slice(index + 1, index + 3).some((nextLine) =>
-          /\d{1,2}\s*(?:[._·•\-–—]{2,}|…+)/.test(nextLine),
-        );
-
-      if (isLikelySubheading) {
-        paragraphs.push(trimmedLine);
-        return;
-      }
-
-      currentParagraph = currentParagraph ? `${currentParagraph} ${trimmedLine}` : trimmedLine;
-    });
-
-    if (currentParagraph) {
-      paragraphs.push(currentParagraph);
-    }
-
-    return paragraphs;
+    return lines.map((line) => line.trim()).filter(Boolean);
   }
 
   function renderBinaryChoices(number: number, options: string[]) {
@@ -667,14 +736,23 @@ function RawQuestionText({
         const binaryOptions = section.mode === "ynng"
           ? ["YES", "NO", "NOT GIVEN"]
           : ["TRUE", "FALSE", "NOT GIVEN"];
+        const hasFillPlaceholders = section.textLines.some((line) =>
+          questionNumbers.some((number) =>
+            new RegExp(`\\b${number}\\s*(?:[._·•\\-–—]{2,}|…+)`, "i").test(line),
+          ),
+        );
+        const isFillSection = section.mode === "fill" || (
+          section.textLines.some((line) => /^[•·]\s*/.test(line)) && hasFillPlaceholders
+        );
+        const fillLines = isFillSection ? getFillTextParagraphs(section.textLines) : [];
+        const noteTitleIndex = fillLines.findIndex((line) => !/^[•·]\s*/.test(line));
+        const hasNotesFrame = isFillSection && fillLines.some((line) => /^[•·]\s*/.test(line));
 
         if (section.mode === "option-bank") {
           return (
             <section className="reading-raw-question-group" key={sectionKey}>
               {section.heading ? <h2>{section.heading}</h2> : null}
-              {section.instructions.map((instruction) => (
-                <p className="reading-raw-question-instruction" key={instruction}>{instruction}</p>
-              ))}
+              {section.instructions.length ? <ReadingFillInstructions instructions={section.instructions} /> : null}
               {section.textLines.map((line, index) => (
                 <p className="reading-raw-question-copy" key={`${sectionKey}-text-${index}`}>{line}</p>
               ))}
@@ -732,9 +810,7 @@ function RawQuestionText({
           return (
             <section className="reading-raw-question-group" key={sectionKey}>
               {section.heading ? <h2>{section.heading}</h2> : null}
-              {section.instructions.map((instruction) => (
-                <p className="reading-raw-question-instruction" key={instruction}>{instruction}</p>
-              ))}
+              {section.instructions.length ? <ReadingBinaryInstructions instructions={section.instructions} /> : null}
               {section.questions.map((question) => (
                 <article className="reading-raw-binary-question" id={`reading-question-${question.number}`} key={question.number}>
                   <div className="reading-question-prompt">
@@ -750,15 +826,34 @@ function RawQuestionText({
 
         return (
           <section className="reading-raw-question-group" key={sectionKey}>
-            {section.heading ? <h2>{section.heading}</h2> : null}
-            {section.instructions.map((instruction) => (
-              <p className="reading-raw-question-instruction" key={instruction}>{instruction}</p>
-            ))}
-            {(section.mode === "fill" ? getFillTextParagraphs(section.textLines) : section.textLines).map((line, index) =>
-              section.mode === "fill" ? renderFillLine(line, `${sectionKey}-fill-${index}`) : (
+            {section.heading
+              ? <h2>{section.heading}</h2>
+              : sectionIndex === 0 && questionNumbers.length
+                ? <h2>Questions {formatQuestionNumbers(questionNumbers)}</h2>
+                : null}
+            {isFillSection ? (
+              <ReadingFillInstructions instructions={section.instructions} />
+            ) : section.instructions.length ? <ReadingFillInstructions instructions={section.instructions} /> : null}
+            {hasNotesFrame ? (
+              <div className="reading-raw-note-frame">
+                {noteTitleIndex >= 0 ? <h3 className="reading-raw-note-title">{fillLines[noteTitleIndex]}</h3> : null}
+                {fillLines.map((line, index) => {
+                  if (index === noteTitleIndex) return null;
+                  const isBullet = /^[•·]\s*/.test(line);
+                  const textLine = isBullet ? line.replace(/^[•·]\s*/, "") : line;
+                  const isSubheading = !isBullet &&
+                    textLine.length <= 80 &&
+                    !/[.!?]$/.test(textLine) &&
+                    !/\d{1,2}\s*(?:[._·•\-–—]{2,}|…+)/.test(textLine);
+
+                  return isSubheading
+                    ? <h4 className="reading-raw-note-subheading" key={`${sectionKey}-note-${index}`}>{textLine}</h4>
+                    : renderFillLine(textLine, `${sectionKey}-fill-${index}`, isBullet);
+                })}
+              </div>
+            ) : isFillSection ? fillLines.map((line, index) => renderFillLine(line, `${sectionKey}-fill-${index}`)) : section.textLines.map((line, index) => (
                 <p className="reading-raw-question-copy" key={`${sectionKey}-text-${index}`}>{line}</p>
-              ),
-            )}
+              ))}
             {section.questions.map((question) => (
               <article
                 className={`reading-raw-numbered-line ${
@@ -1007,10 +1102,11 @@ function ReadingChoiceBlock({
   const selected = answers[questionKey] ?? [];
   const isMultiple = (question.selectCount ?? 1) > 1;
   const numberLabel = question.questionNumbers.join("–");
+  const isBinary = isBinaryReadingOptions(question.options);
 
   return (
     <article className="reading-choice-question" id={`reading-question-${questionKey}`}>
-      <div className="reading-question-prompt">
+      <div className={`reading-question-prompt ${isBinary ? "reading-binary-reading-prompt" : ""}`}>
         <strong>{numberLabel}</strong>
         <span>{question.prompt}</span>
         {isMultiple ? <small>已选 {selected.length}/{question.selectCount}</small> : null}
@@ -1842,7 +1938,7 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
           const figures = displayIndex === displayParagraphs.length - 1
             ? section.figures?.filter((figure) => figure.afterParagraph === paragraphIndex) ?? []
             : [];
-          const paragraphKey = `${section.id}-${displayedParagraphIndex}`;
+          const paragraphKey = `${section.id}-${paragraphIndex}-${displayedParagraphIndex}`;
           const paragraphContent = (
             <ArticleInlineAnnotatedParagraph
               annotations={inlineTextAnnotations}
@@ -2080,7 +2176,7 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
                 return (
                   <section className="reading-question-section reading-heading-question" key={block.id}>
                     <h2>Questions {formatQuestionNumbers(block.questionNumbers)}</h2>
-                    <p>{block.instruction}</p>
+                    <ReadingFillInstructions instructions={[block.instruction]} />
                     <h3>{block.title}</h3>
                     <div
                       className={`reading-heading-pool ${selectedHeadingId ? "has-selection" : ""}`}
@@ -2110,17 +2206,26 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
 
               if (block.type === "choice") {
                 const questionNumbers = block.questions.flatMap((question) => question.questionNumbers);
+                const sharedOptions = block.questions[0]?.options ?? [];
+                const isBinary = isBinaryReadingOptions(sharedOptions);
+                const hasBinaryDefinitions = isBinary && getBinaryInstructionParts([block.instruction]).definitions.length > 0;
                 return (
                   <section className="reading-question-section" key={block.id}>
                     <h2>Questions {formatQuestionNumbers(questionNumbers)}</h2>
-                    <p>{block.instruction}</p>
-                    {block.sharedOptions && block.questions[0]?.options.length ? (
-                      <div className="reading-shared-option-bank">
-                        {block.questions[0].options.map((option) => (
-                          <div key={option.letter}><strong>{option.letter}</strong><span>{option.text}</span></div>
-                        ))}
-                      </div>
-                    ) : null}
+                    {isBinary
+                      ? <ReadingBinaryInstructions instructions={[block.instruction]} />
+                      : <ReadingFillInstructions instructions={[block.instruction]} />}
+                    {block.sharedOptions && sharedOptions.length
+                      ? isBinary
+                        ? hasBinaryDefinitions ? null : <ReadingBinaryOptionDefinitions options={sharedOptions} />
+                        : (
+                          <div className="reading-shared-option-bank">
+                            {sharedOptions.map((option) => (
+                              <div key={option.letter}><strong>{option.letter}</strong><span>{option.text}</span></div>
+                            ))}
+                          </div>
+                        )
+                      : null}
                     <div className="reading-choice-list">
                       {block.questions.map((question) => (
                         <ReadingChoiceBlock
@@ -2142,30 +2247,32 @@ function LegacyReadingPractice({ mode = "mock", test = DEFAULT_READING_TEST }: R
                   {block.chart ? (
                     <>
                       <h2>Questions {formatQuestionNumbers(questionNumbers)}</h2>
-                      <p>{block.instruction}</p>
+                      <ReadingFillInstructions instructions={[block.instruction]} />
                       <ReadingFillAxisChart answers={fillAnswers} chart={block.chart} onChange={(number, value) => updateFill(number, value)} />
                     </>
                   ) : block.table ? (
                     <>
                       <h2>Questions {formatQuestionNumbers(questionNumbers)}</h2>
-                      <p>{block.instruction}</p>
+                      <ReadingFillInstructions instructions={[block.instruction]} />
                       {block.title ? <h3>{block.title}</h3> : null}
                       <ReadingFillTable answers={fillAnswers} onChange={updateFill} table={block.table} />
                     </>
                   ) : block.rawText ? (
                     <RawQuestionText
                       fillAnswers={fillAnswers}
+                      instruction={block.instruction}
                       onAnswerChange={(number, value) => setFillAnswers((current) => ({
                         ...current,
                         [number]: value,
                       }))}
                       questions={block.questions}
                       text={block.rawText}
+                      title={block.title}
                     />
                   ) : (
                     <>
                       <h2>Questions {formatQuestionNumbers(questionNumbers)}</h2>
-                      <p>{block.instruction}</p>
+                      <ReadingFillInstructions instructions={[block.instruction]} />
                       <h3>{block.title}</h3>
                     </>
                   )}

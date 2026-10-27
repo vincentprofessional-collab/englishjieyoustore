@@ -1,0 +1,891 @@
+{
+  "id": "sat-2025-10-asia-a-math-m2",
+  "assessment": "SAT",
+  "test": "Math",
+  "domain": "SAT 数学",
+  "skill": "Math · Module 2",
+  "difficulty": "Unrated",
+  "expectedCount": 13,
+  "questionIds": [
+    "sat-2025-10-asia-a-math-m2-q01",
+    "sat-2025-10-asia-a-math-m2-q02",
+    "sat-2025-10-asia-a-math-m2-q03",
+    "sat-2025-10-asia-a-math-m2-q04",
+    "sat-2025-10-asia-a-math-m2-q05",
+    "sat-2025-10-asia-a-math-m2-q07",
+    "sat-2025-10-asia-a-math-m2-q08",
+    "sat-2025-10-asia-a-math-m2-q09",
+    "sat-2025-10-asia-a-math-m2-q10",
+    "sat-2025-10-asia-a-math-m2-q11",
+    "sat-2025-10-asia-a-math-m2-q12",
+    "sat-2025-10-asia-a-math-m2-q19",
+    "sat-2025-10-asia-a-math-m2-q22"
+  ],
+  "sourceRefs": [
+    {
+      "role": "question",
+      "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+      "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6"
+    },
+    {
+      "role": "answer",
+      "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+      "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6"
+    }
+  ],
+  "questions": [
+    {
+      "id": "sat-2025-10-asia-a-math-m2-q01",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The solution to the given system of equations 5y = 6x + 17 and −5y = 7x − 23 is (x, y). What is the value of 39x?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "−18"
+        },
+        {
+          "id": "B",
+          "text": "−6"
+        },
+        {
+          "id": "C",
+          "text": "6"
+        },
+        {
+          "id": "D",
+          "text": "18"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "将两式相加得 0=13x−6，所以 x=6/13，39x=18，选 D。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            57
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            83
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph/table information kept editable."
+      ],
+      "sectionLabel": "Math · Module 2",
+      "number": 1
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m2-q02",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The graph shows a dashed boundary line y = 4x + 3, with the shaded region above the line. Which inequality represents the shaded region?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "y > 4x + 3"
+        },
+        {
+          "id": "B",
+          "text": "y > 4x − 3"
+        },
+        {
+          "id": "C",
+          "text": "y < 4x + 3"
+        },
+        {
+          "id": "D",
+          "text": "y < 4x − 3"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "边界直线为 y=4x+3，阴影区域在直线上方，因此不等式为 y>4x+3，选 A。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            58
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            83
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph/table information kept editable."
+      ],
+      "sectionLabel": "Math · Module 2",
+      "number": 2
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m2-q03",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "A circle in the xy-plane has center (−5, 2), and the point (−9, 5) lies on the circle. Which equation represents the circle?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "(x−5)^2+(y+2)^2=5"
+        },
+        {
+          "id": "B",
+          "text": "(x+5)^2+(y−2)^2=5"
+        },
+        {
+          "id": "C",
+          "text": "(x−5)^2+(y+2)^2=25"
+        },
+        {
+          "id": "D",
+          "text": "(x+5)^2+(y−2)^2=25"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "圆心为 (−5,2)，半径平方为 (−9+5)^2+(5−2)^2=16+9=25，因此选 D。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            58
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            83
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph/table information kept editable."
+      ],
+      "sectionLabel": "Math · Module 2",
+      "number": 3
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m2-q04",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The inequality y < −3x + 18 holds in the xy-plane. Which point (x, y) is a solution?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "(0,19)"
+        },
+        {
+          "id": "B",
+          "text": "(−1,22)"
+        },
+        {
+          "id": "C",
+          "text": "(−3,0)"
+        },
+        {
+          "id": "D",
+          "text": "(7,−1)"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "将各点代入 y<−3x+18，只有 (−3,0) 满足不等式，因此选 C。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            59
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            83
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph/table information kept editable."
+      ],
+      "sectionLabel": "Math · Module 2",
+      "number": 4
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m2-q05",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In the equation 18(x + 5) = 2(x + c) + 16x, c is a constant. The equation has infinitely many solutions. What is c?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "90"
+        },
+        {
+          "id": "B",
+          "text": "45"
+        },
+        {
+          "id": "C",
+          "text": "10"
+        },
+        {
+          "id": "D",
+          "text": "5"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "展开后两边的 x 项相同；要使等式恒成立，需 90=2c，因此 c=45，选 B。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            59
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            83
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph/table information kept editable."
+      ],
+      "sectionLabel": "Math · Module 2",
+      "number": 5
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m2-q07",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Hannah saves 1/5 of her monthly salary, and Wyatt saves 2/7 of his monthly salary. Together, they save $3,270 each month. If h and w represent their monthly salaries, respectively, which equation represents this relationship?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "h+w=3,270"
+        },
+        {
+          "id": "B",
+          "text": "h+2w=3,270"
+        },
+        {
+          "id": "C",
+          "text": "10h+7w=114,450"
+        },
+        {
+          "id": "D",
+          "text": "7h+10w=114,450"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "每月存款满足 h/5+2w/7=3,270。两边乘以 35，得到 7h+10w=114,450，选 D。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            60
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            83
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph/table information kept editable."
+      ],
+      "sectionLabel": "Math · Module 2",
+      "number": 7
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m2-q08",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The function h is defined by h(x) = (x + p)(x − 4)(2x − 12), where p is a constant. The graph of y = h(x) passes through (−2, 0). What is h(0)?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "−48"
+        },
+        {
+          "id": "B",
+          "text": "−2"
+        },
+        {
+          "id": "C",
+          "text": "8"
+        },
+        {
+          "id": "D",
+          "text": "96"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "因为 (−2,0) 在图像上，h(−2)=0，故 p=2。于是 h(0)=2(−4)(−12)=96，选 D。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            61
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            84
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph/table information kept editable."
+      ],
+      "sectionLabel": "Math · Module 2",
+      "number": 8
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m2-q09",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The equation x − a = (x − a)(x − 24) has a constant a > 25. Which of the following are solutions to the equation? I. a; II. 24; III. 25."
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Only I and II"
+        },
+        {
+          "id": "B",
+          "text": "Only I and III"
+        },
+        {
+          "id": "C",
+          "text": "Only II and III"
+        },
+        {
+          "id": "D",
+          "text": "I, II, and III"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "移项并提取公因式，得到 (x−a)(x−25)=0，因此解为 x=a 和 x=25，选 I、III，即 B。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            61
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            84
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph/table information kept editable."
+      ],
+      "sectionLabel": "Math · Module 2",
+      "number": 9
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m2-q10",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "If √(x − 1) = 2, what is the value of x − 1?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "2"
+        },
+        {
+          "id": "B",
+          "text": "3"
+        },
+        {
+          "id": "C",
+          "text": "4"
+        },
+        {
+          "id": "D",
+          "text": "8"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "两边平方得 x−1=4，选 C。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            62
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            84
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph/table information kept editable."
+      ],
+      "sectionLabel": "Math · Module 2",
+      "number": 10
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m2-q11",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "A rectangular swimming pool that is 21 feet long and 11 feet wide is surrounded by a concrete path that is x feet wide. If the area of the concrete path is 144 square feet, what is the value of x?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "2"
+        },
+        {
+          "id": "B",
+          "text": "4"
+        },
+        {
+          "id": "C",
+          "text": "18"
+        },
+        {
+          "id": "D",
+          "text": "36"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "水泥路面积为 (21+2x)(11+2x)−21×11=144。解得 x=2（取正值），选 A。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            62
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            84
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph/table information kept editable."
+      ],
+      "sectionLabel": "Math · Module 2",
+      "number": 11
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m2-q12",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "At a nature preserve, a wildlife biologist counted bald eagles from an observation deck at the same time each day for 21 days. The table summarizes the resulting data set, data set A."
+        },
+        {
+          "type": "table",
+          "title": "Bald Eagles Counted at a Nature Preserve",
+          "rows": [
+            [
+              "Number of bald eagles",
+              "Number of days"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "1",
+              "3"
+            ],
+            [
+              "2",
+              "4"
+            ],
+            [
+              "3",
+              "5"
+            ],
+            [
+              "4",
+              "4"
+            ],
+            [
+              "5",
+              "3"
+            ],
+            [
+              "19",
+              "1"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The data value 19 was recorded in error and is removed from data set A to create data set B, which consists of the remaining 20 data values. Which statement best compares the median of data set A and the median of data set B?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "The median of data set B is less than the median of data set A."
+        },
+        {
+          "id": "B",
+          "text": "The median of data set B is equal to the median of data set A."
+        },
+        {
+          "id": "C",
+          "text": "The median of data set B is greater than the median of data set A."
+        },
+        {
+          "id": "D",
+          "text": "There is not enough information to compare the medians of the two data sets."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "A 的第 11 个数据为 3；删除 19 后，B 的第 10 与第 11 个数据也都是 3，因此两个中位数相等，选 B。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            63
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            84
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Source page 63 checked; publisher watermark, QR code, and footer text were excluded from the question content."
+      ],
+      "sectionLabel": "Math · Module 2",
+      "number": 12
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m2-q19",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The system of equations is y = 13x + 2 and y = 13x² + 2. Which ordered pair (x, y) is a solution to the system?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "(0,0)"
+        },
+        {
+          "id": "B",
+          "text": "(0,2)"
+        },
+        {
+          "id": "C",
+          "text": "(4,54)"
+        },
+        {
+          "id": "D",
+          "text": "(4,106)"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "令两式相等，x=0 时 y=2，得到 (0,2)，选 B。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            66
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            85
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph/table information kept editable."
+      ],
+      "sectionLabel": "Math · Module 2",
+      "number": 19
+    },
+    {
+      "id": "sat-2025-10-asia-a-math-m2-q22",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT 数学",
+      "skill": "Math · Module 2",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The figure shows parallel lines n and s cut by transversal t. Angles x and y are same-side exterior angles. If x = 6z − 87 and y = 3z + 15, what is the value of z?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "18"
+        },
+        {
+          "id": "B",
+          "text": "28"
+        },
+        {
+          "id": "C",
+          "text": "34"
+        },
+        {
+          "id": "D",
+          "text": "81"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "同侧内角互补，因此 (6z−87)+(3z+15)=180。解得 z=28，选 B。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            68
+          ],
+          "extractionMethod": "本地OCR+逐题复核"
+        },
+        {
+          "role": "answer",
+          "path": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+          "sha256": "901ddbf17c3ec7861b4f9c25c7320d3aa803d90a6c1df847dff522945388a5e6",
+          "pages": [
+            86
+          ],
+          "extractionMethod": "中文OCR+答案与解析逐题核对"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [
+        "OCR文字经源页逐题校正",
+        "Second-pass source-page check: English text restored; graph/table information kept editable.",
+        "Source diagram places x and y as same-side exterior angles; wording matches the diagram."
+      ],
+      "sectionLabel": "Math · Module 2",
+      "number": 22
+    }
+  ],
+  "title": "2025年10月 亚太 A 套 · 数学 · M2",
+  "year": 2025,
+  "month": 10,
+  "region": "亚太 A"
+}

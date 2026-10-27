@@ -27,6 +27,60 @@
   .senior-high-v2-runner[data-paper-font-size] .senior-high-v2-runner-header h1 { font-size: clamp(23px, 5vw, 34px); }
   .senior-high-v2-runner[data-paper-font-size] .senior-high-v2-progress strong { font-size: 22px; }
 }
+
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-runner-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(8px, 1.3vw, 16px);
+}
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-runner-title h1 { flex: 0 1 auto; }
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-practice-year label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-practice-year select {
+  appearance: none;
+  -webkit-appearance: none;
+  min-width: 78px;
+  border: 1px solid rgba(21, 48, 63, .28);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .86);
+  color: #111;
+  cursor: pointer;
+  font: inherit;
+  font-size: clamp(18px, 1.65vw, 24px);
+  font-weight: 700;
+  line-height: 1.2;
+  padding: .22em 1.55em .22em .55em;
+}
+.senior-high-v2-runner[data-paper-font-size] .senior-high-v2-practice-year label::after {
+  position: absolute;
+  top: 50%;
+  right: .58em;
+  width: 0;
+  height: 0;
+  border-top: 9px solid #111;
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+  content: "";
+  pointer-events: none;
+  transform: translateY(-20%);
+}
+.senior-high-v2-group-directions {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  border: 1px solid #a9d4ea;
+  border-radius: 12px;
+  background: #eaf1f5;
+  padding: clamp(12px, 1.8vw, 20px);
+  line-height: 1.6;
+}
+.senior-high-v2-group-directions > * { margin: 0; }
+.senior-high-v2-group-directions .senior-high-v2-paragraph + .senior-high-v2-paragraph { margin-top: 4px; }
 .senior-high-v2-question-nav.direct button.essay-label,
 .senior-high-v2-question-nav.direct button.translation-label { grid-column: span 2; white-space: nowrap; }
 .senior-high-v2-group[data-presentation="inline"] .senior-high-v2-group-body {

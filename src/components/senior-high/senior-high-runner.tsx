@@ -67,6 +67,145 @@ function plainText(blocks: SeniorHighBlock[] | undefined): string {
   }).join(" ").trim();
 }
 
+function normalizedText(text: string) {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, "");
+}
+
+function extractGroupDirections(blocks: SeniorHighBlock[]) {
+  const directionIndex = blocks.findIndex((block) => /^directions?\s*:/i.test(plainText([block])));
+  if (directionIndex < 0) return { directions: [] as SeniorHighBlock[], stimulus: blocks };
+
+  let start = directionIndex;
+  if (start > 0 && /^section\s+[a-z0-9]+$/i.test(plainText([blocks[start - 1]]))) start -= 1;
+  let end = directionIndex;
+  const firstText = plainText([blocks[directionIndex]]);
+  if (!/answer\s+sheet\s+\d/i.test(firstText)) {
+    for (let index = directionIndex + 1; index < Math.min(blocks.length, directionIndex + 8); index += 1) {
+      const text = plainText([blocks[index]]).trim();
+      if (!text || /^(?:passage\b|questions?\s+\d|[A-O]\))/i.test(text)) break;
+      if (!/^(?:[a-z]|each\b|please\b|you\b|mark\b|choose\b|read\b|for each\b|answer\b|there (?:is|are)\b)/i.test(text)) break;
+      end = index;
+      if (/answer\s+sheet\s+\d/i.test(text)) break;
+    }
+  }
+
+  return {
+    directions: blocks.slice(start, end + 1),
+    stimulus: [...blocks.slice(0, start), ...blocks.slice(end + 1)],
+  };
+}
+
+function parseLegacyWordBank(blocks: SeniorHighBlock[], options: SeniorHighOption[], enabled: boolean) {
+  if (!enabled || options.length === 0) return { options, stimulus: blocks };
+  const markerPattern = /(?:^|\s)([A-O])\)\s*/g;
+  const minimumLabels = Math.min(8, options.length);
+
+  for (let start = 0; start < blocks.length; start += 1) {
+    const firstText = plainText([blocks[start]]).trim();
+    if (!/^[A-O]\)\s*\S/i.test(firstText)) continue;
+    let end = start;
+    while (end + 1 < blocks.length && /^[A-O]\)\s*\S/i.test(plainText([blocks[end + 1]]).trim())) end += 1;
+    const bankText = blocks.slice(start, end + 1).map((block) => plainText([block])).join(" ");
+    const markers = [...bankText.matchAll(markerPattern)];
+    const values = new Map<string, string>();
+    for (let index = 0; index < markers.length; index += 1) {
+      const marker = markers[index];
+      const valueStart = (marker.index ?? 0) + marker[0].length;
+      const valueEnd = index + 1 < markers.length ? markers[index + 1].index ?? bankText.length : bankText.length;
+      values.set(marker[1].toUpperCase(), bankText.slice(valueStart, valueEnd).trim());
+    }
+    if (values.size < minimumLabels) continue;
+
+    const normalizedOptions = options.map((option) => {
+      if (plainText(option.blocks)) return option;
+      const text = values.get(option.label.toUpperCase()) || values.get(option.id.toUpperCase());
+      return text ? { ...option, blocks: [{ type: "paragraph" as const, runs: [{ type: "text" as const, text }] }] } : option;
+    });
+    return {
+      options: normalizedOptions,
+      stimulus: [...blocks.slice(0, start), ...blocks.slice(end + 1)],
+    };
+  }
+
+  return { options, stimulus: blocks };
+}
+
+function clipTextBlock(block: SeniorHighBlock, cutoff: number): SeniorHighBlock | null {
+  if (block.type !== "paragraph" && block.type !== "richText") return block;
+  let remaining = cutoff;
+  const runs = [];
+  for (const run of block.runs) {
+    if (run.type === "text") {
+      if (remaining <= 0) break;
+      const text = run.text.slice(0, remaining).trimEnd();
+      if (text) runs.push({ ...run, text });
+      remaining -= run.text.length;
+    } else {
+      if (remaining < 4) break;
+      runs.push(run);
+      remaining -= 4;
+    }
+  }
+  return runs.length ? { ...block, runs } : null;
+}
+
+function duplicateQuestionStart(text: string, questions: SeniorHighQuestion[]) {
+  for (const question of questions) {
+    const number = question.sourceQuestionNumber ?? question.displayNumber;
+    const prompt = normalizedText(plainText(question.promptBlocks));
+    if (!prompt) continue;
+    const marker = new RegExp(`(?:^|\\s)${number}\\s*[.．、)]\\s*`, "g");
+    for (const match of text.matchAll(marker)) {
+      const start = match.index ?? 0;
+      const promptStart = start + match[0].length;
+      if (normalizedText(text.slice(promptStart)).startsWith(prompt)) return start;
+    }
+  }
+  return -1;
+}
+
+function isDuplicateOptionBlock(block: SeniorHighBlock, questions: SeniorHighQuestion[]) {
+  const text = plainText([block]).trim();
+  const match = text.match(/^([A-O])[).、]\s*([\s\S]+)$/i);
+  if (!match) return false;
+  const optionText = normalizedText(match[2]);
+  return questions.some((question) => question.options.some((option) => {
+    const expected = normalizedText(plainText(option.blocks));
+    return option.label.toUpperCase() === match[1].toUpperCase() && expected && optionText.startsWith(expected);
+  }));
+}
+
+function removeDuplicateQuestionText(blocks: SeniorHighBlock[], questions: SeniorHighQuestion[]) {
+  return blocks.flatMap((block) => {
+    if (isDuplicateOptionBlock(block, questions)) return [];
+    const duplicateStart = duplicateQuestionStart(plainText([block]), questions);
+    if (duplicateStart < 0) return [block];
+    if (block.type !== "paragraph" && block.type !== "richText") return [];
+    const clipped = clipTextBlock(block, duplicateStart);
+    return clipped ? [clipped] : [];
+  });
+}
+
+function setOptionDragData(dataTransfer: DataTransfer, optionId: string, sourceQuestionId?: string) {
+  dataTransfer.setData("text/senior-high-option", optionId);
+  if (sourceQuestionId) dataTransfer.setData("text/senior-high-source-question", sourceQuestionId);
+  dataTransfer.setData("text/plain", JSON.stringify({ optionId, sourceQuestionId: sourceQuestionId || "" }));
+  dataTransfer.effectAllowed = "move";
+}
+
+function readOptionDragData(dataTransfer: DataTransfer) {
+  let payload: { optionId?: string; sourceQuestionId?: string } = {};
+  try {
+    payload = JSON.parse(dataTransfer.getData("text/plain")) as typeof payload;
+  } catch {
+    // Other browsers may expose only the plain option id.
+  }
+  return {
+    optionId: dataTransfer.getData("text/senior-high-option") || payload.optionId || dataTransfer.getData("text/plain"),
+    sourceQuestionId: dataTransfer.getData("text/senior-high-source-question") || payload.sourceQuestionId || "",
+  };
+}
+
 function displayNumber(question: SeniorHighQuestion, _kind: SeniorHighSet["kind"]) {
   return question.displayLabel ?? question.displayNumber;
 }
@@ -229,17 +368,17 @@ function BlockRenderer({
       if (!text) return null;
       if (wordBankQuestions?.size && onOptionDrop) {
         const pieces: ReactNode[] = [];
-        const sourceBlank = /_{2,}\s*(\d{1,3})\s*_{2,}/g;
+        const sourceBlank = /_{1,}\s*(\d{1,3})\s*_{1,}|_{1,}\s*(\d{1,3})\b|\b(\d{1,3})\s*_{1,}/g;
         let cursor = 0;
         for (const match of text.matchAll(sourceBlank)) {
-          const sourceNumber = Number(match[1]);
+          const sourceNumber = Number(match[1] || match[2] || match[3]);
           const question = wordBankQuestions.get(sourceNumber);
           if (!question || match.index === undefined) continue;
           if (match.index > cursor) pieces.push(text.slice(cursor, match.index));
           const assigned = answers[question.id] || "";
           const assignedCorrect = revealSolutions && question.answerSpec.gradingMode === "auto" && question.answerSpec.kind === "choice" ? seniorHighAnswerMatches(assigned, question.answerSpec.acceptedAnswers || [], question.answerSpec) : null;
           const choiceState = assignedCorrect === true ? " correct" : assignedCorrect === false ? " incorrect" : "";
-          pieces.push(<span className="senior-high-v2-inline-control cet4-word-bank-inline-control" id={question.id} key={`word-bank-${question.id}`}><b>{match[1]}</b><button aria-label={`第 ${match[1]} 题选词答案空`} className={`senior-high-v2-choice-blank drop-target${assigned ? " assigned" : ""}${choiceState}`} data-senior-high-drop-target="true" draggable={Boolean(assigned)} onDragOver={(event) => { event.preventDefault(); event.dataTransfer.dropEffect = "move"; }} onDragStart={(event) => { if (!assigned) return; event.dataTransfer.setData("text/senior-high-option", assigned); event.dataTransfer.setData("text/senior-high-source-question", question.id); event.dataTransfer.effectAllowed = "move"; }} onDrop={(event) => { event.preventDefault(); const optionId = event.dataTransfer.getData("text/senior-high-option"); if (!optionId) return; onOptionDrop(question.id, optionId, event.dataTransfer.getData("text/senior-high-source-question") || undefined); }} type="button"><span>{assigned}</span>{assignedCorrect === true ? <strong aria-label="正确选项" className="senior-high-option-status">✓</strong> : assignedCorrect === false ? <strong aria-label="回答错误" className="senior-high-option-status">×</strong> : null}</button></span>);
+          pieces.push(<span className="senior-high-v2-inline-control cet4-word-bank-inline-control" id={question.id} key={`word-bank-${question.id}`}><b>{sourceNumber}</b><button aria-label={`第 ${sourceNumber} 题选词答案空`} className={`senior-high-v2-choice-blank drop-target${assigned ? " assigned" : ""}${choiceState}`} data-senior-high-drop-target="true" draggable={Boolean(assigned)} onDragOver={(event) => { event.preventDefault(); event.dataTransfer.dropEffect = "move"; }} onDragStart={(event) => { if (!assigned) return; setOptionDragData(event.dataTransfer, assigned, question.id); }} onDrop={(event) => { event.preventDefault(); const { optionId, sourceQuestionId } = readOptionDragData(event.dataTransfer); if (!optionId) return; onOptionDrop(question.id, optionId, sourceQuestionId || undefined); }} type="button"><span>{assigned}</span>{assignedCorrect === true ? <strong aria-label="正确选项" className="senior-high-option-status">✓</strong> : assignedCorrect === false ? <strong aria-label="回答错误" className="senior-high-option-status">×</strong> : null}</button></span>);
           cursor = match.index + match[0].length;
         }
         if (pieces.length) {
@@ -263,7 +402,7 @@ function BlockRenderer({
       const assignedCorrect = revealSolutions && question.answerSpec.gradingMode === "auto" && question.answerSpec.kind === "choice" ? seniorHighAnswerMatches(assigned, question.answerSpec.acceptedAnswers || [], question.answerSpec) : null;
       const choiceState = assignedCorrect === true ? " correct" : assignedCorrect === false ? " incorrect" : "";
       if (question.typeLabel === "选词填空") {
-        return <span className="senior-high-v2-inline-control" id={question.id} key={run.blankId}><b>{number}</b><button aria-label={`第 ${number} 题选词答案空`} className={`senior-high-v2-choice-blank drop-target${assigned ? " assigned" : ""}${choiceState}`} data-senior-high-drop-target="true" draggable={Boolean(assigned)} onDragOver={(event) => { event.preventDefault(); event.dataTransfer.dropEffect = "move"; }} onDragStart={(event) => { if (!assigned) return; event.dataTransfer.setData("text/senior-high-option", assigned); event.dataTransfer.setData("text/senior-high-source-question", question.id); event.dataTransfer.effectAllowed = "move"; }} onDrop={(event) => { event.preventDefault(); const optionId = event.dataTransfer.getData("text/senior-high-option"); if (optionId) onOptionDrop?.(question.id, optionId, event.dataTransfer.getData("text/senior-high-source-question") || undefined); }} type="button"><span>{assigned}</span></button></span>;
+        return <span className="senior-high-v2-inline-control" id={question.id} key={run.blankId}><b>{number}</b><button aria-label={`第 ${number} 题选词答案空`} className={`senior-high-v2-choice-blank drop-target${assigned ? " assigned" : ""}${choiceState}`} data-senior-high-drop-target="true" draggable={Boolean(assigned)} onDragOver={(event) => { event.preventDefault(); event.dataTransfer.dropEffect = "move"; }} onDragStart={(event) => { if (!assigned) return; setOptionDragData(event.dataTransfer, assigned, question.id); }} onDrop={(event) => { event.preventDefault(); const { optionId, sourceQuestionId } = readOptionDragData(event.dataTransfer); if (optionId) onOptionDrop?.(question.id, optionId, sourceQuestionId || undefined); }} type="button"><span>{assigned}</span></button></span>;
       }
       const paragraphSelect = <select aria-label={`第 ${number} 题段落`} className={`senior-high-inline-answer${choiceState}`} onChange={(event) => { if (event.target.value) onOptionDrop?.(question.id, event.target.value, question.id); else if (assigned) onOptionDrop?.(null, assigned, question.id); }} value={assigned}><option value="" />{binding.options.map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}</select>;
       return <span className="senior-high-v2-inline-control" id={question.id} key={run.blankId}><b>{number}</b><span className="senior-high-v2-inline-select"><span aria-hidden="true" className="senior-high-v2-inline-select-value">{binding.options.find((option) => option.id === assigned)?.label || ""}</span>{paragraphSelect}</span>{assignedCorrect === true ? <strong aria-label="正确选项" className="senior-high-option-status">✓</strong> : assignedCorrect === false ? <strong aria-label="回答错误" className="senior-high-option-status">×</strong> : null}</span>;
@@ -594,16 +733,26 @@ export function SeniorHighRunner({ kind, setId, basePath = "/senior-high", backH
     {(kind === "paper" || basePath === "/cet4" || basePath === "/cet6") && data.instructions.length > 0 ? <div className="senior-high-v2-instructions"><BlockRenderer answers={answers} assets={assets} bindings={new Map()} blocks={data.instructions} basePath={basePath} kind={data.kind} onAnswer={onAnswer} revealSolutions={allSubmitted} /></div> : null}
     <div className="senior-high-v2-sections">{visibleSections.map((section) => { const titleWithoutSet = section.title.replace(/\s*[·•]\s*第\s*\d+\s*套\s*[·•]\s*/u, " · "); const sectionHeading = titleWithoutSet.replace(/^Part\s+(?:[IVX]+|[ⅠⅡⅢⅣⅤⅥ]+|\d+)\s*[·•—–-]\s*/i, "").trim(); const isListeningSection = section.id.toLowerCase().includes("listening") || section.title.includes("听力"); return <section className="senior-high-v2-section" key={section.id}><header><h2>{titleWithoutSet}</h2>{section.score ? <span>{section.score} 分</span> : null}</header>{section.instructions.length > 0 ? <BlockRenderer answers={answers} assets={assets} bindings={new Map()} blocks={section.instructions} basePath={basePath} kind={data.kind} onAnswer={onAnswer} revealSolutions={allSubmitted} /> : null}<div className="senior-high-v2-groups">{section.groups.map((group) => {
       const bindings = new Map<string, BlankBinding>();
-      for (const question of group.questions) for (const blank of question.blanks) bindings.set(blank.blankId, { options: group.sharedOptions, question });
       const cet4WordBankQuestionIds = new Set(isCetExam(basePath || "") && group.sharedOptions.length > 0
         ? group.questions.filter((question) => question.type === "shared_option_matching" && question.typeLabel === "选词填空").map((question) => question.id)
         : []);
       const cet4WordBankQuestions = group.questions.filter((question) => cet4WordBankQuestionIds.has(question.id));
       const cet4WordBankQuestionsByNumber = new Map(cet4WordBankQuestions.map((question) => [question.sourceQuestionNumber ?? question.displayNumber, question]));
+      const separatedDirections = group.presentation === "reading"
+        ? extractGroupDirections(group.stimulusBlocks)
+        : { directions: [] as SeniorHighBlock[], stimulus: group.stimulusBlocks };
+      const normalizedWordBank = parseLegacyWordBank(separatedDirections.stimulus, group.sharedOptions, cet4WordBankQuestions.length > 0);
+      for (const question of group.questions) for (const blank of question.blanks) bindings.set(blank.blankId, { options: normalizedWordBank.options, question });
+      const displayStimulusBlocks = removeDuplicateQuestionText(normalizedWordBank.stimulus, group.questions);
+      const groupDirectionsBlocks = [...group.instructions, ...separatedDirections.directions].filter((block, index, blocks) => {
+        const text = normalizedText(plainText([block]));
+        return !text || blocks.findIndex((candidate) => normalizedText(plainText([candidate])) === text) === index;
+      });
+      const displaySharedOptions = normalizedWordBank.options;
       const inlineQuestions = group.questions.filter((question) => !cet4WordBankQuestionIds.has(question.id) && ["inline_fill", "multi_blank", "table_fill", "shared_option_matching"].includes(question.type) && question.promptBlocks.length === 0 && question.options.length === 0);
       const standaloneQuestions = group.questions.filter((question) => !cet4WordBankQuestionIds.has(question.id) && !inlineQuestions.includes(question));
       const groupKey = `${section.id}:${group.id}`;
-      const hasStimulusQuestions = group.stimulusBlocks.length > 0 && group.questions.length > 0;
+      const hasStimulusQuestions = displayStimulusBlocks.length > 0 && group.questions.length > 0;
       const isClozeGroup = group.stimulusBlocks.length > 0
         && group.sharedOptions.length === 0
         && group.questions.length > 0
@@ -643,12 +792,12 @@ export function SeniorHighRunner({ kind, setId, basePath = "/senior-high", backH
       const groupSubmit = <div className="senior-high-v2-group-submit"><span>{groupAnswered}/{group.questions.length} 已作答</span><button onClick={() => setSubmittedGroups((current) => ({ ...current, [groupKey]: true }))} type="button">{groupSubmitted ? `重新提交${groupLabel}` : `提交${groupLabel}`}</button></div>;
       return <article className={`senior-high-v2-group ${section.layout}${isListeningSection ? " listening" : ""}${hasSideQuestions ? " with-stimulus-questions" : ""}`} data-has-options={group.sharedOptions.length > 0 ? "true" : "false"} data-presentation={group.presentation} data-side-questions={hasSideQuestions ? "true" : "false"} key={group.id}>
         {group.title && group.title.trim() !== sectionHeading && group.title.trim() !== section.title.trim() ? <h3>{group.title}</h3> : null}
-        {group.instructions.length > 0 ? <BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={group.instructions} basePath={basePath} kind={data.kind} onAnswer={answerGroup} revealSolutions={groupSubmitted} /> : null}
+        {groupDirectionsBlocks.length > 0 ? <div className="senior-high-v2-group-directions"><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={groupDirectionsBlocks} basePath={basePath} kind={data.kind} onAnswer={answerGroup} revealSolutions={groupSubmitted} /></div> : null}
         <div className="senior-high-v2-group-body">
-          {group.stimulusBlocks.length > 0 ? <div className="senior-high-v2-stimulus"><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={group.stimulusBlocks} basePath={basePath} kind={data.kind} onAnswer={answerGroup} onOptionDrop={moveOption} wordBankQuestions={cet4WordBankQuestionsByNumber} revealSolutions={groupSubmitted} hideClozeLines={isClozeGroup} /></div> : null}
+          {displayStimulusBlocks.length > 0 ? <div className="senior-high-v2-stimulus"><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={displayStimulusBlocks} basePath={basePath} kind={data.kind} onAnswer={answerGroup} onOptionDrop={moveOption} wordBankQuestions={cet4WordBankQuestionsByNumber} revealSolutions={groupSubmitted} hideClozeLines={isClozeGroup} /></div> : null}
           {showQuestionColumn ? <div className="senior-high-v2-question-column">
             {(data.submissionMode !== "whole-paper" || perGroupSubmission) && groupSubmitted ? groupSubmit : null}
-        {group.sharedOptions.length > 0 && !(isCetExam(basePath || "") && group.questions.some((question) => question.typeLabel === "长篇阅读")) ? <div aria-label="可拖动选项词库；将已选词拖回此处可取消" className="senior-high-v2-shared-options" onDragOver={(event) => { event.preventDefault(); event.dataTransfer.dropEffect = "move"; }} onDrop={(event) => { event.preventDefault(); const optionId = event.dataTransfer.getData("text/senior-high-option"); const sourceQuestionId = event.dataTransfer.getData("text/senior-high-source-question"); if (optionId) moveOption(null, optionId, sourceQuestionId || undefined); }}><strong>{basePath === "/kaoyan" ? "在每道题的下拉菜单中选择对应选项，也可点击选项作答" : "拖动右侧选项到左侧任意空格；拖回此处可取消"}</strong>{group.sharedOptions.filter((option) => isCetExam(basePath || "") || group.sharedOptionsReusable || basePath === "/kaoyan" || !assignedOptionIds.has(option.id)).map((option) => <div aria-label={`选项 ${option.label}${assignedOptionIds.has(option.id) ? "（已放入空格，可拖动调整）" : ""}`} className={`senior-high-v2-shared-option${(isCetExam(basePath || "") || basePath === "/kaoyan") && assignedOptionIds.has(option.id) ? " assigned" : ""}`} draggable={basePath !== "/kaoyan"} role="button" tabIndex={0} key={option.id} onClick={() => { const target = group.questions.find((question) => question.type === "shared_option_matching" && !answers[question.id])?.id; if (target) moveOption(target, option.id); }} onDragStart={(event) => { event.dataTransfer.setData("text/senior-high-option", option.id); event.dataTransfer.effectAllowed = "move"; }} onKeyDown={(event) => { if (event.key !== "Enter" && event.key !== " ") return; event.preventDefault(); const target = group.questions.find((question) => question.type === "shared_option_matching" && !answers[question.id])?.id; if (target) moveOption(target, option.id); }}><b>{option.label}.</b><div><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={option.blocks} basePath={basePath} kind={data.kind} onAnswer={answerGroup} onOptionDrop={moveOption} revealSolutions={groupSubmitted} /></div></div>)}</div> : null}
+        {group.sharedOptions.length > 0 && !(isCetExam(basePath || "") && group.questions.some((question) => question.typeLabel === "长篇阅读")) ? <div aria-label="可拖动选项词库；将已选词拖回此处可取消" className="senior-high-v2-shared-options" onDragOver={(event) => { event.preventDefault(); event.dataTransfer.dropEffect = "move"; }} onDrop={(event) => { event.preventDefault(); const { optionId, sourceQuestionId } = readOptionDragData(event.dataTransfer); if (optionId) moveOption(null, optionId, sourceQuestionId || undefined); }}><strong>{basePath === "/kaoyan" ? "在每道题的下拉菜单中选择对应选项，也可点击选项作答" : "拖动右侧选项到左侧任意空格；拖回此处可取消"}</strong>{displaySharedOptions.filter((option) => isCetExam(basePath || "") || group.sharedOptionsReusable || basePath === "/kaoyan" || !assignedOptionIds.has(option.id)).map((option) => <div aria-label={`选项 ${option.label}${assignedOptionIds.has(option.id) ? "（已放入空格，可拖动调整）" : ""}`} className={`senior-high-v2-shared-option${(isCetExam(basePath || "") || basePath === "/kaoyan") && assignedOptionIds.has(option.id) ? " assigned" : ""}`} draggable={basePath !== "/kaoyan"} role="button" tabIndex={0} key={option.id} onClick={() => { const target = group.questions.find((question) => question.type === "shared_option_matching" && !answers[question.id])?.id; if (target) moveOption(target, option.id); }} onDragStart={(event) => setOptionDragData(event.dataTransfer, option.id)} onKeyDown={(event) => { if (event.key !== "Enter" && event.key !== " ") return; event.preventDefault(); const target = group.questions.find((question) => question.type === "shared_option_matching" && !answers[question.id])?.id; if (target) moveOption(target, option.id); }}><b>{option.label}.</b><div><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={option.blocks} basePath={basePath} kind={data.kind} onAnswer={answerGroup} onOptionDrop={moveOption} revealSolutions={groupSubmitted} /></div></div>)}</div> : null}
             {standaloneQuestions.map((question) => <QuestionCard answers={answers} assets={assets} bindings={bindings} basePath={basePath} hideMeta={isCetExam(basePath || "") && kind === "paper" && ["essay", "translation"].includes(question.type)} key={question.id} kind={data.kind} onAnswer={answerGroup} question={question} onOptionDrop={moveOption} hasGroupExplanation={Boolean(group.explanationBlocks?.length)} submitted={groupSubmitted} />)}
     {(data.submissionMode !== "whole-paper" || perGroupSubmission) && !groupSubmitted && (standaloneQuestions.length > 0 || inlineQuestions.length > 0 || group.sharedOptions.length > 0 || group.stimulusBlocks.length === 0) ? groupSubmit : null}
             {groupSubmitted && inlineQuestions.length > 0 ? <div className="senior-high-v2-inline-results">{inlineQuestions.map((question) => <QuestionCard answers={answers} assets={assets} bindings={bindings} basePath={basePath} hideMeta={isCetExam(basePath || "") && kind === "paper" && ["essay", "translation"].includes(question.type)} key={question.id} kind={data.kind} onAnswer={answerGroup} question={question} onOptionDrop={moveOption} hasGroupExplanation={Boolean(group.explanationBlocks?.length)} submitted />)}</div> : null}

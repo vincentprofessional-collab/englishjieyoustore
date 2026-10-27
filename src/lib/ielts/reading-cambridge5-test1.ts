@@ -127,7 +127,7 @@ const cambridge5Test1PartOne: ReadingPart = {
     {
       id: "c5t1-p1-true-false",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 8–13 on your answer sheet write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 8–13 on your answer sheet write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [8], prompt: "The growing importance of the middle classes led to an increased demand for dictionaries.", options: trueFalseNotGiven },
         { questionNumbers: [9], prompt: "Johnson has become more well known since his death.", options: trueFalseNotGiven },
@@ -266,7 +266,7 @@ const cambridge5Test1PartTwo: ReadingPart = {
     {
       id: "c5t1-p2-true-false",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 2? In boxes 23–26 on your answer sheet write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 2? In boxes 23–26 on your answer sheet write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [23], prompt: "Several of the subjects were psychology students at Yale University.", options: trueFalseNotGiven },
         { questionNumbers: [24], prompt: "Some people may believe that the teacher-subjects' behaviour could be explained as a positive survival mechanism.", options: trueFalseNotGiven },
@@ -361,7 +361,7 @@ const cambridge5Test1PartThree: ReadingPart = {
     {
       id: "c5t1-p3-yes-no",
       type: "choice",
-      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 3? In boxes 27–32 on your answer sheet write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 3? In boxes 27–32 on your answer sheet write YES if the statement agrees with the writer's claims NO if the statement contradicts the writer's claims NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [27], prompt: "Environmentalists take a pessimistic view of the world for a number of reasons.", options: yesNoNotGiven },
         { questionNumbers: [28], prompt: "Data on the Earth's natural resources has only been collected since 1972.", options: yesNoNotGiven },

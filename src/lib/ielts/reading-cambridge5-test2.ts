@@ -106,7 +106,7 @@ const cambridge5Test2PartOne: ReadingPart = {
     {
       id: "c5t2-p1-true-false",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 11–13 on your answer sheet write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 11–13 on your answer sheet write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [11], prompt: "Modern-day plastic preparation is based on the same principles as that patented in 1907.", options: trueFalseNotGiven },
         { questionNumbers: [12], prompt: "Bakelite was immediately welcomed as a practical and versatile material.", options: trueFalseNotGiven },
@@ -195,7 +195,7 @@ const cambridge5Test2PartTwo: ReadingPart = {
     {
       id: "c5t2-p2-true-false",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 2? In boxes 14–20 on your answer sheet write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 2? In boxes 14–20 on your answer sheet write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [14], prompt: "Arthur Koestler considered laughter biologically important in several ways.", options: trueFalseNotGiven },
         { questionNumbers: [15], prompt: "Plato believed humour to be a sign of above-average intelligence.", options: trueFalseNotGiven },
@@ -316,7 +316,7 @@ const cambridge5Test2PartThree: ReadingPart = {
     {
       id: "c5t2-p3-true-false",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 3? In boxes 35–37 on your answer sheet write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 3? In boxes 35–37 on your answer sheet write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [35], prompt: "There was strong competition between scientists in Renaissance Europe.", options: trueFalseNotGiven },
         { questionNumbers: [36], prompt: "The most important scientific development of the Renaissance period was the discovery of magnetism.", options: trueFalseNotGiven },

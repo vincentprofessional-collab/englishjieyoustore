@@ -227,38 +227,74 @@
         "2016填空机经.pdf"
       ],
       "rawQuestionCount": 4,
-      "questionCount": 4,
-      "duplicateCount": 0,
-      "answerCount": 4,
+      "questionCount": 0,
+      "duplicateCount": 2,
+      "answerCount": 0,
       "explanationCount": 0,
-      "answerSourceVerifiedCount": 4,
+      "answerSourceVerifiedCount": 2,
       "explanationSourceVerifiedCount": 0,
-      "sourcePageMatchedCount": 4,
-      "promptMatchedCount": 4,
-      "optionsMatchedCount": 4,
+      "sourcePageMatchedCount": 2,
+      "promptMatchedCount": 2,
+      "optionsMatchedCount": 2,
       "passageQuestionCount": 0,
       "passageSourceVerifiedCount": 0,
-      "status": "review_required",
-      "pendingQuestionIds": [
-        "recall-20160408-fill-q1",
-        "recall-20160408-fill-q2",
-        "recall-20160408-fill-q3",
-        "recall-20160408-fill-q4"
+      "status": "excluded_by_user",
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {},
+      "duplicates": [
+        {
+          "id": "recall-20160408-fill-q4",
+          "duplicateOf": "s76-q10",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 3,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              3,
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160408-fill-q2",
+          "duplicateOf": "s81-q8",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 2,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "optionsVerified": true
+          }
+        }
       ],
-      "pendingQuestionReasons": {
-        "recall-20160408-fill-q1": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160408-fill-q2": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160408-fill-q3": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160408-fill-q4": [
-          "来源未提供逐题解析"
-        ]
-      }
+      "excludedQuestionIds": [
+        "recall-20160408-fill-q1",
+        "recall-20160408-fill-q3"
+      ],
+      "excludedQuestionCount": 2,
+      "exclusionReason": "User requested deletion; no further review"
     },
     {
       "id": "gre-2016-0416-fill-recall",
@@ -273,34 +309,73 @@
         "2016填空机经.pdf"
       ],
       "rawQuestionCount": 3,
-      "questionCount": 3,
-      "duplicateCount": 0,
-      "answerCount": 3,
+      "questionCount": 0,
+      "duplicateCount": 2,
+      "answerCount": 0,
       "explanationCount": 0,
-      "answerSourceVerifiedCount": 3,
+      "answerSourceVerifiedCount": 1,
       "explanationSourceVerifiedCount": 0,
-      "sourcePageMatchedCount": 3,
-      "promptMatchedCount": 3,
-      "optionsMatchedCount": 3,
+      "sourcePageMatchedCount": 1,
+      "promptMatchedCount": 1,
+      "optionsMatchedCount": 1,
       "passageQuestionCount": 0,
       "passageSourceVerifiedCount": 0,
-      "status": "review_required",
-      "pendingQuestionIds": [
-        "recall-20160416-fill-q1",
-        "recall-20160416-fill-q2",
+      "status": "excluded_by_user",
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {},
+      "duplicates": [
+        {
+          "id": "recall-20160416-fill-q1",
+          "duplicateOf": "s51-q10",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 4,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160416-fill-q2",
+          "duplicateOf": "s89-q3",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 4,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            "optionsVerified": true
+          }
+        }
+      ],
+      "excludedQuestionIds": [
         "recall-20160416-fill-q3"
       ],
-      "pendingQuestionReasons": {
-        "recall-20160416-fill-q1": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160416-fill-q2": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160416-fill-q3": [
-          "来源未提供逐题解析"
-        ]
-      }
+      "excludedQuestionCount": 1,
+      "exclusionReason": "User requested deletion; no further review"
     },
     {
       "id": "gre-2016-0508-fill-recall",
@@ -315,50 +390,76 @@
         "2016填空机经.pdf"
       ],
       "rawQuestionCount": 7,
-      "questionCount": 7,
-      "duplicateCount": 0,
-      "answerCount": 7,
+      "questionCount": 0,
+      "duplicateCount": 2,
+      "answerCount": 0,
       "explanationCount": 0,
-      "answerSourceVerifiedCount": 7,
+      "answerSourceVerifiedCount": 5,
       "explanationSourceVerifiedCount": 0,
-      "sourcePageMatchedCount": 7,
-      "promptMatchedCount": 7,
-      "optionsMatchedCount": 7,
+      "sourcePageMatchedCount": 5,
+      "promptMatchedCount": 5,
+      "optionsMatchedCount": 5,
       "passageQuestionCount": 0,
       "passageSourceVerifiedCount": 0,
-      "status": "review_required",
-      "pendingQuestionIds": [
+      "status": "excluded_by_user",
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {},
+      "duplicates": [
+        {
+          "id": "recall-20160508-fill-q4",
+          "duplicateOf": "s69-q1",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 6,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              6,
+              6,
+              6,
+              6,
+              6
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160508-fill-q2",
+          "duplicateOf": "s78-q8",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 5,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              5,
+              5,
+              5,
+              5,
+              5,
+              5
+            ],
+            "optionsVerified": true
+          }
+        }
+      ],
+      "excludedQuestionIds": [
         "recall-20160508-fill-q1",
-        "recall-20160508-fill-q2",
         "recall-20160508-fill-q3",
-        "recall-20160508-fill-q4",
         "recall-20160508-fill-q5",
         "recall-20160508-fill-q6",
         "recall-20160508-fill-q7"
       ],
-      "pendingQuestionReasons": {
-        "recall-20160508-fill-q1": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160508-fill-q2": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160508-fill-q3": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160508-fill-q4": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160508-fill-q5": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160508-fill-q6": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160508-fill-q7": [
-          "来源未提供逐题解析"
-        ]
-      }
+      "excludedQuestionCount": 5,
+      "exclusionReason": "User requested deletion; no further review"
     },
     {
       "id": "gre-2016-0521-fill-recall",
@@ -373,46 +474,76 @@
         "2016填空机经.pdf"
       ],
       "rawQuestionCount": 6,
-      "questionCount": 6,
-      "duplicateCount": 0,
-      "answerCount": 6,
+      "questionCount": 0,
+      "duplicateCount": 2,
+      "answerCount": 0,
       "explanationCount": 0,
-      "answerSourceVerifiedCount": 6,
+      "answerSourceVerifiedCount": 4,
       "explanationSourceVerifiedCount": 0,
-      "sourcePageMatchedCount": 6,
-      "promptMatchedCount": 6,
-      "optionsMatchedCount": 6,
+      "sourcePageMatchedCount": 4,
+      "promptMatchedCount": 4,
+      "optionsMatchedCount": 4,
       "passageQuestionCount": 0,
       "passageSourceVerifiedCount": 0,
-      "status": "review_required",
-      "pendingQuestionIds": [
+      "status": "excluded_by_user",
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {},
+      "duplicates": [
+        {
+          "id": "recall-20160521-fill-q4",
+          "duplicateOf": "s54-q9",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 9,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              9,
+              9,
+              9,
+              9,
+              9,
+              9
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160521-fill-q5",
+          "duplicateOf": "s67-q8",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 9,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              9,
+              9,
+              9,
+              9,
+              9,
+              9
+            ],
+            "optionsVerified": true
+          }
+        }
+      ],
+      "excludedQuestionIds": [
         "recall-20160521-fill-q1",
         "recall-20160521-fill-q2",
         "recall-20160521-fill-q3",
-        "recall-20160521-fill-q4",
-        "recall-20160521-fill-q5",
         "recall-20160521-fill-q6"
       ],
-      "pendingQuestionReasons": {
-        "recall-20160521-fill-q1": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160521-fill-q2": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160521-fill-q3": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160521-fill-q4": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160521-fill-q5": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160521-fill-q6": [
-          "来源未提供逐题解析"
-        ]
-      }
+      "excludedQuestionCount": 4,
+      "exclusionReason": "User requested deletion; no further review"
     },
     {
       "id": "gre-2016-0527-fill-recall",
@@ -427,42 +558,142 @@
         "2016填空机经.pdf"
       ],
       "rawQuestionCount": 5,
-      "questionCount": 5,
-      "duplicateCount": 0,
-      "answerCount": 5,
+      "questionCount": 0,
+      "duplicateCount": 5,
+      "answerCount": 0,
       "explanationCount": 0,
-      "answerSourceVerifiedCount": 5,
+      "answerSourceVerifiedCount": 0,
       "explanationSourceVerifiedCount": 0,
-      "sourcePageMatchedCount": 5,
-      "promptMatchedCount": 5,
-      "optionsMatchedCount": 5,
+      "sourcePageMatchedCount": 0,
+      "promptMatchedCount": 0,
+      "optionsMatchedCount": 0,
       "passageQuestionCount": 0,
       "passageSourceVerifiedCount": 0,
       "status": "review_required",
-      "pendingQuestionIds": [
-        "recall-20160527-fill-q1",
-        "recall-20160527-fill-q2",
-        "recall-20160527-fill-q3",
-        "recall-20160527-fill-q4",
-        "recall-20160527-fill-q5"
-      ],
-      "pendingQuestionReasons": {
-        "recall-20160527-fill-q1": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160527-fill-q2": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160527-fill-q3": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160527-fill-q4": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160527-fill-q5": [
-          "来源未提供逐题解析"
-        ]
-      }
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {},
+      "duplicates": [
+        {
+          "id": "recall-20160527-fill-q4",
+          "duplicateOf": "s56-q5",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 11,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              11,
+              11,
+              11,
+              11,
+              11,
+              11,
+              11,
+              11,
+              11
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160527-fill-q1",
+          "duplicateOf": "s64-q5",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 10,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              10,
+              10,
+              10,
+              10,
+              10,
+              10,
+              10,
+              10,
+              10
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160527-fill-q2",
+          "duplicateOf": "s88-q1",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 10,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              10,
+              10,
+              10,
+              10,
+              10
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160527-fill-q3",
+          "duplicateOf": "s89-q3",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 10,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              10,
+              10,
+              10,
+              10,
+              10,
+              10
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160527-fill-q5",
+          "duplicateOf": "s56-q10",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 11,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              11,
+              11,
+              11,
+              11,
+              11,
+              11
+            ],
+            "optionsVerified": true
+          }
+        }
+      ]
     },
     {
       "id": "gre-2016-0605-fill-recall",
@@ -477,34 +708,73 @@
         "2016填空机经.pdf"
       ],
       "rawQuestionCount": 3,
-      "questionCount": 3,
-      "duplicateCount": 0,
-      "answerCount": 3,
+      "questionCount": 0,
+      "duplicateCount": 2,
+      "answerCount": 0,
       "explanationCount": 0,
-      "answerSourceVerifiedCount": 3,
+      "answerSourceVerifiedCount": 1,
       "explanationSourceVerifiedCount": 0,
-      "sourcePageMatchedCount": 3,
-      "promptMatchedCount": 3,
-      "optionsMatchedCount": 3,
+      "sourcePageMatchedCount": 1,
+      "promptMatchedCount": 1,
+      "optionsMatchedCount": 1,
       "passageQuestionCount": 0,
       "passageSourceVerifiedCount": 0,
-      "status": "review_required",
-      "pendingQuestionIds": [
-        "recall-20160605-fill-q1",
-        "recall-20160605-fill-q2",
-        "recall-20160605-fill-q3"
+      "status": "excluded_by_user",
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {},
+      "duplicates": [
+        {
+          "id": "recall-20160605-fill-q2",
+          "duplicateOf": "s65-q7",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 12,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              12,
+              12,
+              12,
+              12,
+              12,
+              12
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160605-fill-q3",
+          "duplicateOf": "s29-q4",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 12,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              12,
+              12,
+              12,
+              12,
+              12,
+              12
+            ],
+            "optionsVerified": true
+          }
+        }
       ],
-      "pendingQuestionReasons": {
-        "recall-20160605-fill-q1": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160605-fill-q2": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160605-fill-q3": [
-          "来源未提供逐题解析"
-        ]
-      }
+      "excludedQuestionIds": [
+        "recall-20160605-fill-q1"
+      ],
+      "excludedQuestionCount": 1,
+      "exclusionReason": "User requested deletion; no further review"
     },
     {
       "id": "gre-2016-0626-fill-recall",
@@ -519,46 +789,123 @@
         "2016填空机经.pdf"
       ],
       "rawQuestionCount": 6,
-      "questionCount": 6,
-      "duplicateCount": 0,
-      "answerCount": 6,
+      "questionCount": 0,
+      "duplicateCount": 4,
+      "answerCount": 0,
       "explanationCount": 0,
-      "answerSourceVerifiedCount": 6,
+      "answerSourceVerifiedCount": 2,
       "explanationSourceVerifiedCount": 0,
-      "sourcePageMatchedCount": 6,
-      "promptMatchedCount": 6,
-      "optionsMatchedCount": 6,
+      "sourcePageMatchedCount": 2,
+      "promptMatchedCount": 2,
+      "optionsMatchedCount": 2,
       "passageQuestionCount": 0,
       "passageSourceVerifiedCount": 0,
-      "status": "review_required",
-      "pendingQuestionIds": [
-        "recall-20160626-fill-q1",
-        "recall-20160626-fill-q2",
-        "recall-20160626-fill-q3",
-        "recall-20160626-fill-q4",
-        "recall-20160626-fill-q5",
-        "recall-20160626-fill-q6"
+      "status": "excluded_by_user",
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {},
+      "duplicates": [
+        {
+          "id": "recall-20160626-fill-q6",
+          "duplicateOf": "s68-q9",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 14,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160626-fill-q5",
+          "duplicateOf": "s76-q9",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 14,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              14,
+              14,
+              14,
+              14,
+              14,
+              14
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160626-fill-q2",
+          "duplicateOf": "s88-q6",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 13,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160626-fill-q3",
+          "duplicateOf": "s56-q10",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 13,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              13,
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "optionsVerified": true
+          }
+        }
       ],
-      "pendingQuestionReasons": {
-        "recall-20160626-fill-q1": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160626-fill-q2": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160626-fill-q3": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160626-fill-q4": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160626-fill-q5": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160626-fill-q6": [
-          "来源未提供逐题解析"
-        ]
-      }
+      "excludedQuestionIds": [
+        "recall-20160626-fill-q1",
+        "recall-20160626-fill-q4"
+      ],
+      "excludedQuestionCount": 2,
+      "exclusionReason": "User requested deletion; no further review"
     },
     {
       "id": "gre-2016-0717-fill-recall",
@@ -573,39 +920,117 @@
         "2016填空机经.pdf"
       ],
       "rawQuestionCount": 4,
-      "questionCount": 4,
-      "duplicateCount": 0,
-      "answerCount": 3,
+      "questionCount": 0,
+      "duplicateCount": 4,
+      "answerCount": 0,
       "explanationCount": 0,
-      "answerSourceVerifiedCount": 3,
+      "answerSourceVerifiedCount": 0,
       "explanationSourceVerifiedCount": 0,
-      "sourcePageMatchedCount": 4,
-      "promptMatchedCount": 4,
-      "optionsMatchedCount": 4,
+      "sourcePageMatchedCount": 0,
+      "promptMatchedCount": 0,
+      "optionsMatchedCount": 0,
       "passageQuestionCount": 0,
       "passageSourceVerifiedCount": 0,
       "status": "review_required",
-      "pendingQuestionIds": [
-        "recall-20160717-fill-q1",
-        "recall-20160717-fill-q2",
-        "recall-20160717-fill-q3",
-        "recall-20160717-fill-q4"
-      ],
-      "pendingQuestionReasons": {
-        "recall-20160717-fill-q1": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160717-fill-q2": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160717-fill-q3": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160717-fill-q4": [
-          "该场次答案页另有未编号键 AEH，未作题号配对",
-          "来源未提供逐题解析"
-        ]
-      }
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {},
+      "duplicates": [
+        {
+          "id": "recall-20160717-fill-q3",
+          "duplicateOf": "s6-q8",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 15,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              15,
+              15,
+              15,
+              15,
+              15,
+              15
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160717-fill-q2",
+          "duplicateOf": "s74-q1",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 15,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              15,
+              15,
+              15,
+              15,
+              15
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160717-fill-q1",
+          "duplicateOf": "s12-q2",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 15,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              15,
+              15,
+              15,
+              15,
+              15
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160717-fill-q4",
+          "duplicateOf": "s18-q6",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 15,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              15,
+              15,
+              15,
+              15,
+              15,
+              15,
+              15,
+              15,
+              15
+            ],
+            "optionsVerified": true,
+            "answerSourceRaw": "AEH",
+            "answerSourceMapping": "The source key lists 1.A, 2.B, 3.DE, then AEH; AEH is the remaining key for question 4 and matches its three-blank option groups."
+          }
+        }
+      ]
     },
     {
       "id": "gre-2016-0817-fill-recall",
@@ -620,34 +1045,91 @@
         "2016填空机经.pdf"
       ],
       "rawQuestionCount": 3,
-      "questionCount": 3,
-      "duplicateCount": 0,
-      "answerCount": 3,
+      "questionCount": 0,
+      "duplicateCount": 3,
+      "answerCount": 0,
       "explanationCount": 0,
-      "answerSourceVerifiedCount": 3,
+      "answerSourceVerifiedCount": 0,
       "explanationSourceVerifiedCount": 0,
-      "sourcePageMatchedCount": 3,
-      "promptMatchedCount": 3,
-      "optionsMatchedCount": 3,
+      "sourcePageMatchedCount": 0,
+      "promptMatchedCount": 0,
+      "optionsMatchedCount": 0,
       "passageQuestionCount": 0,
       "passageSourceVerifiedCount": 0,
       "status": "review_required",
-      "pendingQuestionIds": [
-        "recall-20160817-fill-q1",
-        "recall-20160817-fill-q2",
-        "recall-20160817-fill-q3"
-      ],
-      "pendingQuestionReasons": {
-        "recall-20160817-fill-q1": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160817-fill-q2": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160817-fill-q3": [
-          "来源未提供逐题解析"
-        ]
-      }
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {},
+      "duplicates": [
+        {
+          "id": "recall-20160817-fill-q2",
+          "duplicateOf": "recall-20160508-fill-q5",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 16,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              16,
+              16,
+              16,
+              16,
+              16,
+              16
+            ],
+            "optionsVerified": true
+          },
+          "duplicateTargetExcluded": true
+        },
+        {
+          "id": "recall-20160817-fill-q1",
+          "duplicateOf": "s30-q8",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 16,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              16,
+              16,
+              16,
+              16,
+              16,
+              16
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160817-fill-q3",
+          "duplicateOf": "s82-q1",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 16,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              16,
+              16,
+              16,
+              16,
+              16
+            ],
+            "optionsVerified": true
+          }
+        }
+      ]
     },
     {
       "id": "gre-2016-0826-fill-recall",
@@ -662,42 +1144,121 @@
         "2016填空机经.pdf"
       ],
       "rawQuestionCount": 5,
-      "questionCount": 5,
-      "duplicateCount": 0,
-      "answerCount": 5,
+      "questionCount": 0,
+      "duplicateCount": 4,
+      "answerCount": 0,
       "explanationCount": 0,
-      "answerSourceVerifiedCount": 5,
+      "answerSourceVerifiedCount": 1,
       "explanationSourceVerifiedCount": 0,
-      "sourcePageMatchedCount": 5,
-      "promptMatchedCount": 5,
-      "optionsMatchedCount": 5,
+      "sourcePageMatchedCount": 1,
+      "promptMatchedCount": 1,
+      "optionsMatchedCount": 1,
       "passageQuestionCount": 0,
       "passageSourceVerifiedCount": 0,
-      "status": "review_required",
-      "pendingQuestionIds": [
-        "recall-20160826-fill-q1",
-        "recall-20160826-fill-q2",
-        "recall-20160826-fill-q3",
-        "recall-20160826-fill-q4",
-        "recall-20160826-fill-q5"
+      "status": "excluded_by_user",
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {},
+      "duplicates": [
+        {
+          "id": "recall-20160826-fill-q2",
+          "duplicateOf": "s51-q1",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 17,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              17,
+              17,
+              17,
+              17,
+              17
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160826-fill-q3",
+          "duplicateOf": "s28-q4",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 17,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              17,
+              17,
+              17,
+              17,
+              17,
+              17
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160826-fill-q4",
+          "duplicateOf": "s42-q7",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 18,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              18,
+              18,
+              18,
+              18,
+              18,
+              18
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160826-fill-q5",
+          "duplicateOf": "s7-q6",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 18,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              18,
+              18,
+              18,
+              18,
+              18,
+              18,
+              18,
+              18,
+              18
+            ],
+            "optionsVerified": true
+          }
+        }
       ],
-      "pendingQuestionReasons": {
-        "recall-20160826-fill-q1": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160826-fill-q2": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160826-fill-q3": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160826-fill-q4": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160826-fill-q5": [
-          "来源未提供逐题解析"
-        ]
-      }
+      "excludedQuestionIds": [
+        "recall-20160826-fill-q1"
+      ],
+      "excludedQuestionCount": 1,
+      "exclusionReason": "User requested deletion; no further review"
     },
     {
       "id": "gre-2016-0923-fill-recall",
@@ -712,59 +1273,148 @@
         "2016填空机经.pdf"
       ],
       "rawQuestionCount": 9,
-      "questionCount": 9,
-      "duplicateCount": 0,
-      "answerCount": 8,
+      "questionCount": 0,
+      "duplicateCount": 5,
+      "answerCount": 0,
       "explanationCount": 0,
-      "answerSourceVerifiedCount": 8,
+      "answerSourceVerifiedCount": 4,
       "explanationSourceVerifiedCount": 0,
-      "sourcePageMatchedCount": 9,
-      "promptMatchedCount": 9,
-      "optionsMatchedCount": 9,
+      "sourcePageMatchedCount": 4,
+      "promptMatchedCount": 4,
+      "optionsMatchedCount": 4,
       "passageQuestionCount": 0,
       "passageSourceVerifiedCount": 0,
-      "status": "review_required",
-      "pendingQuestionIds": [
+      "status": "excluded_by_user",
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {},
+      "duplicates": [
+        {
+          "id": "recall-20160923-fill-q6",
+          "duplicateOf": "s65-q6",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": false,
+            "answerSourceRaw": "BC",
+            "page": 20,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160923-fill-q3",
+          "duplicateOf": "s89-q7",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 19,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              19,
+              19,
+              19,
+              19,
+              19,
+              19
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160923-fill-q4",
+          "duplicateOf": "s43-q1",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 20,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              20,
+              20,
+              20,
+              20,
+              20
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160923-fill-q8",
+          "duplicateOf": "s71-q7",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 21,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              21,
+              21,
+              21,
+              21,
+              21,
+              21
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20160923-fill-q9",
+          "duplicateOf": "s88-q8",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 21,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              21,
+              21,
+              21,
+              21,
+              21,
+              21
+            ],
+            "optionsVerified": true
+          }
+        }
+      ],
+      "excludedQuestionIds": [
         "recall-20160923-fill-q1",
         "recall-20160923-fill-q2",
-        "recall-20160923-fill-q3",
-        "recall-20160923-fill-q4",
         "recall-20160923-fill-q5",
-        "recall-20160923-fill-q6",
-        "recall-20160923-fill-q7",
-        "recall-20160923-fill-q8",
-        "recall-20160923-fill-q9"
+        "recall-20160923-fill-q7"
       ],
-      "pendingQuestionReasons": {
-        "recall-20160923-fill-q1": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160923-fill-q2": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160923-fill-q3": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160923-fill-q4": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160923-fill-q5": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160923-fill-q6": [
-          "原答案键 BC 与题目空格数不符，暂不采纳",
-          "来源未提供逐题解析"
-        ],
-        "recall-20160923-fill-q7": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160923-fill-q8": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20160923-fill-q9": [
-          "来源未提供逐题解析"
-        ]
-      }
+      "excludedQuestionCount": 4,
+      "exclusionReason": "User requested deletion; no further review"
     },
     {
       "id": "gre-2016-1012-fill-recall",
@@ -779,50 +1429,167 @@
         "2016填空机经.pdf"
       ],
       "rawQuestionCount": 7,
-      "questionCount": 7,
-      "duplicateCount": 0,
-      "answerCount": 7,
+      "questionCount": 0,
+      "duplicateCount": 6,
+      "answerCount": 0,
       "explanationCount": 0,
-      "answerSourceVerifiedCount": 7,
+      "answerSourceVerifiedCount": 1,
       "explanationSourceVerifiedCount": 0,
-      "sourcePageMatchedCount": 7,
-      "promptMatchedCount": 7,
-      "optionsMatchedCount": 7,
+      "sourcePageMatchedCount": 1,
+      "promptMatchedCount": 1,
+      "optionsMatchedCount": 1,
       "passageQuestionCount": 0,
       "passageSourceVerifiedCount": 0,
-      "status": "review_required",
-      "pendingQuestionIds": [
-        "recall-20161012-fill-q1",
-        "recall-20161012-fill-q2",
-        "recall-20161012-fill-q3",
-        "recall-20161012-fill-q4",
-        "recall-20161012-fill-q5",
-        "recall-20161012-fill-q6",
-        "recall-20161012-fill-q7"
+      "status": "excluded_by_user",
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {},
+      "duplicates": [
+        {
+          "id": "recall-20161012-fill-q5",
+          "duplicateOf": "s51-q2",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 23,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              23,
+              23,
+              23,
+              23,
+              23
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20161012-fill-q1",
+          "duplicateOf": "s59-q3",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 22,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              22,
+              22,
+              22,
+              22,
+              22,
+              22
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20161012-fill-q6",
+          "duplicateOf": "s89-q5",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 23,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              23,
+              23,
+              23,
+              23,
+              23,
+              23,
+              23,
+              23,
+              23
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20161012-fill-q3",
+          "duplicateOf": "s56-q10",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 22,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              22,
+              22,
+              22,
+              22,
+              22,
+              22
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20161012-fill-q2",
+          "duplicateOf": "s67-q8",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 22,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              22,
+              22,
+              22,
+              22,
+              22,
+              22
+            ],
+            "optionsVerified": true
+          }
+        },
+        {
+          "id": "recall-20161012-fill-q7",
+          "duplicateOf": "s76-q9",
+          "source": {
+            "file": "2016填空机经.pdf",
+            "path": "填空/2016填空机经.pdf",
+            "answerSourceFile": "2016填空机经.pdf",
+            "answerSourcePage": 25,
+            "answerSourceVerified": true,
+            "page": 23,
+            "pageVerified": true,
+            "promptVerified": true,
+            "optionPages": [
+              23,
+              23,
+              23,
+              23,
+              23,
+              23
+            ],
+            "optionsVerified": true
+          }
+        }
       ],
-      "pendingQuestionReasons": {
-        "recall-20161012-fill-q1": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20161012-fill-q2": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20161012-fill-q3": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20161012-fill-q4": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20161012-fill-q5": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20161012-fill-q6": [
-          "来源未提供逐题解析"
-        ],
-        "recall-20161012-fill-q7": [
-          "来源未提供逐题解析"
-        ]
-      }
+      "excludedQuestionIds": [
+        "recall-20161012-fill-q4"
+      ],
+      "excludedQuestionCount": 1,
+      "exclusionReason": "User requested deletion; no further review"
     },
     {
       "id": "gre-2016-dec04-reading-recall",
@@ -941,19 +1708,21 @@
         "kkk辉叔2016最近GRE阅读机经101篇分类分级版7.14.pdf"
       ],
       "rawQuestionCount": 210,
-      "questionCount": 210,
+      "questionCount": 204,
       "duplicateCount": 0,
       "answerCount": 204,
-      "explanationCount": 210,
+      "explanationCount": 204,
       "answerSourceVerifiedCount": 204,
-      "explanationSourceVerifiedCount": 210,
-      "sourcePageMatchedCount": 210,
-      "promptMatchedCount": 210,
+      "explanationSourceVerifiedCount": 204,
+      "sourcePageMatchedCount": 204,
+      "promptMatchedCount": 204,
       "optionsMatchedCount": 204,
-      "passageQuestionCount": 210,
-      "passageSourceVerifiedCount": 210,
-      "status": "review_required",
-      "pendingQuestionIds": [
+      "passageQuestionCount": 204,
+      "passageSourceVerifiedCount": 204,
+      "status": "source_matched",
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {},
+      "excludedQuestionIds": [
         "p2-q1",
         "p19-q4",
         "p40-q2",
@@ -961,37 +1730,15 @@
         "p58-q1",
         "p95-q1"
       ],
-      "pendingQuestionReasons": {
-        "p2-q1": [
-          "选项不足或缺失",
-          "标准答案缺失",
-          "选项内容未完全匹配原题页"
-        ],
-        "p19-q4": [
-          "选项不足或缺失",
-          "标准答案缺失",
-          "选项内容未完全匹配原题页"
-        ],
-        "p40-q2": [
-          "选项不足或缺失",
-          "标准答案缺失",
-          "选项内容未完全匹配原题页"
-        ],
-        "p55-q2": [
-          "选项不足或缺失",
-          "标准答案缺失",
-          "选项内容未完全匹配原题页"
-        ],
-        "p58-q1": [
-          "选项不足或缺失",
-          "标准答案缺失",
-          "选项内容未完全匹配原题页"
-        ],
-        "p95-q1": [
-          "选项不足或缺失",
-          "标准答案缺失",
-          "选项内容未完全匹配原题页"
-        ]
+      "excludedQuestionCount": 6,
+      "exclusionReason": "用户要求删除没有标准答案或选项不全的题目",
+      "excludedQuestionReasons": {
+        "p2-q1": "用户要求删除没有标准答案或选项不全的题目",
+        "p19-q4": "用户要求删除没有标准答案或选项不全的题目",
+        "p40-q2": "用户要求删除没有标准答案或选项不全的题目",
+        "p55-q2": "用户要求删除没有标准答案或选项不全的题目",
+        "p58-q1": "用户要求删除没有标准答案或选项不全的题目",
+        "p95-q1": "用户要求删除没有标准答案或选项不全的题目"
       }
     },
     {
@@ -2588,7 +3335,7 @@
       "path": "填空/2016填空机经.pdf",
       "topic": "填空",
       "pageCount": 26,
-      "status": "partial_recall_imported",
+      "status": "excluded_by_user",
       "bankIds": [
         "gre-2016-0408-fill-recall",
         "gre-2016-0416-fill-recall",
@@ -2603,8 +3350,11 @@
         "gre-2016-0923-fill-recall",
         "gre-2016-1012-fill-recall"
       ],
-      "note": "已按日期拆分导入 12 场填空回忆，共 62 题；题干与选项均按原页核对。答案页列出 61 个编号键，其中 1 个与三空题不符；另 1 题缺题号，页内另有未编号键 AEH，未作配对；暂采用 60 个答案，来源未提供逐题解析。",
-      "questionCount": 62
+      "note": "原始来源共62个回忆记录；41个为重复记录，21道唯一回忆题已按用户要求删除，不再复核；题目解析未导入。",
+      "questionCount": 0,
+      "rawQuestionCount": 62,
+      "duplicateCount": 41,
+      "excludedQuestionCount": 21
     },
     {
       "file": "GRE_1.19.pdf",
@@ -2922,6 +3672,82 @@
       "status": "pending_item_audit",
       "bankIds": [],
       "note": "已纳入本地来源清单；题目、答案与页码尚未逐项核对。"
+    }
+  ],
+  "excludedQuestionIds": [
+    "recall-20160408-fill-q1",
+    "recall-20160408-fill-q3",
+    "recall-20160416-fill-q3",
+    "recall-20160508-fill-q1",
+    "recall-20160508-fill-q3",
+    "recall-20160508-fill-q5",
+    "recall-20160508-fill-q6",
+    "recall-20160508-fill-q7",
+    "recall-20160521-fill-q1",
+    "recall-20160521-fill-q2",
+    "recall-20160521-fill-q3",
+    "recall-20160521-fill-q6",
+    "recall-20160605-fill-q1",
+    "recall-20160626-fill-q1",
+    "recall-20160626-fill-q4",
+    "recall-20160826-fill-q1",
+    "recall-20160923-fill-q1",
+    "recall-20160923-fill-q2",
+    "recall-20160923-fill-q5",
+    "recall-20160923-fill-q7",
+    "recall-20161012-fill-q4",
+    "p2-q1",
+    "p19-q4",
+    "p40-q2",
+    "p55-q2",
+    "p58-q1",
+    "p95-q1"
+  ],
+  "exclusionReason": "按用户指示直接删除；本次另删除没有标准答案或选项不全的题目",
+  "spellingCorrections": [
+    {
+      "bankId": "gre-fill-1000",
+      "questionId": "s27-q3",
+      "field": "prompt",
+      "sourceFile": "GRE填空机经1000题难度分级版%28含答案%29.pdf",
+      "sourcePageIndex": 59,
+      "printedPage": 60,
+      "sourceText": "tent to be",
+      "correctedText": "tend to be",
+      "reason": "Plural subject “experts” requires “tend”; source PDF contains a verified typographical error."
+    },
+    {
+      "bankId": "gre-fill-1000",
+      "questionId": "s33-q5",
+      "field": "prompt",
+      "sourceFile": "GRE填空机经1000题难度分级版%28含答案%29.pdf",
+      "sourcePageIndex": 71,
+      "printedPage": 72,
+      "sourceText": "tent to be",
+      "correctedText": "tend to be",
+      "reason": "Plural subject “glaciers” requires “tend”; source PDF contains a verified typographical error."
+    },
+    {
+      "bankId": "gre-reading-101",
+      "questionId": "p73-q2",
+      "field": "options.E",
+      "sourceFile": "101篇分类分级解析版.pdf",
+      "sourcePdfPage": 69,
+      "printedPage": 68,
+      "sourceText": "better know for",
+      "correctedText": "better known for",
+      "reason": "The verb phrase requires the past participle “known”; the source PDF contains a verified typo."
+    },
+    {
+      "bankId": "gre-reading-101",
+      "questionId": "p73-q3",
+      "field": "prompt",
+      "sourceFile": "101篇分类分级解析版.pdf",
+      "sourcePdfPage": 69,
+      "printedPage": 68,
+      "sourceText": "According to to the passage",
+      "correctedText": "According to the passage",
+      "reason": "The source PDF repeats “to”; removed the duplicate word."
     }
   ]
 }

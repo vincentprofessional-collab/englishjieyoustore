@@ -85,7 +85,41 @@ type StudySettingsDraft = Omit<StudySettings, "dailyNew" | "reactionSeconds" | "
 };
 type ClassificationGroupSession = { ids: string[]; remainingIds: string[]; firstOutcomes: Partial<Record<string, Familiarity>>; index: number; startedAt: number; familiar: number; vague: number; unfamiliar: number; groupNo: number };
 type ClassificationGroupSummary = Omit<ClassificationGroupSession, "index" | "remainingIds" | "firstOutcomes"> & { endedAt: number; book: BookSelectionKey };
-type ActiveGroupProgress = { groupNo: number; scope: VocabularyScope; startedAt: number };
+type ActiveGroupProgress = { groupNo: number; order?: SortOrder; scope: VocabularyScope; startedAt: number };
+
+const FREQUENCY_ORDERED_BOOKS = new Set<BookSelectionKey>([
+  "小学", "初中", "高中", "四级", "六级", "考研", "托雅", "SAT", "GMAT", "GRE",
+]);
+
+function orderWordsForStudy(words: LearningWord[], order: SortOrder, book: BookSelectionKey) {
+  if (order !== "random" || !FREQUENCY_ORDERED_BOOKS.has(book)) return words;
+  return [...words].sort((left, right) =>
+    (left.frequencyRank ?? Number.MAX_SAFE_INTEGER) - (right.frequencyRank ?? Number.MAX_SAFE_INTEGER),
+  );
+}
+
+function avoidAdjacentDuplicateWords(ids: string[], words: LearningWord[], previousWord: string | null = null) {
+  const wordById = new Map(words.map(({ id, word }) => [id, word]));
+  const wordKey = (word: string) => word.trim().toLowerCase().replace(/\s+/g, " ");
+  const keyForId = (id: string) => wordKey(wordById.get(id) ?? id);
+  const ordered = [...ids];
+  let previousKey = previousWord ? wordKey(previousWord) : null;
+
+  for (let index = 0; index < ordered.length; index += 1) {
+    const currentKey = keyForId(ordered[index]);
+    if (currentKey === previousKey) {
+      const alternativeIndex = ordered.findIndex((id, candidateIndex) =>
+        candidateIndex > index && keyForId(id) !== previousKey,
+      );
+      if (alternativeIndex !== -1) {
+        [ordered[index], ordered[alternativeIndex]] = [ordered[alternativeIndex], ordered[index]];
+      }
+    }
+    previousKey = keyForId(ordered[index]);
+  }
+
+  return ordered;
+}
 
 type SpeechRecognitionAlternativeLike = {
   transcript: string;
@@ -2230,6 +2264,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
             const item = value as Partial<ActiveGroupProgress>;
             return Number.isInteger(item.groupNo) && Number(item.groupNo) >= 0
               && (item.scope === "core" || item.scope === "all")
+              && (item.order === undefined || item.order === "sequential" || item.order === "random")
               && Number.isFinite(item.startedAt) && Number(item.startedAt) > 0;
           })) as Record<string, ActiveGroupProgress>);
         }
@@ -2332,6 +2367,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
         const item = value as Partial<ActiveGroupProgress>;
         return Number.isInteger(item.groupNo) && Number(item.groupNo) >= 0
           && (item.scope === "core" || item.scope === "all")
+          && (item.order === undefined || item.order === "sequential" || item.order === "random")
           && Number.isFinite(item.startedAt) && Number(item.startedAt) > 0;
       })) as Record<string, ActiveGroupProgress>);
     } catch {
@@ -2510,46 +2546,52 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
       : words.filter((word) => word.level === selectedBook),
     [currentSettings.scope, selectedBook, words],
   );
+  const orderedStudyWords = useMemo(
+    () => orderWordsForStudy(visibleWords, currentSettings.order, selectedBook),
+    [currentSettings.order, selectedBook, visibleWords],
+  );
   const activeStudyWords = useMemo(() => currentSettings.method === "browse" && currentSettings.reviewView !== null
     ? visibleWords
     : groupBrowseIds
-    ? visibleWords.filter((word) => groupBrowseIds.includes(word.id))
-    : selectVocabularyStudyGroup(visibleWords, currentSettings.wordGroups[currentSettings.scope]), [currentSettings.method, currentSettings.reviewView, currentSettings.scope, currentSettings.wordGroups, groupBrowseIds, visibleWords]);
+    ? orderedStudyWords.filter((word) => groupBrowseIds.includes(word.id))
+    : selectVocabularyStudyGroup(orderedStudyWords, currentSettings.wordGroups[currentSettings.scope]), [currentSettings.method, currentSettings.reviewView, currentSettings.scope, currentSettings.wordGroups, groupBrowseIds, orderedStudyWords, visibleWords]);
   const studyListWords = useMemo(() => currentSettings.method === "browse"
     && (currentSettings.reviewView !== null || currentSettings.reviewFamiliarities.length > 0)
     ? filterBrowseReviewWords(activeStudyWords, progress, `${selectedBook}:${currentSettings.scope}`, currentSettings.reviewView, currentSettings.reviewFamiliarities, Date.now(), currentSettings.modes)
     : activeStudyWords, [activeStudyWords, currentSettings.method, currentSettings.modes, currentSettings.reviewFamiliarities, currentSettings.reviewView, currentSettings.scope, progress, selectedBook]);
-  const resumeScopeWords = selectedBook === "生词本" || currentSettings.scope === "all"
+  const resumeScopeWords = orderWordsForStudy(selectedBook === "生词本" || currentSettings.scope === "all"
     ? words
-    : words.filter((word) => word.level === selectedBook);
+    : words.filter((word) => word.level === selectedBook), currentSettings.order, selectedBook);
   const resumeGroupNo = vocabularyStudyGroupIndex(currentSettings.wordGroups[currentSettings.scope], resumeScopeWords.length)
     ?? (nextGroupByBook[selectedBook] ?? 0) % Math.max(1, Math.ceil(resumeScopeWords.length / GROUP_SIZE));
   const activeGroupProgress = activeGroupByBook[selectedBook];
   const isResumingPartialGroup = currentSettings.method === "classified"
     && activeGroupProgress?.groupNo === resumeGroupNo
-    && activeGroupProgress?.scope === currentSettings.scope;
+    && activeGroupProgress?.scope === currentSettings.scope
+    && (activeGroupProgress?.order ?? "sequential") === currentSettings.order;
   const partialGroupRemainingCount = isResumingPartialGroup && activeGroupProgress
     ? resumeScopeWords.slice(resumeGroupNo * GROUP_SIZE, (resumeGroupNo + 1) * GROUP_SIZE)
       .filter((word) => (progressFor(progress, word.id).lastReviewedAt ?? 0) < activeGroupProgress.startedAt).length
     : 0;
   const hasCompletedVocabularyGroup = Object.prototype.hasOwnProperty.call(nextGroupByBook, selectedBook);
   const startClassifiedGroup = useCallback((settings: StudySettings, sourceWords: LearningWord[], book: BookSelectionKey) => {
-    if (!sourceWords.length) return false;
-    const groupCount = Math.max(1, Math.ceil(sourceWords.length / GROUP_SIZE));
-    let groupNo = vocabularyStudyGroupIndex(settings.wordGroups[settings.scope], sourceWords.length) ?? (nextGroupByBook[book] ?? 0) % groupCount;
+    const orderedSourceWords = orderWordsForStudy(sourceWords, settings.order, book);
+    if (!orderedSourceWords.length) return false;
+    const groupCount = Math.max(1, Math.ceil(orderedSourceWords.length / GROUP_SIZE));
+    let groupNo = vocabularyStudyGroupIndex(settings.wordGroups[settings.scope], orderedSourceWords.length) ?? (nextGroupByBook[book] ?? 0) % groupCount;
     const active = activeGroupByBook[book];
-    const isResuming = active?.groupNo === groupNo && active?.scope === settings.scope;
+    const isResuming = active?.groupNo === groupNo && active?.scope === settings.scope && (active?.order ?? "sequential") === settings.order;
     let startedAt = isResuming ? active.startedAt : Date.now();
 
     const makeSession = (targetGroupNo: number, targetStartedAt: number, resume: boolean) => {
-      const groupWords = sourceWords.slice(targetGroupNo * GROUP_SIZE, (targetGroupNo + 1) * GROUP_SIZE);
+      const groupWords = orderedSourceWords.slice(targetGroupNo * GROUP_SIZE, (targetGroupNo + 1) * GROUP_SIZE);
       const processedWords = resume
         ? groupWords.filter((word) => (progressFor(progress, word.id).lastReviewedAt ?? 0) >= targetStartedAt)
         : [];
       const processedIds = new Set(processedWords.map((word) => word.id));
       const remainingWords = resume ? groupWords.filter((word) => !processedIds.has(word.id)) : groupWords;
       const remainingIds = remainingWords.map((word) => word.id);
-      const dueReviewWords = sourceWords.filter((word) => {
+      const dueReviewWords = orderedSourceWords.filter((word) => {
         if (remainingIds.includes(word.id)) return false;
         const entry = progressFor(progress, word.id);
         const familiarity = familiarityForProgress(entry);
@@ -2557,7 +2599,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
       });
       const ids = [...new Set([...groupWords.map((word) => word.id), ...dueReviewWords.map((word) => word.id)])];
       const queued = new Set(remainingIds);
-      const reviewIds = dueReviewWords.map((word) => word.id).filter((id) => !queued.has(id));
+      const reviewIds = [...new Set(dueReviewWords.map((word) => word.id))].filter((id) => !queued.has(id));
       const freshIds = [...remainingIds];
       remainingIds.length = 0;
       let freshIndex = 0;
@@ -2573,7 +2615,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
       const counts = { familiar: 0, vague: 0, unfamiliar: 0 };
       for (const outcome of Object.values(firstOutcomes)) if (outcome) counts[outcome] += 1;
       const orderedIds = settings.order === "random" ? shuffle(remainingIds) : remainingIds;
-      return { ids, remainingIds: orderedIds, firstOutcomes, startedAt: targetStartedAt, ...counts, groupNo: targetGroupNo, index: processedWords.length };
+      return { ids, remainingIds: avoidAdjacentDuplicateWords(orderedIds, orderedSourceWords), firstOutcomes, startedAt: targetStartedAt, ...counts, groupNo: targetGroupNo, index: processedWords.length };
     };
 
     let session = makeSession(groupNo, startedAt, isResuming);
@@ -2598,7 +2640,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     setGroupSummary(null);
     setSessionDepleted(false);
     setGroupSession(session);
-    setActiveGroupByBook((current) => ({ ...current, [book]: { groupNo, scope: settings.scope, startedAt } }));
+    setActiveGroupByBook((current) => ({ ...current, [book]: { groupNo, order: settings.order, scope: settings.scope, startedAt } }));
     setCurrentWordId(session.remainingIds[0]);
     setRoundNonce((value) => value + 1);
     return true;
@@ -3148,7 +3190,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     const scopePool = settingsOpenFor === "生词本" || settingsDraft.scope === "all"
       ? words
       : words.filter((word) => word.level === settingsOpenFor);
-    const scopedWords = selectVocabularyStudyGroup(scopePool, settingsDraft.wordGroups[settingsDraft.scope]);
+    const orderedScopePool = orderWordsForStudy(scopePool, settingsDraft.order, settingsOpenFor);
+    const scopedWords = selectVocabularyStudyGroup(orderedScopePool, settingsDraft.wordGroups[settingsDraft.scope]);
     const allRecords = scopedWords
       .map((word) => progressFor(progress, word.id))
       .filter((entry) => entry.lastReviewedAt !== null && (entry.lastOutcome !== "unscored" || Boolean(entry.familiarity)));
@@ -3169,7 +3212,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
       total: scopedWords.length,
       familiarity: familiarityCounts,
     };
-  }, [progress, settingsDraft.modes, settingsDraft.reviewView, settingsDraft.scope, settingsDraft.wordGroups, settingsOpenFor, words]);
+  }, [progress, settingsDraft.modes, settingsDraft.order, settingsDraft.reviewView, settingsDraft.scope, settingsDraft.wordGroups, settingsOpenFor, words]);
 
   const toggleStudyMode = (category: ProgressCategory) => {
     if (settingsListMode) {
@@ -3207,15 +3250,19 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
           ? words
           : words.filter((word) => word.level === selectedBook);
         const now = Date.now();
-        const dueReviewIds = reviewPool.flatMap((word) => {
+        const dueReviewIds = [...new Set(reviewPool.flatMap((word) => {
           if (word.id === currentWord.id || remainingIds.includes(word.id)) return [];
           const entry = progressFor(updatedProgress, word.id);
           const familiarity = familiarityForProgress(entry);
           return isReviewDue(entry.nextReviewAt, Boolean(entry.completed), familiarity, now)
             ? [word.id]
             : [];
-        });
-        const nextRemainingIds = [...remainingIds, ...dueReviewIds];
+        }))];
+        const nextRemainingIds = avoidAdjacentDuplicateWords(
+          [...remainingIds, ...dueReviewIds],
+          reviewPool,
+          currentWord.word,
+        );
         const groupIds = [...new Set([...groupSession.ids, ...dueReviewIds])];
         setDefinitionChoice(null);
         if (nextRemainingIds.length === 0) {

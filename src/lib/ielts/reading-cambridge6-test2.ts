@@ -135,7 +135,7 @@ const transportPartOne: ReadingPart = {
     {
       id: "c6t2-p1-true-false",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 1? Write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 6-10 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [6], prompt: "The ISTP study examined public and private systems in every city of the world.", options: trueFalseNotGiven },
         { questionNumbers: [7], prompt: "Efficient cities can improve the quality of life for their inhabitants.", options: trueFalseNotGiven },
@@ -290,7 +290,7 @@ const cambridge6Test2PartThree: ReadingPart = {
     {
       id: "c6t2-p3-true-false",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 3? Write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 3? In boxes 32-40 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [32], prompt: "For the earliest tribes, the concept of sufficiency was more important than the concept of quantity.", options: trueFalseNotGiven },
         { questionNumbers: [33], prompt: "Indigenous Tasmanians used only four terms to indicate numbers of objects.", options: trueFalseNotGiven },

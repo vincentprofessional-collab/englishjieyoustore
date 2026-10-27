@@ -126,7 +126,7 @@ const cinnamon: ReadingPart = {
       id: "cambridge-13-test-2-part1-questions-10-13",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the information given in Reading Passage 1? Write TRUE if the statement agrees with the information, FALSE if it contradicts the information, or NOT GIVEN if there is no information on this.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 10-13 on your answer sheet, write TRUE if the statement agrees with the information, FALSE if it contradicts the information, or NOT GIVEN if there is no information on this.",
       questions: [
         { questionNumbers: [10], prompt: "The Portuguese had control over the cinnamon trade in Ceylon throughout the 16th century.", options: judgmentOptions },
         { questionNumbers: [11], prompt: "The Dutch took over the cinnamon trade from the Portuguese as soon as they arrived in Ceylon.", options: judgmentOptions },

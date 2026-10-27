@@ -172,7 +172,7 @@ const cambridge4Test3PartOne: ReadingPart = {
     {
       id: "c4t3-p1-yes-no",
       type: "choice",
-      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 1? In boxes 9–12 on your answer sheet write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 1? In boxes 9–12 on your answer sheet write YES if the statement agrees with the claims of the writer NO if the statement contradicts the claims of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [9], prompt: "Any street child can set up their own small business if given enough support.", options: yesNoNotGiven },
         { questionNumbers: [10], prompt: "In some cases, the families of street children may need financial support from S.K.I.", options: yesNoNotGiven },

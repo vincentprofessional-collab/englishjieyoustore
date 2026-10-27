@@ -59,7 +59,7 @@ export function SatHome() {
 
   const domains = catalog.domains.map((item) => ({ ...item, sets: catalog.sets.filter((set) => set.domain === item.label) })).filter((item) => item.sets.length);
   return <section className={`${styles.root} ${styles.home}`}>
-    <header className={styles.homeHeader}><div><span className={styles.eyebrow}>SAT READING AND WRITING</span><h1>题型训练</h1><p>按 SAT 官方题型练习阅读与写作题目。</p></div><Link className={styles.homeTab} href="/sat/knowledge">知识点</Link></header>
+    <header className={styles.homeHeader}><div><span className={styles.eyebrow}>SAT READING AND WRITING</span><h1>题型训练</h1><p>按 SAT 官方题型练习阅读与写作题目。</p></div><nav aria-label="SAT 学习内容" className={styles.homeTabs}><Link className={styles.homeTab} href="/sat/knowledge">知识点</Link><Link className={styles.homeTab} href="/sat/past-papers">历年真题</Link></nav></header>
     <div className={styles.summary} aria-label="SAT 题库总览"><div className={styles.summaryItem}><strong>{catalog.totalQuestionCount}</strong><span>总题数</span></div><div className={styles.summaryItem}><strong>{overall.completed}</strong><span>已完成题组</span></div><div className={styles.summaryItem}><strong>{overall.incomplete}</strong><span>未完成题组</span></div></div>
     {domains.length === 0 ? <p className={styles.empty}>没有符合当前筛选条件的题组。</p> : domains.map((item) => {
       const grouped = item.skills.map((skillItem) => ({ ...skillItem, sets: item.sets.filter((set) => set.skill === skillItem.label.replace(/, /g, ",").toLowerCase() || set.skill === skillItem.label) })).filter((group) => group.sets.length);

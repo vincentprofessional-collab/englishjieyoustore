@@ -20,11 +20,19 @@ TYPE_FOLDERS = {
 
 
 def clean(text):
+    text = re.sub(r"Y\[φ\.=5=[\x15\x13\x14]+", " ", str(text or ""))
+    text = text.replace("＂ｙｘ；＂ｋＲ２ｏ１·", " ")
+    text = re.sub(r"(?im)^\s*vx[：:]\s*$", " ", text)
+    text = re.sub(r"\bKZRZ\s*\d+\b", " ", text, flags=re.I)
     lines = []
-    text = re.sub(r"\bv\s*x\s*[:：]\s*KZRZ\s*\d+\b", " ", str(text or ""), flags=re.I)
+    text = re.sub(r"\bv\s*x\s*[:：]\s*KZRZ\s*\d+\b", " ", text, flags=re.I)
     for raw in text.replace("\x00", "").replace("\r", "").splitlines():
         line = re.sub(r"[\t\u00a0 ]+", " ", raw).strip()
         if not line or NOISE.search(line):
+            continue
+        if re.fullmatch(r"-\s*\d{1,3}\s*-", line):
+            continue
+        if re.fullmatch(r"英语[（(]二[）)]试题\s*[.．·]?\s*\d{1,3}\s*[.．·]?\s*[（(]共\s*\d+\s*页[）)]", line):
             continue
         if re.search(r"^\d{1,2}\s*/\s*\d{1,2}\s*/\s*20\d{2}", line):
             continue
@@ -83,17 +91,22 @@ def load_exam_texts():
 
 def classify_heading(line, active_type):
     low = line.lower()
-    if re.search(r"structure\s+and\s+vocabulary|词汇与结构|词汇和结构", low):
+    section_prefix = bool(re.match(r"^\s*(?:section|part)(?:\b|[ivxⅰ-ⅻ0-9a-h])", low))
+    if section_prefix and re.search(r"structure\s+and\s+vocabulary|词汇与结构|词汇和结构", low):
         return "语法与词汇"
-    if re.search(r"cloze\s+test|close\s+test|use\s+of\s+english|完形填空", low):
+    if section_prefix and re.search(r"cloze\s+test|close\s+test|use\s+of\s+english|完形填空", low):
         return "完形填空"
-    if re.search(r"reading\s+comprehension|阅读理解", low):
+    if section_prefix and re.search(r"reading\s+comprehension|阅读理解", low):
         return "阅读理解"
-    if re.search(r"translation|翻译", low) and re.search(r"section|part|translation|翻译", low):
+    if section_prefix and re.search(r"translation|翻译", low):
         return "翻译"
-    if re.search(r"writing|写作", low) and re.search(r"section|part|writing|写作", low):
+    if active_type in {"阅读理解", "考研新题型"} and re.match(r"^\s*part\s*[cＣ]\b", low):
+        return "翻译"
+    # A passage can naturally mention "writing"; only a section/part heading
+    # starts a writing group. Essay instructions inside Section IV stay with it.
+    if section_prefix and re.search(r"writing|写作", low):
         return "写作"
-    if re.search(r"^\s*part\s*[bＢ]\b|^\s*part\s*Ⅱ\b|新题型|paragraph matching", low):
+    if re.match(r"^\s*part\s*[bＢ]\b|^\s*part\s*Ⅱ\b|^\s*(?:新题型|paragraph matching)", low):
         return "考研新题型" if active_type in {"阅读理解", "考研新题型"} else None
     return None
 
@@ -185,13 +198,27 @@ def load_answer_references():
 
 
 def approximate_question_count(text, category):
-    numbered = list(re.finditer(r"(?m)^[ \t]*(\d{1,2})[.．、][ \t]+", text))
+    numbered = list(re.finditer(r"(?m)^[ \t]*((?:\d[ \t]*){1,2})[.．、][ \t]+", text))
+    values = {int(re.sub(r"\s+", "", match.group(1))) for match in numbered}
+    if category == "完形填空" and re.search(r"numbered blank|numbered gap|numbered spaces", text, re.I):
+        return 20
+    if category == "阅读理解":
+        return 20
+    if category == "考研新题型":
+        range_match = re.search(r"questions?\s+(\d{2})\s*[-–—]\s*(\d{2})", text, re.I)
+        if range_match:
+            return int(range_match.group(2)) - int(range_match.group(1)) + 1
+        return 5
     if category == "写作":
-        return max(1, min(2, len(numbered)))
+        if re.search(r"part\s*a\b", text, re.I) and re.search(r"part\s*b\b", text, re.I):
+            return 2
+        return max(1, min(2, sum(value >= 40 for value in values)))
     if category == "翻译":
-        return max(1, len(numbered))
-    if numbered:
-        return min(100, max(1, len({int(m.group(1)) for m in numbered})))
+        if re.match(r"\s*part\s*c\b", text, re.I):
+            return 5
+        return max(1, len(values))
+    if values:
+        return min(100, max(1, len(values)))
     if category == "完形填空":
         return 20
     return 1
@@ -243,6 +270,16 @@ def build_banks():
                 continue
             seen[key] = question["id"]
             unique.append(question)
+        used_ids = set()
+        for question in unique:
+            base_id = question["id"]
+            candidate = base_id
+            suffix = 1
+            while candidate in used_ids:
+                suffix += 1
+                candidate = f"{base_id}-{suffix}"
+            question["id"] = candidate
+            used_ids.add(candidate)
         folder = TYPE_FOLDERS[category]
         path = OUT / "types" / folder
         path.mkdir(parents=True, exist_ok=True)

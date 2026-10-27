@@ -1,0 +1,1164 @@
+{
+  "generatedAt": "2026-10-26",
+  "pass1": "Include text-layer or OCR candidates with a plausible stem, four choices and a source answer; keep a broad candidate pool for source review.",
+  "pass2": "Second pass: compare published stems, choices, numeric details, and answers with cached source-page text and targeted page images; correct only source-confirmed defects, scan the term whitelist, and retain unresolved items as exclusions or review flags.",
+  "currentBatch": {
+    "sets": [
+      {
+        "id": "sat-2023-11-routing",
+        "questionsPublished": 18,
+        "sourceQuestions": 27,
+        "exactDuplicatesSkipped": 5,
+        "siteQuestionDuplicatesSkipped": 3,
+        "nearDuplicatesSkipped": 2,
+        "sourceDefectsExcluded": 1
+      },
+      {
+        "id": "sat-2023-11-easier",
+        "questionsPublished": 20,
+        "sourceQuestions": 27,
+        "exactDuplicatesSkipped": 3,
+        "siteQuestionDuplicatesSkipped": 4,
+        "nearDuplicatesSkipped": 1
+      },
+      {
+        "id": "sat-2024-03-d-rw-m1",
+        "questionsPublished": 23,
+        "sourceQuestions": 27,
+        "exactDuplicatesSkipped": 0,
+        "nearDuplicatesSkipped": 1,
+        "siteQuestionDuplicatesSkipped": 3
+      },
+      {
+        "id": "sat-2025-10-asia-a-rw-m1",
+        "questionsPublished": 26,
+        "sourceQuestions": 27,
+        "exactDuplicatesSkipped": 0,
+        "sourceDefectsExcluded": 1
+      },
+      {
+        "id": "sat-2025-10-asia-a-rw-m2",
+        "questionsPublished": 25,
+        "sourceQuestions": 27,
+        "exactDuplicatesSkipped": 2
+      },
+      {
+        "id": "sat-2025-10-asia-a-math-m1",
+        "questionsPublished": 8,
+        "sourceQuestions": 22,
+        "exactDuplicatesSkipped": 0,
+        "nonChoiceOrUnclearExcluded": 14
+      },
+      {
+        "id": "sat-2025-10-asia-a-math-m2",
+        "questionsPublished": 13,
+        "sourceQuestions": 22,
+        "exactDuplicatesSkipped": 0,
+        "nonChoiceOrUnclearExcluded": 9
+      },
+      {
+        "id": "sat-2026-06-set1-rw-m1",
+        "questionsPublished": 26,
+        "sourceQuestions": 27,
+        "exactDuplicatesSkipped": 0,
+        "watermarkObscuredExcluded": 1
+      },
+      {
+        "id": "sat-2026-06-set1-rw-m2",
+        "questionsPublished": 27,
+        "sourceQuestions": 27,
+        "exactDuplicatesSkipped": 0,
+        "watermarksRemovedFromStem": 2,
+        "sourceTextRepairs": 2
+      },
+      {
+        "id": "sat-2026-06-set1-math-m1",
+        "questionsPublished": 16,
+        "sourceQuestions": 22,
+        "exactDuplicatesSkipped": 0,
+        "nonChoiceExcluded": 6
+      },
+      {
+        "id": "sat-2026-06-set1-math-m2",
+        "questionsPublished": 16,
+        "sourceQuestions": 22,
+        "exactDuplicatesSkipped": 0,
+        "nonChoiceExcluded": 6,
+        "excludedQuestionNumbers": [
+          1,
+          3,
+          7,
+          18,
+          19,
+          22
+        ],
+        "chartsAndTablesConvertedToEditableText": 3
+      },
+      {
+        "id": "sat-2023-05-routing",
+        "questionsPublished": 23,
+        "sourceQuestions": 23,
+        "exactDuplicatesSkipped": 0,
+        "chartsAndTablesConvertedToEditableText": 3
+      },
+      {
+        "id": "sat-2023-05-easier",
+        "questionsPublished": 14,
+        "sourceQuestions": 15,
+        "exactDuplicatesSkipped": 0,
+        "sourceDefectsExcluded": 1
+      }
+    ],
+    "totalQuestionsPublished": 255
+  },
+  "exactQuestionDuplicatesSkipped": [
+    {
+      "sourcePaperId": "sat-2023-11-routing",
+      "sourceQuestionNumber": 5,
+      "existingQuestionId": "4cebc520",
+      "match": "normalized stem and all four choices exactly match",
+      "action": "skip from past-paper page"
+    },
+    {
+      "sourcePaperId": "sat-2023-11-routing",
+      "sourceQuestionNumber": 15,
+      "existingQuestionId": "033ef936",
+      "match": "normalized stem and all four choices exactly match",
+      "action": "skip from past-paper page"
+    },
+    {
+      "sourcePaperId": "sat-2023-11-routing",
+      "sourceQuestionNumber": 20,
+      "existingQuestionId": "accc2b85",
+      "match": "normalized stem and all four choices exactly match",
+      "action": "skip from past-paper page"
+    },
+    {
+      "sourcePaperId": "sat-2023-11-routing",
+      "sourceQuestionNumber": 22,
+      "existingQuestionId": "42b13db6",
+      "match": "normalized stem and all four choices exactly match",
+      "action": "skip from past-paper page"
+    },
+    {
+      "sourcePaperId": "sat-2023-11-easier",
+      "sourceQuestionNumber": 22,
+      "existingQuestionId": "e214479d",
+      "match": "normalized stem and all four choices exactly match",
+      "action": "skip from past-paper page"
+    },
+    {
+      "sourcePaperId": "sat-2023-11-easier",
+      "sourceQuestionNumber": 23,
+      "existingQuestionId": "08b1d40a",
+      "match": "normalized stem and all four choices exactly match",
+      "action": "skip from past-paper page"
+    },
+    {
+      "sourcePaperId": "sat-2025-10-asia-a-rw-m2",
+      "sourceQuestionNumber": 9,
+      "existingQuestionId": "87fb4223",
+      "match": "normalized stem and all four choices exactly match",
+      "action": "skip from past-paper page"
+    },
+    {
+      "sourcePaperId": "sat-2025-10-asia-a-rw-m2",
+      "sourceQuestionNumber": 10,
+      "existingQuestionId": "5f5deac5",
+      "match": "normalized stem and all four choices exactly match",
+      "action": "skip from past-paper page"
+    },
+    {
+      "sourcePaperId": "sat-2023-11-routing",
+      "sourceQuestionNumber": 11,
+      "existingQuestionId": "e7b08326",
+      "match": "The prompt and all four choices match the existing science-submissions question in the SAT command-of-evidence easy set.",
+      "action": "removed from past-paper page; kept the existing practice-set item."
+    },
+    {
+      "sourcePaperId": "sat-2023-11-easier",
+      "sourceQuestionNumber": 13,
+      "existingQuestionId": "fb2bb280",
+      "match": "The passage, precipitation table, prompt, and all four choices match the existing SAT command-of-evidence hard-set item.",
+      "action": "removed from past-paper page; kept the existing practice-set item."
+    },
+    {
+      "sourcePaperId": "sat-2023-11-routing",
+      "sourceQuestionNumber": 23,
+      "existingQuestionId": "8884e4b5",
+      "match": "The prompt and all four choices exactly match an existing rhetorical-synthesis practice-set item.",
+      "action": "removed from past-paper page; kept the existing practice-set item."
+    },
+    {
+      "sourcePaperId": "sat-2024-03-d-rw-m1",
+      "sourceQuestionNumber": 23,
+      "existingQuestionId": "3e5f0874",
+      "match": "The same passage/notes and all four choices match an existing practice-set item; choice order differs but the correct option text is identical.",
+      "action": "removed from past-paper page; kept the existing practice-set item."
+    }
+  ],
+  "sourceDefectsExcluded": [
+    {
+      "sourceFile": "2025年SAT亚太北美真题38套/2025年10月SAT机考真题/2025年10月亚太A带解析(1).pdf",
+      "section": "Reading and Writing · Module 1",
+      "questionNumber": 24,
+      "reason": "The prompt asks for the average weight of the wedge-rumped storm petrel, but none of the four printed choices gives that value; choice D instead refers to a large tree finch. Excluded rather than guessing."
+    },
+    {
+      "sourceFile": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+      "section": "Reading and Writing · Module 1",
+      "questionNumber": 21,
+      "reason": "A publisher watermark/overprint obscures part of the sentence after the description of Red Pavilion; the missing text cannot be recovered reliably from the scan, so the question is omitted rather than guessed."
+    },
+    {
+      "sourceFile": "2023-2024年SAT亚太北美真题47套/2023年3月-11月SAT亚太北美真题6套/2023年5月.pdf",
+      "section": "Reading and Writing · Easier",
+      "questionNumber": 5,
+      "reason": "The supplied PDF proceeds from question 4 on page 33 to question 6 on page 34. The answer key lists B for question 5, but its question text and choices are absent, so it is not reconstructed."
+    },
+    {
+      "paperId": "sat-2023-11-routing",
+      "questionNumber": 13,
+      "sourcePages": [
+        16,
+        17
+      ],
+      "defect": "The source passage ends mid-sentence after “Due to the Chorotega region’s”; page 17 asks to complete the missing assertion, so the prompt and answer cannot be reliably reconstructed from the supplied PDF.",
+      "action": "excluded from the past-paper page; did not guess the missing assertion."
+    }
+  ],
+  "correctionsFromPass2": [
+    {
+      "paperId": "sat-2025-10-asia-a-rw-m1",
+      "questionNumber": 4,
+      "field": "correctAnswer",
+      "before": "A",
+      "after": "C",
+      "evidence": "Chinese explanation page 69 identifies “considerable”; key aligned to the source explanation."
+    },
+    {
+      "paperId": "sat-2025-10-asia-a-rw-m1",
+      "questionNumber": 27,
+      "field": "correctAnswer",
+      "before": "D",
+      "after": "A",
+      "evidence": "Chinese explanation page 73 explicitly supports the seigaiha/nature example."
+    },
+    {
+      "paperId": "sat-2025-10-asia-a-rw-m2",
+      "questionNumber": 12,
+      "field": "choice D",
+      "before": "truncated after “Eospermatopteris and”",
+      "after": "completed “Eospermatopteris and Archaeopteris.”",
+      "evidence": "Question source page 33 visual check."
+    },
+    {
+      "paperId": "sat-2024-03-d-rw-m1",
+      "questionNumber": 16,
+      "field": "correctAnswer",
+      "before": "C",
+      "after": "B",
+      "evidence": "The source key gives C, but only “houses” completes the present-tense statement. Source question page and answer sheet page 2 were visually checked; answer-sheet conflict retained in reviewFlags."
+    },
+    {
+      "paperId": "sat-2024-03-d-rw-m1",
+      "questionNumber": 17,
+      "field": "correctAnswer",
+      "before": "B",
+      "after": "A",
+      "evidence": "The source key gives B; the colon in “goal: catching an in-person glimpse” correctly introduces the goal. Source question page and answer sheet page 2 were visually checked; answer-sheet conflict retained in reviewFlags."
+    },
+    {
+      "paperId": "sat-2024-03-d-rw-m1",
+      "questionNumber": 18,
+      "field": "correctAnswer",
+      "before": "B",
+      "after": "D",
+      "evidence": "The source key gives B; “would be honored” is the future-in-the-past construction parallel to “would become known”. Source question page and answer sheet page 2 were visually checked; answer-sheet conflict retained in reviewFlags."
+    },
+    {
+      "paperId": "sat-2024-03-d-rw-m1",
+      "questionNumber": 19,
+      "field": "correctAnswer",
+      "before": "A",
+      "after": "B",
+      "evidence": "The source key gives A; “Macau; however, when ... it was ...” correctly joins the historical contrast. Source question page and answer sheet page 2 were visually checked; answer-sheet conflict retained in reviewFlags."
+    },
+    {
+      "paperId": "sat-2024-03-d-rw-m1",
+      "questionNumber": 20,
+      "field": "correctAnswer",
+      "before": "A",
+      "after": "B",
+      "evidence": "The source key gives A; “features. For ...” correctly separates the two sentences. Source question page and answer sheet page 2 were visually checked; answer-sheet conflict retained in reviewFlags."
+    }
+  ],
+  "duplicateSourceFileRemoved": {
+    "path": "26年/2026年SAT亚太北美真题/2026年3月SAT机考真题/20260314SAT .pdf",
+    "kept": "2026年SAT亚太北美真题/2026年3月SAT机考真题/20260314SAT .pdf",
+    "sha256": "222527e08f1b390f413f4f494bc51748b7928dcc8ac82d0a0c67e6ee0b896171"
+  },
+  "presentationCleanup": [
+    "No full-page images included; SAT questions and choices are editable text.",
+    "Tables, graph readings and student notes are editable table/list blocks; plotted graph values are explicitly marked approximate.",
+    "Removed source watermarks, promotional text, page headers/footers, page numbers, OCR debris and irrelevant page furniture from published question text and rationales.",
+    "Questions with obscured or irrecoverable text, invalid printed choices, uncertain answer keys, or non-choice response formats are omitted and recorded for review."
+  ],
+  "remainingSourceFiles": "232 source files remain in the classified inventory after exact duplicate-file removal. Question-level extraction, answer verification, and duplicate comparison are complete only for the modules listed in currentBatch; the rest remain queued for later batches.",
+  "watermarkTextRemoved": [
+    {
+      "paperId": "sat-2026-06-set1-rw-m1",
+      "questionNumber": 8,
+      "sourcePage": 10,
+      "action": "Removed inserted publisher attribution from the middle of the stem."
+    },
+    {
+      "paperId": "sat-2026-06-set1-rw-m2",
+      "questionNumber": 3,
+      "sourcePage": 25,
+      "action": "Dropped the overprinted location fragment after Iceland; surrounding argument retained."
+    },
+    {
+      "paperId": "sat-2026-06-set1-rw-m2",
+      "questionNumber": 13,
+      "sourcePage": 34,
+      "action": "Removed inserted promotional text from the middle of the stem."
+    },
+    {
+      "paperId": "sat-2026-06-set1-rw-m2",
+      "questionNumber": 21,
+      "sourcePage": 39,
+      "action": "Removed inserted contact and promotional text from the middle of the stem."
+    },
+    {
+      "paperId": "sat-2026-06-set1-math-m1",
+      "questionNumber": 14,
+      "sourcePage": 49,
+      "action": "Removed inserted promotional account text from the middle of the stem."
+    },
+    {
+      "paperId": "sat-2026-06-set1-math-m1",
+      "questionNumber": 18,
+      "sourcePage": 50,
+      "action": "Removed inserted contact information from the middle of the stem."
+    },
+    {
+      "paperId": "sat-2026-06-set1-math-m1",
+      "questionNumber": 21,
+      "sourcePage": 51,
+      "action": "Removed inserted WeChat promotional text from the middle of the stem."
+    },
+    {
+      "paperId": "sat-2026-06-set1-math-m2",
+      "questionNumber": 21,
+      "sourcePage": 60,
+      "action": "Removed an inserted publisher attribution from the middle of the stem."
+    },
+    {
+      "paperId": "sat-2026-06-set1-math-m2",
+      "questionNumber": 16,
+      "sourcePage": "答案解析 23",
+      "action": "Removed inserted contact/promotion text from the median explanation."
+    },
+    {
+      "paperId": "sat-2025-10-asia-a-math-m2",
+      "questionNumber": 12,
+      "sourcePage": 63,
+      "action": "Transcribed the bald-eagle frequency table as editable rows; did not carry over the source watermark, QR code, page footer, or promotion."
+    }
+  ],
+  "sourceTextRepairs": [
+    {
+      "paperId": "sat-2026-06-set1-rw-m2",
+      "questionNumber": 24,
+      "sourcePage": 41,
+      "action": "Corrected source-page subject-verb typo “causes precedes” to “causes precede”; no answer logic changed."
+    },
+    {
+      "paperId": "sat-2026-06-set1-rw-m2",
+      "questionNumber": 27,
+      "sourcePage": 43,
+      "action": "Corrected OCR name fragments to “Digby” and removed scan debris from the student notes."
+    },
+    {
+      "paperId": "sat-2026-06-set1-math-m1",
+      "questionNumber": 1,
+      "sourcePage": 44,
+      "action": "The source explanation says total 133, but the editable source table sums to 135. Kept answer D and corrected the rationale to 102/135."
+    },
+    {
+      "paperId": "sat-2026-06-set1-math-m1",
+      "questionNumber": 19,
+      "sourcePage": 51,
+      "action": "Restored variable b where OCR read the letter as 6; equation context and answer explanation confirm g(x)=ab^x."
+    },
+    {
+      "paperId": "sat-2026-06-set1-math-m2",
+      "questionNumber": 14,
+      "sourcePage": 57,
+      "action": "Corrected OCR letter “LO” to “LQ”; the source diagram and answer explanation identify the endpoint as Q."
+    },
+    {
+      "paperId": "sat-2026-06-set1-math-m1",
+      "questionNumber": 1,
+      "sourcePage": 44,
+      "action": "Restored the complete age-by-location table and prompt as editable text; the source table totals 135."
+    },
+    {
+      "paperId": "sat-2026-06-set1-math-m1",
+      "questionNumber": 17,
+      "sourcePage": 50,
+      "action": "Restored the three-row x/y table and prompt as editable text."
+    },
+    {
+      "paperId": "sat-2023-05-routing",
+      "questionNumber": 6,
+      "sourcePage": 7,
+      "action": "Corrected the author name to Jerome K. Jerome and fixed the verb-form OCR error in choice C."
+    },
+    {
+      "paperId": "sat-2023-05-routing",
+      "questionNumber": 7,
+      "sourcePage": 8,
+      "action": "Restored missing words in the passage and corrected the selected finding option; removed OCR grammar debris."
+    },
+    {
+      "paperId": "sat-2023-05-routing",
+      "questionNumber": 8,
+      "sourcePage": 9,
+      "action": "Corrected “Obaina” to “Obama” and restored punctuation in the Watergate sentence."
+    },
+    {
+      "paperId": "sat-2023-05-routing",
+      "questionNumber": 9,
+      "sourcePage": 10,
+      "action": "Corrected the prompt verb to “illustrates”."
+    },
+    {
+      "paperId": "sat-2023-05-routing",
+      "questionNumber": 10,
+      "sourcePage": 11,
+      "action": "Removed OCR-inserted “Infants’” from choice B."
+    },
+    {
+      "paperId": "sat-2023-05-routing",
+      "questionNumber": 11,
+      "sourcePage": 12,
+      "action": "Restored the table, paragraph and four choices in correct reading order as editable content."
+    },
+    {
+      "paperId": "sat-2023-05-routing",
+      "questionNumber": 12,
+      "sourcePages": [
+        13,
+        14
+      ],
+      "action": "Restored the full passage; corrected “Mustelus cants/k” to “Mustelus canis” using the species name elsewhere in the same question."
+    },
+    {
+      "paperId": "sat-2023-05-routing",
+      "questionNumber": 13,
+      "sourcePages": [
+        15,
+        16
+      ],
+      "action": "Restored the claim and choices and transcribed plotted values as approximate editable table data."
+    },
+    {
+      "paperId": "sat-2023-05-routing",
+      "questionNumber": 14,
+      "sourcePages": [
+        17,
+        18
+      ],
+      "action": "Restored the complete ranking table and passage as editable text and table data."
+    },
+    {
+      "paperId": "sat-2023-05-routing",
+      "questionNumber": 17,
+      "sourcePages": [
+        21,
+        22
+      ],
+      "action": "Restored both text passages that were absent from the pass-one extraction."
+    },
+    {
+      "paperId": "sat-2023-05-routing",
+      "questionNumber": 18,
+      "sourcePage": 23,
+      "action": "Corrected OCR fragments “Jrcquired” and “orks” to “acquired” and “works”."
+    },
+    {
+      "paperId": "sat-2023-05-routing",
+      "questionNumber": 19,
+      "sourcePages": [
+        24,
+        25
+      ],
+      "action": "Restored the Mary Shelley passage omitted from the pass-one extraction and removed an OCR parenthesis."
+    },
+    {
+      "paperId": "sat-2023-05-routing",
+      "questionNumber": 20,
+      "sourcePage": 26,
+      "action": "Restored the coral-depth table, passage and choices in correct reading order as editable content."
+    },
+    {
+      "paperId": "sat-2023-05-routing",
+      "questionNumber": 21,
+      "sourcePage": 27,
+      "action": "Corrected OCR fragments in choice C to “the literary” and “nonliterary”."
+    },
+    {
+      "paperId": "sat-2023-05-routing",
+      "questionNumber": 23,
+      "sourcePage": 29,
+      "action": "Corrected OCR fragments “data m” and “veal” to “data from” and “reveal”."
+    },
+    {
+      "paperId": "sat-2023-05-easier",
+      "questionNumber": 1,
+      "sourcePage": 30,
+      "action": "Removed the section header “Easier 15 questions 18min” from the question text."
+    },
+    {
+      "paperId": "sat-2023-05-easier",
+      "questionNumber": 2,
+      "sourcePage": 31,
+      "action": "Removed the OCR-inserted “j” before “chemist” in choice C."
+    },
+    {
+      "paperId": "sat-2023-05-easier",
+      "questionNumber": 3,
+      "sourcePage": 32,
+      "action": "Converted the research notes to an editable list."
+    },
+    {
+      "paperId": "sat-2023-05-easier",
+      "questionNumber": 4,
+      "sourcePage": 33,
+      "action": "Corrected the duplicated number in the notes and removed stray OCR characters from choice C."
+    },
+    {
+      "paperId": "sat-2024-03-d-rw-m1",
+      "questionNumber": 11,
+      "sourcePage": 7,
+      "action": "Added the source tribal-area table as an editable table and corrected the question-page reference."
+    },
+    {
+      "paperId": "sat-2024-03-d-rw-m1",
+      "questionNumber": 12,
+      "sourcePage": 8,
+      "action": "Added the source copper-production table as an editable table and corrected the question-page reference."
+    },
+    {
+      "paperId": "sat-2024-03-d-rw-m1",
+      "questionNumber": 14,
+      "sourcePage": 10,
+      "action": "Restored the average-hours table as editable rows; corrected the visible source typo “Calculationis” to “Calculations”."
+    },
+    {
+      "paperId": "sat-2024-03-d-rw-m1",
+      "questionNumber": 15,
+      "sourcePage": 11,
+      "action": "Normalized spacing, restored “to conservation”, “outcomes”, and “M. phitauiana”; corrected the clear genus-name typo “Mammilaia” to “Mammillaria”."
+    },
+    {
+      "paperId": "sat-2024-03-d-rw-m1",
+      "questionNumber": 17,
+      "sourcePage": 12,
+      "action": "Corrected the source misspelling “Gallinula chloropas” to “Gallinula chloropus”; verified the accepted taxon name against GBIF."
+    },
+    {
+      "paperId": "sat-2024-03-d-rw-m1",
+      "questionNumber": 19,
+      "sourcePage": 13,
+      "action": "Corrected the source country-name typo “Trance” to “France”."
+    },
+    {
+      "paperId": "sat-2023-11-easier",
+      "questionNumber": 1,
+      "sourcePage": 32,
+      "action": "Normalized the regnal numeral in the source (“Francis ll”) to “Francis II” and removed the duplicated question number before the prompt."
+    },
+    {
+      "paperId": "sat-2023-11-easier",
+      "questionNumber": 6,
+      "sourcePage": 37,
+      "action": "Corrected “juveniia” to the source-verified spelling “juvenilia”."
+    },
+    {
+      "paperId": "sat-2023-11-routing",
+      "questionNumber": 13,
+      "sourcePage": 17,
+      "action": "The printed graph legend and choice labels were checked; the incomplete item was excluded because its assertion is truncated on source page 16."
+    },
+    {
+      "paperId": "sat-2025-10-asia-a-rw-m2",
+      "questionNumber": 1,
+      "sourcePage": 24,
+      "action": "Restored the missing blank before “a previous observation” and corrected merged words “wildmushrooms” and “mushroomsall”."
+    },
+    {
+      "paperId": "sat-2025-10-asia-a-rw-m2",
+      "questionNumber": 3,
+      "sourcePage": 25,
+      "action": "Corrected the merged words “printand” to “print and”; retained the repeated Dunton wording because it is present as author name plus work title in the source."
+    },
+    {
+      "paperId": "sat-2025-10-asia-a-rw-m2",
+      "questionNumber": 20,
+      "sourcePage": 39,
+      "action": "Corrected the merged word “conformsto” to “conforms to”."
+    },
+    {
+      "paperId": "sat-2025-10-asia-a-rw-m2",
+      "questionNumber": 24,
+      "sourcePage": 41,
+      "action": "Corrected the merged phrase “aresult” to “a result”."
+    },
+    {
+      "paperId": "sat-2025-10-asia-a-math-m1",
+      "questionNumbers": [
+        1,
+        2,
+        5,
+        6,
+        8,
+        11,
+        21,
+        22
+      ],
+      "sourcePages": [
+        44,
+        45,
+        48,
+        49,
+        50,
+        55,
+        56
+      ],
+      "action": "Replaced the Chinese pass-one translations with source-aligned English text; described graph data in editable text and retained the answer choices."
+    },
+    {
+      "paperId": "sat-2025-10-asia-a-math-m2",
+      "questionNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        19,
+        22
+      ],
+      "sourcePages": [
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        66,
+        68
+      ],
+      "action": "Replaced the Chinese pass-one translations with source-aligned English text; restored the bald-eagle frequency table as editable rows and corrected the line label in Q22 from r to n."
+    }
+  ],
+  "nearDuplicateQuestionVersionsSkipped": [
+    {
+      "sourcePaperId": "sat-2024-03-d-rw-m1",
+      "sourceQuestionNumber": 21,
+      "existingPaperId": "sat-2023-11-easier",
+      "existingQuestionNumber": 20,
+      "match": "same sentence structure and all four choices; only country, membership year, and one country name differ",
+      "answerKeyConflict": "2024 source key B; 2023 source key D. The later version is omitted to avoid a repeated item with a conflicting key.",
+      "action": "skip later version from past-paper page"
+    },
+    {
+      "sourcePaperId": "sat-2023-11-routing",
+      "sourceQuestionNumber": 16,
+      "existingPracticeQuestionId": "f0c500d1",
+      "match": "same theremin grammar item and choices; wording and punctuation differ slightly",
+      "action": "skip from past-paper page"
+    },
+    {
+      "sourcePaperId": "sat-2023-11-easier",
+      "sourceQuestionNumber": 7,
+      "existingPracticeQuestionId": "eb5814a5",
+      "match": "same passage, question and four choices; diacritics/formatting differ",
+      "action": "skip from past-paper page"
+    },
+    {
+      "sourcePaperId": "sat-2023-11-easier",
+      "sourceQuestionNumber": 11,
+      "existingPracticeQuestionId": "3ef2af4f",
+      "match": "same Poetry evidence question and four choices; typography differs",
+      "action": "skip from past-paper page"
+    },
+    {
+      "sourcePaperId": "sat-2023-11-easier",
+      "sourceQuestionNumber": 17,
+      "existingPracticeQuestionId": "1020223f",
+      "match": "same Marie-Denise Villers punctuation question and four choices",
+      "action": "skip from past-paper page"
+    },
+    {
+      "sourcePaperId": "sat-2024-03-d-rw-m1",
+      "sourceQuestionNumber": 2,
+      "existingPracticeQuestionId": "ff19c9d6",
+      "match": "same forest-land consensus question and choices; choice order differs",
+      "action": "skip from past-paper page"
+    },
+    {
+      "sourcePaperId": "sat-2024-03-d-rw-m1",
+      "sourceQuestionNumber": 7,
+      "existingPracticeQuestionId": "5cf1663b",
+      "match": "same Annie Dillard passage, function question and four choices; choice order differs",
+      "action": "skip from past-paper page"
+    },
+    {
+      "sourcePaperId": "sat-2023-05-routing",
+      "sourceQuestionNumber": 9,
+      "existingPaperId": "sat-2023-11-easier",
+      "existingQuestionNumber": 12,
+      "match": "same Cane passage, claim and four quotations; choice order differs, and both keys select the same quotation.",
+      "action": "retain May version and remove later November version from the past-paper page"
+    },
+    {
+      "sourcePaperId": "sat-2023-05-easier",
+      "sourceQuestionNumber": 9,
+      "existingPaperId": "sat-2023-11-routing",
+      "existingQuestionNumber": 17,
+      "match": "same Navajo chapter profile sentence pattern, completion blank, answer choices and answer; names/date differ.",
+      "action": "retain May version and remove later November version from the past-paper page"
+    }
+  ],
+  "nearDuplicateCandidatesRetained": [
+    {
+      "paperId": "sat-2023-05-easier",
+      "questionNumber": 8,
+      "similarPaperId": "sat-2024-03-d-rw-m1",
+      "similarQuestionNumber": 19,
+      "match": "The Michelin Guide stimulus is reused, but the May item asks about the verb after “customers to” while the March item tests punctuation after a restaurant name; answer choices and tested points differ.",
+      "action": "retain both as distinct questions; May question text and choices are not duplicates of the March item"
+    }
+  ],
+  "spellcheck": {
+    "method": "Automated dictionary candidate scan on question stems and choices, then source-page review of suspicious spellings and spacing. Dictionary misses are candidates, not automatic errors.",
+    "termWhitelistPath": "docs/sat-question-term-whitelist-2026-10-26.json",
+    "whitelistedSpecialTermCount": 40,
+    "correctedFormsRecorded": 14,
+    "sourceConfirmedSpellingIssuesCorrected": [
+      "Calculationis → Calculations",
+      "Mammilaia → Mammillaria",
+      "Gallinula chloropas → Gallinula chloropus",
+      "Trance → France",
+      "Francis ll → Francis II",
+      "juveniia → juvenilia",
+      "wildmushrooms → wild mushrooms",
+      "mushroomsall → mushrooms all",
+      "printand → print and",
+      "conformsto → conforms to",
+      "aresult → a result",
+      "sumo → sumō",
+      "Defue → Defoe",
+      "Obaina → Obama"
+    ]
+  },
+  "answerKeyManualChecks": [
+    {
+      "questionId": "sat-2025-10-asia-a-math-m1-q05",
+      "answerSourcePage": 79,
+      "visuallyConfirmedSourceKey": "B",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2025-10-asia-a-rw-m1-q05",
+      "answerSourcePage": 69,
+      "visuallyConfirmedSourceKey": "D",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2025-10-asia-a-rw-m1-q11",
+      "answerSourcePage": 70,
+      "visuallyConfirmedSourceKey": "D",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2025-10-asia-a-rw-m2-q01",
+      "answerSourcePage": 74,
+      "visuallyConfirmedSourceKey": "A",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m1-q01",
+      "answerSourcePage": 17,
+      "visuallyConfirmedSourceKey": "D",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m1-q04",
+      "answerSourcePage": 17,
+      "visuallyConfirmedSourceKey": "A",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m1-q06",
+      "answerSourcePage": 17,
+      "visuallyConfirmedSourceKey": "D",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m1-q16",
+      "answerSourcePage": 19,
+      "visuallyConfirmedSourceKey": "B",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m2-q05",
+      "answerSourcePage": 21,
+      "visuallyConfirmedSourceKey": "A",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m2-q06",
+      "answerSourcePage": 21,
+      "visuallyConfirmedSourceKey": "C",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m2-q16",
+      "answerSourcePage": 23,
+      "visuallyConfirmedSourceKey": "B",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2026-06-set1-rw-m1-q02",
+      "answerSourcePage": 5,
+      "visuallyConfirmedSourceKey": "C",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2026-06-set1-rw-m1-q22",
+      "answerSourcePage": 9,
+      "visuallyConfirmedSourceKey": "C",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2026-06-set1-rw-m1-q27",
+      "answerSourcePage": 10,
+      "visuallyConfirmedSourceKey": "C",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2026-06-set1-rw-m2-q02",
+      "answerSourcePage": 11,
+      "visuallyConfirmedSourceKey": "C",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2026-06-set1-rw-m2-q05",
+      "answerSourcePage": 11,
+      "visuallyConfirmedSourceKey": "C",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2026-06-set1-rw-m2-q10",
+      "answerSourcePage": 12,
+      "visuallyConfirmedSourceKey": "D",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2026-06-set1-rw-m2-q17",
+      "answerSourcePage": 14,
+      "visuallyConfirmedSourceKey": "D",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2026-06-set1-rw-m2-q26",
+      "answerSourcePage": 15,
+      "visuallyConfirmedSourceKey": "C",
+      "result": "matches published answer"
+    },
+    {
+      "questionId": "sat-2026-06-set1-rw-m1-q26",
+      "answerSourcePage": 9,
+      "visuallyConfirmedSourceKey": "D",
+      "publishedAnswer": "D",
+      "result": "matches published answer; answer page 9 visibly prints 26.D and rationale matches the question."
+    }
+  ],
+  "sourceVisualChecks": [
+    {
+      "questionId": "sat-2025-10-asia-a-math-m1-q01",
+      "sourceQuestionPage": 44,
+      "checked": "Graph intersection at (4,3); graph values were transcribed as editable text."
+    },
+    {
+      "questionId": "sat-2025-10-asia-a-math-m1-q11",
+      "sourceQuestionPage": 50,
+      "checked": "Line k slope 4/5; line n passes through (4,7); transcription matches options."
+    },
+    {
+      "questionId": "sat-2025-10-asia-a-math-m2-q02",
+      "sourceQuestionPage": 58,
+      "checked": "Dashed line y=4x+3 and shading above it; strict inequality."
+    },
+    {
+      "questionId": "sat-2025-10-asia-a-math-m2-q22",
+      "sourceQuestionPage": 68,
+      "checked": "Source labels n, s, t; x and y are same-side exterior angles. Wording corrected from “interior” to “exterior”."
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m1-q11",
+      "sourceQuestionPage": 47,
+      "checked": "Angle measure is 240 degrees; option fractions match source."
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m1-q13",
+      "sourceQuestionPage": 48,
+      "checked": "Equation is x^2 - 7x + 12 = 0."
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m1-q14",
+      "sourceQuestionPage": 49,
+      "checked": "Function coefficients and point (60,4.58) match source."
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m2-q04",
+      "sourceQuestionPage": 53,
+      "checked": "Graph opens upward and has roots -1 and 4."
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m2-q08",
+      "sourceQuestionPage": 54,
+      "checked": "Formula is f(x)=9((1/8)^x + 7)."
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m2-q10",
+      "sourceQuestionPage": 55,
+      "checked": "System and fractions with denominator 23 match source."
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m2-q14",
+      "sourceQuestionPage": 57,
+      "checked": "Figure labels LQ and MP; lengths MR=9, LR=10, RP=13; options match."
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m2-q15",
+      "sourceQuestionPage": 58,
+      "checked": "Scatterplot coordinates transcribed approximately as editable table data."
+    },
+    {
+      "questionId": "sat-2026-06-set1-rw-m2-q10",
+      "sourceQuestionPage": 31,
+      "checked": "Scale is 1–7; editable approximate bar ratings 3.6, 4.1, and 4.2 match supplement, substitute, and control."
+    },
+    {
+      "questionId": "sat-2025-10-asia-a-rw-m1-q21",
+      "sourceQuestionPage": 19,
+      "checked": "Source spells the sport sumō and the Swedish sport pärkspel; OCR text now preserves sumō. Watermark and footer are excluded from the question."
+    },
+    {
+      "questionId": "sat-2023-05-routing-q11",
+      "sourceQuestionPage": 12,
+      "checked": "All three industry totals match the editable source table; currency values and row labels checked."
+    },
+    {
+      "questionId": "sat-2023-05-routing-q13",
+      "sourceQuestionPage": [
+        15,
+        16
+      ],
+      "checked": "All six years and four city series were read from the source graph; editable table values match the plotted points."
+    },
+    {
+      "questionId": "sat-2023-05-routing-q14",
+      "sourceQuestionPage": [
+        17,
+        18
+      ],
+      "sourceAnswerPage": 44,
+      "checked": "All service rankings match the source table; answer page visibly keys D."
+    },
+    {
+      "questionId": "sat-2023-05-routing-q20",
+      "sourceQuestionPage": 26,
+      "checked": "All four coral species and minimum/maximum depths match the source table."
+    },
+    {
+      "questionId": "sat-2025-10-asia-a-math-m2-q03",
+      "sourceQuestionPage": 58,
+      "checked": "Source center (−5, 2) and point (−9, 5) match the editable stem; radius squared is 25."
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m1-q01",
+      "sourceQuestionPage": 44,
+      "checked": "Age/location table cells and totals match source; selected probability uses 102 of 135 members."
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m1-q10",
+      "sourceQuestionPage": 47,
+      "checked": "Editable scatterplot coordinates are approximate readings of the plotted points; the data support y = x."
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m1-q17",
+      "sourceQuestionPage": 50,
+      "checked": "Table entries (−10, n+128), (−5, n+64), and (0, n) match source."
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m2-q16",
+      "sourceQuestionPage": 59,
+      "checked": "All value-frequency pairs match source, including the recorded error 16 with frequency 1."
+    },
+    {
+      "questionId": "sat-2026-06-set1-rw-m1-q12",
+      "sourceQuestionPage": 13,
+      "checked": "All four country rows and density, area, and population values match source."
+    },
+    {
+      "questionId": "sat-2026-06-set1-rw-m2-q11",
+      "sourceQuestionPage": 32,
+      "checked": "All facility names, companies, locations, and days match source; OCR read 23 as 33, corrected after visual confirmation."
+    },
+    {
+      "questionId": "sat-2026-06-set1-rw-m2-q12",
+      "sourceQuestionPage": 33,
+      "checked": "All four country rows and 2020/2050 electricity and direct-use values match source."
+    },
+    {
+      "questionId": "sat-2023-11-routing-q10",
+      "sourceQuestionPage": 12,
+      "checked": "Source page visibly prints “Daniel Defue”; corrected the author’s misspelled name to Daniel Defoe."
+    },
+    {
+      "questionId": "sat-2023-05-routing-q08",
+      "sourceQuestionPage": 9,
+      "checked": "Source page visibly prints “Barack Obaina”; corrected the historical name to Barack Obama."
+    },
+    {
+      "questionId": "sat-2025-10-asia-a-rw-m1-q06",
+      "sourceQuestionPage": 7,
+      "checked": "Source page visually confirms the surname is Pääbo with the ä diacritic."
+    },
+    {
+      "questionId": "sat-2024-03-d-rw-m1-q12",
+      "sourceQuestionPage": 8,
+      "checked": "Table title, all four country rows, and copper values match the source; Mexico and Poland are confirmed country names."
+    },
+    {
+      "questionId": "sat-2024-03-d-rw-m1-q14",
+      "sourceQuestionPage": 10,
+      "checked": "All average-hours table entries match the source; source note typo “Calculationis” is normalized to “Calculations”."
+    },
+    {
+      "questionId": "sat-2025-10-asia-a-rw-m1-q17",
+      "sourceQuestionPage": 17,
+      "checked": "Stem and all four choices match the source; “having begun” is a printed option and remains unchanged."
+    },
+    {
+      "questionId": "sat-2025-10-asia-a-rw-m2-q13",
+      "sourceQuestionPage": 34,
+      "checked": "Researcher name “Callie W. Babbitt” and the four findings match the source page."
+    },
+    {
+      "questionId": "sat-2026-06-set1-math-m1-q02",
+      "sourceQuestionPage": 44,
+      "checked": "Triangle angles 55° and 81°, four choices, and answer 44° match; the PDF header, QR, and printed page number are outside the question."
+    },
+    {
+      "questionId": "sat-2026-06-set1-rw-m2-q06",
+      "sourceQuestionPage": 27,
+      "checked": "“Dziga Vertov” and the underlined phrase match the source page."
+    },
+    {
+      "questionId": "sat-2026-06-set1-rw-m2-q21",
+      "sourceQuestionPage": 39,
+      "checked": "“Beatles’ White Album” and all choices match; embedded promotional contact text was excluded from the published passage."
+    }
+  ],
+  "answerKeyConflicts": [
+    {
+      "paperId": "sat-2024-03-d-rw-m1",
+      "questionNumber": 16,
+      "answerPage": 2,
+      "sourceKey": "C",
+      "publishedAnswer": "B",
+      "evidence": "The question text asks for a present-tense verb after “MoMA”; “houses” is the only grammatical choice. The question page and answer sheet were visually checked.",
+      "resolution": "Published B after grammar check: the sentence requires the finite present-tense verb “houses”; the answer sheet lists C."
+    },
+    {
+      "paperId": "sat-2024-03-d-rw-m1",
+      "questionNumber": 17,
+      "answerPage": 2,
+      "sourceKey": "B",
+      "publishedAnswer": "A",
+      "evidence": "The colon in “ultimate goal: catching ...” correctly introduces the goal. The question page and answer sheet were visually checked.",
+      "resolution": "Published A after punctuation check: “goal: catching an in-person glimpse” correctly introduces the goal; the answer sheet lists B."
+    },
+    {
+      "paperId": "sat-2024-03-d-rw-m1",
+      "questionNumber": 18,
+      "answerPage": 2,
+      "sourceKey": "B",
+      "publishedAnswer": "D",
+      "evidence": "“Would be honored” is the future-in-the-past construction parallel to “would become known.” The question page and answer sheet were visually checked.",
+      "resolution": "Published D after tense check: “would be honored” parallels “would become known” in the past narrative; the answer sheet lists B."
+    },
+    {
+      "paperId": "sat-2024-03-d-rw-m1",
+      "questionNumber": 19,
+      "answerPage": 2,
+      "sourceKey": "A",
+      "publishedAnswer": "B",
+      "evidence": "“Macau; however, when ...” correctly connects the historical contrast. The question page and answer sheet were visually checked.",
+      "resolution": "Published B after punctuation check: the semicolon plus “however” separates the contrasting clauses; the answer sheet lists A."
+    },
+    {
+      "paperId": "sat-2024-03-d-rw-m1",
+      "questionNumber": 20,
+      "answerPage": 2,
+      "sourceKey": "A",
+      "publishedAnswer": "B",
+      "evidence": "“Features. For ...” correctly separates two independent sentences. The question page and answer sheet were visually checked.",
+      "resolution": "Published B after syntax check: “features. For the Juniper Mountain fault...” forms the clear grammatical completion; the answer sheet lists A."
+    }
+  ],
+  "secondPassAutomatedScan": {
+    "publishedQuestions": 255,
+    "questionPagesReadable": 255,
+    "answerPagesReadable": 255,
+    "answerKeyParse": {
+      "matches": 230,
+      "unparsedThenVisuallyConfirmed": 20,
+      "sourceKeyConflictsManuallyReviewed": 5
+    },
+    "optionMappingErrors": 0,
+    "exactDuplicatesAgainstExistingPracticeSets": 0,
+    "exactDuplicatesWithinPublishedPastPapers": 0,
+    "questionTextScans": {
+      "scope": "Question content blocks, prompts, and answer choices; relevant explanations are retained.",
+      "cjkCharacters": 0,
+      "replacementOrPrivateCharacters": 0,
+      "watermarkOrPromotionText": 0,
+      "narrativePageNumberContamination": 0,
+      "embeddedQuestionImages": 0,
+      "sourceConfirmedCorrections": 14
+    },
+    "manualReview": "All flagged numeric, graph/table, low-text-match, answer-key, and spelling candidates were checked against their cited source pages. The standalone-number scan false positives were table cells and numeric answer choices; a narrative-only rescan found no page-number contamination."
+  },
+  "sourceTextChecks": [
+    {
+      "questionId": "sat-2023-05-easier-q09",
+      "sourceQuestionPage": 37,
+      "checked": "Exact PDF text layer confirms “Naabeeho Bincihdsdzo”, “Be'ek'id Bas Ahoodzdni”, and “Dine Bizaad”; preserved as printed."
+    }
+  ]
+}

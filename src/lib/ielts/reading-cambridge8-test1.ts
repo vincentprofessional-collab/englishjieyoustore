@@ -228,7 +228,7 @@ const airTrafficPassage: ReadingPart = {
     {
       id: "c8t1-p2-true-false-not-given",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 2? Write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 2? In boxes 20-26 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [20], prompt: "The FAA was created as a result of the introduction of the jet engine.", options: trueFalseNotGiven },
         { questionNumbers: [21], prompt: "Air Traffic Control started after the Grand Canyon crash in 1956.", options: trueFalseNotGiven },

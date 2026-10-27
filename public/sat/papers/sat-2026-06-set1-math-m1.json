@@ -1,0 +1,1095 @@
+{
+  "id": "sat-2026-06-set1-math-m1",
+  "assessment": "SAT",
+  "test": "Math",
+  "domain": "SAT Math",
+  "skill": "Math · Module 1",
+  "difficulty": "Unrated",
+  "expectedCount": 16,
+  "questionIds": [
+    "sat-2026-06-set1-math-m1-q01",
+    "sat-2026-06-set1-math-m1-q02",
+    "sat-2026-06-set1-math-m1-q04",
+    "sat-2026-06-set1-math-m1-q05",
+    "sat-2026-06-set1-math-m1-q06",
+    "sat-2026-06-set1-math-m1-q08",
+    "sat-2026-06-set1-math-m1-q10",
+    "sat-2026-06-set1-math-m1-q11",
+    "sat-2026-06-set1-math-m1-q12",
+    "sat-2026-06-set1-math-m1-q13",
+    "sat-2026-06-set1-math-m1-q14",
+    "sat-2026-06-set1-math-m1-q16",
+    "sat-2026-06-set1-math-m1-q17",
+    "sat-2026-06-set1-math-m1-q18",
+    "sat-2026-06-set1-math-m1-q19",
+    "sat-2026-06-set1-math-m1-q21"
+  ],
+  "sourceRefs": [
+    {
+      "role": "question",
+      "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+      "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e"
+    },
+    {
+      "role": "answer",
+      "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+      "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69"
+    }
+  ],
+  "questions": [
+    {
+      "id": "sat-2026-06-set1-math-m1-q01",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "table",
+          "title": "Members by age and location",
+          "rows": [
+            [
+              "Age",
+              "Live north of Center St.",
+              "Live south of Center St.",
+              "Total"
+            ],
+            [
+              "Less than 45 years old",
+              "21",
+              "12",
+              "33"
+            ],
+            [
+              "At least 45 years old",
+              "14",
+              "88",
+              "102"
+            ],
+            [
+              "Total",
+              "35",
+              "100",
+              "135"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The table summarizes members of a local organization by age and whether they live north or south of Center St. If a member is selected at random, what is the probability that the selected member is at least 45 years old?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "33/135"
+        },
+        {
+          "id": "B",
+          "text": "35/135"
+        },
+        {
+          "id": "C",
+          "text": "100/135"
+        },
+        {
+          "id": "D",
+          "text": "102/135"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "有利人数是至少 45 岁的 102 人；总人数为 135 人，所以概率为 102/135。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            44
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            17
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 1",
+      "number": 1
+    },
+    {
+      "id": "sat-2026-06-set1-math-m1-q02",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In triangle XYZ, the measure of angle X is 55° and the measure of angle Y is 81°. What is the measure of angle Z?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "26°"
+        },
+        {
+          "id": "B",
+          "text": "44°"
+        },
+        {
+          "id": "C",
+          "text": "136°"
+        },
+        {
+          "id": "D",
+          "text": "226°"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "三角形内角和为 180°，所以 Z = 180° − 55° − 81° = 44°。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            44
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            17
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 1",
+      "number": 2
+    },
+    {
+      "id": "sat-2026-06-set1-math-m1-q04",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "A pet service that takes care of both cats and dogs can care for at most 31 animals. Which inequality represents this situation, where c is the number of cats and d is the number of dogs?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "c + d ≤ 31"
+        },
+        {
+          "id": "B",
+          "text": "c + d ≥ 31"
+        },
+        {
+          "id": "C",
+          "text": "c − d ≤ 31"
+        },
+        {
+          "id": "D",
+          "text": "c − d ≥ 31"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "猫和狗的总数不能超过 31，因此 c + d ≤ 31。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            45
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            17
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 1",
+      "number": 4
+    },
+    {
+      "id": "sat-2026-06-set1-math-m1-q05",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Line c is defined by y = 2x + 9. Line d is parallel to line c in the xy-plane. What is the slope of line d?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "2"
+        },
+        {
+          "id": "B",
+          "text": "7"
+        },
+        {
+          "id": "C",
+          "text": "9"
+        },
+        {
+          "id": "D",
+          "text": "11"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "平行直线斜率相同；y = 2x + 9 的斜率为 2。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            45
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            17
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 1",
+      "number": 5
+    },
+    {
+      "id": "sat-2026-06-set1-math-m1-q06",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "If 5x − 9 = 6, what is the value of 5x + 9?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "−3"
+        },
+        {
+          "id": "B",
+          "text": "3"
+        },
+        {
+          "id": "C",
+          "text": "12"
+        },
+        {
+          "id": "D",
+          "text": "24"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "由 5x − 9 = 6 得 5x = 15，因此 5x + 9 = 24。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            45
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            17
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 1",
+      "number": 6
+    },
+    {
+      "id": "sat-2026-06-set1-math-m1-q08",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The function p shown gives the number of blank sheets of paper, p(x), remaining in a printer x days after the printer had been loaded with paper. p(x) = 131 − 7x. Which statement is the best interpretation of p(3) = 110?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "There were 3 blank sheets of paper remaining in the printer 110 days after the printer had been loaded with paper."
+        },
+        {
+          "id": "B",
+          "text": "The number of blank sheets of paper remaining in the printer decreased by a total of 3 sheets after 110 days."
+        },
+        {
+          "id": "C",
+          "text": "There were 110 blank sheets of paper remaining in the printer 3 days after the printer had been loaded with paper."
+        },
+        {
+          "id": "D",
+          "text": "The number of blank sheets of paper remaining in the printer decreased by a total of 110 sheets after 3 days."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "x 表示装纸后的天数，p(x) 表示剩余纸张数，因此 p(3)=110 表示 3 天后还剩 110 张。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            46
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            18
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 1",
+      "number": 8
+    },
+    {
+      "id": "sat-2026-06-set1-math-m1-q10",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The scatterplot shows the relationship between two variables, x and y."
+        },
+        {
+          "type": "table",
+          "title": "Approximate coordinates read from the scatterplot",
+          "rows": [
+            [
+              "x",
+              "y (approximately)"
+            ],
+            [
+              "1.4",
+              "1.6"
+            ],
+            [
+              "2.3",
+              "2.6"
+            ],
+            [
+              "4.2",
+              "4.6"
+            ],
+            [
+              "5.1",
+              "2.6"
+            ],
+            [
+              "7.0",
+              "7.6"
+            ],
+            [
+              "8.3",
+              "9.6"
+            ],
+            [
+              "9.5",
+              "9.7"
+            ],
+            [
+              "10.2",
+              "10.2"
+            ],
+            [
+              "11.7",
+              "12.3"
+            ],
+            [
+              "12.5",
+              "11.8"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Which of the following equations is the most appropriate linear model for the data shown?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "y = −2x"
+        },
+        {
+          "id": "B",
+          "text": "y = −x"
+        },
+        {
+          "id": "C",
+          "text": "y = x"
+        },
+        {
+          "id": "D",
+          "text": "y = 2x"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "散点整体沿正斜率方向分布，且 x、y 数值大致相近；y = x 最符合趋势。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            47
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            18
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 1",
+      "number": 10
+    },
+    {
+      "id": "sat-2026-06-set1-math-m1-q11",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The measure of angle Z is 240°. What is the measure, in radians, of angle Z?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "2π/3"
+        },
+        {
+          "id": "B",
+          "text": "4π/3"
+        },
+        {
+          "id": "C",
+          "text": "8π/3"
+        },
+        {
+          "id": "D",
+          "text": "4π"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "将角度换算为弧度：240 × π/180 = 4π/3。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            47
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            18
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 1",
+      "number": 11
+    },
+    {
+      "id": "sat-2026-06-set1-math-m1-q12",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Triangle FGH is similar to triangle JKL, where angle F corresponds to angle J and angles G and K are right angles. If sin(F) = 144/145, what is the value of sin(J)?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "17/145"
+        },
+        {
+          "id": "B",
+          "text": "144/145"
+        },
+        {
+          "id": "C",
+          "text": "145/144"
+        },
+        {
+          "id": "D",
+          "text": "145/17"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "相似三角形中对应角相等，因此 sin(J) = sin(F) = 144/145。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            48
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            18
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 1",
+      "number": 12
+    },
+    {
+      "id": "sat-2026-06-set1-math-m1-q13",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "x² − 7x + 12 = 0. How many distinct real solutions does the given equation have?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Exactly one"
+        },
+        {
+          "id": "B",
+          "text": "Exactly two"
+        },
+        {
+          "id": "C",
+          "text": "Infinitely many"
+        },
+        {
+          "id": "D",
+          "text": "Zero"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "判别式为 (−7)² − 4(1)(12) = 1，大于 0，所以有两个不同实数解。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            48
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            18
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 1",
+      "number": 13
+    },
+    {
+      "id": "sat-2026-06-set1-math-m1-q14",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The estimated fuel cost C(x), in dollars, to drive a vehicle 100 kilometers is given by the function C(x) = 0.0019x² − 0.248x + 12.62, where x is the average speed, in kilometers per hour, of the vehicle. If the function C is graphed in the xy-plane, where y = C(x), what is the best interpretation of the point (60, 4.58) on the graph?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "The estimated fuel cost to drive the vehicle at an average speed of 4.58 kilometers per hour increases by $60 each hour."
+        },
+        {
+          "id": "B",
+          "text": "The estimated fuel cost to drive the vehicle at an average speed of 60 kilometers per hour increases by $4.58 each hour."
+        },
+        {
+          "id": "C",
+          "text": "The estimated fuel cost to drive the vehicle 100 kilometers at an average speed of 4.58 kilometers per hour is $60."
+        },
+        {
+          "id": "D",
+          "text": "The estimated fuel cost to drive the vehicle 100 kilometers at an average speed of 60 kilometers per hour is $4.58."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "点 (60, 4.58) 表示平均速度为每小时 60 千米时，行驶 100 千米的估算燃油费为 4.58 美元。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            49
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            18
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 1",
+      "number": 14
+    },
+    {
+      "id": "sat-2026-06-set1-math-m1-q16",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The length of a rectangle’s diagonal is √34, and the length of one of the rectangle’s sides is 5. What is the perimeter of the rectangle?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "34"
+        },
+        {
+          "id": "B",
+          "text": "16"
+        },
+        {
+          "id": "C",
+          "text": "15"
+        },
+        {
+          "id": "D",
+          "text": "8"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "另一条边长为 √(34 − 25) = 3，周长为 2(5 + 3) = 16。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            49
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            19
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 1",
+      "number": 16
+    },
+    {
+      "id": "sat-2026-06-set1-math-m1-q17",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "table",
+          "title": "Values in a linear relationship",
+          "rows": [
+            [
+              "x",
+              "y"
+            ],
+            [
+              "−10",
+              "n + 128"
+            ],
+            [
+              "−5",
+              "n + 64"
+            ],
+            [
+              "0",
+              "n"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The table shows three values of x and their corresponding values of y, where n is a constant, for the linear relationship between x and y. What is the slope of the line that represents this relationship in the xy-plane?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "−64/5"
+        },
+        {
+          "id": "B",
+          "text": "−5/64"
+        },
+        {
+          "id": "C",
+          "text": "(n + 64)/−5"
+        },
+        {
+          "id": "D",
+          "text": "(2n − 64)/5"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "取表中的点 (−5, n + 64) 和 (0, n)，斜率为 [n − (n + 64)]/[0 − (−5)] = −64/5。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            50
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            19
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 1",
+      "number": 17
+    },
+    {
+      "id": "sat-2026-06-set1-math-m1-q18",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "During a trip, a car traveled a total of 510 miles on city roads and highways and used a total of 17 gallons of gas. The car traveled an average of 29 miles per gallon of gas on city roads and 35 miles per gallon of gas on highways. Which system of equations represents this situation, where c is the number of miles the car traveled on city roads and h is the number of miles the car traveled on highways?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "c + h = 17; c/29 + h/35 = 510"
+        },
+        {
+          "id": "B",
+          "text": "c + h = 17; 29c + 35h = 510"
+        },
+        {
+          "id": "C",
+          "text": "c + h = 510; c/29 + h/35 = 17"
+        },
+        {
+          "id": "D",
+          "text": "c + h = 510; 29c + 35h = 17"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "总路程满足 c + h = 510；消耗汽油量为 c/29 + h/35 = 17。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            50
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            19
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 1",
+      "number": 18
+    },
+    {
+      "id": "sat-2026-06-set1-math-m1-q19",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The exponential function g is defined by g(x) = abˣ, where a and b are positive constants. If g(c) = m and the value of g(c + 1) is 82% more than the value of m, where c and m are constants, what is the value of b?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "0.18"
+        },
+        {
+          "id": "B",
+          "text": "0.82"
+        },
+        {
+          "id": "C",
+          "text": "1.82"
+        },
+        {
+          "id": "D",
+          "text": "3.64"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "g(c + 1)/g(c) = b；增加 82% 意味着这个比值为 1 + 0.82 = 1.82。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            51
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            19
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 1",
+      "number": 19
+    },
+    {
+      "id": "sat-2026-06-set1-math-m1-q21",
+      "assessment": "SAT",
+      "test": "Math",
+      "domain": "SAT Math",
+      "skill": "Math · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "A machine makes 2-inch, 7-inch, and 11-inch parts. During a certain day, the number of 2-inch parts that the machine makes is 5 times the number n of 7-inch parts, and the number of 11-inch parts is 4. During this day, the machine makes 100 parts total. Which equation represents this situation?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "2(5n) + 7n + 11(4) = 100"
+        },
+        {
+          "id": "B",
+          "text": "2n + 7n + 11n = 100"
+        },
+        {
+          "id": "C",
+          "text": "5n + 4 = 100"
+        },
+        {
+          "id": "D",
+          "text": "6n + 4 = 100"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "题目统计零件件数而非长度：2-inch 件有 5n 个、7-inch 件有 n 个、11-inch 件有 4 个，所以 5n + n + 4 = 100。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            51
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            20
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Math · Module 1",
+      "number": 21
+    }
+  ],
+  "title": "2026年6月第1套 · 数学 M1",
+  "year": 2026,
+  "month": 6,
+  "region": "第1套（地区未标注）"
+}

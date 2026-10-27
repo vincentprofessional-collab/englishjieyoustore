@@ -1,6 +1,6 @@
 export type BbcRecognizedWord = { text: string; timestamp: [number, number | null] };
 export type BbcSentenceTiming = { sentenceNo: number; startMs: number; endMs: number };
-export type BbcAudioAlignment = { timings: BbcSentenceTiming[]; reviewSentenceNos: number[] };
+export type BbcAudioAlignment = { timings: BbcSentenceTiming[]; reviewSentenceNos: number[]; autoAdjustedSentenceNos: number[] };
 const words = (text: string) => (text.toLowerCase().match(/[a-z0-9]+(?:['’][a-z]+)*/g) ?? []).map((word) => word.replace(/[’']/g, ""));
 
 export function findBbcAudioPauses(audio: Float32Array, sampleRate: number): [number, number][] {
@@ -62,6 +62,7 @@ export function alignBbcAudioSentences(sentences: { sentenceNo: number; english:
     throw new Error(`本次自动识别的匹配度不足（正文 ${source.length} 词，识别 ${recognized.length} 词，正文覆盖 ${coverage}%），尚未生成逐句音频。请保留原文件并核对本次输入正文与识别结果。`);
   }
   let offset = 0;
+  let previousSpeechEnd = 0;
   const aligned = sentences.map((sentence) => {
     const count = words(sentence.english).length;
     const matchedOffsets = Array.from({ length: count }, (_, index) => index).filter((index) => anchors.has(offset + index));
@@ -71,33 +72,81 @@ export function alignBbcAudioSentences(sentences: { sentenceNo: number; english:
     const missingAtStart = matchedOffsets[0] ?? count;
     const missingAtEnd = matches.length ? count - matchedOffsets.at(-1)! - 1 : count;
     const leadingLaughter = missingAtStart > 0 && sentenceWords.slice(0, missingAtStart).every((word) => /^(?:ha)+$/.test(word));
-    if (!matches.length || missingAtEnd || (missingAtStart && !leadingLaughter)) {
-      throw new Error(`第 ${sentence.sentenceNo} 句的句首或句尾未与原声完整对齐，请核对原文与 MP3 后重试。`);
+    const edgeTolerance = Math.max(1, Math.ceil(count * 0.16));
+    if (!matches.length || matches.length / count < 0.65 || missingAtEnd > edgeTolerance || (missingAtStart > edgeTolerance && !leadingLaughter)) {
+      throw new Error(`第 ${sentence.sentenceNo} 句未与原声完整对齐，差异较大，无法安全自动调整；请核对这一句的原文与 MP3。`);
     }
-    const review = matches.length / count < 0.88;
+    const review = matches.length / count < 0.88 || missingAtStart > 0 || missingAtEnd > 0;
+    const sentencePreviousEnd = previousSpeechEnd;
+    let start = matches[0].start;
+    if (missingAtStart && !leadingLaughter) {
+      const nearbyPause = (pauses ?? []).find(([pauseStart, pauseEnd]) =>
+        pauseEnd <= start && start - pauseEnd <= 1.5 && pauseStart >= sentencePreviousEnd,
+      );
+      if (!nearbyPause && pauses === undefined) {
+        throw new Error(`第 ${sentence.sentenceNo} 句未与原声完整对齐，且没有停顿可确认缺失的句首；请核对原文与 MP3。`);
+      }
+      start = nearbyPause?.[1] ?? Math.max(sentencePreviousEnd, start - Math.min(0.8, missingAtStart * 0.35));
+    }
+    previousSpeechEnd = matches.at(-1)!.end;
     return {
       matches,
+      missingAtStart,
+      missingAtEnd,
+      leadingLaughter,
       review,
-      timing: { sentenceNo: sentence.sentenceNo, startMs: Math.round(matches[0].start * 1000), endMs: Math.round(matches.at(-1)!.end * 1000) },
+      timing: { sentenceNo: sentence.sentenceNo, startMs: Math.round(start * 1000), endMs: Math.round(matches.at(-1)!.end * 1000) },
     };
   });
   const timings = aligned.map((item) => item.timing);
+  const reviewSentenceNos = new Set(aligned.flatMap((item, index) => item.review ? [sentences[index].sentenceNo] : []));
+  const autoAdjustedSentenceNos = new Set(aligned.flatMap((item, index) => item.missingAtStart || item.missingAtEnd ? [sentences[index].sentenceNo] : []));
   for (let index = 1; index < timings.length; index++) {
     const previousEnd = aligned[index - 1].matches.at(-1)!.end;
     const nextStart = aligned[index].matches[0].start;
     if (previousEnd > nextStart) throw new Error(`第 ${sentences[index].sentenceNo} 句与上一句原声重叠，请检查分句。`);
     let boundary = (previousEnd + nextStart) / 2;
     if (pauses) {
-      const pause = pauses.find(([start, end]) => start - 0.015 <= boundary && boundary <= end + 0.015);
-      if (!pause) throw new Error(`第 ${sentences[index].sentenceNo} 句前没有可确认的停顿，请核对原文与音频。`);
-      boundary = Math.max(pause[0], Math.min(pause[1], boundary));
+      const hasMissingEdge = (aligned[index].missingAtStart > 0 && !aligned[index].leadingLaughter) || aligned[index - 1].missingAtEnd > 0;
+      if (!hasMissingEdge) {
+        const pause = pauses.find(([start, end]) => start - 0.015 <= boundary && boundary <= end + 0.015);
+        if (!pause) throw new Error(`第 ${sentences[index].sentenceNo} 句前没有可确认的停顿，请核对原文与音频。`);
+        boundary = Math.max(pause[0], Math.min(pause[1], boundary));
+      } else {
+        const gapPauses = pauses.filter(([start, end]) => start >= previousEnd - 0.015 && end <= nextStart + 0.015);
+        const pause = aligned[index].missingAtStart && !aligned[index - 1].missingAtEnd
+          ? gapPauses[0] ?? null
+          : aligned[index - 1].missingAtEnd && !aligned[index].missingAtStart
+            ? gapPauses.at(-1) ?? null
+            : gapPauses.reduce<[number, number] | null>((best, candidate) => {
+              if (!best || Math.abs((candidate[0] + candidate[1]) / 2 - boundary) < Math.abs((best[0] + best[1]) / 2 - boundary)) return candidate;
+              return best;
+            }, null);
+        if (pause) {
+          if (aligned[index].missingAtStart && !aligned[index - 1].missingAtEnd) boundary = pause[1];
+          else if (aligned[index - 1].missingAtEnd && !aligned[index].missingAtStart) boundary = pause[0];
+          else boundary = Math.max(pause[0], Math.min(pause[1], boundary));
+        } else {
+          if (pauses === undefined) throw new Error(`第 ${sentences[index].sentenceNo} 句未与原声完整对齐，且没有停顿可确认缺失词的切点；请核对原文与音频。`);
+          reviewSentenceNos.add(sentences[index - 1].sentenceNo);
+          reviewSentenceNos.add(sentences[index].sentenceNo);
+          const gap = nextStart - previousEnd;
+          if (aligned[index].missingAtStart && !aligned[index - 1].missingAtEnd) boundary = previousEnd + gap * 0.25;
+          else if (aligned[index - 1].missingAtEnd && !aligned[index].missingAtStart) boundary = previousEnd + gap * 0.75;
+        }
+      }
     }
     timings[index - 1].endMs = Math.round(boundary * 1000);
     timings[index].startMs = Math.round(boundary * 1000);
   }
   const speechEnd = aligned.at(-1)!.matches.at(-1)!.end;
+  if (aligned.at(-1)!.missingAtEnd > 0 && pauses === undefined) {
+    throw new Error(`第 ${sentences.at(-1)!.sentenceNo} 句未与原声完整对齐，且没有停顿可确认缺失的句尾；请核对原文与 MP3。`);
+  }
   const finalPause = pauses?.find(([start, end]) => start >= speechEnd && start - speechEnd < 1 && end - start > 0.2);
-  timings.at(-1)!.endMs = Math.min(Math.round(duration * 1000), Math.round((finalPause ? (finalPause[0] + finalPause[1]) / 2 : speechEnd + 0.3) * 1000));
+  const finalEnd = finalPause ? (finalPause[0] + finalPause[1]) / 2
+    : speechEnd + (aligned.at(-1)!.missingAtEnd ? Math.min(1.2, aligned.at(-1)!.missingAtEnd * 0.35 + 0.3) : 0.3);
+  timings.at(-1)!.endMs = Math.min(Math.round(duration * 1000), Math.round(finalEnd * 1000));
   if (timings.some((timing) => timing.endMs <= timing.startMs)) throw new Error("句子时间轴无效，请重新分析音频。");
-  return { timings, reviewSentenceNos: aligned.flatMap((item, index) => item.review ? [sentences[index].sentenceNo] : []) };
+  return { timings, reviewSentenceNos: [...reviewSentenceNos], autoAdjustedSentenceNos: [...autoAdjustedSentenceNos] };
 }

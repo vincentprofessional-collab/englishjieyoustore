@@ -15,7 +15,7 @@ test("other audio assets continue to use the Supabase media route", () => {
 });
 
 test("reviewed exam media ships with its exact release instead of rewriting to a missing object", () => {
-  for (const path of ["/reading/source-pages/ci1-p026.webp", "/reading/explanations/cambridge-1-test-1-part1-exp-p001.webp", "/cet4/evidence/167c35f2e91e9431a198c9d3.webp", "/cet4/audio/cet4-paper-2020091.mp3"]) assert.equal(isPublishedExamStaticAsset(path), true, path);
+  for (const path of ["/reading/source-pages/ci4-p054.webp", "/reading/explanations/cambridge-17-test-2-part3-exp17-p118.webp", "/cet4/evidence/167c35f2e91e9431a198c9d3.webp", "/cet4/audio/cet4-paper-2020091.mp3"]) assert.equal(isPublishedExamStaticAsset(path), true, path);
   for (const path of ["/audio/bbc/260817.mp3", "/subtitles/bbc/260817.vtt", "/audio/new-concept/lesson1.mp3", "/cet4/original.pdf", "/reading/source-pages/private.png", "/cet4/audio/../private.mp3", "/cet4/audio/%2fprivate.mp3"]) assert.equal(isPublishedExamStaticAsset(path), false, path);
 });
 

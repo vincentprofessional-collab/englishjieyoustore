@@ -65,6 +65,7 @@ export default async function SpeakingModelAnswerPage({
     answerHeading: "7 分范文",
     answerTranslation: modelAnswer.answerTranslation,
     approach: modelAnswer.approach,
+    audioAlternateUrl: modelAnswer.audioAlternateUrl,
     audioUrl: modelAnswer.audioUrl ?? "",
     band: "band-7",
     followUp: question.followUp,

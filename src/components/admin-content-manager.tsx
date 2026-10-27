@@ -12,7 +12,8 @@ import { AdminCommentInbox, AdminCommentNotice, useAdminCommentInbox } from "@/c
 import { GuidePostAdmin } from "@/components/guide-post-admin";
 import { GuideCommentsAdmin } from "@/components/guide-comments-admin";
 import { AdminCourseDirectory } from "@/components/admin-course-directory";
-import { AdminExamPrepEditor } from "@/components/admin-exam-prep-editor";
+import { AdminExamContentEditor } from "@/components/admin-exam-content-editor";
+import { AdminSiteMessageManager } from "@/components/admin-site-message-manager";
 import { supabase } from "@/lib/supabase/client";
 import { getAuthErrorFeedback, reportAuthFailure } from "@/lib/supabase/auth-request";
 
@@ -23,10 +24,11 @@ type AdminView =
   | "home"
   | "chrome"
   | "courses"
-  | "exam-prep"
+  | "exam-content"
   | "guide"
   | "vocabulary-images"
   | "bbc-upload"
+  | "site-messages"
   | "comments"
 
 export function AdminContentManager() {
@@ -251,11 +253,11 @@ export function AdminContentManager() {
           英语课程
         </button>
         <button
-          className={activeView === "exam-prep" ? "active" : ""}
+          className={activeView === "exam-content" ? "active" : ""}
           type="button"
-          onClick={() => setActiveView("exam-prep")}
+          onClick={() => setActiveView("exam-content")}
         >
-          GMAT 题库
+          考试题目管理
         </button>
         <button
           className={activeView === "vocabulary-images" ? "active" : ""}
@@ -270,6 +272,13 @@ export function AdminContentManager() {
           onClick={() => setActiveView("bbc-upload")}
         >
           BBC 文章上传
+        </button>
+        <button
+          className={activeView === "site-messages" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("site-messages")}
+        >
+          站内信
         </button>
       </div>
 
@@ -287,7 +296,7 @@ export function AdminContentManager() {
 
       {activeView === "courses" && adminUserId ? <AdminCourseDirectory /> : null}
 
-      {activeView === "exam-prep" && adminUserId ? <AdminExamPrepEditor adminUserId={adminUserId} /> : null}
+      {activeView === "exam-content" && adminUserId ? <AdminExamContentEditor adminUserId={adminUserId} /> : null}
 
       {activeView === "guide" && adminUserId ? (
         <>
@@ -299,6 +308,7 @@ export function AdminContentManager() {
       {activeView === "vocabulary-images" && adminUserId ? <VocabularyImageAdmin /> : null}
 
       {activeView === "bbc-upload" && adminUserId ? <AdminBbcArticleUpload /> : null}
+      {activeView === "site-messages" && adminUserId ? <AdminSiteMessageManager /> : null}
       {activeView === "comments" && adminUserId ? <AdminCommentInbox inbox={commentInbox} /> : null}
 
     </section>

@@ -82,7 +82,7 @@ const cuttySark: ReadingPart = {
       id: "cambridge-13-test-4-part1-questions-1-8",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the information given in Reading Passage 1? Write TRUE if the statement agrees with the information, FALSE if it contradicts the information, or NOT GIVEN if there is no information on this.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 1-8 on your answer sheet, write TRUE if the statement agrees with the information, FALSE if it contradicts the information, or NOT GIVEN if there is no information on this.",
       questions: [
         { questionNumbers: [1], prompt: "Clippers were originally intended to be used as passenger ships.", options: judgmentOptions },
         { questionNumbers: [2], prompt: "Cutty Sark was given the name of a character in a poem.", options: judgmentOptions },
@@ -300,7 +300,7 @@ const happinessIndustry: ReadingPart = {
       id: "cambridge-13-test-4-part3-questions-35-40",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 3? Write YES if the statement agrees with the claims of the writer, NO if it contradicts the claims of the writer, or NOT GIVEN if it is impossible to say what the writer thinks about this.",
+      instruction: "Do the following statements agree with the claims of the writer in Reading Passage 3? In boxes 35-40 on your answer sheet, write YES if the statement agrees with the claims of the writer, NO if it contradicts the claims of the writer, or NOT GIVEN if it is impossible to say what the writer thinks about this.",
       questions: [
         { questionNumbers: [35], prompt: "One strength of The Happiness Industry is its discussion of the relationship between psychology and economics.", options: yesNoOptions },
         { questionNumbers: [36], prompt: "It is more difficult to measure some emotions than others.", options: yesNoOptions },

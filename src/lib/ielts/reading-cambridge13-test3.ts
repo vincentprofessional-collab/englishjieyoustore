@@ -128,7 +128,7 @@ const coconutPalm: ReadingPart = {
       id: "cambridge-13-test-3-part1-questions-9-13",
       type: "choice",
       sharedOptions: true,
-      instruction: "Do the following statements agree with the information given in Reading Passage 1? Write TRUE if the statement agrees with the information, FALSE if it contradicts the information, or NOT GIVEN if there is no information on this.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 1? In boxes 9-13 on your answer sheet, write TRUE if the statement agrees with the information, FALSE if it contradicts the information, or NOT GIVEN if there is no information on this.",
       questions: [
         { questionNumbers: [9], prompt: "Coconut seeds need shade in order to germinate.", options: judgmentOptions },
         { questionNumbers: [10], prompt: "Coconuts were probably transported to Asia from America in the 16th century.", options: judgmentOptions },

@@ -102,7 +102,7 @@ const cambridge5Test4PartTwo: ReadingPart = {
     {
       id: "c5t4-p2-true-false",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 2? Write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 2? In boxes 24-26 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [24], prompt: "Little doubt was expressed about the reason for the Bishops Walk accident.", options: trueFalseNotGiven },
         { questionNumbers: [25], prompt: "Toughened glass has the same appearance as ordinary glass.", options: trueFalseNotGiven },
@@ -136,7 +136,7 @@ const cambridge5Test4PartThree: ReadingPart = {
     {
       id: "c5t4-p3-true-false",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 3? Write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 3? In boxes 27-33 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [27], prompt: "There is plenty of scientific evidence to support photoperiodism.", options: trueFalseNotGiven },
         { questionNumbers: [28], prompt: "Some types of bird can be encouraged to breed out of season.", options: trueFalseNotGiven },
@@ -215,7 +215,7 @@ const cambridge5Test4PartOne: ReadingPart = {
     {
       id: "c5t4-p1-yes-no",
       type: "choice",
-      instruction: "Do the following statements reflect the opinion of the writer of Reading Passage 1? Write YES, NO or NOT GIVEN.",
+      instruction: "Do the following statements reflect the opinion of the writer of Reading Passage 1? In boxes 4-9 on your answer sheet, write YES if the statement reflects the opinion of the writer NO if the statement contradicts the opinion of the writer NOT GIVEN if it is impossible to say what the writer thinks about this",
       questions: [
         { questionNumbers: [4], prompt: "The low financial cost of setting up wilderness tourism makes it attractive to many countries.", options: yesNoNotGiven },
         { questionNumbers: [5], prompt: "Deserts, mountains and Arctic regions are examples of environments that are both ecologically and culturally fragile.", options: yesNoNotGiven },

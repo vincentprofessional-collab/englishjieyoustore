@@ -1,0 +1,1686 @@
+{
+  "id": "sat-2026-06-set1-rw-m1",
+  "assessment": "SAT",
+  "test": "Reading and Writing",
+  "domain": "SAT 阅读与写作",
+  "skill": "Reading and Writing · Module 1",
+  "difficulty": "Unrated",
+  "expectedCount": 26,
+  "questionIds": [
+    "sat-2026-06-set1-rw-m1-q01",
+    "sat-2026-06-set1-rw-m1-q02",
+    "sat-2026-06-set1-rw-m1-q03",
+    "sat-2026-06-set1-rw-m1-q04",
+    "sat-2026-06-set1-rw-m1-q05",
+    "sat-2026-06-set1-rw-m1-q06",
+    "sat-2026-06-set1-rw-m1-q07",
+    "sat-2026-06-set1-rw-m1-q08",
+    "sat-2026-06-set1-rw-m1-q09",
+    "sat-2026-06-set1-rw-m1-q10",
+    "sat-2026-06-set1-rw-m1-q11",
+    "sat-2026-06-set1-rw-m1-q12",
+    "sat-2026-06-set1-rw-m1-q13",
+    "sat-2026-06-set1-rw-m1-q14",
+    "sat-2026-06-set1-rw-m1-q15",
+    "sat-2026-06-set1-rw-m1-q16",
+    "sat-2026-06-set1-rw-m1-q17",
+    "sat-2026-06-set1-rw-m1-q18",
+    "sat-2026-06-set1-rw-m1-q19",
+    "sat-2026-06-set1-rw-m1-q20",
+    "sat-2026-06-set1-rw-m1-q22",
+    "sat-2026-06-set1-rw-m1-q23",
+    "sat-2026-06-set1-rw-m1-q24",
+    "sat-2026-06-set1-rw-m1-q25",
+    "sat-2026-06-set1-rw-m1-q26",
+    "sat-2026-06-set1-rw-m1-q27"
+  ],
+  "sourceRefs": [
+    {
+      "role": "question",
+      "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+      "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e"
+    },
+    {
+      "role": "answer",
+      "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+      "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69"
+    }
+  ],
+  "questions": [
+    {
+      "id": "sat-2026-06-set1-rw-m1-q01",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "In passenger vehicle maintenance guides, brake pad replacement appears to be ‘_____,’ but as professional technicians will attest, apparent simplicity can mask considerable complexity. Properly done, the procedure requires a detailed inspection of rotors, calipers, and brake lines, as well as detailed checks for fluid leaks and full mechanical operation. Which choice completes the text with the most logical and precise word or phrase?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "complimentary"
+        },
+        {
+          "id": "B",
+          "text": "straightforward"
+        },
+        {
+          "id": "C",
+          "text": "infrequent"
+        },
+        {
+          "id": "D",
+          "text": "hazardous"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "“Apparent simplicity”提示题干所说的是表面上看似简单，因此选 straightforward。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            5
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            5
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 1
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q02",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The following text is adapted from the 1941 nonfiction book Let Us Now Praise Famous Men, with text by James Agee and photographs by Walker Evans. Agee recounts driving a car through an area of rural Alabama that he is unfamiliar with.\n\nOn which road the woods might give way to any extension of farm country there was no deducing: for we were somewhere toward the middle of one of the wider gaps on the road map, and had seen nothing but woods, and infrequent woods farms, for a good while now.\n\nIn the text, what does the word “infrequent” most likely indicate?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "That long stretches of time presumably intervened between the founding of different farms in the area"
+        },
+        {
+          "id": "B",
+          "text": "That the farms give the appearance of neglect, with work having been done on them only intermittently"
+        },
+        {
+          "id": "C",
+          "text": "That the farms that Agee passes by in this area aren’t numerous or located close to one another"
+        },
+        {
+          "id": "D",
+          "text": "That Agee is frustrated with the progress he is making through the large, wooded area"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "作者一路只看到树林和少量农庄；infrequent 指农庄数量不多、彼此相距较远。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            6
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            5
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 2
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q03",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Despite the appearance of many more sophisticated tools in recent years, the ordinary pipe wrench remains _____ plumbers. Its combination of simplicity, durability, and easy adjustability has been impossible for toolmakers to match. Which choice completes the text with the most logical and precise word or phrase?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "indispensable to"
+        },
+        {
+          "id": "B",
+          "text": "excessive for"
+        },
+        {
+          "id": "C",
+          "text": "controversial among"
+        },
+        {
+          "id": "D",
+          "text": "dependent on"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "后文说明管钳的简单、耐用和易调节难以被取代，支持它对水管工不可或缺。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            6
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            5
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 3
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q04",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Astronomers analyzing the Sun have discovered an important _____ between magnetically active and quiet regions. In active regions, bursts of ultraviolet light typically precede significant decreases in magnetic energy, whereas in quiet regions, there is a continuous correlation between ultraviolet light intensity and magnetic energy without significant energy drops. Which choice completes the text with the most logical and precise word or phrase?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "disparity"
+        },
+        {
+          "id": "B",
+          "text": "trade-off"
+        },
+        {
+          "id": "C",
+          "text": "interaction"
+        },
+        {
+          "id": "D",
+          "text": "analogy"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "活跃区与宁静区呈现不同的关系模式，disparity 准确表达这种明显差异。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            7
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            5
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 4
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q05",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "From Earth, some stars in the night sky appear to form shapes with other stars. These shapes are called constellations. They are often named after the shapes people think the stars form. Some people have thought that one set of stars looks like a hunter. This constellation is named Orion, after a mythical Greek hunter. People have thought that another set of stars looks like a bear. This constellation is named Ursa Major, which means “larger bear” in Latin. Which choice best describes the overall structure of the text?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "It identifies some scientific instruments and then explains how they are used."
+        },
+        {
+          "id": "B",
+          "text": "It describes how stars are born and then explains how they eventually die."
+        },
+        {
+          "id": "C",
+          "text": "It explains what constellations are and then gives examples of how some were named."
+        },
+        {
+          "id": "D",
+          "text": "It lists the names of some stars and then states how far away they are from Earth."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "文本先解释星座是什么，再举猎户座和大熊座说明星座名称的来历。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            7
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            5
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 5
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q06",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The moon jar first gained prominence in Korea in the late seventeenth century. Its shape is distinctive: it is a simple orb created by joining two wheel-spun bowl shapes together. Irregularity is an important feature of a moon jar, so it is traditionally finished with a smooth, milky white glaze that may include bits of debris or dashes of color. Modern ceramists continue to create their own versions of these iconic pieces. Los Angeles artist Raina Lee, for example, uses custom glazes to create thick, cratered surfaces on her moon jars. Which choice best states the main purpose of the text?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "To provide an overview of a type of traditional pottery"
+        },
+        {
+          "id": "B",
+          "text": "To present a history of Korean pottery since the seventeenth century"
+        },
+        {
+          "id": "C",
+          "text": "To discuss a collection of works by a contemporary artist"
+        },
+        {
+          "id": "D",
+          "text": "To explain the philosophy that inspired an ancient artistic practice"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "文章概述月亮罐的形状、传统釉面特点及当代创作，是对这种陶器的介绍。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            8
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            6
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 6
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q07",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The following text is from Richard B. Sheridan’s 1777 satirical play The School for Scandal. Maria, Lady Sneerwell, and Joseph Surface are discussing their mutual acquaintance Sir Benjamin Backbite.\n\nMARIA: [Sir Benjamin] has done nothing—but his conversation is a perpetual libel on all his acquaintance.\nSURFACE: Aye and the worst of it is there is no advantage in not knowing him, for he’ll abuse a stranger just as soon as his best friend—and [his uncle] is as bad.\nSNEERWELL: Nay but we should make allowance. Sir Benjamin is a wit and a poet.\nMARIA: For my part—I own madam—wit loses its respect with me, when I see it in company with malice. What do you think, Mr. Surface?\nSURFACE: Certainly, madam, to smile at the jest which plants a thorn on another’s breast is to become a principal in the mischief.\n\nWhich choice best describes the function of the underlined sentence in the text as a whole?",
+          "runs": [
+            {
+              "text": "The following text is from Richard B. Sheridan’s 1777 satirical play The School for Scandal. Maria, Lady Sneerwell, and Joseph Surface are discussing their mutual acquaintance Sir Benjamin Backbite.\n\nMARIA: [Sir Benjamin] has done nothing—but his conversation is a perpetual libel on all his acquaintance.\nSURFACE: Aye and the worst of it is there is no advantage in not knowing him, for he’ll abuse a stranger just as soon as his best friend—and [his uncle] is as bad.\nSNEERWELL: Nay but we should make allowance. Sir Benjamin is a wit and a poet.\nMARIA: For my part—I own madam—wit loses its respect with me, when I see it in company with malice. What do you think, Mr. Surface?\nSURFACE: Certainly, madam, "
+            },
+            {
+              "text": "to smile at the jest which plants a thorn on another’s breast is to become a principal in the mischief.",
+              "marks": [
+                "underline"
+              ]
+            },
+            {
+              "text": "\n\nWhich choice best describes the function of the underlined sentence in the text as a whole?"
+            }
+          ]
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "It illustrates and expands on one character’s definition of a term that was discussed earlier in the text."
+        },
+        {
+          "id": "B",
+          "text": "It contrasts the point of view of one character with that of another through the use of figurative language."
+        },
+        {
+          "id": "C",
+          "text": "It presents a position that seems to support the stance of one character and undermine that of another."
+        },
+        {
+          "id": "D",
+          "text": "It appears to offer an explanation for the behavior of the character who is the topic of conversation in the text."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Surface 说赞同恶意玩笑就等于参与伤害，这与 Maria 的批评一致，也削弱了 Sneerwell 为 Sir Benjamin 辩护的立场。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            9
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            6
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 7
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q08",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Division of labor is a system of dividing the work of making a product among different people who specialize in specific tasks. Instead of each person making an entire product, workers focus on one step in the process. In a pencil factory, for instance, some workers might cut the wood, others insert the graphite, and still others attach the erasers. Workers become skilled at their specific tasks and save time because they’re not switching between different activities. This system has been important for increasing the amount of goods that can be produced in modern economies. What is the main topic of the text?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "How factories train new workers for their jobs"
+        },
+        {
+          "id": "B",
+          "text": "The future of the pencil industry"
+        },
+        {
+          "id": "C",
+          "text": "How division of labor increases efficiency"
+        },
+        {
+          "id": "D",
+          "text": "The invention of the pencil eraser"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "例子和结尾都说明分工让工人专注单一任务、节省时间并提高产量。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            10
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            6
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 8
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q09",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Plants that are pollinated by hummingbirds commonly develop brightly colored flowers that attract these highly visual pollinators, increasing the likelihood of successful pollination. Hammer orchids, however, use a different strategy. These orchids facilitate pollination by deceiving their sole pollinator: thynnid wasps. The flower’s structure mimics the appearance of thynnid wasps. When a wasp attempts to interact with what appears to be another wasp, it triggers a hinged part of the flower that flips the insect upside down, positioning it for optimal pollen transfer. Which choice best states the main idea of the text?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Attracting pollinators through deception is an effective strategy used by many types of flowering plants."
+        },
+        {
+          "id": "B",
+          "text": "Hammer orchids have developed a much better strategy for attracting pollinators than have other flowering plants."
+        },
+        {
+          "id": "C",
+          "text": "Hammer orchids have developed the ability to mimic the characteristics of thynnid wasps."
+        },
+        {
+          "id": "D",
+          "text": "Unlike species pollinated by hummingbirds, hammer orchids use deception to improve their chances of being pollinated."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "文本对比蜂鸟授粉植物与锤兰：锤兰通过欺骗其唯一授粉者来帮助授粉。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            11
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            6
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 9
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q10",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The following text is adapted from Kenneth Grahame’s 1908 novel The Wind in the Willows. The Mole has been found by a friend after getting lost in the woods. It is beginning to snow.\n\nThe Mole saw the wood that had been so dreadful to him in quite a changed aspect. Holes, hollows, pools, pitfalls, and other menaces to the wayfarer were vanishing fast, and a gleaming carpet was springing up everywhere, that looked too delicate to be trodden upon by rough feet. Which choice best states the main idea of the text?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "The Mole feels sad that his adventure in the woods is over."
+        },
+        {
+          "id": "B",
+          "text": "After being found by his friend, the Mole is embarrassed about getting lost."
+        },
+        {
+          "id": "C",
+          "text": "As the landscape gets covered in snow, it no longer seems threatening to the Mole."
+        },
+        {
+          "id": "D",
+          "text": "The Mole prefers warm and dry weather to cold and snowy weather."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "雪覆盖了原先让鼹鼠害怕的坑洼和危险，树林在他眼中变得不再可怕。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            12
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            7
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 10
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q11",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Poems of Experience is a 1910 collection of poetry by Ella Wheeler Wilcox. In one of her poems, the speaker encourages readers to persevere through difficulty, saying,\n\nWhich quotation from Poems of Experience most effectively illustrates the claim?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "“Is the heart heavy with hope long deferred,/ And with prayers that seem vain?” (from “Keep Going”)"
+        },
+        {
+          "id": "B",
+          "text": "“It is up to you, to be, and do, / What you look for in others. See?” (from “See?”)"
+        },
+        {
+          "id": "C",
+          "text": "“Over and over the task was set,/ Over and over I slighted the work.” (from “The Purpose”)"
+        },
+        {
+          "id": "D",
+          "text": "“Then gird up your courage, and say ‘I am strong,’/ And keep going.” (from “Keep Going”)"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "D 直接劝读者鼓起勇气并继续前进，最能体现面对困难时坚持下去。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            12
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            7
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 11
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q12",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Population and Population Density of African Countries in 2015"
+        },
+        {
+          "type": "table",
+          "title": "Population and population density of selected African countries (2015)",
+          "rows": [
+            [
+              "Country",
+              "Density (inhabitants/km²)",
+              "Area (km²)",
+              "Estimated population"
+            ],
+            [
+              "Equatorial Guinea",
+              "30.1",
+              "28,051",
+              "845,000"
+            ],
+            [
+              "Comoros",
+              "363.1",
+              "2,170",
+              "788,000"
+            ],
+            [
+              "Mali",
+              "14.2",
+              "1,240,000",
+              "17,600,000"
+            ],
+            [
+              "Burkina Faso",
+              "66.0",
+              "274,200",
+              "18,106,000"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "As the second-most populous continent in the world, Africa was home to an estimated 1.186 billion people in 2015. In a paper for a social studies class, a student nonetheless notes that countries with very large populations may be less densely populated than are countries with much smaller populations, as can be seen by comparing _____. Which choice most effectively uses data from the table to complete the example?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "the populations of both Comoros and Burkina Faso in 2015 with their populations in 2010."
+        },
+        {
+          "id": "B",
+          "text": "Mali, which has a high population of 17,600,000 inhabitants and a relatively low density of 14.2 inhabitants per square kilometer, with Comoros, which has a much lower population and a higher density."
+        },
+        {
+          "id": "C",
+          "text": "Equatorial Guinea, which has a low density, with Burkina Faso, which has a similar density despite both countries having different geographic sizes."
+        },
+        {
+          "id": "D",
+          "text": "the geographic size of Mali (1,240,000 square kilometers) with its relatively high population of 17,600,000 inhabitants."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Mali 人口较多但人口密度低；科摩罗人口较少却人口密度高，正好支持题干观点。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            13
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            7
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 12
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q13",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The Exeter Book (ca. 960–990 CE) is the sole manuscript source for the entire corpus of Old English riddles. The precise number of riddles is a matter of debate. Identification of consecutive riddles’ boundaries based on content is difficult, given their purposely enigmatic nature, the challenges modern readers face in interpreting the archaic language of Old English, and damage to the manuscript. Moreover, the manuscript lacks any paratextual apparatus—titles, commentary, lists of solutions—to delimit riddles, and the appearance of a distinctive mark to signal the ends of some riddles may be an unreliable clue. For instance, some scholars claim that the use of this mark at the end of the single manuscript line containing the text conventionally known as Riddle 68 may be a scribal error. Which finding, if true, would most directly support the scholars’ claim about Riddle 68?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Many of the Exeter Book riddles employ the rhetorical device of prosopopoeia, a form of personification in which a nonhuman entity, usually the solution to a riddle, is represented as speaking, but neither Riddle 68 nor Riddle 69 uses this device."
+        },
+        {
+          "id": "B",
+          "text": "Although Riddle 68 opens with a phrase in Old English meaning “I saw” that likewise appears at the beginning of a large number of the Exeter Book riddles, neither it nor Riddle 69 concludes with any phrases that directly invite the audience to solve the riddle, which nearly half of the Exeter Book riddles do."
+        },
+        {
+          "id": "C",
+          "text": "Although Riddle 69 appears to be solvable when read on its own or in conjunction with Riddle 68, with “iceberg” or “icicle” having been presented as likely solutions, Riddle 68, whose imagery and sonic patterns are consistent with those of Riddle 69, has been deemed unsolvable given its overly generic clues, unless read in conjunction with Riddle 69."
+        },
+        {
+          "id": "D",
+          "text": "Circumstantial evidence, including the fact that most of Riddles 63–72, which appear consecutively in the manuscript, repeat solutions from riddles scattered throughout earlier pages of the manuscript, suggests that Riddles 68 and 69 may have originated from a single source whose author was influenced by those earlier riddles."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "若第 68 首单独无法解答、与第 69 首连读才有意义，便支持二者原本可能是一首，末尾标记或许是抄写错误。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            14
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            7
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 13
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q14",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Shallow cumulus clouds are too small to be represented accurately in the standard global weather and climate models that weather forecasters use to make predictions. This affects the accuracy of weather forecasts. In 2023, scientists developed a model that predicts how clouds of different sizes interact as they form and change throughout the day. The scientists tested their model using data from a single day in the state of Oklahoma, and it successfully predicted how clouds merged together or split apart over time. Although the results were promising, they are limited in what they can tell us, since _____. Which choice most logically completes the text?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "predicting cloud mergers is more important than predicting cloud splits."
+        },
+        {
+          "id": "B",
+          "text": "a single day’s worth of data from one location may not be representative."
+        },
+        {
+          "id": "C",
+          "text": "small clouds tend to have little effect on the accuracy of weather forecasts."
+        },
+        {
+          "id": "D",
+          "text": "existing forecasting systems already account for shallow cumulus clouds."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "模型只用俄克拉荷马州一天的数据测试，地点和时间都有限，结果未必具有代表性。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            15
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            7
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 14
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q15",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Antonia Olivia Dolan and colleagues conducted a study of the differences between musicians and nonmusicians in their preferred volume, in decibels (dB), for listening to various audio recordings including acoustic folk music, classic rock music, and nature sounds. The musicians, who reported much greater lifetime noise exposure than the nonmusicians did, tended to listen to the recordings at higher volumes than the nonmusicians did. The musicians and the nonmusicians had clinically comparable hearing, however, suggesting that while a musician’s preferred volume for playing a favorite recording might be 90.8 dB and a nonmusician’s might be 61.5 dB, this difference _____. Which choice most logically completes the text?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "cannot be explained as resulting from the musician’s relatively greater musical expertise."
+        },
+        {
+          "id": "B",
+          "text": "indicates that the musician is unlikely to listen to a nonfavorite recording at a higher volume than the nonmusician would."
+        },
+        {
+          "id": "C",
+          "text": "does not arise from the musician having a clinically significant reduction in hearing ability as a result of lifetime noise exposure."
+        },
+        {
+          "id": "D",
+          "text": "shows that both the musician and the nonmusician have lower hearing ability than would be expected of clinically typical individuals with typical levels of lifetime noise exposure."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "两组人的临床听力相当，因此音量偏好差异并非由音乐家出现有临床意义的听力下降造成。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            16
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            8
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 15
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q16",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The Billy Possum stuffed toy _____ a skeptical public when it was introduced in 1909 as a potential rival to the popular teddy bear. In fact, one reporter wrote that the toy’s appearance was “likely to give a baby [a] nightmare.” Which choice completes the text so that it conforms to the conventions of Standard English?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "is facing"
+        },
+        {
+          "id": "B",
+          "text": "faced"
+        },
+        {
+          "id": "C",
+          "text": "faces"
+        },
+        {
+          "id": "D",
+          "text": "will face"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "句子描述 1909 年发生的事，应使用一般过去时 faced。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            16
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            8
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 16
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q17",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "The Trans Bhutan Trail once served as a vital artery connecting fortresses, monasteries, and markets across the country of Bhutan. After a 60-year hiatus, the historic trail has been restored, a project that employed many of the _____, including homestay owner Sangay Choden, who asserts that the trail’s restoration has helped preserve her village’s culture and tradition. Which choice completes the text so that it conforms to the conventions of Standard English?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "countries residents’"
+        },
+        {
+          "id": "B",
+          "text": "country’s residents,"
+        },
+        {
+          "id": "C",
+          "text": "countries’ resident’s,"
+        },
+        {
+          "id": "D",
+          "text": "country’s resident’s,"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "句意是“这个国家的许多居民”；单数 country 的所有格是 country’s，residents 用复数。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            17
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            8
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 17
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q18",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "While being interviewed for the book Latina Authors and Their Muses, poet Maria Gabriela Madrid revealed her favorite book about the craft of _____ Umberto Eco’s Umberto Eco on Literature. Which choice completes the text so that it conforms to the conventions of Standard English?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "writing: which was"
+        },
+        {
+          "id": "B",
+          "text": "writing:"
+        },
+        {
+          "id": "C",
+          "text": "writing, it was"
+        },
+        {
+          "id": "D",
+          "text": "writing;"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "冒号用于引出前面所说的写作技艺相关书籍的具体书名。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            17
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            8
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 18
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q19",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Carnegie Hall’s digital Timeline of African American Music reflects the contributions of many prominent scholars of Black history and music, including Jeff Todd Titon, a professor at Brown ____ and Marisa Parham, a professor at Amherst College. Which choice completes the text so that it conforms to the conventions of Standard English?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "University; George Starks a professor at Drexel University;"
+        },
+        {
+          "id": "B",
+          "text": "University, George Starks, a professor at Drexel University;"
+        },
+        {
+          "id": "C",
+          "text": "University, George Starks a professor at Drexel University,"
+        },
+        {
+          "id": "D",
+          "text": "University; George Starks, a professor at Drexel University;"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "分号可清楚分隔列举的学者及其职务；George Starks 后的同位语用逗号隔开。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            18
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            8
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 19
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q20",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "According to historical accounts, medieval recreation—including chess, backgammon, and other board games enjoyed across royal courts and noble households—_____ primarily focused on strategic gameplay that mirrored societal structures. Chess, with its hierarchical pieces representing different social classes, was particularly popular during this period. Which choice completes the text so that it conforms to the conventions of Standard English?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "being"
+        },
+        {
+          "id": "B",
+          "text": "were"
+        },
+        {
+          "id": "C",
+          "text": "are"
+        },
+        {
+          "id": "D",
+          "text": "was"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "主语是单数 medieval recreation；破折号内的插入说明不改变主谓一致，因此用 was。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            18
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            8
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 20
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q22",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Early in the morning, when the temperature is still low, the spiny lizard will sit in sunny areas for warmth. _____, as the temperature rises, the spiny lizard will hide in shady spots and under rocks to keep from getting too hot. Which choice completes the text with the most logical transition?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "For example,"
+        },
+        {
+          "id": "B",
+          "text": "First,"
+        },
+        {
+          "id": "C",
+          "text": "Later,"
+        },
+        {
+          "id": "D",
+          "text": "Previously,"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "句子描述气温升高后发生的后续行为，Later 表示时间顺序。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            19
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            9
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 22
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q23",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "A citizen of the Blackfeet Nation, Francis Guardipee was born on his tribe’s reservation in Montana. After studying anthropology at the University of Washington, he returned home, where in 1916 he founded the first all-Native troop of the Boy Scouts. Guardipee was one of the first Native people to become a park ranger at Montana’s Glacier National Park in 1932. Which choice completes the text with the most logical transition?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Nevertheless,"
+        },
+        {
+          "id": "B",
+          "text": "Specifically,"
+        },
+        {
+          "id": "C",
+          "text": "In addition,"
+        },
+        {
+          "id": "D",
+          "text": "Earlier,"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "成为童子军领队和成为公园管理员是并列的两项成就，In addition 用来补充第二项。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            20
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            9
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 23
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q24",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Under drought conditions, avocado plants produce smaller leaves, a common response to water scarcity that limits transpirational water loss and helps maintain osmotic balance. Sugarcane plants subjected to drought stress experience a marginal elongation of their leaves, as observed by Misra and colleagues in a recent study. Which choice completes the text with the most logical transition?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "moreover,"
+        },
+        {
+          "id": "B",
+          "text": "specifically,"
+        },
+        {
+          "id": "C",
+          "text": "by contrast,"
+        },
+        {
+          "id": "D",
+          "text": "for instance,"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "鳄梨叶片缩小，甘蔗叶片略微伸长，两种植物的反应相反。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            20
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            9
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 24
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q25",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "While researching a topic, a student has taken the following notes:"
+        },
+        {
+          "type": "notes",
+          "items": [
+            "In Boston, Massachusetts, there is a true-to-scale model solar system called the Community Solar System Trail.",
+            "The scale model Earth is 3.2 cm in diameter.",
+            "The scale model Sun is 350 cm in diameter.",
+            "The actual Sun is roughly 1.39 million km in diameter.",
+            "The actual Earth is roughly 12,742 km in diameter.",
+            "The Sun is over 100 times bigger than Earth."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The student wants to emphasize how much bigger the Sun is than Earth. Which choice most effectively uses relevant information from the notes to accomplish this goal?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "The actual Earth is far bigger than the model Earth, which is only 3.2 cm in diameter."
+        },
+        {
+          "id": "B",
+          "text": "At 1.39 million km in diameter, the Sun is over 100 times bigger than Earth."
+        },
+        {
+          "id": "C",
+          "text": "At the Community Solar System Trail in Boston, Massachusetts, the model Sun is 350 cm in diameter."
+        },
+        {
+          "id": "D",
+          "text": "The Community Solar System Trail in Boston, Massachusetts, is true to scale."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "B 同时给出太阳的实际直径和它比地球大 100 多倍，直接完成强调目标。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            21
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            9
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 25
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q26",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "While researching a topic, a student has taken the following notes:"
+        },
+        {
+          "type": "notes",
+          "items": [
+            "A nonnative species that causes environmental or economic harm when introduced to an ecosystem is considered invasive.",
+            "Quack grass is an invasive species of grass that crowds out crops and native plants.",
+            "Quack grass was first introduced to the US accidentally through seed contamination.",
+            "Giant reed is an invasive species of wetland plant that crowds out native plants and reduces wildlife habitat.",
+            "Giant reed was first introduced to the US to help control erosion."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The student wants to emphasize a similarity between quack grass and giant reed. Which choice most effectively uses relevant information from the notes to accomplish this goal?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Quack grass is an invasive species of wetland plant, and giant reed was first introduced accidentally through seed contamination."
+        },
+        {
+          "id": "B",
+          "text": "Quack grass was first introduced accidentally through seed contamination, but it now crowds out crops and native plants."
+        },
+        {
+          "id": "C",
+          "text": "Giant reed is an invasive species that crowds out native plants and reduces wildlife habitat, causing environmental harm."
+        },
+        {
+          "id": "D",
+          "text": "The harm to ecosystems caused by giant reed and quack grass has led both species to be considered invasive in the US."
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "D 点明两种植物造成生态危害并因此都被视为入侵物种，突出共同点。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            22
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            9
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 26
+    },
+    {
+      "id": "sat-2026-06-set1-rw-m1-q27",
+      "assessment": "SAT",
+      "test": "Reading and Writing",
+      "domain": "SAT 阅读与写作",
+      "skill": "Reading and Writing · Module 1",
+      "difficulty": "Unrated",
+      "contentBlocks": [
+        {
+          "type": "paragraph",
+          "text": "While researching a topic, a student has taken the following notes:"
+        },
+        {
+          "type": "notes",
+          "items": [
+            "The GREEN SURGE project studied different types of urban natural areas in European cities.",
+            "Urban natural areas are city spaces that feature natural elements.",
+            "Ruderal areas are a type of urban natural area included in the study.",
+            "Ruderal areas are defined as vacant lots that are overrun with wild vegetation.",
+            "Urban natural areas can benefit cities by increasing plant species diversity."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The student wants to provide a specific example of a type of urban natural area. Which choice most effectively uses relevant information from the notes to accomplish this goal?"
+        }
+      ],
+      "prompt": "",
+      "choices": [
+        {
+          "id": "A",
+          "text": "GREEN SURGE studied different types of urban natural areas, which are city spaces that feature natural elements."
+        },
+        {
+          "id": "B",
+          "text": "Urban natural areas can benefit cities by increasing plant species diversity."
+        },
+        {
+          "id": "C",
+          "text": "One specific example of a type of urban natural area is ruderal areas, which are vacant lots that are overrun with wild vegetation."
+        },
+        {
+          "id": "D",
+          "text": "The spaces in European cities that feature natural elements are known as urban natural areas."
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "C 给出 ruderal areas 这一具体类型，并说明其特征，正好回应题目要求。",
+      "sourceRefs": [
+        {
+          "role": "question",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 题目.pdf",
+          "sha256": "958aa7a07540ded9c6213d584ab4c8e3e7af8b1b56629739c17c630635fc283e",
+          "pages": [
+            23
+          ],
+          "extractionMethod": "本地OCR并逐题对照原页"
+        },
+        {
+          "role": "answer",
+          "path": "26年/2026年6月SAT 阅读3套 数学3套/26年6月第1套阅读+数学 答案解析.pdf",
+          "sha256": "26473016eda2aabcc3e663b02ff775b0abc5a76bf1a3ed2f1f1aa2537d116a69",
+          "pages": [
+            10
+          ],
+          "extractionMethod": "本地OCR并核对答案解析"
+        }
+      ],
+      "reviewStatus": "verified",
+      "reviewFlags": [],
+      "sectionLabel": "Reading and Writing · Module 1",
+      "number": 27
+    }
+  ],
+  "title": "2026年6月第1套 · 阅读与写作 M1",
+  "year": 2026,
+  "month": 6,
+  "region": "第1套（地区未标注）"
+}

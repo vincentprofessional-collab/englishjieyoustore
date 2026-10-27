@@ -243,7 +243,7 @@ const cambridge6Test1PartTwo: ReadingPart = {
     {
       id: "c6t1-p2-true-false",
       type: "choice",
-      instruction: "Do the following statements agree with the information given in Reading Passage 2? Write TRUE, FALSE or NOT GIVEN.",
+      instruction: "Do the following statements agree with the information given in Reading Passage 2? In boxes 18-22 on your answer sheet, write TRUE if the statement agrees with the information FALSE if the statement contradicts the information NOT GIVEN if there is no information on this",
       questions: [
         { questionNumbers: [18], prompt: "International trade is increasing at a greater rate than the world economy.", options: trueFalseNotGiven },
         { questionNumbers: [19], prompt: "Cheap labour guarantees effective trade conditions.", options: trueFalseNotGiven },

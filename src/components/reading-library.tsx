@@ -3,7 +3,10 @@ import { READING_TESTS, type ReadingTest } from "@/lib/ielts/reading";
 import { getEditableReadingPart } from "@/lib/ielts/reading-source-editable";
 
 const IELTS_READING_TESTS = [1, 2, 3, 4];
-const READING_BOOKS = Array.from({ length: 21 }, (_, i) => ({ code: `cambridge-${i + 1}`, shortTitle: `CI${i + 1}`, title: `剑桥雅思 ${i + 1}` }));
+const READING_BOOKS = Array.from({ length: 18 }, (_, i) => {
+  const bookNo = i + 4;
+  return { code: `cambridge-${bookNo}`, shortTitle: `CI${bookNo}`, title: `剑桥雅思 ${bookNo}` };
+});
 
 export function ReadingLibrary({ mode }: { mode: "mock" | "practice" }) {
   const testsByBook = new Map<string, ReadingTest[]>();

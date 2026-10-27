@@ -64,7 +64,7 @@
 - `public/reading/sources/*.md`：84份。
 - `src/lib/ielts/source-reading-tests.json`、源文判分模型与做题组件、账号进度key识别，以及对应生成/核验脚本。
 - 上传图片共1,828张；整个public/reading约639.8MB。均为现有静态资源接入，无新增云存储依赖，不上传原PDF、私有OCR缓存或.env.local。
-- 发布清单：`docs/剑桥雅思1-21阅读对照与发布清单.md`，逐图来源清单`docs/ielts-reading-source-review-20261022.json`，已完成解析清单`docs/ielts-reading-analysis-review-20261021.json`。
+- 发布清单：`docs/剑桥雅思4-21阅读对照与发布清单.md`，逐图来源清单`docs/ielts-reading-source-review-20261022.json`，已完成解析清单`docs/ielts-reading-analysis-review-20261021.json`。
 - 最终构建和扫描均通过，原卷/答案完整，1,828张最终图片无二维码命中；本分支提交SHA由本对话最终回复记录。调度集中整合和发布；本批尚未推送或部署。
 
 ## 最终回读补充
