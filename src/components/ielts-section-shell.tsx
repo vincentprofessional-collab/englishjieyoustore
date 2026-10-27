@@ -79,7 +79,10 @@ const STUDY_NAV_GROUPS: StudyNavGroup[] = [
     { href: "/cet6?entry=practice", label: "题型训练" },
     { href: "/cet6?entry=papers", label: "历年真题" },
   ], href: "/cet6", id: "cet6", label: "六级英语", mark: "六" },
-  { children: [], href: "/postgraduate?entry=papers", id: "postgraduate", label: "考研英语", mark: "研" },
+  { children: [
+    { href: "/postgraduate?entry=practice", label: "题型训练" },
+    { href: "/postgraduate?entry=papers", label: "历年真题" },
+  ], href: "/postgraduate?entry=papers", id: "postgraduate", label: "考研英语", mark: "研" },
   {
     children: [
       {
@@ -116,14 +119,18 @@ const STUDY_NAV_GROUPS: StudyNavGroup[] = [
     mark: "雅",
   },
   {
-    children: [],
+    children: [
+      { href: "/sat/knowledge", label: "知识点" },
+      { href: "/sat", label: "题型训练" },
+      { href: "/sat/past-papers", label: "历年真题" },
+    ],
     href: "/sat",
     id: "sat",
     label: "SAT",
     mark: "S",
   },
   { children: [], href: "/gmat?entry=practice", id: "gmat", label: "GMAT", mark: "G" },
-  { children: [], href: "/gre?entry=practice", id: "gre", label: "GRE", mark: "G" },
+  { children: [{ href: "/gre?entry=practice", label: "题型训练" }], href: "/gre?entry=practice", id: "gre", label: "GRE", mark: "G" },
 ];
 
 function getPathSegments(pathname: string) {
@@ -500,24 +507,29 @@ function IeltsSectionShellContent({
                     <strong>{group.label}</strong>
                   </div>
                 ) : group.children.length ? (
-                  <button
-                    aria-controls={`study-directory-${group.id}-children`}
-                    aria-expanded={expandedExamGroupId === group.id}
-                    className="study-directory-source-link study-directory-expand-button"
-                    onClick={() => {
-                      const shouldExpand = expandedExamGroupId !== group.id;
-                      setExpandedExamGroupId(shouldExpand ? group.id : null);
-                      setExpandedStudyNavChildIds(
-                        shouldExpand && !window.matchMedia("(max-width: 820px)").matches
-                          ? new Set(getExpandableStudyNavIds(group.children, group.id))
-                          : new Set(),
-                      );
-                    }}
-                    type="button"
-                  >
-                    <strong>{group.label}</strong>
-                    <span aria-hidden="true" className="study-directory-chevron">{expandedExamGroupId === group.id ? "−" : "+"}</span>
-                  </button>
+                  <div className="study-directory-parent-row">
+                    <Link aria-current={isActive ? "page" : undefined} className={`study-directory-source-link ${isActive ? "active" : ""}`} href={group.href}>
+                      <strong>{group.label}</strong>
+                    </Link>
+                    <button
+                      aria-label={`${expandedExamGroupId === group.id ? "收起" : "展开"}${group.label}子菜单`}
+                      aria-controls={`study-directory-${group.id}-children`}
+                      aria-expanded={expandedExamGroupId === group.id}
+                      className="study-directory-expand-button study-directory-nav-toggle"
+                      onClick={() => {
+                        const shouldExpand = expandedExamGroupId !== group.id;
+                        setExpandedExamGroupId(shouldExpand ? group.id : null);
+                        setExpandedStudyNavChildIds(
+                          shouldExpand && !window.matchMedia("(max-width: 820px)").matches
+                            ? new Set(getExpandableStudyNavIds(group.children, group.id))
+                            : new Set(),
+                        );
+                      }}
+                      type="button"
+                    >
+                      <span aria-hidden="true" className="study-directory-chevron">{expandedExamGroupId === group.id ? "−" : "+"}</span>
+                    </button>
+                  </div>
                 ) : (
                   <Link aria-current={isActive ? "page" : undefined} className="study-directory-source-link" href={group.href}>
                     <strong>{group.label}</strong>
@@ -528,7 +540,13 @@ function IeltsSectionShellContent({
                   {renderStudyDirectoryNodes(
                     group.children,
                     group.id,
-                    group.id === "junior-high" ? "knowledge" : group.id === "senior-high" ? "practice" : undefined,
+                    group.id === "junior-high"
+                      ? "knowledge"
+                      : group.id === "senior-high"
+                        ? "practice"
+                        : group.id === "postgraduate"
+                          ? "papers"
+                          : undefined,
                   )}
                 </div> : null}
               </div>

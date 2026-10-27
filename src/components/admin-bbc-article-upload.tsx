@@ -130,8 +130,8 @@ export function AdminBbcArticleUpload() {
       setMessage("MP3 文件不能超过 200 MB。");
       return;
     }
-    if (subtitleFile && !/\.(?:srt|vtt)$/i.test(subtitleFile.name)) {
-      setError(true); setMessage("字幕文件请使用 SRT 或 VTT 格式。"); return;
+    if (subtitleFile && !/\.(?:srt|vtt|lrc)$/i.test(subtitleFile.name)) {
+      setError(true); setMessage("字幕文件请使用 SRT、VTT 或 LRC 格式。"); return;
     }
     if (subtitleFile && subtitleFile.size > 5 * 1024 * 1024) {
       setError(true); setMessage("字幕文件不能超过 5 MB。"); return;
@@ -287,8 +287,8 @@ export function AdminBbcArticleUpload() {
         </label>
         <label className={styles.full}>
           <span>时间戳字幕（可选）</span>
-          <input accept=".srt,.vtt,application/x-subrip,text/vtt" disabled={busy} onChange={(event) => { setSubtitleFile(event.target.files?.[0] ?? null); audioJob.current = null; }} type="file" />
-          <small>{subtitleFile ? `${subtitleFile.name} · 优先使用字幕时间戳切分` : "支持 SRT/VTT；请与上方整篇 MP3 对应。系统会先按字幕切分，匹配不上时再自动识别。最大 5 MB。"}</small>
+          <input accept=".srt,.vtt,.lrc,application/x-subrip,text/vtt,text/plain" disabled={busy} onChange={(event) => { setSubtitleFile(event.target.files?.[0] ?? null); audioJob.current = null; }} type="file" />
+          <small>{subtitleFile ? `${subtitleFile.name} · 优先使用字幕时间戳切分` : "支持 SRT/VTT/LRC；请与上方整篇 MP3 对应。系统会先按字幕切分，匹配不上时再自动识别。最大 5 MB。"}</small>
         </label>
         {audioFile ? (
           <div aria-label="MP3 音频上传进度" aria-valuemax={100} aria-valuemin={0} aria-valuenow={audioProgress} className={styles.progress} role="progressbar">

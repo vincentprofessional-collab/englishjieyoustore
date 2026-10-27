@@ -15,7 +15,7 @@ export async function analyzeBbcAudio(file: Blob, sentences: { sentenceNo: numbe
   const pauses = findBbcAudioPauses(audio, 16_000);
   if (subtitleFile) {
     onProgress("正在读取字幕时间戳并匹配文章句子……");
-    const cues = parseBbcSubtitleCues(await subtitleFile.text());
+    const cues = parseBbcSubtitleCues(await subtitleFile.text(), duration);
     let subtitleAlignment = alignBbcSubtitleSentences(sentences, cues, duration);
     if (!subtitleAlignment) {
       try { subtitleAlignment = alignBbcAudioSentences(sentences, wordsFromBbcSubtitleCues(cues), duration, pauses); }

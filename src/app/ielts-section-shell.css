@@ -573,6 +573,37 @@
   width: 100%;
 }
 
+.study-directory-parent-row {
+  align-items: stretch;
+  display: flex;
+  gap: 4px;
+}
+
+.study-directory-parent-row > .study-directory-source-link {
+  flex: 1;
+  min-width: 0;
+}
+
+.study-directory-nav-toggle {
+  align-items: center;
+  background: #fff;
+  border-radius: 16px;
+  color: #245d7b;
+  display: flex;
+  flex: 0 0 48px;
+  justify-content: center;
+  min-height: 64px;
+  padding: 10px;
+  width: 48px;
+}
+
+.study-directory-nav-toggle:hover,
+.study-directory-nav-toggle:focus-visible,
+.study-directory-nav-toggle[aria-expanded="true"] {
+  background: #dbad3d;
+  color: #245d7b;
+}
+
 .study-directory-chevron {
   font-size: 22px;
   font-weight: 700;

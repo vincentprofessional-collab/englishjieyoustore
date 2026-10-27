@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { READING_TESTS, type ReadingTest } from "@/lib/ielts/reading";
-import { getEditableReadingPart } from "@/lib/ielts/reading-source-editable";
 
 const IELTS_READING_TESTS = [1, 2, 3, 4];
+function isReadingTestReady(test: ReadingTest) {
+  return Boolean(test.source?.verified && test.source.sanitized && test.parts.length > 0 && test.parts.every((part) => part.source?.textVerified));
+}
+
 const READING_BOOKS = Array.from({ length: 18 }, (_, i) => {
   const bookNo = i + 4;
   return { code: `cambridge-${bookNo}`, shortTitle: `CI${bookNo}`, title: `剑桥雅思 ${bookNo}` };
@@ -33,7 +36,7 @@ export function ReadingLibrary({ mode }: { mode: "mock" | "practice" }) {
             const bookTests = [...(testsByBook.get(book.code) ?? [])].sort(
               (a, b) => a.testNo - b.testNo,
             );
-            const readyTests = bookTests.filter((test) => test.parts.every((part) => getEditableReadingPart(part.id)));
+            const readyTests = bookTests.filter(isReadingTestReady);
             const isAvailable = readyTests.length > 0;
 
             return (
@@ -51,7 +54,7 @@ export function ReadingLibrary({ mode }: { mode: "mock" | "practice" }) {
                 <div className="listening-test-grid reading-test-grid">
                   {IELTS_READING_TESTS.map((testNo) => {
                     const test = bookTests.find((item) => item.testNo === testNo);
-                    const isTextReady = Boolean(test?.parts.every((part) => getEditableReadingPart(part.id)));
+                    const isTextReady = Boolean(test && isReadingTestReady(test));
                     const displayNo = test?.displayTestNo ?? (book.code === "cambridge-12" ? testNo + 4 : testNo);
 
                     return test && isTextReady ? (
