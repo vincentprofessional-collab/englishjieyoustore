@@ -180,62 +180,70 @@ export function BbcSyntaxInlineEditor({
     setMessage("词性已修改，点击“保存并更新文章”后生效。");
   }
 
-  function applyComponent() {
+  function addComponent() {
     if (!selection || !label.trim()) return;
-    const targetLevel = editingSpan?.level ?? level;
+    const targetLevel = level;
     const targetKey = layerKey(targetLevel);
     const spans = [...(data[targetKey] ?? [])];
     const parentSpans = targetLevel > 1 ? data[layerKey((targetLevel - 1) as BbcSyntaxLevel)] ?? [] : [];
     const hasParent = targetLevel === 1 || parentSpans.some((parent) =>
       selection.start >= parent.start && selection.end <= parent.end);
-    const originalIndex = editingSpan
-      ? spans.findIndex((span) => span.start === editingSpan.start && span.end === editingSpan.end)
-      : -1;
-    if (editingSpan && originalIndex < 0) {
-      setEditingSpan(null);
-    }
-    if (originalIndex >= 0) {
-      const siblings = spans.filter((_, index) => index !== originalIndex);
-      if (targetLevel === 1 && siblings.some((span) => selection.start < span.end && selection.end > span.start)) {
-        setMessage("新范围与其他主句成分重叠，请调整选区。");
-        return;
-      }
-      if (!hasParent) {
-        setMessage(`第 ${targetLevel} 级成分需要完整落在一个第 ${targetLevel - 1} 级成分范围内。`);
-        return;
-      }
-      const descendants = SYNTAX_LEVELS.filter((candidateLevel) => candidateLevel > targetLevel)
-        .flatMap((candidateLevel) => data[layerKey(candidateLevel)] ?? [])
-        .filter((child) => child.start >= spans[originalIndex].start && child.end <= spans[originalIndex].end);
-      if (descendants.some((child) => child.start < selection.start || child.end > selection.end)) {
-        setMessage("新范围必须完整包含所有下一级成分，请先调整或删除子成分。");
-        return;
-      }
-      spans[originalIndex] = { ...spans[originalIndex], start: selection.start, end: selection.end, label: label.trim() };
-      spans.sort((left, right) => left.start - right.start || left.end - right.end);
-      onSentenceChange({ ...data, [targetKey]: spans });
-      setEditingSpan(null);
-      setMessage("语法成分范围/名称已更新，点击“保存并更新文章”后生效。");
-      return;
-    }
     const exactIndex = spans.findIndex((span) => span.start === selection.start && span.end === selection.end);
     if (exactIndex >= 0) {
-      spans[exactIndex] = { ...spans[exactIndex], label: label.trim() };
-    } else {
-      if (targetLevel === 1 && spans.some((span) => selection.start < span.end && selection.end > span.start)) {
-        setMessage("选区与已有主句成分重叠。请拖选原标注的完整范围进行修改，或先删除重叠标注。");
-        return;
-      }
-      if (!hasParent) {
-        setMessage(`第 ${targetLevel} 级成分需要完整落在一个第 ${targetLevel - 1} 级成分范围内。请先标注上一级成分。`);
-        return;
-      }
-      spans.push({ label: label.trim(), start: selection.start, end: selection.end });
-      spans.sort((left, right) => left.start - right.start || left.end - right.end);
+      setMessage("该范围已有同级成分；请选中原标注后使用“修改成分”。");
+      return;
     }
+    if (targetLevel === 1 && spans.some((span) => selection.start < span.end && selection.end > span.start)) {
+      setMessage("选区与已有一级成分重叠。请选中原标注进行修改，或调整选区。");
+      return;
+    }
+    if (!hasParent) {
+      setMessage(`第 ${targetLevel} 级成分需要完整落在一个第 ${targetLevel - 1} 级成分范围内。请先标注上一级成分。`);
+      return;
+    }
+    spans.push({ label: label.trim(), start: selection.start, end: selection.end });
+    spans.sort((left, right) => left.start - right.start || left.end - right.end);
     onSentenceChange({ ...data, [targetKey]: spans });
     setEditingSpan(null);
-    setMessage("语法成分已更新，点击“保存并更新文章”后生效。");
+    setMessage("语法成分已添加，点击“保存并更新文章”后生效。");
+  }
+
+  function modifyComponent() {
+    if (!selection || !label.trim() || !editingSpan) return;
+    const targetLevel = editingSpan.level;
+    const targetKey = layerKey(targetLevel);
+    const spans = [...(data[targetKey] ?? [])];
+    const originalIndex = spans.findIndex((span) => span.start === editingSpan.start && span.end === editingSpan.end);
+    if (originalIndex < 0) {
+      setEditingSpan(null);
+      setMessage("当前选中的成分已不存在，请重新选择。");
+      return;
+    }
+    const siblings = spans.filter((_, index) => index !== originalIndex);
+    if (targetLevel === 1 && siblings.some((span) => selection.start < span.end && selection.end > span.start)) {
+      setMessage("新范围与其他一级成分重叠，请调整选区。");
+      return;
+    }
+    const parentSpans = targetLevel > 1 ? data[layerKey((targetLevel - 1) as BbcSyntaxLevel)] ?? [] : [];
+    const hasParent = targetLevel === 1 || parentSpans.some((parent) =>
+      selection.start >= parent.start && selection.end <= parent.end);
+    if (!hasParent) {
+      setMessage(`第 ${targetLevel} 级成分需要完整落在一个第 ${targetLevel - 1} 级成分范围内。`);
+      return;
+    }
+    const oldSpan = spans[originalIndex];
+    const descendants = SYNTAX_LEVELS.filter((candidateLevel) => candidateLevel > targetLevel)
+      .flatMap((candidateLevel) => data[layerKey(candidateLevel)] ?? [])
+      .filter((child) => child.start >= oldSpan.start && child.end <= oldSpan.end);
+    if (descendants.some((child) => child.start < selection.start || child.end > selection.end)) {
+      setMessage("新范围必须完整包含所有下一级成分，请先调整或删除子成分。");
+      return;
+    }
+    spans[originalIndex] = { ...oldSpan, start: selection.start, end: selection.end, label: label.trim() };
+    spans.sort((left, right) => left.start - right.start || left.end - right.end);
+    onSentenceChange({ ...data, [targetKey]: spans });
+    setEditingSpan(null);
+    setMessage("语法成分已修改，点击“保存并更新文章”后生效。");
   }
 
   function loadSpan(spanLevel: BbcSyntaxLevel, span: BbcSyntaxSpan) {
@@ -406,7 +414,8 @@ export function BbcSyntaxInlineEditor({
                   <span>语法成分</span>
                   <input onChange={(event) => setLabel(event.target.value)} value={label} />
                 </label>
-                <button disabled={!selection || !label.trim()} onClick={applyComponent} type="button">{editingSpan ? "修改成分" : "添加 / 修改成分"}</button>
+                <button disabled={!selection || !label.trim() || Boolean(editingSpan)} onClick={addComponent} type="button">添加成分</button>
+                <button disabled={!selection || !label.trim() || !editingSpan} onClick={modifyComponent} type="button">修改成分</button>
                 <button disabled={!editingSpan} onClick={deleteEditingSpan} type="button">删除成分</button>
                 <label>
                   <span>下划线样式</span>
@@ -422,6 +431,7 @@ export function BbcSyntaxInlineEditor({
                   <button aria-pressed="true" className={styles.active} onClick={() => setEditing(false)} type="button">退出编辑</button>
                 </div>
               </div>
+              {message ? <p className={styles.message} role="status">{message}</p> : null}
               {isUploadedArticle && timing ? (
                 <div className={styles.controls}>
                   <label>
@@ -446,7 +456,6 @@ export function BbcSyntaxInlineEditor({
                   </div>
                 )) : <p className={styles.hint}>本句暂无语法成分标注。</p>}
               </div>
-              {message ? <p className={styles.message} role="status">{message}</p> : null}
             </>
           ) : null}
         </div>
