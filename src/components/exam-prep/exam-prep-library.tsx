@@ -16,23 +16,20 @@ function getInitialTab(exam: ExamId, requested: string | null): Tab {
   return requested === "papers" || requested === "knowledge" || requested === "practice" ? requested : "practice";
 }
 
-const labels: Record<ExamId, { title: string; subtitle: string; vocab: string }> = {
-  postgraduate: { title: "考研英语学习中心", subtitle: "按历年完整试卷或题型练习；提交后查看答案与解析。", vocab: "考研" },
-  gre: { title: "GRE 学习中心", subtitle: "按填空、阅读理解和逻辑推理练习；提交后查看答案与来源解析。", vocab: "GRE" },
-  gmat: { title: "GMAT 学习中心", subtitle: "按题型进行专项练习；提交后查看答案与解析。", vocab: "GMAT" },
+const labels: Record<ExamId, { vocab: string }> = {
+  postgraduate: { vocab: "考研" },
+  gre: { vocab: "GRE" },
+  gmat: { vocab: "GMAT" },
 };
 
 export function ExamPrepLibrary({ exam }: { exam: ExamId }) {
   const search = useSearchParams();
   const requested = search.get("entry");
-  const [tab, setTab] = useState<Tab>(() => getInitialTab(exam, requested));
+  const tab = getInitialTab(exam, requested);
   const [index, setIndex] = useState<IndexData | null>(null);
   const [error, setError] = useState("");
   const [selectedPracticeCategory, setSelectedPracticeCategory] = useState<string | null>(null);
 
-  useEffect(() => {
-    setTab(getInitialTab(exam, requested));
-  }, [exam, requested]);
   useEffect(() => {
     let cancelled = false;
     async function loadIndex() {
@@ -87,11 +84,7 @@ export function ExamPrepLibrary({ exam }: { exam: ExamId }) {
       entries.push(entry);
       groups.set(category, entries);
     }
-    return [...groups].map(([category, entries]) => ({
-      category,
-      entries,
-      questionCount: entries.reduce((sum, entry) => sum + entry.questionCount, 0),
-    }));
+    return [...groups].map(([category, entries]) => ({ category, entries }));
   }, [index]);
   const selectedPracticeGroup = practiceGroups.find((group) => group.category === selectedPracticeCategory);
   const groupedPapers = useMemo(() => {
@@ -109,26 +102,6 @@ export function ExamPrepLibrary({ exam }: { exam: ExamId }) {
   if (!index) return <section className="senior-high-page"><div className="senior-high-loading">正在载入题库目录…</div></section>;
 
   return <section className="senior-high-page">
-    <header className="senior-high-hero"><div><div className="senior-high-eyebrow">{exam.toUpperCase()} · ENGLISH</div><h1>{info.title}</h1><p>{info.subtitle}</p></div><div className="senior-high-stats"><strong>{index.entries.reduce((sum, item) => sum + item.questionCount, 0).toLocaleString()}</strong><span>已整理题目</span><strong>{index.entries.reduce((sum, item) => sum + (item.answerCount ?? item.questionCount), 0).toLocaleString()}</strong><span>有答案题目</span></div></header>
-    <nav
-      aria-label="题库分类"
-      className={`senior-high-entry-tabs${exam === "gre" ? " one-tab" : exam === "postgraduate" ? " two-tabs" : ""}`}
-    >
-      {exam !== "gre" && exam !== "postgraduate" ? (
-        <button className={tab === "knowledge" ? "selected" : ""} onClick={() => setTab("knowledge")} type="button">
-          知识点<small>词汇</small>
-        </button>
-      ) : null}
-      <button className={tab === "practice" ? "selected" : ""} onClick={() => setTab("practice")} type="button">
-        题型训练<small>{practiceGroups.length} 类</small>
-      </button>
-      {exam !== "gre" ? (
-        <button className={tab === "papers" ? "selected" : ""} onClick={() => setTab("papers")} type="button">
-          {exam === "postgraduate" ? "历年真题" : "历年试卷"}
-          <small>{exam === "postgraduate" ? paperEntries.length : "—"}</small>
-        </button>
-      ) : null}
-    </nav>
     {tab === "knowledge" ? (
       <div className="senior-high-section">
         <div className="senior-high-card-grid">
@@ -142,11 +115,6 @@ export function ExamPrepLibrary({ exam }: { exam: ExamId }) {
     ) : null}
     {tab === "practice" ? (
       <div className="senior-high-section">
-        <p className="senior-high-muted">
-          {exam === "gmat"
-            ? "按题型选择一组练习；作答记录保存在当前浏览器，提交后显示答案与解析。"
-            : "按题型选择一组练习；作答记录保存在当前浏览器，提交后显示答案与解析。标注“复核”的题目存在 OCR、图表或答案解释缺口。"}
-        </p>
         {exam === "postgraduate" && practiceEntries.some((item) => item.groupCount) ? (
           <div className="exam-prep-review-note">
             1980–2020 年题目按原卷题型和年度题组整理；提交后显示该年答案资料。早年文本与版面尚未逐年人工抽检，题组输入用于记录答案，不做自动判分。
@@ -180,8 +148,6 @@ export function ExamPrepLibrary({ exam }: { exam: ExamId }) {
                     type="button"
                   >
                     <strong>{group.category}</strong>
-                    <span>{group.entries.length} 个来源题组 · {group.questionCount.toLocaleString()} 题合计</span>
-                    <small>点击查看该题型下的题组</small>
                   </button>
                 ))}
               </div>

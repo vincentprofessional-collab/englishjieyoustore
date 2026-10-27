@@ -2591,12 +2591,15 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
       const processedIds = new Set(processedWords.map((word) => word.id));
       const remainingWords = resume ? groupWords.filter((word) => !processedIds.has(word.id)) : groupWords;
       const remainingIds = remainingWords.map((word) => word.id);
+      // Pair one 20-word due-review batch with this new-word group; leave any
+      // overdue remainder eligible for the next group or the next visit.
       const dueReviewWords = orderedSourceWords.filter((word) => {
         if (remainingIds.includes(word.id)) return false;
         const entry = progressFor(progress, word.id);
         const familiarity = familiarityForProgress(entry);
         return isReviewDue(entry.nextReviewAt, Boolean(entry.completed), familiarity, Date.now());
-      });
+      }).sort((left, right) => (progressFor(progress, left.id).nextReviewAt ?? 0)
+        - (progressFor(progress, right.id).nextReviewAt ?? 0)).slice(0, GROUP_SIZE);
       const ids = [...new Set([...groupWords.map((word) => word.id), ...dueReviewWords.map((word) => word.id)])];
       const queued = new Set(remainingIds);
       const reviewIds = [...new Set(dueReviewWords.map((word) => word.id))].filter((id) => !queued.has(id));
@@ -2604,10 +2607,12 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
       remainingIds.length = 0;
       let freshIndex = 0;
       let reviewIndex = 0;
-      while (freshIndex < freshIds.length || reviewIndex < reviewIds.length) {
-        for (let slot = 0; slot < 4 && freshIndex < freshIds.length; slot += 1) remainingIds.push(freshIds[freshIndex++]);
-        if (reviewIndex < reviewIds.length) remainingIds.push(reviewIds[reviewIndex++]);
+      while (freshIndex < freshIds.length) {
+        remainingIds.push(freshIds[freshIndex++]);
+        const targetReviewCount = Math.floor(freshIndex * reviewIds.length / freshIds.length);
+        while (reviewIndex < targetReviewCount) remainingIds.push(reviewIds[reviewIndex++]);
       }
+      while (reviewIndex < reviewIds.length) remainingIds.push(reviewIds[reviewIndex++]);
       const firstOutcomes = Object.fromEntries(processedWords.flatMap((word) => {
         const outcome = familiarityForProgress(progressFor(progress, word.id));
         return outcome ? [[word.id, outcome]] : [];
@@ -3250,14 +3255,16 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
           ? words
           : words.filter((word) => word.level === selectedBook);
         const now = Date.now();
-        const dueReviewIds = [...new Set(reviewPool.flatMap((word) => {
-          if (word.id === currentWord.id || remainingIds.includes(word.id)) return [];
+        const groupWordCount = Math.min(GROUP_SIZE, Math.max(0, reviewPool.length - groupSession.groupNo * GROUP_SIZE));
+        const reviewSlotsRemaining = Math.max(0, GROUP_SIZE - Math.max(0, groupSession.ids.length - groupWordCount));
+        const dueReviewIds = reviewPool.filter((word) => {
+          if (word.id === currentWord.id || remainingIds.includes(word.id) || groupSession.ids.includes(word.id)) return false;
           const entry = progressFor(updatedProgress, word.id);
           const familiarity = familiarityForProgress(entry);
-          return isReviewDue(entry.nextReviewAt, Boolean(entry.completed), familiarity, now)
-            ? [word.id]
-            : [];
-        }))];
+          return isReviewDue(entry.nextReviewAt, Boolean(entry.completed), familiarity, now);
+        }).sort((left, right) => (progressFor(updatedProgress, left.id).nextReviewAt ?? 0)
+          - (progressFor(updatedProgress, right.id).nextReviewAt ?? 0))
+          .slice(0, reviewSlotsRemaining).map((word) => word.id);
         const nextRemainingIds = avoidAdjacentDuplicateWords(
           [...remainingIds, ...dueReviewIds],
           reviewPool,

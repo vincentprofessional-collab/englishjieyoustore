@@ -598,8 +598,7 @@
 }
 
 .study-directory-nav-toggle:hover,
-.study-directory-nav-toggle:focus-visible,
-.study-directory-nav-toggle[aria-expanded="true"] {
+.study-directory-nav-toggle:focus-visible {
   background: #dbad3d;
   color: #245d7b;
 }

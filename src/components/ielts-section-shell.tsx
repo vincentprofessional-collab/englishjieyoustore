@@ -12,6 +12,7 @@ type StudyNavNode = {
   href: string;
   label: string;
   children?: StudyNavNode[];
+  matchSubroutes?: boolean;
 };
 
 type StudyNavGroup = {
@@ -87,22 +88,22 @@ const STUDY_NAV_GROUPS: StudyNavGroup[] = [
     children: [
       {
         children: [
-          { href: "/listening/practice?source=cambridge", label: "剑桥雅思" },
-          { href: "/listening/past-papers", label: "历年真题" },
+          { href: "/listening/practice?source=cambridge", label: "剑桥雅思", matchSubroutes: true },
+          { href: "/listening/past-papers", label: "历年真题", matchSubroutes: true },
         ],
         href: "/listening",
         label: "听力",
       },
       {
         children: [
-          { href: "/speaking/part-1", label: "Part 1" },
-          { href: "/speaking/part-2", label: "Part 2" },
-          { href: "/speaking/part-3", label: "Part 3" },
+          { href: "/speaking/part-1", label: "Part 1", matchSubroutes: true },
+          { href: "/speaking/part-2", label: "Part 2", matchSubroutes: true },
+          { href: "/speaking/part-3", label: "Part 3", matchSubroutes: true },
         ],
         href: "/speaking",
         label: "口语",
       },
-      { href: "/reading", label: "阅读" },
+      { href: "/reading", label: "阅读", matchSubroutes: true },
       {
         children: [
           { href: "/writing/practice?task=task1", label: "小作文" },
@@ -130,7 +131,7 @@ const STUDY_NAV_GROUPS: StudyNavGroup[] = [
     mark: "S",
   },
   { children: [], href: "/gmat?entry=practice", id: "gmat", label: "GMAT", mark: "G" },
-  { children: [{ href: "/gre?entry=practice", label: "题型训练" }], href: "/gre?entry=practice", id: "gre", label: "GRE", mark: "G" },
+  { children: [], href: "/gre?entry=practice", id: "gre", label: "GRE", mark: "G" },
 ];
 
 function getPathSegments(pathname: string) {
@@ -183,9 +184,10 @@ function isStudyChildCurrent(
   pathname: string,
   searchParams: ReturnType<typeof useSearchParams>,
   defaultEntry?: string,
+  matchSubroutes = false,
 ) {
   const path = getLinkPath(href);
-  if (pathname !== path && !pathname.startsWith(`${path}/`)) return false;
+  if (pathname !== path && !(matchSubroutes && pathname.startsWith(`${path}/`))) return false;
   const query = href.split("?")[1]?.split("#")[0] ?? "";
   const requested = new URLSearchParams(query);
   if (requested.has("entry")) {
@@ -207,10 +209,9 @@ function isStudyNavNodeCurrent(
   searchParams: ReturnType<typeof useSearchParams>,
   defaultEntry?: string,
 ): boolean {
-  return (
-    Boolean(node.children?.some((child) => isStudyNavNodeCurrent(child, pathname, searchParams, defaultEntry))) ||
-    isStudyChildCurrent(node.href, pathname, searchParams, defaultEntry)
-  );
+  const childIsCurrent = Boolean(node.children?.some((child) => isStudyNavNodeCurrent(child, pathname, searchParams, defaultEntry)));
+  if (childIsCurrent) return false;
+  return isStudyChildCurrent(node.href, pathname, searchParams, defaultEntry, node.matchSubroutes);
 }
 
 function getDirectoryMark(label: string, fallback: string) {
@@ -427,10 +428,9 @@ function IeltsSectionShellContent({
 
               return (
                 <div className="study-directory-source-stack" key={group.id}>
-                  <div className={`study-directory-source-group ${isBbcPage ? "active" : ""}`}>
+                  <div className="study-directory-source-group">
                     <Link
-                      aria-current={isBbcPage ? "page" : undefined}
-                      className={`study-directory-source-link ${isBbcPage ? "active" : ""}`}
+                      className="study-directory-source-link"
                       href="/articles?year=2026"
                     >
                       <span className="study-directory-source-mark" aria-hidden="true">
@@ -442,6 +442,7 @@ function IeltsSectionShellContent({
                       <div aria-label="BBC随身英语年份" className="study-directory-secondary study-directory-year-list">
                         {BBC_DIRECTORY_YEARS.map((year) => (
                           <Link
+                            aria-current={year === activeBbcYear ? "page" : undefined}
                             className={year === activeBbcYear ? "active" : ""}
                             href={`/articles?year=${year}`}
                             key={year}
@@ -508,7 +509,7 @@ function IeltsSectionShellContent({
                   </div>
                 ) : group.children.length ? (
                   <div className="study-directory-parent-row">
-                    <Link aria-current={isActive ? "page" : undefined} className={`study-directory-source-link ${isActive ? "active" : ""}`} href={group.href}>
+                    <Link className="study-directory-source-link" href={group.href}>
                       <strong>{group.label}</strong>
                     </Link>
                     <button
