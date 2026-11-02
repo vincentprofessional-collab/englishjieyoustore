@@ -1,6 +1,7 @@
 import gradedPhrases from "@/data/vocabulary/graded-phrases.json";
 import idiomaticExpressions from "@/data/vocabulary/idiomatic-expressions.json";
 import slangProverbs from "@/data/vocabulary/slang-proverbs.json";
+import { getBbcPhraseLemma } from "@/lib/vocabulary/bbc-phrase-lemma";
 import {
   isSupplementalLearningBook,
   type LearningBookKey,
@@ -35,7 +36,11 @@ const supplementalWords = new Map<LearningBookKey, LearningWord[]>();
 
 function toLearningWord(entry: SupplementalSourceEntry, book: LearningBookKey, index: number): LearningWord {
   const definitionCn = entry.definitionCn || entry.exampleTranslation || entry.englishDefinition || "暂无释义";
-  const partOfSpeech = entry.partOfSpeech || (book === "俚语俗语" ? "习语" : "phr.");
+  const word = book === "地道表达" ? getBbcPhraseLemma(entry.word) : entry.word;
+  const isZoningOutEntry = book === "地道表达" && entry.word.toLowerCase() === "zoning out";
+  const partOfSpeech = isZoningOutEntry ? "phr. v." : entry.partOfSpeech || (book === "俚语俗语" ? "习语" : "phr.");
+  const phonetic = isZoningOutEntry ? "/zəʊn aʊt/" : entry.phonetic;
+  const usPhonetic = isZoningOutEntry ? "/zoʊn aʊt/" : entry.phonetic;
 
   return {
     antonyms: [],
@@ -53,15 +58,15 @@ function toLearningWord(entry: SupplementalSourceEntry, book: LearningBookKey, i
     inflections: [],
     level: book,
     partOfSpeech,
-    phonetic: entry.phonetic,
-    reviewNotes: entry.note ? [entry.note] : [],
+    phonetic,
+    reviewNotes: isZoningOutEntry ? ["动词短语原形；zoning out 是它的 -ing 形式。"] : entry.note ? [entry.note] : [],
     root: "",
     synonyms: [],
     ukAudioUrl: "",
-    ukPhonetic: entry.phonetic,
+    ukPhonetic: phonetic,
     usAudioUrl: "",
-    usPhonetic: entry.phonetic,
-    word: entry.word,
+    usPhonetic,
+    word,
   };
 }
 

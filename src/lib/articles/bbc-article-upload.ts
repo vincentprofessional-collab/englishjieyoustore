@@ -53,6 +53,8 @@ export type ParsedBbcArticlePaste = {
   chinese: string;
   vocabulary: BbcVocabularyItem[];
   syntaxAnnotations: PastedBbcSyntaxSentence[];
+  syntaxRequested: boolean;
+  syntaxWarning?: string;
 };
 
 function stripPasteMarkup(value: string) {
@@ -203,5 +205,7 @@ export function parseBbcArticlePaste(value: string): ParsedBbcArticlePaste | str
     chinese: chineseParagraphs.join("\n\n"),
     vocabulary,
     syntaxAnnotations: extracted.sentences,
+    syntaxRequested: extracted.syntaxRequested,
+    syntaxWarning: extracted.syntaxWarning,
   };
 }

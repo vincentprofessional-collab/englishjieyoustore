@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { usePathname } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
 import { getSiteVisitorId } from "@/lib/site-messages/visitor";
+import { PostImageGallery } from "@/components/post-image-gallery";
 import styles from "./site-message-overlay.module.css";
 
 type SiteMessage = {
@@ -89,9 +89,13 @@ export function SiteMessageOverlay() {
       </header>
       <h2 id="site-message-title">{message.title}</h2>
       {message.body ? <div className={styles.body}>{message.body}</div> : null}
-      {message.imageUrls.length ? <div className={styles.images}>{message.imageUrls.map((url, index) =>
-        <Image alt={`${message.title} 配图 ${index + 1}`} className={styles.image} height={640} key={`${url}-${index}`} src={url} unoptimized width={960} />,
-      )}</div> : null}
+      {message.imageUrls.length ? <div className={styles.imageGallery}>
+        <PostImageGallery
+          images={message.imageUrls.map((url, index) => ({ alt: `${message.title} 配图 ${index + 1}`, url }))}
+          key={message.id}
+          title={message.title}
+        />
+      </div> : null}
       {error ? <p className={styles.error} role="alert">{error}</p> : null}
       <footer className={styles.footer}>
         <span>关闭后不再显示这条消息</span>

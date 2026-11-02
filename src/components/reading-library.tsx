@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ExamPagePresentation } from "@/components/exam-page-presentation";
 import { READING_TESTS, type ReadingTest } from "@/lib/ielts/reading";
 
 const IELTS_READING_TESTS = [1, 2, 3, 4];
@@ -23,6 +24,7 @@ export function ReadingLibrary({ mode }: { mode: "mock" | "practice" }) {
 
   return (
     <section className="stack ielts-module-page listening-library-page reading-library-page">
+      <ExamPagePresentation exam="ielts" />
       <div className="listening-library-panel reading-library-panel">
         <div className="listening-library-head">
           <div>

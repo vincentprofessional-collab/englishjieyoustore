@@ -1,28 +1,51 @@
 import { NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
 import {
   getAllVocabularyEntries,
 } from "@/lib/vocabulary/local-vocabulary";
 import {
-  getLearningBookEntries,
-  LEARNING_BOOKS,
   toLearningWord,
   toLearningWordFromFavorite,
   SUPPLEMENTAL_LEARNING_BOOK_KEYS,
   type FavoriteLearningWord,
-  type LearningBookKey,
   type LearningWord,
 } from "@/lib/vocabulary/learning";
 import { getSupplementalLearningWords } from "@/lib/vocabulary/supplemental-learning-books";
 import { withExistingStudyExamples } from "@/lib/vocabulary/study-examples";
 import totalFrequencyData from "@/data/vocabulary/total-frequency-ranks.json";
+import {
+  EMPTY_VOCABULARY_LEARNING_CONTENT,
+  VOCABULARY_LEARNING_CONTENT_SLUG,
+  applyVocabularyLearningOverrides,
+  getLearningBookCounts as getManagedBookCounts,
+  getLearningWordsForBook,
+  getManagedLearningBooks,
+  normalizeVocabularyLearningContent,
+} from "@/lib/vocabulary/learning-content";
 
 export const dynamic = "force-dynamic";
 
-const validBookKeys = new Set<LearningBookKey | "全部">([
-  ...LEARNING_BOOKS.map((book) => book.key),
-  "全部",
-]);
 const totalFrequencyRanks = (totalFrequencyData as { rankByWord: Record<string, number> }).rankByWord;
+
+async function getManagedContentState() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !anonKey) return EMPTY_VOCABULARY_LEARNING_CONTENT;
+  try {
+    const client = createClient(url, anonKey, { auth: { persistSession: false, autoRefreshToken: false } });
+    const { data, error } = await client.from("managed_content_pages").select("meta_json").eq("slug", VOCABULARY_LEARNING_CONTENT_SLUG).eq("status", "published").maybeSingle();
+    return error ? EMPTY_VOCABULARY_LEARNING_CONTENT : normalizeVocabularyLearningContent(data?.meta_json);
+  } catch {
+    return EMPTY_VOCABULARY_LEARNING_CONTENT;
+  }
+}
+
+function getBaseLearningWords() {
+  const entries = getAllVocabularyEntries();
+  const words: LearningWord[] = entries.map(toLearningWord).map((word) => ({ ...word, frequencyRank: totalFrequencyRanks[word.id] }));
+  for (const book of SUPPLEMENTAL_LEARNING_BOOK_KEYS) words.push(...(getSupplementalLearningWords(book) ?? []));
+  return { entries, words };
+}
 
 let supplementalFavoriteIndex: Map<string, LearningWord> | null = null;
 
@@ -38,31 +61,32 @@ function getSupplementalFavoriteIndex() {
   return supplementalFavoriteIndex;
 }
 
-export function GET(request: Request) {
+export async function GET(request: Request) {
+  const state = await getManagedContentState();
+  const { entries, words: baseWords } = getBaseLearningWords();
+  const managedBooks = getManagedLearningBooks(state);
+  const words = applyVocabularyLearningOverrides(baseWords, state);
   const requestedBook = new URL(request.url).searchParams.get("book") ?? "小学";
-  const book = validBookKeys.has(requestedBook as LearningBookKey | "全部")
-    ? (requestedBook as LearningBookKey | "全部")
-    : "小学";
-  if (book !== "全部") {
-    const supplementalWords = getSupplementalLearningWords(book);
-    if (supplementalWords) {
-      return NextResponse.json(
-        { book, sourceCount: supplementalWords.length, words: supplementalWords.map(withExistingStudyExamples) },
-        { headers: { "Cache-Control": "no-store" } },
-      );
-    }
+  if (new URL(request.url).searchParams.get("catalog") === "1") {
+    return NextResponse.json({
+      books: managedBooks,
+      bookCounts: getManagedBookCounts(words, managedBooks),
+      sourceCount: entries.length,
+    }, { headers: { "Cache-Control": "no-store" } });
   }
-  const entries = getAllVocabularyEntries();
-  const words = getLearningBookEntries(entries, book)
-    .map(toLearningWord)
-    .map((word) => ({ ...word, frequencyRank: totalFrequencyRanks[word.id] ?? word.frequencyRank }))
-    .map(withExistingStudyExamples);
+  const validBooks = new Set(managedBooks.map((item) => item.key));
+  const book = (validBooks.has(requestedBook) || requestedBook === "全部")
+    ? requestedBook
+    : "小学";
+  const selectedWords = (new URL(request.url).searchParams.get("direct") === "1"
+    ? words.filter((word) => word.level === book)
+    : getLearningWordsForBook(words, book)).map(withExistingStudyExamples);
 
   return NextResponse.json(
     {
       book,
       sourceCount: entries.length,
-      words,
+      words: selectedWords,
     },
     {
       headers: {

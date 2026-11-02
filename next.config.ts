@@ -28,6 +28,10 @@ const nextConfig: NextConfig = {
     "/api/vocabulary-audio/*": ["public/**/*.mp3"],
   },
   outputFileTracingIncludes: {
+    "/api/vocabulary-exam-questions": [
+      "./public/{senior-high,cet4,cet6,kaoyan}/index.json",
+      "./public/{senior-high,cet4,cet6,kaoyan,sat}/papers/*.json",
+    ],
     "/api/admin/bbc-pdf-quiz": [
       "./node_modules/pdfjs-dist/package.json",
       "./node_modules/pdfjs-dist/legacy/build/pdf.mjs",

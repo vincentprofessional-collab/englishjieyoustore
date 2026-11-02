@@ -16,6 +16,7 @@ import { resolveCurrentMembership, type MembershipEntitlement, type MembershipPr
 import { supabase } from "@/lib/supabase/client";
 import { getVisitorNumber } from "@/lib/visitor-identity";
 import { buildGuideCommentTree, parseGuideComment, type GuideComment, type GuideCommentRow } from "@/lib/guide/comments";
+import { PostImageGallery, type PostGalleryImage } from "@/components/post-image-gallery";
 
 type GuideBoardProps = {
   eyebrow?: string;
@@ -129,12 +130,7 @@ function GuideBlock({ block }: { block: GuideContentBlock }) {
   }
 
   if (block.type === "video") {
-    return block.url ? (
-      <figure className="guide-post-media" style={{ textAlign: block.align }}>
-        <video controls playsInline preload="metadata" src={block.url} />
-        {block.caption ? <figcaption>{block.caption}</figcaption> : null}
-      </figure>
-    ) : null;
+    return null;
   }
 
   if (block.type === "audio") {
@@ -520,6 +516,13 @@ function GuidePostCard({
     </div>;
   }
   const visibleComments = commentTree.visibleChildren(null, false);
+  const imageBlocks = post.blocks.filter((block) => block.type === "image" && block.url);
+  const firstImageBlockIndex = post.blocks.findIndex((block) => block.type === "image" && block.url);
+  const galleryImages: PostGalleryImage[] = imageBlocks.map((block, index) => ({
+    alt: block.caption || `${post.title} 配图 ${index + 1}`,
+    caption: block.caption,
+    url: block.url,
+  }));
 
   return (
     <article className={`guide-post-card ${expanded ? "expanded" : ""}`}>
@@ -560,9 +563,11 @@ function GuidePostCard({
 
       {initialExpanded || expanded ? (
         <div className="guide-post-content">
-          {post.blocks.map((block) => (
-            <GuideBlock block={block} key={block.id} />
-          ))}
+          {post.blocks.map((block, index) => block.type === "image"
+            ? index === firstImageBlockIndex && galleryImages.length > 0
+              ? <PostImageGallery images={galleryImages} key={`gallery-${block.id}`} title={post.title} />
+              : null
+            : <GuideBlock block={block} key={block.id} />)}
         </div>
       ) : null}
 

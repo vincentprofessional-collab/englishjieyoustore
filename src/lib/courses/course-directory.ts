@@ -2,22 +2,35 @@ export const COURSE_DIRECTORY_SLUG = "course-directory";
 
 export type CoursePageNode = {
   children: CoursePageNode[];
+  content: string;
   id: string;
   label: string;
   slug: string;
   summary: string;
 };
 
+export type CourseHomepage = {
+  content: string;
+  summary: string;
+  title: string;
+};
+
 export type CourseDirectory = {
   groups: CoursePageNode[];
+  homepage: CourseHomepage;
   version: 1;
 };
 
 function courseNode(id: string, slug: string, label: string, children: CoursePageNode[] = [], summary = ""): CoursePageNode {
-  return { children, id, label, slug, summary };
+  return { children, content: "", id, label, slug, summary };
 }
 
 export const DEFAULT_COURSE_DIRECTORY: CourseDirectory = {
+  homepage: {
+    content: "",
+    summary: "暂无内容，稍晚会有演示课及课程介绍等内容。",
+    title: "英语课程",
+  },
   groups: [
     courseNode("exam-courses", "exam-courses", "应试课程", [
       courseNode("senior-high", "senior-high", "高中"),
@@ -67,11 +80,12 @@ export function parseCourseDirectory(value: unknown): CourseDirectory | null {
       const slug = typeof row.slug === "string" ? row.slug.trim().toLowerCase() : "";
       const label = typeof row.label === "string" ? row.label.trim() : "";
       const summary = typeof row.summary === "string" ? row.summary.trim() : "";
+      const content = typeof row.content === "string" ? row.content : "";
       const rawChildren = Array.isArray(row.children) ? row.children : [];
 
       if (!/^[a-zA-Z0-9_-]{1,100}$/.test(id) || ids.has(id)) return null;
       if (!/^[a-z0-9][a-z0-9-]{0,63}$/.test(slug) || slugs.has(slug)) return null;
-      if (!label || label.length > 80 || summary.length > 500) return null;
+      if (!label || label.length > 80 || summary.length > 500 || content.length > 12000) return null;
       ids.add(id);
       slugs.add(slug);
       nodeCount += 1;
@@ -79,14 +93,26 @@ export function parseCourseDirectory(value: unknown): CourseDirectory | null {
 
       const children = parseNodes(rawChildren, depth + 1);
       if (!children) return null;
-      nodes.push({ children, id, label, slug, summary });
+      nodes.push({ children, content, id, label, slug, summary });
     }
 
     return nodes;
   }
 
   const groups = parseNodes(rawGroups, 0);
-  return groups ? { groups, version: 1 } : null;
+  if (!groups) return null;
+
+  const rawHomepage = isRecord(source?.homepage) ? source.homepage : {};
+  const homepageTitle = typeof rawHomepage.title === "string" ? rawHomepage.title.trim() : DEFAULT_COURSE_DIRECTORY.homepage.title;
+  const homepageSummary = typeof rawHomepage.summary === "string" ? rawHomepage.summary.trim() : DEFAULT_COURSE_DIRECTORY.homepage.summary;
+  const homepageContent = typeof rawHomepage.content === "string" ? rawHomepage.content : "";
+  if (!homepageTitle || homepageTitle.length > 80 || homepageSummary.length > 500 || homepageContent.length > 12000) return null;
+
+  return {
+    groups,
+    homepage: { content: homepageContent, summary: homepageSummary, title: homepageTitle },
+    version: 1,
+  };
 }
 
 export function normalizeCourseDirectory(value: unknown): CourseDirectory {
@@ -133,6 +159,7 @@ export function createCoursePageNode(label = "新课程页面"): CoursePageNode 
   const id = globalThis.crypto?.randomUUID?.() ?? `course-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
   return {
     children: [],
+    content: "",
     id,
     label,
     slug: `page-${id.replace(/[^a-z0-9]/gi, "").slice(0, 12).toLowerCase()}`,

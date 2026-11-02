@@ -1,5 +1,6 @@
 import { VocabularyLookupEntry } from "@/components/vocabulary-lookup-entry";
 import { VocabularySearchAutocomplete } from "@/components/vocabulary-search-autocomplete";
+import { FrontendPageAdmin } from "@/components/frontend-page-admin";
 
 export const dynamic = "force-dynamic";
 
@@ -24,6 +25,8 @@ export default async function VocabularyWordPage({
   }
   return <section className="stack vocabulary-page vocabulary-lookup-landing">
     <div className="vocabulary-hero"><VocabularySearchAutocomplete initialQuery="" autoFocus={false} /></div>
-    <VocabularyLookupEntry word={word} backHref={backHref} />
+    <FrontendPageAdmin title="查单词页面管理">
+      <VocabularyLookupEntry word={word} backHref={backHref} />
+    </FrontendPageAdmin>
   </section>;
 }

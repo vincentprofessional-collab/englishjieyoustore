@@ -123,6 +123,14 @@ export function ensureCompleteExamMenu<T extends SiteChromeNavNode & { enabled: 
   items: T[],
   exams: T,
 ): T[] {
+  const ensureChildren = (current: SiteChromeNavNode[], fallback: SiteChromeNavNode[]): SiteChromeNavNode[] => fallback.reduce((children, fallbackChild) => {
+    const existing = children.find((child) => child.id === fallbackChild.id);
+    if (!existing) return [...children, fallbackChild];
+    return children.map((child) => child.id === fallbackChild.id
+      ? { ...child, children: ensureChildren(child.children, fallbackChild.children) }
+      : child);
+  }, current);
+
   const existingExams = items.find((item) => item.id === exams.id);
 
   if (!existingExams) {
@@ -134,12 +142,7 @@ export function ensureCompleteExamMenu<T extends SiteChromeNavNode & { enabled: 
         ...item,
         enabled: true,
         label: exams.label,
-        children: exams.children.reduce(
-          (children, fallbackChild) => children.some((child) => child.id === fallbackChild.id)
-            ? children
-            : [...children, fallbackChild],
-          item.children,
-        ),
+        children: ensureChildren(item.children, exams.children),
       }
     : item);
 }

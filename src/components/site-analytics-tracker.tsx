@@ -3,7 +3,7 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { activityForLearningPath, recordDailyLearningSeconds, recordStudyPage } from "@/lib/learning/site-progress";
-import { getOrCreateVisitorKey, hasVisitedBeforeToday } from "@/lib/visitor-identity";
+import { getOrCreateVisitSessionId, getOrCreateVisitorKey, hasVisitedBeforeToday } from "@/lib/visitor-identity";
 
 const DAILY_TICK_AT_KEY = "ielts-platform.analytics.dailyTickAt";
 const DAILY_TICK_VISIBLE_KEY = "ielts-platform.analytics.dailyTickVisible";
@@ -18,12 +18,16 @@ async function recordPageView(path: string) {
   try {
     const { supabase } = await import("@/lib/supabase/client");
     const { data: { session } } = await supabase.auth.getSession();
+    const visitSessionId = getOrCreateVisitSessionId();
     await supabase.from("site_activity_events").insert({
       event_type: "page_view",
       path: path.split(/[?#]/, 1)[0],
       user_id: session?.user?.id ?? null,
       visitor_key: getOrCreateVisitorKey(),
-      metadata: { returning_visitor: hasVisitedBeforeToday() },
+      metadata: {
+        returning_visitor: hasVisitedBeforeToday(),
+        ...(visitSessionId ? { visit_session_id: visitSessionId } : {}),
+      },
     });
   } catch {
     // Popular-page tracking should never block learning pages.

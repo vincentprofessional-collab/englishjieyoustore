@@ -1,0 +1,10 @@
+.presentation { display: grid; gap: 14px; margin: 0 0 22px; }
+.heading { display: grid; gap: 4px; }
+.heading h1 { margin: 0; font-size: 1.45rem; line-height: 1.3; }
+.heading p { max-width: 70ch; margin: 0; color: #40535a; line-height: 1.6; }
+.blocks { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 12px; }
+.block { display: grid; align-content: start; gap: 7px; border: 1px solid #e6ded0; border-radius: 14px; background: #fffdf8; color: inherit; padding: 16px; text-decoration: none; }
+.block strong { font-size: 17px; }
+.block span { color: #56615d; line-height: 1.6; white-space: pre-wrap; }
+.block small { color: #306c88; font-weight: 700; }
+.block:hover { border-color: #aacdd8; transform: translateY(-1px); }

@@ -633,11 +633,9 @@ export function GlobalStudyInteractions() {
           }}
           onMouseLeave={() => {
             if (hideWordTimerRef.current != null) window.clearTimeout(hideWordTimerRef.current);
-            hideWordTimerRef.current = window.setTimeout(() => {
-              dismissedHoverWordRef.current = wordTooltipRef.current?.word ?? "";
-              setWordTooltip(null);
-              hideWordTimerRef.current = null;
-            }, 400);
+            hideWordTimerRef.current = null;
+            dismissedHoverWordRef.current = wordTooltipRef.current?.word ?? "";
+            setWordTooltip(null);
           }}
         >
           <div className="word-tooltip-title-row">

@@ -75,6 +75,31 @@ function tokenize(text: string): Token[] {
   return tokens;
 }
 
+/** Keep an article editable when the NLP tokenizer cannot preserve source offsets. */
+export function buildUnclassifiedBbcSyntax(text: string): BbcSyntaxSentenceData {
+  const tokens: Token[] = [];
+  const pattern = /[A-Za-z0-9]+(?:[’'][A-Za-z0-9]+)*|[^\s]/gu;
+  for (const match of text.matchAll(pattern)) {
+    const value = match[0];
+    const start = match.index ?? 0;
+    const isWord = /[A-Za-z0-9]/.test(value);
+    tokens.push({
+      text: value,
+      pos: isWord ? "X" : "PUNCT",
+      ...(isWord ? { posLabel: "待补标" } : {}),
+      start,
+      end: start + value.length,
+    });
+  }
+  return {
+    text,
+    tokens,
+    level1: [], level2: [], level3: [], level4: [], level5: [],
+    status: "draft",
+    notes: ["自动分词无法与原文字符位置对应，已留空供前端修改。"],
+  };
+}
+
 function cloneSentence(sentence: BbcSyntaxSentenceData, text = sentence.text): BbcSyntaxSentenceData {
   return {
     ...structuredClone(sentence),

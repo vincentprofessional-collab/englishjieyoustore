@@ -27,6 +27,26 @@ function loadPastedSyntaxModule() {
   return exports;
 }
 
+test("prepare counts reviewed pasted sentence numbers correctly and deduplicates repeats", async () => {
+  const article = {
+    id: "test-paste", title: "Test", body: ["One.", "Two.", "Three."],
+    syntaxSentences: [{ status: "reviewed" }, { status: "draft" }, { status: "reviewed" }],
+  };
+  const post = loadFunctions("../src/app/api/admin/bbc-articles/route.ts", ["POST"], {
+    createServiceClient: () => ({}),
+    requireAdmin: async () => ({ user: { id: "test-admin" } }),
+    parseBbcArticlePaste: () => ({ syntaxRequested: true, syntaxAnnotations: [1, 2, 1, 3].map(sentenceNo => ({ sentenceNo })) }),
+    buildArticle: () => article,
+    getBbcArticleById: () => null,
+    NextResponse: { json: (data, options) => ({ data, status: options?.status ?? 200 }) },
+  });
+  const result = await post({ json: async () => ({ action: "prepare", text: "Test paste" }) });
+  assert.equal(result.status, 200);
+  assert.equal(result.data.pastedSyntaxTotalCount, 3);
+  assert.equal(result.data.pastedSyntaxCount, 2);
+  assert.deepEqual(Array.from(result.data.unmatchedSyntaxSentenceNos), [2]);
+});
+
 function loadAudioAlignment() {
   const exports = {};
   const code = ts.transpileModule(readFileSync(new URL("../src/lib/articles/bbc-audio-alignment.ts", import.meta.url), "utf8"), {
@@ -123,7 +143,12 @@ youth：名词（主语）
 are：助动词（谓语一部分）
 reinventing：现在分词（谓语一部分）
 what：连接代词（宾语从句）
->主干：youth【主】 are reinventing【谓】 what it means to be cool【宾语从句】
+it：代词
+means：动词
+to：不定式符号
+be：助动词
+cool：形容词
+>主干：Today's youth【主】 are reinventing【谓】 what it means to be cool【宾语从句】
 
 词汇表
 1. cool adj. 酷的
@@ -147,7 +172,8 @@ what：连接代词（宾语从句）
   assert.equal(applied.tokens[0].pos, "DET");
   assert.equal(applied.tokens[0].posLabel, "形容词性物主代词");
   assert.equal(applied.level1.length, 3);
-  assert.deepEqual(Array.from(applied.level2, (span) => span.label), ["定语", "主语", "谓语", "宾语从句"]);
+  assert.deepEqual(Array.from(applied.level2, (span) => span.label), ["定语"]);
+  assert.ok(applied.level2[0].start >= applied.level1[0].start && applied.level2[0].end <= applied.level1[0].end);
 });
 
 test("authored BBC grammar remains authoritative instead of falling back to automatic spans", () => {
@@ -163,13 +189,21 @@ test("authored BBC grammar remains authoritative instead of falling back to auto
   const authored = apply(automatic, [{
     sentenceNo: 1, text, main: "", items: [
       { term: "We", description: "代词" },
-      { term: "learn", description: "动词（谓语）" },
+      { term: "learn", description: "动词" },
+      { term: "English", description: "专有名词" },
     ],
   }], 1);
   assert.equal(authored.status, "reviewed");
   assert.equal(authored.level1.length, 0);
-  assert.deepEqual(Array.from(authored.level2, ({ label }) => label), ["谓语"]);
+  assert.equal(authored.level2.length, 0);
   assert.equal(authored.tokens[1].pos, "VERB");
+  assert.throws(() => apply(automatic, [{
+    sentenceNo: 1, text, main: "", items: [
+      { term: "We", description: "代词" },
+      { term: "learn", description: "动词（谓语）" },
+      { term: "English", description: "专有名词" },
+    ],
+  }], 1), /没有对应的一级主干范围/);
   assert.throws(() => apply(automatic, [{
     sentenceNo: 1, text, main: "We【主语】 learn【谓语】 English【宾语】", items: [
       { term: "not-in-source", description: "名词（主语）" },

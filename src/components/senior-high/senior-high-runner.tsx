@@ -453,8 +453,7 @@ function BlockRenderer({
       return asset ? <div className="senior-high-v2-media" key={key}><span>{block.label || "听力音频"}</span><audio controls preload="metadata" src={asset.url} /></div> : null;
     }
     if (block.type === "video") {
-      const asset = assets.get(block.assetId);
-      return asset ? <div className="senior-high-v2-media" key={key}><span>{block.label || "视频"}</span><video controls preload="metadata" src={asset.url} /></div> : null;
+      return null;
     }
     if (block.type === "dialogue") return <div className="senior-high-v2-dialogue" key={key}>{block.turns.map((turn, turnIndex) => <div key={`${turn.speaker}-${turnIndex}`}><strong>{turn.speaker}</strong><div><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={turn.blocks} basePath={basePath} kind={kind} onAnswer={onAnswer} onOptionDrop={onOptionDrop} wordBankQuestions={wordBankQuestions} revealSolutions={revealSolutions} writingPlaceholder={writingPlaceholder} hideWritingImages={hideWritingImages} hideWritingLines={hideWritingLines} hideClozeLines={hideClozeLines} /></div></div>)}</div>;
     return <div className="senior-high-v2-table-wrap" key={key}><table><tbody>{block.rows.map((row, rowIndex) => <tr key={rowIndex}>{row.cells.map((cell, cellIndex) => <td key={cellIndex}><BlockRenderer answers={answers} assets={assets} bindings={bindings} blocks={cell} basePath={basePath} kind={kind} onAnswer={onAnswer} onOptionDrop={onOptionDrop} wordBankQuestions={wordBankQuestions} revealSolutions={revealSolutions} writingPlaceholder={writingPlaceholder} hideWritingImages={hideWritingImages} hideWritingLines={hideWritingLines} hideClozeLines={hideClozeLines} /></td>)}</tr>)}</tbody></table></div>;

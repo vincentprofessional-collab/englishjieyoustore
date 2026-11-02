@@ -13,6 +13,7 @@ import {
   type BbcSyntaxTokenRange,
 } from "@/components/bbc-syntax-sentence";
 import type { ArticleInlineAnnotation, ArticleInlineLineStyle } from "@/lib/article-inline-annotations";
+import type { BbcVocabularyItem } from "@/lib/articles/bbc";
 import { supabase } from "@/lib/supabase/client";
 import { notifyArticleInlineAnnotationsUpdated } from "@/components/use-article-inline-annotations";
 import { adminRequest } from "@/lib/admin/request";
@@ -30,6 +31,8 @@ type Props = {
   allInlineAnnotations: ArticleInlineAnnotation[];
   allSentences: BbcSyntaxSentenceData[];
   articleId: string;
+  articleVocabulary: BbcVocabularyItem[];
+  unitId: string;
   isUploadedArticle?: boolean;
   timing?: { durationMs: number; endMs: number; startMs: number };
   data: BbcSyntaxSentenceData;
@@ -60,6 +63,8 @@ export function BbcSyntaxInlineEditor({
   allInlineAnnotations,
   allSentences,
   articleId,
+  articleVocabulary,
+  unitId,
   isUploadedArticle = false,
   timing,
   data,
@@ -80,7 +85,9 @@ export function BbcSyntaxInlineEditor({
   const [label, setLabel] = useState("主语");
   const [pos, setPos] = useState("");
   const [selectedInlineId, setSelectedInlineId] = useState("");
-  const [lineStyle, setLineStyle] = useState<ArticleInlineLineStyle>("solid");
+  const [lineStyle, setLineStyle] = useState<ArticleInlineLineStyle>("dashed");
+  const [inlineLabel, setInlineLabel] = useState("");
+  const [inlinePartOfSpeech, setInlinePartOfSpeech] = useState("");
   const [message, setMessage] = useState("");
   const [saving, setSaving] = useState(false);
   const [timingStart, setTimingStart] = useState(timing ? (timing.startMs / 1_000).toFixed(3) : "");
@@ -110,6 +117,8 @@ export function BbcSyntaxInlineEditor({
     setSelection(null);
     setEditingSpan(null);
     setSelectedInlineId("");
+    setInlineLabel("");
+    setInlinePartOfSpeech("");
     setMessage("");
   }, [articleId, sentenceNo]);
 
@@ -128,6 +137,9 @@ export function BbcSyntaxInlineEditor({
 
   function selectRange(range: BbcSyntaxTokenRange) {
     setSelection(range);
+    setSelectedInlineId("");
+    setInlineLabel("");
+    setInlinePartOfSpeech("");
     setPos("");
     const exact = allSpans.find(({ span }) => span.start === range.start && span.end === range.end);
     if (exact) {
@@ -166,7 +178,70 @@ export function BbcSyntaxInlineEditor({
     setSelection({ start: matched[0].index, end: matched[matched.length - 1].index + 1 });
     setSelectedInlineId(annotation.id);
     setLineStyle(annotation.style);
+    setInlineLabel(annotation.label);
+    setInlinePartOfSpeech(annotation.partOfSpeech);
     setMessage("已选中这条下划线标注，可修改线型后保存。");
+  }
+
+  function selectedCharacterRange() {
+    if (!selection) return null;
+    const first = data.tokens[selection.start];
+    const last = data.tokens[selection.end - 1];
+    return first && last ? { end: last.end, start: first.start } : null;
+  }
+
+  function addInlineAnnotation() {
+    const range = selectedCharacterRange();
+    if (!unitId || !range || !inlineLabel.trim()) {
+      setMessage(!unitId ? "当前句子没有可保存的原文位置。" : "请先选择短语并填写线下方显示的文字。 ");
+      return;
+    }
+    const selectedText = data.text.slice(range.start, range.end);
+    const overlaps = allInlineAnnotations.some((annotation) => annotation.unitId === unitId
+      && range.start < annotation.end && range.end > annotation.start);
+    if (overlaps) {
+      setMessage("这个范围与现有下划线标注重叠，请选中原标注后修改，或调整范围。");
+      return;
+    }
+    const annotation: ArticleInlineAnnotation = {
+      end: range.end,
+      id: crypto.randomUUID(),
+      label: inlineLabel.trim(),
+      partOfSpeech: inlinePartOfSpeech.trim(),
+      selectedText,
+      start: range.start,
+      style: lineStyle,
+      unitId,
+    };
+    onInlineAnnotationsChange([...allInlineAnnotations, annotation].sort((left, right) => left.unitId.localeCompare(right.unitId) || left.start - right.start));
+    setSelectedInlineId(annotation.id);
+    setMessage("短语下划线已添加，点击“保存并更新文章”后会同步到地道表达词汇书。");
+  }
+
+  function updateInlineAnnotation() {
+    if (!selectedInlineId || !inlineLabel.trim()) return;
+    const range = selectedCharacterRange();
+    if (!range) return;
+    const selectedText = data.text.slice(range.start, range.end);
+    const overlaps = allInlineAnnotations.some((annotation) => annotation.id !== selectedInlineId
+      && annotation.unitId === unitId && range.start < annotation.end && range.end > annotation.start);
+    if (overlaps) {
+      setMessage("这个范围与其他下划线标注重叠，请调整范围。");
+      return;
+    }
+    onInlineAnnotationsChange(allInlineAnnotations.map((annotation) => annotation.id === selectedInlineId
+      ? { ...annotation, end: range.end, label: inlineLabel.trim(), partOfSpeech: inlinePartOfSpeech.trim(), selectedText, start: range.start, style: lineStyle }
+      : annotation));
+    setMessage("短语下划线已修改，点击“保存并更新文章”后生效。");
+  }
+
+  function deleteInlineAnnotation() {
+    if (!selectedInlineId) return;
+    onInlineAnnotationsChange(allInlineAnnotations.filter((annotation) => annotation.id !== selectedInlineId));
+    setSelectedInlineId("");
+    setInlineLabel("");
+    setInlinePartOfSpeech("");
+    setMessage("短语下划线已删除，点击“保存并更新文章”后生效；已加入词汇书的短语可在后台单独删除。");
   }
 
   function changeSelectedPos(nextPos: string) {
@@ -307,7 +382,7 @@ export function BbcSyntaxInlineEditor({
         fetch("/api/article-inline-annotations", {
           method: "POST",
           headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ sourceType: "bbc", sourceId: articleId, annotations: allInlineAnnotations }),
+          body: JSON.stringify({ sourceType: "bbc", sourceId: articleId, annotations: allInlineAnnotations, vocabulary: articleVocabulary }),
         }),
       ]);
       const [syntaxPayload, inlinePayload] = await Promise.all([
@@ -320,7 +395,12 @@ export function BbcSyntaxInlineEditor({
       if (errors.length) throw new Error(errors.join("；"));
       onSentenceChange({ ...data, status: "reviewed" });
       notifyArticleInlineAnnotationsUpdated("bbc", articleId);
-      setMessage("已保存。词性、语法成分和下划线标注已更新。");
+      const phraseCount = Number(inlinePayload?.phraseVocabularyAdded ?? 0) + Number(inlinePayload?.phraseVocabularyUpdated ?? 0);
+      setMessage(inlinePayload?.phraseVocabularyWarning
+        ? `词性、语法成分和下划线已保存；地道表达词汇表同步失败：${inlinePayload.phraseVocabularyWarning}`
+        : phraseCount
+          ? `已保存。词性、语法成分和下划线已更新，并同步 ${phraseCount} 条 BBC 短语到地道表达词汇书。`
+          : "已保存。词性、语法成分和下划线标注已更新。");
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "保存语法标注失败。");
     } finally {
@@ -419,7 +499,7 @@ export function BbcSyntaxInlineEditor({
                 <button disabled={!editingSpan} onClick={deleteEditingSpan} type="button">删除成分</button>
                 <label>
                   <span>下划线样式</span>
-                  <select disabled={!selectedInlineId} onChange={(event) => changeSelectedLineStyle(event.target.value as ArticleInlineLineStyle)} value={lineStyle}>
+                  <select disabled={!selectedInlineId && !selection} onChange={(event) => changeSelectedLineStyle(event.target.value as ArticleInlineLineStyle)} value={lineStyle}>
                     <option value="solid">实线</option>
                     <option value="dashed">虚线</option>
                     <option value="wavy">波浪线</option>
@@ -430,6 +510,20 @@ export function BbcSyntaxInlineEditor({
                   <button className={styles.save} disabled={saving} onClick={() => void save()} type="button">{saving ? "保存中…" : "保存并更新文章"}</button>
                   <button aria-pressed="true" className={styles.active} onClick={() => setEditing(false)} type="button">退出编辑</button>
                 </div>
+              </div>
+              <div className={styles.controls}>
+                <label className={styles.labelInput}>
+                  <span>线下方文字／释义</span>
+                  <input onChange={(event) => setInlineLabel(event.target.value)} placeholder="例如：中文释义或用法说明" value={inlineLabel} />
+                </label>
+                <label>
+                  <span>短语类型</span>
+                  <input onChange={(event) => setInlinePartOfSpeech(event.target.value)} placeholder="例如：地道表达" value={inlinePartOfSpeech} />
+                </label>
+                {selectedInlineId ? <>
+                  <button disabled={!inlineLabel.trim()} onClick={updateInlineAnnotation} type="button">修改下划线标注</button>
+                  <button onClick={deleteInlineAnnotation} type="button">删除下划线</button>
+                </> : <button disabled={!selection || !inlineLabel.trim()} onClick={addInlineAnnotation} type="button">添加短语下划线</button>}
               </div>
               {message ? <p className={styles.message} role="status">{message}</p> : null}
               {isUploadedArticle && timing ? (

@@ -45,6 +45,12 @@ export function isSupplementalLearningBook(book: string): book is (typeof SUPPLE
 
 export type LearningWord = {
   antonyms: string[];
+  bbcExampleSource?: {
+    articleId: string;
+    articleTitle: string;
+    normalizedPhrase: string;
+    sentenceNo: number;
+  };
   definitionCn: string;
   definitionGroups: VocabularyDefinitionGroup[];
   definitionLines: string[];
@@ -75,6 +81,39 @@ export type LearningWord = {
   usPhonetic: string;
   word: string;
 };
+
+export function toLocalVocabularyEntry(word: LearningWord): LocalVocabularyEntry {
+  return {
+    antonyms: word.antonyms,
+    bbcExampleSource: word.bbcExampleSource,
+    definitionCn: word.definitionCn,
+    definitionGroups: word.definitionGroups,
+    definitionLines: word.definitionLines,
+    englishDefinitions: word.englishDefinitions,
+    englishExamples: word.englishExamples,
+    englishExampleTranslations: word.englishExampleTranslations,
+    extension: word.extension,
+    etymologyReferences: [],
+    etymologySource: word.etymologySource,
+    etymologyStory: word.etymologyStory,
+    formation: word.formation,
+    inflections: word.inflections,
+    level: word.level,
+    normalizedWord: word.word.toLowerCase().replace(/^[^a-z]+|[^a-z]+$/gi, ""),
+    partOfSpeech: word.partOfSpeech,
+    phonetic: word.phonetic,
+    reviewNotes: word.reviewNotes,
+    root: word.root,
+    rootReferences: [],
+    sourceRowNumber: 0,
+    synonyms: word.synonyms,
+    ukAudioUrl: word.ukAudioUrl,
+    ukPhonetic: word.ukPhonetic,
+    usAudioUrl: word.usAudioUrl,
+    usPhonetic: word.usPhonetic,
+    word: word.word,
+  };
+}
 
 export type FavoriteLearningWord = {
   definitionCn?: string;

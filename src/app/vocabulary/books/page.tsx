@@ -12,11 +12,12 @@ export default async function VocabularyBooksPage({
 }) {
   const query = await searchParams;
   const requestedLevel = query.level;
-  const initialBook: LearningBookKey | "生词本" = requestedLevel === "生词本"
+  const initialBook = requestedLevel === "生词本"
     ? "生词本"
     : requestedLevel === "未分级"
       ? "其他词汇"
-      : LEARNING_BOOKS.find((book) => book.key === requestedLevel)?.key ?? "初中";
+      : LEARNING_BOOKS.find((book) => book.key === requestedLevel)?.key
+        ?? (requestedLevel?.startsWith("custom-book-") ? requestedLevel : "初中");
   const initialCollection = LEARNING_COLLECTIONS.find((collection) => collection.key === query.collection && collection.key === "mastered")?.key as LearningCollectionKey | undefined;
   const entries = getAllVocabularyEntries();
   const counts = getLearningBookCounts(entries, getSupplementalLearningBookCounts());

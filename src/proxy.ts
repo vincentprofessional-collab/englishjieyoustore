@@ -33,7 +33,7 @@ export async function proxy(request: NextRequest) {
     if (process.env.NODE_ENV === "development" && /^\/audio\/(?:new-concept\/(?:book2|book1-uk|book2-uk)|new-concept-sentences\/book2)\//.test(path)) {
       return NextResponse.next({ request });
     }
-    if (staticMedia.bucket === "audio" || staticMedia.bucket === "video" || staticMedia.bucket === "videos") {
+    if (staticMedia.bucket === "audio") {
       if (isLegacyCosOnlyMediaPath(staticMedia.bucket, staticMedia.path)) {
         return NextResponse.rewrite(new URL(getManagedMediaUrl(staticMedia.bucket, staticMedia.path), request.url));
       }

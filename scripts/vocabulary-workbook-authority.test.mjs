@@ -119,7 +119,7 @@ test("audited inflected words stay corrected in every bundled source without cha
   assert.match(workbook.gulled.englishDefinitions[0], /deceived|tricked/);
 });
 
-test("cloud-only vocabulary videos show on desktop and tablet and do not load on phones", async () => {
+test("word lookup keeps standard details without loading the retired video feature on any device", async () => {
   const preferences = load("../src/lib/vocabulary/lookup-display-preferences.ts", {});
   let userAgent = "desktop";
   let videoLoads = 0;
@@ -137,6 +137,8 @@ test("cloud-only vocabulary videos show on desktop and tablet and do not load on
     "@/lib/vocabulary/synonym-distinctions": { getVocabularySynonymDistinctions: () => [] },
     "@/lib/vocabulary/lookup-display-preferences": preferences,
     "@/lib/articles/bbc-vocabulary": { getBbcVocabularyDetail: () => null },
+    "@/lib/vocabulary/managed-learning-words": { getManagedLearningPhrase() { throw new Error("single words must not load managed phrases"); } },
+    "@/lib/vocabulary/learning": { toLocalVocabularyEntry() { throw new Error("single words retain their standard entry"); } },
     "@/lib/vocabulary/videos": { getVocabularyVideoCandidates: () => [], getVocabularyVideos: async () => { videoLoads += 1; return { videos: [{ path: "cloud-only.mp4" }], totalVideos: 1 }; } },
     "@/lib/supabase/server": {},
   };
@@ -145,13 +147,14 @@ test("cloud-only vocabulary videos show on desktop and tablet and do not load on
   const content = tree => tree.props.children[1].props.children;
   for (const device of ["Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)", "Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X)", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 Mobile/15E148 Safari/604.1", "Mozilla/5.0 (Linux; Android 14; SM-T970) AppleWebKit/537.36 Chrome/130.0.0.0 Safari/537.36"]) {
     userAgent = device;
-    const video = content(await VocabularyLookupEntry({ word: "baby" })).props.inlineVideo;
-    assert.equal(video.type, "VocabularyLookupDisplaySection");
-    assert.equal(video.props.children.props.videos[0].path, "cloud-only.mp4");
+    const detail = content(await VocabularyLookupEntry({ word: "baby" }));
+    assert.equal(detail.type, "VocabularyDetailContent");
+    assert.equal(detail.props.entry, entry);
+    assert.equal(detail.props.inlineVideo, undefined);
   }
   for (const phone of ["Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) Mobile/15E148", "Mozilla/5.0 (Linux; Android 14; Pixel 8) Chrome/130 Mobile Safari/537.36"]) {
     userAgent = phone;
-    assert.equal(content(await VocabularyLookupEntry({ word: "baby" })).props.inlineVideo, null);
+    assert.equal(content(await VocabularyLookupEntry({ word: "baby" })).props.inlineVideo, undefined);
   }
-  assert.equal(videoLoads, 4);
+  assert.equal(videoLoads, 0);
 });

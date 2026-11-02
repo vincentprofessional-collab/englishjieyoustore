@@ -29,6 +29,7 @@ test("published exam banks have clickable sidebar and saved-menu entry points", 
       if (name === "@/lib/courses/course-directory") return {};
       if (name === "@/lib/supabase/client") return {};
       if (name === "@/lib/content/site-chrome-nav") return navHelpers;
+      if (name === "@/lib/language-exam-content") return loadModule("../src/lib/language-exam-content.ts");
       return require(name);
     }, exports);
     return exports;

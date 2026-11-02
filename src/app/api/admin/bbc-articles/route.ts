@@ -3,14 +3,16 @@ import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { splitArticleSentences } from "@/lib/article-inline-annotations";
+import { getArticleInlineSourceDocument } from "@/lib/article-inline-annotation-sources";
 import { getBbcArticleById } from "@/lib/articles/bbc";
 import { parseBbcArticleDateFromTitle, parseBbcArticlePaste, splitBbcArticleParagraphs } from "@/lib/articles/bbc-article-upload";
 import type { BbcArticle, BbcVocabularyItem } from "@/lib/articles/bbc";
 import { extractBbcWaveText } from "@/lib/articles/bbc-paste-markup";
 import { normalizeBbcSyntaxSentenceEdits } from "@/lib/bbc-syntax-annotation-edits";
-import { buildAutomaticBbcSyntax } from "@/lib/articles/bbc-automatic-syntax";
+import { buildAutomaticBbcSyntax, buildUnclassifiedBbcSyntax } from "@/lib/articles/bbc-automatic-syntax";
 import { applyPastedBbcSyntax, retainReviewedBbcSyntax, type PastedBbcSyntaxSentence } from "@/lib/articles/bbc-pasted-syntax";
 import { normalizeBbcPdfQuiz } from "@/lib/articles/bbc-quiz";
+import { syncBbcDashedPhrases } from "@/lib/vocabulary/bbc-dashed-phrase-sync";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -23,6 +25,21 @@ const maxAudioBytes = 200 * 1024 * 1024;
 function createServiceClient() {
   if (!supabaseUrl || !serviceKey) return null;
   return createClient(supabaseUrl, serviceKey, { auth: { autoRefreshToken: false, persistSession: false } });
+}
+
+async function syncPublishedPhraseVocabulary(supabase: SupabaseClient, adminUserId: string, article: BbcArticle) {
+  try {
+    const document = getArticleInlineSourceDocument("bbc", article.id, article);
+    if (!document) return { added: 0, updated: 0, warning: "找不到文章正文，短语词汇表未同步。" };
+    const result = await syncBbcDashedPhrases(supabase, adminUserId, article, document, [], article.vocabulary ?? []);
+    return { ...result, warning: "" };
+  } catch (cause) {
+    return {
+      added: 0,
+      updated: 0,
+      warning: cause instanceof Error ? cause.message : "地道表达词汇表同步失败。",
+    };
+  }
 }
 
 async function requireAdmin(request: NextRequest, supabase: SupabaseClient) {
@@ -215,6 +232,25 @@ function buildPracticeSentences(body: string[], chineseParagraphs: string[]) {
   });
 }
 
+function withoutSyntaxGuessing(text: string) {
+  let automatic: ReturnType<typeof buildAutomaticBbcSyntax>;
+  try { automatic = buildAutomaticBbcSyntax(text); }
+  catch { automatic = buildUnclassifiedBbcSyntax(text); }
+  return {
+    ...automatic,
+    tokens: automatic.tokens.map((token) => token.pos === "PUNCT"
+      ? { ...token }
+      : { ...token, pos: "X", posLabel: "待补标" }),
+    level1: [],
+    level2: [],
+    level3: [],
+    level4: [],
+    level5: [],
+    notes: [],
+    status: "draft" as const,
+  };
+}
+
 function buildArticle(payload: Record<string, unknown>, objectPath: string): BbcArticle | string {
   const titleResult = readText(payload.title, "英文标题", 180);
   if (titleResult.error) return titleResult.error;
@@ -251,14 +287,38 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string): Bbc
   const syntaxAnnotations = Array.isArray(payload.syntaxAnnotations)
     ? payload.syntaxAnnotations as PastedBbcSyntaxSentence[]
     : [];
+  const syntaxRequested = payload.syntaxRequested === true || syntaxAnnotations.length > 0;
+  const syntaxWarnings: string[] = [];
+  if (typeof payload.syntaxWarning === "string" && payload.syntaxWarning.trim()) {
+    syntaxWarnings.push(payload.syntaxWarning.trim());
+  }
   const annotatedSentenceNos = new Set<number>();
+  const validSyntaxAnnotations: PastedBbcSyntaxSentence[] = [];
   for (const annotation of syntaxAnnotations) {
     if (!Number.isInteger(annotation.sentenceNo) || annotation.sentenceNo < 1 || annotation.sentenceNo > sentences.length) {
-      throw new Error(`语法标注的句号 ${annotation.sentenceNo} 超出正文范围，请核对输入框内容。`);
+      syntaxWarnings.push(`语法标注的句号 ${annotation.sentenceNo} 超出正文范围，已跳过该条标注。`);
+      continue;
     }
-    if (annotatedSentenceNos.has(annotation.sentenceNo)) throw new Error(`第 ${annotation.sentenceNo} 句存在重复语法标注。`);
+    if (annotatedSentenceNos.has(annotation.sentenceNo)) {
+      syntaxWarnings.push(`第 ${annotation.sentenceNo} 句存在重复语法标注，已跳过重复条目。`);
+      continue;
+    }
     annotatedSentenceNos.add(annotation.sentenceNo);
+    validSyntaxAnnotations.push(annotation);
   }
+  const syntaxSentences = sentences.map((sentence) => {
+    if (syntaxRequested && validSyntaxAnnotations.length === 0) return withoutSyntaxGuessing(sentence.english);
+    try {
+      return applyPastedBbcSyntax(buildAutomaticBbcSyntax(sentence.english), validSyntaxAnnotations, sentence.sentenceNo);
+    } catch (cause) {
+      const reason = cause instanceof Error ? cause.message : "标注与正文无法匹配。";
+      const hasInputAnnotation = validSyntaxAnnotations.some((annotation) => annotation.sentenceNo === sentence.sentenceNo);
+      syntaxWarnings.push(hasInputAnnotation
+        ? `第 ${sentence.sentenceNo} 句的输入标注未应用：${reason} 文章仍可保存，该句暂不显示自动猜测的词性和句子成分。`
+        : `第 ${sentence.sentenceNo} 句自动分词未能与原文字符位置对齐：${reason} 文章仍可保存，该句已留空供前端修改。`);
+      return withoutSyntaxGuessing(sentence.english);
+    }
+  });
   return {
     ...(fullAudioUrl ? { audioUrl: fullAudioUrl, fullAudioUrl } : {}),
     body: body.map((paragraph) => extractBbcWaveText(paragraph).text),
@@ -267,12 +327,9 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string): Bbc
     date: parsedDate.date,
     id: parsedDate.id,
     lead: titleChinese,
+    reviewWarnings: [...new Set(syntaxWarnings)],
     sentences,
-    syntaxSentences: sentences.map((sentence) => applyPastedBbcSyntax(
-      buildAutomaticBbcSyntax(sentence.english),
-      syntaxAnnotations,
-      sentence.sentenceNo,
-    )),
+    syntaxSentences,
     title,
     titleChinese: titleChinese || undefined,
     vocabulary,
@@ -319,14 +376,17 @@ export async function POST(request: NextRequest) {
         article.quiz = quiz;
       }
       const syntaxSentences = article.syntaxSentences ?? [];
-      const unmatchedSyntaxSentenceNos = parsed.syntaxAnnotations
-        .filter((annotation) => syntaxSentences[annotation.sentenceNo - 1]?.status !== "reviewed")
-        .map((annotation) => annotation.sentenceNo);
-      const pastedSyntaxCount = parsed.syntaxAnnotations.length - unmatchedSyntaxSentenceNos.length;
+      const parsedSyntaxSentenceNos = [...new Set(parsed.syntaxAnnotations.map((annotation) => annotation.sentenceNo))];
+      const unmatchedSyntaxSentenceNos = parsedSyntaxSentenceNos
+        .filter((sentenceNo) => syntaxSentences[sentenceNo - 1]?.status !== "reviewed");
+      const pastedSyntaxTotalCount = parsedSyntaxSentenceNos.length;
+      const pastedSyntaxCount = pastedSyntaxTotalCount - unmatchedSyntaxSentenceNos.length;
       return NextResponse.json({
         article,
         pastedSyntaxCount,
-        pastedSyntaxTotalCount: parsed.syntaxAnnotations.length,
+        pastedSyntaxTotalCount,
+        syntaxRequested: parsed.syntaxRequested,
+        syntaxWarning: parsed.syntaxWarning,
         unmatchedSyntaxSentenceNos,
       });
     } catch (cause) { return NextResponse.json({ error: cause instanceof Error ? cause.message : "文章分析失败。" }, { status: 400 }); }
@@ -469,7 +529,11 @@ export async function PUT(request: NextRequest) {
       previousSyntax = normalizeBbcSyntaxSentenceEdits(overrides.data.sentences, previousSyntax) ?? previousSyntax;
     }
   }
-  article.syntaxSentences = retainReviewedBbcSyntax(article.syntaxSentences ?? [], previousSyntax);
+  const doNotRetainSyntax = new Set(parsedPaste?.syntaxAnnotations.map((annotation) => annotation.sentenceNo) ?? []);
+  if (parsedPaste?.syntaxRequested && parsedPaste.syntaxAnnotations.length === 0) {
+    for (let sentenceNo = 1; sentenceNo <= (article.syntaxSentences?.length ?? 0); sentenceNo++) doNotRetainSyntax.add(sentenceNo);
+  }
+  article.syntaxSentences = retainReviewedBbcSyntax(article.syntaxSentences ?? [], previousSyntax, doNotRetainSyntax);
   let timings = payload.timings;
   let durationMs = Number(payload.durationMs);
   const reusingAudio = !Array.isArray(timings);
@@ -508,6 +572,19 @@ export async function PUT(request: NextRequest) {
   }
   article.subtitleUrl = `/api/bbc-subtitles/${article.id}`;
   article.audioDurationMs = durationMs;
+  const suppliedReviewWarnings = Array.isArray(payload.reviewWarnings)
+    ? payload.reviewWarnings
+      .filter((warning): warning is string => typeof warning === "string" && warning.trim().length > 0)
+      .map((warning) => warning.trim().slice(0, 240))
+    : [];
+  const unmatchedSyntaxSentenceNos = [...new Set((parsedPaste?.syntaxAnnotations ?? []).map((annotation) => annotation.sentenceNo))]
+    .filter((sentenceNo) => article.syntaxSentences?.[sentenceNo - 1]?.status !== "reviewed");
+  article.reviewWarnings = [...new Set([
+    ...(article.reviewWarnings ?? []),
+    ...suppliedReviewWarnings,
+    ...(parsedPaste?.syntaxWarning ? [parsedPaste.syntaxWarning] : []),
+    ...unmatchedSyntaxSentenceNos.map((sentenceNo) => `第 ${sentenceNo} 句语法标注与正文未完全匹配`),
+  ])].slice(0, 30);
 
   const published = existingArticle?.published === true;
 
@@ -530,6 +607,9 @@ export async function PUT(request: NextRequest) {
 
   revalidatePath("/articles");
   revalidatePath(`/articles/${article.id}`);
+  const phraseVocabulary = published
+    ? await syncPublishedPhraseVocabulary(supabase, admin.user.id, article)
+    : { added: 0, updated: 0, warning: "" };
   return NextResponse.json({
     articleId: article.id,
     audioIncluded: Boolean(article.fullAudioUrl),
@@ -541,6 +621,9 @@ export async function PUT(request: NextRequest) {
     vocabularyCount: article.vocabulary?.length ?? 0,
     sentenceCount: article.sentences?.length ?? 0,
     sentenceAudioCount: article.sentences?.filter((sentence) => sentence.audioUrl && sentence.audioUrl !== article.fullAudioUrl).length ?? 0,
+    phraseVocabularyAdded: phraseVocabulary.added,
+    phraseVocabularyUpdated: phraseVocabulary.updated,
+    phraseVocabularyWarning: phraseVocabulary.warning,
     year: article.year,
   });
 }
@@ -562,9 +645,17 @@ export async function PATCH(request: NextRequest) {
     if (!article.fullAudioUrl || !article.sentences?.length) return NextResponse.json({ error: "草稿缺少文章音频或逐句时间轴，暂时不能发布。" }, { status: 400 });
     const { error } = await supabase.from("bbc_uploaded_articles").update({ published: true }).eq("id", articleId);
     if (error) return NextResponse.json({ error: `发布失败：${error.message}` }, { status: 500 });
+    const phraseVocabulary = await syncPublishedPhraseVocabulary(supabase, admin.user.id, article);
     revalidatePath("/articles");
     revalidatePath(`/articles/${articleId}`);
-    return NextResponse.json({ ok: true, published: true, articleId });
+    return NextResponse.json({
+      ok: true,
+      published: true,
+      articleId,
+      phraseVocabularyAdded: phraseVocabulary.added,
+      phraseVocabularyUpdated: phraseVocabulary.updated,
+      phraseVocabularyWarning: phraseVocabulary.warning,
+    });
   }
   const articleId = typeof payload?.articleId === "string" ? payload.articleId : "";
   const sentenceNo = Number(payload?.sentenceNo);

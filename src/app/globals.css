@@ -29226,6 +29226,19 @@ audio.guide-editor-asset-preview {
 .vocabulary-learning-scope-choice label { height: 100%; padding-right: 40px; }
 .vocabulary-learning-scope-choice label > span { flex-wrap: wrap; }
 .vocabulary-learning-scope-choice .vocabulary-study-group-label { flex-basis: 100%; font-size: 12px; }
+.vocabulary-review-group-picker { grid-column: 1 / -1; margin: 8px 8px 10px; min-width: 0; }
+.vocabulary-review-group-picker > summary { background: #fffdf8; border: 1px solid #a9d4ea; border-radius: 10px; color: var(--accent-dark); cursor: pointer; font-size: 13px; font-weight: 750; list-style: none; padding: 8px 10px; }
+.vocabulary-review-group-picker > summary::-webkit-details-marker { display: none; }
+.vocabulary-review-group-picker > summary::after { content: "⌄"; float: right; }
+.vocabulary-review-group-picker[open] > summary::after { content: "⌃"; }
+.vocabulary-review-group-options { background: #fffdf8; border: 1px solid #e4d8bd; border-radius: 11px; display: grid; gap: 5px 8px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 6px; max-height: 220px; overflow: auto; padding: 8px; }
+.vocabulary-review-group-options > p,
+.vocabulary-review-group-options > button { grid-column: 1 / -1; }
+.vocabulary-review-group-options > p { color: var(--muted); font-size: 12px; line-height: 1.4; margin: 0 0 3px; }
+.vocabulary-review-group-options > button { background: #e7f3f8; border: 1px solid #c4deea; border-radius: 8px; color: var(--accent-dark); cursor: pointer; font: inherit; font-size: 12px; font-weight: 750; padding: 6px 8px; }
+.vocabulary-review-group-options label { align-items: center; display: flex; font-size: 12px; gap: 5px; height: auto; justify-content: flex-start; min-width: 0; padding: 4px 2px; white-space: nowrap; }
+.vocabulary-review-group-options input { accent-color: #28779a; margin: 0; }
+@media (max-width: 620px) { .vocabulary-review-group-options { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .vocabulary-study-group-select {
   background: transparent;
   border: 0;
@@ -32677,8 +32690,6 @@ body *:not(.bbc-vocabulary-highlight):not(.bbc-active-word) {
   .vocabulary-bbc-example-strip-card .vocabulary-usage-example-main span { color: #69766f; display: block; font-size: 12px; line-height: 1.5; margin-top: 3px; }
   .vocabulary-bbc-example-strip-card .vocabulary-usage-example-main small { color: #8a8b82; display: block; font-size: 10px; margin-top: 3px; }
   .vocabulary-bbc-example-strip-card .vocabulary-usage-example-actions { justify-content: flex-end; }
-  .vocabulary-word-page .vocabulary-usage-examples .vocabulary-usage-example-card[data-book-code="BBC"] { display: none; }
-  .vocabulary-word-page .vocabulary-usage-examples:has(> [data-has-non-bbc-examples="false"]) { display: none; }
   .vocabulary-video-panel {
     border-radius: 15px;
     margin: 4px 0 0;
@@ -36334,6 +36345,9 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
 .vocabulary-learning-reaction-choice { align-items: center; background: linear-gradient(135deg, #f1f6ff, #e0edff); border: 1px solid #aac5ed; border-radius: 14px; display: flex; gap: 8px; min-height: 52px; min-width: 0; padding: 9px 12px; }
 .vocabulary-learning-reaction-choice.active { background: linear-gradient(135deg, #d7e7ff, #bed7ff); border-color: #87a7e6; }
 .vocabulary-learning-reaction-mode { align-items: center; background: transparent; border: 0; color: #111; cursor: pointer; display: inline-flex; flex: 1; font: inherit; font-size: 15px; font-weight: 800; gap: 7px; justify-content: flex-start; min-width: 0; padding: 0; white-space: nowrap; }
+.vocabulary-learning-reaction-timing { align-items: center; display: inline-flex; flex: 0 0 auto; gap: 2px; }
+.vocabulary-learning-reaction-timing > span { color: #65727c; font-size: 13px; font-weight: 800; }
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-reaction-options .vocabulary-learning-reaction-timing input[type="number"] { flex: 0 0 3ch; text-align: center; width: 3ch; }
 .vocabulary-learning-settings-dialog .vocabulary-learning-settings-reaction-options input[type="number"] { appearance: textfield; background: transparent; border: 0; border-radius: 0; color: #111; flex: 0 0 2.5ch; font-size: 17px; font-variant-numeric: tabular-nums; font-weight: 800; height: 28px; margin: 0; padding: 0; text-align: right; width: 2.5ch; }
 .vocabulary-learning-settings-dialog .vocabulary-learning-settings-memory-options { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .vocabulary-learning-settings-dialog .vocabulary-learning-settings-paired-options .vocabulary-learning-settings-memory-options label { font-size: 14px; padding-inline: 6px; }

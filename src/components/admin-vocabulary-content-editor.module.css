@@ -1,0 +1,26 @@
+.editor { display: grid; gap: 16px; }
+.heading, .sectionHeading { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.heading h2, .panel h3 { margin: 4px 0; }
+.heading p, .sectionHeading p, .hint { margin: 4px 0 0; color: var(--muted); }
+.message { margin: 0; border-radius: 10px; background: #eef6f8; padding: 12px 14px; }
+.layout { display: grid; grid-template-columns: minmax(240px, .7fr) minmax(0, 1.8fr); gap: 16px; align-items: start; }
+.panel { display: grid; align-content: start; gap: 13px; min-width: 0; border: 1px solid var(--line, #e4ded2); border-radius: 14px; background: #fffdf8; padding: 16px; }
+.panel label, .wordForm label, .wordList > label { display: grid; gap: 6px; font-weight: 650; }
+.panel input, .panel textarea, .panel select, .wordForm input, .wordForm textarea, .wordList input { box-sizing: border-box; width: 100%; min-width: 0; border: 1px solid #d9d1c2; border-radius: 8px; background: #fff; color: inherit; font: inherit; padding: 9px 11px; }
+.panel textarea, .wordForm textarea { resize: vertical; line-height: 1.5; }
+.form { display: grid; gap: 10px; padding-top: 12px; border-top: 1px solid #e8e1d5; }
+.form h4, .wordForm h4 { margin: 0; }
+.danger, .deleteSmall { border: 1px solid #dfb6af; border-radius: 8px; background: #fff8f6; color: #a13c31; cursor: pointer; font: inherit; padding: 8px 10px; }
+.wordsLayout { display: grid; grid-template-columns: minmax(220px, .8fr) minmax(300px, 1.2fr); gap: 14px; align-items: start; }
+.wordList { display: grid; gap: 8px; max-height: 820px; overflow: auto; }
+.wordRow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px; align-items: center; border: 1px solid #e8e1d5; border-radius: 9px; background: #fff; padding: 7px; }
+.active { border-color: #7ab9ce; background: #f0f8fa; }
+.wordSelect { display: grid; gap: 3px; min-width: 0; border: 0; background: transparent; color: inherit; cursor: pointer; text-align: left; font: inherit; }
+.wordSelect strong { overflow-wrap: anywhere; }
+.wordSelect span { overflow: hidden; color: var(--muted); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.deleteSmall { font-size: 12px; padding: 6px 8px; }
+.wordForm { display: grid; gap: 10px; border: 1px solid #e8e1d5; border-radius: 10px; background: #fff; padding: 12px; }
+.formRow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
+.formActions { display: flex; flex-wrap: wrap; gap: 8px; }
+@media (max-width: 900px) { .layout, .wordsLayout { grid-template-columns: minmax(0, 1fr); } .wordList { max-height: 380px; } }
+@media (max-width: 560px) { .heading, .sectionHeading { flex-direction: column; } .formRow { grid-template-columns: minmax(0, 1fr); } }

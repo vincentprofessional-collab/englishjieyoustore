@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { getBbcArticleById, type BbcArticle, type BbcVocabularyItem } from "@/lib/articles/bbc";
 import { getUploadedBbcArticle } from "@/lib/articles/bbc-uploaded-content";
 import {
   getArticleInlineSourceCatalog,
@@ -10,6 +11,7 @@ import {
   normalizeArticleInlineAnnotations,
   type ArticleInlineSourceType,
 } from "@/lib/article-inline-annotations";
+import { syncBbcDashedPhrases } from "@/lib/vocabulary/bbc-dashed-phrase-sync";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -22,16 +24,34 @@ function createServiceClient() {
   });
 }
 
-async function resolveDocument(sourceType: ArticleInlineSourceType, sourceId: string) {
-  const document = getArticleInlineSourceDocument(sourceType, sourceId);
-  if (document || sourceType !== "bbc") return document;
-  const article = await getUploadedBbcArticle(sourceId);
-  return article ? getArticleInlineSourceDocument(sourceType, sourceId, article) : null;
+async function resolveBbcArticle(sourceId: string) {
+  return getBbcArticleById(sourceId) ?? await getUploadedBbcArticle(sourceId);
+}
+
+async function resolveDocument(sourceType: ArticleInlineSourceType, sourceId: string, bbcArticle?: BbcArticle | null) {
+  if (sourceType === "bbc") {
+    const article = bbcArticle === undefined ? await resolveBbcArticle(sourceId) : bbcArticle;
+    return article ? getArticleInlineSourceDocument(sourceType, sourceId, article) : null;
+  }
+  return getArticleInlineSourceDocument(sourceType, sourceId);
 }
 
 function missingArticleInlineAnnotationsTable(error: { code?: string; message?: string }) {
   return error.code === "PGRST205" || error.code === "42P01" ||
     /could not find the table ['"]?public\.article_inline_annotations['"]? in the schema cache/i.test(error.message ?? "");
+}
+
+function getVocabularyItems(value: unknown, fallback: BbcVocabularyItem[] = []) {
+  if (!Array.isArray(value)) return fallback;
+  return value.slice(0, 500).flatMap((candidate, index) => {
+    if (!candidate || typeof candidate !== "object" || Array.isArray(candidate)) return [];
+    const item = candidate as Record<string, unknown>;
+    const strings = ["definition", "entry", "example", "highlightTerm", "lemma", "partOfSpeech", "phonetic", "sourceLevel", "term", "translation", "ukPhonetic", "usPhonetic"] as const;
+    const normalized: Record<string, string | number | boolean> = { number: Number.isInteger(item.number) ? Number(item.number) : index + 1 };
+    for (const key of strings) if (typeof item[key] === "string") normalized[key] = (item[key] as string).slice(0, key === "example" || key === "translation" ? 4_000 : 500);
+    if (typeof item.highlight === "boolean") normalized.highlight = item.highlight;
+    return typeof normalized.term === "string" || typeof normalized.lemma === "string" ? [normalized as unknown as BbcVocabularyItem] : [];
+  });
 }
 
 async function requireAdmin(request: NextRequest, supabase: SupabaseClient) {
@@ -80,7 +100,8 @@ export async function GET(request: NextRequest) {
   if (!sourceId || !supabaseUrl || !supabaseAnonKey) {
     return NextResponse.json({ error: "文章标识无效。" }, { status: 400 });
   }
-  const document = await resolveDocument(sourceType, sourceId);
+  const bbcArticle = sourceType === "bbc" ? await resolveBbcArticle(sourceId) : null;
+  const document = await resolveDocument(sourceType, sourceId, bbcArticle);
   if (!document) {
     return NextResponse.json({ error: "找不到这篇文章。" }, { status: 404 });
   }
@@ -113,7 +134,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "文章类型或标识无效。" }, { status: 400 });
   }
 
-  const document = await resolveDocument(sourceType, sourceId);
+  const bbcArticle = sourceType === "bbc" ? await resolveBbcArticle(sourceId) : null;
+  const document = await resolveDocument(sourceType, sourceId, bbcArticle);
   if (!document) return NextResponse.json({ error: "找不到这篇文章。" }, { status: 404 });
   const annotations = normalizeArticleInlineAnnotations(payload?.annotations, document.units);
   if (!annotations) {
@@ -136,5 +158,28 @@ export async function POST(request: NextRequest) {
       : `保存失败：${error.message}`;
     return NextResponse.json({ error: message }, { status: 500 });
   }
-  return NextResponse.json({ ok: true, annotations });
+
+  let phraseVocabulary = { added: 0, updated: 0 };
+  let phraseVocabularyWarning = "";
+  if (sourceType === "bbc" && bbcArticle) {
+    try {
+      phraseVocabulary = await syncBbcDashedPhrases(
+        supabase,
+        admin.user.id,
+        bbcArticle,
+        document,
+        annotations,
+        getVocabularyItems(payload?.vocabulary, bbcArticle.vocabulary ?? []),
+      );
+    } catch (cause) {
+      phraseVocabularyWarning = cause instanceof Error ? cause.message : "虚线短语未能同步到地道表达词汇书。";
+    }
+  }
+  return NextResponse.json({
+    ok: true,
+    annotations,
+    phraseVocabularyAdded: phraseVocabulary.added,
+    phraseVocabularyUpdated: phraseVocabulary.updated,
+    phraseVocabularyWarning,
+  });
 }

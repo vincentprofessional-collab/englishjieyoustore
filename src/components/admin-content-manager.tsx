@@ -13,6 +13,8 @@ import { GuidePostAdmin } from "@/components/guide-post-admin";
 import { GuideCommentsAdmin } from "@/components/guide-comments-admin";
 import { AdminCourseDirectory } from "@/components/admin-course-directory";
 import { AdminExamContentEditor } from "@/components/admin-exam-content-editor";
+import { AdminLanguageExamContentEditor } from "@/components/admin-language-exam-content-editor";
+import { AdminVocabularyContentEditor } from "@/components/admin-vocabulary-content-editor";
 import { AdminSiteMessageManager } from "@/components/admin-site-message-manager";
 import { supabase } from "@/lib/supabase/client";
 import { getAuthErrorFeedback, reportAuthFailure } from "@/lib/supabase/auth-request";
@@ -25,6 +27,8 @@ type AdminView =
   | "chrome"
   | "courses"
   | "exam-content"
+  | "exam-pages"
+  | "vocabulary-content"
   | "guide"
   | "vocabulary-images"
   | "bbc-upload"
@@ -260,6 +264,20 @@ export function AdminContentManager() {
           考试题目管理
         </button>
         <button
+          className={activeView === "exam-pages" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("exam-pages")}
+        >
+          考试菜单与页面
+        </button>
+        <button
+          className={activeView === "vocabulary-content" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("vocabulary-content")}
+        >
+          背单词内容
+        </button>
+        <button
           className={activeView === "vocabulary-images" ? "active" : ""}
           type="button"
           onClick={() => setActiveView("vocabulary-images")}
@@ -297,6 +315,10 @@ export function AdminContentManager() {
       {activeView === "courses" && adminUserId ? <AdminCourseDirectory /> : null}
 
       {activeView === "exam-content" && adminUserId ? <AdminExamContentEditor adminUserId={adminUserId} /> : null}
+
+      {activeView === "exam-pages" && adminUserId ? <AdminLanguageExamContentEditor adminUserId={adminUserId} /> : null}
+
+      {activeView === "vocabulary-content" && adminUserId ? <AdminVocabularyContentEditor adminUserId={adminUserId} /> : null}
 
       {activeView === "guide" && adminUserId ? (
         <>

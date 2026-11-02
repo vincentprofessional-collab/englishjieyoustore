@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { selectVocabularyStudyGroup, vocabularyStudyGroupIndex, VOCABULARY_GROUP_SIZE } from '../src/lib/vocabulary/study-groups.ts';
+import { selectVocabularyStudyGroup, vocabularyStudyGroupIndex, VOCABULARY_GROUP_SIZE, VOCABULARY_GROUP_REVIEW_LIMIT } from '../src/lib/vocabulary/study-groups.ts';
 
 test('571 words form 29 distinct groups, with 11 words in the final group and independent core/all selections', () => {
   const words = Array.from({ length: 571 }, (_, id) => ({ id }));
@@ -19,4 +19,5 @@ test('571 words form 29 distinct groups, with 11 words in the final group and in
   assert.equal(vocabularyStudyGroupIndex('1', 571), null);
   assert.equal(vocabularyStudyGroupIndex(undefined), null);
   assert.deepEqual(selectVocabularyStudyGroup([], 0), []);
+  assert.equal(VOCABULARY_GROUP_REVIEW_LIMIT, 40);
 });

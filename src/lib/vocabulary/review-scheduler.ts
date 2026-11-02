@@ -16,18 +16,51 @@ export type ReviewHistory = {
   spellingHadError?: boolean;
 };
 
+const MINUTE = 60_000;
+const DAY = 24 * 60 * MINUTE;
+const REVIEW_TIMEZONE_OFFSET = 8 * 60 * MINUTE;
+const LONG_TERM_DAYS = [1, 3, 7, 15, 30];
+const DIFFICULT_REVIEW_DAYS = [1, 2, 4, 7, 15];
+
+function reviewDaysFor(entry: Partial<ReviewHistory> & { familiarity?: ReviewOutcome | null }) {
+  const outcome = entry.lastOutcome ?? entry.familiarity;
+  return (entry.mistakeCount ?? 0) > 0 || entry.spellingHadError || entry.recoveryRequired
+    || outcome === "vague" || outcome === "unfamiliar" ? DIFFICULT_REVIEW_DAYS : LONG_TERM_DAYS;
+}
+
+// Calendar reviews use Beijing midnight, independent of browser/server timezone.
+export function calendarReviewAt(reviewedAt: number, days: number) {
+  const dayStart = Math.floor((reviewedAt + REVIEW_TIMEZONE_OFFSET) / DAY) * DAY - REVIEW_TIMEZONE_OFFSET;
+  return dayStart + days * DAY;
+}
+
+export function getReviewDueAt(entry: Partial<ReviewHistory> & {
+  nextReviewAt: number | null;
+  lastOutcome?: ReviewOutcome | "unscored" | null;
+  familiarity?: ReviewOutcome | null;
+}) {
+  if (entry.nextReviewAt === null || !Number.isFinite(entry.nextReviewAt)) return null;
+  const outcome = entry.lastOutcome ?? entry.familiarity;
+  // Failed/uncertain retries keep their exact timestamps, including at midnight.
+  if (outcome !== "familiar") return entry.nextReviewAt;
+  const dueAt = calendarReviewAt(entry.nextReviewAt, 0);
+  if (reviewDaysFor(entry) !== DIFFICULT_REVIEW_DAYS || entry.lastReviewedAt == null
+    || !Number.isFinite(entry.lastReviewedAt)) return dueAt;
+  const step = Math.max(1, Math.min(DIFFICULT_REVIEW_DAYS.length, entry.reviewStep ?? 1));
+  // Shorten existing difficult-word schedules without postponing overdue work.
+  return Math.min(dueAt, calendarReviewAt(entry.lastReviewedAt, DIFFICULT_REVIEW_DAYS[step - 1]));
+}
+
 export function isReviewDue(
   nextReviewAt: number | null,
   completed: boolean,
   familiarity: ReviewOutcome | null,
   now: number,
 ) {
-  return !completed && familiarity !== null && nextReviewAt !== null && nextReviewAt <= now;
+  const dueAt = getReviewDueAt({ nextReviewAt, lastOutcome: familiarity });
+  return !completed && familiarity !== null && dueAt !== null && dueAt <= now;
 }
 
-const MINUTE = 60_000;
-const DAY = 24 * 60 * MINUTE;
-const LONG_TERM_DAYS = [1, 3, 7, 15, 30];
 const RETRY_MINUTES = { vague: 5, unfamiliar: 2 } as const;
 const ALL_MODES = [0, 1, 2, 3] as const;
 const CLASSIFIED_MODE_SEQUENCE = [1, 0, 2, 3] as const;
@@ -74,8 +107,8 @@ export function scheduleReview(
     && modes.includes(advanceToModeOnFamiliar)
     ? advanceToModeOnFamiliar
     : null;
-  const priorMistakes = previous.mistakeCount
-    ?? (previous.spellingHadError || previous.lastOutcome === "vague" || previous.lastOutcome === "unfamiliar" ? 1 : 0);
+  const priorMistakes = Math.max(previous.mistakeCount ?? 0,
+    reviewDaysFor(previous) === DIFFICULT_REVIEW_DAYS ? 1 : 0);
   const isFamiliar = outcome === "familiar";
   const mistakeCount = priorMistakes + (isFamiliar ? Number(hadInputError) : 1);
   const firstLearnedAt = previous.firstLearnedAt ?? previous.lastReviewedAt ?? now;
@@ -96,11 +129,13 @@ export function scheduleReview(
       plan: isLongTerm ? "long-term" as const : "short-term" as const,
       recoveryFamiliarStreak: 0,
       recoveryRequired: true,
-      reviewStep,
+      reviewStep: 0,
     };
   }
 
-  const nextStep = Math.min(LONG_TERM_DAYS.length, reviewStep + 1);
+  const reviewDays = reviewDaysFor({ ...previous, mistakeCount });
+  const restarting = previous.recoveryRequired || previous.lastOutcome === "vague" || previous.lastOutcome === "unfamiliar";
+  const nextStep = Math.min(reviewDays.length, (restarting ? 0 : reviewStep) + 1);
   const nextReviewMode = forcedFamiliarMode ?? nextMode(currentMode, modes);
   return {
     completed: false,
@@ -109,7 +144,7 @@ export function scheduleReview(
     firstLearnedAt,
     mistakeCount,
     modeIndex: nextReviewMode,
-    nextReviewAt: now + LONG_TERM_DAYS[nextStep - 1] * DAY,
+    nextReviewAt: calendarReviewAt(now, reviewDays[nextStep - 1]),
     plan: "long-term" as const,
     recoveryFamiliarStreak: 0,
     recoveryRequired: false,

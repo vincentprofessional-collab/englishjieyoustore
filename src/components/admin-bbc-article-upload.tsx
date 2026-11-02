@@ -151,9 +151,10 @@ export function AdminBbcArticleUpload() {
         pastedSyntaxCount?: number;
         pastedSyntaxTotalCount?: number;
         unmatchedSyntaxSentenceNos?: number[];
+        syntaxRequested?: boolean;
+        syntaxWarning?: string;
       };
       if (editingId && editingId !== prepared.article.id) throw new Error("编辑文章时请保留原日期编号。");
-      if (prepared.unmatchedSyntaxSentenceNos?.length) throw new Error(`第 ${prepared.unmatchedSyntaxSentenceNos.join("、")} 句的语法标注未匹配，请核对输入内容。`);
       let objectPath: string | undefined = existingAudio?.objectPath;
       let alignment: AudioPreparation | undefined;
       let sentenceAudioFiles: { sentenceNo: number; objectPath: string }[] | undefined;
@@ -198,8 +199,15 @@ export function AdminBbcArticleUpload() {
         setAudioStatus("uploaded");
       }
       setMessage("正在核对小音频并保存文章与语法标注……");
+      const unmatchedSyntaxSentenceNos = prepared.unmatchedSyntaxSentenceNos ?? [];
+      const reviewWarnings = [...new Set([
+        ...(prepared.article.reviewWarnings ?? []),
+        ...(prepared.syntaxWarning ? [prepared.syntaxWarning] : []),
+        ...unmatchedSyntaxSentenceNos.map((sentenceNo) => `第 ${sentenceNo} 句语法标注与正文未完全匹配`),
+        ...(alignment?.reviewSentenceNos ?? []).map((sentenceNo) => `第 ${sentenceNo} 句音频边界建议试听复核`),
+      ])];
       const payload = await adminRequest("/api/admin/bbc-articles", {
-        body: JSON.stringify({ text, objectPath, quiz: pdfQuiz, ...(alignment ? { durationMs: alignment.durationMs, timings: alignment.timings, sentenceAudioFiles } : {}) }),
+        body: JSON.stringify({ text, objectPath, quiz: pdfQuiz, reviewWarnings, ...(alignment ? { durationMs: alignment.durationMs, timings: alignment.timings, sentenceAudioFiles } : {}) }),
         method: "PUT",
       });
 
@@ -220,14 +228,20 @@ export function AdminBbcArticleUpload() {
           ? "字幕未能逐句匹配，已改用本地语音识别。"
           : alignment ? "已使用本地语音识别切分。" : "";
       const pastedSyntaxTotalCount = prepared.pastedSyntaxTotalCount ?? 0;
-      const unmatchedSyntaxSentenceNos = prepared.unmatchedSyntaxSentenceNos ?? [];
       const syntaxMessage = pastedSyntaxTotalCount
-        ? `已按输入框中的内容应用 ${prepared.pastedSyntaxCount ?? 0}/${pastedSyntaxTotalCount} 句词性与成分标注。${unmatchedSyntaxSentenceNos.length ? `第 ${unmatchedSyntaxSentenceNos.join("、")} 句未匹配；请核对后再继续。` : ""}`
-        : /全文逐句词性\s*[+＋]\s*句子成分标注/i.test(text)
+        ? `已对齐输入中的 ${prepared.pastedSyntaxCount ?? 0}/${pastedSyntaxTotalCount} 句词性与成分标注。${unmatchedSyntaxSentenceNos.length ? "未匹配句不会套用自动标签，文章仍可正常保存。" : ""}`
+        : prepared.syntaxWarning ?? (/全文逐句词性\s*[+＋]\s*句子成分标注/i.test(text)
           ? "检测到语法标注标题，但没有解析到句子标注；请检查是否按“## 句1”单独分行。"
-          : "";
+          : "");
+      const syntaxFallbackMessage = prepared.syntaxRequested
+        ? pastedSyntaxTotalCount === 0
+          ? "本次未成功应用的人工标注不会用自动结果替代。"
+          : pastedSyntaxTotalCount < (prepared.article.sentences?.length ?? 0)
+            ? "只有未提供人工标注的句子才使用自动分析。"
+            : ""
+        : "未提供人工标注，当前显示自动分析草稿。";
       setMessage(
-        `${isPublished ? `已更新 ${payload.year} 年 ${payload.month} 月的已发布文章` : `已保存为 ${payload.year} 年 ${payload.month} 月的草稿，用户暂时看不到`}；${payload.paragraphCount} 段正文、${payload.sentenceCount} 句、${payload.vocabularyCount} 条词汇、${payload.sentenceAudioCount ?? 0} 个独立小音频。${alignmentMessage}${syntaxMessage}未提供标注的句子已自动分析；可打开前端预览检查。${autoAdjustedSentenceNos.length ? `系统已自动调整第 ${autoAdjustedSentenceNos.join("、")} 句的音频边界。` : ""}${reviewSentenceNos.length ? `第 ${reviewSentenceNos.join("、")} 句建议试听复核。` : ""}`,
+        `${isPublished ? `已更新 ${payload.year} 年 ${payload.month} 月的已发布文章` : `已保存为 ${payload.year} 年 ${payload.month} 月的草稿，用户暂时看不到`}；${payload.paragraphCount} 段正文、${payload.sentenceCount} 句、${payload.vocabularyCount} 条词汇、${payload.sentenceAudioCount ?? 0} 个独立小音频。${alignmentMessage}${syntaxMessage}${syntaxFallbackMessage}${reviewWarnings.length ? `待复核：${reviewWarnings.join("；")}` : ""}可打开前端预览检查。${autoAdjustedSentenceNos.length ? `系统已自动调整第 ${autoAdjustedSentenceNos.join("、")} 句的音频边界。` : ""}${reviewSentenceNos.length ? `第 ${reviewSentenceNos.join("、")} 句建议试听复核。` : ""}`,
       );
       void loadArticles().catch(() => undefined);
     } catch (uploadError) {

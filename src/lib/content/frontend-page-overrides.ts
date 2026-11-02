@@ -10,10 +10,11 @@ export type FrontendPageElementPatch = {
 };
 
 export type FrontendPageAddedBlock = {
+  content?: string;
   hidden?: boolean;
   href?: string;
   id: string;
-  kind: "heading" | "image" | "link" | "paragraph";
+  kind: "heading" | "image" | "link" | "module" | "paragraph";
   text: string;
 };
 

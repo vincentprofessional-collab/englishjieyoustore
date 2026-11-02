@@ -843,12 +843,20 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
     setPublishingDraft(true);
     setDraftPublishMessage("");
     try {
-      await adminRequest("/api/admin/bbc-articles", {
+      const publishResult = await adminRequest("/api/admin/bbc-articles", {
         method: "PATCH",
         body: JSON.stringify({ action: "publish", articleId: article.id }),
       });
       setDraftIsPublished(true);
-      setDraftPublishMessage("文章已正式发布，用户现在可以看到。");
+      const reviewReminder = article.reviewWarnings?.length
+        ? ` 待复核：${article.reviewWarnings.join("；")}`
+        : "";
+      const phraseSyncReminder = typeof publishResult.phraseVocabularyWarning === "string" && publishResult.phraseVocabularyWarning
+        ? ` 地道表达词汇表同步提示：${publishResult.phraseVocabularyWarning}`
+        : Number(publishResult.phraseVocabularyAdded ?? 0) + Number(publishResult.phraseVocabularyUpdated ?? 0) > 0
+          ? ` 已同步 ${Number(publishResult.phraseVocabularyAdded ?? 0) + Number(publishResult.phraseVocabularyUpdated ?? 0)} 条短语到地道表达。`
+          : "";
+      setDraftPublishMessage(`文章已正式发布，用户现在可以看到。${phraseSyncReminder}${reviewReminder}`);
     } catch (error) {
       setDraftPublishMessage(error instanceof Error ? error.message : "发布失败，请重试。");
     } finally {
@@ -1950,7 +1958,9 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                             allInlineAnnotations={editableInlineAnnotations}
                             allSentences={editableSyntaxSentences}
                             articleId={article.id}
+                            articleVocabulary={articleVocabularyForDisplay}
                             isUploadedArticle={isUploadedArticle}
+                            unitId={inlineUnit?.id ?? ""}
                             timing={article.audioDurationMs ? {
                               durationMs: article.audioDurationMs,
                               endMs: sentence.endMs,

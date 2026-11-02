@@ -10,6 +10,13 @@ export type PastedBbcSyntaxSentence = {
   inlineComponents?: string;
 };
 
+export type ParsedPastedBbcSyntaxBlock = {
+  articleText: string;
+  sentences: PastedBbcSyntaxSentence[];
+  syntaxRequested: boolean;
+  syntaxWarning?: string;
+};
+
 const SECTION_HEADING = /^##\s*句\s*(\d+)\s*$/;
 const SYNTAX_TITLE = /^#\s*全文逐句词性\s*[+＋]\s*句子成分标注\s*$/im;
 const FOLLOWING_CONTENT_HEADING = /^(?:#{1,6}\s*)?(?:重点\s*)?(?:词汇(?:表|与短语|和短语|及短语)?|短语|Vocabulary(?:\s+(?:and|&)\s+phrases)?)\s*[:：]?\s*$/im;
@@ -65,7 +72,18 @@ function posCode(description: string) {
 }
 
 function posLabel(description: string) {
-  return description.replace(/[（(].*?[）)]/g, "").replace(/\s+/g, " ").trim().slice(0, 32);
+  const rolePattern = new RegExp(`(?:${[...ROLE_NAMES].sort((left, right) => right.length - left.length).join("|")})`, "g");
+  const parts = description.split(/[，,、；;|｜]/).map((part) => part.trim()).filter(Boolean);
+  const candidate = parts.find((part) => posCode(part)) ?? description;
+  const label = candidate
+    .replace(rolePattern, "")
+    .replace(/(?:作|充当|担当)\s*/g, "")
+    .replace(/[（(]\s*[）)]/g, "")
+    .replace(/\s+/g, " ")
+    .replace(/^[（(]/, "")
+    .replace(/[）)]$/, "")
+    .trim();
+  return (label || candidate.replace(/[（(]|[）)]/g, "").trim()).slice(0, 32);
 }
 
 function findTermRange(text: string, term: string, from: number) {
@@ -108,14 +126,52 @@ function appendSummarySpans(text: string, tokens: BbcSyntaxSentenceData["tokens"
 
 export function parsePastedBbcSyntaxBlock(value: string) {
   const normalized = value.replace(/^\uFEFF/, "").replace(/\r\n?/g, "\n");
-  const inline = parseInlineNumberedSyntax(normalized);
-  if (inline) return inline;
-  const numbered = parseNumberedSyntax(normalized);
-  if (numbered) return numbered;
+  const makeUnparsedBlock = (cause: unknown): ParsedPastedBbcSyntaxBlock | null => {
+    const title = SYNTAX_TITLE.exec(normalized);
+    const inlineHeader = [...normalized.matchAll(/^#{1,6}\s+\d+[.．、]\s+[A-Za-z].+$/gm)]
+      .find(({ index }) => {
+        const position = index ?? -1;
+        return position >= 0 && /词性\s*[:：]/m.test(normalized.slice(position)) && /句子成分\s*[:：]/m.test(normalized.slice(position));
+      });
+    const numberedHeader = [...normalized.matchAll(/^\d+[.．、]\s+[A-Za-z].+$/gm)]
+      .find(({ index }) => {
+        const position = index ?? -1;
+        return position >= 0 && /主干\s*[:：]/m.test(normalized.slice(position)) && /【[^】]+】/.test(normalized.slice(position));
+      });
+    const start = title?.index ?? inlineHeader?.index ?? numberedHeader?.index;
+    if (start === undefined) return null;
+    const remainder = normalized.slice(start);
+    const followingHeading = FOLLOWING_CONTENT_HEADING.exec(remainder);
+    const blockEnd = followingHeading?.index ?? remainder.length;
+    const articleText = [normalized.slice(0, start).trim(), remainder.slice(blockEnd).trim()].filter(Boolean).join("\n\n");
+    const reason = cause instanceof Error ? cause.message : "语法标注格式无法识别。";
+    return {
+      articleText,
+      sentences: [],
+      syntaxRequested: true,
+      syntaxWarning: `${reason} 文章仍可保存；为避免显示错误标签，本次不应用这部分词性和句子成分标注。`,
+    };
+  };
+  try {
+    const inline = parseInlineNumberedSyntax(normalized);
+    if (inline) return { ...inline, syntaxRequested: true } satisfies ParsedPastedBbcSyntaxBlock;
+  } catch (cause) {
+    const unparsed = makeUnparsedBlock(cause);
+    if (unparsed) return unparsed;
+    throw cause;
+  }
+  try {
+    const numbered = parseNumberedSyntax(normalized);
+    if (numbered) return { ...numbered, syntaxRequested: true } satisfies ParsedPastedBbcSyntaxBlock;
+  } catch (cause) {
+    const unparsed = makeUnparsedBlock(cause);
+    if (unparsed) return unparsed;
+    throw cause;
+  }
   const title = SYNTAX_TITLE.exec(normalized);
   const heading = /^##\s*句\s*\d+\s*$/m.exec(normalized);
   const start = title?.index ?? heading?.index;
-  if (start === undefined) return { articleText: value, sentences: [] as PastedBbcSyntaxSentence[] };
+  if (start === undefined) return { articleText: value, sentences: [] as PastedBbcSyntaxSentence[], syntaxRequested: false };
 
   const remainder = normalized.slice(start);
   const followingHeading = FOLLOWING_CONTENT_HEADING.exec(remainder);
@@ -148,7 +204,12 @@ export function parsePastedBbcSyntaxBlock(value: string) {
     }
     if (items.length) sentences.push({ sentenceNo: Number(sectionHeading[1]), text, items, main });
   }
-  return sentences.length ? { articleText, sentences } : { articleText: value, sentences: [] as PastedBbcSyntaxSentence[] };
+  return {
+    articleText,
+    sentences,
+    syntaxRequested: true,
+    ...(sentences.length ? {} : { syntaxWarning: "检测到词性与句子成分标注区块，但未识别到句子标注。文章仍可保存；为避免显示自动猜测的标签，语法标注暂不显示。" }),
+  } satisfies ParsedPastedBbcSyntaxBlock;
 }
 
 export function applyPastedBbcSyntax(
@@ -167,8 +228,11 @@ export function applyPastedBbcSyntax(
   if (annotation.inlineComponents) return applyInlineNumberedSyntax(automatic, annotation);
   if (annotation.summaries) return applyNumberedSyntax(automatic, annotation);
 
-  const tokens = automatic.tokens.map((token) => ({ ...token }));
+  const tokens = automatic.tokens.map((token) => token.pos === "PUNCT"
+    ? { ...token }
+    : { ...token, pos: "X", posLabel: "待补标" });
   const componentRows: { label: string; start: number; end: number }[] = [];
+  const labelledTokens = new Set<number>();
   let cursor = 0;
   for (const item of annotation.items) {
     const range = findTermRange(automatic.text, item.term, cursor);
@@ -180,20 +244,33 @@ export function applyPastedBbcSyntax(
     if (code) indexes.forEach((index) => {
       tokens[index].pos = code;
       tokens[index].posLabel = posLabel(item.description);
+      labelledTokens.add(index);
     });
     for (const label of rolesIn(item.description)) {
       componentRows.push({ label, start: indexes[0], end: indexes.at(-1)! + 1 });
     }
   }
 
+  const missingPos = tokens
+    .map((token, index) => token.pos !== "PUNCT" && !labelledTokens.has(index) ? token.text : "")
+    .filter(Boolean);
+  if (missingPos.length) {
+    throw new Error(`第 ${annotation.sentenceNo} 句的词性标注未覆盖：${missingPos.join("、")}。该句未应用自动词性结果，请补齐后复核。`);
+  }
+
   const summarySpans = appendSummarySpans(automatic.text, tokens, annotation.main, annotation.sentenceNo);
+  const level1 = [...summarySpans];
   const level2: BbcSyntaxSpan[] = [];
   for (const row of componentRows) {
-    if (!level2.some((span) => span.label === row.label && span.end === row.start)) {
+    const parent = summarySpans.find((span) => row.start >= span.start && row.end <= span.end);
+    const crossesParent = !parent && summarySpans.some((span) => row.start < span.end && row.end > span.start);
+    if (crossesParent) throw new Error(`第 ${annotation.sentenceNo} 句的句子成分“${row.label}”跨越了主干成分范围，请核对嵌套层级。`);
+    if (!parent) throw new Error(`第 ${annotation.sentenceNo} 句的句子成分“${row.label}”没有对应的一级主干范围，无法推断嵌套层级。`);
+    if (parent && parent.label === row.label) continue;
+    const previous = [...level2].reverse().find((span) => span.label === row.label && span.end === row.start);
+    if (previous) previous.end = row.end;
+    else {
       level2.push({ ...row });
-    } else {
-      const previous = [...level2].reverse().find((span) => span.label === row.label && span.end === row.start)!;
-      previous.end = row.end;
     }
   }
   return {
@@ -201,9 +278,10 @@ export function applyPastedBbcSyntax(
     tokens,
     // Uploaded annotations are the authority for annotated sentences. Never
     // quietly mix them with the automatic parser when one supplied layer is empty.
-    level1: summarySpans,
+    level1,
     level2,
     level3: [], level4: [], level5: [],
+    sourceAnnotation: annotation.source,
     status: "reviewed",
   };
 }
@@ -437,7 +515,11 @@ function parseNumberedSyntax(normalized: string) {
 }
 
 /** Editing body/vocabulary alone must not erase previously reviewed sentences. */
-export function retainReviewedBbcSyntax(next: BbcSyntaxSentenceData[], previous: BbcSyntaxSentenceData[] = []) {
-  return next.map((sentence, index) => sentence.status !== "reviewed" && previous[index]?.status === "reviewed"
+export function retainReviewedBbcSyntax(
+  next: BbcSyntaxSentenceData[],
+  previous: BbcSyntaxSentenceData[] = [],
+  doNotRetainSentenceNos: ReadonlySet<number> = new Set(),
+) {
+  return next.map((sentence, index) => !doNotRetainSentenceNos.has(index + 1) && sentence.status !== "reviewed" && previous[index]?.status === "reviewed"
     && previous[index].text === sentence.text ? previous[index] : sentence);
 }

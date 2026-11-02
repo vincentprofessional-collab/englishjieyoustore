@@ -26,7 +26,6 @@ const exams: ExamChoice[] = [
   { id: "postgraduate", title: "考研英语", indexUrl: "/exam-prep/postgraduate/index.json", root: "/exam-prep/postgraduate" },
   { id: "ielts", title: "雅思阅读", indexUrl: "/api/exam-content/ielts", root: "/api/exam-content/ielts" },
   { id: "gre", title: "GRE", indexUrl: "/exam-prep/gre/index.json", root: "/exam-prep/gre" },
-  { id: "gmat", title: "GMAT", indexUrl: "/exam-prep/gmat/index.json", root: "/exam-prep/gmat" },
   { id: "sat", title: "SAT", indexUrl: "/sat/index.json", root: "/sat/sets" },
 ];
 
@@ -35,6 +34,9 @@ function contentUrl(exam: ExamChoice, entry: BankEntry) {
   if (exam.id === "cet4" || exam.id === "cet6") {
     const kind = entry.kind === "paper" ? "papers" : "practice";
     return exam.root + "/" + kind + "/" + encodeURIComponent(entry.id) + ".json";
+  }
+  if (exam.id === "sat" && entry.kind === "paper") {
+    return "/sat/papers/" + entry.dataPath!.split("/").map(encodeURIComponent).join("/");
   }
   if (!entry.dataPath) throw new Error("题库目录缺少数据文件路径。");
   return exam.root + "/" + entry.dataPath.split("/").map(encodeURIComponent).join("/");
@@ -263,9 +265,13 @@ export function AdminExamContentEditor({ adminUserId }: { adminUserId: string })
         if (cancelled) return;
         let staticEntries = Array.isArray(result.entries) ? result.entries : [];
         if (exam.id === "sat") {
-          const [knowledgeResponse] = await Promise.all([fetch("/sat/knowledge.json", { cache: "no-store" })]);
-          if (!knowledgeResponse.ok) throw new Error("SAT 知识点目录读取失败。");
+          const [knowledgeResponse, paperResponse] = await Promise.all([
+            fetch("/sat/knowledge.json", { cache: "no-store" }),
+            fetch("/sat/papers/index.json", { cache: "no-store" }),
+          ]);
+          if (!knowledgeResponse.ok || !paperResponse.ok) throw new Error("SAT 分类目录读取失败。");
           const knowledge = await knowledgeResponse.json() as { groups?: Array<{ label?: string; topics?: Array<{ setId: string; title?: string; label?: string }> }> };
+          const papers = await paperResponse.json() as { papers?: Array<{ id: string; title?: string; year?: number; questionCount?: number }> };
           const catalogEntries = (Array.isArray(result.sets) ? result.sets : []).map((set) => ({
             id: String(set.id || ""), title: String(set.skill || set.title || set.id || ""),
             category: String(set.domain || "SAT"), kind: "practice", dataPath: `${String(set.id || "")}.json`,
@@ -274,8 +280,17 @@ export function AdminExamContentEditor({ adminUserId }: { adminUserId: string })
             id: topic.setId, title: topic.title || topic.label || topic.setId,
             category: group.label || "Standard English Conventions", kind: "practice", dataPath: `${topic.setId}.json`,
           })));
+          const paperEntries: BankEntry[] = (papers.papers || []).map((paper) => ({
+            id: paper.id,
+            title: paper.title || paper.id,
+            category: "SAT 历年真题",
+            kind: "paper",
+            year: paper.year,
+            dataPath: `${paper.id}.json`,
+          }));
           const byId = new Map<string, BankEntry>();
           for (const item of [...catalogEntries, ...knowledgeEntries]) byId.set(item.id, item);
+          for (const item of paperEntries) byId.set(item.id, item);
           staticEntries = [...byId.values()];
         }
         setEntries(staticEntries);
@@ -488,6 +503,11 @@ export function AdminExamContentEditor({ adminUserId }: { adminUserId: string })
       if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error("题目内容必须是 JSON 对象。");
       content = parsed as Record<string, unknown>;
       if (content.id !== entry.id) throw new Error("题目 ID 必须与所选题库一致，不能改成另一套题库的 ID。");
+      if (exam.id === "sat") {
+        if (typeof content.kind !== "string") content.kind = entry.kind || "practice";
+        if (content.year === undefined && entry.year !== undefined) content.year = entry.year;
+        if (content.category === undefined && entry.category) content.category = entry.category;
+      }
       if (new Blob([editorText]).size > 4_000_000) throw new Error("单套题库超过 4 MB，暂不能保存。");
     } catch (error) {
       setMessage(errorText(error));

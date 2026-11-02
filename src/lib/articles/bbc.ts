@@ -56,6 +56,7 @@ export type BbcArticle = {
   fullAudioUrl?: string;
   id: string;
   lead: string;
+  reviewWarnings?: string[];
   sentences?: BbcArticleSentence[];
   subtitleUrl?: string;
   syntaxSentences?: BbcSyntaxSentenceData[];

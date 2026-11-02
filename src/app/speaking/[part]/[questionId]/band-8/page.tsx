@@ -91,6 +91,7 @@ export default async function SpeakingBand8Page({ params }: SpeakingBand8PagePro
 
   return (
     <ProjectAccessGate
+      allowLocalPreview
       contentKey={getPaidContentKey("speaking-question", `${part.id}:${questionId}`)}
       projectKey="speaking"
       title="雅思口语范文需要单独开通"

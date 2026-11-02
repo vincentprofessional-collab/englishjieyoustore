@@ -1,5 +1,33 @@
 const FIRST_OPENED_AT_KEY = "ielts-platform.analytics.firstOpenedAt";
 const VISITOR_KEY_STORAGE_KEY = "ielts-platform.analytics.visitorKey";
+const VISIT_SESSION_STORAGE_KEY = "ielts-platform.analytics.visitSession";
+const VISIT_SESSION_TIMEOUT_MS = 30 * 60 * 1000;
+
+export function getOrCreateVisitSessionId() {
+  if (typeof window === "undefined") return "";
+
+  const now = Date.now();
+  try {
+    const stored = window.sessionStorage.getItem(VISIT_SESSION_STORAGE_KEY);
+    const existing = stored ? JSON.parse(stored) as { id?: unknown; lastSeenAt?: unknown } : null;
+    if (
+      typeof existing?.id === "string" &&
+      typeof existing.lastSeenAt === "number" &&
+      existing.lastSeenAt <= now &&
+      now - existing.lastSeenAt < VISIT_SESSION_TIMEOUT_MS
+    ) {
+      window.sessionStorage.setItem(VISIT_SESSION_STORAGE_KEY, JSON.stringify({ id: existing.id, lastSeenAt: now }));
+      return existing.id;
+    }
+
+    const id = window.crypto?.randomUUID?.() ?? `${now.toString(36)}-${Math.random().toString(36).slice(2)}`;
+    window.sessionStorage.setItem(VISIT_SESSION_STORAGE_KEY, JSON.stringify({ id, lastSeenAt: now }));
+    return id;
+  } catch {
+    // Historical daily-visit estimates remain available if session storage is disabled.
+    return "";
+  }
+}
 
 export function getOrCreateVisitorKey() {
   if (typeof window === "undefined") return "";
@@ -8,7 +36,13 @@ export function getOrCreateVisitorKey() {
     const existing = window.localStorage.getItem(VISITOR_KEY_STORAGE_KEY);
     if (existing) return existing;
   } catch {
-    // Keep page analytics available when browser storage is disabled.
+    // Fall back to a tab-scoped identity when persistent browser storage is blocked.
+  }
+  try {
+    const tabIdentity = window.sessionStorage.getItem(VISITOR_KEY_STORAGE_KEY);
+    if (tabIdentity) return tabIdentity;
+  } catch {
+    // Keep page analytics available when all browser storage is disabled.
   }
 
   const bytes = new Uint8Array(16);
@@ -25,7 +59,11 @@ export function getOrCreateVisitorKey() {
   try {
     window.localStorage.setItem(VISITOR_KEY_STORAGE_KEY, visitorKey);
   } catch {
-    // The generated key still identifies this page view when storage is disabled.
+    try {
+      window.sessionStorage.setItem(VISITOR_KEY_STORAGE_KEY, visitorKey);
+    } catch {
+      // The generated key still identifies this page view when all storage is disabled.
+    }
   }
 
   return visitorKey;

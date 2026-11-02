@@ -14,7 +14,13 @@ type DailyVisitor = {
 };
 type DashboardSnapshot = {
   daily_visitors?: DailyVisitor[];
+  lifetime_audience?: LifetimeAudienceMetrics;
   popular_pages?: PopularPage[];
+};
+type LifetimeAudienceMetrics = {
+  registered_users_total: number;
+  visitors_total: number;
+  visitors_over_five_visits: number;
 };
 
 function getShanghaiToday() {
@@ -41,11 +47,11 @@ export function AdminAnalyticsPanel() {
     setMessage("");
 
     try {
-      const { data, error } = await supabase.rpc("get_admin_dashboard_snapshot", { p_days: 1 });
+      const { data, error } = await supabase.rpc("get_admin_dashboard_with_lifetime", { p_days: 1 });
 
       if (error) {
-        if (error.code === "42883" || error.message.includes("get_admin_dashboard_snapshot")) {
-          throw new Error("统计函数尚未创建；部署前请在 Supabase 执行 supabase/033_admin_daily_visitors.sql。");
+        if (error.code === "42883" || error.message.includes("get_admin_dashboard_with_lifetime")) {
+          throw new Error("累计用户统计函数尚未启用；请在 Supabase 执行 supabase/038_admin_lifetime_audience_metrics.sql。");
         }
         throw error;
       }
@@ -62,8 +68,14 @@ export function AdminAnalyticsPanel() {
           first_time_visitors: Number(row.first_time_visitors ?? 0),
           registrations: Number(row.registrations),
         })),
+        lifetime_audience: result?.lifetime_audience ? {
+          registered_users_total: Number(result.lifetime_audience.registered_users_total),
+          visitors_total: Number(result.lifetime_audience.visitors_total),
+          visitors_over_five_visits: Number(result.lifetime_audience.visitors_over_five_visits),
+        } : undefined,
         popular_pages: (result?.popular_pages ?? []).map((row) => ({ ...row, views: Number(row.views) })),
       });
+      if (!result?.lifetime_audience) throw new Error("返回结果缺少累计用户统计；请检查 supabase/038_admin_lifetime_audience_metrics.sql 是否已执行。");
     } catch (error) {
       setMessage(`无法读取网站统计：${error instanceof Error ? error.message : "未知错误"}`);
     } finally {
@@ -75,6 +87,7 @@ export function AdminAnalyticsPanel() {
   const today = getShanghaiToday();
   const dailyVisitors = snapshot?.daily_visitors ?? [];
   const todayVisitors = dailyVisitors.find((row) => row.date === today) ?? dailyVisitors[0];
+  const lifetimeMetrics = snapshot?.lifetime_audience ?? null;
   const pages = snapshot?.popular_pages ?? [];
 
   return (
@@ -83,7 +96,7 @@ export function AdminAnalyticsPanel() {
         <div>
           <span>Analytics</span>
           <h2>网站数据后台</h2>
-          <p className="admin-analytics-refresh-note">访客和注册统计为今天；热门页面统计近 7 天。点击刷新时一次读取全部数据。</p>
+          <p className="admin-analytics-refresh-note">累计用户与回访、今日访客和近 7 天热门页面。点击刷新时读取统计数据。</p>
         </div>
         <button className="button secondary" disabled={isLoading} type="button" onClick={() => void refresh()}>
           {isLoading ? "读取中..." : "刷新数据"}
@@ -91,6 +104,32 @@ export function AdminAnalyticsPanel() {
       </header>
 
       {message ? <p className="admin-form-message error">{message}</p> : null}
+
+      <section className="admin-editor-card">
+        <header className="admin-compact-heading">
+          <h3>累计用户与回访</h3>
+          <span>网站全部记录</span>
+        </header>
+        {lifetimeMetrics ? (
+          <div className="admin-daily-metric-grid">
+            <article className="admin-daily-metric-card">
+              <span>注册用户总数</span>
+              <strong>{lifetimeMetrics.registered_users_total}</strong>
+            </article>
+            <article className="admin-daily-metric-card">
+              <span>曾经打开网站的访客</span>
+              <strong>{lifetimeMetrics.visitors_total}</strong>
+            </article>
+            <article className="admin-daily-metric-card">
+              <span>回访超过 5 次</span>
+              <strong>{lifetimeMetrics.visitors_over_five_visits}</strong>
+            </article>
+          </div>
+        ) : (
+          <p className="admin-empty-text">{isLoading ? "正在读取累计用户统计…" : "点击右上角“刷新数据”查看统计。"}</p>
+        )}
+        <p className="admin-analytics-refresh-note">注册用户排除管理员；访客按浏览器标识估算，清除浏览器数据或更换设备可能重复计数。回访按 30 分钟无活动划分访问会话，历史记录按不同访问日期估算。</p>
+      </section>
 
       <section className="admin-editor-card">
         <header className="admin-compact-heading">

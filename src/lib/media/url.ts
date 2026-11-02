@@ -1,4 +1,4 @@
-export type ManagedMediaBucket = "audio" | "images" | "video" | "videos" | "documents";
+export type ManagedMediaBucket = "audio" | "images" | "documents";
 
 export type StaticMediaAddress = {
   bucket: ManagedMediaBucket;
@@ -44,7 +44,6 @@ const bucketByExtension: Record<string, ManagedMediaBucket> = {
   ogg: "audio",
   wav: "audio",
   weba: "audio",
-  webm: "audio",
   avif: "images",
   gif: "images",
   jpeg: "images",
@@ -52,12 +51,6 @@ const bucketByExtension: Record<string, ManagedMediaBucket> = {
   png: "images",
   svg: "images",
   webp: "images",
-  avi: "video",
-  m4v: "video",
-  mkv: "video",
-  mov: "video",
-  mp4: "video",
-  ogv: "video",
   pdf: "documents",
 };
 
@@ -76,14 +69,9 @@ export function getSupabaseStorageUrl(
   if (!supabaseUrl || !normalizedPath || normalizedPath.split("/").some((part) =>
     !part || part === "." || part === ".." || /[\\\u0000-\u001f]/.test(part)
   )) return null;
-  const targetBucket = bucket === "video" ? "videos" : bucket;
   const storagePath = toSupabaseSafeStoragePath(normalizedPath);
   const encodedPath = storagePath.split("/").map(encodeURIComponent).join("/");
-  return `${supabaseUrl.replace(/\/+$/, "")}/storage/v1/object/public/${targetBucket}/${encodedPath}`;
-}
-
-export function getVocabularyVideoMediaUrl(filename: string) {
-  return `/api/vocabulary-video-media?name=${encodeURIComponent(filename)}`;
+  return `${supabaseUrl.replace(/\/+$/, "")}/storage/v1/object/public/${bucket}/${encodedPath}`;
 }
 
 export function getStaticMediaAddress(pathname: string): StaticMediaAddress | null {

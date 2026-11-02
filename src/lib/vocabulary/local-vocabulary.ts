@@ -110,10 +110,17 @@ type FlatVocabularyEntry = {
 
 export type LocalVocabularyEntry = LocalVocabularyHint & {
   antonyms: string[];
+  bbcExampleSource?: {
+    articleId: string;
+    articleTitle: string;
+    normalizedPhrase: string;
+    sentenceNo: number;
+  };
   definitionGroups: VocabularyDefinitionGroup[];
   definitionLines: string[];
   englishDefinitions: string[];
   englishExamples: string[];
+  englishExampleTranslations?: string[];
   extension?: string;
   etymologyStory: string;
   etymologyReferences: VocabularyEtymologyReference[];

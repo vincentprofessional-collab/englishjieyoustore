@@ -30,7 +30,14 @@ function mergeRecord(key: string, left: ProgressRecord | undefined, right: Progr
   if (!left) return right;
   const [old, fresh] = left.updatedAt > right.updatedAt ? [right, left] : [left, right];
   if (!old.value || !fresh.value) return fresh;
-  if (key.startsWith("v:")) return { updatedAt: fresh.updatedAt, value: { ...old.value, ...fresh.value, modeOutcomes: { ...old.value.modeOutcomes, ...fresh.value.modeOutcomes }, browseByBook: { ...old.value.browseByBook, ...fresh.value.browseByBook } } };
+  if (key.startsWith("v:")) {
+    const value = { ...old.value, ...fresh.value, modeOutcomes: { ...old.value.modeOutcomes, ...fresh.value.modeOutcomes }, browseByBook: { ...old.value.browseByBook, ...fresh.value.browseByBook } };
+    // A later familiar answer on another device must not erase past difficulty.
+    if (old.value.mistakeCount !== undefined || fresh.value.mistakeCount !== undefined) {
+      value.mistakeCount = Math.max(positive(old.value.mistakeCount), positive(fresh.value.mistakeCount));
+    }
+    return { updatedAt: fresh.updatedAt, value };
+  }
   if (key.startsWith("h:")) return { updatedAt: fresh.updatedAt, value: { ...fresh.value, lookedUpWords: union(old.value.lookedUpWords, fresh.value.lookedUpWords), studyItems: union(old.value.studyItems, fresh.value.studyItems), practiceAttempts: [...new Map([...(old.value.practiceAttempts ?? []), ...(fresh.value.practiceAttempts ?? [])].map(item => [item.id, item])).values()] } };
   if (key === "k:ielts-vocabulary-daily-activity-v1") return { updatedAt: fresh.updatedAt, value: { ...fresh.value, history: { ...old.value.history, ...fresh.value.history }, events: old.value.date === fresh.value.date ? union(old.value.events, fresh.value.events) : fresh.value.events } };
   return fresh;

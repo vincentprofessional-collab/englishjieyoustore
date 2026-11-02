@@ -24,6 +24,17 @@ test('different devices merge all learned words and older local data cannot repl
  assert.ok(!model.isProgressKey('sb-secret-auth-token'));
  assert.equal(Object.keys(model.sanitizeAccountSnapshot({entries:{'k:sb-secret-auth-token':{value:'secret',updatedAt:at}}}).entries).length,0);
 });
+test('a newer familiar result on another device keeps the historical mistake count used for dense reviews',()=>{
+ const values=(time,outcome,mistakeCount)=>({[VOC]:{progress:{word:{lastReviewedAt:time,familiarity:outcome,lastOutcome:outcome,mistakeCount}}}});
+ const difficult=capture(values(at-100,'unfamiliar',4),{},empty(),at-100);
+ const familiar=capture(values(at,'familiar',0),{},empty(),at);
+ for(const snapshots of [[difficult,familiar],[familiar,difficult]]){
+  const result=restore(merge(snapshots))[VOC].progress.word;
+  assert.equal(result.familiarity,'familiar');
+  assert.equal(result.lastReviewedAt,at);
+  assert.equal(result.mistakeCount,4);
+ }
+});
 test('study time adds independent device contributions and pulling cloud totals does not count them twice',()=>{
  const day='2026-10-15';
  const aValues={[HISTORY]:{[day]:{seconds:600,activitySeconds:{articles:600},studyItems:['article:A'],lookedUpWords:['baby']}}};
