@@ -2,19 +2,21 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import type { CSSProperties } from "react";
 
 type VocabularyFormationPartProps = {
   href?: string;
   label: string;
+  style?: CSSProperties;
   unlocked: boolean;
 };
 
-export function VocabularyFormationPart({ href, label, unlocked }: VocabularyFormationPartProps) {
+export function VocabularyFormationPart({ href, label, style, unlocked }: VocabularyFormationPartProps) {
   const [isPaywallOpen, setIsPaywallOpen] = useState(false);
 
   if (unlocked && href) {
     return (
-      <Link className="word-formation-part clickable" href={href}>
+      <Link className="word-formation-part clickable" href={href} style={style}>
         {label}
       </Link>
     );
@@ -25,6 +27,7 @@ export function VocabularyFormationPart({ href, label, unlocked }: VocabularyFor
       <button
         className="word-formation-part clickable is-locked"
         onClick={() => setIsPaywallOpen(true)}
+        style={style}
         type="button"
       >
         {label}

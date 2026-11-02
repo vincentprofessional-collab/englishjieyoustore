@@ -2,11 +2,9 @@
 
 import type { ReactNode } from "react";
 
-import { VocabularyFavoriteButton } from "@/components/vocabulary-favorite-button";
-import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronunciation";
 import { VocabularyMobileBackLink } from "@/components/vocabulary-mobile-back-link";
-import { VocabularyShareButton } from "@/components/vocabulary-share-button";
-import type { LocalVocabularyEntry } from "@/lib/vocabulary/local-vocabulary";
+import { VocabularyDetailHeading } from "@/components/vocabulary-detail-heading";
+import type { LocalVocabularyEntry, VocabularyFormationPart } from "@/lib/vocabulary/local-vocabulary";
 
 type VocabularyDetailShellProps = {
   backHref?: string;
@@ -14,6 +12,7 @@ type VocabularyDetailShellProps = {
   className?: string;
   contentClassName?: string;
   entry: LocalVocabularyEntry;
+  formationParts?: VocabularyFormationPart[];
   headerAfterActions?: ReactNode;
   headerContent?: ReactNode;
   headerActions?: ReactNode;
@@ -29,6 +28,7 @@ export function VocabularyDetailShell({
   className = "",
   contentClassName = "",
   entry,
+  formationParts,
   headerAfterActions,
   headerContent,
   headerActions,
@@ -37,13 +37,6 @@ export function VocabularyDetailShell({
   showHeader = true,
   showWord = true,
 }: VocabularyDetailShellProps) {
-  const actions = headerActions ?? (
-    <>
-      <VocabularyFavoriteButton entry={entry} />
-      <VocabularyShareButton entry={entry} />
-    </>
-  );
-
   return (
     <div className={`vocabulary-detail-shell ${className}`.trim()}>
       {showHeader ? (
@@ -51,28 +44,9 @@ export function VocabularyDetailShell({
           {showBack ? (
             <VocabularyMobileBackLink ariaLabel="返回词汇列表" className="back-link" href={backHref} />
           ) : null}
-          <div className="word-title-row word-detail-title-row vocabulary-detail-shell-title-row vocabulary-learning-detail-title-row">
-            <div className={`word-title-primary ${showWord || headerContent ? "" : "is-hidden"}`}>
-              {headerContent ?? (showWord ? (
-                <>
-                  <h1>{entry.word}</h1>
-                  <div className="word-title-meta">
-                    <VocabularyInlinePronunciation
-                      ukAudioUrl={entry.ukAudioUrl}
-                      ukPhonetic={entry.ukPhonetic || entry.phonetic}
-                      usAudioUrl={entry.usAudioUrl}
-                      usPhonetic={entry.usPhonetic || entry.phonetic}
-                      word={entry.word}
-                    />
-                    {entry.level ? <span className="vocabulary-level-badge">{entry.level}</span> : null}
-                  </div>
-                </>
-              ) : null)}
-            </div>
-            <div className="word-title-tools word-title-actions vocabulary-detail-shell-actions vocabulary-learning-word-header-actions">
-              {actions}
-            </div>
-          </div>
+          {showWord || headerContent ? (
+            <VocabularyDetailHeading actions={headerActions} entry={entry} formationParts={formationParts} titleContent={headerContent} />
+          ) : null}
         </div>
       ) : null}
 

@@ -16,25 +16,27 @@ import {
 import Link from "next/link";
 
 import { VocabularyDetailShell } from "@/components/vocabulary-detail-shell";
+import { VocabularyDetailHeading } from "@/components/vocabulary-detail-heading";
 import { VocabularyMobileBackLink } from "@/components/vocabulary-mobile-back-link";
 import { VocabularyDetailContent, useVocabularyIllustration } from "@/components/vocabulary-detail-content";
 import { isPhoneUserAgent } from "@/lib/vocabulary/lookup-display-preferences";
 import { ACCOUNT_PROGRESS_EVENT } from "@/lib/learning/account-progress";
 import { VocabularyFavoriteButton } from "@/components/vocabulary-favorite-button";
-import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronunciation";
 import { VocabularyLookupDisplaySection } from "@/components/vocabulary-lookup-display-section";
 import { VocabularyShareButton } from "@/components/vocabulary-share-button";
 import { VocabularyExcelImport } from "@/components/vocabulary-excel-import";
 import { compareStudyExamples, getConciseStudyDefinition, getDefinitionOptionText, getStudyPhonetic, maskStudyExample } from "@/lib/vocabulary/study-definition";
 import { VocabularyVideoPlayer } from "@/components/vocabulary-video-player";
-import { drawBrowseMode, drawWeightedBrowseWord, filterBrowseReviewWords, nextBrowseLoopId, scheduleBrowseReview } from "@/lib/vocabulary/browse-review";
+import { drawBrowseMode, filterBrowseReviewWords, nextBrowseLoopId, scheduleBrowseReview } from "@/lib/vocabulary/browse-review";
 import { selectVocabularyStudyGroup, vocabularyStudyGroupIndex, VOCABULARY_GROUP_SIZE } from "@/lib/vocabulary/study-groups";
 import type { VocabularyUsageExample } from "@/lib/vocabulary/examples";
 import {
   FAVORITE_WORDS_CHANGED_EVENT,
   FAVORITE_WORDS_STORAGE_KEY,
+  LEARNING_COLLECTIONS,
   isSupplementalLearningBook,
   type FavoriteLearningWord,
+  type LearningCollectionKey,
   type LearningBookKey,
   type LearningWord,
 } from "@/lib/vocabulary/learning";
@@ -52,6 +54,7 @@ type Voice = "us" | "uk";
 type SortOrder = "sequential" | "random";
 type Familiarity = "familiar" | "vague" | "unfamiliar";
 type Outcome = Familiarity | "unscored";
+type AdvanceOutcome = Outcome | "mastered";
 type Plan = "short-term" | "long-term" | "done";
 type RoundPhase = "idle" | "playing" | "recording" | "scoring" | "awaiting";
 type ProgressCategory = "reading" | "listening" | "speaking" | "writing";
@@ -88,13 +91,42 @@ type ClassificationGroupSummary = Omit<ClassificationGroupSession, "index" | "re
 type ActiveGroupProgress = { groupNo: number; order?: SortOrder; scope: VocabularyScope; startedAt: number };
 
 const FREQUENCY_ORDERED_BOOKS = new Set<BookSelectionKey>([
-  "小学", "初中", "高中", "四级", "六级", "考研", "托雅", "SAT", "GMAT", "GRE",
+  "小学", "初中", "高中", "四级", "六级", "考研", "托雅", "SAT", "GMAT", "GRE", "其他词汇",
 ]);
+const STUDY_FREQUENCY_KEYS: Partial<Record<BookSelectionKey, string>> = {
+  小学: "小学",
+  初中: "初中",
+  高中: "高中",
+  四级: "四级",
+  六级: "六级",
+  考研: "考研",
+  托雅: "托雅",
+  SAT: "SAT",
+  GMAT: "GMAT",
+  GRE: "GRE",
+};
 
-function orderWordsForStudy(words: LearningWord[], order: SortOrder, book: BookSelectionKey) {
-  if (order !== "random" || !FREQUENCY_ORDERED_BOOKS.has(book)) return words;
+function belongsToStudyBook(word: LearningWord, book: BookSelectionKey) {
+  return word.studyBookMemberships !== undefined
+    ? word.studyBookMemberships.includes(book)
+    : word.level === book;
+}
+
+function wordsForStudyBook(words: LearningWord[], book: BookSelectionKey) {
+  return words.filter((word) => belongsToStudyBook(word, book)).map((word) => ({ ...word, level: book }));
+}
+
+function orderWordsForStudy(words: LearningWord[], _order: SortOrder, book: BookSelectionKey) {
+  if (!FREQUENCY_ORDERED_BOOKS.has(book)) return words;
+  const stageKey = STUDY_FREQUENCY_KEYS[book] ?? "";
   return [...words].sort((left, right) =>
-    (left.frequencyRank ?? Number.MAX_SAFE_INTEGER) - (right.frequencyRank ?? Number.MAX_SAFE_INTEGER),
+    (left.studyBookGroups?.[book] ?? Number.MAX_SAFE_INTEGER)
+      - (right.studyBookGroups?.[book] ?? Number.MAX_SAFE_INTEGER)
+      || (right.stageFrequencies?.[stageKey] ?? right.studyFrequency ?? 0)
+      - (left.stageFrequencies?.[stageKey] ?? left.studyFrequency ?? 0)
+      || (right.totalFrequency ?? 0) - (left.totalFrequency ?? 0)
+      || (left.frequencyRank ?? Number.MAX_SAFE_INTEGER) - (right.frequencyRank ?? Number.MAX_SAFE_INTEGER)
+      || left.word.localeCompare(right.word),
   );
 }
 
@@ -160,6 +192,8 @@ type ProgressEntry = {
   browseLastSeenAt?: number | null;
   browseModeIndex?: number;
   completed?: boolean;
+  collection?: LearningCollectionKey | null;
+  collectionUpdatedAt?: number;
   consecutiveFamiliar?: number;
   consecutiveFamiliarMode?: number;
   familiarity: Familiarity | null;
@@ -185,6 +219,7 @@ type VocabularyLearningProps = {
   bookCounts: Record<LearningBookKey, { added: number; total: number }>;
   books: Array<{ description: string; key: LearningBookKey; label: string }>;
   initialBook: BookSelectionKey;
+  initialCollection?: LearningCollectionKey;
   initialListMode?: boolean;
   initialListResume?: boolean;
   sourceCount: number;
@@ -242,7 +277,7 @@ const DEFAULT_STUDY_SETTINGS: StudySettings = {
   modes: [...ALL_STUDY_MODES],
   reviewFamiliarities: [],
   reviewView: null,
-  scope: "core",
+  scope: "all",
   wordGroups: { core: null, all: null },
   voice: "us",
   order: "sequential",
@@ -399,6 +434,12 @@ function progressFor(store: ProgressStore, id: string) {
   return store[id] ?? emptyProgress();
 }
 
+function collectionForProgress(entry: ProgressEntry | undefined): LearningCollectionKey | null {
+  if (!entry) return null;
+  if (entry.collection !== undefined) return entry.collection;
+  return entry.familiarity;
+}
+
 function validDailyLimit(value: unknown): value is number {
   return typeof value === "number" && Number.isInteger(value) && value >= 1 && value <= 9999;
 }
@@ -451,6 +492,7 @@ function parseSettingsDraft(draft: StudySettingsDraft): StudySettings | null {
   };
   if (Object.values(reactionSeconds).some((seconds) => !validReactionSeconds(seconds))) return null;
   if (draft.modes.length === 0) return null;
+  const selectedGroup = vocabularyStudyGroupIndex(draft.wordGroups[draft.scope]);
   return {
     dailyNew: GROUP_SIZE,
     browseGroups,
@@ -459,10 +501,10 @@ function parseSettingsDraft(draft: StudySettingsDraft): StudySettings | null {
     modes: [...draft.modes],
     reviewFamiliarities: draft.method === "classified" ? [] : [...draft.reviewFamiliarities],
     reviewView: draft.method === "classified" ? null : draft.reviewView,
-    scope: draft.scope,
-    wordGroups: { core: vocabularyStudyGroupIndex(draft.wordGroups.core), all: vocabularyStudyGroupIndex(draft.wordGroups.all) },
+    scope: "all",
+    wordGroups: { core: selectedGroup, all: selectedGroup },
     voice: draft.voice,
-    order: draft.order,
+    order: "sequential",
     definitionLanguage: draft.definitionLanguage,
     assessmentDefinitionLanguage: draft.assessmentDefinitionLanguage,
     showExamples: draft.showExamples,
@@ -680,6 +722,7 @@ function toLookupEntry(word: LearningWord): LocalVocabularyEntry {
     etymologySource: word.etymologySource,
     etymologyStory: word.etymologyStory,
     formation: word.formation,
+    frequencyRank: word.frequencyRank,
     inflections: word.inflections,
     level: word.level,
     normalizedWord: isSupplementalLearningBook(word.level)
@@ -689,9 +732,14 @@ function toLookupEntry(word: LearningWord): LocalVocabularyEntry {
     phonetic: word.phonetic,
     reviewNotes: word.reviewNotes,
     root: word.root,
+    stageFrequencies: word.stageFrequencies,
+    studyBookGroups: word.studyBookGroups,
+    studyBookMemberships: word.studyBookMemberships,
+    studyFrequency: word.studyFrequency,
     rootReferences: [],
     sourceRowNumber: 0,
     synonyms: word.synonyms,
+    totalFrequency: word.totalFrequency,
     ukAudioUrl: word.ukAudioUrl,
     ukPhonetic: word.ukPhonetic,
     usAudioUrl: word.usAudioUrl,
@@ -1587,19 +1635,7 @@ function LearningVocabularyDetails({
 
   return (
     <div className="vocabulary-learning-complete-detail vocabulary-detail-content">
-      {showWord ? <div className="vocabulary-learning-complete-detail-header">
-        <h1>{detailedEntry.word}</h1>
-        <div className="vocabulary-learning-complete-detail-meta">
-          <VocabularyInlinePronunciation
-            ukAudioUrl={detailedEntry.ukAudioUrl}
-            ukPhonetic={detailedEntry.ukPhonetic || detailedEntry.phonetic}
-            usAudioUrl={detailedEntry.usAudioUrl}
-            usPhonetic={detailedEntry.usPhonetic || detailedEntry.phonetic}
-            word={detailedEntry.word}
-          />
-          {detailedEntry.level ? <span className="vocabulary-learning-complete-detail-level">{detailedEntry.level}</span> : null}
-        </div>
-      </div> : null}
+      {showWord ? <VocabularyDetailHeading entry={detailedEntry} formationParts={detailPayload?.formationParts} /> : null}
       {definitionPrefix}
       {showDefinition ? <VocabularyDetailContent
         entry={conciseEntry}
@@ -1944,15 +1980,16 @@ function chooseNextWord(
   words: LearningWord[],
   store: ProgressStore,
   now: number,
-  order: SortOrder,
+  _order: SortOrder,
   excludeId: string | null,
   settings: StudySettings,
   browseKey: string,
   preferredBook: BookSelectionKey,
 ): LearningWord | null {
-  const preferredWords = preferredBook === "生词本" ? words : words.filter((word) => word.level === preferredBook);
+  const preferredWords = preferredBook === "生词本" ? words : wordsForStudyBook(words, preferredBook);
+  const availableWords = preferredWords.filter((word) => collectionForProgress(store[word.id]) !== "mastered");
   const earlierWords = settings.scope === "all" && preferredBook !== "生词本"
-    ? words.filter((word) => word.level !== preferredBook)
+    ? words.filter((word) => !belongsToStudyBook(word, preferredBook) && collectionForProgress(store[word.id]) !== "mastered")
     : [];
   if (settings.method === "browse") {
     const browseWordLimit = settings.browseGroups * GROUP_SIZE;
@@ -1961,43 +1998,43 @@ function chooseNextWord(
         && (settings.reviewFamiliarities.length === 0 || settings.modes.length === 0)) return null;
       const allFamiliaritiesSelected = (["familiar", "vague", "unfamiliar"] as const).every((value) => settings.reviewFamiliarities.includes(value));
       const selected = filterBrowseReviewWords(
-        settings.scope === "all" ? words : preferredWords, store, browseKey, settings.reviewView, settings.reviewFamiliarities, now, settings.modes,
+        settings.scope === "all" ? words : availableWords, store, browseKey, settings.reviewView, settings.reviewFamiliarities, now, settings.modes,
       );
-      if (settings.reviewView !== null || allFamiliaritiesSelected) return drawWeightedBrowseWord(selected, store, Math.random, excludeId);
-      const nextId = nextBrowseLoopId(selected.map((word) => word.id), excludeId, order);
+      if (settings.reviewView !== null || allFamiliaritiesSelected) {
+        const nextId = nextBrowseLoopId(selected.map((word) => word.id), excludeId, "sequential");
+        return selected.find((word) => word.id === nextId) ?? null;
+      }
+      const nextId = nextBrowseLoopId(selected.map((word) => word.id), excludeId, "sequential");
       return selected.find((word) => word.id === nextId) ?? (earlierWords.length
-        ? chooseNextWord(earlierWords, store, now, order, excludeId, { ...settings, scope: "core" }, browseKey, "生词本")
+        ? chooseNextWord(earlierWords, store, now, "sequential", excludeId, { ...settings, scope: "core" }, browseKey, "生词本")
         : null);
     }
-    const todayIds = preferredWords
+    const todayIds = availableWords
       .filter((word) => isReviewedToday(store[word.id]?.browseByBook?.[browseKey]?.browseLastSeenAt ?? null, now))
       .map((word) => word.id);
     if (todayIds.length < browseWordLimit) {
       const todaySet = new Set(todayIds);
-      const candidates = preferredWords.filter((word) => !todaySet.has(word.id) && word.id !== excludeId);
+      const candidates = availableWords.filter((word) => !todaySet.has(word.id) && word.id !== excludeId);
       const neverBrowsed = candidates.filter((word) => {
         const entry = store[word.id];
         return !entry?.lastReviewedAt && !entry?.browseByBook?.[browseKey]?.browseFirstSeenAt;
       });
       const unscored = candidates.filter((word) => !store[word.id]?.lastReviewedAt);
       const fresh = neverBrowsed.length > 0 ? neverBrowsed : unscored.length > 0 ? unscored : candidates;
-      if (fresh.length > 0) return order === "random" ? shuffle(fresh)[0] : fresh[0];
+      if (fresh.length > 0) return fresh[0];
     }
-    const loopIds = todayIds
-      .sort((left, right) => (store[left]?.browseByBook?.[browseKey]?.browseLastSeenAt ?? 0)
-        - (store[right]?.browseByBook?.[browseKey]?.browseLastSeenAt ?? 0))
-      .slice(0, browseWordLimit);
-    const loopId = nextBrowseLoopId(loopIds, excludeId, order);
-    return preferredWords.find((word) => word.id === loopId) ?? (earlierWords.length
-      ? chooseNextWord(earlierWords, store, now, order, excludeId, { ...settings, scope: "core" }, browseKey, "生词本")
+    const loopIds = todayIds.slice(0, browseWordLimit);
+    const loopId = nextBrowseLoopId(loopIds, excludeId, "sequential");
+    return availableWords.find((word) => word.id === loopId) ?? (earlierWords.length
+      ? chooseNextWord(earlierWords, store, now, "sequential", excludeId, { ...settings, scope: "core" }, browseKey, "生词本")
       : null);
   }
-  const newToday = preferredWords.filter((word) => {
+  const newToday = availableWords.filter((word) => {
     const entry = progressFor(store, word.id);
     return isReviewedToday(entry.firstLearnedAt ?? null, now);
   }).length;
   const queue: LearningWord[] = [];
-  for (const word of preferredWords) {
+  for (const word of availableWords) {
     if (word.id === excludeId) continue;
     const entry = progressFor(store, word.id);
     if (entry.completed) continue;
@@ -2009,13 +2046,81 @@ function chooseNextWord(
       queue.push(word);
     }
   }
-  if (queue.length === 0) return earlierWords.length && preferredWords.every((word) => progressFor(store, word.id).completed)
-    ? chooseNextWord(earlierWords, store, now, order, excludeId, { ...settings, scope: "core" }, browseKey, "生词本")
+  if (queue.length === 0) return earlierWords.length && availableWords.every((word) => progressFor(store, word.id).completed || collectionForProgress(store[word.id]) === "mastered")
+    ? chooseNextWord(earlierWords, store, now, "sequential", excludeId, { ...settings, scope: "core" }, browseKey, "生词本")
     : null;
-  return order === "random" ? shuffle(queue)[0] : queue[0];
+  return queue[0];
 }
 
-export function VocabularyLearning({ bookCounts, books, initialBook, initialListMode = false, initialListResume = false, sourceCount }: VocabularyLearningProps) {
+type CollectionVocabularyWord = {
+  definitionLines: string[];
+  frequencyRank?: number;
+  id: string;
+  level: string;
+  phonetic: string;
+  word: string;
+};
+
+function VocabularyCollectionList({
+  collection,
+  error,
+  loading,
+  onDelete,
+  onMove,
+  returnTo,
+  words,
+}: {
+  collection: LearningCollectionKey;
+  error: string;
+  loading: boolean;
+  onDelete: (wordId: string) => void;
+  onMove: (wordId: string, collection: LearningCollectionKey) => void;
+  returnTo: string;
+  words: CollectionVocabularyWord[];
+}) {
+  const title = LEARNING_COLLECTIONS.find((item) => item.key === collection)?.label ?? collection;
+  return (
+    <section aria-label={`${title}词汇表`} className="vocabulary-learning-collection-view">
+      <header>
+        <div><p>词汇分类</p><h2>{title}</h2><span>{loading ? "正在加载…" : `${words.length.toLocaleString()} 个词汇`}</span></div>
+      </header>
+      {error ? <p className="vocabulary-learning-collection-message" role="alert">{error}</p> : null}
+      {!loading && !error && words.length === 0 ? <p className="vocabulary-learning-collection-message">这个词汇表里还没有单词。</p> : null}
+      <ol className="vocabulary-learning-collection-rows">
+        {words.map((word, index) => (
+          <li key={word.id}>
+            <span className="vocabulary-learning-collection-index">{index + 1}</span>
+            <div className="vocabulary-learning-collection-word-content">
+              <div className="vocabulary-learning-collection-word-line">
+                <Link href={`/vocabulary/${encodeURIComponent(word.word)}?returnTo=${encodeURIComponent(returnTo)}`}>{word.word}</Link>
+                {word.phonetic ? <span>{word.phonetic}</span> : null}
+              </div>
+              <p>{word.definitionLines.find((line) => line.trim()) ?? "暂无中文释义"}</p>
+            </div>
+            <details className="vocabulary-learning-collection-menu">
+              <summary aria-label={`更多操作：${word.word}`} title="删除或移动词汇">
+                <svg aria-hidden="true" viewBox="0 0 12 8"><path d="M1 1h10L6 7z" /></svg>
+              </summary>
+              <div className="vocabulary-learning-collection-menu-panel">
+                <button onClick={() => onDelete(word.id)} type="button">从此词表删除</button>
+                <details>
+                  <summary>移动到</summary>
+                  <div>
+                    {LEARNING_COLLECTIONS.map((item) => (
+                      <button disabled={item.key === collection} key={item.key} onClick={() => onMove(word.id, item.key)} type="button">{item.label}</button>
+                    ))}
+                  </div>
+                </details>
+              </div>
+            </details>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+export function VocabularyLearning({ bookCounts, books, initialBook, initialCollection, initialListMode = false, initialListResume = false, sourceCount }: VocabularyLearningProps) {
   const [selectedBook, setSelectedBook] = useState<BookSelectionKey>(initialBook);
   const [qualityNoticeOpen, setQualityNoticeOpen] = useState(() => isQualityNoticeBook(initialBook));
   useEffect(() => {
@@ -2030,7 +2135,10 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
   const [setupMode, setSetupMode] = useState<"single" | "pk">("single");
   const [listModeActive, setListModeActive] = useState(false);
   const [settingsListMode, setSettingsListMode] = useState(initialListMode);
+  const [collectionListKey, setCollectionListKey] = useState<LearningCollectionKey | null>(initialCollection ?? null);
   const settingsDraftBookRef = useRef<BookSelectionKey | null>(null);
+  const collectionListRequestRef = useRef(0);
+  const initialCollectionOpenedRef = useRef<LearningCollectionKey | null>(null);
   const [pkSetupBook, setPkSetupBook] = useState<LearningBookKey>(initialBook === "生词本" ? "小学" : initialBook);
   const [studyPaused, setStudyPaused] = useState(false);
   const [browseCountdownPaused, setBrowseCountdownPaused] = useState(false);
@@ -2057,9 +2165,11 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     if (!settingsUiHydratedRef.current) return;
     rememberSettingsUi(setupMode, settingsListMode);
   }, [rememberSettingsUi, settingsListMode, setupMode]);
-  const weightedBrowse = settingsDraft.method === "browse" && (settingsDraft.reviewView !== null || (["familiar", "vague", "unfamiliar"] as const).every((value) => settingsDraft.reviewFamiliarities.includes(value)));
   const reactionOptionsRef = useRef<HTMLDivElement | null>(null);
   const [favoriteWords, setFavoriteWords] = useState<FavoriteLearningWord[]>([]);
+  const [collectionWords, setCollectionWords] = useState<CollectionVocabularyWord[]>([]);
+  const [collectionListLoading, setCollectionListLoading] = useState(false);
+  const [collectionListError, setCollectionListError] = useState("");
   const [customBookOpen, setCustomBookOpen] = useState(false);
   const [voice, setVoice] = useState<Voice>("us");
   const [order, setOrder] = useState<SortOrder>("sequential");
@@ -2234,7 +2344,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
           setSelectedBook(savedBook as BookSelectionKey);
         }
         if (saved.voice === "us" || saved.voice === "uk") setVoice(saved.voice);
-        if (saved.order === "sequential" || saved.order === "random") setOrder(saved.order);
+        setOrder("sequential");
         if (saved.progress && typeof saved.progress === "object") {
           setProgress(restoreProgress(saved.progress, (saved.reviewScheduleVersion ?? 1) < 2));
         }
@@ -2320,6 +2430,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
           ? COLLECTIONS.map((collection) => collection.key).filter((key) => item.reviewFamiliarities?.includes(key))
           : (legacyFamiliarity === "familiar" || legacyFamiliarity === "vague" || legacyFamiliarity === "unfamiliar")
             ? [legacyFamiliarity] : [];
+        const savedScope = item.scope === "all" ? "all" : "core";
+        const savedGroup = vocabularyStudyGroupIndex(item.wordGroups?.[savedScope]);
         restored[key] = {
           dailyNew: item.dailyNew,
           browseGroups: Number.isInteger(item.browseGroups) && Number(item.browseGroups) > 0 ? Number(item.browseGroups) : 1,
@@ -2331,10 +2443,10 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
             : reviewView && restoredFamiliarities.length === 0
               ? COLLECTIONS.map((collection) => collection.key) : restoredFamiliarities,
           reviewView: method === "classified" ? null : reviewView,
-          scope: item.scope === "all" ? "all" : "core",
-          wordGroups: { core: vocabularyStudyGroupIndex(item.wordGroups?.core), all: vocabularyStudyGroupIndex(item.wordGroups?.all) },
+          scope: "all",
+          wordGroups: { core: savedGroup, all: savedGroup },
           voice: item.voice === "uk" ? "uk" : "us",
-          order: item.order === "random" ? "random" : "sequential",
+          order: "sequential",
           definitionLanguage: storedDefinitionLanguage === "zh-audio" ? "zh-audio" : storedDefinitionLanguage === "en" || (storedDefinitionLanguage === "synonym" && storedAssessmentDefinitionLanguage === "en") ? "en" : "zh",
           assessmentDefinitionLanguage: storedAssessmentDefinitionLanguage === "en" || (!storedAssessmentDefinitionLanguage && storedDefinitionLanguage === "en") ? "en" : "zh",
           showExamples: item.showExamples !== false,
@@ -2541,10 +2653,21 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     : currentSettings.definitionLanguage;
   const displayedDefinitionLanguage: AssessmentDefinitionLanguage = selectedDefinitionLanguage === "en" ? "en" : "zh";
   const visibleWords = useMemo(
-    () => selectedBook === "生词本" || currentSettings.scope === "all"
+    () => (selectedBook === "生词本" || currentSettings.scope === "all"
       ? words
-      : words.filter((word) => word.level === selectedBook),
-    [currentSettings.scope, selectedBook, words],
+      : wordsForStudyBook(words, selectedBook))
+      .filter((word) => collectionForProgress(progress[word.id]) !== "mastered"),
+    [currentSettings.scope, progress, selectedBook, words],
+  );
+  const masteredWordCount = useMemo(
+    () => Object.values(progress).filter((entry) => collectionForProgress(entry) === "mastered").length,
+    [progress],
+  );
+  const visibleCollectionWords = useMemo(
+    () => collectionListKey
+      ? collectionWords.filter((word) => collectionForProgress(progress[word.id]) === collectionListKey)
+      : collectionWords,
+    [collectionListKey, collectionWords, progress],
   );
   const orderedStudyWords = useMemo(
     () => orderWordsForStudy(visibleWords, currentSettings.order, selectedBook),
@@ -2559,9 +2682,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     && (currentSettings.reviewView !== null || currentSettings.reviewFamiliarities.length > 0)
     ? filterBrowseReviewWords(activeStudyWords, progress, `${selectedBook}:${currentSettings.scope}`, currentSettings.reviewView, currentSettings.reviewFamiliarities, Date.now(), currentSettings.modes)
     : activeStudyWords, [activeStudyWords, currentSettings.method, currentSettings.modes, currentSettings.reviewFamiliarities, currentSettings.reviewView, currentSettings.scope, progress, selectedBook]);
-  const resumeScopeWords = orderWordsForStudy(selectedBook === "生词本" || currentSettings.scope === "all"
-    ? words
-    : words.filter((word) => word.level === selectedBook), currentSettings.order, selectedBook);
+  const resumeScopeWords = orderWordsForStudy(visibleWords, "sequential", selectedBook);
   const resumeGroupNo = vocabularyStudyGroupIndex(currentSettings.wordGroups[currentSettings.scope], resumeScopeWords.length)
     ?? (nextGroupByBook[selectedBook] ?? 0) % Math.max(1, Math.ceil(resumeScopeWords.length / GROUP_SIZE));
   const activeGroupProgress = activeGroupByBook[selectedBook];
@@ -2584,7 +2705,9 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     let startedAt = isResuming ? active.startedAt : Date.now();
 
     const makeSession = (targetGroupNo: number, targetStartedAt: number, resume: boolean) => {
-      const groupWords = orderedSourceWords.slice(targetGroupNo * GROUP_SIZE, (targetGroupNo + 1) * GROUP_SIZE);
+      const groupWords = orderedSourceWords
+        .slice(targetGroupNo * GROUP_SIZE, (targetGroupNo + 1) * GROUP_SIZE)
+        .filter((word) => collectionForProgress(progressFor(progress, word.id)) !== "mastered");
       const processedWords = resume
         ? groupWords.filter((word) => (progressFor(progress, word.id).lastReviewedAt ?? 0) >= targetStartedAt)
         : [];
@@ -2596,6 +2719,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
       const dueReviewWords = orderedSourceWords.filter((word) => {
         if (remainingIds.includes(word.id)) return false;
         const entry = progressFor(progress, word.id);
+        if (collectionForProgress(entry) === "mastered") return false;
         const familiarity = familiarityForProgress(entry);
         return isReviewDue(entry.nextReviewAt, Boolean(entry.completed), familiarity, Date.now());
       }).sort((left, right) => (progressFor(progress, left.id).nextReviewAt ?? 0)
@@ -2619,15 +2743,25 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
       })) as Partial<Record<string, Familiarity>>;
       const counts = { familiar: 0, vague: 0, unfamiliar: 0 };
       for (const outcome of Object.values(firstOutcomes)) if (outcome) counts[outcome] += 1;
-      const orderedIds = settings.order === "random" ? shuffle(remainingIds) : remainingIds;
-      return { ids, remainingIds: avoidAdjacentDuplicateWords(orderedIds, orderedSourceWords), firstOutcomes, startedAt: targetStartedAt, ...counts, groupNo: targetGroupNo, index: processedWords.length };
+      return { ids, remainingIds: avoidAdjacentDuplicateWords(remainingIds, orderedSourceWords), firstOutcomes, startedAt: targetStartedAt, ...counts, groupNo: targetGroupNo, index: processedWords.length };
     };
 
     let session = makeSession(groupNo, startedAt, isResuming);
-    if (session.remainingIds.length === 0) {
+    const requestedGroupNo = groupNo;
+    let skippedGroups = 0;
+    while (session.remainingIds.length === 0 && skippedGroups < groupCount - 1) {
       groupNo = (groupNo + 1) % groupCount;
       startedAt = Date.now();
       session = makeSession(groupNo, startedAt, false);
+      skippedGroups += 1;
+    }
+    if (session.remainingIds.length === 0) {
+      setGroupSession(null);
+      setCurrentWordId(null);
+      setSessionDepleted(true);
+      return false;
+    }
+    if (groupNo !== requestedGroupNo) {
       setNextGroupByBook((current) => ({ ...current, [book]: groupNo }));
       setActiveGroupByBook((current) => {
         const next = { ...current };
@@ -2639,7 +2773,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
         return { ...current, [book]: { ...saved, wordGroups: { ...saved.wordGroups, [saved.scope]: groupNo } } };
       });
     }
-    if (session.remainingIds.length === 0) return false;
 
     setGroupBrowseIds(null);
     setGroupSummary(null);
@@ -2719,7 +2852,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
   }, [currentWord?.id, currentWord?.definitionCn, visibleWords]);
   useEffect(() => setDefinitionChoice(null), [currentWordId]);
   const currentProgress = currentWord ? progressFor(progress, currentWord.id) : emptyProgress();
-  const reviewedTodayCount = visibleWords.filter((word) => isReviewedToday(progressFor(progress, word.id).lastReviewedAt, Date.now())).length;
+  const reviewedTodayCount = words.filter((word) => isReviewedToday(progressFor(progress, word.id).lastReviewedAt, Date.now())).length;
   const dailyGoal = currentSettings.dailyNew;
   const browseMode = currentSettings.method === "browse";
   const canRunRound = !browseMode || pageVisible;
@@ -2856,6 +2989,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     let nextWake = midnight.getTime();
     for (const word of activeStudyWords) {
       const entry = progressFor(progress, word.id);
+      if (collectionForProgress(entry) === "mastered") continue;
       if (!entry.completed && entry.nextReviewAt && entry.nextReviewAt > now) {
         nextWake = Math.min(nextWake, entry.nextReviewAt);
       }
@@ -3014,6 +3148,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     setGroupSummary(null);
     setGroupBrowseIds(null);
     setListModeActive(false);
+    setCollectionListKey(null);
+    collectionListRequestRef.current += 1;
     window.history.replaceState(null, "", `/vocabulary/books?level=${encodeURIComponent(nextSelection)}`);
     setPkSetupBook(nextSelection === "生词本" ? "小学" : nextSelection);
     if (nextSelection !== selectedBook) {
@@ -3028,8 +3164,102 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     setEntryGate("settings");
   }, [advancePending, order, selectedBook, settingsByBook, voice]);
 
+  const openCollectionList = useCallback((collection: LearningCollectionKey, updateUrl = true) => {
+    if (advancePending) return;
+    const requestId = ++collectionListRequestRef.current;
+    roundTokenRef.current += 1;
+    stopLearningAudio();
+    setCollectionListKey(collection);
+    setListModeActive(true);
+    setStudyPaused(true);
+    setEntryGate("active");
+    setSettingsOpenFor(null);
+    setCurrentWordId(null);
+    setGroupSession(null);
+    setGroupSummary(null);
+    setGroupBrowseIds(null);
+    setSessionDepleted(false);
+    setCollectionListError("");
+    setCollectionWords([]);
+    if (updateUrl) {
+      window.history.replaceState(null, "", `/vocabulary/books?level=${encodeURIComponent(selectedBook)}&collection=${encodeURIComponent(collection)}`);
+    }
+    const wordIds = Object.entries(progress)
+      .filter(([, entry]) => collectionForProgress(entry) === collection)
+      .map(([id]) => id);
+    const requestedIds = new Set(wordIds.map((id) => id.trim().toLowerCase()));
+    const matchingFavorites = favoriteWords.filter((word) => requestedIds.has(word.id.trim().toLowerCase()));
+    if (wordIds.length === 0) {
+      setCollectionListLoading(false);
+      return;
+    }
+    setCollectionListLoading(true);
+    void fetch("/api/vocabulary-learning", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ favorites: matchingFavorites, wordIds }),
+    }).then(async (response) => {
+      if (!response.ok) throw new Error("已掌握词汇表加载失败。");
+      return await response.json() as { words: CollectionVocabularyWord[] };
+    }).then((payload) => {
+      if (requestId !== collectionListRequestRef.current) return;
+      setCollectionWords([...payload.words].sort((left, right) =>
+        (left.frequencyRank ?? Number.MAX_SAFE_INTEGER) - (right.frequencyRank ?? Number.MAX_SAFE_INTEGER)
+        || left.word.localeCompare(right.word),
+      ));
+    }).catch((error: unknown) => {
+      if (requestId !== collectionListRequestRef.current) return;
+      setCollectionListError(error instanceof Error ? error.message : "已掌握词汇表加载失败。");
+    }).finally(() => {
+      if (requestId === collectionListRequestRef.current) setCollectionListLoading(false);
+    });
+  }, [advancePending, favoriteWords, progress, selectedBook, stopLearningAudio]);
+
+  useEffect(() => {
+    if (!hydrated || !initialCollection || initialCollectionOpenedRef.current === initialCollection) return;
+    initialCollectionOpenedRef.current = initialCollection;
+    openCollectionList(initialCollection, false);
+  }, [hydrated, initialCollection, openCollectionList]);
+
+  const removeFromCollection = useCallback((wordId: string) => {
+    setProgress((current) => {
+      const timestamp = Date.now();
+      const previous = progressFor(current, wordId);
+      const wasMastered = collectionForProgress(previous) === "mastered";
+      return {
+        ...current,
+        [wordId]: {
+          ...previous,
+          collection: null,
+          collectionUpdatedAt: timestamp,
+          ...(wasMastered ? { nextReviewAt: previous.familiarity ? Date.now() : null, plan: "short-term" as const } : {}),
+        },
+      };
+    });
+  }, []);
+
+  const moveCollectionWord = useCallback((wordId: string, collection: LearningCollectionKey) => {
+    setProgress((current) => {
+      const timestamp = Date.now();
+      const previous = progressFor(current, wordId);
+      const wasMastered = collectionForProgress(previous) === "mastered";
+      return {
+        ...current,
+        [wordId]: {
+          ...previous,
+          collection,
+          collectionUpdatedAt: timestamp,
+          plan: collection === "mastered" ? "done" : wasMastered ? "short-term" : previous.plan,
+          nextReviewAt: collection === "mastered" ? null : wasMastered && previous.familiarity ? Date.now() : previous.nextReviewAt,
+        },
+      };
+    });
+  }, []);
+
   const openStudySettings = useCallback(() => {
-    const listViewQuery = listModeActive ? "&view=list" : "";
+    const listViewQuery = collectionListKey
+      ? `&collection=${encodeURIComponent(collectionListKey)}`
+      : listModeActive ? "&view=list" : "";
     window.history.replaceState(null, "", `/vocabulary/books?level=${encodeURIComponent(selectedBook)}${listViewQuery}`);
     forceNextSpellingWordRef.current = false;
     setForcedSpellingWordId(null);
@@ -3041,10 +3271,11 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     setSettingsOpenFor(selectedBook);
     setStudyPaused(true);
     setEntryGate("settings");
-  }, [listModeActive, order, selectedBook, settingsByBook, voice]);
+  }, [collectionListKey, listModeActive, order, selectedBook, settingsByBook, voice]);
 
   const continuePreviousStudy = useCallback(() => {
     setListModeActive(false);
+    setCollectionListKey(null);
     window.history.replaceState(null, "", `/vocabulary/books?level=${encodeURIComponent(selectedBook)}`);
     if (!settingsByBook[selectedBook]) {
       setEntryGate("select-book");
@@ -3057,9 +3288,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     const savedSettings = settingsByBook[selectedBook] ?? DEFAULT_STUDY_SETTINGS;
     const settings: StudySettings = { ...savedSettings, method: "classified", reviewView: null, reviewFamiliarities: [] };
     setSettingsByBook((current) => ({ ...current, [selectedBook]: settings }));
-    const sourceWords = selectedBook === "生词本" || settings.scope === "all" ? words : words.filter((word) => word.level === selectedBook);
-    startClassifiedGroup(settings, sourceWords, selectedBook);
-  }, [selectedBook, settingsByBook, startClassifiedGroup, words]);
+    startClassifiedGroup(settings, visibleWords, selectedBook);
+  }, [selectedBook, settingsByBook, startClassifiedGroup, visibleWords]);
 
   const selectResumeBook = useCallback((nextBook: BookSelectionKey) => {
     const settings = settingsByBook[nextBook];
@@ -3071,6 +3301,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     stopLearningAudio();
     setSelectedBook(nextBook);
     setListModeActive(false);
+    setCollectionListKey(null);
     setVoice(settings.voice);
     setOrder(settings.order);
     setWords([]);
@@ -3132,6 +3363,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     const settings = parseSettingsDraft(settingsDraft);
     if (!settings) return;
     setListModeActive(false);
+    setCollectionListKey(null);
+    window.history.replaceState(null, "", `/vocabulary/books?level=${encodeURIComponent(settingsOpenFor)}`);
     setCurrentWordId(null);
     forceNextSpellingWordRef.current = false;
     setForcedSpellingWordId(null);
@@ -3145,10 +3378,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     setSessionDepleted(false);
     setGroupSummary(null);
     if (settings.method === "classified") {
-      const selected = settingsOpenFor === "生词本" || settings.scope === "all"
-        ? words
-        : words.filter((word) => word.level === settingsOpenFor);
-      startClassifiedGroup(settings, selected, settingsOpenFor);
+      startClassifiedGroup(settings, visibleWords, settingsOpenFor);
     } else {
       setGroupSession(null);
       setGroupBrowseIds(null);
@@ -3163,6 +3393,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     stopLearningAudio();
     if (settings.modes[0] === "listening" || settings.modes[0] === "speaking") unlockLearningAudio();
     setSettingsByBook((current) => ({ ...current, [book]: settings }));
+    setCollectionListKey(null);
     setVoice(settings.voice);
     setOrder(settings.order);
     setCurrentWordId(null);
@@ -3187,16 +3418,19 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
 
   const validSettingsDraft = parseSettingsDraft(settingsDraft) !== null;
   const scopeBook = settingsOpenFor ?? selectedBook;
-  const scopeCounts = scopeBook === "生词本"
-    ? { added: favoriteWords.length, total: favoriteWords.length }
-    : bookCounts[scopeBook];
+  const settingsWordCount = visibleWords.length;
+  const settingsGroupCount = Math.ceil(settingsWordCount / GROUP_SIZE);
+  const settingsGroupNo = settingsGroupCount > 0
+    ? vocabularyStudyGroupIndex(settingsDraft.wordGroups.all, settingsWordCount) ?? (nextGroupByBook[scopeBook] ?? 0) % settingsGroupCount
+    : null;
   const settingsReviewCounts = useMemo(() => {
     if (!settingsOpenFor) return null;
-    const scopePool = settingsOpenFor === "生词本" || settingsDraft.scope === "all"
-      ? words
-      : words.filter((word) => word.level === settingsOpenFor);
-    const orderedScopePool = orderWordsForStudy(scopePool, settingsDraft.order, settingsOpenFor);
-    const scopedWords = selectVocabularyStudyGroup(orderedScopePool, settingsDraft.wordGroups[settingsDraft.scope]);
+    const orderedScopePool = orderWordsForStudy(visibleWords, "sequential", settingsOpenFor);
+    const groupCount = Math.ceil(orderedScopePool.length / GROUP_SIZE);
+    const selectedGroup = groupCount > 0
+      ? vocabularyStudyGroupIndex(settingsDraft.wordGroups.all, orderedScopePool.length) ?? (nextGroupByBook[settingsOpenFor] ?? 0) % groupCount
+      : null;
+    const scopedWords = selectVocabularyStudyGroup(orderedScopePool, selectedGroup);
     const allRecords = scopedWords
       .map((word) => progressFor(progress, word.id))
       .filter((entry) => entry.lastReviewedAt !== null && (entry.lastOutcome !== "unscored" || Boolean(entry.familiarity)));
@@ -3217,7 +3451,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
       total: scopedWords.length,
       familiarity: familiarityCounts,
     };
-  }, [progress, settingsDraft.modes, settingsDraft.order, settingsDraft.reviewView, settingsDraft.scope, settingsDraft.wordGroups, settingsOpenFor, words]);
+  }, [nextGroupByBook, progress, settingsDraft.modes, settingsDraft.reviewView, settingsDraft.wordGroups, settingsOpenFor, visibleWords]);
 
   const toggleStudyMode = (category: ProgressCategory) => {
     if (settingsListMode) {
@@ -3241,25 +3475,24 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
   };
 
   const moveToNextWord = useCallback(
-    (updatedProgress: ProgressStore, outcome?: Outcome) => {
+    (updatedProgress: ProgressStore, outcome?: AdvanceOutcome) => {
       if (!currentWord) return;
       if (groupSession && outcome && outcome !== "unscored") {
-        const firstClassification = !groupSession.firstOutcomes[currentWord.id];
+        const firstClassification = outcome !== "mastered" && !groupSession.firstOutcomes[currentWord.id];
         const counts = {
           familiar: groupSession.familiar + (firstClassification && outcome === "familiar" ? 1 : 0),
           vague: groupSession.vague + (firstClassification && outcome === "vague" ? 1 : 0),
           unfamiliar: groupSession.unfamiliar + (firstClassification && outcome === "unfamiliar" ? 1 : 0),
         };
         const remainingIds = groupSession.remainingIds.filter((id) => id !== currentWord.id);
-        const reviewPool = selectedBook === "生词本" || currentSettings.scope === "all"
-          ? words
-          : words.filter((word) => word.level === selectedBook);
+        const reviewPool = visibleWords.filter((word) => collectionForProgress(updatedProgress[word.id]) !== "mastered");
         const now = Date.now();
         const groupWordCount = Math.min(GROUP_SIZE, Math.max(0, reviewPool.length - groupSession.groupNo * GROUP_SIZE));
         const reviewSlotsRemaining = Math.max(0, GROUP_SIZE - Math.max(0, groupSession.ids.length - groupWordCount));
         const dueReviewIds = reviewPool.filter((word) => {
           if (word.id === currentWord.id || remainingIds.includes(word.id) || groupSession.ids.includes(word.id)) return false;
           const entry = progressFor(updatedProgress, word.id);
+          if (collectionForProgress(entry) === "mastered") return false;
           const familiarity = familiarityForProgress(entry);
           return isReviewDue(entry.nextReviewAt, Boolean(entry.completed), familiarity, now);
         }).sort((left, right) => (progressFor(updatedProgress, left.id).nextReviewAt ?? 0)
@@ -3274,9 +3507,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
         setDefinitionChoice(null);
         if (nextRemainingIds.length === 0) {
           const endedAt = Date.now();
-          const groupSourceWords = selectedBook === "生词本" || currentSettings.scope === "all"
-            ? words
-            : words.filter((word) => word.level === selectedBook);
+          const groupSourceWords = reviewPool;
           const groupCount = Math.max(1, Math.ceil(groupSourceWords.length / GROUP_SIZE));
           const nextGroupNo = (groupSession.groupNo + 1) % groupCount;
           setGroupSession(null);
@@ -3295,7 +3526,10 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
           setSessionDepleted(true);
           return;
         }
-        setGroupSession({ ...groupSession, ...counts, ids: groupIds, remainingIds: nextRemainingIds, firstOutcomes: { ...groupSession.firstOutcomes, [currentWord.id]: groupSession.firstOutcomes[currentWord.id] ?? outcome }, index: groupIds.length - nextRemainingIds.length });
+        const firstOutcomes = outcome === "mastered"
+          ? groupSession.firstOutcomes
+          : { ...groupSession.firstOutcomes, [currentWord.id]: groupSession.firstOutcomes[currentWord.id] ?? outcome };
+        setGroupSession({ ...groupSession, ...counts, ids: groupIds, remainingIds: nextRemainingIds, firstOutcomes, index: groupIds.length - nextRemainingIds.length });
         setCurrentWordId(nextRemainingIds[0]);
         setSessionDepleted(false);
         setRoundNonce((value) => value + 1);
@@ -3324,6 +3558,18 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
     },
     [activeStudyWords, chooseBrowseMode, currentSettings, currentWord, forcedSpellingWordId, groupSession, selectedBook, visibleWords, words],
   );
+
+  const markCurrentMastered = useCallback(() => {
+    if (!currentWord || advancePending) return;
+    const timestamp = Date.now();
+    const previous = progressFor(progress, currentWord.id);
+    const updatedProgress = {
+      ...progress,
+      [currentWord.id]: { ...previous, collection: "mastered" as const, collectionUpdatedAt: timestamp, plan: "done" as const, nextReviewAt: null },
+    };
+    setProgress(updatedProgress);
+    moveToNextWord(updatedProgress, "mastered");
+  }, [advancePending, currentWord, moveToNextWord, progress]);
 
   const commitBrowse = useCallback(() => {
     if (!browseMode || !pageVisible || !currentWord || advancePending) return;
@@ -3388,6 +3634,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
         familiarity: outcome,
         lastCategory: progressCategoryForMode(modeIndex),
         modeOutcomes: { ...previous.modeOutcomes, [progressCategoryForMode(modeIndex)]: outcome },
+        collection: outcome,
+        collectionUpdatedAt: timestamp,
         lastOutcome: outcome,
         lastReviewedAt: timestamp,
       };
@@ -3742,9 +3990,15 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
       <VocabularyShareButton entry={detailEntry} />
     </>
   ) : null;
-  const learningCategoryBar = browseMode ? <button aria-keyshortcuts="Space" aria-pressed={browseCountdownPaused} className="vocabulary-browse-countdown" onClick={toggleBrowseCountdown} type="button">
-    {browseCountdownPaused ? "倒计时已暂停 · 空格继续" : `${currentRoundRevealed ? "详情停留" : "反应时间"} ${browseSecondsRemaining ?? (currentRoundRevealed ? 2 : currentSettings.reactionSeconds[progressCategoryForMode(modeIndex)])} 秒 · 空格暂停`}
-  </button> : (
+  const masteredButton = <button className="vocabulary-learning-category-button mastered" disabled={advancePending} onClick={markCurrentMastered} type="button"><span>已掌握</span></button>;
+  const learningCategoryBar = browseMode ? (
+    <div className="vocabulary-learning-browse-actions">
+      <button aria-keyshortcuts="Space" aria-pressed={browseCountdownPaused} className="vocabulary-browse-countdown" onClick={toggleBrowseCountdown} type="button">
+        {browseCountdownPaused ? "倒计时已暂停 · 空格继续" : `${currentRoundRevealed ? "详情停留" : "反应时间"} ${browseSecondsRemaining ?? (currentRoundRevealed ? 2 : currentSettings.reactionSeconds[progressCategoryForMode(modeIndex)])} 秒 · 空格暂停`}
+      </button>
+      {masteredButton}
+    </div>
+  ) : (
     <div className="vocabulary-learning-bottom-bar">
       <div className="vocabulary-learning-bottom-actions">
         <button
@@ -3771,6 +4025,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
           onClick={() => modeIndex === 3 ? submitSpelling("unfamiliar") : handleRecognitionOutcome("unfamiliar")}
           type="button"
         ><span>生僻</span><small aria-hidden="true">L</small></button>
+        {masteredButton}
       </div>
     </div>
   );
@@ -3842,6 +4097,20 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
               <strong>{favoriteWords.length.toLocaleString()}</strong>
               <span aria-hidden="true" className="vocabulary-learning-nav-arrow">›</span>
             </button>
+            {LEARNING_COLLECTIONS.filter((collection) => collection.key === "mastered").map((collection) => (
+              <button
+                aria-current={collectionListKey === collection.key ? "page" : undefined}
+                className={`vocabulary-learning-nav-button vocabulary-learning-collection-nav-button ${collectionListKey === collection.key ? "active" : ""}`}
+                key={collection.key}
+                onClick={() => openCollectionList(collection.key)}
+                type="button"
+              >
+                <span aria-hidden="true" className="vocabulary-learning-nav-dot" />
+                <span className="vocabulary-learning-nav-label">{collection.label}</span>
+                <strong>{masteredWordCount.toLocaleString()}</strong>
+                <span aria-hidden="true" className="vocabulary-learning-nav-arrow">›</span>
+              </button>
+            ))}
             {books.map((book) => (
               <Fragment key={book.key}>
                 {book.key === "小学短语" ? <h2 className="vocabulary-learning-phrase-heading">短语</h2> : null}
@@ -3869,8 +4138,19 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
 
         <main className="vocabulary-learning-workspace">
           <div className="vocabulary-learning-content-grid">
-          {loading ? <div className="vocabulary-learning-empty">正在加载完整词库……</div> : null}
-          {!loading && loadError ? (
+          {listModeActive && collectionListKey ? (
+            <VocabularyCollectionList
+              collection={collectionListKey}
+              error={collectionListError}
+              loading={collectionListLoading}
+              onDelete={removeFromCollection}
+              onMove={moveCollectionWord}
+              returnTo={`/vocabulary/books?level=${encodeURIComponent(selectedBook)}&collection=${encodeURIComponent(collectionListKey)}`}
+              words={visibleCollectionWords}
+            />
+          ) : null}
+          {loading && !collectionListKey ? <div className="vocabulary-learning-empty">正在加载完整词库……</div> : null}
+          {!loading && !collectionListKey && loadError ? (
             <div className="vocabulary-learning-empty vocabulary-learning-error">
               <strong>{loadError}</strong>
               <button className="button" onClick={() => setLoadNonce((value) => value + 1)} type="button">重试</button>
@@ -3913,7 +4193,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
               </div>
             </div>
           ) : null}
-          {!loading && !loadError && listModeActive ? (
+          {!loading && !loadError && listModeActive && !collectionListKey ? (
             studyListWords.length > 0 ? (
               <VocabularyStudyList
                 bookLabel={selectedBookLabel}
@@ -3937,9 +4217,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
               <div className="vocabulary-learning-group-summary-counts"><strong>熟悉 <b>{groupSummary.familiar}</b></strong><strong>模糊 <b>{groupSummary.vague}</b></strong><strong>生僻 <b>{groupSummary.unfamiliar}</b></strong></div>
               <div className="vocabulary-learning-group-summary-actions">
                 <button className="primary" onClick={() => {
-                  const groupSourceWords = selectedBook === "生词本" || currentSettings.scope === "all"
-                    ? words
-                    : words.filter((word) => word.level === selectedBook);
+                  const groupSourceWords = visibleWords;
                   const nextGroupNo = (groupSummary.groupNo + 1) % Math.max(1, Math.ceil(groupSourceWords.length / GROUP_SIZE));
                   const settings = { ...currentSettings, wordGroups: { ...currentSettings.wordGroups, [currentSettings.scope]: nextGroupNo } };
                   setSettingsByBook((current) => ({ ...current, [selectedBook]: settings }));
@@ -3970,8 +4248,12 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
           ) : null}
           {!loading && !loadError && entryGate === "active" && !listModeActive && visibleWords.length === 0 ? (
             <div className="vocabulary-learning-empty">
-              <strong>{selectedBook === "生词本" && favoriteWords.length === 0 ? "生词本还没有收藏的单词。" : "当前分类没有可处理的新词。"}</strong>
-              <p>{selectedBook === "生词本" && favoriteWords.length === 0 ? "在单词页面点击收藏，单词会自动加入这里。" : "可以切换其他分类，或等待已安排的复习时间到达。"}</p>
+              <strong>{selectedBook === "生词本" && favoriteWords.length === 0 ? "生词本还没有收藏的单词。" : words.length > 0 ? "该词汇书中的词汇都已掌握。" : "当前分类没有可处理的新词。"}</strong>
+              <p>{selectedBook === "生词本" && favoriteWords.length === 0
+                ? "在单词页面点击收藏，单词会自动加入这里。"
+                : words.length > 0
+                  ? "已掌握的词汇会从各等级词汇书的学习卡片中隐藏，可在左侧“已掌握”查看。"
+                  : "可以切换其他分类，或等待已安排的复习时间到达。"}</p>
             </div>
           ) : null}
           {!loading && !loadError && entryGate === "active" && !groupSummary && visibleWords.length > 0 && !currentWord && studyReady && sessionDepleted ? (
@@ -4240,23 +4522,49 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
             role="dialog"
           >
             <div className="vocabulary-learning-settings-body">
-            {setupMode === "single" ? <label className="vocabulary-learning-settings-book-select">
-              <span>选择词汇表</span>
-              <span className="vocabulary-book-select-control">
-                <span aria-hidden="true">{selectedBookLabel}</span>
-                <select
-                  aria-label="选择词汇表"
-                  onChange={(event) => selectWord(event.target.value as BookSelectionKey)}
-                  value={settingsOpenFor}
-                >
-                  <option value="生词本">生词本（{favoriteWords.length.toLocaleString()}）</option>
-                  {books.map((book) => (
-                    <option key={book.key} value={book.key}>{book.label}</option>
-                  ))}
-                </select>
-                <span aria-hidden="true" className="vocabulary-book-select-arrow" />
-              </span>
-            </label> : null}
+            {setupMode === "single" ? <div className="vocabulary-learning-settings-selectors">
+              <label className="vocabulary-learning-settings-book-select">
+                <span>选择词汇表</span>
+                <span className="vocabulary-book-select-control">
+                  <span aria-hidden="true">{selectedBookLabel}</span>
+                  <select
+                    aria-label="选择词汇表"
+                    onChange={(event) => selectWord(event.target.value as BookSelectionKey)}
+                    value={settingsOpenFor}
+                  >
+                    <option value="生词本">生词本（{favoriteWords.length.toLocaleString()}）</option>
+                    {books.map((book) => (
+                      <option key={book.key} value={book.key}>{book.label}</option>
+                    ))}
+                  </select>
+                  <span aria-hidden="true" className="vocabulary-book-select-arrow" />
+                </span>
+              </label>
+              <label className="vocabulary-learning-settings-group-select">
+                <span>选择词汇组</span>
+                <span>
+                  <select
+                    aria-label="选择词汇组"
+                    disabled={settingsGroupCount === 0 || loading}
+                    onChange={(event) => {
+                      const value = Number(event.currentTarget.value);
+                      setSettingsDraft((current) => ({
+                        ...current,
+                        scope: "all",
+                        wordGroups: { core: value, all: value },
+                      }));
+                    }}
+                    value={settingsGroupNo ?? ""}
+                  >
+                    {Array.from({ length: settingsGroupCount }, (_, index) => {
+                      const wordsInGroup = Math.min(GROUP_SIZE, settingsWordCount - index * GROUP_SIZE);
+                      return <option key={index} value={index}>第 {index + 1} 组（{wordsInGroup} 词）</option>;
+                    })}
+                  </select>
+                  <span aria-hidden="true" className="vocabulary-learning-group-select-arrow" />
+                </span>
+              </label>
+            </div> : null}
             <div aria-label="学习模式" className="vocabulary-learning-setup-modes" role="tablist">
               <button aria-selected={setupMode === "single"} className={setupMode === "single" ? "active" : ""} onClick={() => setSetupMode("single")} role="tab" type="button">单人学习</button>
               <button aria-selected={setupMode === "pk"} className={setupMode === "pk" ? "active" : ""} onClick={() => setSetupMode("pk")} role="tab" type="button">PK 挑战</button>
@@ -4287,27 +4595,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
               <legend>当前任务</legend>
               <label><input checked={settingsDraft.method === "classified"} name="learning-method" onChange={() => setSettingsDraft((current) => ({ ...current, method: "classified", reviewView: null, reviewFamiliarities: [] }))} type="radio" />记忆新词</label>
               <label><input checked={settingsDraft.method === "browse"} name="learning-method" onChange={() => setSettingsDraft((current) => ({ ...current, method: "browse" }))} type="radio" />复习旧词</label>
-            </fieldset>
-            <fieldset className="vocabulary-learning-settings-options vocabulary-learning-settings-scope">
-              <legend>词汇范围</legend>
-              {([{ scope: "core", title: "核心词汇", count: scopeCounts.added }, { scope: "all", title: "全部词汇", count: scopeCounts.total }] as const).map(({ scope, title, count }) => {
-                const group = vocabularyStudyGroupIndex(settingsDraft.wordGroups[scope], count);
-                const groups = Math.ceil(count / GROUP_SIZE);
-                return <div className="vocabulary-learning-scope-choice" key={scope}>
-                  <label>
-                    <input checked={settingsDraft.scope === scope} name="study-scope" onChange={() => setSettingsDraft((current) => ({ ...current, scope }))} type="radio" />
-                    <span>{title}<small>{count.toLocaleString()}</small>{group !== null ? <small className="vocabulary-study-group-label">第 {group + 1} 组</small> : null}</span>
-                  </label>
-                  <select aria-label={`${title}选择词汇组`} className="vocabulary-study-group-select" disabled={!groups || loading} onChange={(event) => {
-                    const value = event.currentTarget.value === "" ? null : Number(event.currentTarget.value);
-                    setSettingsDraft((current) => ({ ...current, scope, wordGroups: { ...current.wordGroups, [scope]: value } }));
-                  }} title={`${title}：每组 ${GROUP_SIZE} 词，共 ${groups} 组`} value={group ?? ""}>
-                    <option value="">全部组（{groups} 组）</option>
-                    {Array.from({ length: groups }, (_, index) => <option key={index} value={index}>第 {index + 1} 组</option>)}
-                  </select>
-                  <span aria-hidden="true" className="vocabulary-study-group-arrow" />
-                </div>;
-              })}
             </fieldset>
             <div className="vocabulary-learning-settings-fields">
               <fieldset className="vocabulary-learning-settings-reaction">
@@ -4388,11 +4675,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialList
               </div>
             </section>
             <div className="vocabulary-learning-settings-paired-options">
-              <fieldset className="vocabulary-learning-settings-options">
-                <legend>记忆顺序</legend>
-                <label><input checked={!weightedBrowse && settingsDraft.order === "sequential"} disabled={weightedBrowse} name="study-order" onChange={() => setSettingsDraft((current) => ({ ...current, order: "sequential" }))} type="radio" />顺序</label>
-                <label><input checked={weightedBrowse || settingsDraft.order === "random"} name="study-order" onChange={() => setSettingsDraft((current) => ({ ...current, order: "random" }))} type="radio" />乱序</label>
-              </fieldset>
               <fieldset className="vocabulary-learning-settings-options">
                 <legend>发音设置</legend>
                 <label><input checked={settingsDraft.voice === "us"} name="study-voice" onChange={() => setSettingsDraft((current) => ({ ...current, voice: "us" }))} type="radio" />美音</label>

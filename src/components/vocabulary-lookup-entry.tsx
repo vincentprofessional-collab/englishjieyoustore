@@ -89,6 +89,7 @@ export async function VocabularyLookupEntry({ word, backHref = "/vocabulary" }: 
       <VocabularyDetailShell
         backHref={backHref}
         entry={entry}
+        formationParts={formationParts}
       >
         <VocabularyDetailContent
           entry={entry}

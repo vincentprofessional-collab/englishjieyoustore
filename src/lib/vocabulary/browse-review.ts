@@ -8,6 +8,7 @@ type BrowseCategory = "reading" | "listening" | "speaking" | "writing";
 
 type BrowseProgress = {
   browseByBook?: Record<string, BrowseHistory>;
+  collection?: "mastered" | "familiar" | "vague" | "unfamiliar" | null;
   familiarity?: "familiar" | "vague" | "unfamiliar" | null;
   lastOutcome?: "familiar" | "vague" | "unfamiliar" | "unscored" | null;
   lastCategory?: BrowseCategory;
@@ -23,12 +24,13 @@ export function filterBrowseReviewWords<T extends { id: string }>(
   now: number,
   categories: readonly BrowseCategory[] = [],
 ) {
-  if (view === null && familiarities.length === 0) return [...words];
-  if (view === null && (categories.length === 0 || (["reading", "listening", "speaking", "writing"] as const).every((value) => categories.includes(value))) && (["familiar", "vague", "unfamiliar"] as const).every((value) => familiarities.includes(value))) return [...words];
+  const availableWords = words.filter((word) => progress[word.id]?.collection !== "mastered");
+  if (view === null && familiarities.length === 0) return availableWords;
+  if (view === null && (categories.length === 0 || (["reading", "listening", "speaking", "writing"] as const).every((value) => categories.includes(value))) && (["familiar", "vague", "unfamiliar"] as const).every((value) => familiarities.includes(value))) return availableWords;
   const today = new Date(now).toDateString();
-  return words.filter((word) => {
+  return availableWords.filter((word) => {
     const entry = progress[word.id];
-    if (!entry) return false;
+    if (!entry || entry.collection === "mastered") return false;
     const reviewedAt = entry.lastReviewedAt ?? null;
     const familiarity = entry.familiarity ?? (entry.lastOutcome === "unscored" ? null : entry.lastOutcome);
     if (familiarities.length > 0 && (!familiarity || !familiarities.includes(familiarity))) return false;

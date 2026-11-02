@@ -15,11 +15,18 @@ export type LocalVocabularyHint = {
   etymologySource: string;
   etymologySourceKey?: string;
   formation: string;
+  frequencyRank?: number;
+  isLatestWorkbookVocabulary?: boolean;
   level: string;
   partOfSpeech: string;
   phonetic: string;
   root: string;
   rootKey?: string;
+  stageFrequencies?: Record<string, number>;
+  studyBookGroups?: Record<string, number>;
+  studyBookMemberships?: string[];
+  studyFrequency?: number;
+  totalFrequency?: number;
   ukAudioUrl?: string;
   ukPhonetic?: string;
   usAudioUrl?: string;
@@ -91,6 +98,12 @@ type FlatVocabularyEntry = {
   ukPron?: string;
   usAudioUrl?: string;
   usPron?: string;
+  frequencyRank?: number;
+  stageFrequencies?: Record<string, number>;
+  studyBookGroups?: Record<string, number>;
+  studyBookMemberships?: string[];
+  studyFrequency?: number;
+  totalFrequency?: number;
   word?: string;
   wordStory?: string;
 };
@@ -253,9 +266,17 @@ const EXCEL_LEFTMOST_ROOT_AFFIX_INDEX = excelLeftmostRootAffix as ExcelLeftmostR
 const EXCEL_ROOT_AFFIX_CATALOG = excelRootAffixCatalog as ExcelRootAffixCatalog;
 const WORKBOOK_VOCABULARY_DETAILS = workbookVocabularyDetails as Record<string, {
   definitionCn: string;
+  displayWord?: string;
   englishDefinitions: string[];
+  formation?: string;
+  frequencyRank?: number | null;
   level: string;
   phonetic: string;
+  stageFrequencies?: Record<string, number>;
+  studyBookGroups?: Record<string, number>;
+  studyBookMemberships?: string[];
+  studyFrequency?: number;
+  totalFrequency?: number;
 }>;
 const DEFINITION_CORRECTIONS = definitionCorrections as Record<string, {
   definitionCn?: string;
@@ -283,22 +304,37 @@ function loadVocabularySourceEntries() {
 
   const workbookEntries: FlatVocabularyEntry[] = Object.entries(workbookVocabularyDetails as Record<string, {
     definitionCn: string;
+    displayWord?: string;
     englishDefinitions: string[];
+    formation?: string;
+    frequencyRank?: number | null;
     level: string;
     phonetic: string;
+    stageFrequencies?: Record<string, number>;
+    studyBookGroups?: Record<string, number>;
+    studyBookMemberships?: string[];
+    studyFrequency?: number;
+    totalFrequency?: number;
   }>).map(([word, details]) => ({
     def: details.definitionCn,
     englishDefinition: details.englishDefinitions,
+    form: details.formation,
+    frequencyRank: details.frequencyRank ?? undefined,
     level: details.level,
     pron: details.phonetic,
-    word,
+    stageFrequencies: details.stageFrequencies,
+    studyBookGroups: details.studyBookGroups,
+    studyBookMemberships: details.studyBookMemberships,
+    studyFrequency: details.studyFrequency,
+    totalFrequency: details.totalFrequency,
+    word: details.displayWord || word,
   }));
 
   return [...sourceEntries, ...workbookEntries];
 }
 
 export function normalizeLookupWord(value: string) {
-  return value.toLowerCase().replace(/^[^a-z]+|[^a-z]+$/gi, "");
+  return value.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase().replace(/^[^a-z]+|[^a-z]+$/gi, "");
 }
 
 function getWorkbookEnglishDefinitions(word: string) {
@@ -314,11 +350,12 @@ function getWorkbookDefinitionFields(word: string) {
   const lines = splitDefinition(correction ?? WORKBOOK_VOCABULARY_DETAILS[normalizedWord]?.definitionCn ?? "");
   const definitionGroups = buildDefinitionGroups(lines);
   const definitionLines = definitionGroups.length ? definitionGroups.map((group) => group.text) : lines;
+  const englishDefinitions = getWorkbookEnglishDefinitions(normalizedWord);
   return {
-    definitionCn: definitionLines.join(" / "),
+    definitionCn: definitionLines.join(" / ") || (englishDefinitions.length ? "（暂无中文释义）" : ""),
     definitionGroups,
     definitionLines,
-    englishDefinitions: getWorkbookEnglishDefinitions(normalizedWord),
+    englishDefinitions,
     partOfSpeech: definitionGroups[0]?.partOfSpeech ?? "",
   };
 }
@@ -467,7 +504,7 @@ function buildDefinitionGroups(lines: string[]) {
 }
 
 function getVocabularyLevelScore(level?: string) {
-  const normalizedLevel = level?.trim();
+  const normalizedLevel = level?.split("、")[0]?.trim();
 
   if (!normalizedLevel) {
     return Number.MAX_SAFE_INTEGER;
@@ -476,13 +513,17 @@ function getVocabularyLevelScore(level?: string) {
   const levelOrder: Record<string, number> = {
     小学: 1,
     初中: 2,
+    中考: 2,
     高中: 3,
+    高考: 3,
     四级: 4,
     六级: 5,
     考研: 6,
     托福: 7,
     雅思: 7,
+    托雅: 7,
     SAT: 8,
+    GMAT: 9,
     GRE: 9,
   };
 
@@ -742,7 +783,9 @@ function loadVocabularyEntries() {
     const definition = compactDefinition(entry.def ?? "");
     const ecdictEntry = ecdictMap.get(normalizedWord);
 
-    if (!normalizedWord || !definition) {
+    const hasEnglishDefinition = normalizeTextList(entry.englishDefinition ?? entry.definitionEn ?? entry.enDef).length > 0;
+
+    if (!normalizedWord || (!definition && !hasEnglishDefinition)) {
       continue;
     }
 
@@ -947,6 +990,7 @@ function loadVocabularyEntries() {
     const definitions = getWorkbookDefinitionFields(accumulator.normalizedWord);
     const primaryEtymologyReference = accumulator.etymologyReferences[0];
     const primaryRootReference = accumulator.rootReferences[0];
+    const workbookDetails = WORKBOOK_VOCABULARY_DETAILS[accumulator.normalizedWord];
 
     return {
       ...definitions,
@@ -956,22 +1000,29 @@ function loadVocabularyEntries() {
       etymologyReferences: accumulator.etymologyReferences,
       etymologySource: primaryEtymologyReference?.etymologySource ?? accumulator.etymologySource,
       etymologySourceKey: primaryEtymologyReference?.etymologySourceKey ?? accumulator.etymologySourceKey,
-      formation: primaryEtymologyReference?.formation ?? primaryRootReference?.formation ?? accumulator.formation,
+      formation: workbookDetails?.formation ?? primaryEtymologyReference?.formation ?? primaryRootReference?.formation ?? accumulator.formation,
+      frequencyRank: workbookDetails?.frequencyRank ?? undefined,
+      isLatestWorkbookVocabulary: Boolean(workbookDetails),
       inflections: sortInflections(accumulator.inflections),
-      level: accumulator.level,
+      level: workbookDetails?.level ?? accumulator.level,
       normalizedWord: accumulator.normalizedWord,
-      phonetic: accumulator.phonetic,
+      phonetic: workbookDetails?.phonetic || accumulator.phonetic,
       reviewNotes: accumulator.reviewNotes,
       root: primaryRootReference?.root ?? "",
       rootKey: primaryRootReference?.rootKey ?? "",
       rootReferences: accumulator.rootReferences,
       sourceRowNumber: accumulator.sourceRowNumber,
+      stageFrequencies: workbookDetails?.stageFrequencies,
+      studyBookGroups: workbookDetails?.studyBookGroups,
+      studyBookMemberships: workbookDetails?.studyBookMemberships,
+      studyFrequency: workbookDetails?.studyFrequency,
       synonyms: accumulator.synonyms,
+      totalFrequency: workbookDetails?.totalFrequency,
       ukAudioUrl: accumulator.ukAudioUrl,
       ukPhonetic: accumulator.ukPhonetic,
       usAudioUrl: accumulator.usAudioUrl,
       usPhonetic: accumulator.usPhonetic,
-      word: accumulator.word,
+      word: workbookDetails?.displayWord || accumulator.word,
     } satisfies LocalVocabularyEntry;
   });
 

@@ -77,7 +77,7 @@ export function captureAccountChanges(values: Record<string, any>, baseline: Rec
   const delta = emptyAccountSnapshot(), next = flattenProgressValues(values), before = flattenProgressValues(baseline);
   for (const key of new Set([...Object.keys(next), ...Object.keys(before)])) if (JSON.stringify(next[key]) !== JSON.stringify(before[key])) {
     const value = next[key] ?? null;
-    const reviewedAt = key.startsWith("v:") && value ? Math.max(positive(value.lastReviewedAt), ...Object.values(object(value.browseByBook)).map(row => positive(object(row).browseLastSeenAt))) : 0;
+    const reviewedAt = key.startsWith("v:") && value ? Math.max(positive(value.lastReviewedAt), positive(value.collectionUpdatedAt), ...Object.values(object(value.browseByBook)).map(row => positive(object(row).browseLastSeenAt))) : 0;
     delta.entries[key] = { value, updatedAt: key.startsWith("v:") && value ? reviewedAt || 1 : now };
   }
   const oldHistory = object(baseline[STUDY_HISTORY_KEY]);

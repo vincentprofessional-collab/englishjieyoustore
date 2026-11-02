@@ -7,6 +7,14 @@ import type {
 export const FAVORITE_WORDS_STORAGE_KEY = "ielts-platform.favoriteWords";
 export const FAVORITE_WORDS_CHANGED_EVENT = "vocabulary-favorite-words-changed";
 
+export const LEARNING_COLLECTIONS = [
+  { key: "mastered", label: "已掌握" },
+  { key: "familiar", label: "熟悉" },
+  { key: "unfamiliar", label: "生僻" },
+  { key: "vague", label: "模糊" },
+] as const;
+export type LearningCollectionKey = (typeof LEARNING_COLLECTIONS)[number]["key"];
+
 export const LEARNING_BOOKS = [
   { key: "小学", label: "小学", rank: 1, description: "基础高频词" },
   { key: "初中", label: "初中", rank: 2, description: "初中核心词" },
@@ -55,7 +63,12 @@ export type LearningWord = {
   phonetic: string;
   reviewNotes: string[];
   root: string;
+  stageFrequencies?: Record<string, number>;
+  studyBookGroups?: Record<string, number>;
+  studyBookMemberships?: string[];
+  studyFrequency?: number;
   synonyms: string[];
+  totalFrequency?: number;
   ukAudioUrl: string;
   ukPhonetic: string;
   usAudioUrl: string;
@@ -92,36 +105,39 @@ export function getLearningLevelKey(level: string): LearningBookKey {
 }
 
 export function getLearningBookEntries(entries: LocalVocabularyEntry[], book: LearningBookKey | "全部") {
+  const latestWorkbookEntries = entries.filter((entry) => entry.isLatestWorkbookVocabulary !== false);
+
   if (book === "全部") {
-    return entries;
+    return latestWorkbookEntries;
   }
 
   if (book === "其他词汇") {
-    return entries.filter((entry) => getLearningLevelKey(entry.level) === "其他词汇");
+    return latestWorkbookEntries.filter((entry) => entry.studyBookMemberships
+      ? entry.studyBookMemberships.includes("其他词汇")
+      : getLearningLevelKey(entry.level) === "其他词汇");
   }
-
-  const selectedRank = LEARNING_BOOKS.find((candidate) => candidate.key === book)?.rank ?? 0;
-
-  return entries.filter((entry) => {
-    const entryKey = getLearningLevelKey(entry.level);
-    const entryRank = LEARNING_BOOKS.find((candidate) => candidate.key === entryKey)?.rank ?? 0;
-    return entryRank > 0 && entryRank <= selectedRank;
-  });
+  return latestWorkbookEntries.filter((entry) => entry.studyBookMemberships
+    ? entry.studyBookMemberships.includes(book)
+    : getLearningLevelKey(entry.level) === book);
 }
 
 export function getLearningBookCounts(
   entries: LocalVocabularyEntry[],
   supplementalCounts: Partial<Record<LearningBookKey, number>> = {},
 ) {
-  let previousTotal = 0;
+  const includedWords = new Set<string>();
 
   return Object.fromEntries(
     LEARNING_BOOKS.map((book) => {
-      const total = supplementalCounts[book.key] ?? getLearningBookEntries(entries, book.key).length;
+      const members = getLearningBookEntries(entries, book.key);
+      const total = supplementalCounts[book.key] ?? members.length;
 
       if (book.rank > 0) {
-        const added = total - previousTotal;
-        previousTotal = total;
+        let added = 0;
+        for (const entry of members) {
+          if (!includedWords.has(entry.normalizedWord)) added += 1;
+          includedWords.add(entry.normalizedWord);
+        }
         return [book.key, { added, total }];
       }
 
@@ -141,14 +157,20 @@ export function toLearningWord(entry: LocalVocabularyEntry): LearningWord {
     etymologySource: entry.etymologySource,
     etymologyStory: entry.etymologyStory,
     formation: entry.formation,
+    frequencyRank: entry.frequencyRank,
     id: entry.normalizedWord,
     inflections: entry.inflections,
-    level: getLearningLevelKey(entry.level),
+    level: entry.studyBookMemberships?.[0] ?? getLearningLevelKey(entry.level),
     partOfSpeech: entry.partOfSpeech,
     phonetic: entry.phonetic,
     reviewNotes: entry.reviewNotes,
     root: entry.root,
+    stageFrequencies: entry.stageFrequencies,
+    studyBookGroups: entry.studyBookGroups,
+    studyBookMemberships: entry.studyBookMemberships,
+    studyFrequency: entry.studyFrequency,
     synonyms: entry.synonyms,
+    totalFrequency: entry.totalFrequency,
     ukAudioUrl: entry.ukAudioUrl ?? "",
     ukPhonetic: entry.ukPhonetic ?? entry.phonetic,
     usAudioUrl: entry.usAudioUrl ?? "",

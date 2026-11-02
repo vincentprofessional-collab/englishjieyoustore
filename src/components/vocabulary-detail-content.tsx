@@ -6,6 +6,7 @@ import { VocabularyExampleArticleLink } from "@/components/vocabulary-example-ar
 import { VocabularyExampleAudioButton, VocabularyExampleFavoriteButton } from "@/components/vocabulary-example-actions";
 import { VocabularyFormationPart as VocabularyFormationPartLink } from "@/components/vocabulary-formation-part";
 import { VocabularyLookupDisplaySection } from "@/components/vocabulary-lookup-display-section";
+import { getVocabularyComponentStyle } from "@/components/vocabulary-morphology";
 import type { VocabularyUsageExample } from "@/lib/vocabulary/examples";
 import type { VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
 import type { VocabularySynonymDistinction } from "@/lib/vocabulary/synonym-distinctions";
@@ -119,9 +120,10 @@ function EnglishDefinitionSection({ entry }: { entry: LocalVocabularyEntry }) {
   );
 }
 
-function FormationPart({ part, unlocked }: { part: VocabularyFormationPart; unlocked: boolean }) {
-  if (!part.href) return <span className="word-formation-part">{part.label}</span>;
-  return <VocabularyFormationPartLink href={part.href} label={part.label} unlocked={unlocked} />;
+function FormationPart({ index, part, unlocked }: { index: number; part: VocabularyFormationPart; unlocked: boolean }) {
+  const style = getVocabularyComponentStyle(index);
+  if (!part.href) return <span className="word-formation-part" style={style}>{part.label}</span>;
+  return <VocabularyFormationPartLink href={part.href} label={part.label} style={style} unlocked={unlocked} />;
 }
 
 function WordFormationSection({ parts, unlocked }: { parts: VocabularyFormationPart[]; unlocked: boolean }) {
@@ -133,7 +135,7 @@ function WordFormationSection({ parts, unlocked }: { parts: VocabularyFormationP
           {parts.map((part, index) => (
             <span className="word-formation-token" key={`${part.label}-${index}`}>
               {index > 0 ? <span className="word-formation-plus">+</span> : null}
-              <FormationPart part={part} unlocked={unlocked} />
+              <FormationPart index={index} part={part} unlocked={unlocked} />
             </span>
           ))}
         </div>
