@@ -365,7 +365,7 @@ export function VocabularyDetailContent({
   usageScenario,
   usageExamples,
 }: VocabularyDetailContentProps) {
-  const illustration = useVocabularyIllustration(showIllustration && entry.level === "小学" ? entry.word : null);
+  const illustration = useVocabularyIllustration(showIllustration ? entry.word : null);
   const chineseDefinition = (
     <VocabularyLookupDisplaySection controlsEnabled id="chineseDefinition" title="中文释义"><DefinitionRows entry={entry} /></VocabularyLookupDisplaySection>
   );
