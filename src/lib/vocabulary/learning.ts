@@ -16,17 +16,28 @@ export const LEARNING_COLLECTIONS = [
 export type LearningCollectionKey = (typeof LEARNING_COLLECTIONS)[number]["key"];
 
 export const LEARNING_BOOKS = [
-  { key: "小学", label: "小学", rank: 1, description: "基础高频词" },
-  { key: "初中", label: "初中", rank: 2, description: "初中核心词" },
-  { key: "高中", label: "高中", rank: 3, description: "高中核心词" },
+  { key: "小学", label: "小学大纲词汇", rank: 1, description: "小学大纲词汇" },
+  { key: "初中", label: "初中大纲词汇", rank: 2, description: "初中大纲词汇" },
+  { key: "高中", label: "高中", rank: 3, description: "高中词汇" },
+  { key: "高考必修", label: "高考必修", rank: 0, description: "按高考词频选取的 3000 词" },
+  { key: "高中必修词汇", label: "高中大纲必修词汇", rank: 0, description: "普通高中英语课标必修词汇" },
+  { key: "高中选修词汇", label: "高中大纲选修词汇", rank: 0, description: "普通高中英语课标选择性必修词汇" },
   { key: "四级", label: "四级", rank: 4, description: "大学英语四级" },
+  { key: "四级核心词汇", label: "四级大纲词汇", rank: 0, description: "四级大纲主词目" },
+  { key: "四级派生词", label: "四级大纲派生词汇", rank: 0, description: "四级大纲同组派生词" },
   { key: "六级", label: "六级", rank: 5, description: "大学英语六级" },
-  { key: "考研", label: "考研", rank: 6, description: "考研核心词" },
+  { key: "六级核心词汇", label: "六级大纲词汇", rank: 0, description: "六级大纲主词目" },
+  { key: "六级派生词", label: "六级大纲派生词汇", rank: 0, description: "六级大纲同组派生词" },
+  { key: "考研", label: "考研大纲词汇", rank: 6, description: "考研大纲词汇" },
   { key: "托雅", label: "托雅", rank: 7, description: "托福与雅思词汇" },
   { key: "SAT", label: "SAT", rank: 8, description: "SAT 词汇" },
   { key: "GMAT", label: "GMAT", rank: 9, description: "GMAT 词汇" },
   { key: "GRE", label: "GRE", rank: 10, description: "GRE 词汇" },
-  { key: "其他词汇", label: "其他词汇", rank: 0, description: "其他未归入等级的词汇" },
+  { key: "雅思", label: "雅思", rank: 0, description: "雅思真题出现词汇" },
+  { key: "雅思听力答案词", label: "雅思听力答案词", rank: 0, description: "剑桥雅思听力 Section 1–4 答案词" },
+  { key: "雅思听力高频词", label: "雅思听力高频词", rank: 0, description: "按听力真题出现频率排列" },
+  { key: "雅思阅读高频词", label: "雅思阅读高频词", rank: 0, description: "按阅读真题出现频率排列" },
+  { key: "其他词汇", label: "其它词汇", rank: 0, description: "其他未归入等级的词汇" },
   { key: "小学短语", label: "小学短语", rank: 0, description: "教学大纲小学短语" },
   { key: "初中短语", label: "初中短语", rank: 0, description: "教学大纲初中短语" },
   { key: "高中短语", label: "高中短语", rank: 0, description: "教学大纲高中短语" },
@@ -35,8 +46,25 @@ export const LEARNING_BOOKS = [
 ] as const;
 
 export type LearningBookKey = (typeof LEARNING_BOOKS)[number]["key"];
+export const VISIBLE_LEARNING_BOOK_KEYS = [
+  "小学", "初中", "高中必修词汇", "高中选修词汇", "四级核心词汇", "四级派生词",
+  "六级核心词汇", "六级派生词", "考研", "雅思听力答案词", "雅思听力高频词",
+  "雅思阅读高频词", "SAT", "GMAT", "GRE", "其他词汇", "小学短语", "初中短语",
+  "高中短语", "地道表达", "俚语俗语",
+] as const satisfies readonly LearningBookKey[];
+
+export function getVisibleLearningBooks<T extends { key: string }>(books: readonly T[]) {
+  const byKey = new Map(books.map((book) => [book.key, book]));
+  return VISIBLE_LEARNING_BOOK_KEYS.flatMap((key) => {
+    const book = byKey.get(key);
+    const canonical = LEARNING_BOOKS.find((item) => item.key === key);
+    return book ? [{ ...book, ...(canonical ? { label: canonical.label } : {}) }] : [];
+  });
+}
+
 export const SUPPLEMENTAL_LEARNING_BOOK_KEYS = [
   "小学短语", "初中短语", "高中短语", "地道表达", "俚语俗语",
+  "雅思听力答案词", "雅思听力高频词", "雅思阅读高频词",
 ] as const satisfies readonly LearningBookKey[];
 
 export function isSupplementalLearningBook(book: string): book is (typeof SUPPLEMENTAL_LEARNING_BOOK_KEYS)[number] {
@@ -45,6 +73,7 @@ export function isSupplementalLearningBook(book: string): book is (typeof SUPPLE
 
 export type LearningWord = {
   antonyms: string[];
+  articleCategory?: string;
   bbcExampleSource?: {
     articleId: string;
     articleTitle: string;
@@ -85,6 +114,7 @@ export type LearningWord = {
 export function toLocalVocabularyEntry(word: LearningWord): LocalVocabularyEntry {
   return {
     antonyms: word.antonyms,
+    articleCategory: word.articleCategory,
     bbcExampleSource: word.bbcExampleSource,
     definitionCn: word.definitionCn,
     definitionGroups: word.definitionGroups,
@@ -188,6 +218,7 @@ export function getLearningBookCounts(
 export function toLearningWord(entry: LocalVocabularyEntry): LearningWord {
   return {
     antonyms: entry.antonyms,
+    articleCategory: entry.articleCategory,
     definitionCn: entry.definitionCn,
     definitionGroups: entry.definitionGroups,
     definitionLines: entry.definitionLines,

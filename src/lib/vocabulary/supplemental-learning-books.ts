@@ -1,5 +1,6 @@
 import gradedPhrases from "@/data/vocabulary/graded-phrases.json";
 import idiomaticExpressions from "@/data/vocabulary/idiomatic-expressions.json";
+import ieltsSpecialBooks from "@/data/vocabulary/ielts-special-learning-books.json";
 import slangProverbs from "@/data/vocabulary/slang-proverbs.json";
 import { getBbcPhraseLemma } from "@/lib/vocabulary/bbc-phrase-lemma";
 import {
@@ -9,6 +10,7 @@ import {
 } from "@/lib/vocabulary/learning";
 
 type SupplementalSourceEntry = {
+  articleCategory?: string;
   definitionCn: string;
   englishDefinition?: string;
   example?: string;
@@ -18,6 +20,9 @@ type SupplementalSourceEntry = {
   origin?: string;
   partOfSpeech: string;
   phonetic: string;
+  frequency?: number;
+  frequencyRank?: number;
+  group?: number;
   word: string;
 };
 
@@ -29,6 +34,9 @@ const gradedPhraseBooks: Partial<Record<LearningBookKey, SupplementalSourceEntry
 
 function getSourceEntries(book: LearningBookKey): SupplementalSourceEntry[] {
   if (gradedPhraseBooks[book]) return gradedPhraseBooks[book] ?? [];
+  if (book === "雅思听力答案词" || book === "雅思听力高频词" || book === "雅思阅读高频词") {
+    return ieltsSpecialBooks[book] as SupplementalSourceEntry[];
+  }
   return (book === "地道表达" ? idiomaticExpressions : slangProverbs) as SupplementalSourceEntry[];
 }
 
@@ -44,6 +52,7 @@ function toLearningWord(entry: SupplementalSourceEntry, book: LearningBookKey, i
 
   return {
     antonyms: [],
+    articleCategory: entry.articleCategory,
     definitionCn,
     definitionGroups: [{ definitions: [definitionCn], partOfSpeech, text: definitionCn }],
     definitionLines: [definitionCn],
@@ -61,6 +70,13 @@ function toLearningWord(entry: SupplementalSourceEntry, book: LearningBookKey, i
     phonetic,
     reviewNotes: isZoningOutEntry ? ["动词短语原形；zoning out 是它的 -ing 形式。"] : entry.note ? [entry.note] : [],
     root: "",
+    ...(entry.frequencyRank ? { frequencyRank: entry.frequencyRank } : {}),
+    ...(entry.frequency !== undefined ? {
+      stageFrequencies: { [book]: entry.frequency },
+      studyBookGroups: { [book]: entry.group ?? 1 },
+      studyFrequency: entry.frequency,
+      totalFrequency: entry.frequency,
+    } : {}),
     synonyms: [],
     ukAudioUrl: "",
     ukPhonetic: phonetic,

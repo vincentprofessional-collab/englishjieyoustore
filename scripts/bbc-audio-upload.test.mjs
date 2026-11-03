@@ -130,6 +130,20 @@ test("BBC explicit headings and vocabulary without IPA work; numbered prose rema
   assert.match(parse("260803-Test 测试\nOnly English prose."), /中文翻译/);
 });
 
+test("BBC uploaded phrases store normalized lemmas while retaining the written headword", () => {
+  const result = loadPasteParser()(`260803-Example title 示例标题
+Zoning out can happen during a long meeting.
+长时间开会时可能会走神。
+
+1. zoning out /ˈzəʊnɪŋ aʊt/ phr. 走神
+2. aerobatic activities /ˌeərəˈbætɪk ækˈtɪvətiz/ n. 特技飞行活动`);
+  assert.equal(typeof result, "object");
+  assert.equal(result.vocabulary[0].term, "zoning out");
+  assert.equal(result.vocabulary[0].lemma, "zone out");
+  assert.equal(result.vocabulary[1].term, "aerobatic activities");
+  assert.equal(result.vocabulary[1].lemma, "aerobatic activity");
+});
+
 test("BBC upload removes appended sentence syntax notes and maps authored POS/components back to the source sentence", () => {
   const input = `260803-Gen Z's love of the past 热衷怀旧的“Z世代”
 Today's youth are reinventing what it means to be cool.

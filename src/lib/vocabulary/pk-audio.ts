@@ -6,7 +6,6 @@ export function createVocabularyPkAudio() {
   let source: AudioBufferSourceNode | null = null;
   let request: AbortController | null = null;
   let generation = 0;
-  let speaking = false;
   const notes = new Set<OscillatorNode>();
 
   const stopWord = () => {
@@ -15,8 +14,6 @@ export function createVocabularyPkAudio() {
     request = null;
     if (source) { try { source.stop(); } catch { /* Already ended. */ } }
     source = null;
-    if (speaking) window.speechSynthesis?.cancel();
-    speaking = false;
   };
 
   return {
@@ -46,14 +43,7 @@ export function createVocabularyPkAudio() {
         source = node;
         node.start();
       } catch {
-        if (generation === token && "speechSynthesis" in window) {
-          const utterance = new SpeechSynthesisUtterance(word);
-          utterance.lang = "en-GB";
-          utterance.rate = .88;
-          speaking = true;
-          utterance.onend = () => { speaking = false; };
-          window.speechSynthesis.speak(utterance);
-        }
+        // Pronunciation requires the generated audio file; do not substitute browser speech.
       } finally { window.clearTimeout(timeout); }
     },
     feedback(correct: boolean) {

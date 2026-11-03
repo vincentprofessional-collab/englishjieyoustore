@@ -38,6 +38,14 @@
 .reading-source-subtitle { color: #596b61 !important; font-style: italic !important; }
 .reading-source-passage-section + .reading-source-passage-section { margin-top: 18px; }
 .reading-source-section-label { display: inline-block; min-width: 1.6em; }
+.reading-source-passage-heading { color: #354c3f; font-size: 17px; margin: 18px 0 8px; }
+.reading-source-passage-list { color: #29352f; line-height: 1.75; margin: 0 0 15px; padding-left: 1.5em; }
+.reading-source-figure { margin: 12px auto 18px; max-width: 100%; overflow-x: auto; text-align: center; }
+.reading-source-figure table { border-collapse: collapse; color: #29352f; font: 13px/1.5 Georgia, "Times New Roman", serif; margin: 0 auto; min-width: min(100%, 420px); }
+.reading-source-figure th, .reading-source-figure td { border: 1px solid #bdb5a8; padding: 6px 9px; text-align: left; }
+.reading-source-figure th { background: #f6f4ed; }
+.reading-source-figure figcaption { color: #68776d; font-size: 12px; line-height: 1.5; margin: 8px auto 0; max-width: 90%; }
+.reading-source-wheel-figure svg { fill: none; height: 180px; max-width: 100%; stroke: #354c3f; stroke-width: 2; width: 180px; }
 .reading-source-footnotes { border-top: 1px solid #ded7ca; margin-top: 20px; padding-top: 12px; }
 .reading-source-footnotes p { font: 13px/1.5 Georgia, "Times New Roman", serif; margin: 5px 0; }
 .reading-source-reference { border-top: 1px solid #e4dccd; margin-top: 20px; padding-top: 10px; }
@@ -60,6 +68,9 @@
 .reading-source-radio-options { display: grid; gap: 5px; margin: 8px 0 12px; }
 .reading-source-radio-options label { align-items: start; color: #29352f; display: flex; gap: 8px; line-height: 1.5; }
 .reading-source-radio-options input { flex: 0 0 auto; margin: 4px 0 0; }
+.reading-source-checkbox-options { display: grid; gap: 5px; margin: 8px 0 12px; }
+.reading-source-checkbox-options label { align-items: start; color: #29352f; display: flex; gap: 8px; line-height: 1.5; }
+.reading-source-checkbox-options input { flex: 0 0 auto; margin: 4px 0 0; }
 .reading-source-inline-answer .reading-source-text-input, .reading-source-inline-answer .reading-source-text-select { display: inline-block; margin: 0 5px; vertical-align: middle; width: 140px; }
 .reading-source-text-question.correct .reading-source-text-input, .reading-source-text-question.correct .reading-source-text-select { background: #eff7ee; border-color: #6d9e74; }
 .reading-source-text-question.incorrect .reading-source-text-input, .reading-source-text-question.incorrect .reading-source-text-select { background: #fff3ee; border-color: #b44a39; }

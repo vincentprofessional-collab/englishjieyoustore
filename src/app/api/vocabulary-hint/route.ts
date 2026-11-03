@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import { getBbcVocabularyDetail } from "@/lib/articles/bbc-vocabulary";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
-import { getVocabularyUsageExamples, prioritizeVocabularyUsageExamples } from "@/lib/vocabulary/examples";
+import { getVocabularyUsageExamples, getVocabularyWorkbookUsageExamples, prioritizeVocabularyUsageExamples } from "@/lib/vocabulary/examples";
 import { getVocabularyPhraseMatches } from "@/lib/vocabulary/phrases";
 import { getExtendedVocabularyEntry, getVocabularyEntry, getVocabularyFormationParts } from "@/lib/vocabulary/local-vocabulary";
 import { getVocabularyLookupEtymology } from "@/lib/vocabulary/lookup-etymology";
@@ -21,10 +21,9 @@ export async function GET(request: Request) {
   }
 
   if (isDetailed) {
-    const studyOnly = searchParams.get("study") === "1";
     const bbcVocabularyDetail = getBbcVocabularyDetail(word);
     const entry = /\s/.test(word) && bbcVocabularyDetail ? bbcVocabularyDetail.entry : hint;
-    const fetchedUsageExamples = studyOnly ? [] : prioritizeVocabularyUsageExamples(
+    const fetchedUsageExamples = prioritizeVocabularyUsageExamples(
       await getVocabularyUsageExamples(entry.word, 5, entry.inflections.map((inflection) => inflection.value)),
       bbcVocabularyDetail?.examples ?? [],
     ).slice(0, 5);
@@ -41,9 +40,10 @@ export async function GET(request: Request) {
         // Treat an unavailable membership check as a visitor and hide BBC examples.
       }
     }
-    const usageExamples = canAccessBbcExamples
+    const accessibleUsageExamples = canAccessBbcExamples
       ? fetchedUsageExamples
       : fetchedUsageExamples.filter((example) => example.bookCode !== "BBC");
+    const usageExamples = accessibleUsageExamples.length ? accessibleUsageExamples : getVocabularyWorkbookUsageExamples(entry.word);
     const formationParts = getVocabularyFormationParts(entry).map((part) => ({
       ...part,
       href: part.href ? `${part.href}${part.href.includes("?") ? "&" : "?"}from=lookup` : part.href,

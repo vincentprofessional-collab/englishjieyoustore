@@ -1,0 +1,236 @@
+.preview {
+  background: linear-gradient(145deg, #fffefa 0%, #fffaf0 100%);
+  border: 1px solid #eadcbf;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(80, 66, 44, .07);
+  margin: 0 0 22px;
+  min-width: 0;
+  padding: clamp(16px, 1.8vw, 28px);
+}
+
+.header h2 {
+  color: #263958;
+  font-family: "Songti SC", "Noto Serif SC", serif;
+  font-size: clamp(24px, 2vw, 34px);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.kicker {
+  color: #6273b7;
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.intro {
+  color: #6e7789;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 8px 0 0;
+}
+
+.sceneStory {
+  background: #fffaf0;
+  border: 1px solid #ece5d8;
+  border-left: 3px solid #82bcb5;
+  border-radius: 10px;
+  color: #475266;
+  font-size: 14px;
+  line-height: 1.85;
+  margin: 0 0 13px;
+  padding: 10px 12px;
+}
+
+.target {
+  background: #eaf2ff;
+  border-radius: 5px;
+  color: #36599f;
+  font-weight: 800;
+  padding: 1px 3px;
+}
+
+.sceneGrid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.scene {
+  background: #fff;
+  border: 1px solid #ece5d8;
+  border-radius: 16px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.imageFrame {
+  aspect-ratio: 3 / 4;
+  background: #eaf1fa;
+  overflow: hidden;
+  position: relative;
+}
+
+.imageFrame img {
+  object-fit: contain;
+}
+
+.imageWordLabels {
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.imageWordLabel {
+  background: rgba(255, 254, 250, .94);
+  border: 1px solid #82bcb5;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(53, 75, 100, .14);
+  color: #36599f;
+  font-size: clamp(10px, .8vw, 12px);
+  font-weight: 800;
+  line-height: 1.2;
+  padding: 3px 7px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.sceneBody {
+  padding: 13px;
+}
+
+.sceneBody h3 {
+  align-items: baseline;
+  color: #3b4a65;
+  display: flex;
+  font-size: 16px;
+  gap: 8px;
+  margin: 0 0 11px;
+}
+
+.sceneBody h3 span {
+  color: #b08a37;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.wordGrid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.wordCard {
+  background: #fffdf8;
+  border: 1px solid #e7e2d7;
+  border-radius: 11px;
+  min-width: 0;
+  padding: 9px;
+}
+
+.wordHeading {
+  align-items: baseline;
+  display: flex;
+  gap: 5px;
+  min-width: 0;
+}
+
+.wordHeading strong {
+  color: #273f69;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.wordHeading small {
+  color: #8891a0;
+  font-size: 10px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.wordOrder {
+  color: #a98a50;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+}
+
+.meaning {
+  color: #5d6573;
+  font-size: 12px;
+  line-height: 1.45;
+  margin: 4px 0 7px;
+  min-height: 18px;
+}
+
+.pronunciationRow {
+  align-items: center;
+  display: grid;
+  gap: 4px;
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  min-width: 0;
+}
+
+.pronunciationRow + .pronunciationRow {
+  margin-top: 4px;
+}
+
+.accentLabel {
+  color: #6273b7;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.ipa {
+  color: #434d60;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.playButton {
+  background: #eef3ff;
+  border: 1px solid #d5def5;
+  border-radius: 7px;
+  color: #36599f;
+  cursor: pointer;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 7px;
+}
+
+.playButton:hover {
+  background: #e2eaff;
+}
+
+.playButton:focus-visible {
+  outline: 2px solid #6273b7;
+  outline-offset: 2px;
+}
+
+@media (max-width: 760px) {
+  .preview {
+    border-radius: 18px;
+    padding: 15px;
+  }
+
+  .sceneGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .sceneStory {
+    padding: 9px 10px;
+  }
+
+  .wordGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

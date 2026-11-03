@@ -14,6 +14,9 @@ import {
 import { supabase } from "@/lib/supabase/client";
 import { DEFAULT_PAYMENT_INSTRUCTIONS, loadPaymentInstructions, savePaymentInstructions } from "@/lib/content/payment-instructions";
 import { BbcMembers } from "@/components/bbc-members";
+import { GuideBoard } from "@/components/guide-board";
+import { ALL_PAID_PAGES_POST_PATH } from "@/lib/content/guide-post-navigation";
+import { readLocalAccessCatalogPreview } from "@/lib/access-control-local-preview";
 
 type ProjectAccessPaywallProps = {
   description?: string;
@@ -28,10 +31,14 @@ type PaymentRequest = {
 
 type ProjectRow = {
   description: string | null;
+  description_font_family: "serif" | "sans" | null;
+  description_font_size: number | null;
   gate_title: string | null;
   project_key: string;
   short_title: string | null;
   title: string;
+  title_font_family: "serif" | "sans" | null;
+  title_font_size: number | null;
 };
 
 type ProjectPlanRow = {
@@ -50,6 +57,7 @@ export function ProjectAccessPaywall({
   const [project, setProject] = useState<ProjectAccessRule>(fallbackProject);
   const [plans, setPlans] = useState<ProjectAccessPlanOption[]>([]);
   const [catalog, setCatalog] = useState({ projectKey: "", status: "loading" });
+  const [isLocalCatalogPreview, setIsLocalCatalogPreview] = useState(false);
   const [catalogAttempt, setCatalogAttempt] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState<ProjectAccessPlan>("monthly");
   const selectedPlanOption = plans.find((plan) => plan.plan === selectedPlan) ?? plans[0];
@@ -106,13 +114,46 @@ export function ProjectAccessPaywall({
     const nextFallbackProject = getProjectAccessRule(projectKey);
     setProject(nextFallbackProject);
     setPlans([]);
+    setIsLocalCatalogPreview(false);
     setCatalog({ projectKey, status: "loading" });
+
+    if (process.env.NODE_ENV === "development" && [
+      "vocabulary.idiomatic-expressions",
+      "vocabulary.slang-proverbs",
+    ].includes(projectKey)) {
+      const localPreview = readLocalAccessCatalogPreview(projectKey);
+      if (localPreview) {
+        setProject({
+          ...nextFallbackProject,
+          description: localPreview.description,
+          descriptionFontFamily: localPreview.descriptionFontFamily ?? "serif",
+          descriptionFontSize: localPreview.descriptionFontSize ?? 18,
+          gateTitle: localPreview.gateTitle || nextFallbackProject.gateTitle,
+          shortTitle: localPreview.shortTitle || nextFallbackProject.shortTitle,
+          title: localPreview.title || nextFallbackProject.title,
+          titleFontFamily: localPreview.titleFontFamily ?? "serif",
+          titleFontSize: localPreview.titleFontSize ?? 36,
+        });
+      }
+      const priceCny = localPreview?.priceCny ?? 9.9;
+      setPlans([{
+        durationLabel: "永久",
+        label: "一次性开通",
+        plan: "lifetime",
+        priceCny,
+        priceLabel: formatProjectPrice(priceCny),
+      }]);
+      setSelectedPlan("lifetime");
+      setIsLocalCatalogPreview(true);
+      setCatalog({ projectKey, status: "ready" });
+      return () => { isMounted = false; };
+    }
 
     async function loadCatalog() {
       const [projectResult, plansResult] = await Promise.all([
         supabase
           .from("access_projects")
-          .select("project_key,title,short_title,gate_title,description")
+          .select("project_key,title,short_title,gate_title,description,title_font_family,title_font_size,description_font_family,description_font_size")
           .eq("project_key", projectKey)
           .eq("is_enabled", true)
           .maybeSingle(),
@@ -127,6 +168,22 @@ export function ProjectAccessPaywall({
       if (!isMounted) return;
 
       if (projectResult.error || !projectResult.data || plansResult.error || !plansResult.data?.length) {
+        if (process.env.NODE_ENV === "development" && [
+          "vocabulary.idiomatic-expressions",
+          "vocabulary.slang-proverbs",
+        ].includes(projectKey)) {
+          setPlans([{
+            durationLabel: "永久",
+            label: "一次性开通",
+            plan: "lifetime",
+            priceCny: 9.9,
+            priceLabel: formatProjectPrice(9.9),
+          }]);
+          setSelectedPlan("lifetime");
+          setIsLocalCatalogPreview(true);
+          setCatalog({ projectKey, status: "ready" });
+          return;
+        }
         setCatalog({ projectKey, status: "error" });
         return;
       }
@@ -135,10 +192,14 @@ export function ProjectAccessPaywall({
         const row = projectResult.data as ProjectRow;
         setProject({
           description: row.description ?? "",
+          descriptionFontFamily: row.description_font_family ?? "serif",
+          descriptionFontSize: row.description_font_size ?? 18,
           gateTitle: row.gate_title ?? undefined,
           key: row.project_key,
           shortTitle: row.short_title ?? row.title,
           title: row.title,
+          titleFontFamily: row.title_font_family ?? "serif",
+          titleFontSize: row.title_font_size ?? 36,
         });
       }
 
@@ -230,11 +291,18 @@ export function ProjectAccessPaywall({
   }
 
   return (
+    <>
     <section className="project-access-gate" aria-label={project.shortTitle + "付费内容"}>
       <div className="project-access-gate-copy">
         <span>PROJECT ACCESS</span>
-        <h2>{title ?? project.gateTitle ?? project.title + "需要单独开通"}</h2>
-        {description ?? project.description ? <p>{description ?? project.description}</p> : null}
+        <h2 style={{
+          fontFamily: project.titleFontFamily === "sans" ? 'Arial, "Noto Sans SC", sans-serif' : 'Georgia, "Times New Roman", "Noto Serif SC", serif',
+          fontSize: `${project.titleFontSize ?? 36}px`,
+        }}>{title ?? project.gateTitle ?? project.title + "需要单独开通"}</h2>
+        {description ?? project.description ? <p style={{
+          fontFamily: project.descriptionFontFamily === "sans" ? 'Arial, "Noto Sans SC", sans-serif' : 'Georgia, "Times New Roman", "Noto Serif SC", serif',
+          fontSize: `${project.descriptionFontSize ?? 18}px`,
+        }}>{description ?? project.description}</p> : null}
       </div>
 
       <div className="project-access-plan-list" aria-label="可开通周期">
@@ -254,7 +322,9 @@ export function ProjectAccessPaywall({
       </div>
 
       <div className="project-access-actions">
-        {userEmail ? (
+        {isLocalCatalogPreview ? (
+          <p className="project-access-message" role="status">本地预览：项目尚未部署，付款功能暂不可用。</p>
+        ) : userEmail ? (
           <button
             className="button primary"
             disabled={isCreatingPayment || !selectedPlanOption}
@@ -303,5 +373,9 @@ export function ProjectAccessPaywall({
       ) : null}
       {projectKey === "bbc" ? <BbcMembers /> : null}
     </section>
+    <div className="guide-posts-under-page">
+      <GuideBoard compact eyebrow="PAGE POSTS · 付费页面" hideWhenEmpty initialExpanded placementPath={ALL_PAID_PAGES_POST_PATH} title="页面帖子" />
+    </div>
+    </>
   );
 }

@@ -6,11 +6,17 @@ import {
 import {
   toLearningWord,
   toLearningWordFromFavorite,
+  getVisibleLearningBooks,
   SUPPLEMENTAL_LEARNING_BOOK_KEYS,
   type FavoriteLearningWord,
   type LearningWord,
 } from "@/lib/vocabulary/learning";
 import { getSupplementalLearningWords } from "@/lib/vocabulary/supplemental-learning-books";
+import {
+  getPaidLearningBook,
+  hasLearningBookAccess,
+  PAID_LEARNING_BOOKS,
+} from "@/lib/vocabulary/learning-book-access";
 import { withExistingStudyExamples } from "@/lib/vocabulary/study-examples";
 import totalFrequencyData from "@/data/vocabulary/total-frequency-ranks.json";
 import {
@@ -62,12 +68,23 @@ function getSupplementalFavoriteIndex() {
 }
 
 export async function GET(request: Request) {
+  const params = new URL(request.url).searchParams;
+  const requestedBook = params.get("book") ?? "小学";
+  const paidBookNames = Object.keys(PAID_LEARNING_BOOKS);
+  const booksToCheck = requestedBook === "全部"
+    ? paidBookNames
+    : getPaidLearningBook(requestedBook) ? [requestedBook] : [];
+  const paidBookAccess = new Map(await Promise.all(booksToCheck.map(async (book) => [book, await hasLearningBookAccess(book)] as const)));
+  const deniedPaidBooks = new Set([...paidBookAccess].filter(([, allowed]) => !allowed).map(([book]) => book));
+  if (deniedPaidBooks.has(requestedBook)) {
+    const paywall = getPaidLearningBook(requestedBook)?.paywallPath;
+    return NextResponse.json({ error: "请先开通该词汇书。", paywall }, { headers: { "Cache-Control": "private, no-store" }, status: 403 });
+  }
   const state = await getManagedContentState();
   const { entries, words: baseWords } = getBaseLearningWords();
-  const managedBooks = getManagedLearningBooks(state);
+  const managedBooks = getVisibleLearningBooks(getManagedLearningBooks(state));
   const words = applyVocabularyLearningOverrides(baseWords, state);
-  const requestedBook = new URL(request.url).searchParams.get("book") ?? "小学";
-  if (new URL(request.url).searchParams.get("catalog") === "1") {
+  if (params.get("catalog") === "1") {
     return NextResponse.json({
       books: managedBooks,
       bookCounts: getManagedBookCounts(words, managedBooks),
@@ -78,9 +95,10 @@ export async function GET(request: Request) {
   const book = (validBooks.has(requestedBook) || requestedBook === "全部")
     ? requestedBook
     : "小学";
-  const selectedWords = (new URL(request.url).searchParams.get("direct") === "1"
-    ? words.filter((word) => word.level === book)
-    : getLearningWordsForBook(words, book)).map(withExistingStudyExamples);
+  const visibleWords = words.filter((word) => !deniedPaidBooks.has(word.level));
+  const selectedWords = (params.get("direct") === "1"
+    ? visibleWords.filter((word) => word.level === book)
+    : getLearningWordsForBook(visibleWords, book)).map(withExistingStudyExamples);
 
   return NextResponse.json(
     {
@@ -117,12 +135,19 @@ export async function POST(request: Request) {
     const requestedIds = [...new Set((Array.isArray(rawWordIds) ? rawWordIds : [])
       .filter((id): id is string => typeof id === "string" && id.trim().length > 0 && id.length <= 120)
       .map((id) => id.trim().toLowerCase()))].slice(0, 50_000);
+    const paidBooks = [...new Set(requestedIds.map((id) => supplementalById.get(id)?.level ?? favoritesById.get(id)?.level ?? "")
+      .filter((book) => Boolean(getPaidLearningBook(book))))];
+    const paidBookAccess = new Map(await Promise.all(paidBooks.map(async (book) => [book, await hasLearningBookAccess(book)] as const)));
     const words = requestedIds.flatMap((id) => {
       const entry = entriesById.get(id);
+      const supplementalWord = supplementalById.get(id);
+      const favorite = favoritesById.get(id);
+      const book = supplementalWord?.level ?? favorite?.level ?? "";
+      if (getPaidLearningBook(book) && paidBookAccess.get(book) === false) return [];
       const word = entry
         ? toLearningWord(entry)
-        : supplementalById.get(id)
-          ?? (favoritesById.has(id) ? toLearningWordFromFavorite({ ...favoritesById.get(id)!, id }) : null);
+        : supplementalWord
+          ?? (favorite ? toLearningWordFromFavorite({ ...favorite, id }) : null);
       return word ? [{
         id: word.id,
         word: word.word,
@@ -138,7 +163,11 @@ export async function POST(request: Request) {
     );
   }
   const seen = new Set<string>();
+  const paidFavoriteBooks = [...new Set(favorites.map((favorite) => favorite.level ?? "")
+    .filter((book) => Boolean(getPaidLearningBook(book))))];
+  const paidFavoriteAccess = new Map(await Promise.all(paidFavoriteBooks.map(async (book) => [book, await hasLearningBookAccess(book)] as const)));
   const words = favorites.flatMap((favorite) => {
+    if (getPaidLearningBook(favorite.level ?? "") && paidFavoriteAccess.get(favorite.level ?? "") === false) return [];
     const id = favorite.id.trim().toLowerCase();
     if (!id || seen.has(id)) return [];
     seen.add(id);

@@ -12,6 +12,7 @@ export type GuidePagePlacementOption = {
 };
 
 export const GUIDE_POST_NAV_PREFIX = "guide-post-";
+export const ALL_PAID_PAGES_POST_PATH = "/__all-paid-pages__";
 
 export function guidePostNavId(slug: string) {
   return `${GUIDE_POST_NAV_PREFIX}${slug}`;
@@ -64,6 +65,8 @@ export function normalizeGuidePagePath(value: string) {
 export function guidePostPagePlacementOptions(config: SiteChromeConfig): GuidePagePlacementOption[] {
   const options: GuidePagePlacementOption[] = [{ label: "主页", path: "/" }];
   const seenPaths = new Set(options.map((option) => option.path));
+  seenPaths.add(ALL_PAID_PAGES_POST_PATH);
+  options.push({ label: "付费页面：所有付费页面", path: ALL_PAID_PAGES_POST_PATH });
 
   const addOption = (label: string, href: string) => {
     const normalizedPath = normalizeGuidePagePath(href);

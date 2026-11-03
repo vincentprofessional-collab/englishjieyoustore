@@ -11,6 +11,7 @@ import { shouldShowAudioPronunciation } from "@/lib/audio-pronunciation";
 import { getAdjectiveBaseFormCandidates } from "./adjective-base-forms";
 
 export type LocalVocabularyHint = {
+  articleCategory?: string;
   definitionCn: string;
   etymologySource: string;
   etymologySourceKey?: string;
@@ -995,16 +996,27 @@ function loadVocabularyEntries() {
     // Legacy sources still supply roots, audio and word forms. Meanings come
     // exclusively from the supplied workbook and explicit user corrections.
     const definitions = getWorkbookDefinitionFields(accumulator.normalizedWord);
-    const primaryEtymologyReference = accumulator.etymologyReferences[0];
-    const primaryRootReference = accumulator.rootReferences[0];
     const workbookDetails = WORKBOOK_VOCABULARY_DETAILS[accumulator.normalizedWord];
+    const etymologyReferences = workbookDetails
+      ? accumulator.etymologyReferences.filter((reference) => !/gcide|iferror/i.test(reference.etymologySource))
+      : accumulator.etymologyReferences;
+    const primaryEtymologyReference = etymologyReferences[0];
+    const workbookFormationParts = (workbookDetails?.formation ?? "").split(/\s+\+\s+/).map(normalizeDirectoryKey).filter(Boolean);
+    const rootReferences = workbookDetails
+      ? accumulator.rootReferences.filter((reference) => {
+          if (/gcide|iferror|历史词形|同源形式/i.test(`${reference.root} ${reference.etymologySource}`)) return false;
+          const rootKey = normalizeDirectoryKey(reference.root);
+          return Boolean(rootKey && workbookFormationParts.some((part) => part === rootKey || part.includes(rootKey)));
+        })
+      : accumulator.rootReferences;
+    const primaryRootReference = rootReferences[0];
 
     return {
       ...definitions,
       antonyms: accumulator.antonyms,
       englishExamples: accumulator.englishExamples,
       etymologyStory: accumulator.etymologyStory,
-      etymologyReferences: accumulator.etymologyReferences,
+      etymologyReferences,
       etymologySource: primaryEtymologyReference?.etymologySource ?? accumulator.etymologySource,
       etymologySourceKey: primaryEtymologyReference?.etymologySourceKey ?? accumulator.etymologySourceKey,
       formation: workbookDetails?.formation ?? primaryEtymologyReference?.formation ?? primaryRootReference?.formation ?? accumulator.formation,
@@ -1017,7 +1029,7 @@ function loadVocabularyEntries() {
       reviewNotes: accumulator.reviewNotes,
       root: primaryRootReference?.root ?? "",
       rootKey: primaryRootReference?.rootKey ?? "",
-      rootReferences: accumulator.rootReferences,
+      rootReferences,
       sourceRowNumber: accumulator.sourceRowNumber,
       stageFrequencies: workbookDetails?.stageFrequencies,
       studyBookGroups: workbookDetails?.studyBookGroups,
@@ -1118,9 +1130,11 @@ export function getVocabularyRootAffixDirectory(category?: VocabularyRootAffixCa
   const directory = categories.flatMap((categoryKey) =>
     (EXCEL_ROOT_AFFIX_CATALOG.categories[categoryKey]?.items ?? [])
       .filter((item) => !/IFERROR|MATCH\(/i.test(item.label))
-      .map((item) => ({
+      .map((item) => ({ item, count: getCatalogRelatedEntries(item).length }))
+      .filter(({ count }) => count > 0)
+      .map(({ item, count }) => ({
         category: categoryKey,
-        count: item.relatedWordCount || item.occurrenceCount || 0,
+        count,
         href: `/vocabulary/etymologies/${encodeURIComponent(item.key)}`,
         key: item.key,
         kind: getRootAffixKind(categoryKey),
@@ -1128,6 +1142,39 @@ export function getVocabularyRootAffixDirectory(category?: VocabularyRootAffixCa
         meaning: item.meaning,
       })),
   );
+  const knownLabels = new Set(
+    ["root", "prefix", "suffix"]
+      .flatMap((categoryKey) => EXCEL_ROOT_AFFIX_CATALOG.categories[categoryKey as VocabularyRootAffixCategory]?.items ?? [])
+      .flatMap((item) => [normalizeDirectoryKey(item.label), normalizeDirectoryKey(item.sourceKey)]),
+  );
+  const dynamicItems = new Map<string, { category: VocabularyRootAffixCategory; label: string; words: Set<string> }>();
+  for (const entry of loadVocabularyEntries()) {
+    if (!entry.isLatestWorkbookVocabulary) continue;
+    for (const label of getFormationLabels(entry.formation)) {
+      const key = normalizeDirectoryKey(label);
+      if (!key || knownLabels.has(key)) continue;
+      const category: VocabularyRootAffixCategory = /^[-/]/.test(label.trim())
+        ? "suffix"
+        : /^[A-Za-z]+-/.test(label.trim())
+          ? "prefix"
+          : "root";
+      const item = dynamicItems.get(key) ?? { category, label, words: new Set<string>() };
+      item.words.add(entry.normalizedWord);
+      dynamicItems.set(key, item);
+    }
+  }
+  for (const [key, item] of dynamicItems) {
+    if (category && item.category !== category) continue;
+    directory.push({
+      category: item.category,
+      count: item.words.size,
+      href: `/vocabulary/etymologies/${encodeURIComponent(key)}`,
+      key,
+      kind: getRootAffixKind(item.category),
+      label: item.label,
+      meaning: "",
+    });
+  }
 
   directory.sort((left, right) => collator.compare(left.label, right.label));
 
@@ -2229,6 +2276,28 @@ function isPieRootLabel(rootLabel: string) {
   return /^PIE\b/i.test(rootLabel.trim());
 }
 
+function formationMatchesCatalogItem(entry: LocalVocabularyEntry, item: VocabularyRootAffixCatalogItem) {
+  const parts = entry.formation.split(/\s+\+\s+/).map(normalizeDirectoryKey).filter(Boolean);
+  const labelKey = normalizeDirectoryKey(item.label);
+  const sourceKey = normalizeDirectoryKey(item.sourceKey);
+
+  if (parts.some((part) => part === labelKey || part === sourceKey)) return true;
+  if (item.category === "suffix") {
+    const core = sourceKey.split("-")[0];
+    return Boolean(core && parts.some((part) => part.replace(/^-+/, "").startsWith(core)));
+  }
+  return false;
+}
+
+function getCatalogRelatedEntries(item: VocabularyRootAffixCatalogItem) {
+  const entryMap = loadVocabularyMap();
+  return (EXCEL_ROOT_AFFIX_CATALOG.relatedWords[item.key] ?? [])
+    .map((word) => entryMap.get(normalizeLookupWord(word)))
+    .filter((entry): entry is LocalVocabularyEntry =>
+      Boolean(entry && (!entry.isLatestWorkbookVocabulary || formationMatchesCatalogItem(entry, item))),
+    );
+}
+
 export function getVocabularyEtymologyDirectory(sourceKey: string): VocabularyEtymologyDirectory | null {
   const normalizedSourceKey = normalizeDirectoryKey(sourceKey);
 
@@ -2244,10 +2313,7 @@ export function getVocabularyEtymologyDirectory(sourceKey: string): VocabularyEt
   );
 
   if (catalogItem) {
-    const entryMap = loadVocabularyMap();
-    const entries = (EXCEL_ROOT_AFFIX_CATALOG.relatedWords[catalogItem.key] ?? [])
-      .map((word) => entryMap.get(normalizeLookupWord(word)))
-      .filter((entry): entry is LocalVocabularyEntry => Boolean(entry));
+    const entries = getCatalogRelatedEntries(catalogItem);
     const uniqueEntries = [...new Map(entries.map((entry) => [entry.normalizedWord, entry])).values()];
 
     return {
@@ -2290,10 +2356,11 @@ export function getVocabularyEtymologyDirectory(sourceKey: string): VocabularyEt
         .sort((a, b) => a.sourceRowNumber - b.sourceRowNumber)
     : isFormationDirectory
     ? entries
-        .filter((entry) =>
-          [...entry.etymologyReferences, ...entry.rootReferences].some((reference) =>
-            formationIncludesKey(reference.formation, normalizedSourceKey),
-          ),
+        .filter((entry) => entry.isLatestWorkbookVocabulary
+          ? formationIncludesKey(entry.formation, normalizedSourceKey)
+          : [...entry.etymologyReferences, ...entry.rootReferences].some((reference) =>
+              formationIncludesKey(reference.formation, normalizedSourceKey),
+            ),
         )
         .sort(
           (a, b) =>
@@ -2306,8 +2373,11 @@ export function getVocabularyEtymologyDirectory(sourceKey: string): VocabularyEt
     ? getExcelLeftmostRootAffixLabel(normalizedSourceKey)
     : isFormationDirectory
     ? matchedEntries
-        .flatMap((entry) => [...entry.etymologyReferences, ...entry.rootReferences])
-        .map((reference) => getFormationLabelByKey(reference.formation, normalizedSourceKey))
+        .flatMap((entry) => [
+          getFormationLabelByKey(entry.formation, normalizedSourceKey),
+          ...[...entry.etymologyReferences, ...entry.rootReferences]
+            .map((reference) => getFormationLabelByKey(reference.formation, normalizedSourceKey)),
+        ])
         .find(Boolean)
     : "";
 

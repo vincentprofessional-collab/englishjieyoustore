@@ -52,11 +52,11 @@ test("Excel bilingual examples mask concise Chinese synonyms and provide the Eng
   assert.deepEqual(details.englishDefinitions, ["feeling fear; frightened because you think that you might be hurt or suffer"]);
 });
 
-test("workbook examples take priority, then shorter bilingual examples", () => {
+test("non-workbook examples take priority, then shorter bilingual examples", () => {
   const workbook = { english: "A somewhat longer workbook sentence.", chinese: "Excel 翻译。", sourceType: "workbook" };
   const shorterFallback = { english: "A book.", chinese: "一本书。", sourceType: "listening" };
   const longerFallback = { english: "A much longer fallback sentence.", chinese: "更长的翻译。", sourceType: "manual" };
-  assert.ok(compareStudyExamples(workbook, shorterFallback) < 0);
+  assert.ok(compareStudyExamples(shorterFallback, workbook) < 0);
   assert.ok(compareStudyExamples(shorterFallback, longerFallback) < 0);
 });
 
@@ -81,4 +81,20 @@ test("the word list selects the configured accent's phonetic without swapping ac
   assert.equal(getStudyPhonetic(word, "uk"), "/UK/");
   assert.equal(getStudyPhonetic({ phonetic: "/legacy/" }, "uk"), "/legacy/");
   assert.equal(getStudyPhonetic({}, "us"), "");
+});
+
+test("study vocabulary details hide the morphology row and center word and IPA on separate rows", () => {
+  const learning = readFileSync(new URL("../src/components/vocabulary-learning.tsx", import.meta.url), "utf8");
+  const heading = readFileSync(new URL("../src/components/vocabulary-detail-heading.tsx", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/app/globals.css", import.meta.url), "utf8");
+  assert.match(learning, /showMorphology=\{false\}\s+studyCentered/);
+  assert.match(heading, /showMorphology\s*&&\s*parts\.length/);
+  assert.match(styles, /vocabulary-detail-heading-study-centered[\s\S]*?flex-direction:\s*column/);
+  assert.match(styles, /vocabulary-detail-heading-study-centered[\s\S]*?justify-content:\s*center/);
+});
+
+test("story word pronunciations use generated vocabulary audio rather than browser speech synthesis", () => {
+  const story = readFileSync(new URL("../src/components/senior-high-vocabulary-story-preview.tsx", import.meta.url), "utf8");
+  assert.match(story, /playVocabularyPronunciation\(\{ accent, word \}\)/);
+  assert.doesNotMatch(story, /SpeechSynthesisUtterance|speechSynthesis\.speak/);
 });

@@ -561,7 +561,7 @@ function GuidePostCard({
         </div>
       </header>
 
-      {initialExpanded || expanded ? (
+      {expanded ? (
         <div className="guide-post-content">
           {post.blocks.map((block, index) => block.type === "image"
             ? index === firstImageBlockIndex && galleryImages.length > 0
@@ -770,13 +770,14 @@ export function GuidePostsOnNavigationPage({
   const searchParams = useSearchParams();
   const query = searchParams.toString();
   const currentPath = normalizeGuidePagePath(`${pathname}${query ? `?${query}` : ""}`);
+  const postPlacementPath = currentPath;
   const isHandledByDedicatedBoard =
     currentPath === "/" || currentPath === "/contact" || currentPath.startsWith("/contact/");
   const isAdminRoute = currentPath === "/admin" || currentPath.startsWith("/admin/");
   const isArticleDetail = pathname.startsWith("/articles/");
   const isNavigationPage = config?.nav?.items?.length
     ? guidePostPagePlacementOptions(config).some(
-    (option) => option.path === currentPath,
+    (option) => option.path === postPlacementPath,
       )
     : false;
 
@@ -791,7 +792,7 @@ export function GuidePostsOnNavigationPage({
         eyebrow="PAGE POSTS · 页面帖子"
         hideWhenEmpty
         initialExpanded
-        placementPath={currentPath}
+        placementPath={postPlacementPath}
         title="页面帖子"
       />
     </div>

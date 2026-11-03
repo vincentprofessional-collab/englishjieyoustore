@@ -1,0 +1,177 @@
+{
+  "source": {
+    "path": "2025年SAT亚太北美真题38套/2025年5月SAT机考真题/2025年5月第1套（亚太）带答案.pdf",
+    "sha256": "c57f8ff362751b1c7d94c7a5b2447a96bbf9f8e07d96e968a19fa6f0c5a549c6"
+  },
+  "section": "Section 1, Module 1: Reading and Writing",
+  "reviewedSourcePages": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 41, 42, 43],
+  "watermarkAndPageFurnitureExcluded": true,
+  "verifiedQuestionCount": 13,
+  "expectedModuleQuestionCount": 27,
+  "reviewRequiredQuestions": [
+    {
+      "number": 10,
+      "questionPage": 9,
+      "answerPage": 42,
+      "title": "Employment in Agriculture, Hunting, and Forestry in the Czech Republic and Austria, 1995–2013",
+      "figureText": "折线图：横轴为 1995、1998、2001、2004、2007、2010、2013；纵轴为雇员人数（千人），范围 0–250；实线为 Czech Republic，虚线为 Austria。",
+      "prompt": "A student is using the graph for a class presentation on historic employment trends in the agriculture, hunting, and forestry sectors in two European countries. The student notes that from 1995 to 2007 ______. Which choice most effectively uses data from the graph to complete the example?",
+      "choices": ["A. the majority of employees in Austria were working in these sectors.", "B. the number of employees working in these sectors decreased in the Czech Republic while remaining relatively steady in Austria.", "C. employment in these sectors remained stable in both Austria and the Czech Republic.", "D. the number of employees working in these sectors increased in the Czech Republic."],
+      "answer": "B",
+      "explanation": "图中显示 1995 至 2007 年捷克共和国相关行业就业人数下降，而奥地利人数基本稳定。",
+      "reviewStatus": "review_required",
+      "blocker": "题目文字、答案与解析已核实；图表裁切图仍需处理原页水印后再完成展示核验。"
+    }
+  ],
+  "sourceGaps": [
+    {
+      "number": 6,
+      "questionPage": 6,
+      "answerPage": 41,
+      "status": "source_missing",
+      "note": "原卷题目页和答案解析页均明确标注缺题；不补造题干或答案。"
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "questionPage": 4,
+      "answerPage": 41,
+      "prompt": "The National Heritage Fellowship was created to ______ exceptional folk and traditional artists in the United States. One artist who received the fellowship, the Mexican American rodeo tailor Manuel Cuevas, was chosen for his lifetime contributions to the arts. Which choice completes the text with the most logical and precise word or phrase?",
+      "choices": ["A. begin", "B. overshadow", "C. distract", "D. honor"],
+      "answer": "D",
+      "explanation": "National Heritage Fellowship 是为表彰杰出艺术家而设立的奖项，文中说明 Manuel Cuevas 因终身艺术贡献获奖，因此 honor 符合语境。",
+      "reviewStatus": "source_matched"
+    },
+    {
+      "number": 2,
+      "questionPage": 4,
+      "answerPage": 41,
+      "prompt": "Some cities estimate where sidewalks are located using road maps, which is not very accurate. Maryam Hosseini and her team trained a computer program to identify sidewalks in aerial images of Manhattan and used it on images of Brooklyn. The program's performance was ______ to that of the road-map method: it more accurately identified sidewalks, and it even distinguished between cobblestone and brick. Which choice completes the text with the most logical and precise word or phrase?",
+      "choices": ["A. superior", "B. supportive", "C. similar", "D. changed"],
+      "answer": "A",
+      "explanation": "程序比道路地图方法更准确，还能区分鹅卵石和砖，因此其表现 superior（更优）。",
+      "reviewStatus": "source_matched"
+    },
+    {
+      "number": 3,
+      "questionPage": 5,
+      "answerPage": 41,
+      "prompt": "The following text is from Charles Chesnutt's 1905 novel The Colonel's Dream. Mr. French and Mr. Kirby work together. Mr. French, the senior partner, who sat opposite Kirby, was an older man—a safe guess would have placed him somewhere in the debatable ground between forty and fifty; of a good height, as could be seen even from the seated figure, the upper part of which was held erect with the unconscious ease which one associates with military training. As used in the text, what does the word ‘good’ most nearly mean?",
+      "choices": ["A. Well-behaved", "B. Considerable", "C. Capable", "D. Reliable"],
+      "answer": "B",
+      "explanation": "good height 描写 French 先生身材较高，considerable 表示相当高，符合上下文。",
+      "reviewStatus": "source_matched"
+    },
+    {
+      "number": 4,
+      "questionPage": 5,
+      "answerPage": 41,
+      "prompt": "Often, the Nobel Prize in Chemistry is given to a single person, such as George de Hevesy in 1943. But recognition isn't restricted to ______ individuals. Instead, success in fields like chemistry is usually achieved through collaboration with other experts, as was the case for Max Ferdinand Perutz, who was among those awarded for ‘their studies of the structures of globular proteins.’ Which choice completes the text with the most logical and precise word or phrase?",
+      "choices": ["A. solitary", "B. coordinated", "C. considerate", "D. coincidental"],
+      "answer": "A",
+      "explanation": "前文提到诺贝尔奖通常授予个人，后文强调研究需要合作，因此空格应表达“不限于单独的个人”；solitary 与 collaboration 构成对比。",
+      "reviewStatus": "source_matched"
+    },
+    {
+      "number": 5,
+      "questionPage": 6,
+      "answerPage": 41,
+      "prompt": "The Apollo Moon landings (1969–1972) brought atmospheric sensors and soil sensors to the Moon and produced large amounts of data, much of which was stored on outdated technologies. A data-transfer project is making the data available again, thereby ______ the Apollo data's usefulness, as the data are used to study the geology of the Moon. Which choice completes the text with the most logical and precise word or phrase?",
+      "choices": ["A. persisting", "B. installing", "C. renewing", "D. exceeding"],
+      "answer": "C",
+      "explanation": "数据因存储技术过时而无法使用，如今通过数据迁移重新可用；renewing（恢复、更新）符合语境。",
+      "reviewStatus": "source_matched"
+    },
+    {
+      "number": 7,
+      "questionPage": 7,
+      "answerPage": 41,
+      "prompt": "Text 1: In 2019 Belo Horizonte, Brazil, was named a City of Gastronomy by UNESCO in recognition of the city's unique food culture. The honor is well known among residents of the city as well as tourists who visit. It's obvious that the selection of Belo Horizonte by UNESCO has brought awareness to local recipes, cooking practices, and chefs and has provided a boost to the city's tourism industry.\n\nText 2: Many people in Belo Horizonte's restaurant industry hoped that food tourism would increase after the city was chosen as a City of Gastronomy in 2019. However, as researcher Eerang Park and colleagues argue, cities must still create effective marketing strategies to benefit fully from being named a City of Gastronomy. Without an intentional effort to promote the city's food scene, many current and potential visitors to Belo Horizonte may not even be aware that it's home to uniquely delicious food.\n\nBased on the texts, what would the author of Text 2 most likely say in response to the underlined claim in Text 1?",
+      "choices": ["A. Many people worked together to help Belo Horizonte be recognized by UNESCO, but chefs deserve the most credit for Belo Horizonte's selection as a City of Gastronomy.", "B. Belo Horizonte may have benefited from being selected by UNESCO, but tourism can likely be further increased by making more potential visitors aware of the city's status as a City of Gastronomy.", "C. The naming of Belo Horizonte as a City of Gastronomy was long overdue, given the city's unique and delicious food.", "D. The benefits of being named a City of Gastronomy extend well beyond tourism."],
+      "answer": "B",
+      "explanation": "Text 2 指出城市还需要有效的营销策略才能充分受益，因此作者会认可已有帮助，同时指出提高潜在游客对该称号的认知还能进一步促进旅游。",
+      "reviewStatus": "source_matched"
+    },
+    {
+      "number": 8,
+      "questionPage": 8,
+      "answerPage": 42,
+      "prompt": "In Hoocąk, an Indigenous language from the Midwest region of what is now the United States, zi means ‘yellow,’ whereas zizi means ‘yellow in spots.’ This phenomenon, in which an element of a root word is repeated, sometimes with modification, within another word that is related to the root word, is called reduplication. In this case, the entire word zi gets repeated in zizi. There are many examples of this type of reduplication in Hoocąk. The text makes which point about Hoocąk?",
+      "choices": ["A. It is one of the only languages in the world that makes use of reduplication.", "B. It is closely related to another language from the Midwest region of what is now the United States that also makes use of reduplication.", "C. It contains many instances of the type of reduplication seen in the words zi and zizi.", "D. It has a wide variety of reduplicated words and phrases that mean ‘yellow.’"],
+      "answer": "C",
+      "explanation": "原文明确说 Hoocąk 中有许多与 zi、zizi 相同类型的重叠实例，因此选 C。",
+      "reviewStatus": "source_matched"
+    },
+    {
+      "number": 9,
+      "questionPage": 8,
+      "answerPage": 42,
+      "prompt": "The Federalist Papers are a collection of 85 essays written by Alexander Hamilton, John Jay, and James Madison. Their publication (under a single pen name) was divided among the Daily Advertiser and other New York newspapers in 1787–88. The essays argue that New Yorkers should vote to ratify the proposed United States Constitution. Though the authorship of most of the individual essays is certain, that of a few is in question: for instance, while No. 6, ‘Concerning Dangers from Dissensions between the States,’ was surely penned by Hamilton, No. 62, ‘The Senate,’ may have been written by either Hamilton or Madison. Based on the text, what do the essays ‘Concerning Dangers from Dissensions between the States’ and ‘The Senate’ have in common?",
+      "choices": ["A. They were both written by one of the three authors of the Federalist Papers, but which of the authors wrote either is not entirely clear.", "B. They were both published sometime during 1787 or 1788.", "C. They were both collaborative efforts between Alexander Hamilton and James Madison.", "D. They were both published in the Daily Advertiser."],
+      "answer": "B",
+      "explanation": "两篇文章均列在《联邦党人文集》于 1787–1788 年期间的出版范围内；题目明确说第 6 篇作者确定而第 62 篇作者不确定，因此选 A 不对。",
+      "reviewStatus": "source_matched"
+    },
+    {
+      "number": 11,
+      "questionPage": 10,
+      "answerPage": 42,
+      "contentTable": {
+        "title": "Volcanoes in Ecuador",
+        "rows": [
+          ["Name of volcano", "Year of last eruption", "Volcano type"],
+          ["Wolf", "2022 CE", "shield"],
+          ["Imbabura", "5550 BCE", "compound"],
+          ["Chacana", "1773 CE", "caldera"],
+          ["Tungurahua", "216 CE", "stratovolcano"]
+        ]
+      },
+      "prompt": "A student is researching volcanoes in Ecuador. The student claims that Ecuador is home to several different types of volcanoes. Which choice best describes information from the table that supports the student's claim?",
+      "choices": ["A. Wolf is a shield volcano. Tungurahua is a stratovolcano, Imbabura is a compound volcano, and Chacana is a caldera volcano.", "B. Wolf, Tungurahua, and Imbabura are all stratovolcanoes, whereas Chacana is the only caldera volcano.", "C. Wolf, Tungurahua, Imbabura, and Chacana each most recently erupted in different years.", "D. Wolf and Tungurahua are both shield volcanoes, whereas Imbabura and Chacana are both compound volcanoes."],
+      "answer": "A",
+      "explanation": "表格分别列出 shield、stratovolcano、compound 和 caldera 等不同火山类型，支持厄瓜多尔有多种火山类型这一说法。",
+      "reviewStatus": "source_matched"
+    },
+    {
+      "number": 12,
+      "questionPage": 11,
+      "answerPage": 42,
+      "prompt": "Memoirs of Elleanor Eldridge is an 1838 historical account by Elleanor Eldridge and Frances Harriet Whipple Green. In the book, the authors assert that all people naturally have an emotional attachment to where they live, writing, ______. Which quotation from Memoirs of Elleanor Eldridge most effectively illustrates the claim?",
+      "choices": ["A. ‘This little book is published for the express purpose of giving a helping hand to suffering and persecuted merit.’", "B. ‘To give some idea of the high esteem in which the subject of the following narrative is held, and the strong interest her misfortunes have excited, a few, from the great number of recommendations in her possession, are selected.’", "C. ‘Blessed are the slumbers of the innocent! They are kindlier than balm, and they refresh and gladden the spirit of childhood, like ministerings from a better world.’", "D. ‘Home is home, to the lowly as well as the great: and no rank, or color, destroys its sacred character, its power over the mind, and the affections.’"],
+      "answer": "D",
+      "explanation": "D 直接表达家园对不同身份、肤色的人都有神圣意义，并影响人的思想和情感，最能支持人们对居住地有情感依恋这一观点。",
+      "reviewStatus": "source_matched"
+    },
+    {
+      "number": 13,
+      "questionPage": 12,
+      "answerPage": 42,
+      "prompt": "Chemists M. H. Gamble, P. Rice, and J. D. Selman studied the mass and heat transfer processes that occur when foods, such as the Indian snacks malapua and puri bhaji, are oil fried. During frying, water in the crust evaporates, leaving voids that oil (a pure fat) can fill. As the process continues, water from the food's center moves to the crust as long as the crust remains permeable. Therefore, it is likely that, all other things being equal, sections of a food that lose less moisture during the frying process ______. Which choice most logically completes the text?",
+      "choices": ["A. will develop a thicker crust during the frying process than sections that lose more moisture.", "B. will have a lower fat content after frying is completed than sections that lose more moisture.", "C. will have a crust that loses its permeability less quickly during the frying process than sections that lose more moisture.", "D. will have a higher temperature after frying is completed than sections that lose more moisture."],
+      "answer": "B",
+      "explanation": "水分流失较少意味着形成供油填充的空隙较少，因此炸好后脂肪含量可能较低。",
+      "reviewStatus": "source_matched"
+    },
+    {
+      "number": 14,
+      "questionPage": 13,
+      "answerPage": 42,
+      "prompt": "Ants and aphids are known to be mutualistic: ants feed on the honeydew produced by aphids, while aphids benefit from ants' protection against predators. If aphid colonies—which generally require relatively stable surfaces, such as trees or other woody plants, to thrive—are too small to produce significant volumes of honeydew, however, ants will prey on aphids. Researcher Tae-Sung Kwon examined ant and aphid abundance in two habitats in South Korea, one on the mainland and one on Jeju Island. Though the habitats differed in some important respects, both were predominantly grassland, which could help explain why Kwon observed ______. Which choice most logically completes the text?",
+      "choices": ["A. different ant and aphid species on the mainland compared to those on the island.", "B. a positive correlation between aphid diversity and abundance on both the mainland and the island.", "C. a negative correlation between ant and aphid abundance on both the mainland and the island.", "D. diminished ant and aphid abundance on the mainland compared to that on the island."],
+      "answer": "C",
+      "explanation": "草地缺少适合蚜虫繁殖的稳定木质表面，蚜虫群落可能较小，蚂蚁会捕食蚜虫，因此两者数量可能呈负相关。",
+      "reviewStatus": "source_matched"
+    },
+    {
+      "number": 15,
+      "questionPage": 13,
+      "answerPage": 43,
+      "prompt": "Museo del Autonomismo Puertorriqueño is a history museum in Ponce, Puerto Rico. It's one of more than eighty museums in the US territory. Puerto Rico's ______ showcase everything from the territory's history to its architecture to its coffee. Which choice completes the text so that it conforms to the conventions of Standard English?",
+      "choices": ["A. museums", "B. museums:", "C. museums,", "D. museums—"],
+      "answer": "A",
+      "explanation": "Puerto Rico's museums 是句子主语，后接谓语 showcase；主语与谓语之间不应插入冒号、逗号或破折号。",
+      "reviewStatus": "source_matched"
+    }
+  ]
+}

@@ -1,7 +1,13 @@
+import type { ReadingChoiceBlock, ReadingFillBlock, ReadingFillTableCell, ReadingHeadingsBlock, ReadingPart, ReadingPassageFigure } from "./reading";
+import type { ReadingPartSource, ReadingSource } from "./reading-source-model";
+
 export type EditableReadingSection = {
   label?: string;
+  heading?: string;
+  format?: "pre";
   paragraphs: string[];
-
+  listItems?: string[];
+  figures?: ReadingPassageFigure[];
 };
 
 export type EditableQuestionLine =
@@ -11,10 +17,14 @@ export type EditableQuestionLine =
 
 export type EditableQuestionItem = {
   number: number;
+  numbers?: number[];
   prompt?: string;
   before?: string;
   after?: string;
   options?: EditableQuestionOption[];
+  selectCount?: number;
+  inputCount?: number;
+  joiners?: string[];
 };
 
 export type EditableQuestionOption = {
@@ -22,8 +32,8 @@ export type EditableQuestionOption = {
   label: string;
 };
 
-export type EditableQuestionTableCell = Array<{ text: string } | { question: number }>;
-export type EditableQuestionFlowSegment = { text: string } | { question: number };
+export type EditableQuestionTableCell = Array<{ text: string } | { question: number; inputCount?: number; joiners?: string[] }>;
+export type EditableQuestionFlowSegment = { text: string } | { question: number; inputCount?: number; joiners?: string[]; showNumber?: boolean };
 
 export type EditableQuestionBlock = {
   id: string;
@@ -10006,6 +10016,190 @@ export const EDITABLE_READING_PARTS: Record<string, EditableReadingPart> = {
     ],
   },
 };
+
+function splitDirections(value: string | undefined): string[] {
+  return (value ?? "").split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+}
+
+function editableOptions(options: Array<{ letter: string; text: string }>): EditableQuestionOption[] {
+  return options.map(({ letter, text }) => ({ value: letter, label: `${letter}. ${text}` }));
+}
+
+function rawQuestionFlow(block: ReadingFillBlock, title?: string): EditableQuestionFlowSegment[] {
+  let raw = block.rawText ?? "";
+  const firstLine = raw.split(/\r?\n/, 1)[0]?.trim() ?? "";
+  const normalizeTitle = (value: string) => value.toLowerCase().replace(/[–—]/g, "-").replace(/\s+/g, "");
+  if (title && normalizeTitle(firstLine) === normalizeTitle(title)) raw = raw.slice(raw.indexOf("\n") + 1);
+  const candidates: Array<{ start: number; end: number; number: number; inputCount?: number; joiners?: string[] }> = [];
+  const used = new Set<number>();
+
+  for (const question of block.questions) {
+    const number = String(question.number);
+    const escaped = number.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const blankPattern = new RegExp(`(?<![A-Za-z0-9])${escaped}(?=\\s*(?:_{2,}|\\.{3,}|…{2,}))`, "g");
+    const blankMatch = blankPattern.exec(raw);
+    if (blankMatch) {
+      const blankStart = blankMatch.index + number.length;
+      const blank = /(?:_{2,}|\.{3,}|…{2,})/.exec(raw.slice(blankStart));
+      if (blank) {
+        const start = blankStart + blank.index;
+        candidates.push({ start, end: start + blank[0].length, number: question.number, inputCount: question.inputCount, joiners: question.joiners });
+        used.add(question.number);
+        continue;
+      }
+    }
+
+    const linePattern = new RegExp(`(^|\\n)(?:\\s*[•*-]\\s*)?${escaped}(?=\\s|[.)])`, "g");
+    const lineMatch = linePattern.exec(raw);
+    if (lineMatch) {
+      const lineStart = lineMatch.index + lineMatch[0].lastIndexOf(number);
+      const lineEnd = raw.indexOf("\n", lineStart);
+      const end = lineEnd < 0 ? raw.length : lineEnd;
+      if (candidates.some((candidate) => candidate.number === question.number)) continue;
+      candidates.push({ start: end, end, number: question.number, inputCount: question.inputCount, joiners: question.joiners });
+      used.add(question.number);
+    }
+  }
+
+  candidates.sort((a, b) => a.start - b.start || a.number - b.number);
+  const result: EditableQuestionFlowSegment[] = [];
+  let cursor = 0;
+  for (const candidate of candidates) {
+    if (candidate.start < cursor) continue;
+    if (candidate.start > cursor) result.push({ text: raw.slice(cursor, candidate.start) });
+    result.push({ question: candidate.number, inputCount: candidate.inputCount, joiners: candidate.joiners, showNumber: false });
+    cursor = candidate.end;
+  }
+  if (cursor < raw.length) result.push({ text: raw.slice(cursor) });
+  for (const question of block.questions) {
+    if (used.has(question.number)) continue;
+    result.push({ text: `\n${question.before?.trim() || `Question ${question.number}`} ` });
+    result.push({ question: question.number, inputCount: question.inputCount, joiners: question.joiners, showNumber: false });
+  }
+  return result;
+}
+
+function editableTableCell(cell: ReadingFillTableCell): EditableQuestionTableCell {
+  if (cell.questionNumber !== undefined) {
+    return [
+      ...(cell.before ? [{ text: cell.before }] : []),
+      { question: cell.questionNumber, inputCount: cell.inputCount, joiners: cell.joiners },
+      ...(cell.after ? [{ text: cell.after }] : []),
+    ];
+  }
+  return [{ text: cell.text ?? cell.before ?? "" }];
+}
+
+function editableQuestionBlock(block: ReadingChoiceBlock | ReadingFillBlock | ReadingHeadingsBlock): EditableQuestionBlock {
+  if (block.type === "choice") {
+    return {
+      id: block.id,
+      directions: splitDirections(block.instruction),
+      response: "select",
+      questionNumbers: block.questions.flatMap((question) => question.questionNumbers),
+      items: block.questions.flatMap((question) => question.selectCount && question.questionNumbers.length > 1
+        ? [{
+          number: question.questionNumbers[0],
+          numbers: question.questionNumbers,
+          selectCount: question.selectCount,
+          prompt: question.prompt,
+          options: editableOptions(question.options),
+        }]
+        : question.questionNumbers.map((number) => ({
+          number,
+          prompt: question.prompt,
+          options: editableOptions(question.options),
+        }))),
+    };
+  }
+
+  if (block.type === "headings") {
+    return {
+      id: block.id,
+      title: block.title,
+      directions: splitDirections(block.instruction),
+      response: "select",
+      questionNumbers: block.questionNumbers,
+      options: block.options.map(({ id, text }) => ({ value: id, label: `${id}. ${text}` })),
+      items: block.questionNumbers.map((number) => ({ number, before: `Question ${number}` })),
+    };
+  }
+
+  const questionNumbers = block.questions.map((question) => question.number);
+  const result: EditableQuestionBlock = {
+    id: block.id,
+    title: block.title || undefined,
+    directions: splitDirections(block.instruction),
+    response: "text",
+    questionNumbers,
+    wordBank: Boolean(block.wordBank?.length),
+    options: block.wordBank?.map((word) => ({ value: word, label: word })),
+  };
+
+  if (block.table) {
+    result.table = {
+      columns: block.table.headers,
+      rows: block.table.rows.map((row) => row.map(editableTableCell)),
+    };
+  } else if (block.chart) {
+    result.directions = [
+      ...result.directions,
+      `刻度：${block.chart.ticks.join("、")}%；纵轴上限 ${block.chart.scale}%。`,
+    ];
+    result.table = {
+      title: block.chart.title,
+      columns: ["类别", "比例"],
+      rows: block.chart.rows.map((row) => [
+        [{ text: row.label ?? "" }],
+        row.questionNumber === undefined ? [{ text: `${row.percent}%` }] : [{ question: row.questionNumber }],
+      ]),
+    };
+  } else if (block.rawText) {
+    result.flow = rawQuestionFlow(block, result.title);
+  } else {
+    result.items = block.questions.map((question) => ({
+      number: question.number,
+      before: question.before,
+      after: question.after,
+      inputCount: question.inputCount,
+      joiners: question.joiners,
+    }));
+  }
+
+  return result;
+}
+
+/**
+ * Reuse the source-reviewed Cambridge 4–12 legacy records in the editable source
+ * workbench. These records already carry the original PDF page map and reviewed
+ * answer key; only their display schema differs from the Cambridge 13–21 records.
+ */
+export function adaptReviewedLegacyReadingPart(part: ReadingPart, paperSource: ReadingSource): EditableReadingPart | undefined {
+  const partSource: ReadingPartSource | undefined = part.source;
+  if (!paperSource.verified || !paperSource.sanitized || !partSource?.textVerified || !partSource.passagePages.length || !partSource.questionPages.length) return undefined;
+
+  const physicalPages = [...new Set([
+    ...partSource.passagePages.map((page) => page.page),
+    ...partSource.questionPages.map((page) => page.page),
+  ])].sort((a, b) => a - b);
+
+  return {
+    status: "source-verified",
+    source: { pdfName: paperSource.pdfName, sha256: paperSource.sha256, physicalPages, reviewedAt: "2026-10-22" },
+    passageTitle: part.title,
+    subtitle: part.subtitle,
+    passageDirections: part.intro,
+    sections: part.sections.map((section) => ({
+      label: section.heading,
+      heading: section.heading,
+      format: section.format,
+      paragraphs: section.paragraphs,
+      listItems: section.listItems,
+      figures: section.figures,
+    })),
+    questionBlocks: part.questionBlocks.map(editableQuestionBlock),
+  };
+}
 
 export function getEditableReadingPart(partId: string): EditableReadingPart | undefined {
   return EDITABLE_READING_PARTS[partId];

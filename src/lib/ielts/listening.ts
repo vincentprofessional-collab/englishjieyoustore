@@ -158,7 +158,7 @@ type JiufenBook = (typeof jiufenContentBundle.books)[number];
 type JiufenTest = JiufenBook["tests"][number];
 type JiufenPart = JiufenTest["parts"][number];
 
-const JIUFEN_PUBLICATION_ENABLED = false;
+const JIUFEN_PUBLICATION_ENABLED = true;
 
 function isSectionVisible(section: ListeningSectionSummary, includeDrafts: boolean) {
   return includeDrafts || (

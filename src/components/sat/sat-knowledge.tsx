@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "./sat.module.css";
 import { getSatKnowledgeIndex } from "@/lib/sat/library";
+import { SatSectionNavigation } from "@/components/sat/sat-section-navigation";
 
 function pageRange(pages: number[]) {
   if (!pages.length) return "";
@@ -10,6 +11,7 @@ function pageRange(pages: number[]) {
 export function SatKnowledgeHome() {
   const catalog = getSatKnowledgeIndex();
   return <section className={`${styles.root} ${styles.home}`}>
+    <SatSectionNavigation current="knowledge" />
     {catalog.groups.map((group) => <section className={styles.section} key={group.id}>
       <header className={styles.sectionHeader}><h2>{group.label}</h2><span>{group.topics.length} 个专题</span></header>
       <div className={styles.topicGrid}>{group.topics.map((topic) => <Link className={styles.topicCard} href={`/sat/practice/${topic.setId}`} key={topic.id}>

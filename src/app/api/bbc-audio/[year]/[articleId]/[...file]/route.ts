@@ -107,7 +107,7 @@ export async function GET(
     return new Response("Audio not found.", { status: 404 });
   }
 
-  if (!adminDraftPreview && !(article.year === 2015 && isFreeBbc2015ArticleUnlocked(article.id))) {
+  if (!adminDraftPreview && !(article.year === 2015 && isFreeBbc2015ArticleUnlocked())) {
     const hasAccess = await claimPaidContentAccess(
       "bbc",
       getPaidContentKey("bbc-article", article.id),

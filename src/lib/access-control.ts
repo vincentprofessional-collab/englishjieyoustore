@@ -8,13 +8,18 @@ export type PaidContentType =
 
 export type ProjectAccessKey = string;
 export type ProjectAccessPlan = "monthly" | "quarterly" | "yearly" | "lifetime";
+export type ProjectAccessFontFamily = "serif" | "sans";
 
 export type ProjectAccessRule = {
   description: string;
+  descriptionFontFamily?: ProjectAccessFontFamily;
+  descriptionFontSize?: number;
   gateTitle?: string;
   key: ProjectAccessKey;
   shortTitle: string;
   title: string;
+  titleFontFamily?: ProjectAccessFontFamily;
+  titleFontSize?: number;
 };
 
 export type ProjectAccessPlanOption = {
@@ -38,6 +43,20 @@ export const PROJECT_ACCESS_RULES: Record<string, ProjectAccessRule> = {
     key: "vocabulary.ielts-listening-answer-words",
     shortTitle: "雅思听力答案词",
     title: "雅思听力答案词",
+  },
+  "vocabulary.idiomatic-expressions": {
+    description: "开通后可学习地道英语表达、搭配和例句。一次支付 9.9 元，永久使用。",
+    gateTitle: "一次性开通地道表达",
+    key: "vocabulary.idiomatic-expressions",
+    shortTitle: "地道表达",
+    title: "地道表达词汇书",
+  },
+  "vocabulary.slang-proverbs": {
+    description: "开通后可学习英语俚语、俗语和常见习语。一次支付 9.9 元，永久使用。",
+    gateTitle: "一次性开通俚语俗语",
+    key: "vocabulary.slang-proverbs",
+    shortTitle: "俚语俗语",
+    title: "俚语俗语词汇书",
   },
   bbc: {
     description: "",
@@ -63,6 +82,8 @@ export const PROJECT_ACCESS_RULES: Record<string, ProjectAccessRule> = {
 export const PROJECT_ACCESS_PROJECTS = [
   PROJECT_ACCESS_RULES["vocabulary.etymology"],
   PROJECT_ACCESS_RULES["vocabulary.ielts-listening-answer-words"],
+  PROJECT_ACCESS_RULES["vocabulary.idiomatic-expressions"],
+  PROJECT_ACCESS_RULES["vocabulary.slang-proverbs"],
   PROJECT_ACCESS_RULES.speaking,
   PROJECT_ACCESS_RULES.writing,
   PROJECT_ACCESS_RULES.bbc,

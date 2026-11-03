@@ -64,6 +64,50 @@ function stripPasteMarkup(value: string) {
 const VOCABULARY_NUMBER = /^\s*(?:[-*]\s*)?(\d+)[.)、．]\s*(.*)$/;
 const VOCABULARY_HEADING = /^(?:#{1,6}\s*)?(?:重点\s*)?(?:词汇(?:表|与短语|和短语|及短语)?|短语|Vocabulary(?:\s+(?:and|&)\s+phrases)?)\s*[:：]?\s*$/i;
 const PART_OF_SPEECH = /^(phr\.\s*v\.|modal\s+v\.|phr\.|n\.|v\.|vt\.|vi\.|adj\.|adv\.|prep\.|pron\.|conj\.|det\.|num\.|interj\.|aux\.|abbr\.)\s*(.*)$/i;
+const IRREGULAR_LEMMAS = new Map([
+  ["am", "be"], ["is", "be"], ["are", "be"], ["was", "be"], ["were", "be"], ["been", "be"], ["being", "be"],
+  ["has", "have"], ["had", "have"], ["having", "have"], ["does", "do"], ["did", "do"], ["done", "do"], ["doing", "do"],
+  ["went", "go"], ["gone", "go"], ["going", "go"], ["children", "child"], ["people", "person"], ["men", "man"], ["women", "woman"],
+  ["teeth", "tooth"], ["feet", "foot"], ["mice", "mouse"], ["geese", "goose"], ["activities", "activity"],
+]);
+const SILENT_E_ING_BASES = new Set([
+  "bake", "bite", "come", "dance", "drive", "give", "guide", "hide", "hope", "invite", "make", "move", "prove", "ride", "smile", "solve", "take", "use", "write", "zone",
+]);
+const INVARIANT_PLURALS = new Set(["news", "series", "species", "politics", "economics", "athletics", "mathematics"]);
+
+function normalizePhraseLemma(value: string) {
+  const tokens = value.toLowerCase().match(/[a-z]+(?:['’-][a-z]+)*/g) ?? [];
+  if (!tokens.length) return value.trim();
+  const lemmas = [...tokens];
+
+  const first = lemmas[0];
+  if (IRREGULAR_LEMMAS.has(first)) {
+    lemmas[0] = IRREGULAR_LEMMAS.get(first)!;
+  } else if (first.endsWith("ing") && first.length > 5) {
+    const stem = first.slice(0, -3);
+    const silentEBase = [...SILENT_E_ING_BASES].find((base) => base.slice(0, -1) === stem);
+    const doubledConsonantStem = stem.length > 2 && stem.at(-1) === stem.at(-2) && !/[aeiou]/.test(stem.at(-1) ?? "");
+    lemmas[0] = silentEBase ?? (doubledConsonantStem ? stem.slice(0, -1) : stem);
+  } else if (first.endsWith("ed") && first.length > 4) {
+    const stem = first.slice(0, -2);
+    const silentEBase = [...SILENT_E_ING_BASES].find((base) => base.slice(0, -1) === stem);
+    const doubledConsonantStem = stem.length > 2 && stem.at(-1) === stem.at(-2) && !/[aeiou]/.test(stem.at(-1) ?? "");
+    lemmas[0] = silentEBase ?? (doubledConsonantStem ? stem.slice(0, -1) : stem);
+  }
+
+  const lastIndex = lemmas.length - 1;
+  const last = lemmas[lastIndex];
+  if (IRREGULAR_LEMMAS.has(last)) {
+    lemmas[lastIndex] = IRREGULAR_LEMMAS.get(last)!;
+  } else if (!INVARIANT_PLURALS.has(last)) {
+    if (last.endsWith("ies") && last.length > 4) lemmas[lastIndex] = `${last.slice(0, -3)}y`;
+    else if (/(?:ches|shes|sses|xes|zes)$/.test(last)) lemmas[lastIndex] = last.slice(0, -2);
+    else if (last.endsWith("s") && !/(?:ss|us|is)$/.test(last) && last.length > 3) lemmas[lastIndex] = last.slice(0, -1);
+  }
+
+  let index = 0;
+  return value.replace(/[a-z]+(?:['’-][a-z]+)*/gi, () => lemmas[index++] ?? "");
+}
 
 function parseVocabularyCore(value: string) {
   const line = stripPasteMarkup(value);
@@ -123,7 +167,7 @@ function parsePastedVocabulary(lines: string[]): BbcVocabularyItem[] | string {
       definition,
       entry: [term, phonetic ? `/${phonetic}/` : "", partOfSpeech, definition].filter(Boolean).join(" "),
       example,
-      lemma: term,
+      lemma: normalizePhraseLemma(term),
       number: Number(fallbackNumber) || items.length + 1,
       partOfSpeech: partOfSpeech || undefined,
       phonetic: phonetic || undefined,

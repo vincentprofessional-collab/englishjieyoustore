@@ -27,12 +27,15 @@ test('stored bilingual study examples need no cross-book lookup and never invent
   assert.equal(result.englishExamples[0], 'The baby sleeps.');
   assert.equal(result.englishExampleTranslations[0], '婴儿睡着了。');
   assert.equal(original.englishExamples.length, 0);
+  const sourced = helper.withExistingStudyExamples({ word: 'baby', englishExamples: ['A baby is smiling.'], englishExampleTranslations: ['一个婴儿正在微笑。'] });
+  assert.deepEqual(Array.from(sourced.englishExamples), ['A baby is smiling.']);
+  assert.deepEqual(Array.from(sourced.englishExampleTranslations), ['一个婴儿正在微笑。']);
   const unknown = helper.withExistingStudyExamples({ word: 'unknown', englishExamples: ['Existing.', 'No translation.'], englishExampleTranslations: ['已有译文。'] });
   assert.equal(unknown.englishExamples.length, 1);
   assert.equal(unknown.englishExampleTranslations[0], '已有译文。');
 });
 
-test('lookup includes new-concept and listening audio even when a workbook example exists; BBC remains member-only', async () => {
+test('lookup prefers new-concept and listening examples over workbook examples; BBC remains member-only', async () => {
   const article = { id: '260810', year: 2026, title: 'BBC', sentences: [{ sentenceNo: 1, english: 'A baby smiles.', chinese: '婴儿笑了。', audioUrl: '/old.mp3' }] };
   const db = { from(table) {
     const data = table === 'transcript_sentences' ? [
@@ -50,11 +53,14 @@ test('lookup includes new-concept and listening audio even when a workbook examp
     '@/lib/supabase/client': { supabase: db },
     '@/lib/supabase/storage': { getPublicStorageUrl: (_bucket, path) => `/audio/${path}` },
     '@/lib/vocabulary/local-vocabulary': { normalizeLookupWord: (word) => word.trim().toLowerCase() },
-    '@/data/vocabulary/workbook-usage-examples.json': { baby: { englishText: 'The baby sleeps.', chineseText: '婴儿睡着了。' } },
+    '@/data/vocabulary/workbook-usage-examples.json': {
+      baby: { englishText: 'The baby sleeps.', chineseText: '婴儿睡着了。' },
+      unknown: { englishText: 'The unknown is a word.', chineseText: 'unknown 是一个单词。' },
+    },
   });
   const rows = await source.getVocabularyUsageExamples('baby');
-  assert.deepEqual(Array.from(rows, (row) => row.sourceType).sort(), ['article', 'listening', 'new-concept', 'workbook']);
-  assert.ok(rows.filter((row) => row.sourceType !== 'workbook').every((row) => row.audioUrl && row.chineseText));
+  assert.deepEqual(Array.from(rows, (row) => row.sourceType).sort(), ['article', 'listening', 'new-concept']);
+  assert.ok(rows.every((row) => row.audioUrl && row.chineseText));
   assert.ok(rows.find((row) => row.bookCode === 'BBC').audioUrl.startsWith('/api/vocabulary-bbc-example-audio?'));
 
   let access = false;
@@ -71,7 +77,7 @@ test('lookup includes new-concept and listening audio even when a workbook examp
     '@/lib/supabase/server': server,
     '@/lib/vocabulary/examples': { ...source, getVocabularyUsageExamples: async (...args) => { lookups++; return source.getVocabularyUsageExamples(...args); } },
     '@/lib/vocabulary/phrases': { getVocabularyPhraseMatches: () => [] },
-    '@/lib/vocabulary/local-vocabulary': { getVocabularyEntry: () => hint, getExtendedVocabularyEntry: () => hint, getVocabularyFormationParts: () => [] },
+    '@/lib/vocabulary/local-vocabulary': { getVocabularyEntry: (word) => ({ ...hint, word, normalizedWord: word }), getExtendedVocabularyEntry: (word) => ({ ...hint, word, normalizedWord: word }), getVocabularyFormationParts: () => [] },
     '@/lib/vocabulary/lookup-etymology': { getVocabularyLookupEtymology: () => null },
     '@/lib/vocabulary/synonym-distinctions': { getVocabularySynonymDistinctions: () => [] },
   });
@@ -82,8 +88,12 @@ test('lookup includes new-concept and listening audio even when a workbook examp
   denied = true;
   assert.ok((await route.GET(request)).usageExamples.every((row) => row.bookCode !== 'BBC'));
   const before = lookups;
-  assert.equal((await route.GET({ url: `${request.url}&study=1` })).usageExamples.length, 0);
-  assert.equal(lookups, before);
+  const studyExamples = await route.GET({ url: `${request.url}&study=1` });
+  assert.deepEqual(Array.from(studyExamples.usageExamples, (row) => row.sourceType).sort(), ['listening', 'new-concept']);
+  const workbookFallback = await route.GET({ url: 'https://local.invalid/api/vocabulary-hint?word=unknown&detail=1&study=1' });
+  assert.deepEqual(Array.from(workbookFallback.usageExamples, (row) => row.sourceType), ['workbook']);
+  assert.equal(workbookFallback.usageExamples[0].englishText, 'The unknown is a word.');
+  assert.equal(lookups, before + 2);
 });
 
 test('BBC example playback verifies membership before reading metadata and uses the currently published clip', async () => {

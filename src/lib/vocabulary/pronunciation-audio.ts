@@ -1,28 +1,23 @@
 import { getSupabaseStorageUrl } from "@/lib/media/url";
+import { normalizeVocabularyAudioKey } from "@/lib/vocabulary/audio-key";
 
 export type VocabularyAccent = "uk" | "us";
 
-function normalizeAudioWord(word: string) {
-  return word.trim().normalize("NFC").toLowerCase();
-}
-
 export function getVocabularyAudioUrl(word: string, accent: VocabularyAccent) {
-  const normalizedWord = normalizeAudioWord(word);
+  const audioKey = normalizeVocabularyAudioKey(word);
 
-  if (!normalizedWord) {
+  if (!audioKey) {
     return "";
   }
 
-  const audioKeyWord = normalizedWord === "café" ? "cafe-accent" : normalizedWord;
-
   const supabaseUrl = getSupabaseStorageUrl(
     "audio",
-    `word-audio/${accent}/${audioKeyWord}.mp3`,
+    `word-audio/${accent}/${audioKey}.mp3`,
   );
   if (supabaseUrl) return supabaseUrl;
 
   const configuredBaseUrl = process.env.NEXT_PUBLIC_VOCABULARY_AUDIO_BASE_URL?.trim().replace(/\/+$/, "");
-  const encodedWord = encodeURIComponent(audioKeyWord);
+  const encodedWord = encodeURIComponent(audioKey);
 
   if (configuredBaseUrl) {
     return `${configuredBaseUrl}/${accent}/${encodedWord}.mp3`;
@@ -31,15 +26,9 @@ export function getVocabularyAudioUrl(word: string, accent: VocabularyAccent) {
   return `/api/vocabulary-audio/${accent}/${encodedWord}`;
 }
 
-function speakWithBrowser(word: string, locale: "en-GB" | "en-US") {
-  if (typeof window === "undefined" || !("speechSynthesis" in window)) {
-    return;
-  }
-
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(word);
-  utterance.lang = locale;
-  window.speechSynthesis.speak(utterance);
+function getLocalVocabularyAudioUrl(word: string, accent: VocabularyAccent) {
+  const audioKey = normalizeVocabularyAudioKey(word);
+  return audioKey ? `/api/vocabulary-audio/${accent}/${encodeURIComponent(audioKey)}` : "";
 }
 
 export function playVocabularyPronunciation({
@@ -51,24 +40,18 @@ export function playVocabularyPronunciation({
   audioUrl?: string;
   word: string;
 }) {
-  const locale = accent === "uk" ? "en-GB" : "en-US";
   const audioUrls = [...new Set([
     getVocabularyAudioUrl(word, accent),
     audioUrl?.trim(),
+    getLocalVocabularyAudioUrl(word, accent),
   ].filter((url): url is string => Boolean(url)))];
 
-  if (typeof window === "undefined" || audioUrls.length === 0) {
-    speakWithBrowser(word, locale);
-    return;
-  }
+  if (typeof window === "undefined" || audioUrls.length === 0) return;
 
   let audioIndex = 0;
   const playNext = () => {
     const resolvedAudioUrl = audioUrls[audioIndex];
-    if (!resolvedAudioUrl) {
-      speakWithBrowser(word, locale);
-      return;
-    }
+    if (!resolvedAudioUrl) return;
     audioIndex += 1;
 
     const audio = new Audio(resolvedAudioUrl);

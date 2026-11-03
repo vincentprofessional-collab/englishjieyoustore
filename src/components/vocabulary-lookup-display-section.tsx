@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import {
   DEFAULT_VOCABULARY_LOOKUP_DISPLAY_PREFERENCES,
@@ -27,7 +26,6 @@ export function VocabularyLookupDisplaySection({
   initialVisible = DEFAULT_VOCABULARY_LOOKUP_DISPLAY_PREFERENCES[id],
   title,
 }: VocabularyLookupDisplaySectionProps) {
-  const router = useRouter();
   const [visible, setVisible] = useState(initialVisible);
 
   useEffect(() => {
@@ -50,7 +48,6 @@ export function VocabularyLookupDisplaySection({
     const next = !expanded;
     setVisible(next);
     setVocabularyLookupSectionVisible(id, next);
-    if (id === "video") router.refresh();
   }
 
   return (

@@ -178,6 +178,11 @@ function getWorkbookUsageExample(word: string): VocabularyUsageExample | null {
   };
 }
 
+export function getVocabularyWorkbookUsageExamples(word: string) {
+  const example = getWorkbookUsageExample(normalizeLookupWord(word));
+  return example ? [example] : [];
+}
+
 function getNewConceptUsageExamples(wordForms: Set<string>, limit: number) {
   const examples: VocabularyUsageExample[] = [];
   const seenSentences = new Set<string>();
@@ -230,9 +235,13 @@ function getNewConceptUsageExamples(wordForms: Set<string>, limit: number) {
 export function prioritizeVocabularyUsageExamples(...groups: VocabularyUsageExample[][]) {
   const examples: VocabularyUsageExample[] = [];
   const seen = new Set<string>();
+  const hasOtherSource = groups.some((group) => group.some((example) =>
+    example.sourceType !== "workbook" && !(example.bookCode === "BBC" && !example.audioUrl),
+  ));
 
   for (const group of groups) {
     for (const example of group) {
+      if (hasOtherSource && example.sourceType === "workbook") continue;
       if (example.bookCode === "BBC" && !example.audioUrl) continue;
       const normalizedText = example.englishText.toLowerCase().replace(/\s+/g, " ").trim();
       const key = normalizedText || example.id;
@@ -261,6 +270,11 @@ function pickLookupExamples(limit: number, ...groups: VocabularyUsageExample[][]
   return prioritizeVocabularyUsageExamples(firstFromEach, ...sortedGroups).slice(0, limit);
 }
 
+function pickLookupExamplesWithWorkbookFallback(limit: number, workbookExamples: VocabularyUsageExample[], ...groups: VocabularyUsageExample[][]) {
+  const preferredExamples = pickLookupExamples(limit, ...groups);
+  return preferredExamples.length ? preferredExamples : pickLookupExamples(limit, workbookExamples);
+}
+
 export async function getVocabularyUsageExamples(
   word: string,
   limit = 5,
@@ -274,8 +288,7 @@ export async function getVocabularyUsageExamples(
     return [];
   }
 
-  const workbookExample = getWorkbookUsageExample(normalizedWord);
-  const workbookExamples = workbookExample ? [workbookExample] : [];
+  const workbookExamples = getVocabularyWorkbookUsageExamples(normalizedWord);
 
   const candidateLimit = maximumExamples * 6;
   const newConceptExamples = getNewConceptUsageExamples(wordForms, candidateLimit);
@@ -295,7 +308,7 @@ export async function getVocabularyUsageExamples(
     .limit(candidateLimit * 6);
 
   if (transcriptError || !transcriptRows?.length) {
-    return pickLookupExamples(maximumExamples,
+    return pickLookupExamplesWithWorkbookFallback(maximumExamples,
       workbookExamples,
       newConceptExamples,
       getBbcUsageExamples(wordForms, candidateLimit),
@@ -307,7 +320,7 @@ export async function getVocabularyUsageExamples(
     .slice(0, candidateLimit);
 
   if (sentences.length === 0) {
-    return pickLookupExamples(maximumExamples,
+    return pickLookupExamplesWithWorkbookFallback(maximumExamples,
       workbookExamples,
       newConceptExamples,
       getBbcUsageExamples(wordForms, candidateLimit),
@@ -361,7 +374,7 @@ export async function getVocabularyUsageExamples(
     };
   });
 
-  return pickLookupExamples(maximumExamples,
+  return pickLookupExamplesWithWorkbookFallback(maximumExamples,
     workbookExamples,
     newConceptExamples,
     listeningExamples,

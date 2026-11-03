@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { stripTypeScriptTypes } from "node:module";
 import { selectPendingRetryIds, selectDueReviewWords } from "../src/lib/vocabulary/due-review-words.ts";
 import { calendarReviewAt, getReviewDueAt, scheduleReview } from "../src/lib/vocabulary/review-scheduler.ts";
-import { vocabularyStudyGroupIndex, VOCABULARY_GROUP_SIZE, VOCABULARY_GROUP_REVIEW_LIMIT } from "../src/lib/vocabulary/study-groups.ts";
+import { selectVocabularyStudyGroup, sortVocabularyByScene, vocabularyStudyGroupCount, vocabularyStudyGroupIndex, VOCABULARY_GROUP_SIZE, VOCABULARY_GROUP_REVIEW_LIMIT } from "../src/lib/vocabulary/study-groups.ts";
 
 const day = 86400000;
 const row = (outcome, nextReviewAt, extra = {}) => ({ familiarity: outcome, lastOutcome: outcome, lastReviewedAt: day, nextReviewAt, ...extra });
@@ -65,11 +65,14 @@ function groupHarness(overrides = {}) {
     activeGroupByBook: {}, nextGroupByBook: {}, forcedSpellingWordId: null,
     chooseBrowseMode() {}, studyReady: true, pageVisible: true, loading: false, wakeTick: 0,
     GROUP_SIZE: VOCABULARY_GROUP_SIZE, VOCABULARY_GROUP_REVIEW_LIMIT,
+    selectVocabularyStudyGroup, sortVocabularyByScene, vocabularyStudyGroupCount,
     vocabularyStudyGroupIndex, selectPendingRetryIds, selectDueReviewWords,
     progressFor: (progress, id) => progress[id] ?? { lastReviewedAt: null },
     familiarityForProgress: entry => entry.familiarity ?? entry.lastOutcome,
     ...overrides,
   };
+  if (overrides.words && !overrides.visibleWords) context.visibleWords = overrides.words;
+  state.groupSession = context.groupSession;
   for (const name of ["GroupBrowseIds", "GroupSummary", "SessionDepleted", "GroupSession", "ActiveGroupByBook", "NextGroupByBook", "SettingsByBook", "CurrentWordId", "RoundNonce", "DefinitionChoice", "WakeTick"]) {
     const key = name[0].toLowerCase() + name.slice(1);
     context[`set${name}`] = update => { state[key] = typeof update === "function" ? update(state[key] ?? (key === "roundNonce" || key === "wakeTick" ? 0 : {})) : update; };
@@ -209,7 +212,7 @@ test("resuming keeps previously studied old words for immediate retry without ad
   progress["60"] = row("familiar", day, { lastReviewedAt: day - 1000 });
   const harness = groupHarness({ words, progress,
     activeGroupByBook: { 高中: { groupNo: 0, scope: "core", order: "sequential", startedAt: day } },
-    currentSettings: { scope: "core", order: "sequential", wordGroups: { core: 0, all: null } } });
+    currentSettings: { scope: "core", order: "sequential", vocabularySort: "frequency", wordGroups: { core: 0, all: null } } });
   assert.equal(harness.start(), true);
   assert.equal(harness.state.currentWordId, "20");
   assert.equal(harness.state.groupSession.ids.length, 60);

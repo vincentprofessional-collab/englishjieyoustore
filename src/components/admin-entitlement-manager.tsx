@@ -10,6 +10,7 @@ import {
 } from "@/lib/access-control";
 import { supabase } from "@/lib/supabase/client";
 import { AdminMembershipOverview } from "@/components/admin-membership-overview";
+import { saveLocalAccessCatalogPreview } from "@/lib/access-control-local-preview";
 
 type ProfileRow = {
   created_at: string | null;
@@ -44,12 +45,16 @@ type PaymentRequestRow = {
 
 type AccessProjectRow = {
   description: string | null;
+  description_font_family: "serif" | "sans" | null;
+  description_font_size: number | null;
   gate_title: string | null;
   is_enabled: boolean;
   project_key: string;
   short_title: string | null;
   sort_order: number;
   title: string;
+  title_font_family: "serif" | "sans" | null;
+  title_font_size: number | null;
 };
 
 type AccessProjectPlanRow = {
@@ -64,6 +69,8 @@ type AccessProjectPlanRow = {
 
 type CatalogDraft = {
   description: string;
+  descriptionFontFamily: "serif" | "sans";
+  descriptionFontSize: number;
   gateTitle: string;
   isEnabled: boolean;
   planEnabled: Record<ProjectAccessPlan, boolean>;
@@ -72,9 +79,15 @@ type CatalogDraft = {
   shortTitle: string;
   sortOrder: number;
   title: string;
+  titleFontFamily: "serif" | "sans";
+  titleFontSize: number;
 };
 
 const PLAN_ORDER: ProjectAccessPlan[] = ["monthly", "quarterly", "yearly", "lifetime"];
+const SINGLE_PAYMENT_PROJECT_KEYS = new Set([
+  "vocabulary.idiomatic-expressions",
+  "vocabulary.slang-proverbs",
+]);
 
 function createDefaultPrices() {
   return Object.fromEntries(PROJECT_ACCESS_PLANS.map((plan) => [plan.plan, plan.priceCny])) as Record<
@@ -93,6 +106,8 @@ function createDefaultPlanEnabled() {
 function createEmptyCatalogDraft(): CatalogDraft {
   return {
     description: "",
+    descriptionFontFamily: "serif",
+    descriptionFontSize: 18,
     gateTitle: "",
     isEnabled: true,
     planEnabled: createDefaultPlanEnabled(),
@@ -101,18 +116,24 @@ function createEmptyCatalogDraft(): CatalogDraft {
     shortTitle: "",
     sortOrder: 50,
     title: "",
+    titleFontFamily: "serif",
+    titleFontSize: 36,
   };
 }
 
 function createFallbackProjects(): AccessProjectRow[] {
   return PROJECT_ACCESS_PROJECTS.map((project, index) => ({
     description: project.description || null,
+    description_font_family: "serif",
+    description_font_size: 18,
     gate_title: project.gateTitle ?? null,
     is_enabled: true,
     project_key: project.key,
     short_title: project.shortTitle,
     sort_order: (index + 1) * 10,
     title: project.title,
+    title_font_family: "serif",
+    title_font_size: 36,
   }));
 }
 
@@ -120,10 +141,10 @@ function createFallbackPlans(projects: AccessProjectRow[]): AccessProjectPlanRow
   return projects.flatMap((project) =>
     PROJECT_ACCESS_PLANS.map((plan, index) => ({
       duration_label: plan.durationLabel,
-      is_enabled: true,
-      label: plan.label,
+      is_enabled: !SINGLE_PAYMENT_PROJECT_KEYS.has(project.project_key) || plan.plan === "lifetime",
+      label: SINGLE_PAYMENT_PROJECT_KEYS.has(project.project_key) && plan.plan === "lifetime" ? "一次性开通" : plan.label,
       plan: plan.plan,
-      price_cny: plan.priceCny,
+      price_cny: SINGLE_PAYMENT_PROJECT_KEYS.has(project.project_key) && plan.plan === "lifetime" ? 9.9 : plan.priceCny,
       project_key: project.project_key,
       sort_order: (index + 1) * 10,
     })),
@@ -133,6 +154,10 @@ function createFallbackPlans(projects: AccessProjectRow[]): AccessProjectPlanRow
 function createCatalogDraft(project: AccessProjectRow, plans: AccessProjectPlanRow[]): CatalogDraft {
   const planPrices = createDefaultPrices();
   const planEnabled = createDefaultPlanEnabled();
+  if (SINGLE_PAYMENT_PROJECT_KEYS.has(project.project_key)) {
+    for (const plan of PLAN_ORDER) planEnabled[plan] = plan === "lifetime";
+    planPrices.lifetime = 9.9;
+  }
 
   for (const plan of plans) {
     if (plan.project_key === project.project_key) {
@@ -143,6 +168,8 @@ function createCatalogDraft(project: AccessProjectRow, plans: AccessProjectPlanR
 
   return {
     description: project.description ?? "",
+    descriptionFontFamily: project.description_font_family ?? "serif",
+    descriptionFontSize: project.description_font_size ?? 18,
     gateTitle: project.gate_title ?? "",
     isEnabled: project.is_enabled,
     planEnabled,
@@ -151,6 +178,8 @@ function createCatalogDraft(project: AccessProjectRow, plans: AccessProjectPlanR
     shortTitle: project.short_title ?? project.title,
     sortOrder: project.sort_order,
     title: project.title,
+    titleFontFamily: project.title_font_family ?? "serif",
+    titleFontSize: project.title_font_size ?? 36,
   };
 }
 
@@ -221,6 +250,7 @@ export function AdminEntitlementManager() {
   const [membershipRefreshKey, setMembershipRefreshKey] = useState(0);
   const [accessProjects, setAccessProjects] = useState<AccessProjectRow[]>([]);
   const [accessProjectPlans, setAccessProjectPlans] = useState<AccessProjectPlanRow[]>([]);
+  const [localPreviewProjectKeys, setLocalPreviewProjectKeys] = useState<Set<string>>(() => new Set());
   const [catalogDrafts, setCatalogDrafts] = useState<Record<string, CatalogDraft>>({});
   const [newCatalogDraft, setNewCatalogDraft] = useState<CatalogDraft>(createEmptyCatalogDraft);
   const [selectedUserId, setSelectedUserId] = useState("");
@@ -285,7 +315,7 @@ export function AdminEntitlementManager() {
         .limit(300),
       supabase
         .from("access_projects")
-        .select("project_key,title,short_title,gate_title,description,is_enabled,sort_order")
+        .select("project_key,title,short_title,gate_title,description,title_font_family,title_font_size,description_font_family,description_font_size,is_enabled,sort_order")
         .order("sort_order", { ascending: true }),
       supabase
         .from("access_project_plans")
@@ -305,15 +335,36 @@ export function AdminEntitlementManager() {
     setPaymentRequests((paymentRequestsResult.data ?? []) as PaymentRequestRow[]);
 
     const catalogUnavailable = Boolean(projectsResult.error || plansResult.error);
-    const nextProjects = catalogUnavailable
+    const databaseProjects = (projectsResult.data ?? []) as AccessProjectRow[];
+    const baseProjects = catalogUnavailable
       ? createFallbackProjects()
-      : ((projectsResult.data ?? []) as AccessProjectRow[]);
-    const nextPlans = catalogUnavailable
+      : databaseProjects;
+    const localPreviewProjects = process.env.NODE_ENV === "development"
+      ? createFallbackProjects().filter((project) =>
+          SINGLE_PAYMENT_PROJECT_KEYS.has(project.project_key) &&
+          !databaseProjects.some((databaseProject) => databaseProject.project_key === project.project_key),
+        )
+      : [];
+    const nextProjects = [
+      ...baseProjects,
+      ...localPreviewProjects.filter((previewProject) =>
+        !baseProjects.some((project) => project.project_key === previewProject.project_key),
+      ),
+    ];
+    const basePlans = catalogUnavailable
       ? createFallbackPlans(nextProjects)
       : ((plansResult.data ?? []) as AccessProjectPlanRow[]);
+    const previewPlans = createFallbackPlans(localPreviewProjects);
+    const nextPlans = [
+      ...basePlans,
+      ...previewPlans.filter((previewPlan) =>
+        !basePlans.some((plan) => plan.project_key === previewPlan.project_key && plan.plan === previewPlan.plan),
+      ),
+    ];
 
     setAccessProjects(nextProjects);
     setAccessProjectPlans(nextPlans);
+    setLocalPreviewProjectKeys(new Set(localPreviewProjects.map((project) => project.project_key)));
     setCatalogDrafts(
       Object.fromEntries(nextProjects.map((project) => [project.project_key, createCatalogDraft(project, nextPlans)])),
     );
@@ -336,7 +387,7 @@ export function AdminEntitlementManager() {
           ? "付款申请表还没有创建。请先执行 supabase/010_project_payment_requests.sql。"
           : "无法读取付款申请：" + paymentRequestsResult.error.message,
       );
-    } else if (catalogUnavailable) {
+    } else if (catalogUnavailable && !localPreviewProjects.length) {
       setMessage("项目价格配置尚未启用。请先执行 supabase/012_access_project_catalog_pricing.sql。");
     }
 
@@ -381,6 +432,8 @@ export function AdminEntitlementManager() {
       return "项目标识只能使用小写字母、数字、点、横线或下划线。";
     }
     if (!draft.title.trim()) return "请填写项目名称。";
+    if (!Number.isInteger(draft.titleFontSize) || draft.titleFontSize < 18 || draft.titleFontSize > 72) return "标题字号请设置为 18–72。";
+    if (!Number.isInteger(draft.descriptionFontSize) || draft.descriptionFontSize < 12 || draft.descriptionFontSize > 40) return "说明字号请设置为 12–40。";
     if (PLAN_ORDER.some((plan) => !Number.isFinite(draft.planPrices[plan]) || draft.planPrices[plan] < 0)) {
       return "价格必须是大于或等于 0 的数字。";
     }
@@ -400,11 +453,29 @@ export function AdminEntitlementManager() {
       return;
     }
 
+    if (localPreviewProjectKeys.has(projectKey)) {
+      const saved = saveLocalAccessCatalogPreview(projectKey, {
+        description: draft.description.trim(),
+        descriptionFontFamily: draft.descriptionFontFamily,
+        descriptionFontSize: draft.descriptionFontSize,
+        gateTitle: draft.gateTitle.trim(),
+        priceCny: draft.planPrices.lifetime,
+        shortTitle: draft.shortTitle.trim(),
+        title: draft.title.trim(),
+        titleFontFamily: draft.titleFontFamily,
+        titleFontSize: draft.titleFontSize,
+      });
+      setMessage(saved ? "本地预览内容已保存到当前浏览器。" : "浏览器存储不可用，无法保存本地预览内容。");
+      return;
+    }
+
     setIsSaving(true);
     setMessage("");
 
-    const { error } = await supabase.rpc("admin_upsert_access_project", {
+    const { error } = await supabase.rpc("admin_upsert_access_project_with_typography", {
       _description: draft.description.trim() || null,
+      _description_font_family: draft.descriptionFontFamily,
+      _description_font_size: draft.descriptionFontSize,
       _gate_title: draft.gateTitle.trim() || null,
       _is_enabled: draft.isEnabled,
       _plans: PROJECT_ACCESS_PLANS.map((plan, index) => ({
@@ -419,12 +490,14 @@ export function AdminEntitlementManager() {
       _short_title: draft.shortTitle.trim() || draft.title.trim(),
       _sort_order: draft.sortOrder,
       _title: draft.title.trim(),
+      _title_font_family: draft.titleFontFamily,
+      _title_font_size: draft.titleFontSize,
     });
 
     if (error) {
       setMessage(
-        error.message.includes("admin_upsert_access_project")
-          ? "保存接口尚未启用。请先执行 supabase/012_access_project_catalog_pricing.sql。"
+        error.message.includes("admin_upsert_access_project_with_typography")
+          ? "付费项目字体设置尚未启用。请先执行最新的 access project typography 数据库迁移。"
           : "保存失败：" + error.message,
       );
       setIsSaving(false);
@@ -439,6 +512,11 @@ export function AdminEntitlementManager() {
 
   async function grantAccess(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (localPreviewProjectKeys.has(selectedProjectKey)) {
+      setMessage("这是本地预览项目，暂不能开通真实用户权限。");
+      return;
+    }
+
     if (!selectedUserId) {
       setMessage("请先选择用户。");
       return;
@@ -567,6 +645,7 @@ export function AdminEntitlementManager() {
           {accessProjects.map((project) => {
             const draft = catalogDrafts[project.project_key];
             if (!draft) return null;
+            const isLocalPreview = localPreviewProjectKeys.has(project.project_key);
 
             return (
               <article className="admin-access-catalog-item" key={project.project_key}>
@@ -574,10 +653,12 @@ export function AdminEntitlementManager() {
                   <div>
                     <strong>{draft.title || project.project_key}</strong>
                     <code>{project.project_key}</code>
+                    {isLocalPreview ? <small>本地预览 · 保存仅留在当前浏览器</small> : null}
                   </div>
                   <label className="admin-access-toggle">
                     <input
                       checked={draft.isEnabled}
+                      disabled={isLocalPreview}
                       type="checkbox"
                       onChange={(event) => updateCatalogDraft(project.project_key, { isEnabled: event.target.checked })}
                     />
@@ -611,12 +692,33 @@ export function AdminEntitlementManager() {
                     <span>排序</span>
                     <input
                       min="0"
+                      disabled={isLocalPreview}
                       type="number"
                       value={draft.sortOrder}
                       onChange={(event) =>
                         updateCatalogDraft(project.project_key, { sortOrder: Number(event.target.value) })
                       }
                     />
+                  </label>
+                  <label>
+                    <span>标题字体</span>
+                    <select value={draft.titleFontFamily} onChange={(event) => updateCatalogDraft(project.project_key, { titleFontFamily: event.target.value as "serif" | "sans" })}>
+                      <option value="serif">衬线</option><option value="sans">无衬线</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>标题字号（18–72）</span>
+                    <input max="72" min="18" type="number" value={draft.titleFontSize} onChange={(event) => updateCatalogDraft(project.project_key, { titleFontSize: Number(event.target.value) })} />
+                  </label>
+                  <label>
+                    <span>说明字体</span>
+                    <select value={draft.descriptionFontFamily} onChange={(event) => updateCatalogDraft(project.project_key, { descriptionFontFamily: event.target.value as "serif" | "sans" })}>
+                      <option value="serif">衬线</option><option value="sans">无衬线</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>说明字号（12–40）</span>
+                    <input max="40" min="12" type="number" value={draft.descriptionFontSize} onChange={(event) => updateCatalogDraft(project.project_key, { descriptionFontSize: Number(event.target.value) })} />
                   </label>
                 </div>
 
@@ -636,6 +738,7 @@ export function AdminEntitlementManager() {
                         <input
                           checked={draft.planEnabled[plan.plan]}
                           className="admin-access-plan-toggle"
+                          disabled={isLocalPreview}
                           type="checkbox"
                           onChange={(event) =>
                             updateCatalogPlanEnabled(project.project_key, plan.plan, event.target.checked)
@@ -647,6 +750,7 @@ export function AdminEntitlementManager() {
                         <input
                           min="0"
                           step="0.01"
+                          disabled={isLocalPreview && plan.plan !== "lifetime"}
                           type="number"
                           value={draft.planPrices[plan.plan]}
                           onChange={(event) =>
@@ -728,6 +832,26 @@ export function AdminEntitlementManager() {
                 value={newCatalogDraft.gateTitle}
                 onChange={(event) => setNewCatalogDraft((draft) => ({ ...draft, gateTitle: event.target.value }))}
               />
+            </label>
+            <label>
+              <span>标题字体</span>
+              <select value={newCatalogDraft.titleFontFamily} onChange={(event) => setNewCatalogDraft((draft) => ({ ...draft, titleFontFamily: event.target.value as "serif" | "sans" }))}>
+                <option value="serif">衬线</option><option value="sans">无衬线</option>
+              </select>
+            </label>
+            <label>
+              <span>标题字号（18–72）</span>
+              <input max="72" min="18" type="number" value={newCatalogDraft.titleFontSize} onChange={(event) => setNewCatalogDraft((draft) => ({ ...draft, titleFontSize: Number(event.target.value) }))} />
+            </label>
+            <label>
+              <span>说明字体</span>
+              <select value={newCatalogDraft.descriptionFontFamily} onChange={(event) => setNewCatalogDraft((draft) => ({ ...draft, descriptionFontFamily: event.target.value as "serif" | "sans" }))}>
+                <option value="serif">衬线</option><option value="sans">无衬线</option>
+              </select>
+            </label>
+            <label>
+              <span>说明字号（12–40）</span>
+              <input max="40" min="12" type="number" value={newCatalogDraft.descriptionFontSize} onChange={(event) => setNewCatalogDraft((draft) => ({ ...draft, descriptionFontSize: Number(event.target.value) }))} />
             </label>
           </div>
 
@@ -881,7 +1005,7 @@ export function AdminEntitlementManager() {
 
         <button
           className="button primary"
-          disabled={isSaving || users.length === 0 || !selectedProjectPlans.length}
+          disabled={isSaving || users.length === 0 || !selectedProjectPlans.length || localPreviewProjectKeys.has(selectedProjectKey)}
           type="submit"
         >
           {isSaving ? "处理中..." : "开通 / 续期"}

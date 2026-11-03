@@ -9,6 +9,25 @@ export function getVocabularyComponentStyle(index: number): CSSProperties {
   return { "--vocabulary-component-color": color, color } as CSSProperties;
 }
 
+function isAffixPart(label: string) {
+  const text = label.split("；中文释义：", 1)[0].trim();
+  return /^[-–/]\s*[a-z]/i.test(text) || /^[a-z]{1,8}-(?=\s*(?:[（(]|$))/i.test(text);
+}
+
+export function getVisibleVocabularyFormationParts(parts: VocabularyFormationPart[]) {
+  const visibleParts = parts.filter((part) => !/单一词根/.test(part.label));
+  const roots = visibleParts.filter((part) => !isAffixPart(part.label));
+  const hasAffix = visibleParts.some((part) => isAffixPart(part.label));
+  return !hasAffix && roots.length === 1 ? [] : visibleParts;
+}
+
+export function isVocabularyFormationQualityLocked(word: string, parts: VocabularyFormationPart[]) {
+  if (parts.some((part) => /单一词根|单一词缀|单一词素/.test(part.label))) return true;
+  const normalizedWord = normalizeSurface(word);
+  const normalizedParts = parts.map((part) => normalizeSurface(part.label)).filter(Boolean);
+  return normalizedParts.filter((part) => part === normalizedWord).length > 1;
+}
+
 export function splitVocabularyFormation(formation: string): VocabularyFormationPart[] {
   return formation.split(/\s+\+\s+/).map((label) => label.trim()).filter(Boolean).map((label) => ({ label }));
 }

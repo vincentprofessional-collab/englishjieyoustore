@@ -1,4 +1,3 @@
-export const VOCABULARY_LOOKUP_VIDEO_COOKIE = "vocabulary-lookup-video-visible";
 export const VOCABULARY_LOOKUP_PREFERENCES_KEY = "ielts-platform.vocabularyLookupDisplay";
 export const VOCABULARY_LOOKUP_PREFERENCES_EVENT = "vocabulary-lookup-display-change";
 
@@ -6,7 +5,6 @@ export const VOCABULARY_LOOKUP_SECTIONS = [
   { key: "chineseDefinition", label: "中文释义", defaultVisible: true },
   { key: "englishDefinition", label: "英文释义", defaultVisible: true },
   { key: "inflections", label: "词性变化", defaultVisible: true },
-  { key: "video", label: "视频", defaultVisible: true },
   { key: "images", label: "图片", defaultVisible: true },
   { key: "examples", label: "例句", defaultVisible: true },
   { key: "synonymDistinctions", label: "同义词辨析", defaultVisible: true },
@@ -43,10 +41,6 @@ export function setVocabularyLookupSectionVisible(key: VocabularyLookupSectionKe
   if (typeof window === "undefined") return;
   const next = { ...getVocabularyLookupDisplayPreferences(), [key]: visible };
   window.localStorage.setItem(VOCABULARY_LOOKUP_PREFERENCES_KEY, JSON.stringify(next));
-  if (key === "video") {
-    const secure = window.location.protocol === "https:" ? "; Secure" : "";
-    document.cookie = `${VOCABULARY_LOOKUP_VIDEO_COOKIE}=${visible ? "1" : "0"}; Path=/; Max-Age=31536000; SameSite=Lax${secure}`;
-  }
   window.dispatchEvent(new CustomEvent(VOCABULARY_LOOKUP_PREFERENCES_EVENT));
 }
 

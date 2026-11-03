@@ -50,6 +50,7 @@ function collectMp3Files(root, current = root, files = []) {
       collectMp3Files(root, absolutePath, files);
       continue;
     }
+    if (item.isFile() && /^\..+\.mp3\.\d+\.tmp$/.test(item.name)) continue;
     if (!item.isFile() || !item.name.toLowerCase().endsWith(".mp3")) {
       throw new Error(`Unexpected source entry; expected MP3 audio only: ${absolutePath}`);
     }
@@ -128,6 +129,7 @@ if (existsSync(checkpointPath)) {
 
 const encodeStoragePath = (path) => path.split("/").map(encodeURIComponent).join("/");
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const md5 = (bytes) => createHash("md5").update(bytes).digest("hex");
 
 async function retry(operation, label) {
   for (let attempt = 1; attempt <= 4; attempt += 1) {
@@ -197,7 +199,13 @@ const worker = async () => {
     if (info) {
       if (Number(info.size) !== bytes.length) throw new Error(`Existing Supabase object has a different size; refusing to overwrite ${entry.storagePath}.`);
       if (info.metadata?.sha256 && info.metadata.sha256 !== hash) throw new Error(`Existing Supabase object has a different SHA-256; refusing to overwrite ${entry.storagePath}.`);
-      if (!info.metadata?.sha256) {
+      const remoteEtag = String(info.metadata?.eTag ?? info.metadata?.etag ?? "")
+        .trim()
+        .replace(/^"|"$/g, "")
+        .toLowerCase();
+      if (!info.metadata?.sha256 && remoteEtag) {
+        if (remoteEtag !== md5(bytes)) throw new Error(`Existing Supabase object has a different ETag/MD5; refusing to overwrite ${entry.storagePath}.`);
+      } else if (!info.metadata?.sha256) {
         const { data, error } = await retry(() => supabase.storage.from("audio").download(encodeStoragePath(entry.storagePath)), `Supabase download check for ${entry.storagePath}`);
         if (error) throw error;
         if (!data || sha256(Buffer.from(await data.arrayBuffer())) !== hash) {

@@ -28,7 +28,9 @@ export function PostImageGallery({ images, title }: { images: PostGalleryImage[]
   return (
     <figure aria-label={`${title}图片`} className={styles.gallery}>
       <div aria-label={`${title}图片轮播`} aria-roledescription="轮播图" className={styles.frame} role="group">
-        <Image alt={image.alt || image.caption || title} className={styles.image} fill priority={activeIndex === 0} sizes="(max-width: 760px) 100vw, 860px" src={image.url} unoptimized />
+        <button aria-label="点击全屏查看图片" className={styles.imageTrigger} onClick={() => dialogRef.current?.showModal()} type="button">
+          <Image alt={image.alt || image.caption || title} className={styles.image} fill priority={activeIndex === 0} sizes="(max-width: 760px) 100vw, 860px" src={image.url} unoptimized />
+        </button>
         {images.length > 1 ? <>
           <button aria-label="上一张图片" className={`${styles.arrow} ${styles.previous}`} onClick={() => moveImage(-1)} type="button">‹</button>
           <button aria-label="下一张图片" className={`${styles.arrow} ${styles.next}`} onClick={() => moveImage(1)} type="button">›</button>

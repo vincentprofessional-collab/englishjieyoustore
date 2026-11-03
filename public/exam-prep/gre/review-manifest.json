@@ -27,163 +27,11 @@
       "optionsMatchedCount": 40,
       "passageQuestionCount": 0,
       "passageSourceVerifiedCount": 0,
-      "status": "review_required",
-      "pendingQuestionIds": [
-        "ppii-single-q1",
-        "ppii-single-q2",
-        "ppii-single-q3",
-        "ppii-single-q4",
-        "ppii-single-q5",
-        "ppii-single-q6",
-        "ppii-single-q7",
-        "ppii-single-q8",
-        "ppii-double-q1",
-        "ppii-double-q2",
-        "ppii-double-q3",
-        "ppii-double-q4",
-        "ppii-double-q5",
-        "ppii-double-q6",
-        "ppii-double-q7",
-        "ppii-triple-q2",
-        "ppii-triple-q3",
-        "ppii-triple-q4",
-        "ppii-triple-q5",
-        "ppii-triple-q6",
-        "ppii-triple-q7",
-        "ppii-triple-q8",
-        "ppii-triple-q9",
-        "ppii-equivalence-q1",
-        "ppii-equivalence-q2",
-        "ppii-equivalence-q3",
-        "ppii-equivalence-q4",
-        "ppii-equivalence-q5",
-        "ppii-equivalence-q6",
-        "ppii-equivalence-q7",
-        "ppii-equivalence-q8",
-        "ppii-equivalence-q9",
-        "ppii-equivalence-q10",
-        "ppii-equivalence-q12",
-        "ppii-equivalence-q13",
-        "ppii-equivalence-q14",
-        "ppii-equivalence-q15",
-        "ppii-equivalence-q16"
-      ],
-      "pendingQuestionReasons": {
-        "ppii-single-q1": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-single-q2": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-single-q3": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-single-q4": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-single-q5": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-single-q6": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-single-q7": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-single-q8": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-double-q1": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-double-q2": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-double-q3": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-double-q4": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-double-q5": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-double-q6": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-double-q7": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-triple-q2": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-triple-q3": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-triple-q4": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-triple-q5": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-triple-q6": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-triple-q7": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-triple-q8": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-triple-q9": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-equivalence-q1": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-equivalence-q2": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-equivalence-q3": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-equivalence-q4": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-equivalence-q5": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-equivalence-q6": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-equivalence-q7": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-equivalence-q8": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-equivalence-q9": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-equivalence-q10": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-equivalence-q12": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-equivalence-q13": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-equivalence-q14": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-equivalence-q15": [
-          "来源未提供逐题解析"
-        ],
-        "ppii-equivalence-q16": [
-          "来源未提供逐题解析"
-        ]
-      }
+      "status": "source_matched",
+      "pendingQuestionIds": [],
+      "pendingQuestionReasons": {},
+      "acceptedNoExplanationCount": 38,
+      "noExplanationPolicy": "Original source does not provide item-level explanations; include per user instruction."
     },
     {
       "id": "gre-official250-matched-verbal",
@@ -3749,5 +3597,6 @@
       "correctedText": "According to the passage",
       "reason": "The source PDF repeats “to”; removed the duplicate word."
     }
-  ]
+  ],
+  "generatedAt": "2026-11-03T12:01:00+08:00"
 }

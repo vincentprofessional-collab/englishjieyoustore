@@ -17,3 +17,13 @@
 - Use solid lines for level 1 components, dashed lines for level 2, and wavy lines only for level 3 or deeper syntax nesting. Do not use wavy underlines to mark vocabulary or phrases in intensive reading.
 - A nested component belongs in the next level under its actual parent. Render deeper levels above their parent line; for example, a level 2 postmodifier inside an appositive uses a dashed line above the appositive.
 - Keep each nested span fully inside its parent span. Do not duplicate a nested component as a separate level 1 component.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

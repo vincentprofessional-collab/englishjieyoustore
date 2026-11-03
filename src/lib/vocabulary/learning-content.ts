@@ -122,8 +122,9 @@ export function getLearningWordsForBook(words: LearningWord[], book: string): Le
   }
   if (book === "其他词汇") return words.filter((word) => word.level === "其他词汇");
   const selectedRank = LEARNING_BOOKS.find((candidate) => candidate.key === book)?.rank;
-  if (selectedRank === undefined) return words.filter((word) => word.level === book);
   return words.filter((word) => {
+    if (word.studyBookMemberships) return word.studyBookMemberships.includes(book);
+    if (selectedRank === undefined || selectedRank <= 0) return word.level === book;
     const entryRank = LEARNING_BOOKS.find((candidate) => candidate.key === word.level)?.rank ?? 0;
     return entryRank > 0 && entryRank <= selectedRank;
   });
@@ -136,13 +137,8 @@ export function getLearningBookCounts(words: LearningWord[], books: LearningBook
   for (const book of books) {
     const rank = LEARNING_BOOKS.find((item) => item.key === book.key)?.rank ?? 0;
     const direct = exactCounts.get(book.key) || 0;
-    if (rank > 0) {
-      const total = books.filter((item) => (LEARNING_BOOKS.find((known) => known.key === item.key)?.rank ?? 0) > 0 && (LEARNING_BOOKS.find((known) => known.key === item.key)?.rank ?? 0) <= rank)
-        .reduce((sum, item) => sum + (exactCounts.get(item.key) || 0), 0);
-      result[book.key] = { added: direct, total };
-    } else {
-      result[book.key] = { added: direct, total: direct };
-    }
+    const total = getLearningWordsForBook(words, book.key).length;
+    result[book.key] = { added: rank > 0 ? direct : total, total };
   }
   return result;
 }

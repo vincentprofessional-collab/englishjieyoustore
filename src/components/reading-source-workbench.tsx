@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getReadingQuestionNumbers, type ReadingTest } from "@/lib/ielts/reading";
+import { getRawReadingParagraphs } from "@/lib/ielts/reading-article-text";
 import { gradeSourceReading, type ReadingSourcePage } from "@/lib/ielts/reading-source-model";
-import { getEditableReadingPart, type EditableQuestionBlock, type EditableQuestionItem, type EditableReadingPart } from "@/lib/ielts/reading-source-editable";
+import { adaptReviewedLegacyReadingPart, getEditableReadingPart, type EditableQuestionBlock, type EditableQuestionItem, type EditableReadingPart } from "@/lib/ielts/reading-source-editable";
 import { recordPracticeAttempt } from "@/lib/learning/site-progress";
 import "@/app/reading/reading-source.css";
 
@@ -19,7 +20,7 @@ function SourcePages({ pages, label }: { pages: ReadingSourcePage[]; label: stri
 function EditableQuestionControl({ block, number, item, answers, onAnswer, disabled, locked, expected, correct }: {
   block: EditableQuestionBlock;
   number: number;
-  item: Pick<EditableQuestionItem, "before" | "after" | "prompt" | "options">;
+  item: Pick<EditableQuestionItem, "before" | "after" | "prompt" | "options" | "inputCount" | "joiners" | "numbers" | "selectCount">;
   answers: Record<number, string>;
   onAnswer: (number: number, value: string) => void;
   disabled: boolean;
@@ -28,21 +29,55 @@ function EditableQuestionControl({ block, number, item, answers, onAnswer, disab
   correct: boolean | null;
 }) {
   const id = `reading-source-answer-${number}`;
+  const questionNumbers = item.numbers?.length ? item.numbers : [number];
+  const questionLabel = questionNumbers.length > 1 ? `${questionNumbers[0]}–${questionNumbers.at(-1)}` : String(number);
   const status = locked ? correct === true ? "correct" : correct === false ? "incorrect" : "" : "";
-  const control = block.response === "select" && item.options ? <div aria-label={`第 ${number} 题选项`} className="reading-source-radio-options" role="radiogroup">
+  const control = block.response === "select" && item.selectCount && questionNumbers.length > 1 && item.options ? <div aria-label={`第 ${questionLabel} 题，选择 ${item.selectCount} 项`} className="reading-source-checkbox-options" role="group">
+    {item.options.map((option) => {
+      const selectedNumber = questionNumbers.find((questionNumber) => answers[questionNumber] === option.value);
+      const selectedCount = questionNumbers.filter((questionNumber) => Boolean(answers[questionNumber])).length;
+      return <label key={option.value}><input checked={selectedNumber !== undefined} disabled={disabled || (selectedNumber === undefined && selectedCount >= item.selectCount!)} name={id} onChange={(event) => {
+        if (event.target.checked) {
+          const target = questionNumbers.find((questionNumber) => !answers[questionNumber]);
+          if (target !== undefined) onAnswer(target, option.value);
+        } else if (selectedNumber !== undefined) onAnswer(selectedNumber, "");
+      }} type="checkbox" value={option.value} /><span>{option.label}</span></label>;
+    })}
+  </div> : block.response === "select" && item.options ? <div aria-label={`第 ${number} 题选项`} className="reading-source-radio-options" role="radiogroup">
     {item.options.map((option) => <label key={option.value}><input checked={answers[number] === option.value} disabled={disabled} name={id} onChange={() => onAnswer(number, option.value)} type="radio" value={option.value} /><span>{option.label}</span></label>)}
   </div> : block.response === "select" ? <select aria-label={`第 ${number} 题答案`} className="reading-source-text-select" disabled={disabled} id={id} onChange={(event) => onAnswer(number, event.target.value)} value={answers[number] ?? ""}>
     <option value="">请选择</option>
     {(item.options ?? block.options ?? []).map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
-  </select> : <input aria-label={`第 ${number} 题答案`} autoComplete="off" className="reading-source-text-input" disabled={disabled} id={id} maxLength={140} onChange={(event) => onAnswer(number, event.target.value)} spellCheck={false} value={answers[number] ?? ""} />;
+  </select> : <EditableTextAnswerControl number={number} value={answers[number] ?? ""} onAnswer={onAnswer} disabled={disabled} inputCount={item.inputCount} joiners={item.joiners} />;
   return <div className={`reading-source-text-question ${status}`} id={`reading-source-question-${number}`}>
-    <span className="reading-source-text-question-number">{number}</span>
+    <span className="reading-source-text-question-number">{questionLabel}</span>
     <div className="reading-source-text-question-body">
       {item.prompt ? <p>{item.prompt}</p> : null}
       {item.before !== undefined || item.after !== undefined ? <p className="reading-source-inline-answer"><span>{item.before}</span>{control}<span>{item.after}</span></p> : !item.prompt ? control : null}
       {locked ? <small>{correct === null ? "待核对" : correct ? "正确" : `参考：${expected}`}</small> : null}
     </div>
   </div>;
+}
+
+function EditableTextAnswerControl({ number, value, onAnswer, disabled, inputCount = 1, joiners = [] }: {
+  number: number;
+  value: string;
+  onAnswer: (number: number, value: string) => void;
+  disabled: boolean;
+  inputCount?: number;
+  joiners?: string[];
+}) {
+  const count = Math.max(1, Math.min(5, inputCount));
+  const values = value.split(/\s+and\s+|\s*&\s*|\s*\/\s*|,\s*/i);
+  while (values.length < count) values.push("");
+  return <>{Array.from({ length: count }, (_, index) => <span key={`${number}-answer-${index}`}>
+    {index ? <span aria-hidden="true">{joiners[index - 1] ?? " and "}</span> : null}
+    <input aria-label={`第 ${number} 题答案${count > 1 ? `（第 ${index + 1} 项）` : ""}`} autoComplete="off" className="reading-source-text-input" disabled={disabled} id={`reading-source-answer-${number}${index ? `-${index + 1}` : ""}`} maxLength={140} onChange={(event) => {
+      const next = values.slice(0, count);
+      next[index] = event.target.value;
+      onAnswer(number, count === 1 ? next[0] : next.join(joiners[0] ?? " and "));
+    }} spellCheck={false} value={values[index] ?? ""} />
+  </span>)}</>;
 }
 
 function EditableQuestionFlow({ block, answers, onAnswer, disabled, locked, rowsByNumber }: {
@@ -56,13 +91,13 @@ function EditableQuestionFlow({ block, answers, onAnswer, disabled, locked, rows
   return <p className="reading-source-question-flow">{block.flow?.map((segment, index) => {
     if ("text" in segment) return <span key={`flow-${index}`}>{segment.text}</span>;
     const number = segment.question;
-    const answer = rowsByNumber.get(number);
+      const answer = rowsByNumber.get(number);
     const status = locked ? answer?.correct === true ? "correct" : answer?.correct === false ? "incorrect" : "" : "";
     const control = block.response === "select" ? <select aria-label={`第 ${number} 题答案`} className="reading-source-text-select" disabled={disabled} id={`reading-source-answer-${number}`} onChange={(event) => onAnswer(number, event.target.value)} value={answers[number] ?? ""}>
       <option value="">请选择</option>
       {(block.options ?? []).map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
-    </select> : <input aria-label={`第 ${number} 题答案`} autoComplete="off" className="reading-source-text-input" disabled={disabled} id={`reading-source-answer-${number}`} maxLength={140} onChange={(event) => onAnswer(number, event.target.value)} spellCheck={false} value={answers[number] ?? ""} />;
-    return <span className={`reading-source-flow-answer ${status}`} key={`flow-q${number}`}><span className="reading-source-table-question-number">{number}</span>{control}{locked ? <small>{answer?.correct === null || !answer ? "待核对" : answer.correct ? "正确" : `参考：${answer.expected}`}</small> : null}</span>;
+    </select> : <EditableTextAnswerControl number={number} value={answers[number] ?? ""} onAnswer={onAnswer} disabled={disabled} inputCount={"inputCount" in segment ? segment.inputCount : undefined} joiners={"joiners" in segment ? segment.joiners : undefined} />;
+    return <span className={`reading-source-flow-answer ${status}`} key={`flow-q${number}`}>{!("showNumber" in segment) || segment.showNumber !== false ? <span className="reading-source-table-question-number">{number}</span> : null}{control}{locked ? <small>{answer?.correct === null || !answer ? "待核对" : answer.correct ? "正确" : `参考：${answer.expected}`}</small> : null}</span>;
   })}</p>;
 }
 
@@ -86,7 +121,7 @@ function EditableQuestions({ part, partRows, answers, onAnswer, disabled, locked
           if ("text" in segment) return <span key={`${rowIndex}-${cellIndex}-${segmentIndex}`}>{segment.text}</span>;
           const answer = rowsByNumber.get(segment.question);
           const status = locked ? answer?.correct === true ? "correct" : answer?.correct === false ? "incorrect" : "" : "";
-          return <label className={`reading-source-table-answer ${status}`} key={`${rowIndex}-${cellIndex}-q${segment.question}`}><span className="reading-source-table-question-number">{segment.question}</span><input aria-label={`第 ${segment.question} 题答案`} autoComplete="off" disabled={disabled} maxLength={140} onChange={(event) => onAnswer(segment.question, event.target.value)} spellCheck={false} value={answers[segment.question] ?? ""} />{locked ? <small>{answer?.correct === null || !answer ? "待核对" : answer.correct ? "正确" : `参考：${answer.expected}`}</small> : null}</label>;
+          return <label className={`reading-source-table-answer ${status}`} key={`${rowIndex}-${cellIndex}-q${segment.question}`}><span className="reading-source-table-question-number">{segment.question}</span><EditableTextAnswerControl number={segment.question} value={answers[segment.question] ?? ""} onAnswer={onAnswer} disabled={disabled} inputCount={segment.inputCount} joiners={segment.joiners} />{locked ? <small>{answer?.correct === null || !answer ? "待核对" : answer.correct ? "正确" : `参考：${answer.expected}`}</small> : null}</label>;
         })}</td>)}</tr>)}</tbody>
       </table></div> : null}
       {block.flow?.length ? <EditableQuestionFlow block={block} answers={answers} onAnswer={onAnswer} disabled={disabled} locked={locked} rowsByNumber={rowsByNumber} /> : null}
@@ -95,10 +130,29 @@ function EditableQuestions({ part, partRows, answers, onAnswer, disabled, locked
         : line.kind === "text"
           ? <p className="reading-source-note-line" key={`${block.id}-line-${index}`}>• {line.text}</p>
           : <EditableQuestionControl key={`${block.id}-q-${line.number}`} block={block} number={line.number} item={line} answers={answers} onAnswer={onAnswer} disabled={disabled} locked={locked} expected={rowsByNumber.get(line.number)?.expected ?? ""} correct={rowsByNumber.get(line.number)?.correct ?? null} />)}
-      {!block.flow?.length ? block.items?.map((item) => <EditableQuestionControl key={`${block.id}-q-${item.number}`} block={block} number={item.number} item={item} answers={answers} onAnswer={onAnswer} disabled={disabled} locked={locked} expected={rowsByNumber.get(item.number)?.expected ?? ""} correct={rowsByNumber.get(item.number)?.correct ?? null} />) : null}
+      {!block.flow?.length ? block.items?.map((item) => {
+        const numbers = item.numbers?.length ? item.numbers : [item.number];
+        const resultRows = numbers.map((number) => rowsByNumber.get(number));
+        const correct = resultRows.every((row) => row?.correct === true) ? true : resultRows.some((row) => row?.correct === false) ? false : null;
+        return <EditableQuestionControl key={`${block.id}-q-${item.number}`} block={block} number={item.number} item={item} answers={answers} onAnswer={onAnswer} disabled={disabled} locked={locked} expected={rowsByNumber.get(item.number)?.expected ?? ""} correct={correct} />;
+      }) : null}
     </section>)}
     {locked ? <p className="reading-source-result">{partRows.filter((row) => row.correct).length}/{partRows.length} 题已答对</p> : null}
   </div>;
+}
+
+function EditablePassageFigure({ figure }: { figure: NonNullable<EditableReadingPart["sections"][number]["figures"]>[number] }) {
+  if (figure.type === "wheel-motion") return <figure className="reading-source-figure reading-source-wheel-figure">
+    <svg aria-label="A circle with a curved line inside it" role="img" viewBox="0 0 200 200"><circle cx="100" cy="100" r="82" /><path d="M43 103 C62 79 79 82 95 99 C111 116 132 119 157 95" /></svg>
+    {figure.caption ? <figcaption>{figure.caption}</figcaption> : null}
+  </figure>;
+
+  const columns = figure.type === "data-table" ? figure.headers : ["Words associated with circle/square", "Agreement among subjects (%)"];
+  const rows = figure.type === "data-table" ? figure.rows : figure.rows.map((row) => [row.pair, String(row.agreement)]);
+  return <figure className="reading-source-figure"><table><thead><tr>{columns.map((column, index) => <th key={`${index}-${column}`}>{column}</th>)}</tr></thead>
+    <tbody>{rows.map((row, rowIndex) => <tr key={rowIndex}>{row.map((cell, cellIndex) => <td key={`${rowIndex}-${cellIndex}`}>{cell}</td>)}</tr>)}</tbody></table>
+    {figure.caption ? <figcaption>{figure.caption}</figcaption> : null}
+  </figure>;
 }
 
 function EditablePassage({ part }: { part: EditableReadingPart }) {
@@ -107,10 +161,15 @@ function EditablePassage({ part }: { part: EditableReadingPart }) {
     <p className="reading-source-direction reading-source-passage-direction">{part.passageDirections}</p>
     {part.subtitle ? <p className="reading-source-subtitle">{part.subtitle}</p> : null}
     {part.sections.map((section, sectionIndex) => <section className="reading-source-passage-section" key={`${section.label ?? "passage"}-${sectionIndex}`}>
-      {section.paragraphs.map((paragraph, paragraphIndex) => <p key={paragraphIndex}>
-        {section.label && paragraphIndex === 0 ? <strong className="reading-source-section-label">{section.label} </strong> : null}
-        {paragraph}
-      </p>)}
+      {section.heading ? <h3 className="reading-source-passage-heading">{section.heading}</h3> : null}
+      {section.paragraphs.map((paragraph, paragraphIndex) => {
+        const displayParagraphs = section.format === "pre" ? getRawReadingParagraphs(paragraph, part.passageTitle, part.subtitle) : [paragraph];
+        return displayParagraphs.map((displayParagraph, displayIndex) => <div key={`${paragraphIndex}-${displayIndex}`}>
+          <p>{section.label && paragraphIndex === 0 && displayIndex === 0 ? <strong className="reading-source-section-label">{section.label} </strong> : null}{displayParagraph}</p>
+          {displayIndex === displayParagraphs.length - 1 ? section.figures?.filter((figure) => figure.afterParagraph === paragraphIndex).map((figure) => <EditablePassageFigure figure={figure} key={`${sectionIndex}-${figure.afterParagraph}-${figure.type}`} />) : null}
+        </div>);
+      })}
+      {section.listItems?.length ? <ul className="reading-source-passage-list">{section.listItems.map((item, index) => <li key={index}>{item}</li>)}</ul> : null}
     </section>)}
     {part.footnotes?.length ? <footer className="reading-source-footnotes">{part.footnotes.map((footnote) => <p key={footnote}>{footnote}</p>)}</footer> : null}
   </div>;
@@ -134,10 +193,14 @@ export function ReadingSourceWorkbench({ mode, test }: { mode: "mock" | "practic
   const committed = useRef(false);
   const storageKey = `ielts-platform.reading.attempt:${mode}:${test.id}`;
   const allNumbers = useMemo(() => test.parts.flatMap(getReadingQuestionNumbers), [test.parts]);
+  const editableParts = useMemo(() => new Map(test.parts.map((item) => [
+    item.id,
+    getEditableReadingPart(item.id) ?? (test.source ? adaptReviewedLegacyReadingPart(item, test.source) : undefined),
+  ])), [test]);
   const part = test.parts.find((item) => item.id === partId) ?? test.parts[0];
-  const editablePart = getEditableReadingPart(part.id);
+  const editablePart = editableParts.get(part.id);
   const partReady = Boolean(editablePart);
-  const testReady = test.parts.every((item) => Boolean(getEditableReadingPart(item.id)));
+  const testReady = test.parts.every((item) => Boolean(editableParts.get(item.id)));
   const numbers = getReadingQuestionNumbers(part);
   const complete = submitted.length === test.parts.length;
   const locked = mode === "mock" ? complete : submitted.includes(part.id);
@@ -241,7 +304,7 @@ export function ReadingSourceWorkbench({ mode, test }: { mode: "mock" | "practic
       </div>
     </div>
     <div className="reading-source-part-tabs" role="group" aria-label="阅读篇章">
-      {test.parts.map((item) => <button aria-pressed={item.id === part.id} className={item.id === part.id ? "active" : ""} key={item.id} onClick={() => selectPart(item.id)} type="button">{item.label}<span>{getEditableReadingPart(item.id) ? `${getReadingQuestionNumbers(item).filter((n) => answers[n]?.trim()).length}/${getReadingQuestionNumbers(item).length}` : "文字待核"}</span>{submitted.includes(item.id) ? " 已提交" : ""}</button>)}
+      {test.parts.map((item) => <button aria-pressed={item.id === part.id} className={item.id === part.id ? "active" : ""} key={item.id} onClick={() => selectPart(item.id)} type="button">{item.label}<span>{editableParts.get(item.id) ? `${getReadingQuestionNumbers(item).filter((n) => answers[n]?.trim()).length}/${getReadingQuestionNumbers(item).length}` : "文字待核"}</span>{submitted.includes(item.id) ? " 已提交" : ""}</button>)}
       <a download href={`/reading/sources/${test.id}.md`}>下载本卷 MD</a>
     </div>
     <nav aria-label="阅读题号导航" className="junior-high-paper-nav direct reading-source-navigation">

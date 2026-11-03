@@ -21,6 +21,18 @@
   object-fit: contain;
 }
 
+.imageTrigger {
+  background: transparent;
+  border: 0;
+  cursor: zoom-in;
+  inset: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.imageTrigger:focus-visible { outline: 3px solid #a8d7ff; outline-offset: -3px; }
+
 .arrow,
 .fullscreenButton {
   align-items: center;

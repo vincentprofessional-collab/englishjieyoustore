@@ -62,10 +62,11 @@ test('the paywall waits for enabled server plans and never flashes fallback mont
   const imports = {
     react, 'react/jsx-runtime': { jsx, jsxs: jsx }, 'next/image': {}, 'next/link': {},
     '@/lib/access-control': { getProjectAccessRule: () => fallback, PROJECT_ACCESS_PLANS: [{ label: '月卡' }, { label: '季卡' }], formatProjectPrice: amount => `¥${amount}` },
-    '@/lib/supabase/client': { supabase: client }, '@/lib/content/payment-instructions': { DEFAULT_PAYMENT_INSTRUCTIONS: {} }, '@/components/bbc-members': {},
+    '@/lib/supabase/client': { supabase: client }, '@/lib/content/payment-instructions': { DEFAULT_PAYMENT_INSTRUCTIONS: {} }, '@/lib/access-control-local-preview': { readLocalAccessCatalogPreview: () => null }, '@/components/bbc-members': {},
+    '@/components/guide-board': { GuideBoard: () => null }, '@/lib/content/guide-post-navigation': { ALL_PAID_PAGES_POST_PATH: '/__all-paid-pages__' },
   };
   const exports = {};
-  vm.runInNewContext(source, { exports, require: name => { assert.ok(name in imports, name); return imports[name]; } });
+  vm.runInNewContext(source, { exports, process: { env: { NODE_ENV: 'production' } }, require: name => { assert.ok(name in imports, name); return imports[name]; } });
   function text(node) {
     if (Array.isArray(node)) return node.map(text).join('');
     if (typeof node === 'string' || typeof node === 'number') return String(node);

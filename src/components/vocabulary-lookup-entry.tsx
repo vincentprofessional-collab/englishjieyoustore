@@ -3,7 +3,7 @@ import { VocabularyAutoplay } from "@/components/vocabulary-autoplay";
 import { VocabularyDetailShell } from "@/components/vocabulary-detail-shell";
 import { VocabularyDetailContent } from "@/components/vocabulary-detail-content";
 import { getExtendedVocabularyEntry, getVocabularyFormationParts } from "@/lib/vocabulary/local-vocabulary";
-import { getVocabularyUsageExamples, prioritizeVocabularyUsageExamples } from "@/lib/vocabulary/examples";
+import { getVocabularyUsageExamples, getVocabularyWorkbookUsageExamples, prioritizeVocabularyUsageExamples } from "@/lib/vocabulary/examples";
 import { getVocabularyPhraseMatches } from "@/lib/vocabulary/phrases";
 import { getVocabularyLookupEtymology } from "@/lib/vocabulary/lookup-etymology";
 import { getVocabularySynonymDistinctions } from "@/lib/vocabulary/synonym-distinctions";
@@ -65,9 +65,10 @@ export async function VocabularyLookupEntry({ word, backHref = "/vocabulary" }: 
       // Treat an unavailable membership check as a visitor and hide BBC examples.
     }
   }
-  const usageExamples = canAccessBbcExamples
+  const accessibleUsageExamples = canAccessBbcExamples
     ? fetchedUsageExamples
     : fetchedUsageExamples.filter((example) => example.bookCode !== "BBC");
+  const usageExamples = accessibleUsageExamples.length ? accessibleUsageExamples : getVocabularyWorkbookUsageExamples(entry.word);
   const phrases = getVocabularyPhraseMatches(entry.word);
   const formationParts = getVocabularyFormationParts(entry).map((part) => ({
     ...part,

@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { SatPastPaperIndex } from "@/lib/sat/types";
 import { supabase } from "@/lib/supabase/client";
 import styles from "./sat.module.css";
+import { SatSectionNavigation } from "@/components/sat/sat-section-navigation";
 
 export function SatPastPaperLibrary({ initialCatalog }: { initialCatalog: SatPastPaperIndex }) {
   const [papers, setPapers] = useState(initialCatalog.papers);
@@ -54,6 +55,7 @@ export function SatPastPaperLibrary({ initialCatalog }: { initialCatalog: SatPas
 
   const years = useMemo(() => [...new Set(papers.map((paper) => paper.year))].sort((a, b) => b - a), [papers]);
   return <section className={`${styles.root} ${styles.home}`}>
+    <SatSectionNavigation current="past-papers" />
     {years.length ? years.map((year) => {
       const yearPapers = papers.filter((paper) => paper.year === year).sort((a, b) => (b.month ?? 0) - (a.month ?? 0) || a.title.localeCompare(b.title, "zh-CN"));
       return <section className={styles.section} key={year}>

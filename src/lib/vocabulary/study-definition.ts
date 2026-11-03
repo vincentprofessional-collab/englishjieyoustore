@@ -70,7 +70,7 @@ export function compareStudyExamples(
   left: { chinese: string; english: string; sourceType: string },
   right: { chinese: string; english: string; sourceType: string },
 ) {
-  return Number(right.sourceType === "workbook") - Number(left.sourceType === "workbook")
+  return Number(left.sourceType === "workbook") - Number(right.sourceType === "workbook")
     || Number(!left.chinese.trim()) - Number(!right.chinese.trim())
     || left.english.trim().split(/\s+/).filter(Boolean).length - right.english.trim().split(/\s+/).filter(Boolean).length
     || left.english.length - right.english.length;

@@ -1819,7 +1819,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
               sourceType="bbc"
             />
           ) : isOriginalVisible ? (
-            <div className={`bbc-original-copy ${originalDisplayMode === "bilingual" || studyMode !== "general" ? "bilingual" : ""}`}>
+            <div className={`bbc-original-copy${audioSettings.pronunciationMode === "uk" || audioSettings.pronunciationMode === "us" ? " with-phonetics" : ""} ${originalDisplayMode === "bilingual" || studyMode !== "general" ? "bilingual" : ""}`}>
               {studyMode === "general" ? originalTextBlocksWithOffsets.map((textBlock, index) => (
                 <div className="bbc-original-text-block" key={`${article.id}-paragraph-${index}`}>
                   {originalDisplayMode !== "chinese" ? (
@@ -2087,10 +2087,11 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                 const parsedVocabulary = parseBbcVocabularyItem(item);
                 const favoriteVocabularyId = parsedVocabulary.normalizedWord;
                 const vocabularyDetailTerm = parsedVocabulary.lemma || parsedVocabulary.word;
+                const hasPronunciation = Boolean(parsedVocabulary.ukPhonetic || parsedVocabulary.usPhonetic);
 
                 return (
                   <article
-                    className="bbc-vocabulary-item"
+                    className={`bbc-vocabulary-item${hasPronunciation ? " has-phonetics" : ""}`}
                     id={`bbc-vocabulary-${item.number}`}
                     key={`${article.id}-vocabulary-${item.number}`}
                   >
@@ -2118,8 +2119,8 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                       </div>
                     </div>
                     <div className="bbc-vocabulary-details">
-                      {parsedVocabulary.ukPhonetic || parsedVocabulary.usPhonetic ? (
-                        <p>
+                      {hasPronunciation ? (
+                        <p className="bbc-vocabulary-phonetics">
                           {parsedVocabulary.ukPhonetic ? `英 ${parsedVocabulary.ukPhonetic}` : null}
                           {parsedVocabulary.ukPhonetic && parsedVocabulary.usPhonetic ? "　" : null}
                           {parsedVocabulary.usPhonetic ? `美 ${parsedVocabulary.usPhonetic}` : null}

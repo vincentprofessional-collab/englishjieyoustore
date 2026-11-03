@@ -228,10 +228,6 @@
   display: none !important;
 }
 
-:global(.frontend-content-hidden) {
-  display: none !important;
-}
-
 @media (max-width: 620px) {
   .toolbar {
     border-radius: 16px;

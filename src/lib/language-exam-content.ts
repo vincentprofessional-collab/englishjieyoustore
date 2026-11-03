@@ -58,6 +58,7 @@ export const DEFAULT_LANGUAGE_EXAM_NAVIGATION: ExamMenuGroup[] = [
   { id: "ielts", label: "雅思", mark: "雅", href: "/listening", children: [
     { id: "ielts-listening", label: "听力", href: "/listening", children: [
       { id: "ielts-listening-cambridge", label: "剑桥雅思", href: "/listening/practice?source=cambridge", matchSubroutes: true, children: [] },
+      { id: "ielts-listening-jiufen", label: "九分达人", href: "/listening/jiufen", matchSubroutes: true, children: [] },
       { id: "ielts-listening-papers", label: "历年真题", href: "/listening/past-papers", matchSubroutes: true, children: [] },
     ] },
     { id: "ielts-speaking", label: "口语", href: "/speaking", children: [
@@ -118,9 +119,23 @@ function pageCopy(value: unknown, fallback: ExamPageCopy): ExamPageCopy {
 
 export function normalizeLanguageExamContent(value: unknown): LanguageExamContent {
   const row = value && typeof value === "object" ? value as Record<string, unknown> : {};
-  const navigation = Array.isArray(row.navigation) && row.navigation.every(isMenuGroup)
+  const configuredNavigation = Array.isArray(row.navigation) && row.navigation.every(isMenuGroup)
     ? row.navigation as ExamMenuGroup[]
     : DEFAULT_LANGUAGE_EXAM_NAVIGATION;
+  const navigation = configuredNavigation.map((group) => {
+    if (group.id !== "ielts") return group;
+    return {
+      ...group,
+      children: group.children.map((node) => {
+        if (node.id !== "ielts-listening" || node.children.some((child) => child.id === "ielts-listening-jiufen")) return node;
+        const insertAt = node.children.findIndex((child) => child.id === "ielts-listening-papers");
+        const jiufenNode: ExamMenuNode = { id: "ielts-listening-jiufen", label: "九分达人", href: "/listening/jiufen", matchSubroutes: true, children: [] };
+        const children = [...node.children];
+        children.splice(insertAt < 0 ? children.length : insertAt, 0, jiufenNode);
+        return { ...node, children };
+      }),
+    };
+  });
   const sourcePages = row.pages && typeof row.pages === "object" ? row.pages as Record<string, unknown> : {};
   return {
     navigation,

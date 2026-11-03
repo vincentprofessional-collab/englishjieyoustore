@@ -17,8 +17,22 @@ function getAudioRoot() {
   return resolve(homedir(), "Desktop", "单词音频合成", "word-audio");
 }
 
-function isSafeWord(value: string) {
-  return /^[a-z][a-z '\-]*[a-z]$|^[a-z]$/i.test(value);
+function getAudioRoots() {
+  const roots = [
+    getAudioRoot(),
+    resolve("/Volumes/My HDD3/网站/英文解忧杂货铺/04_媒体素材/词汇发音/word-audio"),
+  ];
+  return [...new Set(roots)];
+}
+
+function isSafeAudioKey(value: string) {
+  return /^[a-z0-9][a-z0-9'\-]*[a-z0-9]$|^[a-z0-9]$/i.test(value);
+}
+
+function getLegacyAudioNames(value: string) {
+  const names = [value, value.replace(/-/g, " ")];
+  if (value === "cafe-accent") names.push("café");
+  return [...new Set(names)];
 }
 
 function parseRange(rangeHeader: string, totalBytes: number) {
@@ -45,21 +59,33 @@ export async function GET(
   { params }: { params: Promise<{ accent: string; word: string }> },
 ) {
   const { accent, word: encodedWord } = await params;
-  const word = decodeURIComponent(encodedWord).trim().toLowerCase();
+  const word = encodedWord.trim().toLowerCase();
 
-  if ((accent !== "uk" && accent !== "us") || !isSafeWord(word)) {
+  if ((accent !== "uk" && accent !== "us") || !isSafeAudioKey(word)) {
     return NextResponse.json({ error: "Invalid audio path" }, { status: 400 });
   }
 
-  const accentRoot = resolve(getAudioRoot(), accent);
-  const audioPath = resolve(accentRoot, `${word}.mp3`);
-
-  if (!audioPath.startsWith(`${accentRoot}${sep}`)) {
-    return NextResponse.json({ error: "Invalid audio path" }, { status: 400 });
+  const audioPaths = getAudioRoots().flatMap((root) => {
+    const accentRoot = resolve(root, accent);
+    return getLegacyAudioNames(word).map((filename) => {
+      if (!/^[a-z0-9' café-]+$/i.test(filename)) return "";
+      const audioPath = resolve(accentRoot, `${filename}.mp3`);
+      return audioPath.startsWith(`${accentRoot}${sep}`) ? audioPath : "";
+    });
+  }).filter(Boolean);
+  let audioPath = "";
+  let audioStats: Awaited<ReturnType<typeof stat>> | null = null;
+  for (const candidate of audioPaths) {
+    try {
+      audioStats = await stat(candidate);
+      audioPath = candidate;
+      break;
+    } catch {
+      // Check the next local audio source.
+    }
   }
 
-  try {
-    const audioStats = await stat(audioPath);
+  if (audioPath && audioStats) {
     const rangeHeader = request.headers.get("range");
     const commonHeaders = {
       "Accept-Ranges": "bytes",
@@ -97,7 +123,7 @@ export async function GET(
     return new Response(audioStream, {
       headers: { ...commonHeaders, "Content-Length": String(audioStats.size) },
     });
-  } catch {
-    return NextResponse.json({ error: "Audio not found" }, { status: 404 });
   }
+
+  return NextResponse.json({ error: "Audio not found" }, { status: 404 });
 }

@@ -8,6 +8,13 @@ import {
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export async function claimPaidContentAccess(projectKey: string, contentKey: string, freeLimit = 1) {
+  if (projectKey === "bbc") {
+    const supabase = await createServerSupabaseClient();
+    const { data, error } = await supabase.rpc("can_access_project", { _project_key: "bbc" });
+    if (error) console.error("BBC project access check failed", { code: error.code });
+    return !error && data === true;
+  }
+
   const cookieStore = await cookies();
   const visitorId = cookieStore.get(FREE_PREVIEW_VISITOR_COOKIE)?.value;
 

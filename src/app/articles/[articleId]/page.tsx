@@ -85,7 +85,7 @@ export default async function ArticlePage({
     return <ArticleDetailPage key={article.id} article={article} dictationWordMetadata={dictationWordMetadata} isUploadedArticle={!builtinArticle} syntaxSentences={canonicalSyntaxSentences} />;
   }
 
-  const hasPublicRelease = article.year === 2015 && isFreeBbc2015ArticleUnlocked(article.id);
+  const hasPublicRelease = article.year === 2015 && isFreeBbc2015ArticleUnlocked();
   const hasAccess = hasPublicRelease || await claimPaidContentAccess(
     "bbc",
     getPaidContentKey("bbc-article", article.id),

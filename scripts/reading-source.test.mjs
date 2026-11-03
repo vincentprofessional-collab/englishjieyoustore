@@ -3,7 +3,7 @@ import { test } from "node:test";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { gradeSourceReading, matchesReadingAnswer, normalizeReadingAnswer } from "../src/lib/ielts/reading-source-model.ts";
-import { EDITABLE_READING_PARTS } from "../src/lib/ielts/reading-source-editable.ts";
+import { adaptReviewedLegacyReadingPart, EDITABLE_READING_PARTS } from "../src/lib/ielts/reading-source-editable.ts";
 
 test("reading: accepts official alternatives and optional plural endings without accepting misspellings", () => {
   const answer = { values: ["freshwater dolphin(s) / the freshwater dolphin(s)"], mode: "any" };
@@ -16,6 +16,39 @@ test("reading: a two-answer group never gives full credit for a duplicate select
   const groups = [{ numbers: [1, 2], values: ["B", "E"], mode: "unordered" }];
   assert.equal(gradeSourceReading([1, 2], answers, groups, { 1: "B", 2: "B" }).filter((r) => r.correct).length, 1);
   assert.equal(gradeSourceReading([1, 2], answers, groups, { 1: "E", 2: "B" }).filter((r) => r.correct).length, 2);
+});
+test("reading: legacy multi-select questions stay one checkbox group with their original question numbers", () => {
+  const sourcePage = { page: 12, src: "/reading/source-pages/ci4-p012.webp", width: 1200, height: 1600 };
+  const part = {
+    id: "cambridge-4-test-2-part3",
+    title: "Sample passage",
+    label: "Passage 3",
+    questionRange: "33–35",
+    intro: "Read the passage and answer Questions 33–35.",
+    sections: [{ paragraphs: ["Reviewed passage text."] }],
+    questionBlocks: [{
+      type: "choice",
+      id: "q33-35",
+      instruction: "Choose THREE letters.",
+      questions: [{
+        questionNumbers: [33, 34, 35],
+        prompt: "Which THREE ideas are mentioned?",
+        options: [{ letter: "A", text: "First" }, { letter: "B", text: "Second" }, { letter: "C", text: "Third" }],
+        answer: ["A", "B", "C"],
+        selectCount: 3,
+      }],
+    }],
+    source: { textVerified: true, passagePages: [sourcePage], questionPages: [sourcePage], answerPages: [] },
+  };
+  const paperSource = { verified: true, sanitized: true, pdfName: "cambridge-4.pdf", sha256: "reviewed-source-hash", answers: {}, groups: [] };
+  const adapted = adaptReviewedLegacyReadingPart(part, paperSource);
+  assert.deepEqual(adapted.questionBlocks[0].items, [{
+    number: 33,
+    numbers: [33, 34, 35],
+    selectCount: 3,
+    prompt: "Which THREE ideas are mentioned?",
+    options: [{ value: "A", label: "A. First" }, { value: "B", label: "B. Second" }, { value: "C", label: "C. Third" }],
+  }]);
 });
 test("reading: both-required answers earn one mark only when both elements are present", () => {
   const answer = { values: ["forward", "downward"], mode: "all" };

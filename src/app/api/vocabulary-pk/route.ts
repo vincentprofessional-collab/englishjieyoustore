@@ -14,6 +14,7 @@ import {
 } from "@/lib/vocabulary/learning";
 import { getSupplementalLearningWords } from "@/lib/vocabulary/supplemental-learning-books";
 import { getConciseStudyDefinition } from "@/lib/vocabulary/study-definition";
+import { getPaidLearningBook, hasLearningBookAccess } from "@/lib/vocabulary/learning-book-access";
 
 export const dynamic = "force-dynamic";
 
@@ -27,6 +28,13 @@ type PkQuestion = { wordId: string; word: string; choices: string[]; correctInde
 
 function jsonError(message: string, status = 400) {
   return NextResponse.json({ error: message }, { status });
+}
+
+async function paidBookAccessError(book: string) {
+  if (getPaidLearningBook(book) && !await hasLearningBookAccess(book)) {
+    return jsonError("请先开通该词汇书。", 403);
+  }
+  return null;
 }
 
 function serviceClient() {
@@ -135,6 +143,8 @@ export async function GET(request: Request) {
   const book = url.searchParams.get("book") ?? "初中";
   const period = url.searchParams.get("period") ?? "month";
   if (!BOOK_KEYS.has(book)) return jsonError("词汇书参数无效。");
+  const accessError = await paidBookAccessError(book);
+  if (accessError) return accessError;
 
   if (action === "profile") {
     const member = await memberFor(request, db);
@@ -179,6 +189,8 @@ export async function POST(request: Request) {
     const member = await memberFor(request, db);
     if (action === "queue" && !member) return jsonError("自动匹配和积分赛需要先登录。", 401);
     const bookKey = typeof payload.bookKey === "string" ? payload.bookKey : "";
+    const accessError = await paidBookAccessError(bookKey);
+    if (accessError) return accessError;
     const questions = buildQuestions(bookKey, payload.wordIds);
     if (!questions) return jsonError("该词汇书需要至少 20 个有中文释义的词汇才能开始 PK。");
     if (action === "create-invite") {
@@ -213,6 +225,9 @@ export async function POST(request: Request) {
   if (action === "join-invite") {
     const inviteToken = typeof payload.inviteToken === "string" ? payload.inviteToken : "";
     if (!/^[0-9a-f-]{36}$/i.test(inviteToken)) return jsonError("挑战链接无效。");
+    const { data: invitation } = await db.from("vocabulary_pk_matches").select("book_key").eq("invite_token", inviteToken).maybeSingle();
+    const accessError = await paidBookAccessError(invitation?.book_key ?? "");
+    if (accessError) return accessError;
     const member = await memberFor(request, db);
     const { data, error } = await db.rpc("vocabulary_pk_join_invite", {
       p_invite_token: inviteToken, p_user_id: member?.id ?? null,
@@ -226,13 +241,15 @@ export async function POST(request: Request) {
 
   if (action === "queue-state" || action === "cancel-queue") {
     const queueToken = typeof payload.queueToken === "string" ? payload.queueToken : "";
-    let { data: row } = await db.from("vocabulary_pk_queue").select("status,match_id,queue_token,user_id").eq("queue_token", queueToken).maybeSingle();
+    let { data: row } = await db.from("vocabulary_pk_queue").select("status,match_id,queue_token,user_id,book_key").eq("queue_token", queueToken).maybeSingle();
     if (!row) return jsonError("匹配请求已过期。", 404);
     if ((await memberFor(request, db))?.id !== row.user_id) return jsonError("请使用参加匹配的账号继续。", 401);
+    const accessError = await paidBookAccessError(row.book_key);
+    if (accessError) return accessError;
     if (action === "cancel-queue" && row.status === "waiting") {
       const { data: cancelled } = await db.from("vocabulary_pk_queue").update({ status: "cancelled" }).eq("queue_token", queueToken).eq("status", "waiting").select("status").maybeSingle();
       if (cancelled) return NextResponse.json({ status: "cancelled" });
-      const { data: latest } = await db.from("vocabulary_pk_queue").select("status,match_id,queue_token,user_id").eq("queue_token", queueToken).maybeSingle();
+      const { data: latest } = await db.from("vocabulary_pk_queue").select("status,match_id,queue_token,user_id,book_key").eq("queue_token", queueToken).maybeSingle();
       if (!latest) return jsonError("匹配请求已过期。", 404);
       row = latest;
     }
@@ -248,6 +265,8 @@ export async function POST(request: Request) {
   if (player.user_id && (await memberFor(request, db))?.id !== player.user_id) return jsonError("请使用参赛账号继续比赛。", 401);
   const { data: match } = await db.from("vocabulary_pk_matches").select("*").eq("id", player.match_id).single();
   if (!match) return jsonError("比赛记录不存在。", 404);
+  const accessError = await paidBookAccessError(match.book_key);
+  if (accessError) return accessError;
   if (action === "cancel-invite") {
     if (player.seat_no !== 1 || match.status !== "waiting") return jsonError("这场比赛已经开始，无法取消。", 409);
     await db.from("vocabulary_pk_matches").update({ status: "cancelled" }).eq("id", match.id).eq("status", "waiting");

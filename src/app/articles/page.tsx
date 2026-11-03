@@ -24,7 +24,7 @@ export default async function ArticlesPage({
       .sort((left, right) => right.id.localeCompare(left.id))
       .map((article) => ({
         date: article.date,
-        guestFree: isFreeBbc2015ArticleUnlocked(article.id),
+        guestFree: isFreeBbc2015ArticleUnlocked(),
         id: article.id,
         title: article.title,
         titleChinese: article.titleChinese,
@@ -37,7 +37,7 @@ export default async function ArticlesPage({
       .filter(({ article }) => article.year === group.year)
       .map(({ article }) => ({
         date: article.date,
-        guestFree: isFreeBbc2015ArticleUnlocked(article.id),
+        guestFree: isFreeBbc2015ArticleUnlocked(),
         id: article.id,
         title: article.title,
         titleChinese: article.titleChinese,
