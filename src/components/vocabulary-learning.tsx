@@ -1635,7 +1635,7 @@ function LearningRoundExamples({ word, usageExamples, pending }: { word: Learnin
 }
 
 function LearningRoundPicture({ word }: { word: LearningWord }) {
-  const picture = useVocabularyIllustration(word.level === "小学" ? word.word : null, false);
+  const picture = useVocabularyIllustration(word.word, false);
   return picture ? <section aria-label="词汇图片" className="vocabulary-learning-round-picture">
     {picture}
   </section> : null;
