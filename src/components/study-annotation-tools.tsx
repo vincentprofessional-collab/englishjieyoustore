@@ -856,8 +856,10 @@ export function StudyAnnotationTools({
           }}
           onMouseLeave={() => {
             if (hideWordTimerRef.current != null) window.clearTimeout(hideWordTimerRef.current);
-            hideWordTimerRef.current = null;
-            setActiveWordTooltip(null);
+            hideWordTimerRef.current = window.setTimeout(() => {
+              setActiveWordTooltip(null);
+              hideWordTimerRef.current = null;
+            }, 400);
           }}
         >
           <div className="word-tooltip-title-row">
