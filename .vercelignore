@@ -28,6 +28,8 @@ public/**/*.webp
 !public/cet4/evidence/*.webp
 !public/cet4/audio/*.mp3
 !public/speaking/audio/*.mp3
+# Verified Jiufen question diagrams are served directly by the listening pages.
+!public/listening/source-maps/jiufen/*.png
 .next/
 .next/dev/
 .next/dev/**
