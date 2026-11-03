@@ -1765,20 +1765,18 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
               <time className="bbc-article-date" dateTime={article.date}>
                 {article.date.replaceAll("-", ".")}
               </time>
-              <h1 aria-label={`${article.title} ${articleTitleChinese}`.trim()}>
+              <h1 aria-label={`${article.title} ${articleTitleChinese}`.trim()} className="bbc-article-title-heading">
                 <span className="bbc-article-title-group">
                   <span className="bbc-article-title-line" lang="en">
                     {article.title}
                   </span>
                 </span>
-              </h1>
-              <div className="bbc-article-title-bottom-row">
                 {articleTitleChinese ? (
-                  <span className="bbc-article-title-line" lang="zh-CN">
+                  <span className="bbc-article-title-line bbc-article-title-line-chinese" lang="zh-CN">
                     {articleTitleChinese}
                   </span>
                 ) : null}
-              </div>
+              </h1>
             </div>
             <div className="bbc-article-word-count">
               共 <b className="stat-number">{articleWordCount}</b> 词

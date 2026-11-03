@@ -38018,6 +38018,25 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
   .exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-title { justify-self: center; }
 }
 
+/* Keep article translations directly under their English title on every screen. */
+body .bbc-article-hero h1.bbc-article-title-heading {
+  align-items: center;
+  display: grid;
+  gap: 0;
+  justify-content: center;
+  text-align: center;
+}
+
+body .bbc-article-title-heading .bbc-article-title-line-chinese {
+  color: inherit !important;
+  font-family: inherit !important;
+  font-size: 1em !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  line-height: inherit;
+  text-align: center;
+}
+
 /* Study detail card: center the word and pronunciations on separate lines. */
 .vocabulary-learning-page .vocabulary-detail-heading-study-centered .vocabulary-detail-heading-main {
   display: grid;
