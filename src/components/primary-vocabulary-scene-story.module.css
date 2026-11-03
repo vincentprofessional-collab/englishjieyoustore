@@ -58,6 +58,55 @@
   padding-left: 9px;
 }
 
+.resumePrompt {
+  background: #fffaf0;
+  border: 1px solid #eadcbf;
+  border-radius: 16px;
+  color: #263958;
+  display: grid;
+  flex: 0 1 330px;
+  gap: 5px;
+  max-width: 100%;
+  padding: 12px 14px;
+}
+
+.resumePrompt strong {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.resumePrompt > span {
+  color: #6e7789;
+  font-size: 12px;
+}
+
+.resumePrompt > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 4px;
+}
+
+.resumePrompt button {
+  border: 1px solid #a9c3f1;
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 6px 12px;
+}
+
+.resumeContinue {
+  background: #dceaff;
+  color: #263958;
+}
+
+.resumeAdjust {
+  background: #fff;
+  color: #36599f;
+}
+
 .story {
   display: grid;
   gap: 12px;
@@ -125,4 +174,5 @@
   .preview { border-radius: 18px; padding: 17px; }
   .header { flex-direction: column; gap: 10px; }
   .groupBadge { white-space: normal; }
+  .resumePrompt { flex-basis: auto; width: 100%; }
 }

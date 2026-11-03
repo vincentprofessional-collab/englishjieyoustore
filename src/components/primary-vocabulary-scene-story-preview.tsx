@@ -7,7 +7,7 @@ const words = [
   "library", "maths", "paper", "pen", "pencil", "question", "read", "ruler", "school", "schoolbag",
 ];
 
-export function PrimaryVocabularySceneStoryPreview() {
+export function PrimaryVocabularySceneStoryPreview({ onContinue, onAdjustSettings }: { onContinue?: () => void; onAdjustSettings?: () => void }) {
   return (
     <section aria-labelledby="primary-scene-story-title" className={styles.preview}>
       <header className={styles.header}>
@@ -16,7 +16,14 @@ export function PrimaryVocabularySceneStoryPreview() {
           <h2 id="primary-scene-story-title">校园与学习：一堂有趣的课</h2>
           <p className={styles.intro}>第 1 组 · 20 词。配图任务已取消，以下保留中英故事和本组词汇。</p>
         </div>
-        <span className={styles.groupBadge}>校园与学习 <i>第 1 组 · 20 词</i></span>
+        <div aria-label="继续记忆" className={styles.resumePrompt}>
+          <strong>是否继续按照之前进度进行记忆？</strong>
+          <span>将从上次保存的位置继续。</span>
+          <div>
+            {onContinue ? <button className={styles.resumeContinue} onClick={onContinue} type="button">继续记忆</button> : null}
+            {onAdjustSettings ? <button className={styles.resumeAdjust} onClick={onAdjustSettings} type="button">调整设置</button> : null}
+          </div>
+        </div>
       </header>
 
       <div className={styles.story}>

@@ -81,6 +81,55 @@
   gap: 8px;
 }
 
+.resumePrompt {
+  background: #fffaf0;
+  border: 1px solid #eadcbf;
+  border-radius: 16px;
+  color: #263958;
+  display: grid;
+  flex: 0 1 330px;
+  gap: 5px;
+  max-width: 100%;
+  padding: 12px 14px;
+}
+
+.resumePrompt strong {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.resumePrompt > span {
+  color: #6e7789;
+  font-size: 12px;
+}
+
+.resumePrompt > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 4px;
+}
+
+.resumePrompt button {
+  border: 1px solid #a9c3f1;
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 6px 12px;
+}
+
+.resumeContinue {
+  background: #dceaff;
+  color: #263958;
+}
+
+.resumeAdjust {
+  background: #fff;
+  color: #36599f;
+}
+
 .groupSwitcher {
   background: #f5f0e7;
   border: 1px solid #e8dfcf;
@@ -283,6 +332,7 @@
 }
 
 .imageCallout {
+  appearance: none;
   align-items: center;
   background: rgba(255, 254, 250, .97);
   border: 1px solid #9cb8c8;
@@ -291,7 +341,11 @@
   display: flex;
   flex-direction: column;
   max-width: 32%;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
   padding: 3px 6px;
+  pointer-events: auto;
   position: absolute;
   text-align: center;
   transform: translate(-50%, -50%);
@@ -311,6 +365,7 @@
 }
 
 .imageWordCard {
+  appearance: none;
   align-items: center;
   background: #fff;
   border: 1px solid #eee6d9;
@@ -318,8 +373,12 @@
   display: flex;
   flex-direction: column;
   gap: 1px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
   min-width: 0;
   padding: 4px 2px;
+  width: 100%;
   text-align: center;
 }
 
@@ -345,6 +404,15 @@
 .imageFrame img {
   object-fit: contain;
   transition: transform .25s ease;
+}
+
+.imageCallout:hover,
+.imageCallout:focus-visible,
+.imageWordCard:hover,
+.imageWordCard:focus-visible {
+  border-color: #6689df;
+  outline: 2px solid rgba(102, 137, 223, .35);
+  outline-offset: 1px;
 }
 
 .figure:hover .imageFrame img {
@@ -401,6 +469,11 @@
     align-items: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
+  }
+
+  .resumePrompt {
+    flex-basis: auto;
+    width: 100%;
   }
 
   .gallery {

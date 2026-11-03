@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
+import { useState } from "react";
 
 import { type VocabularySortMode } from "@/lib/vocabulary/study-groups";
+import { playVocabularyPronunciation, type VocabularyAccent } from "@/lib/vocabulary/pronunciation-audio";
 import { PrimaryVocabularySceneStoryPreview } from "./primary-vocabulary-scene-story-preview";
 import styles from "./primary-vocabulary-story.module.css";
 
@@ -115,8 +116,15 @@ const secondLastIllustrations: StoryIllustration[] = [
   { alt: "瓦力和伊芙点亮蜡烛，和小鸭分享奶油蛋糕、香蕉和葡萄", caption: "月球庆祝会", wordCards: cardsFor(secondLastVocabulary, ["candle", "cream", "banana", "grape", "bye"]), callouts: [{ word: "candle", labelX: 16, labelY: 39, anchorX: 22, anchorY: 56 }, { word: "cream", labelX: 50, labelY: 14, anchorX: 50, anchorY: 49 }, { word: "banana", labelX: 83, labelY: 40, anchorX: 71, anchorY: 57 }, { word: "grape", labelX: 25, labelY: 66, anchorX: 34, anchorY: 63 }, { word: "bye", labelX: 81, labelY: 14, anchorX: 82, anchorY: 33 }], src: "/vocabulary-stories/primary-group-25/poster-04.svg" },
 ];
 
-function PrimaryVocabularyFrequencyStoryPreview() {
-  const [activeGroup, setActiveGroup] = useState<StoryGroup>("secondLast");
+type PrimaryVocabularyStoryPreviewProps = {
+  onAdjustSettings?: () => void;
+  onContinue?: () => void;
+  sortMode?: VocabularySortMode;
+  voice?: VocabularyAccent;
+};
+
+function PrimaryVocabularyFrequencyStoryPreview({ onAdjustSettings, onContinue, voice = "us" }: Pick<PrimaryVocabularyStoryPreviewProps, "onAdjustSettings" | "onContinue" | "voice">) {
+  const [activeGroup] = useState<StoryGroup>("secondLast");
   const isLastGroup = activeGroup === "last";
   const isSecondLastGroup = activeGroup === "secondLast";
   const groupNumber = isLastGroup ? 26 : isSecondLastGroup ? 25 : 1;
@@ -129,15 +137,15 @@ function PrimaryVocabularyFrequencyStoryPreview() {
         <div>
           <span className={styles.kicker}>小学大纲词汇 · 总词频顺序</span>
           <h2 id="primary-vocabulary-story-title">{isLastGroup ? "月亮舞会的魔法衣帽屋" : isSecondLastGroup ? "瓦力和伊芙的星际课堂" : "小红旗、萌萌与月亮鲸鱼"}</h2>
-          <p className={styles.intro}>{isLastGroup ? "末组 5 个词，读完星星舞会的童话，再认一遍词。" : isSecondLastGroup ? "倒数第二组 20 个词，和瓦力、伊芙一起找回魔法钟摆。" : "读一段中英杂合童话，在四幅插画里认识第一组 20 个词。"}</p>
+          <p className={styles.intro}>{isLastGroup ? "读完星星舞会的童话，再认一遍词。" : isSecondLastGroup ? "和瓦力、伊芙一起找回魔法钟摆。" : "读一段中英杂合童话，在四幅插画里认识词汇。"}</p>
         </div>
-        <div className={styles.headerTools}>
-          <div aria-label="选择故事组" className={styles.groupSwitcher} role="group">
-            <button aria-pressed={activeGroup === "first"} className={activeGroup === "first" ? styles.groupButtonActive : styles.groupButton} onClick={() => setActiveGroup("first")} type="button">第 1 组</button>
-            <button aria-pressed={isSecondLastGroup} className={isSecondLastGroup ? styles.groupButtonActive : styles.groupButton} onClick={() => setActiveGroup("secondLast")} type="button">倒数第2组</button>
-            <button aria-pressed={isLastGroup} className={isLastGroup ? styles.groupButtonActive : styles.groupButton} onClick={() => setActiveGroup("last")} type="button">末组</button>
+        <div aria-label="继续记忆" className={styles.resumePrompt}>
+          <strong>是否继续按照之前进度进行记忆？</strong>
+          <span>将从上次保存的位置继续。</span>
+          <div>
+            {onContinue ? <button className={styles.resumeContinue} onClick={onContinue} type="button">继续记忆</button> : null}
+            {onAdjustSettings ? <button className={styles.resumeAdjust} onClick={onAdjustSettings} type="button">调整设置</button> : null}
           </div>
-          <span className={styles.groupBadge}>第 {groupNumber} 组 <i>{words.length} 词</i></span>
         </div>
       </header>
 
@@ -189,21 +197,36 @@ function PrimaryVocabularyFrequencyStoryPreview() {
                   {illustration.callouts.map(({ labelX, labelY, word }) => {
                     const card = illustration.wordCards?.find((item) => item.word === word);
                     return card ? (
-                      <div className={styles.imageCallout} key={word} style={{ left: `${labelX}%`, top: `${labelY}%` }}>
+                      <button
+                        aria-label={`播放 ${card.word} ${voice === "uk" ? "英音" : "美音"}`}
+                        className={styles.imageCallout}
+                        key={word}
+                        onClick={() => playVocabularyPronunciation({ accent: voice, word: card.word })}
+                        style={{ left: `${labelX}%`, top: `${labelY}%` }}
+                        title={`播放 ${card.word}`}
+                        type="button"
+                      >
                         <strong>{card.word}</strong><span>{card.meaning}</span>
-                      </div>
+                      </button>
                     ) : null;
                   })}
                 </div>
               ) : null}
               {illustration.wordCards ? (
-                <div aria-label={`图片词汇：${illustration.wordCards.map(({ word, meaning }) => `${word} ${meaning}`).join("、")}`} className={styles.imageWordCards} role="list">
+                <div aria-label={`图片词汇：${illustration.wordCards.map(({ word, meaning }) => `${word} ${meaning}`).join("、")}`} className={styles.imageWordCards} role="group">
                   {illustration.wordCards.map(({ word, phonetic, meaning }) => (
-                    <div className={styles.imageWordCard} key={word} role="listitem">
+                    <button
+                      aria-label={`播放 ${word} ${voice === "uk" ? "英音" : "美音"}`}
+                      className={styles.imageWordCard}
+                      key={word}
+                      onClick={() => playVocabularyPronunciation({ accent: voice, word })}
+                      title={`播放 ${word}`}
+                      type="button"
+                    >
                       <strong>{word}</strong>
                       <span>{phonetic}</span>
                       <small>{meaning}</small>
-                    </div>
+                    </button>
                   ))}
                 </div>
               ) : null}
@@ -219,6 +242,8 @@ function PrimaryVocabularyFrequencyStoryPreview() {
   );
 }
 
-export function PrimaryVocabularyStoryPreview({ sortMode = "frequency" }: { sortMode?: VocabularySortMode }) {
-  return sortMode === "scene" ? <PrimaryVocabularySceneStoryPreview /> : <PrimaryVocabularyFrequencyStoryPreview />;
+export function PrimaryVocabularyStoryPreview({ sortMode = "frequency", voice = "us", onContinue, onAdjustSettings }: PrimaryVocabularyStoryPreviewProps) {
+  return sortMode === "scene"
+    ? <PrimaryVocabularySceneStoryPreview onAdjustSettings={onAdjustSettings} onContinue={onContinue} />
+    : <PrimaryVocabularyFrequencyStoryPreview onAdjustSettings={onAdjustSettings} onContinue={onContinue} voice={voice} />;
 }

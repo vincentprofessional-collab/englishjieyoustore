@@ -38018,6 +38018,42 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
   .exam-prep-runner.is-gmat[data-paper-font-size] .senior-high-v2-runner-title { justify-self: center; }
 }
 
+.vocabulary-learning-settings-sort-voice {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-width: 0;
+}
+
+.vocabulary-learning-settings-sort-voice > .vocabulary-learning-settings-options {
+  align-content: start;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  min-width: 0;
+}
+
+.vocabulary-learning-settings-sort-voice .vocabulary-learning-settings-options label {
+  justify-content: center;
+  min-width: 0;
+  padding-inline: 8px;
+  white-space: nowrap;
+}
+
+.vocabulary-learning-settings-sort-voice .vocabulary-learning-settings-options legend {
+  grid-column: 1 / -1;
+}
+
+.vocabulary-learning-settings-paired-options {
+  margin-top: 0;
+}
+
+@media (max-width: 560px) {
+  .vocabulary-learning-settings-sort-voice {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /* Keep article translations directly under their English title on every screen. */
 body .bbc-article-hero h1.bbc-article-title-heading {
   align-items: center;

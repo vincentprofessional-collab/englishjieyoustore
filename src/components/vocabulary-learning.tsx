@@ -4322,7 +4322,12 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
           ) : null}
           {!loading && !loadError && entryGate === "continue" && !listModeActive ? (
             selectedBook === "小学" ? (
-              <PrimaryVocabularyStoryPreview sortMode={settingsByBook[selectedBook]?.vocabularySort ?? currentSettings.vocabularySort} />
+              <PrimaryVocabularyStoryPreview
+                onAdjustSettings={openStudySettings}
+                onContinue={continuePreviousStudy}
+                sortMode={settingsByBook[selectedBook]?.vocabularySort ?? currentSettings.vocabularySort}
+                voice={currentSettings.voice}
+              />
             ) : (
               <div className="vocabulary-learning-empty vocabulary-learning-plan-empty">
                 <strong>继续之前的进度</strong>
@@ -4753,17 +4758,40 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
               </div>
             </div> : null}
             {setupMode === "single" ? (
-              <fieldset aria-label="词汇排序" className="vocabulary-learning-settings-options vocabulary-learning-settings-sort">
-                <legend>词汇排序</legend>
-                <label>
-                  <input checked={settingsDraft.vocabularySort === "frequency"} name="vocabulary-sort" onChange={() => setSettingsDraft((current) => ({ ...current, vocabularySort: "frequency", reviewGroupIndexes: [], wordGroups: { core: 0, all: 0 } }))} type="radio" />
-                  <span>词频</span>
-                </label>
-                <label>
-                  <input checked={settingsDraft.vocabularySort === "scene"} name="vocabulary-sort" onChange={() => setSettingsDraft((current) => ({ ...current, vocabularySort: "scene", reviewGroupIndexes: [], wordGroups: { core: 0, all: 0 } }))} type="radio" />
-                  <span>场景</span>
-                </label>
-              </fieldset>
+              <>
+                <div className="vocabulary-learning-settings-sort-voice">
+                  <fieldset aria-label="词汇排序" className="vocabulary-learning-settings-options vocabulary-learning-settings-sort">
+                    <legend>词汇排序</legend>
+                    <label>
+                      <input checked={settingsDraft.vocabularySort === "frequency"} name="vocabulary-sort" onChange={() => setSettingsDraft((current) => ({ ...current, vocabularySort: "frequency", reviewGroupIndexes: [], wordGroups: { core: 0, all: 0 } }))} type="radio" />
+                      <span>词频</span>
+                    </label>
+                    <label>
+                      <input checked={settingsDraft.vocabularySort === "scene"} name="vocabulary-sort" onChange={() => setSettingsDraft((current) => ({ ...current, vocabularySort: "scene", reviewGroupIndexes: [], wordGroups: { core: 0, all: 0 } }))} type="radio" />
+                      <span>场景</span>
+                    </label>
+                  </fieldset>
+                  <fieldset className="vocabulary-learning-settings-options vocabulary-learning-settings-voice-options">
+                    <legend>发音设置</legend>
+                    <label><input checked={settingsDraft.voice === "us"} name="study-voice" onChange={() => setSettingsDraft((current) => ({ ...current, voice: "us" }))} type="radio" />美音</label>
+                    <label><input checked={settingsDraft.voice === "uk"} name="study-voice" onChange={() => setSettingsDraft((current) => ({ ...current, voice: "uk" }))} type="radio" />英音</label>
+                  </fieldset>
+                </div>
+                <div className="vocabulary-learning-settings-paired-options">
+                  <fieldset aria-disabled={settingsListMode} className={`vocabulary-learning-settings-options vocabulary-learning-settings-memory-options${settingsListMode ? " is-disabled" : ""}`}>
+                    <legend>辅助记忆</legend>
+                    <label><input checked={settingsDraft.showExamples} disabled={settingsListMode} onChange={(event) => setSettingsDraft((current) => ({ ...current, showExamples: event.target.checked }))} type="checkbox" />语境例句</label>
+                    <label><input checked={settingsDraft.showOptions} disabled={settingsListMode} onChange={(event) => setSettingsDraft((current) => ({ ...current, showOptions: event.target.checked }))} type="checkbox" />释义选项</label>
+                    <label><input checked={settingsDraft.showPicture} disabled={settingsListMode} onChange={(event) => setSettingsDraft((current) => ({ ...current, showPicture: event.target.checked }))} type="checkbox" />看图识词</label>
+                  </fieldset>
+                  <fieldset className="vocabulary-learning-settings-options vocabulary-learning-settings-definition-options">
+                    <legend>释义选择</legend>
+                    <label><input checked={settingsDraft.definitionLanguage === "zh"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "zh", assessmentDefinitionLanguage: "zh" }))} type="radio" />中文释义</label>
+                    <label><input checked={settingsDraft.definitionLanguage === "en"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "en", assessmentDefinitionLanguage: "en" }))} type="radio" />英文释义</label>
+                    <label><input checked={settingsDraft.definitionLanguage === "zh-audio"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "zh-audio", assessmentDefinitionLanguage: "zh" }))} type="radio" />中文语音</label>
+                  </fieldset>
+                </div>
+              </>
             ) : null}
             <div aria-label="学习模式" className="vocabulary-learning-setup-modes" role="tablist">
               <button aria-selected={setupMode === "single"} className={setupMode === "single" ? "active" : ""} onClick={() => setSetupMode("single")} role="tab" type="button">单人学习</button>
@@ -4901,25 +4929,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
                 ))}
               </div>
             </section>
-            <div className="vocabulary-learning-settings-paired-options">
-              <fieldset className="vocabulary-learning-settings-options">
-                <legend>发音设置</legend>
-                <label><input checked={settingsDraft.voice === "us"} name="study-voice" onChange={() => setSettingsDraft((current) => ({ ...current, voice: "us" }))} type="radio" />美音</label>
-                <label><input checked={settingsDraft.voice === "uk"} name="study-voice" onChange={() => setSettingsDraft((current) => ({ ...current, voice: "uk" }))} type="radio" />英音</label>
-              </fieldset>
-              <fieldset className="vocabulary-learning-settings-options vocabulary-learning-settings-definition-options">
-                <legend>释义选择</legend>
-                <label><input checked={settingsDraft.definitionLanguage === "zh"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "zh", assessmentDefinitionLanguage: "zh" }))} type="radio" />中文释义</label>
-                <label><input checked={settingsDraft.definitionLanguage === "en"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "en", assessmentDefinitionLanguage: "en" }))} type="radio" />英文释义</label>
-                <label><input checked={settingsDraft.definitionLanguage === "zh-audio"} name="study-definition-language" onChange={() => setSettingsDraft((current) => ({ ...current, definitionLanguage: "zh-audio", assessmentDefinitionLanguage: "zh" }))} type="radio" />中文语音</label>
-              </fieldset>
-              <fieldset aria-disabled={settingsListMode} className={`vocabulary-learning-settings-options vocabulary-learning-settings-memory-options${settingsListMode ? " is-disabled" : ""}`}>
-                <legend>辅助记忆</legend>
-                <label><input checked={settingsDraft.showExamples} disabled={settingsListMode} onChange={(event) => setSettingsDraft((current) => ({ ...current, showExamples: event.target.checked }))} type="checkbox" />语境例句</label>
-                <label><input checked={settingsDraft.showOptions} disabled={settingsListMode} onChange={(event) => setSettingsDraft((current) => ({ ...current, showOptions: event.target.checked }))} type="checkbox" />释义选项</label>
-                <label><input checked={settingsDraft.showPicture} disabled={settingsListMode} onChange={(event) => setSettingsDraft((current) => ({ ...current, showPicture: event.target.checked }))} type="checkbox" />看图识词</label>
-              </fieldset>
-            </div>
             {settingsDraft.modes.length === 0
               ? <p className="vocabulary-learning-settings-validation">请至少选择一种考察模式。</p>
               : null}
