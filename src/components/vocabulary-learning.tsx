@@ -2253,6 +2253,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
   const recordingRef = useRef<MediaRecorder | null>(null);
   const recordingStreamRef = useRef<MediaStream | null>(null);
   const recordingChunksRef = useRef<Blob[]>([]);
+  const recordingMimeTypeRef = useRef("");
   const holdingMicRef = useRef(false);
   const touchMicPointerRef = useRef(false);
   const recordingStartPendingRef = useRef(false);
@@ -3771,19 +3772,20 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
     [advancePending, currentSettings, currentWord, modeIndex, moveToNextWord, progress, recordDailyActivity],
   );
 
+  const canRateOralManually = Boolean(recordingAudioUrl && recordingError);
   const handleRecognitionOutcome = useCallback(
     (outcome: Familiarity) => {
       if (modeIndex < 2 && !currentRoundRevealed) return;
       if (modeIndex === 2) {
-        if (oralScoreFeedback === null) return;
-        commitOutcome(outcome, undefined, oralScoreFeedback);
+        if (oralScoreFeedback === null && !canRateOralManually) return;
+        commitOutcome(outcome, undefined, oralScoreFeedback ?? undefined);
         return;
       }
 
       if (modeIndex > 1) return;
       commitOutcome(outcome);
     },
-    [commitOutcome, currentRoundRevealed, modeIndex, oralScoreFeedback],
+    [canRateOralManually, commitOutcome, currentRoundRevealed, modeIndex, oralScoreFeedback],
   );
 
   const spellingCorrect = currentWord ? answer.trim().toLowerCase() === currentWord.word.trim().toLowerCase() : false;
@@ -3899,9 +3901,14 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
     }
 
     const recordedChunks = recordingChunksRef.current;
-    if (recordedChunks.length > 0) {
-      replaceRecordingAudio(new Blob(recordedChunks, { type: recordedChunks[0]?.type || "audio/webm" }));
+    const recordedMimeType = recordingMimeTypeRef.current;
+    recordingMimeTypeRef.current = "";
+    if (recordedChunks.length === 0) {
+      setRecordingError("没有采集到录音内容，请检查麦克风权限后重新录制。");
+      setPhase("awaiting");
+      return;
     }
+    replaceRecordingAudio(new Blob(recordedChunks, { type: recordedChunks[0]?.type || recordedMimeType || "audio/webm" }));
 
     setPhase("scoring");
     const token = roundTokenRef.current;
@@ -3909,7 +3916,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
       if (roundTokenRef.current !== token || !currentWord || oralOutcomeLockedRef.current) return;
       if (oralRecognitionErrorRef.current) {
         revealSpeakingDetails(token);
-        setRecordingError("录音已保存，但浏览器未能识别语音，本轮无法自动评分。请重新录音，或使用 Chrome／Edge。");
+        setRecordingError("录音已保存，但当前浏览器无法自动识别语音。可点重听后按自己的发音表现选择熟悉程度。");
         setPhase("awaiting");
         return;
       }
@@ -3990,7 +3997,20 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
         }
       }
 
-      recorder = new MediaRecorder(stream);
+      const supportedMimeTypes = typeof MediaRecorder.isTypeSupported === "function"
+        ? ["audio/webm;codecs=opus", "audio/webm", "audio/ogg;codecs=opus", "audio/mp4", "audio/aac"]
+          .filter((mimeType) => MediaRecorder.isTypeSupported(mimeType))
+        : [];
+      for (const mimeType of supportedMimeTypes) {
+        try {
+          recorder = new MediaRecorder(stream, { mimeType });
+          break;
+        } catch {
+          // Some mobile browsers report a MIME type as supported but reject it during construction.
+        }
+      }
+      recorder ??= new MediaRecorder(stream);
+      recordingMimeTypeRef.current = recorder.mimeType || supportedMimeTypes[0] || "";
       recordingStreamRef.current = stream;
       recordingRef.current = recorder;
       recordingChunksRef.current = [];
@@ -4001,7 +4021,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
       setPhase("recording");
       recorder.start();
       if (stopRequestedRef.current) recorder.stop();
-    } catch {
+    } catch (error) {
       if (recognition) {
         try {
           recognition.stop();
@@ -4014,7 +4034,15 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
       stream?.getTracks().forEach((track) => track.stop());
       recordingStreamRef.current = null;
       recordingRef.current = null;
-      setRecordingError("麦克风未授权或暂时不可用；本轮未产生评分。");
+      recordingMimeTypeRef.current = "";
+      const errorName = error && typeof error === "object" && "name" in error ? String(error.name) : "";
+      setRecordingError(errorName === "NotAllowedError" || errorName === "PermissionDeniedError"
+        ? "麦克风权限未开启：请在浏览器网站设置和设备隐私设置中允许麦克风后重试。"
+        : errorName === "NotFoundError"
+          ? "没有检测到可用麦克风，请检查设备的麦克风。"
+          : errorName === "NotReadableError"
+            ? "麦克风暂时无法读取，请关闭正在使用麦克风的应用后重试。"
+            : "麦克风暂时不可用，请检查权限并重试。录音失败的本轮不会计分。");
       setPhase("awaiting");
     }
   }, [advancePending, currentWord, finishRecording, modeIndex, phase, replaceRecordingAudio, voice]);
@@ -4122,7 +4150,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
           className="vocabulary-learning-category-button familiar"
           aria-keyshortcuts="J ArrowLeft"
           title="按 J 或 ←：熟悉"
-          disabled={advancePending || (modeIndex < 2 && !currentRoundRevealed) || (modeIndex === 2 && oralScoreFeedback === null) || (modeIndex === 3 && !spellingCorrect)}
+          disabled={advancePending || (modeIndex < 2 && !currentRoundRevealed) || (modeIndex === 2 && oralScoreFeedback === null && !canRateOralManually) || (modeIndex === 3 && !spellingCorrect)}
           onClick={() => modeIndex === 3 ? submitSpelling("familiar") : handleRecognitionOutcome("familiar")}
           type="button"
         ><span>熟悉</span><small aria-hidden="true">J</small></button>
@@ -4130,7 +4158,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
           className="vocabulary-learning-category-button vague"
           aria-keyshortcuts="K ArrowDown"
           title="按 K 或 ↓：模糊"
-          disabled={advancePending || (modeIndex < 2 && !currentRoundRevealed) || (modeIndex === 2 && oralScoreFeedback === null)}
+          disabled={advancePending || (modeIndex < 2 && !currentRoundRevealed) || (modeIndex === 2 && oralScoreFeedback === null && !canRateOralManually)}
           onClick={() => modeIndex === 3 ? submitSpelling("vague") : handleRecognitionOutcome("vague")}
           type="button"
         ><span>模糊</span><small aria-hidden="true">K</small></button>
@@ -4138,7 +4166,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
           className="vocabulary-learning-category-button unfamiliar"
           aria-keyshortcuts="L ArrowRight"
           title="按 L 或 →：生僻"
-          disabled={advancePending || (modeIndex < 2 && !currentRoundRevealed) || (modeIndex === 2 && oralScoreFeedback === null)}
+          disabled={advancePending || (modeIndex < 2 && !currentRoundRevealed) || (modeIndex === 2 && oralScoreFeedback === null && !canRateOralManually)}
           onClick={() => modeIndex === 3 ? submitSpelling("unfamiliar") : handleRecognitionOutcome("unfamiliar")}
           type="button"
         ><span>生僻</span><small aria-hidden="true">L</small></button>
