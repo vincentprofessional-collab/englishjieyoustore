@@ -4321,42 +4321,33 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
             </div>
           ) : null}
           {!loading && !loadError && entryGate === "continue" && !listModeActive ? (
-            selectedBook === "小学" ? (
-              <PrimaryVocabularyStoryPreview
-                onAdjustSettings={openStudySettings}
-                onContinue={continuePreviousStudy}
-                sortMode={settingsByBook[selectedBook]?.vocabularySort ?? currentSettings.vocabularySort}
-                voice={currentSettings.voice}
-              />
-            ) : (
-              <div className="vocabulary-learning-empty vocabulary-learning-plan-empty">
-                <strong>继续之前的进度</strong>
-                <div className="vocabulary-learning-resume-book-picker">
-                  <p>将按照 {resumeBookOptions.length > 1 ? (
-                    <button aria-controls="vocabulary-learning-resume-books" aria-expanded={resumeBookPickerOpen} className="vocabulary-learning-resume-book-chip" onClick={() => setResumeBookPickerOpen((open) => !open)} type="button">{selectedBookLabel}<span aria-hidden="true">⌄</span></button>
-                  ) : <span className="vocabulary-learning-resume-book-chip is-current">{selectedBookLabel}</span>} 上次保存的设置继续学习。</p>
-                  {resumeBookPickerOpen && resumeBookOptions.length > 1 ? (
-                    <div aria-label="选择继续学习的词汇书" className="vocabulary-learning-resume-book-options" id="vocabulary-learning-resume-books" role="group">
-                      {resumeBookOptions.map((book) => {
-                        const label = book === "生词本" ? book : availableBooks.find((item) => item.key === book)?.label ?? book;
-                        return <button aria-pressed={book === selectedBook} className={book === selectedBook ? "active" : ""} key={book} onClick={() => selectResumeBook(book)} type="button"><span>{label}</span>{book === selectedBook ? <small>当前选择</small> : null}</button>;
-                      })}
-                    </div>
-                  ) : null}
-                </div>
-                {currentSettings.method === "classified" ? (
-                  <p className="vocabulary-learning-resume-guidance">
-                    {isResumingPartialGroup && partialGroupRemainingCount > 0
-                      ? `第 ${resumeGroupNo + 1} 组还有 ${partialGroupRemainingCount} 个词尚未完成筛选，继续后会接着学习这一组。`
-                      : `继续记忆将从第 ${resumeGroupNo + 1} 组新词开始，并穿插已到复习时间的模糊、生僻词。`}
-                  </p>
+            <div className="vocabulary-learning-empty vocabulary-learning-plan-empty">
+              <strong>是否继续按照之前进度进行记忆？</strong>
+              <div className="vocabulary-learning-resume-book-picker">
+                <p>将按照 {resumeBookOptions.length > 1 ? (
+                  <button aria-controls="vocabulary-learning-resume-books" aria-expanded={resumeBookPickerOpen} className="vocabulary-learning-resume-book-chip" onClick={() => setResumeBookPickerOpen((open) => !open)} type="button">{selectedBookLabel}<span aria-hidden="true">⌄</span></button>
+                ) : <span className="vocabulary-learning-resume-book-chip is-current">{selectedBookLabel}</span>} 上次保存的设置继续学习。</p>
+                {resumeBookPickerOpen && resumeBookOptions.length > 1 ? (
+                  <div aria-label="选择继续学习的词汇书" className="vocabulary-learning-resume-book-options" id="vocabulary-learning-resume-books" role="group">
+                    {resumeBookOptions.map((book) => {
+                      const label = book === "生词本" ? book : availableBooks.find((item) => item.key === book)?.label ?? book;
+                      return <button aria-pressed={book === selectedBook} className={book === selectedBook ? "active" : ""} key={book} onClick={() => selectResumeBook(book)} type="button"><span>{label}</span>{book === selectedBook ? <small>当前选择</small> : null}</button>;
+                    })}
+                  </div>
                 ) : null}
-                <div className="vocabulary-learning-resume-actions">
-                  <button className="button" onClick={continuePreviousStudy} type="button">继续记忆</button>
-                  {hasCompletedVocabularyGroup ? <button className="button secondary" onClick={openReviewSettings} type="button">开始复习</button> : null}
-                </div>
               </div>
-            )
+              {currentSettings.method === "classified" ? (
+                <p className="vocabulary-learning-resume-guidance">
+                  {isResumingPartialGroup && partialGroupRemainingCount > 0
+                    ? `第 ${resumeGroupNo + 1} 组还有 ${partialGroupRemainingCount} 个词尚未完成筛选，继续后会接着学习这一组。`
+                    : `继续记忆将从第 ${resumeGroupNo + 1} 组新词开始，并穿插已到复习时间的模糊、生僻词。`}
+                </p>
+              ) : null}
+              <div className="vocabulary-learning-resume-actions">
+                <button className="button" onClick={continuePreviousStudy} type="button">继续记忆</button>
+                {hasCompletedVocabularyGroup ? <button className="button secondary" onClick={openReviewSettings} type="button">开始复习</button> : null}
+              </div>
+            </div>
           ) : null}
           {!loading && !loadError && listModeActive && !collectionListKey ? (
             studyListWords.length > 0 ? (
