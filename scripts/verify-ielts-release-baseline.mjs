@@ -4,6 +4,7 @@ const requiredFiles = [
   "src/app/ielts-section-shell.css",
   "src/app/layout.tsx",
   "src/components/ielts-section-shell.tsx",
+  "src/lib/language-exam-content.ts",
   "src/app/listening/page.tsx",
   "src/app/listening/practice/page.tsx",
   "src/app/listening/jiufen/page.tsx",
@@ -19,8 +20,10 @@ const requiredMarkers = {
   "src/components/ielts-section-shell.tsx": [
     "ielts-section-shell",
     "ielts-side-nav",
-    'id: "ielts"',
     "语言考试导航",
+  ],
+  "src/lib/language-exam-content.ts": [
+    'id: "ielts"',
     "剑桥雅思",
     "历年真题",
     '/listening/practice?source=cambridge',
@@ -28,6 +31,7 @@ const requiredMarkers = {
     '/speaking/part-1',
     '/writing/practice?task=task1',
     '/writing/task2',
+    '/listening/jiufen',
   ],
 };
 
@@ -49,19 +53,14 @@ for (const [file, markers] of Object.entries(requiredMarkers)) {
   }
 }
 
-const ieltsNavigation = readFileSync("src/components/ielts-section-shell.tsx", "utf8");
-if (ieltsNavigation.includes("九分达人") || ieltsNavigation.includes("/listening/jiufen")) {
-  failures.push("the retired Jiufen collection must remain absent from IELTS navigation");
-}
-
 const jiufenRoute = readFileSync("src/app/listening/jiufen/page.tsx", "utf8");
-if (!/\bnotFound\(\)/.test(jiufenRoute)) {
-  failures.push("the retired Jiufen route must remain unavailable until its audio is restored");
+if (/\bnotFound\(\)/.test(jiufenRoute)) {
+  failures.push("the source-verified Jiufen collection must remain available");
 }
 
 const listeningCatalog = readFileSync("src/lib/ielts/listening.ts", "utf8");
-if (!/const JIUFEN_PUBLICATION_ENABLED = false/.test(listeningCatalog)) {
-  failures.push("the retired Jiufen collection must remain unpublished");
+if (!/const JIUFEN_PUBLICATION_ENABLED = true/.test(listeningCatalog)) {
+  failures.push("the source-verified Jiufen collection must be published");
 }
 
 const layout = readFileSync("src/app/layout.tsx", "utf8");
