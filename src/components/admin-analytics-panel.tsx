@@ -50,7 +50,10 @@ export function AdminAnalyticsPanel() {
       const { data, error } = await supabase.rpc("get_admin_dashboard_with_lifetime", { p_days: 1 });
 
       if (error) {
-        if (error.code === "42883" || error.message.includes("get_admin_dashboard_with_lifetime")) {
+        if (error.code === "PGRST202") {
+          throw new Error("Supabase API 缓存暂未识别累计统计函数（PGRST202）。请刷新页面后重试；若仍失败，请确认网站连接的 Supabase 项目已执行 supabase/038_admin_lifetime_audience_metrics.sql。");
+        }
+        if (error.code === "42883") {
           throw new Error("累计用户统计函数尚未启用；请在 Supabase 执行 supabase/038_admin_lifetime_audience_metrics.sql。");
         }
         throw error;
