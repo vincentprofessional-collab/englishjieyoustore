@@ -24,9 +24,7 @@ export function VocabularyListeningAnswerWords({
   const [audioMessage, setAudioMessage] = useState("");
   const audioRef = useRef<HTMLAudioElement>(null);
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
-  const autoStopAtRef = useRef<number | null>(null);
   const revealTimerRef = useRef<number | null>(null);
-  const firstGroupStartedRef = useRef(false);
 
   const activeDeck = useMemo(() => decks.find((deck) => deck.id === activeDeckId) ?? null, [activeDeckId, decks]);
   const groupCount = activeDeck ? Math.ceil(activeDeck.words.length / LISTENING_ANSWER_WORDS_PER_GROUP) : 0;
@@ -38,35 +36,14 @@ export function VocabularyListeningAnswerWords({
   useEffect(() => {
     const audio = audioRef.current;
     if (!activeDeck || !audio) return;
-
-    let disposed = false;
-    const handleCanPlay = () => {
-      if (disposed) return;
-      setAudioReady(true);
-      setAudioMessage((message) => message.startsWith("整段音频") ? "" : message);
-    };
-    const handleError = () => {
-      if (disposed) return;
-      setAudioReady(false);
-      setAudioMessage("整段音频加载失败，请检查网络或项目访问状态后重试。");
-    };
-
+    const source = `/api/vocabulary-answer-audio/${activeDeck.id}/group-${String(groupIndex + 1).padStart(3, "0")}`;
+    if (audio.getAttribute("src") === source) return;
     audio.pause();
-    audio.preload = "metadata";
     setAudioReady(false);
-    setAudioMessage("整段音频正在加载…");
-    audio.addEventListener("canplay", handleCanPlay);
-    audio.addEventListener("error", handleError);
-    audio.src = `/api/vocabulary-answer-audio/${activeDeck.id}/full`;
+    setAudioMessage(`第 ${groupIndex + 1} 组音频正在加载…`);
+    audio.src = source;
     audio.load();
-
-    return () => {
-      disposed = true;
-      audio.pause();
-      audio.removeEventListener("canplay", handleCanPlay);
-      audio.removeEventListener("error", handleError);
-    };
-  }, [activeDeck]);
+  }, [activeDeck, groupIndex]);
 
   useEffect(() => {
     if (!activeDeck || completed || answersRevealed || !batchRange) return;
@@ -88,8 +65,8 @@ export function VocabularyListeningAnswerWords({
   const startDeck = useCallback((deckId: ListeningAnswerDeckId) => {
     clearRevealTimer();
     audioRef.current?.pause();
-    autoStopAtRef.current = null;
-    firstGroupStartedRef.current = false;
+    audioRef.current?.removeAttribute("src");
+    audioRef.current?.load();
     inputRefs.current = [];
     setActiveDeckId(deckId);
     setGroupIndex(0);
@@ -103,8 +80,8 @@ export function VocabularyListeningAnswerWords({
   const returnToDecks = useCallback(() => {
     clearRevealTimer();
     audioRef.current?.pause();
-    autoStopAtRef.current = null;
-    firstGroupStartedRef.current = false;
+    audioRef.current?.removeAttribute("src");
+    audioRef.current?.load();
     setActiveDeckId(null);
     setGroupIndex(0);
     setTypedAnswers({});
@@ -115,40 +92,21 @@ export function VocabularyListeningAnswerWords({
   }, [clearRevealTimer]);
 
   const revealAnswersAfterPlayback = useCallback(() => {
-    if (autoStopAtRef.current === null) return;
-    autoStopAtRef.current = null;
+    if (revealTimerRef.current !== null || answersRevealed) return;
     audioRef.current?.pause();
-    setAudioMessage("本组音频已结束，5 秒后显示词汇信息和拼写反馈。");
+    setAudioMessage("本组 10 词音频已结束，5 秒后显示词汇信息和拼写反馈。");
     clearRevealTimer();
     revealTimerRef.current = window.setTimeout(() => {
       setAnswersRevealed(true);
       setAudioMessage("");
       revealTimerRef.current = null;
     }, ANSWER_REVEAL_DELAY_MS);
-  }, [clearRevealTimer]);
+  }, [answersRevealed, clearRevealTimer]);
 
   const handleAudioPlay = useCallback(() => {
-    if (!activeDeck || groupIndex !== 0 || firstGroupStartedRef.current || autoStopAtRef.current !== null) return;
-    const firstRange = getListeningAnswerBatchRange(activeDeck.id, activeDeck.words, 0);
-    const audio = audioRef.current;
-    if (!firstRange || !audio) return;
-
-    firstGroupStartedRef.current = true;
-    autoStopAtRef.current = firstRange.endMs / 1000;
-    const startSeconds = firstRange.startMs / 1000;
-    if (audio.currentTime < startSeconds || audio.currentTime >= autoStopAtRef.current) {
-      audio.currentTime = startSeconds;
-    }
-    setAudioMessage("正在播放本组 10 个词，播放结束后 5 秒显示答案。");
-  }, [activeDeck, groupIndex]);
-
-  const handleAudioTimeUpdate = useCallback(() => {
-    const audio = audioRef.current;
-    const stopAt = autoStopAtRef.current;
-    if (audio && stopAt !== null && audio.currentTime >= stopAt - 0.04) {
-      revealAnswersAfterPlayback();
-    }
-  }, [revealAnswersAfterPlayback]);
+    clearRevealTimer();
+    setAudioMessage(`正在播放第 ${groupIndex + 1} 组 10 词音频…`);
+  }, [clearRevealTimer, groupIndex]);
 
   const handleNextGroup = useCallback(() => {
     if (!activeDeck || !batchRange || !answersRevealed) return;
@@ -159,25 +117,24 @@ export function VocabularyListeningAnswerWords({
       return;
     }
 
-    const nextRange = getListeningAnswerBatchRange(activeDeck.id, activeDeck.words, nextGroupIndex);
     const audio = audioRef.current;
-    if (!nextRange || !audio) return;
+    if (!audio) return;
 
     clearRevealTimer();
     audio.pause();
     setGroupIndex(nextGroupIndex);
     setAnswersRevealed(false);
-    const startSeconds = nextRange.startMs / 1000;
-    autoStopAtRef.current = nextRange.endMs / 1000;
-    audio.currentTime = startSeconds;
-    setAudioMessage(`正在播放第 ${nextGroupIndex + 1} 组 10 个词…`);
+    setAudioReady(false);
+    audio.src = `/api/vocabulary-answer-audio/${activeDeck.id}/group-${String(nextGroupIndex + 1).padStart(3, "0")}`;
+    audio.load();
+    setAudioMessage(`正在加载第 ${nextGroupIndex + 1} 组 10 词音频…`);
     void audio.play().catch(() => {
-      setAudioMessage("自动播放未启动，请按播放器的播放键继续本组。");
+      setAudioMessage("浏览器未启动自动播放，请按播放器的播放键播放本组。");
     });
   }, [activeDeck, answersRevealed, batchRange, clearRevealTimer, groupCount, groupIndex]);
 
   const handleAudioEnded = useCallback(() => {
-    if (autoStopAtRef.current !== null) revealAnswersAfterPlayback();
+    revealAnswersAfterPlayback();
   }, [revealAnswersAfterPlayback]);
 
   const currentGroupLabel = batchRange
@@ -234,28 +191,37 @@ export function VocabularyListeningAnswerWords({
           </div>
 
           <div className={styles.audioSection}>
-            <label className={styles.audioLabel} htmlFor="listening-answer-full-audio">本组听力音频</label>
+            <label className={styles.audioLabel} htmlFor="listening-answer-group-audio">第 {groupIndex + 1} 组听力音频（10 词）</label>
             <audio
-              aria-label="完整听力音频，可播放、暂停和拖动进度"
+              aria-label="本组 10 词音频，可播放、暂停和拖动进度"
               className={styles.fullAudio}
               controls
-              id="listening-answer-full-audio"
+              id="listening-answer-group-audio"
+              onCanPlay={() => {
+                setAudioReady(true);
+                setAudioMessage("");
+              }}
               onEnded={handleAudioEnded}
+              onError={() => {
+                setAudioReady(false);
+                setAudioMessage("本组音频加载失败，请检查网络或项目访问状态后重试。");
+              }}
               onPlay={handleAudioPlay}
-              onTimeUpdate={handleAudioTimeUpdate}
               preload="metadata"
               ref={audioRef}
             />
             {audioMessage ? <p aria-live="polite" className={styles.audioMessage}>{audioMessage}</p> : null}
             {audioMessage.includes("加载失败") ? (
               <button className={styles.retryAudioButton} onClick={() => {
-                setAudioMessage("整段音频正在重新加载…");
-                audioRef.current?.load();
+                setAudioMessage("本组音频正在重新加载…");
+                const audio = audioRef.current;
+                audio?.load();
+                void audio?.play().catch(() => setAudioMessage("自动播放未启动，请按播放器的播放键继续本组。"));
               }} type="button">
                 重新加载音频
               </button>
             ) : null}
-            {!audioReady && !audioMessage ? <p className={styles.audioHint}>完整录音正在准备…</p> : null}
+            {!audioReady && !audioMessage ? <p className={styles.audioHint}>本组小音频正在准备…</p> : null}
           </div>
 
           <div aria-label={`第 ${groupIndex + 1} 组拼写`} className={styles.wordRows}>

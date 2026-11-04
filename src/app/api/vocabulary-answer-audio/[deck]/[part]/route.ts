@@ -12,12 +12,20 @@ export const dynamic = "force-dynamic";
 
 const sourceRoot = process.env.VOCABULARY_ANSWER_AUDIO_ROOT?.trim()
   || "/Volumes/My HDD3/词汇音频/剑雅听力词汇答案词音频";
+const chunkRoot = process.env.VOCABULARY_ANSWER_AUDIO_CHUNKS_ROOT?.trim()
+  || resolve(process.cwd(), "tmp/vocabulary-answer-audio");
 const bucket = process.env.R2_BBC_AUDIO_BUCKET || "englishjieyou-bbc-audio";
 
 const DECK_FOLDERS: Record<ListeningAnswerDeckId, string> = {
   core346: "剑雅4-21听力答案词-超核心高频词346",
   answers683: "剑雅4-21听力答案词-683",
   numbers208: "剑雅4-20听力答案词-数字与拼写特辑",
+};
+
+const GROUP_COUNTS: Record<ListeningAnswerDeckId, number> = {
+  core346: 35,
+  answers683: 67,
+  numbers208: 21,
 };
 
 function sha256(value: string) {
@@ -35,6 +43,11 @@ function encodePathPart(value: string) {
 }
 
 function getAudioFilename(deck: ListeningAnswerDeckId, part: string) {
+  const groupMatch = part.match(/^group-(\d{3})$/);
+  if (groupMatch) {
+    const groupNumber = Number(groupMatch[1]);
+    return groupNumber >= 1 && groupNumber <= GROUP_COUNTS[deck] ? `group-${groupMatch[1]}.mp3` : null;
+  }
   if (part === "full") {
     if (deck === "core346") return "剑雅4-21听力答案词-超核心高频词346-文本.mp3";
     if (deck === "answers683") return "剑雅4-20听力答案词-683词-音频.mp3";
@@ -112,8 +125,10 @@ export async function GET(
   }
 
   const deckRoot = resolve(sourceRoot, DECK_FOLDERS[deck]);
-  const audioPath = resolve(deckRoot, filename);
-  if (!audioPath.startsWith(`${deckRoot}${sep}`)) return NextResponse.json({ error: "Invalid audio path" }, { status: 400 });
+  const isGroupClip = part.startsWith("group-");
+  const audioRoot = isGroupClip ? resolve(chunkRoot, deck) : deckRoot;
+  const audioPath = resolve(audioRoot, filename);
+  if (!audioPath.startsWith(`${audioRoot}${sep}`)) return NextResponse.json({ error: "Invalid audio path" }, { status: 400 });
   const rangeHeader = request.headers.get("range");
   if (rangeHeader && (rangeHeader.length > 80 || !/^bytes=(?:\d+-\d*|-\d+)$/.test(rangeHeader))) {
     return new Response(null, { status: 416 });
@@ -147,7 +162,7 @@ export async function GET(
     }
   }
 
-  const key = `vocabulary/listening-answer-words/${DECK_FOLDERS[deck]}/${filename}`;
+  const key = `vocabulary/listening-answer-words/${DECK_FOLDERS[deck]}/${isGroupClip ? "groups/" : ""}${filename}`;
   const url = signedR2Url(key);
   if (!url) return new Response("Audio storage unavailable.", { status: 503 });
   return new Response(null, {

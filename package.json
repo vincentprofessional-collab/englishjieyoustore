@@ -8,6 +8,7 @@
     "dev:http": "next dev --hostname 0.0.0.0",
     "dev:local": "next dev",
     "dev:audio": "zsh scripts/start-local-audio-preview.zsh",
+    "audio:answer-words:split": "python3 scripts/split-listening-answer-audio.py",
     "build": "next build --webpack",
     "test:auth": "node --test scripts/auth-login.test.mjs scripts/supabase-proxy.test.mjs",
     "test:bbc-syntax": "node --experimental-strip-types --test scripts/bbc-automatic-syntax.test.mjs",
