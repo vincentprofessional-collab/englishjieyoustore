@@ -13,6 +13,7 @@ import { GuidePostAdmin } from "@/components/guide-post-admin";
 import { GuideCommentsAdmin } from "@/components/guide-comments-admin";
 import { AdminCourseDirectory } from "@/components/admin-course-directory";
 import { AdminExamContentEditor } from "@/components/admin-exam-content-editor";
+import { AdminExamPrepEditor } from "@/components/admin-exam-prep-editor";
 import { AdminLanguageExamContentEditor } from "@/components/admin-language-exam-content-editor";
 import { AdminVocabularyContentEditor } from "@/components/admin-vocabulary-content-editor";
 import { AdminSiteMessageManager } from "@/components/admin-site-message-manager";
@@ -27,6 +28,7 @@ type AdminView =
   | "chrome"
   | "courses"
   | "exam-content"
+  | "gmat-content"
   | "exam-pages"
   | "vocabulary-content"
   | "guide"
@@ -264,6 +266,13 @@ export function AdminContentManager() {
           考试题目管理
         </button>
         <button
+          className={activeView === "gmat-content" ? "active" : ""}
+          type="button"
+          onClick={() => setActiveView("gmat-content")}
+        >
+          GMAT 题目管理
+        </button>
+        <button
           className={activeView === "exam-pages" ? "active" : ""}
           type="button"
           onClick={() => setActiveView("exam-pages")}
@@ -315,6 +324,8 @@ export function AdminContentManager() {
       {activeView === "courses" && adminUserId ? <AdminCourseDirectory /> : null}
 
       {activeView === "exam-content" && adminUserId ? <AdminExamContentEditor adminUserId={adminUserId} /> : null}
+
+      {activeView === "gmat-content" && adminUserId ? <AdminExamPrepEditor adminUserId={adminUserId} /> : null}
 
       {activeView === "exam-pages" && adminUserId ? <AdminLanguageExamContentEditor adminUserId={adminUserId} /> : null}
 

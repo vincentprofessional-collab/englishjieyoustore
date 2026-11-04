@@ -26,14 +26,8 @@ export const metadata: Metadata = {
 
 const fallbackChrome = mergeSiteChromeConfig(DEFAULT_SITE_CHROME_CONFIG);
 
-function navigationConfig(config: SiteChromeConfig) {
-  return process.env.VOCABULARY_VIDEO_PREVIEW === "true"
-    ? { ...config, brand: { ...config.brand, imageUrl: "" } }
-    : config;
-}
-
 async function PublishedNavigation({ config }: { config: Promise<SiteChromeConfig> }) {
-  return <SiteNav config={navigationConfig(await config)} />;
+  return <SiteNav config={await config} />;
 }
 
 async function PublishedPageFrame({ children, config, courseDirectory }: { children: React.ReactNode; config: Promise<SiteChromeConfig>; courseDirectory: Promise<CourseDirectory> }) {
@@ -69,7 +63,7 @@ export default async function RootLayout({
         <CommunityInboxProvider>
         <AccountProgressProvider>
         <main className="shell">
-          <Suspense fallback={<SiteNav config={navigationConfig(fallbackChrome)} />}>
+          <Suspense fallback={<SiteNav config={fallbackChrome} />}>
             <PublishedNavigation config={siteChromeConfig} />
           </Suspense>
           <LearningProgressConsentPrompt />
