@@ -35,7 +35,11 @@ function encodePathPart(value: string) {
 }
 
 function getAudioFilename(deck: ListeningAnswerDeckId, part: string) {
-  if (deck === "core346" && part === "full") return "剑雅4-21听力答案词-超核心高频词346-文本.mp3";
+  if (part === "full") {
+    if (deck === "core346") return "剑雅4-21听力答案词-超核心高频词346-文本.mp3";
+    if (deck === "answers683") return "剑雅4-20听力答案词-683词-音频.mp3";
+    if (deck === "numbers208") return "剑雅4-20听力答案词-数字与拼写特辑-音频.mp3";
+  }
   const match = part.match(/^part(\d{2})$/);
   if (!match) return null;
   const number = Number(match[1]);
