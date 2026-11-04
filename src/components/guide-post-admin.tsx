@@ -18,7 +18,6 @@ import { coursePagePlacementOptions, normalizeCourseDirectory, COURSE_DIRECTORY_
 import { uploadAdminImage } from "@/lib/admin/upload-image";
 import { supabase } from "@/lib/supabase/client";
 import { uploadAdminAudio } from "@/lib/admin/upload-audio";
-import { uploadAdminVideo } from "@/lib/admin/upload-video";
 
 type GuidePostAdminProps = {
   adminUserId: string;
@@ -47,11 +46,11 @@ type TextCursorTarget = {
   selectionStart: number;
 };
 
-type MediaDialogKind = "audio" | "image" | "link" | "video";
+type MediaDialogKind = "audio" | "image" | "link";
 
 type MediaDialogState = {
   caption: string;
-  file: File | null;
+  files: File[];
   kind: MediaDialogKind;
   text: string;
   url: string;
@@ -92,7 +91,7 @@ function rowToDraft(row: AdminGuidePostRow): GuideDraft {
 
   return {
     author: post.author ?? "",
-    blocks: post.blocks.map((block) => ({ ...block })),
+    blocks: post.blocks.filter((block) => block.type !== "video").map((block) => ({ ...block })),
     excerpt: post.excerpt,
     id: row.id,
     pagePlacement: post.pagePlacement ?? "/",
@@ -444,7 +443,7 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
   }
 
   function addBlock(type: GuideBlockType) {
-    if (type === "image" || type === "video" || type === "audio" || type === "link") {
+    if (type === "image" || type === "audio" || type === "link") {
       openMediaDialog(type);
       return;
     }
@@ -545,7 +544,7 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
 
   function insertBlockAtTextCursor(
     type: MediaDialogKind,
-    payload: { caption?: string; text?: string; url: string },
+    payloads: Array<{ caption?: string; text?: string; url: string }>,
   ) {
     setDraft((current) => {
       const blockId = textCursorTarget?.blockId;
@@ -553,17 +552,17 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
         ? current.blocks.findIndex((block) => block.id === blockId)
         : -1;
       const block = current.blocks[blockIndex];
-      const insertedBlock: GuideContentBlock = {
+      const insertedBlocks: GuideContentBlock[] = payloads.map((payload) => ({
         ...createGuideBlock(type),
         caption: payload.caption ?? "",
         text: payload.text ?? "",
         url: payload.url,
-      };
+      }));
 
       if (blockIndex < 0 || !block || (block.type !== "paragraph" && block.type !== "heading")) {
         return {
           ...current,
-          blocks: [...current.blocks, insertedBlock],
+          blocks: [...current.blocks, ...insertedBlocks],
         };
       }
 
@@ -584,7 +583,7 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
         ...(beforeText
           ? [{ ...block, html: htmlParts.before, text: beforeText }]
           : []),
-        { ...insertedBlock, align: block.align },
+        ...insertedBlocks.map((insertedBlock) => ({ ...insertedBlock, align: block.align })),
         ...(afterText
           ? [
               {
@@ -601,20 +600,20 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
         ...current,
         blocks: [
           ...current.blocks.slice(0, blockIndex),
-          ...(replacementBlocks.length ? replacementBlocks : [insertedBlock]),
+          ...(replacementBlocks.length ? replacementBlocks : insertedBlocks),
           ...current.blocks.slice(blockIndex + 1),
         ],
       };
     });
     setTextCursorTarget(null);
     setActiveBlockId(null);
-    setMessage(`${BLOCK_LABELS[type]}已插入到正文光标处。`);
+    setMessage(`${payloads.length > 1 ? `${payloads.length} 张` : ""}${BLOCK_LABELS[type]}已插入到正文光标处。`);
   }
 
   function openMediaDialog(kind: MediaDialogKind) {
     setMediaDialog({
       caption: "",
-      file: null,
+      files: [],
       kind,
       text: kind === "link" ? "查看链接" : "",
       url: "",
@@ -629,13 +628,13 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
 
   async function confirmMediaDialog() {
     if (!mediaDialog) return;
-    const { caption, file, kind, text, url } = mediaDialog;
+    const { caption, files, kind, text, url } = mediaDialog;
 
     if (kind === "link" && !url.trim()) {
       setMessage("请输入链接地址。");
       return;
     }
-    if (kind !== "link" && !file && !url.trim()) {
+    if (kind !== "link" && !files.length && !url.trim()) {
       setMessage(`请选择${BLOCK_LABELS[kind]}文件，或填写直链。`);
       return;
     }
@@ -643,18 +642,21 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
     setUploadingBlockId("media-dialog");
     setMessage("");
     try {
-      const publicUrl = file
-        ? kind === "image"
-          ? await uploadAdminImage(file, "site/guide")
-          : kind === "video"
-            ? await uploadAdminVideo(file, "site/guide")
-            : await uploadAdminAudio(file, "site/guide")
-        : url.trim();
-      insertBlockAtTextCursor(kind, {
-        caption: caption.trim(),
-        text: kind === "link" ? text.trim() : "",
-        url: publicUrl,
-      });
+      const payloads = kind === "image" && files.length
+        ? await Promise.all(files.map(async (file, index) => ({
+          caption: index === 0 ? caption.trim() : "",
+          url: await uploadAdminImage(file, "site/guide"),
+        })))
+        : [{
+          caption: caption.trim(),
+          text: kind === "link" ? text.trim() : "",
+          url: files[0]
+            ? kind === "image"
+              ? await uploadAdminImage(files[0], "site/guide")
+              : await uploadAdminAudio(files[0], "site/guide")
+            : url.trim(),
+        }];
+      insertBlockAtTextCursor(kind, payloads);
       setMediaDialog(null);
     } catch (error) {
       setMessage(`${BLOCK_LABELS[kind]}上传失败：${error instanceof Error ? error.message : "请稍后再试。"}`);
@@ -739,14 +741,14 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
     blockId: string,
     event: ChangeEvent<HTMLInputElement>,
   ) {
-    const file = event.target.files?.[0];
+    const files = Array.from(event.target.files ?? []);
     event.target.value = "";
 
-    if (!file) {
+    if (!files.length) {
       return;
     }
 
-    if (!file.type.startsWith("image/")) {
+    if (files.some((file) => !file.type.startsWith("image/"))) {
       setMessage("请选择图片文件。");
       return;
     }
@@ -755,9 +757,27 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
     setMessage("");
 
     try {
-      const publicUrl = await uploadAdminImage(file, "site/guide");
-      updateBlock(blockId, { url: publicUrl });
-      setMessage("图片上传成功。");
+      const publicUrls = await Promise.all(files.map((file) => uploadAdminImage(file, "site/guide")));
+      setDraft((current) => {
+        const blockIndex = current.blocks.findIndex((block) => block.id === blockId);
+        const block = current.blocks[blockIndex];
+        if (blockIndex < 0 || !block) return current;
+        const followingImages = publicUrls.slice(1).map((url) => ({
+          ...createGuideBlock("image"),
+          align: block.align,
+          url,
+        }));
+        return {
+          ...current,
+          blocks: [
+            ...current.blocks.slice(0, blockIndex),
+            { ...block, url: publicUrls[0] },
+            ...followingImages,
+            ...current.blocks.slice(blockIndex + 1),
+          ],
+        };
+      });
+      setMessage(`${publicUrls.length > 1 ? `${publicUrls.length} 张` : ""}图片上传成功。`);
     } catch (error) {
       setMessage(`图片上传失败：${error instanceof Error ? error.message : "请稍后再试。"}`);
     } finally {
@@ -766,16 +786,17 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
   }
 
   async function savePost(status: "draft" | "published") {
+    const blocks = draft.blocks.filter((block) => block.type !== "video");
     const title = draft.title.trim();
-    const excerpt = draft.excerpt.trim() || firstText(draft.blocks).slice(0, 140);
+    const excerpt = draft.excerpt.trim() || firstText(blocks).slice(0, 140);
 
     if (!title) {
       setMessage("请先填写帖子标题。");
       return;
     }
 
-    if (!draft.blocks.some((block) => block.text.trim() || block.url.trim())) {
-      setMessage("请至少填写一个正文、链接、图片或视频区块。");
+    if (!blocks.some((block) => block.text.trim() || block.url.trim())) {
+      setMessage("请至少填写一个正文、链接、图片或音频区块。");
       return;
     }
 
@@ -785,12 +806,12 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
     const slug = draft.slug ?? `guide-${Date.now().toString(36)}`;
     const payload = {
       access_feature_key: null,
-      cover_image_url: firstImage(draft.blocks),
+      cover_image_url: firstImage(blocks),
       created_by: adminUserId,
       is_paid_only: false,
       meta_json: {
         author: draft.author.trim(),
-        blocks: draft.blocks,
+        blocks,
         excerpt,
         kind: "guide-post",
         pagePlacement: draft.pagePlacement === "/" ? null : draft.pagePlacement,
@@ -961,7 +982,6 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
                 <button aria-label="添加小标题" onClick={() => addBlock("heading")} title="添加小标题" type="button">H</button>
                 <button aria-label="插入链接" onClick={() => openMediaDialog("link")} title="插入链接" type="button">↗</button>
                 <button aria-label="插入图片" onClick={() => openMediaDialog("image")} title="插入图片" type="button">▧</button>
-                <button aria-label="插入视频" onClick={() => openMediaDialog("video")} title="插入视频" type="button">▶</button>
                 <button aria-label="插入音频" onClick={() => openMediaDialog("audio")} title="插入音频" type="button">♫</button>
                 <button aria-label="插入表情" onClick={insertEmoji} title="插入表情" type="button">☺</button>
               </div>
@@ -1007,7 +1027,6 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
                       ) : null}
                       {block.type === "link" && block.url ? <a className="guide-editor-link-preview" href={block.url} rel="noreferrer" target="_blank">{block.text || block.url} ↗</a> : null}
                       {block.type === "image" && block.url ? <ResizableImagePreview block={block} onResize={(width, height) => updateBlock(block.id, { height, width }, true)} /> : null}
-                      {block.type === "video" && block.url ? <figure className="guide-editor-inline-media guide-editor-video-media"><video className="guide-editor-asset-preview" controls playsInline preload="metadata" src={block.url} />{block.caption ? <figcaption>{block.caption}</figcaption> : null}<a href={block.url} rel="noreferrer" target="_blank">在新窗口打开视频 ↗</a></figure> : null}
                       {block.type === "audio" && block.url ? <figure className="guide-editor-inline-media guide-editor-audio-media"><audio className="guide-editor-asset-preview" controls preload="metadata" src={block.url} />{block.caption ? <figcaption>{block.caption}</figcaption> : null}<a href={block.url} rel="noreferrer" target="_blank">打开音频 ↗</a></figure> : null}
                     </article>
                   ))}
@@ -1065,7 +1084,7 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
                       }
                       value={block.type}
                     >
-                      {Object.entries(BLOCK_LABELS).map(([value, label]) => (
+                      {Object.entries(BLOCK_LABELS).filter(([value]) => value !== "video").map(([value, label]) => (
                         <option key={value} value={value}>
                           {label}
                         </option>
@@ -1208,10 +1227,11 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
                         />
                       </label>
                       <label className="guide-upload-control">
-                        <span>或从电脑上传</span>
+                        <span>或从电脑上传（可多选）</span>
                         <input
                           accept="image/*"
                           disabled={uploadingBlockId === block.id}
+                          multiple
                           onChange={(event) => void uploadImage(block.id, event)}
                           type="file"
                         />
@@ -1219,36 +1239,14 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
                     </div>
                   ) : null}
 
-                  {block.type === "video" ? (
-                    <div className="guide-admin-field-grid">
-                      <label>
-                        <span>视频直链</span>
-                        <input
-                          onChange={(event) => updateBlock(block.id, { url: event.target.value })}
-                          placeholder="https://.../video.mp4"
-                          type="url"
-                          value={block.url}
-                        />
-                      </label>
-                      <label>
-                        <span>视频说明</span>
-                        <input
-                          onChange={(event) =>
-                            updateBlock(block.id, { caption: event.target.value })
-                          }
-                          placeholder="可选"
-                          value={block.caption}
-                        />
-                      </label>
-                    </div>
-                  ) : null}
+                  {block.type === "video" ? <p role="status">该视频内容已下架，保存帖子时会移除此区块。</p> : null}
                 </article>
               ))}
             </div>
 
             <div className="guide-add-blocks">
               <span>添加：</span>
-              {Object.entries(BLOCK_LABELS).map(([type, label]) => (
+              {Object.entries(BLOCK_LABELS).filter(([type]) => type !== "video").map(([type, label]) => (
                 <button
                   key={type}
                   onClick={() => addBlock(type as GuideBlockType)}
@@ -1326,7 +1324,20 @@ export function GuidePostAdmin({ adminUserId }: GuidePostAdminProps) {
               <label><span>链接地址</span><input autoFocus onChange={(event) => setMediaDialog((current) => current ? { ...current, url: event.target.value } : current)} placeholder="https://..." type="url" value={mediaDialog.url} /></label>
             ) : (
               <>
-                <label><span>从本机选择文件</span><input accept={mediaDialog.kind === "image" ? "image/*" : mediaDialog.kind === "video" ? "video/*" : "audio/*"} autoFocus onChange={(event) => setMediaDialog((current) => current ? { ...current, file: event.target.files?.[0] ?? null } : current)} type="file" /></label>
+                <label>
+                  <span>从本机选择文件{mediaDialog.kind === "image" ? "（可多选）" : ""}</span>
+                  <input
+                    accept={mediaDialog.kind === "image" ? "image/*" : "audio/*"}
+                    autoFocus
+                    multiple={mediaDialog.kind === "image"}
+                    onChange={(event) => {
+                      const files = Array.from(event.target.files ?? []);
+                      setMediaDialog((current) => current ? { ...current, files } : current);
+                    }}
+                    type="file"
+                  />
+                  {mediaDialog.kind === "image" && mediaDialog.files.length > 1 ? <small>{mediaDialog.files.length} 张图片将按选择顺序插入，说明文字添加到第一张。</small> : null}
+                </label>
                 <label><span>或填写直链</span><input onChange={(event) => setMediaDialog((current) => current ? { ...current, url: event.target.value } : current)} placeholder="https://..." type="url" value={mediaDialog.url} /></label>
               </>
             )}

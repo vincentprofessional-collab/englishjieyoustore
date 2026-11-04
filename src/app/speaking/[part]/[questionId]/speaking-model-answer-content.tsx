@@ -477,7 +477,7 @@ export default function SpeakingModelAnswerContent({
                 <label className={`${styles.adminField} ${styles.adminWideField}`}>
                   <span>上传音频</span>
                   <input
-                    accept="audio/*,.aac,.flac,.m4a,.mp3,.mp4,.ogg,.wav,.webm"
+                    accept="audio/*,.aac,.flac,.m4a,.mp3,.ogg,.wav"
                     disabled={isUploading}
                     type="file"
                     onChange={uploadAudio}

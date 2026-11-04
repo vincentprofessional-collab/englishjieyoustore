@@ -252,20 +252,34 @@ export function SatPracticeRunner({ setId, dataRoot = "/sat/sets", returnHref: c
   }, []);
 
   useEffect(() => {
-    Promise.all([
-      fetch(`${dataRoot}/${setId}.json`).then((response) => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.json() as Promise<SatSet>;
-      }),
-      loadSatQuestionOverrides(),
-    ])
-      .then(([payload, loadedOverrides]) => {
-        setQuestionOverrides(loadedOverrides);
-        setData(applySatQuestionOverrides(payload, loadedOverrides));
-      })
-      .catch(() => setError("这套 SAT 题组暂时无法载入，请返回后重试。"));
+    let active = true;
+    setData(null);
+    setError("");
+    async function loadSet() {
+      const [savedResult, loadedOverrides] = await Promise.all([
+        supabase.from("exam_prep_banks").select("bank_data,is_deleted").eq("exam", "sat").eq("bank_id", setId).eq("status", "published").maybeSingle(),
+        loadSatQuestionOverrides(),
+      ]);
+      if (!active) return;
+      if (!savedResult.error && savedResult.data?.is_deleted) throw new Error("这套 SAT 题目已从后台删除。");
+      let payload = !savedResult.error && savedResult.data?.bank_data && typeof savedResult.data.bank_data === "object"
+        ? savedResult.data.bank_data as SatSet
+        : null;
+      if (!payload) {
+        const response = await fetch(`${dataRoot}/${setId}.json`);
+        if (!response.ok) throw new Error("这套 SAT 题组暂时无法载入，请返回后重试。");
+        payload = await response.json() as SatSet;
+      }
+      if (!active) return;
+      setQuestionOverrides(loadedOverrides);
+      setData(applySatQuestionOverrides(payload, loadedOverrides));
+    }
+    void loadSet().catch((error: unknown) => {
+      if (active) setError(error instanceof Error ? error.message : "这套 SAT 题组暂时无法载入，请返回后重试。");
+    });
     setProgress(readProgress(progressId));
     setRestored(true);
+    return () => { active = false; };
   }, [dataRoot, progressId, setId]);
 
   useEffect(() => {

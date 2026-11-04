@@ -6,7 +6,7 @@ import type { ManagedMediaBucket } from "@/lib/media/url";
 
 export const runtime = "nodejs";
 
-const mediaBuckets = new Set<ManagedMediaBucket>(["audio", "images", "video", "videos", "documents"]);
+const mediaBuckets = new Set<ManagedMediaBucket>(["audio", "images", "documents"]);
 
 const forwardedAudioHeaders = [
   "accept-ranges",
@@ -125,8 +125,7 @@ async function handleMediaRequest(request: NextRequest) {
       : new NextResponse("Media unavailable", { status: 404 });
   }
 
-  if (((bucket === "audio" && !isBbcAudio) || bucket === "video" || bucket === "videos")
-    && !isLegacyCosOnlyMediaPath(bucket, cleanPath)) {
+  if (bucket === "audio" && !isBbcAudio && !isLegacyCosOnlyMediaPath(bucket, cleanPath)) {
     const directUrl = getSupabaseStorageUrl(bucket, cleanPath);
     return directUrl
       ? NextResponse.redirect(directUrl, { status: 307, headers: { "Cache-Control": "public, max-age=31536000, immutable" } })

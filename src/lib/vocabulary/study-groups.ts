@@ -1,4 +1,5 @@
 export const VOCABULARY_GROUP_SIZE = 20;
+export const VOCABULARY_GROUP_REVIEW_LIMIT = 40;
 
 export function vocabularyStudyGroupIndex(value: unknown, wordCount?: number): number | null {
   if (!Number.isInteger(value) || Number(value) < 0) return null;

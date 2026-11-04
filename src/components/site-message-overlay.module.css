@@ -65,21 +65,7 @@
   overflow-wrap: anywhere;
 }
 
-.images {
-  display: grid;
-  gap: 12px;
-  margin-top: 18px;
-}
-
-.image {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 62vh;
-  object-fit: contain;
-  border-radius: 12px;
-  background: #f3eee4;
-}
+.imageGallery { margin-top: 18px; }
 
 .footer {
   justify-content: flex-end;

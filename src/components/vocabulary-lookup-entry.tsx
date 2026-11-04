@@ -1,39 +1,57 @@
 import { notFound } from "next/navigation";
-import { cookies, headers } from "next/headers";
 import { VocabularyAutoplay } from "@/components/vocabulary-autoplay";
 import { VocabularyDetailShell } from "@/components/vocabulary-detail-shell";
 import { VocabularyDetailContent } from "@/components/vocabulary-detail-content";
-import { VocabularyLookupDisplaySection } from "@/components/vocabulary-lookup-display-section";
-import { VocabularyVideoPlayer } from "@/components/vocabulary-video-player";
 import { getExtendedVocabularyEntry, getVocabularyFormationParts } from "@/lib/vocabulary/local-vocabulary";
 import { getVocabularyUsageExamples, prioritizeVocabularyUsageExamples } from "@/lib/vocabulary/examples";
 import { getVocabularyPhraseMatches } from "@/lib/vocabulary/phrases";
 import { getVocabularyLookupEtymology } from "@/lib/vocabulary/lookup-etymology";
 import { getVocabularySynonymDistinctions } from "@/lib/vocabulary/synonym-distinctions";
-import { DEFAULT_VOCABULARY_LOOKUP_DISPLAY_PREFERENCES, isPhoneUserAgent, VOCABULARY_LOOKUP_VIDEO_COOKIE } from "@/lib/vocabulary/lookup-display-preferences";
 import { getBbcVocabularyDetail } from "@/lib/articles/bbc-vocabulary";
-import { getVocabularyVideoCandidates, getVocabularyVideos } from "@/lib/vocabulary/videos";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { getManagedLearningPhrase } from "@/lib/vocabulary/managed-learning-words";
+import { toLocalVocabularyEntry } from "@/lib/vocabulary/learning";
+import type { VocabularyUsageExample } from "@/lib/vocabulary/examples";
 
 export async function VocabularyLookupEntry({ word, backHref = "/vocabulary" }: { word: string; backHref?: string }) {
   const decodedWord = decodeURIComponent(word);
   const bbcVocabularyDetail = getBbcVocabularyDetail(decodedWord);
-  const entry = /\s/.test(decodedWord) && bbcVocabularyDetail
-    ? bbcVocabularyDetail.entry
-    : (await getExtendedVocabularyEntry(decodedWord)) ?? bbcVocabularyDetail?.entry;
+  const isPhrase = /[\s-]/.test(decodedWord);
+  const managedPhrase = isPhrase ? await getManagedLearningPhrase(decodedWord) : null;
+  const entry = managedPhrase
+    ? toLocalVocabularyEntry(managedPhrase)
+    : isPhrase && bbcVocabularyDetail
+      ? bbcVocabularyDetail.entry
+      : (await getExtendedVocabularyEntry(decodedWord)) ?? bbcVocabularyDetail?.entry;
 
   if (!entry) {
     notFound();
   }
 
-  const fetchedUsageExamples = prioritizeVocabularyUsageExamples(
-    await getVocabularyUsageExamples(
-      entry.word,
-      5,
-      entry.inflections.map((inflection) => inflection.value),
-    ),
-    bbcVocabularyDetail?.examples ?? [],
-  ).slice(0, 5);
+  const managedExamples: VocabularyUsageExample[] = managedPhrase
+    ? managedPhrase.englishExamples.map((englishText, index) => ({
+        audioUrl: null,
+        bookCode: managedPhrase.bbcExampleSource ? "BBC" : "VOCABULARY",
+        chineseText: managedPhrase.englishExampleTranslations?.[index] ?? "",
+        englishText,
+        id: `managed-phrase:${managedPhrase.id}:${index}`,
+        sentenceNo: managedPhrase.bbcExampleSource?.sentenceNo ?? index + 1,
+        sourceId: managedPhrase.bbcExampleSource?.articleId ?? "",
+        sourceTitle: managedPhrase.bbcExampleSource ? `BBC · ${managedPhrase.bbcExampleSource.articleTitle}` : "地道表达词汇书",
+        sourceType: managedPhrase.bbcExampleSource ? "article" : "manual",
+        testNo: 0,
+      }))
+    : [];
+  const fetchedUsageExamples = managedPhrase
+    ? managedExamples
+    : prioritizeVocabularyUsageExamples(
+      await getVocabularyUsageExamples(
+        entry.word,
+        5,
+        entry.inflections.map((inflection) => inflection.value),
+      ),
+      bbcVocabularyDetail?.examples ?? [],
+    ).slice(0, 5);
   const hasBbcExamples = fetchedUsageExamples.some((example) => example.bookCode === "BBC");
   let canAccessBbcExamples = !hasBbcExamples;
   if (hasBbcExamples) {
@@ -55,34 +73,12 @@ export async function VocabularyLookupEntry({ word, backHref = "/vocabulary" }: 
     ...part,
     href: part.href ? `${part.href}${part.href.includes("?") ? "&" : "?"}from=lookup` : part.href,
   }));
-  const [requestHeaders, cookieStore] = await Promise.all([headers(), cookies()]);
-  const isPhoneRequest = isPhoneUserAgent(requestHeaders.get("user-agent") ?? "");
   const etymology = getVocabularyLookupEtymology(entry.word);
   const synonymDistinctions = getVocabularySynonymDistinctions([
     entry.word,
     entry.normalizedWord,
     ...entry.inflections.map((inflection) => inflection.value),
   ]);
-  const videoPreference = cookieStore.get(VOCABULARY_LOOKUP_VIDEO_COOKIE)?.value;
-  const videoVisible = videoPreference === undefined ? DEFAULT_VOCABULARY_LOOKUP_DISPLAY_PREFERENCES.video : videoPreference === "1";
-  const videoCandidates = isPhoneRequest ? [] : getVocabularyVideoCandidates(entry);
-  const shouldLoadVideos = videoVisible && !isPhoneRequest;
-  const videoData = shouldLoadVideos ? await getVocabularyVideos(entry) : null;
-  const hasVideoForVisibleSection = !isPhoneRequest && (shouldLoadVideos ? Boolean(videoData?.videos.length) : videoCandidates.length > 0);
-  const videoSection = hasVideoForVisibleSection ? (
-    <VocabularyLookupDisplaySection className="vocabulary-lookup-video-section" controlsEnabled id="video" initialVisible={videoVisible} title="视频">
-      {videoData?.videos.length ? (
-        <VocabularyVideoPlayer
-          canDelete={videoData.canDelete}
-          entryWord={entry.normalizedWord}
-          totalVideos={videoData.totalVideos}
-          videos={videoData.videos}
-          votesEnabled={videoData.votesEnabled}
-        />
-      ) : null}
-    </VocabularyLookupDisplaySection>
-  ) : null;
-
   return (
     <section className="stack vocabulary-word-page">
       <VocabularyAutoplay ukAudioUrl={entry.ukAudioUrl} usAudioUrl={entry.usAudioUrl} word={entry.word} />
@@ -95,7 +91,6 @@ export async function VocabularyLookupEntry({ word, backHref = "/vocabulary" }: 
           etymologyChinese={etymology?.chinese}
           etymologyEnglish={etymology?.english}
           formationParts={formationParts}
-          inlineVideo={!isPhoneRequest ? videoSection : null}
           lookupLayout
           phrases={phrases}
           synonymDistinctions={synonymDistinctions}

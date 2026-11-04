@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ExamPagePresentation } from "@/components/exam-page-presentation";
 import { useEffect, useState } from "react";
 import { listExamContentOverrides } from "@/lib/exam-content/overrides";
 
@@ -14,10 +15,10 @@ export type ReadingTestSummary = {
 };
 
 const IELTS_READING_TESTS = [1, 2, 3, 4];
-const READING_BOOKS = Array.from({ length: 21 }, (_, index) => ({
-  code: "cambridge-" + (index + 1),
-  shortTitle: "CI" + (index + 1),
-  title: "剑桥雅思 " + (index + 1),
+const READING_BOOKS = Array.from({ length: 18 }, (_, index) => ({
+  code: "cambridge-" + (index + 4),
+  shortTitle: "CI" + (index + 4),
+  title: "剑桥雅思 " + (index + 4),
 }));
 
 export function ReadingLibraryClient({ mode, initialTests }: { mode: "mock" | "practice"; initialTests: ReadingTestSummary[] }) {
@@ -75,6 +76,7 @@ export function ReadingLibraryClient({ mode, initialTests }: { mode: "mock" | "p
 
   return (
     <section className="stack ielts-module-page listening-library-page reading-library-page">
+      <ExamPagePresentation exam="ielts" />
       <div className="listening-library-panel reading-library-panel">
         <div className="listening-library-head">
           <div><span>{mode === "mock" ? "mock test" : "practice"}</span><strong>{mode === "mock" ? "阅读模考题库" : "阅读逐篇练习"}</strong></div>

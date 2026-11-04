@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState, type ReactNode } from "react";
 import type { SiteChromeConfig } from "@/lib/content/site-chrome";
+import { DEFAULT_LANGUAGE_EXAM_NAVIGATION, loadLanguageExamContent, type ExamMenuGroup, type ExamMenuNode } from "@/lib/language-exam-content";
 import { GuidePostsOnNavigationPage } from "@/components/guide-board";
 import { BBC_DEFAULT_YEAR } from "@/lib/articles/bbc";
 import { coursePageHref, type CourseDirectory, type CoursePageNode } from "@/lib/courses/course-directory";
@@ -17,7 +18,7 @@ type StudyNavNode = {
 
 type StudyNavGroup = {
   href: string;
-  id: "integrated-english" | "junior-high" | "senior-high" | "cet4" | "cet6" | "postgraduate" | "ielts" | "sat" | "gmat" | "gre";
+  id: string;
   label: string;
   mark: string;
   disabled?: boolean;
@@ -33,106 +34,40 @@ function getExpandableStudyNavIds(nodes: StudyNavNode[], parentId: string): stri
   });
 }
 
-function getExpandedCourseNavIds(nodes: CoursePageNode[]): Set<string> {
-  return new Set(nodes.flatMap((node) => node.children.length
-    ? [`course:${node.id}`, ...getExpandedCourseNavIds(node.children)]
-    : []));
+const INTEGRATED_ENGLISH_GROUP: StudyNavGroup = {
+  children: [
+    { href: "/articles?year=2026", label: "BBC随身英语" },
+    { href: "/new-concept", label: "新概念英语" },
+  ],
+  href: "/articles",
+  id: "integrated-english",
+  label: "综合英语",
+  mark: "英",
+};
+
+function toStudyNavNode(node: ExamMenuNode): StudyNavNode {
+  return {
+    href: node.href,
+    label: node.label,
+    ...(node.matchSubroutes ? { matchSubroutes: true } : {}),
+    children: node.children.map(toStudyNavNode),
+  };
 }
 
-const STUDY_NAV_GROUPS: StudyNavGroup[] = [
-  {
-    children: [
-      { href: "/articles?year=2026", label: "BBC随身英语" },
-      { href: "/new-concept", label: "新概念英语" },
-    ],
-    href: "/articles",
-    id: "integrated-english",
-    label: "综合英语",
-    mark: "英",
-  },
-  {
-    children: [
-      { href: "/junior-high?entry=knowledge", label: "知识点" },
-      { href: "/junior-high?entry=practice", label: "题型训练" },
-      { href: "/junior-high?entry=papers", label: "历年真题" },
-    ],
-    href: "/junior-high?entry=knowledge",
-    id: "junior-high",
-    label: "中考英语",
-    mark: "中",
-  },
-  {
-    children: [
-      { href: "/senior-high?entry=knowledge", label: "知识点" },
-      { href: "/senior-high?entry=practice", label: "题型训练" },
-      { href: "/senior-high?entry=papers", label: "历年真题" },
-    ],
-    href: "/senior-high?entry=practice",
-    id: "senior-high",
-    label: "高考英语",
-    mark: "高",
-  },
-  { children: [
-    { href: "/cet4?entry=practice", label: "题型训练" },
-    { href: "/cet4?entry=papers", label: "历年真题" },
-  ], href: "/cet4?entry=papers", id: "cet4", label: "四级英语", mark: "四" },
-  { children: [
-    { href: "/cet6?entry=practice", label: "题型训练" },
-    { href: "/cet6?entry=papers", label: "历年真题" },
-  ], href: "/cet6", id: "cet6", label: "六级英语", mark: "六" },
-  { children: [
-    { href: "/postgraduate?entry=practice", label: "题型训练" },
-    { href: "/postgraduate?entry=papers", label: "历年真题" },
-  ], href: "/postgraduate?entry=papers", id: "postgraduate", label: "考研英语", mark: "研" },
-  {
-    children: [
-      {
-        children: [
-          { href: "/listening/practice?source=cambridge", label: "剑桥雅思", matchSubroutes: true },
-          { href: "/listening/past-papers", label: "历年真题", matchSubroutes: true },
-        ],
-        href: "/listening",
-        label: "听力",
-      },
-      {
-        children: [
-          { href: "/speaking/part-1", label: "Part 1", matchSubroutes: true },
-          { href: "/speaking/part-2", label: "Part 2", matchSubroutes: true },
-          { href: "/speaking/part-3", label: "Part 3", matchSubroutes: true },
-        ],
-        href: "/speaking",
-        label: "口语",
-      },
-      { href: "/reading", label: "阅读", matchSubroutes: true },
-      {
-        children: [
-          { href: "/writing/practice?task=task1", label: "小作文" },
-          { href: "/writing/task2", label: "大作文" },
-          { href: "/writing/task1-vocabulary", label: "专项训练" },
-        ],
-        href: "/writing",
-        label: "写作",
-      },
-    ],
-    href: "/listening",
-    id: "ielts",
-    label: "雅思",
-    mark: "雅",
-  },
-  {
-    children: [
-      { href: "/sat/knowledge", label: "知识点" },
-      { href: "/sat", label: "题型训练" },
-      { href: "/sat/past-papers", label: "历年真题" },
-    ],
-    href: "/sat",
-    id: "sat",
-    label: "SAT",
-    mark: "S",
-  },
-  { children: [], href: "/gmat?entry=practice", id: "gmat", label: "GMAT", mark: "G" },
-  { children: [], href: "/gre?entry=practice", id: "gre", label: "GRE", mark: "G" },
+function toStudyNavGroup(group: ExamMenuGroup): StudyNavGroup {
+  return { ...group, children: group.children.map(toStudyNavNode) };
+}
+
+const DEFAULT_STUDY_NAV_GROUPS: StudyNavGroup[] = [
+  INTEGRATED_ENGLISH_GROUP,
+  ...DEFAULT_LANGUAGE_EXAM_NAVIGATION.map(toStudyNavGroup),
 ];
+
+/*
+ * Keep the default sidebar in sync with the editable language-exam menu below.
+ * The saved menu is loaded by IeltsSectionShellContent after hydration.
+ */
+
 
 function getPathSegments(pathname: string) {
   return pathname.split("/").filter(Boolean);
@@ -172,11 +107,11 @@ function isGroupPath(pathname: string, group: StudyNavGroup) {
   if (group.id === "ielts") {
     return group.children.some(({ href }) => {
       const path = getLinkPath(href);
-      return pathname === path || pathname.startsWith(`${path}/`);
+      return Boolean(path) && (pathname === path || pathname.startsWith(`${path}/`));
     });
   }
   const path = getLinkPath(group.href);
-  return pathname === path || pathname.startsWith(`${path}/`);
+  return Boolean(path) && (pathname === path || pathname.startsWith(`${path}/`));
 }
 
 function isStudyChildCurrent(
@@ -187,6 +122,7 @@ function isStudyChildCurrent(
   matchSubroutes = false,
 ) {
   const path = getLinkPath(href);
+  if (!path) return false;
   if (pathname !== path && !(matchSubroutes && pathname.startsWith(`${path}/`))) return false;
   const query = href.split("?")[1]?.split("#")[0] ?? "";
   const requested = new URLSearchParams(query);
@@ -240,12 +176,23 @@ function IeltsSectionShellContent({
   const searchParams = useSearchParams();
   const isCoursePage = pathname === "/courses" || pathname.startsWith("/courses/");
   const [expandedExamGroupId, setExpandedExamGroupId] = useState<StudyNavGroup["id"] | null>(null);
-  const [expandedStudyNavChildIds, setExpandedStudyNavChildIds] = useState<Set<string>>(() => isCoursePage ? getExpandedCourseNavIds(courseDirectory.groups) : new Set());
+  const [studyNavGroups, setStudyNavGroups] = useState<StudyNavGroup[]>(DEFAULT_STUDY_NAV_GROUPS);
+  const [expandedStudyNavChildIds, setExpandedStudyNavChildIds] = useState<Set<string>>(() => new Set());
   const requestedBbcYear = Number(searchParams.get("year"));
   const activeBbcYear = BBC_DIRECTORY_YEARS.includes(requestedBbcYear)
     ? requestedBbcYear
     : BBC_DEFAULT_YEAR;
-  const activeGroup = STUDY_NAV_GROUPS.find((group) =>
+  useEffect(() => {
+    let cancelled = false;
+    void loadLanguageExamContent().then((content) => {
+      if (!cancelled) setStudyNavGroups([INTEGRATED_ENGLISH_GROUP, ...content.navigation.map(toStudyNavGroup)]);
+    }).catch(() => {
+      // The built-in navigation keeps the study pages available if the optional
+      // admin-managed menu cannot be read.
+    });
+    return () => { cancelled = true; };
+  }, []);
+  const activeGroup = studyNavGroups.find((group) =>
     group.id === "integrated-english"
       ? pathname === "/articles" || pathname.startsWith("/articles/") || pathname === "/new-concept" || pathname.startsWith("/new-concept/")
       : isGroupPath(pathname, group),
@@ -259,11 +206,6 @@ function IeltsSectionShellContent({
       setExpandedStudyNavChildIds(new Set());
     }
   }, [activeGroup?.id, pathname, isCoursePage]);
-
-  useEffect(() => {
-    if (!isCoursePage) return;
-    setExpandedStudyNavChildIds(getExpandedCourseNavIds(courseDirectory.groups));
-  }, [courseDirectory, isCoursePage, pathname]);
 
   function renderStudyDirectoryNodes(
     nodes: StudyNavNode[],
@@ -312,6 +254,10 @@ function IeltsSectionShellContent({
         );
       }
 
+      if (!node.href.trim()) {
+        return <span className={`study-directory-empty-link ${isCurrent ? "active" : ""}`} key={nodeId}><span aria-hidden="true" />{node.label}</span>;
+      }
+
       return (
         <Link
           aria-current={isCurrent ? "page" : undefined}
@@ -330,16 +276,14 @@ function IeltsSectionShellContent({
     return nodes.map((node) => {
       const slugs = [...parentSlugs, node.slug];
       const href = coursePageHref(slugs);
-      const nodeId = `course:${node.id}`;
       const isCurrent = pathname === href;
       const isInCurrentBranch = isCurrent || pathname.startsWith(`${href}/`);
-      const isExpanded = expandedStudyNavChildIds.has(nodeId);
       const nestedId = `course-directory-${node.id.replace(/[^a-z0-9_-]/gi, "-")}`;
-      const row = (
-        <div className={`course-directory-source-row ${isInCurrentBranch ? "active" : ""}`}>
+      return (
+        <div className={`${depth === 0 ? "study-directory-source-group" : "study-directory-secondary-group"} course-directory-group ${isInCurrentBranch ? "active" : ""}`} key={node.id}>
           <Link
             aria-current={isCurrent ? "page" : undefined}
-            className={depth === 0 ? "study-directory-source-link" : `course-directory-nested-link ${isInCurrentBranch ? "active" : ""}`}
+            className={depth === 0 ? `study-directory-source-link ${isCurrent ? "active" : ""}` : `course-directory-nested-link ${isCurrent ? "active" : ""}`}
             href={href}
           >
             {depth === 0
@@ -347,34 +291,10 @@ function IeltsSectionShellContent({
               : <><span aria-hidden="true" />{node.label}</>}
           </Link>
           {node.children.length ? (
-            <button
-              aria-controls={nestedId}
-              aria-expanded={isExpanded}
-              aria-label={`${isExpanded ? "收起" : "展开"}${node.label}子页面`}
-              className="course-directory-expand-button"
-              onClick={() => setExpandedStudyNavChildIds((current) => {
-                const next = new Set(current);
-                if (next.has(nodeId)) next.delete(nodeId);
-                else next.add(nodeId);
-                return next;
-              })}
-              type="button"
-            >
-              <span aria-hidden="true" className="study-directory-chevron">{isExpanded ? "−" : "+"}</span>
-            </button>
+            <div className={depth === 0 ? "study-directory-secondary" : "study-directory-tertiary"} id={nestedId}>
+              {renderCourseDirectoryNodes(node.children, slugs, depth + 1)}
+            </div>
           ) : null}
-        </div>
-      );
-
-      return depth === 0 ? (
-        <div className={`study-directory-source-group course-directory-group ${isInCurrentBranch ? "active" : ""}`} key={node.id}>
-          {row}
-          {isExpanded ? <div className="study-directory-secondary" id={nestedId}>{renderCourseDirectoryNodes(node.children, slugs, depth + 1)}</div> : null}
-        </div>
-      ) : (
-        <div className={`study-directory-secondary-group course-directory-group ${isInCurrentBranch ? "active" : ""}`} key={node.id}>
-          {row}
-          {isExpanded ? <div className="study-directory-tertiary" id={nestedId}>{renderCourseDirectoryNodes(node.children, slugs, depth + 1)}</div> : null}
         </div>
       );
     });
@@ -392,7 +312,7 @@ function IeltsSectionShellContent({
   }
 
   const isIntegratedEnglish = activeGroup?.id === "integrated-english";
-  const examGroups = STUDY_NAV_GROUPS.filter((group) => group.id !== "integrated-english");
+  const examGroups = studyNavGroups.filter((group) => group.id !== "integrated-english");
   const isBbcPage = pathname === "/articles" || pathname.startsWith("/articles/");
   const isBbcArticle = /^\/articles\/[^/]+\/?$/.test(pathname);
   const isNewConceptPage = pathname === "/new-concept" || pathname.startsWith("/new-concept/");
@@ -509,9 +429,7 @@ function IeltsSectionShellContent({
                   </div>
                 ) : group.children.length ? (
                   <div className="study-directory-parent-row">
-                    <Link className="study-directory-source-link" href={group.href}>
-                      <strong>{group.label}</strong>
-                    </Link>
+                    {group.href.trim() ? <Link className="study-directory-source-link" href={group.href}><strong>{group.label}</strong></Link> : <span className="study-directory-source-link"><strong>{group.label}</strong></span>}
                     <button
                       aria-label={`${expandedExamGroupId === group.id ? "收起" : "展开"}${group.label}子菜单`}
                       aria-controls={`study-directory-${group.id}-children`}
@@ -532,9 +450,9 @@ function IeltsSectionShellContent({
                     </button>
                   </div>
                 ) : (
-                  <Link aria-current={isActive ? "page" : undefined} className="study-directory-source-link" href={group.href}>
-                    <strong>{group.label}</strong>
-                  </Link>
+                  group.href.trim()
+                    ? <Link aria-current={isActive ? "page" : undefined} className="study-directory-source-link" href={group.href}><strong>{group.label}</strong></Link>
+                    : <span className="study-directory-source-link"><strong>{group.label}</strong></span>
                 )}
 
                 {group.children.length && expandedExamGroupId === group.id ? <div className="study-directory-secondary" id={`study-directory-${group.id}-children`}>

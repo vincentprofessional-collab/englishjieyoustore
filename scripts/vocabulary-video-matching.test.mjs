@@ -1,40 +1,16 @@
 import assert from "node:assert/strict";
-import fs from "node:fs";
-import vm from "node:vm";
+import { readFileSync } from "node:fs";
 import test from "node:test";
-import ts from "typescript";
+import { getStaticMediaAddress } from "../src/lib/media/url.ts";
 
-test("curated video vocabulary assignments prevent filename typos matching another word", () => {
-  const catalog = JSON.parse(fs.readFileSync(new URL("../src/data/vocabulary/video-catalog.json", import.meta.url), "utf8"));
-  const filename = "Send in the next apple can 请下一个应聘者进来.mp4";
-  const item = catalog.find((candidate) => candidate.name === filename);
-  assert.deepEqual(item?.vocabularyWords, ["applicant"]);
+test("word details do not import or request the retired video catalog or player", () => {
+  for (const path of ["vocabulary-lookup-entry.tsx", "vocabulary-detail-content.tsx"]) {
+    const source = readFileSync(new URL(`../src/components/${path}`, import.meta.url), "utf8");
+    assert.doesNotMatch(source, /getVocabularyVideos|VocabularyVideoPlayer|@\/lib\/vocabulary\/videos|vocabulary-video-media/);
+  }
+});
 
-  const module = { exports: {} };
-  const dependencies = {
-    "server-only": {},
-    "next/cache": { unstable_cache: (fn) => fn },
-    "@supabase/supabase-js": { createClient: () => null },
-    "@/data/vocabulary/video-catalog.json": catalog,
-    "@/lib/media/url": { getVocabularyVideoMediaUrl: (name) => name, toSupabaseSafeStoragePath: (name) => name },
-    "@/lib/supabase/server": { createServerSupabaseClient: () => null },
-    "@/lib/vocabulary/local-vocabulary": { getAllVocabularyEntries: () => [] },
-  };
-  const source = fs.readFileSync(new URL("../src/lib/vocabulary/videos.ts", import.meta.url), "utf8");
-  const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true } }).outputText;
-  vm.runInNewContext(compiled, {
-    exports: module.exports,
-    module,
-    process: { env: {} },
-    require: (name) => {
-      assert.ok(name in dependencies, `unexpected dependency: ${name}`);
-      return dependencies[name];
-    },
-  });
-
-  const getCandidates = module.exports.getVocabularyVideoCandidates;
-  const applicantVideos = getCandidates({ normalizedWord: "applicant", inflections: [] }).map((video) => video.path);
-  const appleVideos = getCandidates({ normalizedWord: "apple", inflections: [] }).map((video) => video.path);
-  assert.ok(applicantVideos.includes(filename));
-  assert.ok(!appleVideos.includes(filename));
+test("retired video extensions do not create managed-media requests; vocabulary audio remains supported", () => {
+  for (const path of ["/videos/vocabulary/baby.mp4", "/vocabulary/example.webm"]) assert.equal(getStaticMediaAddress(path), null);
+  assert.equal(getStaticMediaAddress("/audio/new-concept/book1-us/lesson1.mp3")?.bucket, "audio");
 });

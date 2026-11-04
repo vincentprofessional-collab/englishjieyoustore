@@ -8,6 +8,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
   const directory = await getCachedPublishedCourseDirectory();
   const page = findCoursePage(directory, slug);
   if (!page) notFound();
+  const paragraphs = page.node.content.split(/\n\s*\n/).map((text) => text.trim()).filter(Boolean);
 
   return (
     <main className="course-page course-detail-page">
@@ -25,7 +26,8 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
       <header className="course-page-hero">
         <span>ENGLISH COURSE</span>
         <h1>{page.node.label}</h1>
-        <p>暂无内容，稍晚会有演示课及课程介绍等内容。</p>
+        {page.node.summary ? <p>{page.node.summary}</p> : null}
+        {paragraphs.length ? <div className="course-page-content">{paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}</div> : null}
       </header>
     </main>
   );

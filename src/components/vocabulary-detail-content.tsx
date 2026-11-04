@@ -6,6 +6,7 @@ import { VocabularyExampleArticleLink } from "@/components/vocabulary-example-ar
 import { VocabularyExampleAudioButton, VocabularyExampleFavoriteButton } from "@/components/vocabulary-example-actions";
 import { VocabularyFormationPart as VocabularyFormationPartLink } from "@/components/vocabulary-formation-part";
 import { VocabularyLookupDisplaySection } from "@/components/vocabulary-lookup-display-section";
+import { VocabularyExamQuestions } from "@/components/vocabulary-exam-questions";
 import type { VocabularyUsageExample } from "@/lib/vocabulary/examples";
 import type { VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
 import type { VocabularySynonymDistinction } from "@/lib/vocabulary/synonym-distinctions";
@@ -20,7 +21,6 @@ type VocabularyDetailContentProps = {
   etymologyEnglish?: string;
   formationUnlocked?: boolean;
   formationParts: VocabularyFormationPart[];
-  inlineVideo?: ReactNode;
   lookupLayout?: boolean;
   showExamples?: boolean;
   showIllustration?: boolean;
@@ -246,7 +246,10 @@ function UsageExamplesSection({
   examples: VocabularyUsageExample[];
   illustration?: ReactNode;
 }) {
-  const bilingualExamples = examples.filter((example) => example.englishText.trim() && example.chineseText.trim());
+  const bilingualExamples = [
+    ...examples.filter((example) => example.bookCode !== "BBC"),
+    ...examples.filter((example) => example.bookCode === "BBC"),
+  ].filter((example) => example.englishText.trim() && (example.chineseText.trim() || example.sourceType === "article"));
 
   if (bilingualExamples.length === 0) {
     if (!illustration) return null;
@@ -261,18 +264,17 @@ function UsageExamplesSection({
     <VocabularyLookupDisplaySection className="vocabulary-usage-examples" controlsEnabled id="examples" title="例句">
       <div
         className={`vocabulary-usage-example-layout${illustration ? " has-primary-school-picture" : ""}`}
-        data-has-non-bbc-examples={bilingualExamples.some((example) => example.bookCode !== "BBC") ? "true" : "false"}
       >
         <div className="vocabulary-usage-example-list">
           {bilingualExamples.map((example, index) => (
             <article className="vocabulary-usage-example-card" data-book-code={example.bookCode} id={`vocabulary-example-${index + 1}`} key={example.id}>
-              {example.sourceType === "article" || example.sourceType === "new-concept" ? (
-                <VocabularyExampleArticleLink example={example}>
-                  <div className="vocabulary-usage-example-main"><p>{example.englishText}</p>{example.chineseText ? <span>{example.chineseText}</span> : null}</div>
-                </VocabularyExampleArticleLink>
-              ) : (
-                <div className="vocabulary-usage-example-main"><p>{example.englishText}</p>{example.chineseText ? <span>{example.chineseText}</span> : null}</div>
-              )}
+              <VocabularyExampleArticleLink example={example}>
+                <div className="vocabulary-usage-example-main">
+                  <p>{example.englishText}</p>
+                  {example.chineseText ? <span>{example.chineseText}</span> : null}
+                  {example.sourceTitle ? <small className="vocabulary-usage-example-source">来源：{example.sourceTitle}</small> : null}
+                </div>
+              </VocabularyExampleArticleLink>
               <div className="vocabulary-usage-example-actions">
                 {example.audioUrl ? <VocabularyExampleAudioButton audioUrl={example.audioUrl} /> : null}
                 <VocabularyExampleFavoriteButton example={example} />
@@ -349,7 +351,6 @@ export function VocabularyDetailContent({
   etymologyEnglish = "",
   formationParts,
   formationUnlocked = false,
-  inlineVideo,
   lookupLayout = false,
   showExamples = true,
   showIllustration = true,
@@ -380,6 +381,7 @@ export function VocabularyDetailContent({
         {caution ? <WordDetailListSection items={[caution]} title="注意事项" /> : null}
         {entry.extension ? <WordDetailListSection items={[entry.extension]} title="延伸扩展" /> : null}
         {scenario && showExamples ? <SupplementalUsageScenario {...scenario} /> : null}
+        <VocabularyExamQuestions key={`${entry.word}:${entry.level}`} word={entry.word} level={entry.level} />
       </>
     );
   }
@@ -417,11 +419,11 @@ export function VocabularyDetailContent({
       <SynonymDistinctionSection groups={synonymDistinctions} />
       {wordTreeAndEtymology}
       {lookupLayout ? <WordInflectionSection entry={entry} /> : null}
-      {inlineVideo}
       <WordDetailListSection items={entry.reviewNotes} title="温故知新" />
       <PhraseSection phrases={phrases} />
       <WordDetailTagSection items={entry.synonyms} title="同义词" />
       <WordDetailTagSection items={entry.antonyms} title="反义词" />
+      <VocabularyExamQuestions key={`${entry.word}:${entry.level}`} word={entry.word} level={entry.level} />
     </>
   );
 }

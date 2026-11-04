@@ -188,31 +188,38 @@ export function ExamPrepRunner({ exam, setId, dataPath }: { exam: ExamId; setId:
     setError("");
     async function loadSet() {
       try {
-        const response = await fetch(`/exam-prep/${exam}/${dataPath}`);
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const rawStaticData = await response.json() as ExamSet;
-        const staticData = exam === "gmat" ? cleanGmatBank(rawStaticData) : rawStaticData;
+        let publishedData: ExamSet | null = null;
+        try {
+          const { data: saved, error: savedError } = await supabase
+            .from("exam_prep_banks")
+            .select("bank_data,is_deleted")
+            .eq("exam", exam)
+            .eq("bank_id", setId)
+            .eq("status", "published")
+            .maybeSingle();
+          if (!savedError && saved?.is_deleted) throw new Error("这套题库已从后台删除。");
+          if (!savedError && saved?.bank_data && typeof saved.bank_data === "object") publishedData = saved.bank_data as ExamSet;
+        } catch (loadError) {
+          if (loadError instanceof Error && loadError.message.includes("已从后台删除")) throw loadError;
+          // Static files remain a working fallback when the optional override store is unavailable.
+        }
+        if (!publishedData && dataPath) {
+          const response = await fetch(`/exam-prep/${exam}/${dataPath}`);
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          publishedData = await response.json() as ExamSet;
+        }
+        if (!publishedData) throw new Error("这组题目尚未发布或已删除，请返回题库目录。");
+        const loadedData = exam === "gmat" ? cleanGmatBank(publishedData) : publishedData;
         if (cancelled) return;
-        setBaseData(staticData);
-        if (exam === "gmat") {
-          try {
-            const { data: saved, error: savedError } = await supabase
-              .from("exam_prep_banks")
-              .select("bank_data")
-              .eq("exam", "gmat")
-              .eq("bank_id", setId)
-              .eq("status", "published")
-              .maybeSingle();
-            if (!cancelled && !savedError && saved?.bank_data) setBaseData(cleanGmatBank(saved.bank_data as ExamSet));
-          } catch { /* Keep the static GMAT bank available when its optional override table is unavailable. */ }
-        } else if (exam === "gre") {
+        setBaseData(loadedData);
+        if (exam === "gre") {
           try {
             const overrides = await loadExamPrepQuestionOverrides(exam, setId);
             if (!cancelled) setQuestionOverrides(overrides);
-          } catch { /* Keep the static GRE bank available when the override store is unreachable. */ }
+          } catch { /* Keep the published question set available if the optional question patch store is unavailable. */ }
         }
-      } catch {
-        if (!cancelled) setError("这组题目暂时无法载入，请返回目录选择其他练习。");
+      } catch (loadError) {
+        if (!cancelled) setError(loadError instanceof Error ? loadError.message : "这组题目暂时无法载入，请返回目录选择其他练习。");
       }
     }
     void loadSet();

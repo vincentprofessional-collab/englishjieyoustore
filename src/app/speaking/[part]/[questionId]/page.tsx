@@ -84,6 +84,7 @@ export default async function SpeakingModelAnswerPage({
 
   return (
     <ProjectAccessGate
+      allowLocalPreview
       contentKey={getPaidContentKey("speaking-question", `${part.id}:${questionId}`)}
       projectKey="speaking"
       title="雅思口语范文需要单独开通"

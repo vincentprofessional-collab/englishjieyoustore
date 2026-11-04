@@ -172,7 +172,7 @@ export const speakingModelAnswers = [
       "目前我在大学学习媒体与传播。我选择这个专业，是因为我对人们如何理解和判断信息很感兴趣，尤其是现在我们很多日常生活都通过屏幕发生。它不只是关于社交媒体；我们也会学习新闻、受众行为和媒介素养。",
       "这门课程的学习曲线相当陡，因为有些理论比较抽象，阅读量也很大。话虽如此，我很喜欢实践型项目，比如分析短视频或策划一个小型传播活动。它们让我能更批判地观察数字行为，所以我觉得这个专业既实用，也有思考价值。",
     ],
-    audioUrl: "/speaking/audio/speaking-part-1-003.mp3",
+    audioUrl: "/speaking/audio/speaking-part-1-003-work-or-study.mp3",
     band8AudioUrl: "/speaking/audio/speaking-part-1-003-work-or-study-band-8.mp3",
   },
   {
@@ -467,6 +467,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-010",
+    audioUrl: "/speaking/audio/speaking-part-1-010-scenery.mp3",
     band8AudioUrl: "/speaking/audio/speaking-part-1-010-scenery-band-8.mp3",
     approach: "风景题把自然景观和情绪修复联系起来。地点可以普通，但要说出为什么比打卡更有意义。",
     frames: [
@@ -514,6 +515,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-011",
+    audioUrl: "/speaking/audio/speaking-part-1-011-sports-team.mp3",
     approach: "团队运动题不必假装自己很擅长。可以区分观看和参与，再讲团队协作带来的价值。",
     frames: [
       "I enjoy watching team sports more than ...",
@@ -538,6 +540,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-012",
+    audioUrl: "/speaking/audio/speaking-part-1-012-food-and-cooking.mp3",
     approach: "饮食题用一道具体食物开头，再讲自己的真实厨艺和家庭分工。把做饭和情绪稳定联系起来会更高级。",
     frames: [
       "My favourite food is ... because ...",
@@ -562,6 +565,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-013",
+    audioUrl: "/speaking/audio/speaking-part-1-013-old-buildings.mp3",
     approach: "老建筑题用平衡回答：有价值的应保护，但日常居住仍需要现代安全和便利。避免绝对化。",
     frames: [
       "I think old buildings should be preserved if ...",
@@ -586,6 +590,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-014",
+    audioUrl: "/speaking/audio/speaking-part-1-014-parks-and-public-gardens.mp3",
     approach: "公园题可用童年与现在对比，再强调小而近的社区公园比遥远大公园更影响日常生活。",
     frames: [
       "As a child, I liked parks because ...",
@@ -610,6 +615,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-015",
+    audioUrl: "/speaking/audio/speaking-part-1-015-music.mp3",
     approach: "音乐题用场景回答不同音乐喜好，再讲是否学过乐器。可以借鉴 BBC 关于音乐与记忆的角度。",
     frames: [
       "Music is part of my day, especially when ...",
@@ -709,6 +715,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-019",
+    audioUrl: "/speaking/audio/speaking-part-1-019-cars.mp3",
     approach: "汽车题可以承认车程方便，但也讲堵车、环保和自己更喜欢当乘客。答案会比单纯说喜欢开车更真实。",
     frames: [
       "I enjoy car travel when ...",
@@ -733,6 +740,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-020",
+    audioUrl: "/speaking/audio/speaking-part-1-020-morning-time.mp3",
     approach: "早晨题先表明是否早起，再讲一个固定动作和早餐态度。用身体状态而不是空泛自律来回答。",
     frames: [
       "I’m not a natural morning person, but ...",
@@ -757,6 +765,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-021",
+    audioUrl: "/speaking/audio/speaking-part-1-021-dream-and-ambition.mp3",
     approach: "梦想题可以讲童年梦想的变化，再讲现在更现实的抱负。重点是成熟，不是夸大目标。",
     frames: [
       "When I was a child, I dreamed of ...",
@@ -781,6 +790,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-022",
+    audioUrl: "/speaking/audio/speaking-part-1-022-shopping.mp3",
     approach: "购物题用线上线下对比，再说比价习惯。不要把自己说成完全理性，承认偶尔冲动更自然。",
     frames: [
       "I do more shopping online because ...",
@@ -955,6 +965,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-029",
+    audioUrl: "/speaking/audio/speaking-part-1-029-gifts.mp3",
     approach: "礼物题用“用心大于价格”展开，再比较手工和购买礼物，最后说选礼物要考虑对方真正需要什么。",
     frames: [
       "I do like giving gifts, especially when ...",
@@ -979,6 +990,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-030",
+    audioUrl: "/speaking/audio/speaking-part-1-030-jokes-and-comedies.mp3",
     approach: "笑话和喜剧题可以承认自己不擅长讲笑话，但喜欢自然幽默；强调幽默要看场合，避免冒犯。",
     frames: [
       "I’m not brilliant at telling jokes, but ...",
@@ -1003,6 +1015,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-031",
+    audioUrl: "/speaking/audio/speaking-part-1-031-smiling.mp3",
     approach: "微笑题可讲频率、对象和场合。重点区分真诚微笑和礼貌性微笑，答案会更成熟。",
     frames: [
       "I smile quite often when ...",
@@ -1027,6 +1040,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-032",
+    audioUrl: "/speaking/audio/speaking-part-1-032-social-media.mp3",
     approach: "社交媒体题讲具体平台、用途和自控。高分关键是承认便利，同时点出 screen time、FOMO 和隐私问题。",
     frames: [
       "The platforms I use most are ...",
@@ -1051,6 +1065,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-033",
+    audioUrl: "/speaking/audio/speaking-part-1-033-headphones.mp3",
     approach: "耳机题先说使用场景，再讲安全和礼貌限制。这样答案不只是物品描述，而有观点。",
     frames: [
       "I use headphones quite a lot, especially when ...",
@@ -1075,6 +1090,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-034",
+    audioUrl: "/speaking/audio/speaking-part-1-034-typing.mp3",
     approach: "打字题要比较 typing 和 handwriting。用学习场景解释：打字快，手写更有记忆和思考感。",
     frames: [
       "I type quite a lot because ...",
@@ -1099,6 +1115,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-035",
+    audioUrl: "/speaking/audio/speaking-part-1-035-websites.mp3",
     approach: "网站题讲常去网站类型，不要报太多品牌。再补充国内流行网站和隐私意识，显得观点完整。",
     frames: [
       "The websites I visit most often are ...",
@@ -1123,6 +1140,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-036",
+    audioUrl: "/speaking/audio/speaking-part-1-036-outer-space-and-stars.mp3",
     approach: "外太空题可把科幻兴趣和真实太空旅行分开。喜欢想象，但对风险保持现实态度。",
     frames: [
       "I do enjoy sci-fi movies, especially when ...",
@@ -1147,6 +1165,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-037",
+    audioUrl: "/speaking/audio/speaking-part-1-037-person-who-inspires-you.mp3",
     approach: "激励人物题不要说得像作文。用一个身边人、一个具体品质和一个真实影响来回答。",
     frames: [
       "The person who inspires me most is ...",
@@ -1171,6 +1190,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-038",
+    audioUrl: "/speaking/audio/speaking-part-1-038-friends-or-family.mp3",
     approach: "家人朋友偏好题用分场景回答。不要绝对化，说明情感支持和日常放松的不同作用。",
     frames: [
       "It depends on the situation, but ...",
@@ -1195,6 +1215,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-039",
+    audioUrl: "/speaking/audio/speaking-part-1-039-advice.mp3",
     approach: "建议题要说向谁求助、为什么信任、建议如何帮你厘清问题。用具体对象比泛泛回答更自然。",
     frames: [
       "When I need advice, I usually turn to ...",
@@ -1219,6 +1240,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-040",
+    audioUrl: "/speaking/audio/speaking-part-1-015-music.mp3",
     approach: "听音乐题可以讲频率、类型和作用。避免只列歌手，用情绪和场景把答案说活。",
     frames: [
       "Yes, I listen to music almost ...",
@@ -1243,6 +1265,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-041",
+    audioUrl: "/speaking/audio/speaking-part-1-041-free-time.mp3",
     approach: "空闲时间题用真实低成本活动，不要堆很多爱好。重点讲它如何帮你恢复精力。",
     frames: [
       "In my free time, I usually ...",
@@ -1267,6 +1290,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-042",
+    audioUrl: "/speaking/audio/speaking-part-1-042-city-or-countryside.mp3",
     approach: "城市乡村题用优缺点平衡。学生口吻可以说当前更适合城市，长期可能更向往乡村。",
     frames: [
       "At this stage of my life, I prefer ...",
@@ -1291,6 +1315,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-043",
+    audioUrl: "/speaking/audio/speaking-part-1-043-place-to-relax.mp3",
     approach: "放松地点题讲具体环境和感官感受。用一个常去地点，解释为什么它能让你清空大脑。",
     frames: [
       "A place I like to go to relax is ...",
@@ -1315,6 +1340,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-044",
+    audioUrl: "/speaking/audio/speaking-part-1-003-work-or-study.mp3",
     approach: "工作学习题按学生身份回答：专业、原因、感受、未来用途。保持具体但不泄露个人隐私。",
     frames: [
       "I’m currently a student, and I study ...",
@@ -1339,6 +1365,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-045",
+    audioUrl: "/speaking/audio/speaking-part-1-045-studying-alone-or-with-others.mp3",
     approach: "独学还是共学题用任务类型区分：输入型独学，讨论型共学。这样比单选更真实。",
     frames: [
       "It depends on what I’m studying.",
@@ -1363,6 +1390,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-046",
+    audioUrl: "/speaking/audio/speaking-part-1-046-people-in-your-country.mp3",
     approach: "国家友好度题避免绝对化。用陌生人、服务场景和熟人圈三种层次来回答。",
     frames: [
       "In general, I think people are ...",
@@ -1387,6 +1415,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-047",
+    audioUrl: "/speaking/audio/speaking-part-1-047-gifts.mp3",
     approach: "买礼物题和 Gifts 区分：这里重点回答购买频率、对象和预算，而不是泛讲礼物意义。",
     frames: [
       "I buy gifts for others from time to time, especially ...",
@@ -1411,6 +1440,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-048",
+    audioUrl: "/speaking/audio/speaking-part-1-048-favorite-object-at-home.mp3",
     approach: "家中物品题要选一个有细节的小物件。用地点、用途和情感价值支撑答案。",
     frames: [
       "My favourite object at home is ...",
@@ -1435,6 +1465,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-049",
+    audioUrl: "/speaking/audio/speaking-part-1-049-trying-new-activities.mp3",
     approach: "尝试新活动题要承认一开始会紧张，再讲低风险尝试如何扩大生活经验。",
     frames: [
       "I enjoy trying new activities, but ...",
@@ -1459,6 +1490,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-050",
+    audioUrl: "/speaking/audio/speaking-part-1-008-hobbies.mp3",
     approach: "爱好题不要泛泛说 enjoy。讲一个稳定爱好、频率、具体收益和能否长期坚持。",
     frames: [
       "One hobby I’ve kept for a while is ...",
@@ -1483,6 +1515,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-051",
+    audioUrl: "/speaking/audio/speaking-part-1-051-keys.mp3",
     approach: "钥匙题用日常细节回答：带几把、如何防丢、丢钥匙的后果。简单题也要有生活感。",
     frames: [
       "Yes, I carry keys almost every day.",
@@ -1582,6 +1615,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-055",
+    audioUrl: "/speaking/audio/speaking-part-1-055-dreams.mp3",
     approach: "梦境题要区分 night dreams 和 goals。讲是否常记得梦、梦的类型和睡眠状态的关系。",
     frames: [
       "I don’t remember my dreams every day, but ...",
@@ -1606,6 +1640,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-056",
+    audioUrl: "/speaking/audio/speaking-part-1-056-transport.mp3",
     approach: "交通题用日常通勤回答，再补充高峰期和环保意识。Part1 不需要展开成城市规划。",
     frames: [
       "The transport I use most often is ...",
@@ -1655,6 +1690,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-058",
+    audioUrl: "/speaking/audio/speaking-part-1-058-public-places.mp3",
     approach: "公共场所题要讲行为规范：音量、垃圾、排队、个人空间。答案可体现公民意识。",
     frames: [
       "In public places, I think people should ...",
@@ -1679,6 +1715,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-059",
+    audioUrl: "/speaking/audio/speaking-part-1-059-tv.mp3",
     approach: "电视题结合流媒体时代回答。说明不常看传统电视，但会看节目类型和使用场景。",
     frames: [
       "I don’t watch traditional TV very often, but ...",
@@ -1728,6 +1765,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-061",
+    audioUrl: "/speaking/audio/speaking-part-1-061-crowded-places.mp3",
     approach: "拥挤场所题讲感受、原因和处理方法。用 peak hours、personal space 表达具体。",
     frames: [
       "I don’t really enjoy crowded places because ...",
@@ -1752,6 +1790,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-062",
+    audioUrl: "/speaking/audio/speaking-part-1-062-travel.mp3",
     approach: "旅行题讲偏好和方式。Part1 用目的、准备和体验感回答，不要展开成 Part2 故事。",
     frames: [
       "I enjoy travelling, especially when ...",
@@ -1776,6 +1815,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-063",
+    audioUrl: "/speaking/audio/speaking-part-1-063-shoes.mp3",
     approach: "鞋子题从数量、偏好和实用性回答。重点讲舒适度，不要变成购物广告。",
     frames: [
       "I don’t have a huge number of shoes, but ...",
@@ -1825,6 +1865,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-065",
+    audioUrl: "/speaking/audio/speaking-part-1-065-doing-sth-well.mp3",
     approach: "把事情做好题要讲一个可迁移能力，如写作、整理或演讲。强调练习、反馈和细节。",
     frames: [
       "One thing I’m quite good at is ...",
@@ -1849,6 +1890,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-066",
+    audioUrl: "/speaking/audio/speaking-part-1-066-working-with-old-people.mp3",
     approach: "与老人共事题可讲尊重、耐心和代际差异。没有真实工作经历时，用志愿活动或家庭互动回答。",
     frames: [
       "I haven’t worked with old people formally, but ...",
@@ -1873,6 +1915,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-067",
+    audioUrl: "/speaking/audio/speaking-part-1-067-rules.mp3",
     approach: "规则题先说明总体态度，再举学校或公共场所规则。强调合理规则保护效率和安全。",
     frames: [
       "In general, I think rules are necessary because ...",
@@ -1897,6 +1940,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-068",
+    audioUrl: "/speaking/audio/speaking-part-1-068-cellphones.mp3",
     approach: "手机题讲使用频率和依赖感，同时加入通知管理。要平衡便利和分心。",
     frames: [
       "I use my cellphone every day for ...",
@@ -1921,6 +1965,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-069",
+    audioUrl: "/speaking/audio/speaking-part-1-069-plants.mp3",
     approach: "植物题用是否养植物、喜欢原因和照顾难度回答。学生口吻可以选择低维护植物。",
     frames: [
       "I like plants, although ...",
@@ -1945,6 +1990,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-070",
+    audioUrl: "/speaking/audio/speaking-part-1-070-weather.mp3",
     approach: "天气题讲偏好、天气对心情和计划的影响。不要只说 sunny/rainy，补湿度或阴天细节。",
     frames: [
       "The weather I like most is ...",
@@ -1969,6 +2015,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-1",
     questionId: "speaking-part-1-071",
+    audioUrl: "/speaking/audio/speaking-part-1-071-art.mp3",
     approach: "艺术题讲个人兴趣，不必装专家。用画展、电影海报、设计等日常艺术入口回答。",
     frames: [
       "I like art, but ...",
@@ -2148,6 +2195,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-2",
     questionId: "speaking-part-2-006",
+    audioUrl: "/speaking/audio/speaking-part-2-006-difficult-task.mp3",
     approach: "困难任务题要具体说明任务、压力来源、解决方法和结果。重点展示拆解问题和坚持完成的过程。",
     frames: [
       "A difficult task I completed was ...",
@@ -2178,6 +2226,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-2",
     questionId: "speaking-part-2-007",
+    audioUrl: "/speaking/audio/speaking-part-2-007-happy-event.mp3",
     approach: "组织活动题按“为什么组织—如何分工—现场亮点—个人感受”展开，突出组织能力和快乐氛围。",
     frames: [
       "I organised this event for ...",
@@ -2208,6 +2257,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-2",
     questionId: "speaking-part-2-008",
+    audioUrl: "/speaking/audio/speaking-part-2-008-historical-period.mp3",
     approach: "历史时期题不要像背历史书。选择一个你真想理解的阶段，讲为什么好奇、想了解什么、对今天有什么启发。",
     frames: [
       "The historical period I’d like to learn more about is ...",
@@ -2238,6 +2288,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-2",
     questionId: "speaking-part-2-009",
+    audioUrl: "/speaking/audio/speaking-part-2-009-life-changing-event.mp3",
     approach: "改变人生的经历要讲“前后对比”。选择离家上大学这类真实经历，突出独立性和成长。",
     frames: [
       "A life-changing event for me was ...",
@@ -2268,6 +2319,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-2",
     questionId: "speaking-part-2-010",
+    audioUrl: "/speaking/audio/speaking-part-2-010-missed-meeting.mp3",
     approach: "迟到或错过会议题要主动承担责任，讲清楚原因、补救和学到的时间管理。",
     frames: [
       "I once missed a meeting with ...",
@@ -2298,6 +2350,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-2",
     questionId: "speaking-part-2-011",
+    audioUrl: "/speaking/audio/speaking-part-2-011-party.mp3",
     approach: "派对题讲氛围比讲规模更重要。用朋友生日派对突出放松、互动和情绪变化。",
     frames: [
       "A party I really enjoyed was ...",
@@ -2358,6 +2411,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-2",
     questionId: "speaking-part-2-013",
+    audioUrl: "/speaking/audio/speaking-part-2-013-positive-change.mp3",
     approach: "积极改变题选一个可持续小习惯，比宏大改变更可信。讲起因、执行困难和长期收益。",
     frames: [
       "A positive change in my life was ...",
@@ -2388,6 +2442,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-2",
     questionId: "speaking-part-2-014",
+    audioUrl: "/speaking/audio/speaking-part-2-014-positive-change-you-made.mp3",
     approach: "同样是积极改变，这题强调“主动做出的改变”。用自己做饭更贴近日常，也能自然接 BBC 食物词汇。",
     frames: [
       "A positive change I made was ...",
@@ -2418,6 +2473,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-2",
     questionId: "speaking-part-2-015",
+    audioUrl: "/speaking/audio/speaking-part-2-015-prize-received.mp3",
     approach: "奖项题避免炫耀，重点讲努力过程、奖项意义和它如何增强自信。",
     frames: [
       "A prize I received was ...",
@@ -2448,6 +2504,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-2",
     questionId: "speaking-part-2-016",
+    audioUrl: "/speaking/audio/speaking-part-2-016-public-event.mp3",
     approach: "公共活动题要体现“公众参与”和现场氛围。选城市公益跑或文化节，容易连接社区、组织和个人体验。",
     frames: [
       "A public event I attended was ...",
@@ -2478,6 +2535,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-2",
     questionId: "speaking-part-2-017",
+    audioUrl: "/speaking/audio/speaking-part-2-017-special-cheap-day-out.mp3",
     approach: "低花费外出题重点不是“穷游”，而是说明便宜却特别。用免费展览、步行和简单食物突出价值感。",
     frames: [
       "A special cheap day out I remember was ...",
@@ -2508,6 +2566,7 @@ export const speakingModelAnswers = [
   {
     partId: "part-2",
     questionId: "speaking-part-2-018",
+    audioUrl: "/speaking/audio/speaking-part-2-018-special-meal.mp3",
     approach: "特别一餐题要讲做饭的人、具体食物和情感意义。不要只描述味道，重点放在关心和回忆。",
     frames: [
       "A special meal someone made for me was ...",

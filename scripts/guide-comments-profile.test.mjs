@@ -54,6 +54,7 @@ function postCardFixture(linkTitle = false) {
     return [states[index], value => { states[index] = typeof value === "function" ? value(states[index]) : value; }];
   } };
   const component = load("../src/components/guide-board.tsx", { react, "react/jsx-runtime": jsx,
+    "@/components/post-image-gallery": { PostImageGallery: () => null },
     "next/link": { __esModule: true, default: props => React.createElement("a", props) }, "next/navigation": {}, "@/lib/content/guide-post-navigation": {},
     "@/lib/guide/posts": {}, "@/lib/membership/current-membership": membership, "@/lib/supabase/client": {}, "@/lib/visitor-identity": {}, "@/lib/guide/comments": model,
   }, "\nexports.Card = GuidePostCard; exports.TitleCard = GuidePostTitleCard;");

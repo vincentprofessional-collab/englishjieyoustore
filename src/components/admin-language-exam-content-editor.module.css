@@ -1,0 +1,24 @@
+.editor { display: grid; gap: 18px; }
+.heading, .sectionHead, .blockHeader { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.heading h2, .sectionHead h3 { margin: 4px 0; }
+.heading p, .sectionHead p { margin: 4px 0 0; color: var(--muted); }
+.message { margin: 0; border-radius: 10px; background: #eef6f8; padding: 12px 14px; }
+.columns { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.panel { display: grid; gap: 14px; min-width: 0; border: 1px solid var(--line, #e4ded2); border-radius: 14px; background: #fffdf8; padding: 16px; }
+.panel label { display: grid; gap: 6px; color: var(--ink); font-weight: 650; }
+.panel input, .panel textarea, .panel select { box-sizing: border-box; width: 100%; min-width: 0; border: 1px solid #d9d1c2; border-radius: 8px; background: #fff; color: inherit; font: inherit; padding: 9px 11px; }
+.panel textarea { resize: vertical; line-height: 1.55; }
+.examSelect { max-width: 320px; }
+.menuNode { display: grid; gap: 10px; border: 1px solid #e4decf; border-radius: 12px; background: #fff; padding: 12px; }
+.nestedNode { margin-left: 18px; border-left: 3px solid #d7e8ee; }
+.menuFields { display: grid; grid-template-columns: minmax(100px, .8fr) minmax(0, 1.4fr) auto; align-items: end; gap: 10px; }
+.hrefField { min-width: 180px; }
+.matchField { display: flex !important; align-items: center; gap: 6px !important; white-space: nowrap; }
+.matchField input { width: auto; }
+.menuActions { display: flex; gap: 6px; }
+.menuActions button, .blockHeader button { border: 1px solid #d8d0c1; border-radius: 7px; background: #fff; color: inherit; cursor: pointer; font: inherit; font-size: 13px; padding: 7px 9px; }
+.danger { border-color: #dfb6af !important; color: #a13c31 !important; }
+.block { display: grid; gap: 10px; border: 1px solid #e4decf; border-radius: 12px; background: #fff; padding: 12px; }
+.blockHeader { align-items: center; }
+@media (max-width: 1000px) { .columns { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 650px) { .heading, .sectionHead { flex-direction: column; } .menuFields { grid-template-columns: minmax(0, 1fr); } .nestedNode { margin-left: 8px; } }

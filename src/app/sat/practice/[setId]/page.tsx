@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { SatPracticeRunner } from "@/components/sat/sat-practice-runner";
-import { getSatCatalogIndex, getSatKnowledgeIndex, getSatSet } from "@/lib/sat/library";
+import { getSatCatalogIndex, getSatKnowledgeIndex } from "@/lib/sat/library";
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export const metadata: Metadata = {
   title: "SAT 题组练习｜英文解忧杂货铺",
@@ -16,6 +15,5 @@ export function generateStaticParams() {
 
 export default async function SatPracticePage({ params }: { params: Promise<{ setId: string }> }) {
   const { setId } = await params;
-  if (!getSatSet(setId)) notFound();
   return <SatPracticeRunner setId={setId} />;
 }

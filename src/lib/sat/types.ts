@@ -94,6 +94,7 @@ export type SatPastPaperIndex = {
 };
 
 export type SatSetSummary = Omit<SatSet, "questions" | "sourceRefs"> & {
+  questionCount?: number;
   sourceRefs: Array<Pick<SatSourceRef, "role" | "path" | "sha256">>;
 };
 

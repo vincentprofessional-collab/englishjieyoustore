@@ -73,10 +73,15 @@ export function AdminCourseDirectory() {
     setMessage("");
   }
 
+  function updateHomepage<K extends keyof CourseDirectory["homepage"]>(key: K, value: CourseDirectory["homepage"][K]) {
+    setDirectory((current) => ({ ...current, homepage: { ...current.homepage, [key]: value } }));
+    setMessage("");
+  }
+
   function addNode(parentPath: string[] = []) {
     const node = createCoursePageNode();
     setDirectory((current) => ({ ...current, groups: addCourseNode(current.groups, parentPath, node) }));
-    setMessage("新页面已添加；修改标题、路径和说明后发布目录。新增子页面后可在帖子管理中选择它的路径。 ");
+    setMessage("新页面已添加；可修改标题、路径、说明和正文后发布目录。");
   }
 
   function deleteNode(id: string, label: string, hasChildren: boolean) {
@@ -130,6 +135,10 @@ export function AdminCourseDirectory() {
               页面说明
               <textarea maxLength={500} onChange={(event) => updateNode(path, (current) => ({ ...current, summary: event.target.value }))} rows={2} value={node.summary} />
             </label>
+            <label className="course-admin-summary-field">
+              右侧正文（段落之间空一行）
+              <textarea maxLength={12000} onChange={(event) => updateNode(path, (current) => ({ ...current, content: event.target.value }))} rows={6} value={node.content} />
+            </label>
           </div>
           <div className="course-admin-node-actions">
             <small>层级 {depth + 1} · {node.children.length ? `${countCoursePages(node.children)} 个下级页面` : "可在此页面发布帖子"}</small>
@@ -152,7 +161,7 @@ export function AdminCourseDirectory() {
         <div>
           <span>COURSE DIRECTORY</span>
           <h2>英语课程页面</h2>
-          <p>维护左侧栏目和页面层级。帖子管理中选择课程页面路径，即可将帖子发布到相应页面。</p>
+          <p>维护左侧菜单，以及课程首页和每个课程页面右侧的标题、说明与正文。修改后发布目录即可生效。</p>
         </div>
         <div className="course-admin-heading-actions">
           <button className="button secondary" onClick={() => addNode()} type="button">新增一级页面</button>
@@ -160,6 +169,23 @@ export function AdminCourseDirectory() {
         </div>
       </header>
       {message ? <p className="course-admin-message" role="status">{message}</p> : null}
+      <section className="course-admin-node">
+        <header className="admin-compact-heading"><h3>课程首页右侧内容</h3></header>
+        <div className="course-admin-node-fields">
+          <label>
+            页面标题
+            <input maxLength={80} onChange={(event) => updateHomepage("title", event.target.value)} value={directory.homepage.title} />
+          </label>
+          <label className="course-admin-summary-field">
+            页面说明
+            <textarea maxLength={500} onChange={(event) => updateHomepage("summary", event.target.value)} rows={2} value={directory.homepage.summary} />
+          </label>
+          <label className="course-admin-summary-field">
+            正文（段落之间空一行）
+            <textarea maxLength={12000} onChange={(event) => updateHomepage("content", event.target.value)} rows={6} value={directory.homepage.content} />
+          </label>
+        </div>
+      </section>
       <div className="course-admin-tree">{renderNodes(directory.groups)}</div>
       <p className="course-admin-footnote">页面路径只能使用小写英文字母、数字和连字符；同级页面路径不能重复。修改或删除路径后，发布在旧路径的帖子仍保留在后台，需要在帖子管理中重新选择新路径。当前目录共 {countCoursePages(directory.groups)} 个页面。</p>
     </section>
