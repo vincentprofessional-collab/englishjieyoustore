@@ -37,8 +37,8 @@ MORPHOLOGY_CORRECTIONS = {
     "gon": ["Greek gōnia（角、角度）", "-gon（构成多边形名称的后缀）"],
 }
 LEVEL_ORDER = [
-    "小学", "初中", "高中", "高考必修", "高中必修词汇", "高中选修词汇",
-    "四级", "四级核心词汇", "四级派生词", "六级", "六级核心词汇", "六级派生词",
+    "小学", "初中", "高中", "高考必修", "高中必修词汇", "高中选修词汇", "高中大纲词汇",
+    "四级", "四级核心词汇", "四级派生词", "四级大纲词汇", "六级", "六级核心词汇", "六级派生词", "六级大纲词汇",
     "考研", "托雅", "SAT", "GMAT", "GRE", "雅思", "其他词汇",
 ]
 LEVEL_ALIASES = {"sat": "SAT", "其他": "其他", "其它": "其他", "未分级": "其他"}
@@ -55,11 +55,14 @@ STAGE_FREQUENCY_COLUMN = {
     "GRE": "GRE（整理版）",
     "高中必修词汇": "高考",
     "高中选修词汇": "高考",
+    "高中大纲词汇": "高考",
     "高考必修": "高考",
     "四级核心词汇": "四级",
     "四级派生词": "四级",
+    "四级大纲词汇": "四级",
     "六级核心词汇": "六级",
     "六级派生词": "六级",
+    "六级大纲词汇": "六级",
     "雅思": "雅思",
 }
 STAGE_FREQUENCY_COLUMNS = {
@@ -74,16 +77,19 @@ STAGE_FREQUENCY_COLUMNS = {
     "GRE": "GRE（整理版）",
     "高中必修词汇": "高考",
     "高中选修词汇": "高考",
+    "高中大纲词汇": "高考",
     "高考必修": "高考",
     "四级核心词汇": "四级",
     "四级派生词": "四级",
+    "四级大纲词汇": "四级",
     "六级核心词汇": "六级",
     "六级派生词": "六级",
+    "六级大纲词汇": "六级",
     "雅思": "雅思",
 }
 GROUPED_STUDY_BOOKS = [
-    "小学", "初中", "高中", "高考必修", "高中必修词汇", "高中选修词汇", "四级", "四级核心词汇", "四级派生词",
-    "六级", "六级核心词汇", "六级派生词", "考研", "GRE", "GMAT", "SAT", "托雅", "雅思", "其他词汇",
+    "小学", "初中", "高中", "高考必修", "高中大纲词汇", "高中必修词汇", "高中选修词汇", "四级", "四级大纲词汇", "四级核心词汇", "四级派生词",
+    "六级", "六级大纲词汇", "六级核心词汇", "六级派生词", "考研", "GRE", "GMAT", "SAT", "托雅", "雅思", "其他词汇",
 ]
 STUDY_BOOK_MAX_WORDS = {
     "小学": 1000,
@@ -491,6 +497,15 @@ def main():
     for _, record in high_school_candidates[:3000]:
         if "高考必修" not in record["studyBookMemberships"]:
             record["studyBookMemberships"].append("高考必修")
+    for record in records.values():
+        memberships = set(record["studyBookMemberships"])
+        for merged_book, source_books in (
+            ("高中大纲词汇", {"高中必修词汇", "高中选修词汇"}),
+            ("四级大纲词汇", {"四级核心词汇", "四级派生词"}),
+            ("六级大纲词汇", {"六级核心词汇", "六级派生词"}),
+        ):
+            if memberships.intersection(source_books) and merged_book not in record["studyBookMemberships"]:
+                record["studyBookMemberships"].append(merged_book)
     selected_by_book = {}
     study_book_max_words = dict(STUDY_BOOK_MAX_WORDS)
     study_book_max_words["雅思"] = max(study_book_max_words["雅思"], len(ielts_required_words))
@@ -498,7 +513,10 @@ def main():
         members = [
             (word, record) for word, record in records.items()
             if (
-                (book in record["studyBookMemberships"] or (book == "雅思" and record["stageFrequencies"].get("雅思", 0) > 0))
+                (
+                    book in record["studyBookMemberships"]
+                    or (book in {"GMAT", "雅思"} and record["stageFrequencies"].get(book, 0) > 0)
+                )
                 and not (book == "雅思" and re.search(r"\d", word))
             )
         ]
@@ -518,6 +536,16 @@ def main():
             if len(selected) >= maximum:
                 break
             selected.add(word)
+        if book == "GMAT" and len(selected) < maximum:
+            fallback = sorted(records.items(), key=lambda item: (
+                -(item[1]["totalFrequency"] or 0),
+                item[1]["frequencyRank"] if item[1]["frequencyRank"] is not None else 10**12,
+                item[0],
+            ))
+            for word, _ in fallback:
+                if len(selected) >= maximum:
+                    break
+                selected.add(word)
         for word, record in records.items():
             has_book = book in record["studyBookMemberships"]
             keep_book = word in selected

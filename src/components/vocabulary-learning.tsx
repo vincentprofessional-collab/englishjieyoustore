@@ -120,8 +120,8 @@ function orderWordsForStudy(words: LearningWord[], _order: SortOrder, book: Book
 }
 
 const FREQUENCY_ORDERED_BOOKS = new Set<BookSelectionKey>([
-  "小学", "初中", "高中", "高考必修", "高中必修词汇", "高中选修词汇",
-  "四级", "四级核心词汇", "四级派生词", "六级", "六级核心词汇", "六级派生词",
+  "小学", "初中", "高中", "高考必修", "高中大纲词汇", "高中必修词汇", "高中选修词汇",
+  "四级", "四级大纲词汇", "四级核心词汇", "四级派生词", "六级", "六级大纲词汇", "六级核心词汇", "六级派生词",
   "考研", "托雅", "SAT", "GMAT", "GRE", "雅思", "其他词汇",
 ]);
 const STUDY_FREQUENCY_KEYS: Partial<Record<BookSelectionKey, string>> = {
@@ -131,10 +131,13 @@ const STUDY_FREQUENCY_KEYS: Partial<Record<BookSelectionKey, string>> = {
   高考必修: "高考必修",
   高中必修词汇: "高中必修词汇",
   高中选修词汇: "高中选修词汇",
+  高中大纲词汇: "高考",
   四级: "四级",
+  四级大纲词汇: "四级",
   四级核心词汇: "四级核心词汇",
   四级派生词: "四级派生词",
   六级: "六级",
+  六级大纲词汇: "六级",
   六级核心词汇: "六级核心词汇",
   六级派生词: "六级派生词",
   考研: "考研",
@@ -2063,7 +2066,9 @@ function VocabularyCollectionList({
   error,
   loading,
   onDelete,
+  onDeleteMany,
   onMove,
+  onMoveMany,
   returnTo,
   words,
 }: {
@@ -2071,21 +2076,56 @@ function VocabularyCollectionList({
   error: string;
   loading: boolean;
   onDelete: (wordId: string) => void;
+  onDeleteMany: (wordIds: string[]) => void;
   onMove: (wordId: string, collection: LearningCollectionKey) => void;
+  onMoveMany: (wordIds: string[], collection: LearningCollectionKey) => void;
   returnTo: string;
   words: CollectionVocabularyWord[];
 }) {
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const title = LEARNING_COLLECTIONS.find((item) => item.key === collection)?.label ?? collection;
+  const currentIds = words.map((word) => word.id);
+  const currentIdSet = new Set(currentIds);
+  const selectedWordIds = selectedIds.filter((id) => currentIdSet.has(id));
+  const allSelected = currentIds.length > 0 && selectedWordIds.length === currentIds.length;
+  const toggleSelectedWord = (wordId: string) => {
+    setSelectedIds((current) => current.includes(wordId)
+      ? current.filter((id) => id !== wordId)
+      : [...current, wordId]);
+  };
+  const clearSelection = () => setSelectedIds([]);
+  const deleteSelected = () => {
+    if (!selectedWordIds.length) return;
+    onDeleteMany(selectedWordIds);
+    clearSelection();
+  };
+  const moveSelected = (target: LearningCollectionKey) => {
+    if (!selectedWordIds.length) return;
+    onMoveMany(selectedWordIds, target);
+    clearSelection();
+  };
   return (
     <section aria-label={`${title}词汇表`} className="vocabulary-learning-collection-view">
       <header>
-        <div><p>词汇分类</p><h2>{title}</h2><span>{loading ? "正在加载…" : `${words.length.toLocaleString()} 个词汇`}</span></div>
+        <h2>{title}</h2>
+        <details className="vocabulary-learning-collection-bulk-menu">
+          <summary>{selectedWordIds.length ? `已选 ${selectedWordIds.length} 项` : "全部选取"}<span aria-hidden="true">▾</span></summary>
+          <div className="vocabulary-learning-collection-bulk-panel">
+            <button disabled={loading || words.length === 0} onClick={() => setSelectedIds(allSelected ? [] : currentIds)} type="button">{allSelected ? "取消全选" : "全部选取"}</button>
+            <button disabled={selectedWordIds.length === 0} onClick={deleteSelected} type="button">全部删除</button>
+            <p>移动到</p>
+            {LEARNING_COLLECTIONS.filter((item) => item.key !== collection).map((item) => (
+              <button disabled={selectedWordIds.length === 0} key={item.key} onClick={() => moveSelected(item.key)} type="button">{item.label}</button>
+            ))}
+          </div>
+        </details>
       </header>
       {error ? <p className="vocabulary-learning-collection-message" role="alert">{error}</p> : null}
       {!loading && !error && words.length === 0 ? <p className="vocabulary-learning-collection-message">这个词汇表里还没有单词。</p> : null}
       <ol className="vocabulary-learning-collection-rows">
         {words.map((word, index) => (
-          <li key={word.id}>
+          <li className={selectedWordIds.includes(word.id) ? "is-selected" : undefined} key={word.id}>
+            <input aria-label={`选择${word.word}`} checked={selectedWordIds.includes(word.id)} onChange={() => toggleSelectedWord(word.id)} type="checkbox" />
             <span className="vocabulary-learning-collection-index">{index + 1}</span>
             <div className="vocabulary-learning-collection-word-content">
               <div className="vocabulary-learning-collection-word-line">
@@ -3229,11 +3269,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
       window.location.assign("/vocabulary/listening-answer-words");
       return;
     }
-    const paidBookPaywall = PAID_BOOK_PAYWALLS[nextSelection];
-    if (paidBookPaywall) {
-      window.location.assign(paidBookPaywall);
-      return;
-    }
     roundTokenRef.current += 1;
     stopLearningAudio();
     forceNextSpellingWordRef.current = false;
@@ -3334,6 +3369,24 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
     });
   }, []);
 
+  const removeManyFromCollection = useCallback((wordIds: string[]) => {
+    setProgress((current) => {
+      const timestamp = Date.now();
+      const next = { ...current };
+      for (const wordId of wordIds) {
+        const previous = progressFor(current, wordId);
+        const wasMastered = collectionForProgress(previous) === "mastered";
+        next[wordId] = {
+          ...previous,
+          collection: null,
+          collectionUpdatedAt: timestamp,
+          ...(wasMastered ? { nextReviewAt: previous.familiarity ? timestamp : null, plan: "short-term" as const } : {}),
+        };
+      }
+      return next;
+    });
+  }, []);
+
   const moveCollectionWord = useCallback((wordId: string, collection: LearningCollectionKey) => {
     setProgress((current) => {
       const timestamp = Date.now();
@@ -3349,6 +3402,25 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
           nextReviewAt: collection === "mastered" ? null : wasMastered && previous.familiarity ? Date.now() : previous.nextReviewAt,
         },
       };
+    });
+  }, []);
+
+  const moveManyCollectionWords = useCallback((wordIds: string[], collection: LearningCollectionKey) => {
+    setProgress((current) => {
+      const timestamp = Date.now();
+      const next = { ...current };
+      for (const wordId of wordIds) {
+        const previous = progressFor(current, wordId);
+        const wasMastered = collectionForProgress(previous) === "mastered";
+        next[wordId] = {
+          ...previous,
+          collection,
+          collectionUpdatedAt: timestamp,
+          plan: collection === "mastered" ? "done" : wasMastered ? "short-term" : previous.plan,
+          nextReviewAt: collection === "mastered" ? null : wasMastered && previous.familiarity ? timestamp : previous.nextReviewAt,
+        };
+      }
+      return next;
     });
   }, []);
 
@@ -4280,14 +4352,16 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
 
         <main className="vocabulary-learning-workspace">
           <div className="vocabulary-learning-content-grid">
-          {selectedBook === "高中必修词汇" && !collectionListKey ? <SeniorHighVocabularyStoryPreview /> : null}
+          {(selectedBook === "高中大纲词汇" || selectedBook === "高中必修词汇") && !collectionListKey ? <SeniorHighVocabularyStoryPreview /> : null}
           {listModeActive && collectionListKey ? (
             <VocabularyCollectionList
               collection={collectionListKey}
               error={collectionListError}
               loading={collectionListLoading}
               onDelete={removeFromCollection}
+              onDeleteMany={removeManyFromCollection}
               onMove={moveCollectionWord}
+              onMoveMany={moveManyCollectionWords}
               returnTo={`/vocabulary/books?level=${encodeURIComponent(selectedBook)}&collection=${encodeURIComponent(collectionListKey)}`}
               words={visibleCollectionWords}
             />

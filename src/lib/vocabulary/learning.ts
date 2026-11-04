@@ -20,12 +20,15 @@ export const LEARNING_BOOKS = [
   { key: "初中", label: "初中大纲词汇", rank: 2, description: "初中大纲词汇" },
   { key: "高中", label: "高中", rank: 3, description: "高中词汇" },
   { key: "高考必修", label: "高考必修", rank: 0, description: "按高考词频选取的 3000 词" },
+  { key: "高中大纲词汇", label: "高中大纲词汇", rank: 0, description: "高中必修与选择性必修大纲词汇，按高考词频分组" },
   { key: "高中必修词汇", label: "高中大纲必修词汇", rank: 0, description: "普通高中英语课标必修词汇" },
   { key: "高中选修词汇", label: "高中大纲选修词汇", rank: 0, description: "普通高中英语课标选择性必修词汇" },
   { key: "四级", label: "四级", rank: 4, description: "大学英语四级" },
+  { key: "四级大纲词汇", label: "四级大纲词汇", rank: 0, description: "四级大纲词汇与派生词，按四级词频分组" },
   { key: "四级核心词汇", label: "四级大纲词汇", rank: 0, description: "四级大纲主词目" },
   { key: "四级派生词", label: "四级大纲派生词汇", rank: 0, description: "四级大纲同组派生词" },
   { key: "六级", label: "六级", rank: 5, description: "大学英语六级" },
+  { key: "六级大纲词汇", label: "六级大纲词汇", rank: 0, description: "六级大纲词汇与派生词，按六级词频分组" },
   { key: "六级核心词汇", label: "六级大纲词汇", rank: 0, description: "六级大纲主词目" },
   { key: "六级派生词", label: "六级大纲派生词汇", rank: 0, description: "六级大纲同组派生词" },
   { key: "考研", label: "考研大纲词汇", rank: 6, description: "考研大纲词汇" },
@@ -47,8 +50,7 @@ export const LEARNING_BOOKS = [
 
 export type LearningBookKey = (typeof LEARNING_BOOKS)[number]["key"];
 export const VISIBLE_LEARNING_BOOK_KEYS = [
-  "小学", "初中", "高中必修词汇", "高中选修词汇", "四级核心词汇", "四级派生词",
-  "六级核心词汇", "六级派生词", "考研", "雅思听力答案词", "雅思听力高频词",
+  "小学", "初中", "高中大纲词汇", "四级大纲词汇", "六级大纲词汇", "考研", "雅思听力答案词", "雅思听力高频词",
   "雅思阅读高频词", "SAT", "GMAT", "GRE", "其他词汇", "小学短语", "初中短语",
   "高中短语", "地道表达", "俚语俗语",
 ] as const satisfies readonly LearningBookKey[];

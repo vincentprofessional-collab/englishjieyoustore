@@ -38683,16 +38683,62 @@ body .bbc-article-title-heading .bbc-article-title-line-chinese {
   width: 100%;
 }
 .vocabulary-learning-collection-view > header {
+  align-items: center;
   border-bottom: 1px solid #eadfca;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
   margin-bottom: 12px;
   padding-bottom: 14px;
 }
-.vocabulary-learning-collection-view > header p,
-.vocabulary-learning-collection-view > header h2,
-.vocabulary-learning-collection-view > header span { margin: 0; }
-.vocabulary-learning-collection-view > header p { color: #73838b; font-size: 12px; font-weight: 800; margin-bottom: 4px; }
-.vocabulary-learning-collection-view > header h2 { color: #245d7b; font-size: clamp(20px, 2vw, 27px); line-height: 1.3; }
-.vocabulary-learning-collection-view > header span { color: #77827b; display: inline-block; font-size: 13px; margin-top: 4px; }
+.vocabulary-learning-collection-view > header h2 { color: #245d7b; font-size: clamp(30px, 3.2vw, 44px); line-height: 1.2; margin: 0; }
+.vocabulary-learning-collection-bulk-menu { position: relative; }
+.vocabulary-learning-collection-bulk-menu > summary {
+  align-items: center;
+  background: #fffaf0;
+  border: 1px solid #dfd4c0;
+  border-radius: 999px;
+  color: #33424a;
+  cursor: pointer;
+  display: flex;
+  font-size: 15px;
+  font-weight: 700;
+  gap: 12px;
+  justify-content: space-between;
+  list-style: none;
+  min-width: 142px;
+  padding: 11px 15px;
+}
+.vocabulary-learning-collection-bulk-menu > summary::-webkit-details-marker { display: none; }
+.vocabulary-learning-collection-bulk-menu > summary span { color: #73838b; }
+.vocabulary-learning-collection-bulk-panel {
+  background: #fffdf8;
+  border: 1px solid #e4dac8;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(42, 51, 47, .15);
+  display: grid;
+  gap: 4px;
+  min-width: 190px;
+  padding: 8px;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 8;
+}
+.vocabulary-learning-collection-bulk-panel button {
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  color: #33424a;
+  cursor: pointer;
+  font: inherit;
+  padding: 9px 10px;
+  text-align: left;
+  white-space: nowrap;
+}
+.vocabulary-learning-collection-bulk-panel button:hover:not(:disabled) { background: #f1f5f6; }
+.vocabulary-learning-collection-bulk-panel button:disabled { color: #9ba19d; cursor: default; }
+.vocabulary-learning-collection-bulk-panel p { border-top: 1px solid #eee7da; color: #73838b; font-size: 13px; font-weight: 700; margin: 4px 0 0; padding: 8px 10px 0; }
 .vocabulary-learning-collection-message { color: #77827b; font-size: 14px; margin: 14px 0; }
 .vocabulary-learning-collection-rows { list-style: none; margin: 0; padding: 0; }
 .vocabulary-learning-collection-rows > li {
@@ -38700,9 +38746,11 @@ body .bbc-article-title-heading .bbc-article-title-line-chinese {
   border-bottom: 1px solid #eee7da;
   display: grid;
   gap: 14px;
-  grid-template-columns: 32px minmax(0, 1fr) 42px;
+  grid-template-columns: 20px 32px minmax(0, 1fr) 42px;
   padding: 13px 4px;
 }
+.vocabulary-learning-collection-rows > li.is-selected { background: #f8f4e9; }
+.vocabulary-learning-collection-rows > li > input { accent-color: #c99a2b; height: 17px; margin: 0; width: 17px; }
 .vocabulary-learning-collection-index { color: #879197; font-size: 12px; font-variant-numeric: tabular-nums; text-align: right; }
 .vocabulary-learning-collection-word-content { min-width: 0; }
 .vocabulary-learning-collection-word-line { align-items: baseline; display: flex; flex-wrap: wrap; gap: 7px 12px; }
@@ -38768,7 +38816,10 @@ body .bbc-article-title-heading .bbc-article-title-line-chinese {
   .vocabulary-learning-settings-dialog .vocabulary-book-select-control > span:first-child,
   .vocabulary-learning-settings-dialog .vocabulary-learning-settings-group-select select { font-size: 11px; }
   .vocabulary-learning-settings-dialog .vocabulary-learning-settings-group-select select { padding-left: 7px; padding-right: 25px; }
-  .vocabulary-learning-collection-rows > li { gap: 8px; grid-template-columns: 25px minmax(0, 1fr) 38px; padding: 11px 0; }
+  .vocabulary-learning-collection-view > header { align-items: flex-start; }
+  .vocabulary-learning-collection-view > header h2 { font-size: clamp(26px, 8vw, 34px); }
+  .vocabulary-learning-collection-bulk-menu > summary { font-size: 13px; min-width: 0; padding: 9px 11px; }
+  .vocabulary-learning-collection-rows > li { gap: 8px; grid-template-columns: 17px 25px minmax(0, 1fr) 38px; padding: 11px 0; }
   .vocabulary-learning-collection-index { font-size: 11px; }
   .vocabulary-learning-collection-word-line a { font-size: 17px; }
   .vocabulary-learning-collection-word-content p { font-size: 14px; }

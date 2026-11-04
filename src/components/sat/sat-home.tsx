@@ -6,7 +6,6 @@ import styles from "./sat.module.css";
 import type { SatCatalogIndex, SatSetSummary } from "@/lib/sat/types";
 import { ExamPagePresentation } from "@/components/exam-page-presentation";
 import { supabase } from "@/lib/supabase/client";
-import { SatSectionNavigation } from "@/components/sat/sat-section-navigation";
 
 const DIFFICULTY_ORDER = ["Easy", "Medium", "Hard"];
 
@@ -84,10 +83,27 @@ export function SatHome() {
   const domains = catalog.domains.map((item) => ({ ...item, sets: catalog.sets.filter((set) => set.domain === item.label) })).filter((item) => item.sets.length);
   return <section className={`${styles.root} ${styles.home}`}>
     <ExamPagePresentation exam="sat" />
-    <SatSectionNavigation current="practice" />
     {domains.length === 0 ? <p className={styles.empty}>没有符合当前筛选条件的题组。</p> : domains.map((item) => {
       const grouped = item.skills.map((skillItem) => ({ ...skillItem, sets: item.sets.filter((set) => set.skill === skillItem.label.replace(/, /g, ",").toLowerCase() || set.skill === skillItem.label) })).filter((group) => group.sets.length);
-      return <section className={styles.section} key={item.id}><header className={styles.sectionHeader}><h2>{item.label}</h2></header>{grouped.map((group) => <div className={styles.skillGroup} key={group.id}><h3>{group.label}</h3><div className={styles.setGrid}>{group.sets.slice().sort((a, b) => DIFFICULTY_ORDER.indexOf(a.difficulty) - DIFFICULTY_ORDER.indexOf(b.difficulty)).map((set) => <Link className={styles.setCard} href={`/sat/practice/${set.id}`} key={set.id}><span className={styles.meta}>{set.title || set.difficulty}</span></Link>)}</div></div>)}</section>;
+      return <section className={styles.section} key={item.id}>
+        <header className={styles.sectionHeader}><h2>{item.label}</h2></header>
+        {grouped.map((group) => {
+          const orderedSets = group.sets.slice().sort((a, b) => DIFFICULTY_ORDER.indexOf(a.difficulty) - DIFFICULTY_ORDER.indexOf(b.difficulty));
+          return <div className={styles.skillGroup} key={group.id}>
+            <h3>{group.label}</h3>
+            <div className={styles.setGrid}>
+              {orderedSets.map((set, index) => {
+                const title = set.title && !/^(easy|medium|hard)$/i.test(set.title.trim()) ? set.title : `练习 ${index + 1}`;
+                return <Link className={styles.setCard} href={`/sat/practice/${set.id}`} key={set.id}>
+                  <strong className={styles.practiceSetTitle}>{title}</strong>
+                  {set.questionCount ? <span className={styles.practiceSetCount}>{set.questionCount} 题</span> : null}
+                  <span className={styles.practiceSetAction}>开始训练 <span aria-hidden="true">→</span></span>
+                </Link>;
+              })}
+            </div>
+          </div>;
+        })}
+      </section>;
     })}
   </section>;
 }

@@ -18,10 +18,6 @@ type VocabularyDetailHeadingProps = {
   titleContent?: ReactNode;
 };
 
-function formatCount(value?: number) {
-  return typeof value === "number" && Number.isFinite(value) ? value.toLocaleString("en-US") : "—";
-}
-
 export function VocabularyDetailHeading({ actions, entry, formationParts, showMorphology = true, showLevels = true, studyCentered = false, titleContent }: VocabularyDetailHeadingProps) {
   const parts = getVisibleVocabularyFormationParts(formationParts?.length ? formationParts : splitVocabularyFormation(entry.formation));
   const morphologyQualityLocked = isVocabularyFormationQualityLocked(entry.word, parts);
@@ -53,10 +49,6 @@ export function VocabularyDetailHeading({ actions, entry, formationParts, showMo
                 )) : null}
               </div>
             </div>
-            <span aria-label={`总词频排名 ${formatCount(entry.frequencyRank)}，总频率 ${formatCount(entry.totalFrequency)}`} className="vocabulary-detail-heading-frequency">
-              <small>总词频</small>
-              <strong>{formatCount(entry.frequencyRank)}/{formatCount(entry.totalFrequency)}</strong>
-            </span>
           </>}
         </div>
         <div className="vocabulary-detail-heading-actions">{headerActions}</div>

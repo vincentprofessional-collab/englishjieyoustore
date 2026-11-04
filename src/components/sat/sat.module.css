@@ -68,12 +68,14 @@
 .topicCardTop { align-items: center; color: var(--sat-gold); display: flex; font-size: 12px; font-weight: 800; justify-content: space-between; }
 .topicCard h3 { color: var(--sat-ink); font-size: 20px; line-height: 1.35; margin: 0; }
 .topicEnglish { color: var(--sat-muted); font-size: 13px; line-height: 1.45; margin: 0; }
-.topicSource { color: var(--sat-muted); font-size: 12px; margin: 0; }
 .topicReview { color: var(--sat-danger); line-height: 1.5; }
-.topicAction { align-items: center; color: var(--sat-green); display: flex; font-size: 13px; font-weight: 800; justify-content: space-between; margin-top: auto; }
+.topicAction { align-items: center; color: var(--sat-green); display: flex; font-size: clamp(18px, 1.7vw, 22px); font-weight: 800; justify-content: space-between; margin-top: auto; }
 .setCard { align-content: start; background: var(--sat-panel); border: 1px solid var(--sat-line); border-radius: 13px; display: grid; gap: 10px; min-height: 154px; padding: 17px; transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
 .setCard:hover { border-color: var(--sat-green); box-shadow: 0 10px 24px rgba(54, 122, 160, .1); transform: translateY(-2px); }
 .setCard .meta { color: var(--sat-muted); letter-spacing: .03em; }
+.practiceSetTitle { color: var(--sat-ink); font-size: clamp(20px, 2vw, 25px); line-height: 1.3; }
+.practiceSetCount { color: var(--sat-muted); font-size: 15px; font-weight: 700; }
+.practiceSetAction { align-items: center; color: var(--sat-green); display: flex; font-size: clamp(18px, 1.7vw, 22px); font-weight: 800; justify-content: space-between; margin-top: auto; }
 .setCardStats { align-items: center; display: flex; gap: 10px; justify-content: space-between; margin-top: auto; }
 .setCardStats span { color: var(--sat-gold); font-size: 13px; font-weight: 800; }
 .bar { background: #eee8da; border-radius: 99px; height: 6px; overflow: hidden; width: 100%; }

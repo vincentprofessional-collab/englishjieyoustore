@@ -94,14 +94,16 @@ test("study book and group selectors share equal one-line cards and keep both ad
   assert.match(globalCss, /\.vocabulary-learning-settings-selectors > :is\(\.vocabulary-learning-settings-book-select, \.vocabulary-learning-settings-group-select\) \{ gap: 5px; min-height: 62px !important; padding: 7px !important; \}/);
 });
 
-test("SAT practice, knowledge, and past-paper pages link to each other", () => {
+test("SAT pages keep the route definitions without repeating the top section tabs", () => {
   for (const [href, label] of [["/sat", "题型训练"], ["/sat/knowledge", "知识点"], ["/sat/past-papers", "历年真题"]]) {
     assert.ok(satNavigation.includes(`href: "${href}"`));
     assert.ok(satNavigation.includes(`label: "${label}"`));
   }
-  assert.match(satHome, /<SatSectionNavigation current="practice" \/>/);
-  assert.match(satKnowledge, /<SatSectionNavigation current="knowledge" \/>/);
-  assert.match(satPastPapers, /<SatSectionNavigation current="past-papers" \/>/);
+  assert.doesNotMatch(satHome, /SatSectionNavigation/);
+  assert.doesNotMatch(satKnowledge, /SatSectionNavigation|topicSource/);
+  assert.doesNotMatch(satPastPapers, /SatSectionNavigation/);
+  assert.match(satHome, /className=\{styles\.practiceSetAction\}/);
+  assert.match(satKnowledge, /className=\{styles\.topicAction\}/);
   assert.match(satNavigation, /aria-current=\{section\.id === current \? "page" : undefined\}/);
 });
 
