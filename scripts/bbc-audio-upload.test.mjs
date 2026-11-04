@@ -355,6 +355,17 @@ test("BBC audio alignment accepts 76 percent coverage with anchored sentence edg
   assert.ok(result.timings[0].endMs > 4000);
 });
 
+test("BBC audio alignment rejects a missing sentence opening instead of estimating its boundary", () => {
+  const align = loadAudioAlignment();
+  const sentences = [
+    { sentenceNo: 1, english: "Opening sentence starts cleanly." },
+    { sentenceNo: 2, english: "The second sentence matches the source completely." },
+  ];
+  const recognized = ["sentence", "starts", "cleanly", "The", "second", "sentence", "matches", "the", "source", "completely"]
+    .map((text, index) => ({ text, timestamp: [0.2 + index * 0.25, 0.4 + index * 0.25] }));
+  assert.throws(() => align(sentences, recognized, 5), /句首或句尾未与原声完整对齐/);
+});
+
 test("BBC audio alignment refuses to truncate or estimate unrecognized final words", () => {
   const align = loadAudioAlignment();
   const sentences = [
