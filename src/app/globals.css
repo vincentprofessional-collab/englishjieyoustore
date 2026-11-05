@@ -38090,7 +38090,7 @@ body .bbc-article-title-heading .bbc-article-title-line-chinese {
   grid-row: auto;
   justify-content: center;
   max-width: 100%;
-  padding-inline: 52px;
+  padding-inline: 0;
   text-align: center;
   width: 100%;
 }
@@ -38114,18 +38114,9 @@ body .bbc-article-title-heading .bbc-article-title-line-chinese {
   max-width: 100%;
 }
 .vocabulary-learning-page .vocabulary-detail-heading-study-centered .vocabulary-detail-heading-frequency {
-  justify-content: center;
-}
-.vocabulary-learning-page .vocabulary-detail-heading-study-centered .vocabulary-detail-heading-actions {
-  grid-column: 1;
-  grid-row: auto;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  display: none;
 }
 @media (max-width: 560px) {
-  .vocabulary-learning-page .vocabulary-detail-heading-study-centered .vocabulary-detail-heading-center { padding-inline: 42px; }
   .vocabulary-learning-page .vocabulary-detail-heading-study-centered .vocabulary-detail-heading-identity h1 { font-size: clamp(26px, 8vw, 36px); }
   .vocabulary-learning-page .vocabulary-detail-heading-study-centered .vocabulary-detail-heading-meta .inline-pronunciation { flex-wrap: wrap !important; justify-content: center; }
 }

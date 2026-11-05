@@ -73,6 +73,7 @@ test("definition options retain two main parts of speech and one meaning per par
   assert.equal(getDefinitionOptionText("n. 拉链；拉锁 / v. 拉上或拉开拉链 / vi. 拉上拉链 / vt. 用拉链扣上 / adj. 活泼的"), "n. 拉链\nv. 拉上或拉开拉链");
   assert.equal(getDefinitionOptionText("vt. 运行；经营 / vi. 跑；奔跑 / n. 运行；奔跑 / adj. 运行的"), "v. 运行\nn. 运行");
   assert.equal(getDefinitionOptionText("art. 一；任一"), "art. 一");
+  assert.equal(getDefinitionOptionText("adj. （食物）难消化的，易饱的\n乏味的\nn. 物品"), "adj. （食物）难消化的，易饱的；乏味的\nn. 物品");
 });
 
 test("the word list selects the configured accent's phonetic without swapping accents", () => {
@@ -88,9 +89,12 @@ test("study vocabulary details hide the morphology row and center word and IPA o
   const heading = readFileSync(new URL("../src/components/vocabulary-detail-heading.tsx", import.meta.url), "utf8");
   const styles = readFileSync(new URL("../src/app/globals.css", import.meta.url), "utf8");
   assert.match(learning, /showMorphology=\{false\}\s+studyCentered/);
+  assert.match(learning, /showActions=\{false\}/);
   assert.match(heading, /showMorphology\s*&&\s*parts\.length/);
+  assert.match(heading, /showActions\s*\?\s*<div className="vocabulary-detail-heading-actions"/);
   assert.match(styles, /vocabulary-detail-heading-study-centered[\s\S]*?flex-direction:\s*column/);
   assert.match(styles, /vocabulary-detail-heading-study-centered[\s\S]*?justify-content:\s*center/);
+  assert.match(styles, /vocabulary-detail-heading-study-centered \.vocabulary-detail-heading-frequency\s*\{\s*display:\s*none/s);
 });
 
 test("story word pronunciations use generated vocabulary audio rather than browser speech synthesis", () => {

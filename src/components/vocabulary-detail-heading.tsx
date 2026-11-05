@@ -13,12 +13,13 @@ type VocabularyDetailHeadingProps = {
   entry: LocalVocabularyEntry;
   formationParts?: VocabularyFormationPart[];
   showMorphology?: boolean;
+  showActions?: boolean;
   showLevels?: boolean;
   studyCentered?: boolean;
   titleContent?: ReactNode;
 };
 
-export function VocabularyDetailHeading({ actions, entry, formationParts, showMorphology = true, showLevels = true, studyCentered = false, titleContent }: VocabularyDetailHeadingProps) {
+export function VocabularyDetailHeading({ actions, entry, formationParts, showActions = true, showMorphology = true, showLevels = true, studyCentered = false, titleContent }: VocabularyDetailHeadingProps) {
   const parts = getVisibleVocabularyFormationParts(formationParts?.length ? formationParts : splitVocabularyFormation(entry.formation));
   const morphologyQualityLocked = isVocabularyFormationQualityLocked(entry.word, parts);
   const visibleLevels = entry.level.split("、").filter((level) => level && !isSupplementalLearningBook(level));
@@ -51,7 +52,7 @@ export function VocabularyDetailHeading({ actions, entry, formationParts, showMo
             </div>
           </>}
         </div>
-        <div className="vocabulary-detail-heading-actions">{headerActions}</div>
+        {showActions ? <div className="vocabulary-detail-heading-actions">{headerActions}</div> : null}
       </div>
       {showMorphology && parts.length && !morphologyQualityLocked ? (
         <div aria-label="词根和词缀组成" className="vocabulary-detail-morphology-summary">

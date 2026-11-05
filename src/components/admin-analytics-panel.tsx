@@ -21,6 +21,9 @@ type LifetimeAudienceMetrics = {
   registered_users_total: number;
   visitors_total: number;
   visitors_over_five_visits: number;
+  visitors_with_two_return_visits: number;
+  visitors_with_three_return_visits: number;
+  visitors_with_four_return_visits: number;
 };
 
 function getShanghaiToday() {
@@ -63,6 +66,11 @@ export function AdminAnalyticsPanel() {
       if (!result?.daily_visitors?.some((row) => Object.hasOwn(row, "first_time_visitors"))) {
         throw new Error("每日首次访问统计尚未启用；请在 Supabase 执行 supabase/034_admin_first_time_visitors.sql。");
       }
+      const lifetime = result?.lifetime_audience;
+      if (!lifetime) throw new Error("返回结果缺少累计用户统计；请检查 Supabase 管理统计迁移是否已执行。");
+      if (!["visitors_with_two_return_visits", "visitors_with_three_return_visits", "visitors_with_four_return_visits"].every((key) => Object.hasOwn(lifetime, key))) {
+        throw new Error("回访次数分档尚未启用；请确认 Supabase 已执行回访统计迁移。");
+      }
       setSnapshot({
         daily_visitors: (result?.daily_visitors ?? []).map((row) => ({
           ...row,
@@ -71,14 +79,16 @@ export function AdminAnalyticsPanel() {
           first_time_visitors: Number(row.first_time_visitors ?? 0),
           registrations: Number(row.registrations),
         })),
-        lifetime_audience: result?.lifetime_audience ? {
-          registered_users_total: Number(result.lifetime_audience.registered_users_total),
-          visitors_total: Number(result.lifetime_audience.visitors_total),
-          visitors_over_five_visits: Number(result.lifetime_audience.visitors_over_five_visits),
-        } : undefined,
+        lifetime_audience: {
+          registered_users_total: Number(lifetime.registered_users_total),
+          visitors_total: Number(lifetime.visitors_total),
+          visitors_over_five_visits: Number(lifetime.visitors_over_five_visits),
+          visitors_with_two_return_visits: Number(lifetime.visitors_with_two_return_visits),
+          visitors_with_three_return_visits: Number(lifetime.visitors_with_three_return_visits),
+          visitors_with_four_return_visits: Number(lifetime.visitors_with_four_return_visits),
+        },
         popular_pages: (result?.popular_pages ?? []).map((row) => ({ ...row, views: Number(row.views) })),
       });
-      if (!result?.lifetime_audience) throw new Error("返回结果缺少累计用户统计；请检查 supabase/038_admin_lifetime_audience_metrics.sql 是否已执行。");
     } catch (error) {
       setMessage(`无法读取网站统计：${error instanceof Error ? error.message : "未知错误"}`);
     } finally {
@@ -124,14 +134,26 @@ export function AdminAnalyticsPanel() {
               <strong>{lifetimeMetrics.visitors_total}</strong>
             </article>
             <article className="admin-daily-metric-card">
-              <span>回访超过 5 次</span>
+              <span>累计访问超过 5 次</span>
               <strong>{lifetimeMetrics.visitors_over_five_visits}</strong>
+            </article>
+            <article className="admin-daily-metric-card">
+              <span>恰好回访 2 次</span>
+              <strong>{lifetimeMetrics.visitors_with_two_return_visits}</strong>
+            </article>
+            <article className="admin-daily-metric-card">
+              <span>恰好回访 3 次</span>
+              <strong>{lifetimeMetrics.visitors_with_three_return_visits}</strong>
+            </article>
+            <article className="admin-daily-metric-card">
+              <span>恰好回访 4 次</span>
+              <strong>{lifetimeMetrics.visitors_with_four_return_visits}</strong>
             </article>
           </div>
         ) : (
           <p className="admin-empty-text">{isLoading ? "正在读取累计用户统计…" : "点击右上角“刷新数据”查看统计。"}</p>
         )}
-        <p className="admin-analytics-refresh-note">注册用户排除管理员；访客按浏览器标识估算，清除浏览器数据或更换设备可能重复计数。回访按 30 分钟无活动划分访问会话，历史记录按不同访问日期估算。</p>
+        <p className="admin-analytics-refresh-note">注册用户排除管理员；访客按浏览器标识估算，清除浏览器数据或更换设备可能重复计数。回访次数指首次访问后的额外访问会话，按 30 分钟无活动划分会话；历史记录按不同访问日期估算。</p>
       </section>
 
       <section className="admin-editor-card">

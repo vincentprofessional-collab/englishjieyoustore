@@ -28,18 +28,27 @@ export function getConciseStudyDefinition(value: string) {
 
 export function getDefinitionOptionText(value: string) {
   const groups = new Map<string, string>();
+  let previousPart = "";
   const lines = getConciseStudyDefinition(value)
     .split(/\n+|\s+(?=(?:n|v|vt|vi|adj|adv|pron|prep|conj|int|art|num|aux)\.\s)/i);
   for (const line of lines) {
     const prefix = line.match(PART_OF_SPEECH)?.[0].trim() ?? "";
-    const part = /^(?:v|vt|vi|modal\s+v|phr\.\s*v)\.$/i.test(prefix) ? "v."
+    const labeledPart = /^(?:v|vt|vi|modal\s+v|phr\.\s*v)\.$/i.test(prefix) ? "v."
       : /^(?:a|s|adj)\.$/i.test(prefix) ? "adj."
       : /^(?:r|ad|adv)\.$/i.test(prefix) ? "adv." : prefix;
     const meaning = line.slice(prefix.length).split(/[；;]/)[0]?.trim();
-    if (!meaning || groups.has(part)) continue;
-    // Dictionary order puts the main senses first; verb variants share one part of speech.
-    groups.set(part, [part, meaning].filter(Boolean).join(" "));
-    if (groups.size === 2) break;
+    if (!meaning) continue;
+    if (labeledPart) {
+      previousPart = labeledPart;
+      if (groups.has(labeledPart) || groups.size >= 2) continue;
+      groups.set(labeledPart, `${labeledPart} ${meaning}`);
+      continue;
+    }
+    if (previousPart && groups.has(previousPart)) {
+      groups.set(previousPart, `${groups.get(previousPart)}；${meaning}`);
+    } else if (!groups.has("") && groups.size < 2) {
+      groups.set("", meaning);
+    }
   }
   return [...groups.values()].join("\n");
 }

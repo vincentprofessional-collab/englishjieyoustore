@@ -1693,7 +1693,7 @@ function LearningVocabularyDetails({
 
   return (
     <div className="vocabulary-learning-complete-detail vocabulary-detail-content">
-      {showWord ? <VocabularyDetailHeading entry={detailedEntry} formationParts={detailPayload?.formationParts} showLevels={false} showMorphology={false} studyCentered /> : null}
+      {showWord ? <VocabularyDetailHeading entry={detailedEntry} formationParts={detailPayload?.formationParts} showActions={false} showLevels={false} showMorphology={false} studyCentered /> : null}
       {definitionPrefix}
       {showDefinition ? <VocabularyDetailContent
         entry={conciseEntry}
