@@ -41,6 +41,14 @@ begin
     select visitor_id, sum(visits)::bigint as total_visits
     from visits_by_day
     group by visitor_id
+  ),
+  return_visit_counts as (
+    select
+      count(*) filter (where total_visits > 5)::bigint as visitors_over_five_visits,
+      count(*) filter (where total_visits = 3)::bigint as visitors_with_two_return_visits,
+      count(*) filter (where total_visits = 4)::bigint as visitors_with_three_return_visits,
+      count(*) filter (where total_visits = 5)::bigint as visitors_with_four_return_visits
+    from visits_by_visitor
   )
   select jsonb_build_object(
     'registered_users_total', (
@@ -49,12 +57,12 @@ begin
       where coalesce(profile.role, '') <> 'admin'
     ),
     'visitors_total', (select count(distinct visitor_id)::bigint from page_views),
-    'visitors_over_five_visits', (
-      select count(*)::bigint
-      from visits_by_visitor
-      where total_visits > 5
-    )
-  ) into result;
+    'visitors_over_five_visits', return_visit_counts.visitors_over_five_visits,
+    'visitors_with_two_return_visits', return_visit_counts.visitors_with_two_return_visits,
+    'visitors_with_three_return_visits', return_visit_counts.visitors_with_three_return_visits,
+    'visitors_with_four_return_visits', return_visit_counts.visitors_with_four_return_visits
+  ) into result
+  from return_visit_counts;
 
   return result;
 end;

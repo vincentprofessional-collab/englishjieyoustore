@@ -39108,6 +39108,8 @@ body .bbc-article-title-shell { display: grid; gap: 4px; width: 100%; }
 body .bbc-article-hero .bbc-article-word-count { color: #1d1d1b !important; font-size: 15px; justify-self: end; margin: 0; position: static; text-align: right; white-space: nowrap; }
 body .bbc-article-title-bottom-row { display: block; width: 100%; }
 .vocabulary-learning-settings-dialog .vocabulary-learning-settings-definition-options { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.vocabulary-learning-settings-dialog .vocabulary-learning-settings-sort { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.vocabulary-learning-scene-access-notice { grid-column: 1 / -1; margin: 0.15rem 0 0; color: #6e766f; font-size: 0.92em; text-align: center; }
 @media (max-width: 600px) {
   body .bbc-article-title-shell { justify-items: stretch; }
   body .bbc-article-hero .bbc-article-word-count { font-size: 12px; position: static; }

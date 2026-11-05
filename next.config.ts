@@ -43,6 +43,7 @@ const nextConfig: NextConfig = {
       "./node_modules/pdfjs-dist/wasm/**/*",
     ],
     "/api/admin-primary-school-vocabulary-image": ["./node_modules/pdfjs-dist/standard_fonts/LiberationSans-Bold.ttf"],
+    "/api/vocabulary-scenes/*": ["./src/data/vocabulary-scenes/*.json"],
     "/*": [
       "./src/data/vocabulary/flat-vocabulary.json",
       "./src/data/vocabulary/lookup-etymology/*.json.gz",

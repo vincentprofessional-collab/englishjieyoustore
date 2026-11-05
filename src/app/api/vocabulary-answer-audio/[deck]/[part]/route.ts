@@ -1,106 +1,19 @@
-import { createHash, createHmac } from "node:crypto";
 import { createReadStream } from "node:fs";
 import { stat } from "node:fs/promises";
 import { Readable } from "node:stream";
 import { resolve, sep } from "node:path";
+import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
-import type { ListeningAnswerDeckId } from "@/lib/vocabulary/listening-answer-words";
 import { hasListeningAnswerWordsAccess } from "@/lib/vocabulary/listening-answer-words-access";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const sourceRoot = process.env.VOCABULARY_ANSWER_AUDIO_ROOT?.trim()
-  || "/Volumes/My HDD3/词汇音频/剑雅听力词汇答案词音频";
 const chunkRoot = process.env.VOCABULARY_ANSWER_AUDIO_CHUNKS_ROOT?.trim()
   || resolve(process.cwd(), "tmp/vocabulary-answer-audio");
-const bucket = process.env.R2_BBC_AUDIO_BUCKET || "englishjieyou-bbc-audio";
-
-const DECK_FOLDERS: Record<ListeningAnswerDeckId, string> = {
-  core346: "剑雅4-21听力答案词-超核心高频词346",
-  answers683: "剑雅4-21听力答案词-683",
-  numbers208: "剑雅4-20听力答案词-数字与拼写特辑",
-};
-
-const GROUP_COUNTS: Record<ListeningAnswerDeckId, number> = {
-  core346: 35,
-  answers683: 67,
-  numbers208: 21,
-};
-
-function sha256(value: string) {
-  return createHash("sha256").update(value).digest("hex");
-}
-
-function hmac(key: string | Buffer, value: string) {
-  return createHmac("sha256", key).update(value).digest();
-}
-
-function encodePathPart(value: string) {
-  return encodeURIComponent(value).replace(/[!'()*]/g, (char) =>
-    `%${char.charCodeAt(0).toString(16).toUpperCase()}`,
-  );
-}
-
-function getAudioFilename(deck: ListeningAnswerDeckId, part: string) {
-  const groupMatch = part.match(/^group-(\d{3})$/);
-  if (groupMatch) {
-    const groupNumber = Number(groupMatch[1]);
-    return groupNumber >= 1 && groupNumber <= GROUP_COUNTS[deck] ? `group-${groupMatch[1]}.mp3` : null;
-  }
-  if (part === "full") {
-    if (deck === "core346") return "剑雅4-21听力答案词-超核心高频词346-文本.mp3";
-    if (deck === "answers683") return "剑雅4-20听力答案词-683词-音频.mp3";
-    if (deck === "numbers208") return "剑雅4-20听力答案词-数字与拼写特辑-音频.mp3";
-  }
-  const match = part.match(/^part(\d{2})$/);
-  if (!match) return null;
-  const number = Number(match[1]);
-
-  if (deck === "core346" && number >= 1 && number <= 6) {
-    return `剑雅4-21超核心高频词346-文本-part${number}.mp3`;
-  }
-  if (deck === "answers683" && number >= 1 && number <= 12) {
-    return `剑雅4-21听力答案词-part${match[1]}.mp3`;
-  }
-  if (deck === "numbers208" && number >= 1 && number <= 3) {
-    return `剑雅4-20听力答案词-数字与拼写特辑-part${match[1]}.mp3`;
-  }
-  return null;
-}
-
-function signedR2Url(key: string) {
-  const accountId = process.env.R2_ACCOUNT_ID;
-  const accessKeyId = process.env.R2_BBC_AUDIO_ACCESS_KEY_ID;
-  const secretAccessKey = process.env.R2_BBC_AUDIO_SECRET_ACCESS_KEY;
-  if (!accountId || !accessKeyId || !secretAccessKey) return null;
-
-  const host = `${accountId}.r2.cloudflarestorage.com`;
-  const uri = `/${bucket}/${key.split("/").map(encodePathPart).join("/")}`;
-  const amzDate = new Date().toISOString().replace(/[:-]|\.\d{3}/g, "");
-  const dateStamp = amzDate.slice(0, 8);
-  const scope = `${dateStamp}/auto/s3/aws4_request`;
-  const query: [string, string][] = [
-    ["X-Amz-Algorithm", "AWS4-HMAC-SHA256"],
-    ["X-Amz-Credential", `${accessKeyId}/${scope}`],
-    ["X-Amz-Date", amzDate],
-    ["X-Amz-Expires", "3600"],
-    ["X-Amz-SignedHeaders", "host"],
-  ];
-  const canonicalQuery = query
-    .map(([name, value]) => [encodePathPart(name), encodePathPart(value)] as const)
-    .sort(([left], [right]) => left.localeCompare(right))
-    .map(([name, value]) => `${name}=${value}`)
-    .join("&");
-  const canonicalRequest = ["GET", uri, canonicalQuery, `host:${host}\n`, "host", "UNSIGNED-PAYLOAD"].join("\n");
-  const stringToSign = ["AWS4-HMAC-SHA256", amzDate, scope, sha256(canonicalRequest)].join("\n");
-  const signingKey = hmac(
-    hmac(hmac(hmac(`AWS4${secretAccessKey}`, dateStamp), "auto"), "s3"),
-    "aws4_request",
-  );
-  const signature = createHmac("sha256", signingKey).update(stringToSign).digest("hex");
-  return `https://${host}${uri}?${canonicalQuery}&X-Amz-Signature=${signature}`;
-}
+const bucket = "vocabulary-answer-audio";
+const NUMBER_GROUP_COUNT = 21;
+const signedUrls = new Map<string, { expiresAt: number; url: string }>();
 
 function parseRange(rangeHeader: string, totalBytes: number) {
   const match = rangeHeader.match(/^bytes=(\d*)-(\d*)$/);
@@ -111,24 +24,50 @@ function parseRange(rangeHeader: string, totalBytes: number) {
   return { end, start };
 }
 
+async function signNumberAudio(storagePath: string) {
+  const cached = signedUrls.get(storagePath);
+  if (cached && cached.expiresAt > Date.now()) return cached.url;
+
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SECRET_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) throw new Error("数字音频存储服务暂不可用");
+
+  const supabase = createClient(url, key, { auth: { autoRefreshToken: false, persistSession: false } });
+  const { data, error } = await supabase.storage.from(bucket).createSignedUrl(storagePath, 600);
+  if (error || !data?.signedUrl) throw new Error("数字音频暂不可用");
+
+  signedUrls.set(storagePath, { expiresAt: Date.now() + 480_000, url: data.signedUrl });
+  return data.signedUrl;
+}
+
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ deck: string; part: string }> },
 ) {
-  const { deck: rawDeck, part } = await params;
-  if (!(rawDeck in DECK_FOLDERS)) return NextResponse.json({ error: "Unknown audio deck" }, { status: 404 });
-  const deck = rawDeck as ListeningAnswerDeckId;
-  const filename = getAudioFilename(deck, part);
-  if (!filename) return NextResponse.json({ error: "Unknown audio part" }, { status: 404 });
-  if (!await hasListeningAnswerWordsAccess()) {
-    return NextResponse.json({ error: "Project access required." }, { headers: { "Cache-Control": "private, no-store" }, status: 403 });
+  const { deck, part } = await params;
+  const groupMatch = part.match(/^group-(\d{3})$/);
+  if (deck !== "numbers208" || !groupMatch) {
+    return NextResponse.json({ error: "Unknown audio part" }, { status: 404 });
   }
 
-  const deckRoot = resolve(sourceRoot, DECK_FOLDERS[deck]);
-  const isGroupClip = part.startsWith("group-");
-  const audioRoot = isGroupClip ? resolve(chunkRoot, deck) : deckRoot;
+  const groupNumber = Number(groupMatch[1]);
+  if (groupNumber < 1 || groupNumber > NUMBER_GROUP_COUNT) {
+    return NextResponse.json({ error: "Unknown audio part" }, { status: 404 });
+  }
+  if (!await hasListeningAnswerWordsAccess()) {
+    return NextResponse.json(
+      { error: "Project access required." },
+      { headers: { "Cache-Control": "private, no-store" }, status: 403 },
+    );
+  }
+
+  const filename = `group-${groupMatch[1]}.mp3`;
+  const audioRoot = resolve(chunkRoot, "numbers208");
   const audioPath = resolve(audioRoot, filename);
-  if (!audioPath.startsWith(`${audioRoot}${sep}`)) return NextResponse.json({ error: "Invalid audio path" }, { status: 400 });
+  if (!audioPath.startsWith(`${audioRoot}${sep}`)) {
+    return NextResponse.json({ error: "Invalid audio path" }, { status: 400 });
+  }
+
   const rangeHeader = request.headers.get("range");
   if (rangeHeader && (rangeHeader.length > 80 || !/^bytes=(?:\d+-\d*|-\d+)$/.test(rangeHeader))) {
     return new Response(null, { status: 416 });
@@ -144,7 +83,12 @@ export async function GET(
       };
       if (rangeHeader) {
         const range = parseRange(rangeHeader, audioStats.size);
-        if (!range) return new Response(null, { headers: { ...commonHeaders, "Content-Range": `bytes */${audioStats.size}` }, status: 416 });
+        if (!range) {
+          return new Response(null, {
+            headers: { ...commonHeaders, "Content-Range": `bytes */${audioStats.size}` },
+            status: 416,
+          });
+        }
         const stream = Readable.toWeb(createReadStream(audioPath, { end: range.end, start: range.start })) as ReadableStream<Uint8Array>;
         return new Response(stream, {
           headers: {
@@ -158,15 +102,24 @@ export async function GET(
       const stream = Readable.toWeb(createReadStream(audioPath)) as ReadableStream<Uint8Array>;
       return new Response(stream, { headers: { ...commonHeaders, "Content-Length": String(audioStats.size) } });
     } catch {
-      // Local audio is optional; deployed requests use the matching private R2 key.
+      // Production audio is served directly from the private Supabase bucket.
     }
   }
 
-  const key = `vocabulary/listening-answer-words/${DECK_FOLDERS[deck]}/${isGroupClip ? "groups/" : ""}${filename}`;
-  const url = signedR2Url(key);
-  if (!url) return new Response("Audio storage unavailable.", { status: 503 });
-  return new Response(null, {
-    headers: { "Cache-Control": "private, no-store", Location: url, "Referrer-Policy": "no-referrer" },
-    status: 302,
-  });
+  try {
+    const signedUrl = await signNumberAudio(`numbers208/${filename}`);
+    return new Response(null, {
+      headers: {
+        "Cache-Control": "private, no-store",
+        Location: signedUrl,
+        "Referrer-Policy": "no-referrer",
+      },
+      status: 302,
+    });
+  } catch {
+    return new Response("Audio storage unavailable.", {
+      headers: { "Cache-Control": "private, no-store" },
+      status: 503,
+    });
+  }
 }

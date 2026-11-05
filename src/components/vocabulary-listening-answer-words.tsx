@@ -2,11 +2,27 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { getSpellingCharacterFeedback } from "@/lib/vocabulary/spelling-feedback";
-import { getListeningAnswerBatchRange, LISTENING_ANSWER_WORDS_PER_GROUP } from "@/lib/vocabulary/listening-answer-batches";
+import { getListeningAnswerBatchRange, getNumberAudioClipNumbers, LISTENING_ANSWER_WORDS_PER_GROUP } from "@/lib/vocabulary/listening-answer-batches";
+import { getVocabularyAudioUrl, type VocabularyAccent } from "@/lib/vocabulary/pronunciation-audio";
 import type { ListeningAnswerDeck, ListeningAnswerDeckId } from "@/lib/vocabulary/listening-answer-words";
 import styles from "./vocabulary-listening-answer-words.module.css";
 
 const ANSWER_REVEAL_DELAY_MS = 5_000;
+const STUDY_VOICE_STORAGE_KEY = "ielts-vocabulary-learning-v1";
+
+function getNumberAudioUrl(clipNumber: number) {
+  return `/api/vocabulary-answer-audio/numbers208/group-${String(clipNumber).padStart(3, "0")}`;
+}
+
+function getSavedStudyAccent(): VocabularyAccent {
+  try {
+    const saved = JSON.parse(window.localStorage.getItem(STUDY_VOICE_STORAGE_KEY) ?? "null") as { voice?: unknown } | null;
+    if (saved?.voice === "uk" || saved?.voice === "us") return saved.voice;
+  } catch {
+    // Use the app's default voice when the local preference is unavailable.
+  }
+  return "us";
+}
 
 export function VocabularyListeningAnswerWords({
   decks,
@@ -22,28 +38,48 @@ export function VocabularyListeningAnswerWords({
   const [completed, setCompleted] = useState(false);
   const [audioReady, setAudioReady] = useState(false);
   const [audioMessage, setAudioMessage] = useState("");
+  const [accent, setAccent] = useState<VocabularyAccent>("us");
   const audioRef = useRef<HTMLAudioElement>(null);
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
   const revealTimerRef = useRef<number | null>(null);
+  const playbackWordOffsetRef = useRef(0);
+  const playbackNumberClipOffsetRef = useRef(0);
 
   const activeDeck = useMemo(() => decks.find((deck) => deck.id === activeDeckId) ?? null, [activeDeckId, decks]);
   const groupCount = activeDeck ? Math.ceil(activeDeck.words.length / LISTENING_ANSWER_WORDS_PER_GROUP) : 0;
   const batchRange = activeDeck
     ? getListeningAnswerBatchRange(activeDeck.id, activeDeck.words, groupIndex)
     : null;
+  const usesGroupRecording = activeDeck?.id === "numbers208";
+  const numberAudioClipNumbers = usesGroupRecording && batchRange ? getNumberAudioClipNumbers(batchRange) : [];
+  const initialAudioSource = activeDeck && batchRange
+    ? usesGroupRecording
+      ? getNumberAudioUrl(numberAudioClipNumbers[0])
+      : getVocabularyAudioUrl(batchRange.words[0].answer, accent)
+    : "";
   const wordsComplete = batchRange ? batchRange.endWordIndex + 1 : 0;
 
   useEffect(() => {
+    const syncAccent = () => setAccent(getSavedStudyAccent());
+    syncAccent();
+    window.addEventListener("storage", syncAccent);
+    return () => window.removeEventListener("storage", syncAccent);
+  }, []);
+
+  useEffect(() => {
     const audio = audioRef.current;
-    if (!activeDeck || !audio) return;
-    const source = `/api/vocabulary-answer-audio/${activeDeck.id}/group-${String(groupIndex + 1).padStart(3, "0")}`;
-    if (audio.getAttribute("src") === source) return;
+    if (!activeDeck || !audio || !initialAudioSource) return;
+    if (audio.getAttribute("src") === initialAudioSource) return;
     audio.pause();
     setAudioReady(false);
-    setAudioMessage(`第 ${groupIndex + 1} 组音频正在加载…`);
-    audio.src = source;
+    playbackWordOffsetRef.current = 0;
+    setAudioMessage(usesGroupRecording
+      ? `第 ${groupIndex + 1} 组音频正在加载…`
+      : `正在加载第 ${groupIndex + 1} 组第 1 词的${accent === "uk" ? "英音" : "美音"}…`);
+    audio.src = initialAudioSource;
     audio.load();
-  }, [activeDeck, groupIndex]);
+    playbackNumberClipOffsetRef.current = 0;
+  }, [accent, activeDeck, groupIndex, initialAudioSource, usesGroupRecording]);
 
   useEffect(() => {
     if (!activeDeck || completed || answersRevealed || !batchRange) return;
@@ -75,6 +111,8 @@ export function VocabularyListeningAnswerWords({
     setCompleted(false);
     setAudioReady(false);
     setAudioMessage("");
+    playbackWordOffsetRef.current = 0;
+    playbackNumberClipOffsetRef.current = 0;
   }, [clearRevealTimer]);
 
   const returnToDecks = useCallback(() => {
@@ -89,12 +127,14 @@ export function VocabularyListeningAnswerWords({
     setCompleted(false);
     setAudioReady(false);
     setAudioMessage("");
+    playbackWordOffsetRef.current = 0;
+    playbackNumberClipOffsetRef.current = 0;
   }, [clearRevealTimer]);
 
   const revealAnswersAfterPlayback = useCallback(() => {
     if (revealTimerRef.current !== null || answersRevealed) return;
     audioRef.current?.pause();
-    setAudioMessage("本组 10 词音频已结束，5 秒后显示词汇信息和拼写反馈。");
+    setAudioMessage("本组音频已结束，5 秒后显示词汇信息和拼写反馈。");
     clearRevealTimer();
     revealTimerRef.current = window.setTimeout(() => {
       setAnswersRevealed(true);
@@ -105,8 +145,28 @@ export function VocabularyListeningAnswerWords({
 
   const handleAudioPlay = useCallback(() => {
     clearRevealTimer();
-    setAudioMessage(`正在播放第 ${groupIndex + 1} 组 10 词音频…`);
-  }, [clearRevealTimer, groupIndex]);
+    setAudioMessage(usesGroupRecording
+      ? `正在播放第 ${groupIndex + 1} 组数字音频（第 ${playbackNumberClipOffsetRef.current + 1}/${numberAudioClipNumbers.length} 段）…`
+      : `正在播放第 ${groupIndex + 1} 组第 ${playbackWordOffsetRef.current + 1} 词…`);
+  }, [clearRevealTimer, groupIndex, numberAudioClipNumbers.length, usesGroupRecording]);
+
+  const handleReplayGroup = useCallback(() => {
+    if (!activeDeck || !batchRange) return;
+    const audio = audioRef.current;
+    if (!audio) return;
+    clearRevealTimer();
+    playbackWordOffsetRef.current = 0;
+    playbackNumberClipOffsetRef.current = 0;
+    const source = usesGroupRecording
+      ? getNumberAudioUrl(numberAudioClipNumbers[0])
+      : getVocabularyAudioUrl(batchRange.words[0].answer, accent);
+    audio.pause();
+    audio.src = source;
+    audio.load();
+    setAudioReady(false);
+    setAudioMessage(`正在重新播放第 ${groupIndex + 1} 组…`);
+    void audio.play().catch(() => setAudioMessage("浏览器未启动自动播放，请按播放器的播放键继续本组。"));
+  }, [accent, activeDeck, batchRange, clearRevealTimer, groupIndex, numberAudioClipNumbers, usesGroupRecording]);
 
   const handleNextGroup = useCallback(() => {
     if (!activeDeck || !batchRange || !answersRevealed) return;
@@ -125,17 +185,50 @@ export function VocabularyListeningAnswerWords({
     setGroupIndex(nextGroupIndex);
     setAnswersRevealed(false);
     setAudioReady(false);
-    audio.src = `/api/vocabulary-answer-audio/${activeDeck.id}/group-${String(nextGroupIndex + 1).padStart(3, "0")}`;
+    playbackWordOffsetRef.current = 0;
+    playbackNumberClipOffsetRef.current = 0;
+    const nextBatch = getListeningAnswerBatchRange(activeDeck.id, activeDeck.words, nextGroupIndex);
+    if (!nextBatch) return;
+    const nextNumberAudioClipNumbers = activeDeck.id === "numbers208" ? getNumberAudioClipNumbers(nextBatch) : [];
+    audio.src = activeDeck.id === "numbers208"
+      ? getNumberAudioUrl(nextNumberAudioClipNumbers[0])
+      : getVocabularyAudioUrl(nextBatch.words[0].answer, accent);
     audio.load();
-    setAudioMessage(`正在加载第 ${nextGroupIndex + 1} 组 10 词音频…`);
+    setAudioMessage(`正在加载第 ${nextGroupIndex + 1} 组音频…`);
     void audio.play().catch(() => {
       setAudioMessage("浏览器未启动自动播放，请按播放器的播放键播放本组。");
     });
-  }, [activeDeck, answersRevealed, batchRange, clearRevealTimer, groupCount, groupIndex]);
+  }, [accent, activeDeck, answersRevealed, batchRange, clearRevealTimer, groupCount, groupIndex]);
 
   const handleAudioEnded = useCallback(() => {
+    if (usesGroupRecording && numberAudioClipNumbers.length > 0) {
+      const nextClipOffset = playbackNumberClipOffsetRef.current + 1;
+      if (nextClipOffset < numberAudioClipNumbers.length) {
+        const audio = audioRef.current;
+        if (!audio) return;
+        playbackNumberClipOffsetRef.current = nextClipOffset;
+        audio.src = getNumberAudioUrl(numberAudioClipNumbers[nextClipOffset]);
+        audio.load();
+        setAudioMessage(`正在播放第 ${groupIndex + 1} 组数字音频（第 ${nextClipOffset + 1}/${numberAudioClipNumbers.length} 段）…`);
+        void audio.play().catch(() => setAudioMessage("浏览器未启动自动播放，请按播放器的播放键继续本组。"));
+        return;
+      }
+    }
+    if (!usesGroupRecording && batchRange) {
+      const nextWordOffset = playbackWordOffsetRef.current + 1;
+      if (nextWordOffset < batchRange.words.length) {
+        const audio = audioRef.current;
+        if (!audio) return;
+        playbackWordOffsetRef.current = nextWordOffset;
+        audio.src = getVocabularyAudioUrl(batchRange.words[nextWordOffset].answer, accent);
+        audio.load();
+        setAudioMessage(`正在播放第 ${groupIndex + 1} 组第 ${nextWordOffset + 1} 词…`);
+        void audio.play().catch(() => setAudioMessage("浏览器未启动自动播放，请按播放器的播放键继续本组。"));
+        return;
+      }
+    }
     revealAnswersAfterPlayback();
-  }, [revealAnswersAfterPlayback]);
+  }, [accent, batchRange, groupIndex, numberAudioClipNumbers, revealAnswersAfterPlayback, usesGroupRecording]);
 
   const currentGroupLabel = batchRange
     ? `${(batchRange.startWordIndex + 1).toLocaleString()}–${(batchRange.endWordIndex + 1).toLocaleString()} / ${activeDeck?.words.length.toLocaleString()}`
@@ -147,7 +240,7 @@ export function VocabularyListeningAnswerWords({
         <div>
           <p className={styles.eyebrow}>背单词 · 写作模式</p>
           <h1>雅思听力答案词</h1>
-          <p className={styles.intro}>每组 10 词。播放后完成拼写；本组音频结束 5 秒后显示词汇、音标、释义和逐字拼写反馈。</p>
+          <p className={styles.intro}>每组 20 词。数字特辑自动连续播放对应的 10 词音频片段，其他词汇按当前英音／美音设置连续播放已有单词发音；本组播放结束 5 秒后显示词汇、音标、释义和逐字拼写反馈。</p>
         </div>
         {activeDeck ? <button className={styles.backButton} onClick={returnToDecks} type="button">返回词库</button> : null}
       </header>
@@ -168,7 +261,7 @@ export function VocabularyListeningAnswerWords({
         <div className={styles.completeCard}>
           <span className={styles.deckKicker}>{activeDeck.title}</span>
           <h2>本套练习已完成</h2>
-          <p>已按每组 10 词完成 {activeDeck.words.length.toLocaleString()} 词。</p>
+          <p>已按每组 20 词完成 {activeDeck.words.length.toLocaleString()} 词。</p>
           <div className={styles.actions}>
             <button className={styles.primaryButton} onClick={() => startDeck(activeDeck.id)} type="button">重新练习</button>
             <button className={styles.secondaryButton} onClick={returnToDecks} type="button">选择其他词库</button>
@@ -191,9 +284,11 @@ export function VocabularyListeningAnswerWords({
           </div>
 
           <div className={styles.audioSection}>
-            <label className={styles.audioLabel} htmlFor="listening-answer-group-audio">第 {groupIndex + 1} 组听力音频（10 词）</label>
+            <label className={styles.audioLabel} htmlFor="listening-answer-group-audio">
+              {usesGroupRecording ? `第 ${groupIndex + 1} 组听力音频（${batchRange.words.length} 词，${numberAudioClipNumbers.length} 段）` : `第 ${groupIndex + 1} 组单词发音（${accent === "uk" ? "英音" : "美音"}，逐词连续播放）`}
+            </label>
             <audio
-              aria-label="本组 10 词音频，可播放、暂停和拖动进度"
+              aria-label={usesGroupRecording ? "本组数字音频，可播放、暂停和拖动进度，并自动衔接本组后续片段" : "本组单词发音，可播放、暂停当前词并自动连续播放"}
               className={styles.fullAudio}
               controls
               id="listening-answer-group-audio"
@@ -204,7 +299,9 @@ export function VocabularyListeningAnswerWords({
               onEnded={handleAudioEnded}
               onError={() => {
                 setAudioReady(false);
-                setAudioMessage("本组音频加载失败，请检查网络或项目访问状态后重试。");
+                setAudioMessage(usesGroupRecording
+                  ? "本组音频加载失败，请检查网络或项目访问状态后重试。"
+                  : `“${batchRange?.words[playbackWordOffsetRef.current]?.answer ?? "当前词"}”的${accent === "uk" ? "英音" : "美音"}加载失败，请检查网络后重试。`);
               }}
               onPlay={handleAudioPlay}
               preload="metadata"
@@ -221,7 +318,8 @@ export function VocabularyListeningAnswerWords({
                 重新加载音频
               </button>
             ) : null}
-            {!audioReady && !audioMessage ? <p className={styles.audioHint}>本组小音频正在准备…</p> : null}
+            {!audioReady && !audioMessage ? <p className={styles.audioHint}>{usesGroupRecording ? "本组小音频正在准备…" : "正在准备本组第一个词的发音…"}</p> : null}
+            <button className={styles.retryAudioButton} onClick={handleReplayGroup} type="button">重播本组</button>
           </div>
 
           <div aria-label={`第 ${groupIndex + 1} 组拼写`} className={styles.wordRows}>

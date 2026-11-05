@@ -106,6 +106,9 @@ async function handleMediaRequest(request: NextRequest) {
   }
 
   const cleanPath = path.replace(/^\/+|\/+$/g, "");
+  if (bucket === "images" && /^(?:static\/)?vocabulary-stories\//i.test(cleanPath)) {
+    return new NextResponse("Not found", { status: 404, headers: { "Cache-Control": "private, no-store" } });
+  }
   const isBbcAudio = bucket === "audio" && /^bbc(?:\/|$)/i.test(cleanPath);
   if (bucket === "audio" && /^listening\//i.test(cleanPath)) {
     return streamListeningAudio(request, cleanPath);

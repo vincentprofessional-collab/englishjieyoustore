@@ -44,6 +44,13 @@ export const PROJECT_ACCESS_RULES: Record<string, ProjectAccessRule> = {
     shortTitle: "雅思听力答案词",
     title: "雅思听力答案词",
   },
+  "vocabulary.scene-images": {
+    description: "暂未达到上线质量标准",
+    gateTitle: "场景图片",
+    key: "vocabulary.scene-images",
+    shortTitle: "场景图片",
+    title: "场景图片词汇学习",
+  },
   "vocabulary.idiomatic-expressions": {
     description: "开通后可学习地道英语表达、搭配和例句。一次支付 9.9 元，永久使用。",
     gateTitle: "一次性开通地道表达",

@@ -36,12 +36,34 @@ function DefinitionRows({ entry }: { entry: LocalVocabularyEntry }) {
     return <p className="muted">{entry.definitionCn}</p>;
   }
 
+  const rows: Array<{ definitions: string[]; key: string; partOfSpeech: string }> = [];
+  const rowByPartOfSpeech = new Map<string, (typeof rows)[number]>();
+
+  for (const group of entry.definitionGroups) {
+    const partOfSpeech = group.partOfSpeech.trim();
+    const normalizedPartOfSpeech = partOfSpeech.toLowerCase().replace(/\s+/g, "");
+    const row = normalizedPartOfSpeech ? rowByPartOfSpeech.get(normalizedPartOfSpeech) : undefined;
+    const target = row ?? { definitions: [], key: normalizedPartOfSpeech || `definition-${rows.length}`, partOfSpeech };
+
+    if (!row) {
+      rows.push(target);
+      if (normalizedPartOfSpeech) rowByPartOfSpeech.set(normalizedPartOfSpeech, target);
+    }
+
+    for (const definition of group.definitions) {
+      const normalizedDefinition = definition.trim().toLocaleLowerCase();
+      if (normalizedDefinition && !target.definitions.some((item) => item.trim().toLocaleLowerCase() === normalizedDefinition)) {
+        target.definitions.push(definition);
+      }
+    }
+  }
+
   return (
     <div className="definition-rows large">
-      {entry.definitionGroups.map((group) => (
-        <p className={group.partOfSpeech ? undefined : "no-part-of-speech"} key={group.partOfSpeech || group.text}>
-          {group.partOfSpeech ? <strong>{group.partOfSpeech}</strong> : null}
-          <span>{group.definitions.join("；")}</span>
+      {rows.map((row) => (
+        <p className={row.partOfSpeech ? undefined : "no-part-of-speech"} key={row.key}>
+          {row.partOfSpeech ? <strong>{row.partOfSpeech}</strong> : null}
+          <span>{row.definitions.join("；")}</span>
         </p>
       ))}
     </div>

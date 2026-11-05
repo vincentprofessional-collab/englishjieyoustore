@@ -3,6 +3,7 @@ import { getAllVocabularyEntries } from "@/lib/vocabulary/local-vocabulary";
 import { getLearningBookCounts, getVisibleLearningBooks, LEARNING_BOOKS, LEARNING_COLLECTIONS, type LearningBookKey, type LearningCollectionKey } from "@/lib/vocabulary/learning";
 import { getSupplementalLearningBookCounts } from "@/lib/vocabulary/supplemental-learning-book-counts";
 import { getPaidLearningBook, hasLearningBookAccess } from "@/lib/vocabulary/learning-book-access";
+import { hasVocabularySceneImageAccess } from "@/lib/vocabulary/vocabulary-scene-image-access";
 import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
@@ -28,6 +29,12 @@ export default async function VocabularyBooksPage({
   const entries = getAllVocabularyEntries();
   const counts = getLearningBookCounts(entries, getSupplementalLearningBookCounts());
   const sourceCount = entries.filter((entry) => entry.isLatestWorkbookVocabulary !== false).length;
+  let canAccessSceneImages = false;
+  try {
+    canAccessSceneImages = await hasVocabularySceneImageAccess();
+  } catch {
+    // A missing admin session must keep scene content unavailable.
+  }
 
   return (
     <VocabularyLearning
@@ -38,6 +45,7 @@ export default async function VocabularyBooksPage({
       initialListMode={query.view === "list"}
       initialListResume={query.resume === "1"}
       initialOpenSettings={query.setup === "1"}
+      canAccessSceneImages={canAccessSceneImages}
       sourceCount={sourceCount}
     />
   );

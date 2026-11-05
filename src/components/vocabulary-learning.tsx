@@ -44,6 +44,8 @@ import type { LocalVocabularyEntry, VocabularyFormationPart } from "@/lib/vocabu
 import type { VocabularySynonymDistinction } from "@/lib/vocabulary/synonym-distinctions";
 import type { VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
 import { getVocabularyAudioUrl, playVocabularyPronunciation } from "@/lib/vocabulary/pronunciation-audio";
+import { sceneBookLevel, sceneLearningUrl } from "@/lib/vocabulary/scene-learning";
+import sceneCatalog from "@/data/vocabulary-scenes/index.json";
 import { getSpellingCharacterFeedback } from "@/lib/vocabulary/spelling-feedback";
 import { calendarReviewAt, getReviewDueAt, isReviewDue, scheduleReview, selectEnabledMode } from "@/lib/vocabulary/review-scheduler";
 import { selectDueReviewWords, selectPendingRetryIds } from "@/lib/vocabulary/due-review-words";
@@ -64,6 +66,11 @@ type VocabularyScope = "core" | "all";
 type LearningMethod = "classified" | "browse";
 type AssessmentDefinitionLanguage = "zh" | "en";
 type DefinitionLanguage = AssessmentDefinitionLanguage | "zh-audio";
+
+function vocabularySortForRole(sort: VocabularySortMode, canAccessSceneImages: boolean): VocabularySortMode {
+  return !canAccessSceneImages && sort === "scene" ? "frequency" : sort;
+}
+
 type StudySettings = {
   dailyNew: number;
   browseGroups: number;
@@ -85,6 +92,14 @@ type StudySettings = {
   showOptions: boolean;
   showPicture: boolean;
 };
+function openSceneImageStudy(book: string, settings: StudySettings, saved: Partial<Record<string, StudySettings>>) {
+  const url = sceneLearningUrl(book, settings);
+  if (!url) return false;
+  try { window.localStorage.setItem("ielts-vocabulary-learning-settings-v1", JSON.stringify({ ...saved, [book]: settings })); } catch { /* Navigation also carries the complete settings. */ }
+  window.location.assign(url);
+  return true;
+}
+
 type StudySettingsDraft = Omit<StudySettings, "dailyNew" | "detailSeconds" | "reactionSeconds" | "browseGroups"> & {
   dailyNew: string;
   browseGroups: string;
@@ -248,6 +263,7 @@ type VocabularyLearningProps = {
   initialListMode?: boolean;
   initialListResume?: boolean;
   initialOpenSettings?: boolean;
+  canAccessSceneImages: boolean;
   sourceCount: number;
 };
 
@@ -2157,7 +2173,7 @@ function VocabularyCollectionList({
   );
 }
 
-export function VocabularyLearning({ bookCounts, books, initialBook, initialCollection, initialListMode = false, initialListResume = false, initialOpenSettings = false, sourceCount }: VocabularyLearningProps) {
+export function VocabularyLearning({ bookCounts, books, initialBook, initialCollection, initialListMode = false, initialListResume = false, initialOpenSettings = false, canAccessSceneImages, sourceCount }: VocabularyLearningProps) {
   const [selectedBook, setSelectedBook] = useState<BookSelectionKey>(initialBook);
   const [availableBooks, setAvailableBooks] = useState(() => getVisibleLearningBooks(books));
   const [availableBookCounts, setAvailableBookCounts] = useState(bookCounts);
@@ -2727,7 +2743,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
     return () => controller.abort();
   }, [loadNonce, selectedBook, selectedFavorites]);
 
-  const currentSettings = settingsByBook[selectedBook] ?? DEFAULT_STUDY_SETTINGS;
+  const savedCurrentSettings = settingsByBook[selectedBook] ?? DEFAULT_STUDY_SETTINGS;
+  const currentSettings = { ...savedCurrentSettings, vocabularySort: vocabularySortForRole(savedCurrentSettings.vocabularySort, canAccessSceneImages) };
   const dailySummary = useMemo(
     () => summarizeDailyStudy(dailyActivity, progress, availableSourceCount),
     [dailyActivity, progress, availableSourceCount],
@@ -3459,6 +3476,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
     setGroupBrowseIds(null);
     const savedSettings = settingsByBook[selectedBook] ?? DEFAULT_STUDY_SETTINGS;
     const settings: StudySettings = { ...savedSettings, method: "classified", reviewView: null, reviewFamiliarities: [] };
+    if (openSceneImageStudy(selectedBook, settings, settingsByBook)) return;
     setSettingsByBook((current) => ({ ...current, [selectedBook]: settings }));
     startClassifiedGroup(settings, visibleWords, selectedBook);
   }, [selectedBook, settingsByBook, startClassifiedGroup, visibleWords]);
@@ -3494,7 +3512,8 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
   }, [selectedBook, settingsByBook]);
 
   const closeStudySettings = useCallback(() => {
-    const rememberedSettings = settingsOpenFor ? parseSettingsDraft(settingsDraft) : null;
+    const parsedDraft = settingsOpenFor ? parseSettingsDraft(settingsDraft) : null;
+    const rememberedSettings = parsedDraft ? { ...parsedDraft, vocabularySort: vocabularySortForRole(parsedDraft.vocabularySort, canAccessSceneImages) } : null;
     if (settingsOpenFor && rememberedSettings) {
       setSettingsByBook((current) => ({ ...current, [settingsOpenFor]: rememberedSettings }));
     }
@@ -3531,13 +3550,15 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
     setStudyPaused(true);
     setSettingsOpenFor(null);
     setEntryGate(settingsByBook[selectedBook] || (settingsOpenFor === selectedBook && rememberedSettings) ? "continue" : "select-book");
-  }, [replaceRecordingAudio, selectedBook, settingsByBook, settingsDraft, settingsOpenFor]);
+  }, [canAccessSceneImages, replaceRecordingAudio, selectedBook, settingsByBook, settingsDraft, settingsOpenFor]);
 
   const saveStudySettings = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!settingsOpenFor) return;
-    const settings = parseSettingsDraft(settingsDraft);
-    if (!settings) return;
+    const parsedSettings = parseSettingsDraft(settingsDraft);
+    if (!parsedSettings) return;
+    const settings = { ...parsedSettings, vocabularySort: vocabularySortForRole(parsedSettings.vocabularySort, canAccessSceneImages) };
+    if (openSceneImageStudy(settingsOpenFor, settings, settingsByBook)) { stopLearningAudio(); return; }
     setListModeActive(false);
     setCollectionListKey(null);
     window.history.replaceState(null, "", `/vocabulary/books?level=${encodeURIComponent(settingsOpenFor)}`);
@@ -3563,8 +3584,10 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
 
   const enterListMode = () => {
     const book = settingsOpenFor ?? selectedBook;
-    const settings = settingsOpenFor ? parseSettingsDraft(settingsDraft) : currentSettings;
-    if (!settings) return;
+    const parsedSettings = settingsOpenFor ? parseSettingsDraft(settingsDraft) : currentSettings;
+    if (!parsedSettings) return;
+    const settings = { ...parsedSettings, vocabularySort: vocabularySortForRole(parsedSettings.vocabularySort, canAccessSceneImages) };
+    if (openSceneImageStudy(book, settings, settingsByBook)) { stopLearningAudio(); return; }
     roundTokenRef.current += 1;
     stopLearningAudio();
     if (settings.modes[0] === "listening" || settings.modes[0] === "speaking") unlockLearningAudio();
@@ -3594,22 +3617,27 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
 
   const validSettingsDraft = parseSettingsDraft(settingsDraft) !== null;
   const scopeBook = settingsOpenFor ?? selectedBook;
+  const settingsVocabularySort = vocabularySortForRole(settingsDraft.vocabularySort, canAccessSceneImages);
   const settingsWordCount = visibleWords.length;
-  const settingsOrderedWords = orderWordsForStudy(visibleWords, "sequential", scopeBook, settingsDraft.vocabularySort);
-  const settingsGroupCount = vocabularyStudyGroupCount(settingsOrderedWords, settingsDraft.vocabularySort);
+  const settingsOrderedWords = orderWordsForStudy(visibleWords, "sequential", scopeBook, settingsVocabularySort);
+  const settingsSceneGroups = settingsVocabularySort === "scene" ? sceneCatalog.filter(scene => scene.level === sceneBookLevel(scopeBook)) : [];
+  const settingsGroupCount = settingsSceneGroups.length || vocabularyStudyGroupCount(settingsOrderedWords, settingsVocabularySort);
+  const settingsGroupLabel = (index: number) => settingsSceneGroups[index]
+    ? `第${index+1}组 · ${settingsSceneGroups[index].title}（${settingsSceneGroups[index].wordCount}词）`
+    : vocabularyStudyGroupLabel(settingsOrderedWords, index, settingsVocabularySort);
   const settingsGroupNo = settingsGroupCount > 0
     ? vocabularyStudyGroupIndex(settingsDraft.wordGroups.all, settingsWordCount, settingsGroupCount) ?? (nextGroupByBook[scopeBook] ?? 0) % settingsGroupCount
     : null;
   const settingsReviewCounts = useMemo(() => {
     if (!settingsOpenFor) return null;
-    const orderedScopePool = orderWordsForStudy(visibleWords, "sequential", settingsOpenFor, settingsDraft.vocabularySort);
-    const groupCount = vocabularyStudyGroupCount(orderedScopePool, settingsDraft.vocabularySort);
+    const orderedScopePool = orderWordsForStudy(visibleWords, "sequential", settingsOpenFor, settingsVocabularySort);
+    const groupCount = vocabularyStudyGroupCount(orderedScopePool, settingsVocabularySort);
     const selectedGroup = groupCount > 0
       ? vocabularyStudyGroupIndex(settingsDraft.wordGroups.all, orderedScopePool.length, groupCount) ?? (nextGroupByBook[settingsOpenFor] ?? 0) % groupCount
       : null;
     const scopedWords = settingsDraft.method === "browse" && settingsDraft.reviewGroupIndexes.length > 0
-      ? selectVocabularyStudyGroups(orderedScopePool, settingsDraft.reviewGroupIndexes, settingsDraft.vocabularySort)
-      : selectVocabularyStudyGroup(orderedScopePool, selectedGroup, settingsDraft.vocabularySort);
+      ? selectVocabularyStudyGroups(orderedScopePool, settingsDraft.reviewGroupIndexes, settingsVocabularySort)
+      : selectVocabularyStudyGroup(orderedScopePool, selectedGroup, settingsVocabularySort);
     const allRecords = scopedWords
       .map((word) => progressFor(progress, word.id))
       .filter((entry) => entry.lastReviewedAt !== null && (entry.lastOutcome !== "unscored" || Boolean(entry.familiarity)));
@@ -3630,7 +3658,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
       total: scopedWords.length,
       familiarity: familiarityCounts,
     };
-  }, [nextGroupByBook, progress, settingsDraft.method, settingsDraft.modes, settingsDraft.reviewGroupIndexes, settingsDraft.reviewView, settingsDraft.vocabularySort, settingsDraft.wordGroups, settingsOpenFor, visibleWords]);
+  }, [nextGroupByBook, progress, settingsDraft.method, settingsDraft.modes, settingsDraft.reviewGroupIndexes, settingsDraft.reviewView, settingsVocabularySort, settingsDraft.wordGroups, settingsOpenFor, visibleWords]);
 
   const toggleStudyMode = (category: ProgressCategory) => {
     if (settingsListMode) {
@@ -4352,7 +4380,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
 
         <main className="vocabulary-learning-workspace">
           <div className="vocabulary-learning-content-grid">
-          {(selectedBook === "高中大纲词汇" || selectedBook === "高中必修词汇") && !collectionListKey ? <SeniorHighVocabularyStoryPreview /> : null}
+          {canAccessSceneImages && (selectedBook === "高中大纲词汇" || selectedBook === "高中必修词汇") && !collectionListKey ? <SeniorHighVocabularyStoryPreview /> : null}
           {listModeActive && collectionListKey ? (
             <VocabularyCollectionList
               collection={collectionListKey}
@@ -4391,7 +4419,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
                 </>
               )}
             </div>
-            {selectedBook === "小学" ? <PrimaryVocabularyStoryPreview sortMode="scene" /> : null}
+            {canAccessSceneImages && selectedBook === "小学" ? <PrimaryVocabularyStoryPreview sortMode="scene" /> : null}
             </div>
           ) : null}
           {!loading && !loadError && entryGate === "continue" && !listModeActive ? (
@@ -4772,13 +4800,13 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
                       <span>{settingsDraft.reviewGroupIndexes.length === 0
                         ? "选择词汇组"
                         : settingsDraft.reviewGroupIndexes.length === 1
-                          ? vocabularyStudyGroupLabel(settingsOrderedWords, settingsDraft.reviewGroupIndexes[0], settingsDraft.vocabularySort)
-                          : `已选 ${settingsDraft.reviewGroupIndexes.length} 组（${settingsDraft.reviewGroupIndexes.reduce((total, group) => total + vocabularyStudyGroupSize(settingsOrderedWords, group, settingsDraft.vocabularySort), 0)} 词）`}</span>
+                          ? settingsGroupLabel(settingsDraft.reviewGroupIndexes[0])
+                          : `已选 ${settingsDraft.reviewGroupIndexes.length} 组（${settingsDraft.reviewGroupIndexes.reduce((total, group) => total + vocabularyStudyGroupSize(settingsOrderedWords, group, settingsVocabularySort), 0)} 词）`}</span>
                       <span aria-hidden="true" className="vocabulary-learning-group-select-arrow" />
                     </summary>
                     <div aria-label="复习词汇组" className="vocabulary-learning-group-multi-select-options">
                       {Array.from({ length: settingsGroupCount }, (_, index) => {
-                        const groupLabel = vocabularyStudyGroupLabel(settingsOrderedWords, index, settingsDraft.vocabularySort);
+                        const groupLabel = settingsGroupLabel(index);
                         const checked = settingsDraft.reviewGroupIndexes.includes(index);
                         return (
                           <label key={index}>
@@ -4815,7 +4843,7 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
                     value={settingsGroupNo ?? ""}
                   >
                     {Array.from({ length: settingsGroupCount }, (_, index) => {
-                      return <option key={index} value={index}>{vocabularyStudyGroupLabel(settingsOrderedWords, index, settingsDraft.vocabularySort)}</option>;
+                      return <option key={index} value={index}>{settingsGroupLabel(index)}</option>;
                     })}
                   </select>
                   <span aria-hidden="true" className="vocabulary-learning-group-select-arrow" />
@@ -4828,12 +4856,23 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
                   <fieldset aria-label="词汇排序" className="vocabulary-learning-settings-options vocabulary-learning-settings-sort">
                     <legend>词汇排序</legend>
                     <label>
-                      <input checked={settingsDraft.vocabularySort === "frequency"} name="vocabulary-sort" onChange={() => setSettingsDraft((current) => ({ ...current, vocabularySort: "frequency", reviewGroupIndexes: [], wordGroups: { core: 0, all: 0 } }))} type="radio" />
-                      <span>词频</span>
+                      <input checked={settingsVocabularySort === "frequency" && !settingsListMode} name="vocabulary-sort" onChange={() => { setSettingsDraft((current) => ({ ...current, vocabularySort: "frequency", reviewGroupIndexes: [], wordGroups: { core: 0, all: 0 } })); setSettingsListMode(false); }} type="radio" />
+                      <span>词频卡片</span>
                     </label>
                     <label>
-                      <input checked={settingsDraft.vocabularySort === "scene"} name="vocabulary-sort" onChange={() => setSettingsDraft((current) => ({ ...current, vocabularySort: "scene", reviewGroupIndexes: [], wordGroups: { core: 0, all: 0 } }))} type="radio" />
-                      <span>场景</span>
+                      <input checked={settingsVocabularySort === "frequency" && settingsListMode} name="vocabulary-sort" onChange={() => { setSettingsDraft((current) => ({ ...current, vocabularySort: "frequency", reviewGroupIndexes: [], wordGroups: { core: 0, all: 0 } })); selectListMode(); }} type="radio" />
+                      <span>词频列表</span>
+                    </label>
+                    <label>
+                      <input checked={canAccessSceneImages && settingsDraft.vocabularySort === "scene"} name="vocabulary-sort" onChange={() => {
+                        if (!canAccessSceneImages) {
+                          window.location.assign(`/vocabulary/scene-images?level=${encodeURIComponent(selectedBook)}`);
+                          return;
+                        }
+                        setSettingsDraft((current) => ({ ...current, vocabularySort: "scene", reviewGroupIndexes: [], wordGroups: { core: 0, all: 0 } }));
+                        setSettingsListMode(false);
+                      }} type="radio" />
+                      <span>场景图片</span>
                     </label>
                   </fieldset>
                   <fieldset className="vocabulary-learning-settings-options vocabulary-learning-settings-voice-options">
@@ -4862,12 +4901,6 @@ export function VocabularyLearning({ bookCounts, books, initialBook, initialColl
               <button aria-selected={setupMode === "single"} className={setupMode === "single" ? "active" : ""} onClick={() => setSetupMode("single")} role="tab" type="button">单人学习</button>
               <button aria-selected={setupMode === "pk"} className={setupMode === "pk" ? "active" : ""} onClick={() => { setSetupMode("pk"); if (!pkBooks.some((book) => book.key === pkSetupBook)) setPkSetupBook(pkBooks[0]?.key ?? "小学"); }} role="tab" type="button">PK 挑战</button>
             </div>
-            {setupMode === "single" ? (
-              <div aria-label="单人学习模式" className="vocabulary-learning-view-modes" role="tablist">
-                <button aria-selected={!settingsListMode} className={!settingsListMode ? "active" : ""} onClick={() => setSettingsListMode(false)} role="tab" type="button">卡片形式</button>
-                <button aria-selected={settingsListMode} className={settingsListMode ? "active" : ""} onClick={selectListMode} role="tab" type="button">列表形式</button>
-              </div>
-            ) : null}
             {setupMode === "pk" ? (
               <section aria-label="PK 设置" className="vocabulary-learning-pk-setup">
                 <fieldset className="vocabulary-learning-settings-options vocabulary-learning-pk-books">

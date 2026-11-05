@@ -130,8 +130,8 @@ export function SeniorHighVocabularyStoryPreview() {
       <div className={styles.sceneGrid}>
         {scenes.map((scene, sceneIndex) => (
           <article className={styles.scene} key={scene.image}>
-            <div className={styles.imageFrame}>
-              <Image alt={scene.alt} fill sizes="(max-width: 760px) 100vw, 48vw" src={scene.image} />
+            <div className={styles.imageFrame} onContextMenu={(event) => event.preventDefault()} onDragStart={(event) => event.preventDefault()}>
+              <Image alt={scene.alt} draggable={false} fill sizes="(max-width: 760px) 100vw, 48vw" src={scene.image.replace("/vocabulary-stories/", "/api/vocabulary-scene-images/")} unoptimized />
               <div aria-label={`${scene.title}图片中的词汇标注`} className={styles.imageWordLabels}>
                 {scene.imageLabels.map((label) => (
                   <span className={styles.imageWordLabel} key={label.word} style={{ left: `${label.x}%`, top: `${label.y}%` }}>{label.word}</span>

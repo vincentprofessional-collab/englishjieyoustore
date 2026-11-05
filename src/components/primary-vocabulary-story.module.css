@@ -285,6 +285,8 @@
   background: #eaf1fa;
   overflow: hidden;
   position: relative;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .imageWordCards {

@@ -99,7 +99,7 @@ const firstIllustrations: StoryIllustration[] = [
   { alt: "小红旗背着书包，与萌萌和珍珠在月亮森林相遇", caption: "森林相遇", wordCards: cardsFor(firstVocabulary, ["I", "have", "a / an", "and", "the"]), src: "/vocabulary-stories/primary-group-01/simple-01.png" },
   { alt: "萌萌和珍珠陪小红旗沿着月光小路寻找方向", caption: "地图提问", wordCards: cardsFor(firstVocabulary, ["what", "can", "you", "do", "with"]), src: "/vocabulary-stories/primary-group-01/simple-02.png" },
   { alt: "小红旗、萌萌和珍珠乘着月亮鲸鱼前往云城", caption: "月亮鲸鱼", wordCards: cardsFor(firstVocabulary, ["to", "in", "of", "on", "that"]), src: "/vocabulary-stories/primary-group-01/simple-03.png" },
-  { alt: "三位伙伴为迷路的小星星点亮灯笼", caption: "云城归星", wordCards: cardsFor(firstVocabulary, ["be", "for", "it", "at", "from"]), src: "/vocabulary-stories/primary-group-01/simple-04.png" },
+  { alt: "三位伙伴为迷路的小星星点亮灯笼", caption: "云城归星", wordCards: cardsFor(firstVocabulary, ["be", "for", "it", "at", "from"]), src: "/vocabulary-stories/primary-group-01/simple-04.svg" },
 ];
 
 const lastIllustrations: StoryIllustration[] = [
@@ -182,8 +182,8 @@ function PrimaryVocabularyFrequencyStoryPreview({ onAdjustSettings, onContinue, 
       <div className={styles.gallery}>
         {illustrations.map((illustration, index) => (
           <figure className={styles.figure} key={illustration.src}>
-            <div className={styles.imageFrame}>
-              <Image alt={illustration.alt} fill sizes="(max-width: 760px) 100vw, (max-width: 1450px) 44vw, 22vw" src={illustration.src} />
+            <div className={styles.imageFrame} onContextMenu={(event) => event.preventDefault()} onDragStart={(event) => event.preventDefault()}>
+              <Image alt={illustration.alt} draggable={false} fill sizes="(max-width: 760px) 100vw, (max-width: 1450px) 44vw, 22vw" src={illustration.src.replace("/vocabulary-stories/", "/api/vocabulary-scene-images/")} unoptimized />
               {illustration.callouts && illustration.wordCards ? (
                 <div aria-label="图片中的词汇指示" className={styles.imageCalloutLayer}>
                   <svg aria-hidden="true" className={styles.calloutLines} preserveAspectRatio="none" viewBox="0 0 100 100">
