@@ -107,9 +107,9 @@ export function vocabularyStudyGroupLabel<T extends SceneWord>(words: readonly T
   const groups = groupWordsByMode(words, mode);
   const selected = groups[group];
   if (!selected) return "";
-  if (mode === "frequency") return `第 ${group + 1} 组（${selected.words.length} 词）`;
+  if (mode === "frequency") return `第${group + 1}组（${selected.words.length}词）`;
   const localIndex = groups.slice(0, group).filter((item) => item.label === selected.label).length + 1;
-  return `${selected.label} · 第 ${localIndex} 组（${selected.words.length} 词）`;
+  return `${selected.label}·第${localIndex}组（${selected.words.length}词）`;
 }
 
 export function selectVocabularyStudyGroup<T extends SceneWord>(words: readonly T[], group: number | null, mode: VocabularySortMode = "frequency"): T[] {
