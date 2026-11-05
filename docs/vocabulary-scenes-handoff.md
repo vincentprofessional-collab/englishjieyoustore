@@ -1,8 +1,8 @@
 # 场景图片统一发布交接 · 2026-11-06
 
-当前工作树：`/Users/shidianjin/Projects/englishjieyoustore-vocab-ui-20261030`，分支`codex/vocab-details-20261030`，基准HEAD`c0b24cf`。未提交、未push、未部署；保留工作树中其他任务的修改。
+当前工作树：`/Users/shidianjin/Projects/englishjieyoustore-vocab-ui-20261030`，分支`codex/vocab-details-20261030`。场景功能已随统一发布提交`72e124f5fc972a8fd81589dbccafc09d33d7b309`进入`origin/main`；完整构建通过，部署已成功。本文于2026-11-06按线上数据库回读更新。
 
-统一发布顺序：场景图片排在其他任务之后，沿用本检查点，不另开生产发布，不重做已核验的图片、上传和测试。资产存于Supabase，不迁往Cloudflare；BBC音频不在本任务改动范围内。
+场景图片按用户要求在“场景图片”对话完成制作与核验，统一发布时复用其235组成果，不重做已核验的图片、上传和测试。资产存于Supabase，不迁往Cloudflare；BBC音频不在本任务改动范围内。
 
 ## 本轮发布范围
 
@@ -55,11 +55,11 @@ Supabase项目`ahecwiqjfrrxxjxazmre`，私有桶`vocabulary-scene-images`。已�
 
 其余脏文件由统一发布对话归属核对；不要把所有修改自动当成本场景任务。`next-env.d.ts`是本地Next生成变化，发布前由统一负责人按项目约定检查。
 
-## 发布前仍需处理
+## 发布及权限回读
 
-1. **生产购买方案停用待直接授权。**生产DB当前`vocabulary.scene-images`项目和`lifetime`方案仍启用，价格29.90。执行已准备的停用SQL被自动审批拒绝，理由为缺少用户对生产购买/权限变更的直接授权；没有改用SDK或其他路径绕过。已向用户提出确认。确认后只停用该项目和方案，保留图片、价格与已有权益记录；再读回`project_enabled=false`、`plan_enabled=false`及`project_access_amount_cny=null`。此项解决前不能宣称购买已关闭。
-2. 统一发布负责人检查生产存在`SUPABASE_SECRET_KEY`或`SUPABASE_SERVICE_ROLE_KEY`（仅服务端）和`NEXT_PUBLIC_SUPABASE_URL`。本地使用已有服务端密钥完成签名验证，未读取或修改生产环境变量。
-3. 本对话交接后由统一发布负责人执行一次完整`npm run build`（含BBC等既有基线），按AGENTS发布规范检查最新main、统一提交/部署；本对话不push、不部署。
-4. 发布后以admin及匿名/普通/付费角色回读页面和API；确认Network中图片直达Supabase、Vercel无图片字节转发、无静态public副本。正式支付交易未测试，也不在本轮开放范围。
+1. **生产购买已停用。**2026-11-06对Supabase项目`ahecwiqjfrrxxjxazmre`回读确认`vocabulary.scene-images.is_enabled=false`、`lifetime.is_enabled=false`，价格记录仍为29.90、`project_access_amount_cny=null`；没有该项目的用户权益记录。停用迁移已应用，不删除旧价格记录。
+2. **统一发布已完成。**发布提交为`72e124f5fc972a8fd81589dbccafc09d33d7b309`，与`origin/main`一致。完整`npm run build`通过，BBC既有prebuild基线通过；Vercel对应Git提交检查成功。场景图片资产与逐组验收结果来自“场景图片”对话，清单和测试结果见上文；未重复生成或上传。
+3. 场景访问维持admin-only：匿名、普通和付费用户都显示“暂未达到上线质量标准”，不出现购买入口。正式支付交易不在本次开放范围内。
+4. 生产环境变量的值未读取或回显；发布环境的密钥保持在服务端使用。不要把密钥写入源码、文档或聊天。
 
 本地预览中的既有登录Origin代理403及全站Logo图片优化器对代理fake-IP的拦截，没有通过修改代理、认证或`dangerouslyAllowLocalIP`处理；场景直连图片核验已通过。这些本地观察不应触发本场景任务扩大权限或修改无关认证配置。

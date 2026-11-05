@@ -6,6 +6,6 @@
 
 2026-11-06最新交接范围：本轮仅admin开放；访客、普通和付费账户均显示“暂未达到上线质量标准”。服务端页面、元数据API和旧图片API共用admin校验。购买入口已从场景页面移除。
 
-生产数据库目前仍启用旧29.9元终身方案。停用SQL已保存到`supabase/migrations/20261106000000_vocabulary_scene_images_admin_preview.sql`，执行被自动审批拒绝，等待用户直接授权，未通过其他路径重试。此项解决前不能将“购买已停用”作为上线验收结论。
+生产数据库已应用`supabase/migrations/20261106000000_vocabulary_scene_images_admin_preview.sql`。2026-11-06回读确认`vocabulary.scene-images`项目与`lifetime`方案均为关闭，价格记录29.90保留、实际可购金额为`null`；未发现该项目的权益记录。购买已停用，场景仍仅向admin开放。
 
-本对话未push、未部署；统一发布对话负责完整`npm run build`、生产环境密钥确认和上线回读。详细文件与验证范围见`docs/vocabulary-scenes-handoff.md`。
+统一工作树`72e124f`已通过完整`npm run build`并进入`origin/main`，本次部署已成功。详细文件与验证范围见`docs/vocabulary-scenes-handoff.md`。
