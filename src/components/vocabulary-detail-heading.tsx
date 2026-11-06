@@ -4,7 +4,8 @@ import type { ReactNode } from "react";
 import { VocabularyFavoriteButton } from "@/components/vocabulary-favorite-button";
 import { VocabularyInlinePronunciation } from "@/components/vocabulary-pronunciation";
 import { VocabularyShareButton } from "@/components/vocabulary-share-button";
-import { getVocabularyComponentStyle, getVisibleVocabularyFormationParts, isVocabularyFormationQualityLocked, splitVocabularyFormation, VocabularyMorphologyWord } from "@/components/vocabulary-morphology";
+import { VocabularyFormationPart as VocabularyFormationPartLink } from "@/components/vocabulary-formation-part";
+import { getVocabularyComponentStyle, getVisibleVocabularyFormationParts, splitVocabularyFormation, VocabularyMorphologyWord } from "@/components/vocabulary-morphology";
 import type { LocalVocabularyEntry, VocabularyFormationPart } from "@/lib/vocabulary/local-vocabulary";
 import { isSupplementalLearningBook } from "@/lib/vocabulary/learning";
 
@@ -21,7 +22,6 @@ type VocabularyDetailHeadingProps = {
 
 export function VocabularyDetailHeading({ actions, entry, formationParts, showActions = true, showMorphology = true, showLevels = true, studyCentered = false, titleContent }: VocabularyDetailHeadingProps) {
   const parts = getVisibleVocabularyFormationParts(formationParts?.length ? formationParts : splitVocabularyFormation(entry.formation));
-  const morphologyQualityLocked = isVocabularyFormationQualityLocked(entry.word, parts);
   const visibleLevels = entry.level.split("、").filter((level) => level && !isSupplementalLearningBook(level));
   const headerActions = actions ?? (
     <>
@@ -36,7 +36,7 @@ export function VocabularyDetailHeading({ actions, entry, formationParts, showAc
         <div aria-label={showLevels ? "词汇音标与等级" : "词汇音标"} className="vocabulary-detail-heading-center">
           {titleContent ?? <>
             <div className="vocabulary-detail-heading-identity">
-              <h1><VocabularyMorphologyWord parts={morphologyQualityLocked ? [] : parts} word={entry.word} /></h1>
+              <h1><VocabularyMorphologyWord parts={parts} word={entry.word} /></h1>
               <div className="vocabulary-detail-heading-meta">
                 <VocabularyInlinePronunciation
                   ukAudioUrl={entry.ukAudioUrl}
@@ -54,12 +54,17 @@ export function VocabularyDetailHeading({ actions, entry, formationParts, showAc
         </div>
         {showActions ? <div className="vocabulary-detail-heading-actions">{headerActions}</div> : null}
       </div>
-      {showMorphology && parts.length && !morphologyQualityLocked ? (
+      {showMorphology && parts.length ? (
         <div aria-label="词根和词缀组成" className="vocabulary-detail-morphology-summary">
           {parts.map((part, index) => (
             <span className="vocabulary-detail-morphology-item" key={`${part.label}-${index}`}>
               {index > 0 ? <span aria-hidden="true" className="vocabulary-detail-morphology-plus">+</span> : null}
-              <span className="vocabulary-detail-morphology-chip" style={getVocabularyComponentStyle(index)}>{part.label}</span>
+              <VocabularyFormationPartLink
+                href={part.href}
+                label={part.label}
+                style={getVocabularyComponentStyle(index)}
+                unlocked={false}
+              />
             </span>
           ))}
         </div>

@@ -19797,7 +19797,7 @@ body:has(.theme-editorial) .global-vocabulary-search-strip .vocabulary-search-ro
 }
 
 .bbc-original-copy.with-phonetics p[lang="en"] {
-  line-height: 1.9;
+  line-height: 2.05;
 }
 
 .bbc-original-copy .bbc-original-chinese {
@@ -25184,12 +25184,12 @@ audio.guide-editor-asset-preview {
 .article-word-pronunciation {
   color: #2476b8;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.62em;
+  font-size: 0.72em;
   font-weight: 700;
   line-height: 1.1;
   left: 50%;
   position: absolute;
-  top: -0.38em;
+  top: -0.5em;
   transform: translateX(-50%);
   white-space: nowrap;
 }
@@ -35467,7 +35467,7 @@ body .mobile-bottom-nav a.active { color: #245d7b !important; }
     line-height: 1.95 !important;
   }
   :is(.bbc-article-page, .new-concept-lesson-page, .listening-exam-page)[data-study-mode="general"] .bbc-original-copy.with-phonetics p[lang="en"] {
-    line-height: 2.2 !important;
+    line-height: 2.35 !important;
   }
   :is(.bbc-article-page, .new-concept-lesson-page, .listening-exam-page)[data-study-mode="intensive"] .bbc-intensive-english {
     font-size: 18px;
@@ -38945,6 +38945,14 @@ body .bbc-article-title-heading .bbc-article-title-line-chinese {
 .word-formation-part {
   border-color: color-mix(in srgb, var(--vocabulary-component-color, #25804c) 48%, white);
 }
+.vocabulary-detail-morphology-summary .word-formation-part {
+  cursor: pointer;
+  font: inherit;
+  font-size: clamp(15px, 1.45vw, 21px);
+  line-height: 1.4;
+  padding: 7px 12px;
+  text-align: left;
+}
 .word-formation-plus {
   color: #6d796b;
 }
@@ -38980,8 +38988,8 @@ body .bbc-article-title-heading .bbc-article-title-line-chinese {
     grid-row: 1;
   }
   .vocabulary-detail-heading-frequency { white-space: normal; }
-  .vocabulary-detail-morphology-summary { gap: 7px; padding: 9px 10px; }
-  .vocabulary-detail-morphology-chip { font-size: 13px; padding: 5px 8px; }
+  .vocabulary-detail-morphology-summary { gap: 7px; padding: 0; }
+  .vocabulary-detail-morphology-summary .word-formation-part { font-size: 15px; padding: 5px 8px; }
   .vocabulary-lookup-section .word-detail-section-heading { min-height: 56px; margin-bottom: 12px; padding: 9px 4px; }
 }
 @media (max-width: 560px) { .exam-prep-paper-submit { align-items: stretch; flex-direction: column; text-align: center; } .exam-prep-pagination { gap: 8px; font-size: 13px; } .exam-prep-pagination button { padding-inline: 10px; } }

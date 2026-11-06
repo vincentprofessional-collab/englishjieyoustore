@@ -897,16 +897,6 @@ function LookupDetails({ word }: { word: LearningWord }) {
         </section>
       ) : null}
 
-      {word.formation || word.root ? (
-        <section className="word-detail-section vocabulary-lookup-section">
-          <h2>词根树</h2>
-          <div className="vocabulary-lookup-lines">
-            {word.formation ? <p><b>构词</b>{word.formation}</p> : null}
-            {word.root ? <p><b>词根</b>{word.root}</p> : null}
-          </div>
-        </section>
-      ) : null}
-
       {word.etymologySource ? (
         <section className="word-detail-section vocabulary-lookup-section">
           <h2>词源来源</h2>

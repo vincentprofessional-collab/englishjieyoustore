@@ -22,6 +22,8 @@ const sourceRoot = resolve(valueAfter(
   "/Volumes/My HDD3/网站/英文解忧杂货铺/04_媒体素材/词汇发音/word-audio",
 ));
 const envFile = resolve(valueAfter("--env-file", resolve(projectRoot, ".env.seed.local")));
+const expectedWordsPath = valueAfter("--expected-words", "");
+const missingOnly = args.includes("--missing-only");
 const checkpointPath = resolve(valueAfter(
   "--checkpoint",
   "/private/tmp/englishjieyoustore-word-audio-upload-progress.jsonl",
@@ -30,6 +32,22 @@ const concurrency = Number(valueAfter("--concurrency", "4"));
 
 if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 6) {
   throw new Error("Concurrency must be an integer from 1 to 6.");
+}
+if (missingOnly && !expectedWordsPath) {
+  throw new Error("--missing-only requires --expected-words with a JSON array of audio key stems.");
+}
+
+let expectedWords = null;
+if (expectedWordsPath) {
+  const expectedWordsFile = resolve(expectedWordsPath);
+  if (!existsSync(expectedWordsFile)) throw new Error(`Expected word manifest not found: ${expectedWordsFile}`);
+  const parsedManifest = JSON.parse(readFileSync(expectedWordsFile, "utf8"));
+  const wordList = Array.isArray(parsedManifest) ? parsedManifest : parsedManifest?.words;
+  if (!Array.isArray(wordList) || wordList.some((word) => typeof word !== "string" || !word.trim())) {
+    throw new Error("Expected word manifest must be a JSON array of non-empty audio key stems.");
+  }
+  expectedWords = new Set(wordList.map((word) => word.trim().toLowerCase().normalize("NFC")));
+  if (expectedWords.size !== wordList.length) throw new Error("Expected word manifest contains duplicate key stems.");
 }
 
 function readEnvFile(path) {
@@ -69,13 +87,23 @@ for (const accent of ["uk", "us"]) {
   if (!existsSync(accentRoot) || !statSync(accentRoot).isDirectory()) {
     throw new Error(`Missing source directory: ${accentRoot}`);
   }
+  const foundExpectedWords = new Set();
   for (const file of collectMp3Files(accentRoot)) {
     // Supabase Storage only accepts ASCII object keys here. Keep the accented
     // homophone separate from the existing plain "cafe.mp3" source file.
     const filename = file.relativePath.normalize("NFC").toLowerCase();
+    const wordStem = filename.slice(0, -4);
+    if (expectedWords && !expectedWords.has(wordStem)) continue;
+    foundExpectedWords.add(wordStem);
     const storageFilename = filename === "café.mp3" ? "cafe-accent.mp3" : filename;
     const storagePath = `word-audio/${accent}/${storageFilename}`;
     entries.push({ ...file, accent, bytes: statSync(file.absolutePath).size, storagePath });
+  }
+  if (expectedWords) {
+    const missingLocalWords = [...expectedWords].filter((word) => !foundExpectedWords.has(word));
+    if (missingLocalWords.length > 0) {
+      throw new Error(`Local ${accent} audio is missing ${missingLocalWords.length} expected files: ${missingLocalWords.slice(0, 8).join(", ")}`);
+    }
   }
 }
 
@@ -112,6 +140,34 @@ const supabase = createClient(supabaseUrl, serviceRoleKey, {
   auth: { autoRefreshToken: false, persistSession: false },
 });
 mkdirSync(dirname(checkpointPath), { recursive: true });
+
+let uploadEntries = entries;
+if (missingOnly) {
+  const existingPaths = new Set();
+  const pageSize = 1000;
+  for (const accent of ["uk", "us"]) {
+    let offset = 0;
+    while (true) {
+      const { data, error } = await retry(
+        () => supabase.storage.from("audio").list(`word-audio/${accent}`, {
+          limit: pageSize,
+          offset,
+          sortBy: { column: "name", order: "asc" },
+        }),
+        `Supabase object inventory for ${accent} page ${Math.floor(offset / pageSize) + 1}`,
+      );
+      if (error) throw error;
+      const objects = data ?? [];
+      for (const object of objects) {
+        if (object.name) existingPaths.add(`word-audio/${accent}/${object.name}`);
+      }
+      if (objects.length < pageSize) break;
+      offset += objects.length;
+    }
+  }
+  uploadEntries = entries.filter((entry) => !existingPaths.has(entry.storagePath));
+  console.log(`Supabase inventory found ${(entries.length - uploadEntries.length).toLocaleString()} expected objects already present; only ${uploadEntries.length.toLocaleString()} missing objects will be checked and uploaded.`);
+}
 
 const checkpointed = new Map();
 if (existsSync(checkpointPath)) {
@@ -176,13 +232,13 @@ let skipped = 0;
 let failure;
 const worker = async () => {
   while (!failure) {
-    const entry = entries[next++];
+    const entry = uploadEntries[next++];
     if (!entry) return;
     const bytes = readFileSync(entry.absolutePath);
     if (bytes.length !== entry.bytes) throw new Error(`Source file changed while uploading: ${entry.absolutePath}`);
     const hash = sha256(bytes);
     const checkpointRecord = checkpointed.get(entry.storagePath);
-    if (checkpointRecord) {
+    if (checkpointRecord && !missingOnly) {
       if (checkpointRecord.sha256 !== hash) throw new Error(`Local audio changed after it was checkpointed: ${entry.storagePath}`);
       skipped += 1;
       if (skipped % 1000 === 0) console.log(`Revalidated ${skipped.toLocaleString()} checkpointed source files.`);
@@ -237,7 +293,7 @@ const worker = async () => {
   }
 };
 
-await Promise.all(Array.from({ length: Math.min(concurrency, entries.length) }, async () => {
+await Promise.all(Array.from({ length: Math.min(concurrency, uploadEntries.length) }, async () => {
   try {
     await worker();
   } catch (error) {

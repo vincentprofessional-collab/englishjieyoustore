@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const [siteNav, articlesPage, articlesHome, newConceptLesson, vocabularyLearning, vocabularyLearningLib, globalCss, adminAnalytics, membershipSalesRoute, adminMembership, analyticsSql, popularPagesSql, dashboardSnapshotSql, progressProvider, favoritesPage, writingTerm, annotationTools, bbcDetail, listeningPractice, accessAdmin, accessPaywall, typographySql, satNavigation, satHome, satKnowledge, satPastPapers] = await Promise.all([
+const [siteNav, articlesPage, articlesHome, newConceptLesson, vocabularyLearning, vocabularyLearningLib, globalCss, adminAnalytics, membershipSalesRoute, adminMembership, analyticsSql, popularPagesSql, dashboardSnapshotSql, progressProvider, favoritesPage, writingTerm, annotationTools, bbcDetail, listeningPractice, accessAdmin, accessPaywall, typographySql, satNavigation, satHome, satKnowledge, satPastPapers, lifetimeAudienceMigration] = await Promise.all([
   readFile(new URL("../src/components/site-nav.tsx", import.meta.url), "utf8"),
   readFile(new URL("../src/app/articles/page.tsx", import.meta.url), "utf8"),
   readFile(new URL("../src/components/articles-home.tsx", import.meta.url), "utf8"),
@@ -29,6 +29,7 @@ const [siteNav, articlesPage, articlesHome, newConceptLesson, vocabularyLearning
   readFile(new URL("../src/components/sat/sat-home.tsx", import.meta.url), "utf8"),
   readFile(new URL("../src/components/sat/sat-knowledge.tsx", import.meta.url), "utf8"),
   readFile(new URL("../src/components/sat/sat-past-paper-library.tsx", import.meta.url), "utf8"),
+  readFile(new URL("../supabase/migrations/20261106053755_admin_anonymous_visit_thresholds.sql", import.meta.url), "utf8"),
 ]);
 
 test("top navigation opens section pages instead of hover dropdowns", () => {
@@ -65,9 +66,9 @@ test("BBC article title keeps its original neutral styling and IPA cards get mor
   assert.match(bbcDetail, /bbc-vocabulary-item\$\{hasPronunciation \? " has-phonetics" : ""\}/);
   assert.match(globalCss, /\.bbc-vocabulary-item\.has-phonetics \.bbc-vocabulary-phonetics\s*\{[^}]*font-size:\s*16px;[^}]*line-height:\s*1\.8;/);
   assert.match(bbcDetail, /bbc-original-copy\$\{audioSettings\.pronunciationMode === "uk" \|\| audioSettings\.pronunciationMode === "us" \? " with-phonetics"/);
-  assert.match(globalCss, /\.bbc-original-copy\.with-phonetics p\[lang="en"\]\s*\{[^}]*line-height:\s*1\.9;/);
-  assert.match(globalCss, /\.article-word-pronunciation\s*\{[^}]*font-size:\s*0\.62em;[^}]*line-height:\s*1\.1;[^}]*left:\s*50%;[^}]*position:\s*absolute;[^}]*top:\s*-0\.38em;/);
-  assert.match(globalCss, /\.bbc-original-copy\.with-phonetics p\[lang="en"\]\s*\{\s*line-height:\s*2\.2 !important;/);
+  assert.match(globalCss, /\.bbc-original-copy\.with-phonetics p\[lang="en"\]\s*\{[^}]*line-height:\s*2\.05;/);
+  assert.match(globalCss, /\.article-word-pronunciation\s*\{[^}]*font-size:\s*0\.72em;[^}]*line-height:\s*1\.1;[^}]*left:\s*50%;[^}]*position:\s*absolute;[^}]*top:\s*-0\.5em;/);
+  assert.match(globalCss, /\.bbc-original-copy\.with-phonetics p\[lang="en"\]\s*\{\s*line-height:\s*2\.35 !important;/);
 });
 
 test("paid project admin saves names and typography and paywall uses the saved settings", () => {
@@ -131,6 +132,18 @@ test("admin analytics loads today's visitor counts and top 20 pages in one manua
   assert.match(adminAnalytics, /onClick=\{\(\) => void refresh\(\)\}/);
   assert.match(adminAnalytics, /document\.visibilityState === "hidden"/);
   assert.doesNotMatch(adminAnalytics, /setInterval|Promise\.all\(offsets\.map/);
+  assert.match(adminAnalytics, /累计访问超过 2 次（未注册）/);
+  assert.match(adminAnalytics, /累计访问超过 3 次（未注册）/);
+  assert.match(adminAnalytics, /累计访问超过 4 次（未注册）/);
+  assert.match(adminAnalytics, /累计访问超过 5 次（未注册）/);
+  assert.match(lifetimeAudienceMigration, /registered_visitor_ids as/);
+  assert.match(lifetimeAudienceMigration, /from anonymous_page_views/);
+  for (const threshold of [3, 4, 5, 6]) {
+    assert.match(lifetimeAudienceMigration, new RegExp(`total_visits >= ${threshold}`));
+  }
+  for (const field of ["visitors_over_five_visits", "visitors_with_two_return_visits", "visitors_with_three_return_visits", "visitors_with_four_return_visits"]) {
+    assert.match(lifetimeAudienceMigration, new RegExp(`'${field}'`));
+  }
   assert.match(popularPagesSql, /if not public\.is_admin\(\) then/);
   assert.match(popularPagesSql, /event\.event_type = 'page_view'/);
   assert.match(popularPagesSql, /limit least\(greatest\(coalesce\(p_limit, 20\), 1\), 20\)/);

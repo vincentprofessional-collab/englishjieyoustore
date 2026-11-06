@@ -20,10 +20,10 @@ type DashboardSnapshot = {
 type LifetimeAudienceMetrics = {
   registered_users_total: number;
   visitors_total: number;
-  visitors_over_five_visits: number;
-  visitors_with_two_return_visits: number;
-  visitors_with_three_return_visits: number;
-  visitors_with_four_return_visits: number;
+  anonymous_visitors_with_3_plus_visits: number;
+  anonymous_visitors_with_4_plus_visits: number;
+  anonymous_visitors_with_5_plus_visits: number;
+  anonymous_visitors_with_6_plus_visits: number;
 };
 
 function getShanghaiToday() {
@@ -68,7 +68,7 @@ export function AdminAnalyticsPanel() {
       }
       const lifetime = result?.lifetime_audience;
       if (!lifetime) throw new Error("返回结果缺少累计用户统计；请检查 Supabase 管理统计迁移是否已执行。");
-      if (!["visitors_with_two_return_visits", "visitors_with_three_return_visits", "visitors_with_four_return_visits"].every((key) => Object.hasOwn(lifetime, key))) {
+      if (!["anonymous_visitors_with_3_plus_visits", "anonymous_visitors_with_4_plus_visits", "anonymous_visitors_with_5_plus_visits", "anonymous_visitors_with_6_plus_visits"].every((key) => Object.hasOwn(lifetime, key))) {
         throw new Error("回访次数分档尚未启用；请确认 Supabase 已执行回访统计迁移。");
       }
       setSnapshot({
@@ -82,10 +82,10 @@ export function AdminAnalyticsPanel() {
         lifetime_audience: {
           registered_users_total: Number(lifetime.registered_users_total),
           visitors_total: Number(lifetime.visitors_total),
-          visitors_over_five_visits: Number(lifetime.visitors_over_five_visits),
-          visitors_with_two_return_visits: Number(lifetime.visitors_with_two_return_visits),
-          visitors_with_three_return_visits: Number(lifetime.visitors_with_three_return_visits),
-          visitors_with_four_return_visits: Number(lifetime.visitors_with_four_return_visits),
+          anonymous_visitors_with_3_plus_visits: Number(lifetime.anonymous_visitors_with_3_plus_visits),
+          anonymous_visitors_with_4_plus_visits: Number(lifetime.anonymous_visitors_with_4_plus_visits),
+          anonymous_visitors_with_5_plus_visits: Number(lifetime.anonymous_visitors_with_5_plus_visits),
+          anonymous_visitors_with_6_plus_visits: Number(lifetime.anonymous_visitors_with_6_plus_visits),
         },
         popular_pages: (result?.popular_pages ?? []).map((row) => ({ ...row, views: Number(row.views) })),
       });
@@ -134,26 +134,26 @@ export function AdminAnalyticsPanel() {
               <strong>{lifetimeMetrics.visitors_total}</strong>
             </article>
             <article className="admin-daily-metric-card">
-              <span>累计访问超过 5 次</span>
-              <strong>{lifetimeMetrics.visitors_over_five_visits}</strong>
+              <span>累计访问超过 2 次（未注册）</span>
+              <strong>{lifetimeMetrics.anonymous_visitors_with_3_plus_visits}</strong>
             </article>
             <article className="admin-daily-metric-card">
-              <span>恰好回访 2 次</span>
-              <strong>{lifetimeMetrics.visitors_with_two_return_visits}</strong>
+              <span>累计访问超过 3 次（未注册）</span>
+              <strong>{lifetimeMetrics.anonymous_visitors_with_4_plus_visits}</strong>
             </article>
             <article className="admin-daily-metric-card">
-              <span>恰好回访 3 次</span>
-              <strong>{lifetimeMetrics.visitors_with_three_return_visits}</strong>
+              <span>累计访问超过 4 次（未注册）</span>
+              <strong>{lifetimeMetrics.anonymous_visitors_with_5_plus_visits}</strong>
             </article>
             <article className="admin-daily-metric-card">
-              <span>恰好回访 4 次</span>
-              <strong>{lifetimeMetrics.visitors_with_four_return_visits}</strong>
+              <span>累计访问超过 5 次（未注册）</span>
+              <strong>{lifetimeMetrics.anonymous_visitors_with_6_plus_visits}</strong>
             </article>
           </div>
         ) : (
           <p className="admin-empty-text">{isLoading ? "正在读取累计用户统计…" : "点击右上角“刷新数据”查看统计。"}</p>
         )}
-        <p className="admin-analytics-refresh-note">注册用户排除管理员；访客按浏览器标识估算，清除浏览器数据或更换设备可能重复计数。回访次数指首次访问后的额外访问会话，按 30 分钟无活动划分会话；历史记录按不同访问日期估算。</p>
+        <p className="admin-analytics-refresh-note">以上四档只计未注册用户，且为累计门槛（例如“超过 2 次”包含访问 3 次及以上）；同一浏览器后来注册的记录也会排除。访客按浏览器标识估算，清除浏览器数据或更换设备可能重复计数。每 30 分钟无活动划分为新访问；缺少会话标识的旧记录按不同访问日期估算。</p>
       </section>
 
       <section className="admin-editor-card">

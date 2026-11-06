@@ -4,9 +4,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { ContentShareButton } from "@/components/content-share-button";
 import { VocabularyExampleArticleLink } from "@/components/vocabulary-example-article-link";
 import { VocabularyExampleAudioButton, VocabularyExampleFavoriteButton } from "@/components/vocabulary-example-actions";
-import { VocabularyFormationPart as VocabularyFormationPartLink } from "@/components/vocabulary-formation-part";
 import { VocabularyLookupDisplaySection } from "@/components/vocabulary-lookup-display-section";
-import { getVocabularyComponentStyle, getVisibleVocabularyFormationParts, isVocabularyFormationQualityLocked } from "@/components/vocabulary-morphology";
 import { VocabularyExamQuestions } from "@/components/vocabulary-exam-questions";
 import type { VocabularyUsageExample } from "@/lib/vocabulary/examples";
 import type { VocabularyPhraseMatch } from "@/lib/vocabulary/phrases";
@@ -137,34 +135,6 @@ function EnglishDefinitionSection({ entry }: { entry: LocalVocabularyEntry }) {
             </p>
           );
         })}
-      </div>
-    </VocabularyLookupDisplaySection>
-  );
-}
-
-function FormationPart({ index, part, unlocked }: { index: number; part: VocabularyFormationPart; unlocked: boolean }) {
-  const style = getVocabularyComponentStyle(index);
-  if (!part.href) return <span className="word-formation-part" style={style}>{part.label}</span>;
-  return <VocabularyFormationPartLink href={part.href} label={part.label} style={style} unlocked={unlocked} />;
-}
-
-function WordFormationSection({ word, parts, unlocked }: { word: string; parts: VocabularyFormationPart[]; unlocked: boolean }) {
-  const visibleParts = getVisibleVocabularyFormationParts(parts);
-  if (visibleParts.length === 0) return null;
-  const qualityLocked = isVocabularyFormationQualityLocked(word, visibleParts);
-  return (
-    <VocabularyLookupDisplaySection className="word-formation-section" controlsEnabled id="rootTree" title="词根树">
-      <div className="word-formation-card">
-        {qualityLocked ? <button aria-label="暂未达到上线质量要求" className="word-formation-quality-lock" onClick={() => window.alert("暂未达到上线质量要求")} title="点击查看质量状态" type="button">🔒</button> : (
-          <div className="word-formation-line">
-            {visibleParts.map((part, index) => (
-              <span className="word-formation-token" key={`${part.label}-${index}`}>
-                {index > 0 ? <span className="word-formation-plus">+</span> : null}
-                <FormationPart index={index} part={part} unlocked={unlocked} />
-              </span>
-            ))}
-          </div>
-        )}
       </div>
     </VocabularyLookupDisplaySection>
   );
@@ -377,8 +347,6 @@ export function VocabularyDetailContent({
   entry,
   etymologyChinese = "",
   etymologyEnglish = "",
-  formationParts,
-  formationUnlocked = false,
   lookupLayout = false,
   showExamples = true,
   showIllustration = true,
@@ -414,12 +382,9 @@ export function VocabularyDetailContent({
     );
   }
 
-  const hasEtymologyContent = Boolean(etymologyEnglish || etymologyChinese || entry.etymologyStory || formationParts.length);
+  const hasEtymologyContent = Boolean(etymologyEnglish || etymologyChinese || entry.etymologyStory);
   const wordTreeAndEtymology = hasEtymologyContent ? (
-    <>
-      <WordFormationSection word={entry.word} parts={formationParts} unlocked={formationUnlocked} />
-      <EtymologySection chinese={etymologyChinese} english={etymologyEnglish} story={entry.etymologyStory} />
-    </>
+    <EtymologySection chinese={etymologyChinese} english={etymologyEnglish} story={entry.etymologyStory} />
   ) : null;
   const definitionsAndExamples = <>
     {chineseDefinition}

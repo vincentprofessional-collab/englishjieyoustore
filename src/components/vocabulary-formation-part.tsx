@@ -42,7 +42,7 @@ export function VocabularyFormationPart({ href, label, style, unlocked }: Vocabu
             onClick={(event) => event.stopPropagation()}
             role="dialog"
           >
-            <p>暂未达到可公开学习的质量标准</p>
+            <p>暂未达到上线质量要求</p>
             <button className="button primary" onClick={() => setIsPaywallOpen(false)} type="button">
               知道了
             </button>
