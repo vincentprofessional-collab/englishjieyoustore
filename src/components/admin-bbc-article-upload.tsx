@@ -7,7 +7,7 @@ import { readBbcRichPaste, serializeBbcArticlePaste } from "@/lib/articles/bbc-p
 import { adminRequest } from "@/lib/admin/request";
 import { analyzeBbcAudio } from "@/lib/admin/bbc-audio-alignment";
 import type { BbcArticle } from "@/lib/articles/bbc";
-import { parseBbcArticlePaste, splitBbcArticleParagraphs } from "@/lib/articles/bbc-article-upload";
+import { parseBbcArticleDateFromTitle, parseBbcArticlePaste, splitBbcArticleParagraphs } from "@/lib/articles/bbc-article-upload";
 import { getBbcPdfQuizIssues, type BbcPdfQuiz } from "@/lib/articles/bbc-quiz";
 import { AdminBbcPdfQuizEditor } from "@/components/admin-bbc-pdf-quiz-editor";
 
@@ -15,7 +15,7 @@ type UploadTicket = { headers: Record<string, string>; objectPath: string; uploa
 type SentenceUploadTicket = UploadTicket & { sentenceNo: number };
 type AudioPreparation = Awaited<ReturnType<typeof analyzeBbcAudio>>;
 
-function uploadToR2(ticket: UploadTicket, file: File, onProgress: (value: number) => void) {
+function uploadToR2(ticket: UploadTicket, file: File, onProgress: (value: number) => void, timeoutMs = 0) {
   return new Promise<void>((resolve, reject) => {
     const request = new XMLHttpRequest();
     request.open("PUT", ticket.uploadUrl);
@@ -24,6 +24,8 @@ function uploadToR2(ticket: UploadTicket, file: File, onProgress: (value: number
       if (event.lengthComputable) onProgress(Math.min(99, Math.round((event.loaded / event.total) * 100)));
     };
     request.onerror = () => reject(new Error("音频上传未完成，可能是存储服务拒绝请求或传输中断。请重试或检查后台上传权限。"));
+    request.timeout = timeoutMs;
+    request.ontimeout = () => reject(new Error("MP3 上传超时。"));
     request.onabort = () => reject(new Error("音频上传已取消。"));
     request.onload = () => {
       if (request.status >= 200 && request.status < 300) {
@@ -34,6 +36,27 @@ function uploadToR2(ticket: UploadTicket, file: File, onProgress: (value: number
       reject(new Error(`Cloudflare R2 音频上传失败（HTTP ${request.status}）。`));
     };
     request.send(file);
+  });
+}
+
+function readMp3DurationMs(file: File) {
+  return new Promise<number | undefined>((resolve) => {
+    const player = new Audio();
+    const url = URL.createObjectURL(file);
+    const finish = (duration?: number) => {
+      clearTimeout(timeout);
+      player.onloadedmetadata = null;
+      player.onerror = null;
+      URL.revokeObjectURL(url);
+      resolve(duration);
+    };
+    const timeout = setTimeout(finish, 5_000);
+    player.preload = "metadata";
+    player.onloadedmetadata = () => finish(Number.isFinite(player.duration) && player.duration > 0
+      ? Math.round(player.duration * 1000)
+      : undefined);
+    player.onerror = () => finish();
+    player.src = url;
   });
 }
 
@@ -57,7 +80,7 @@ export function AdminBbcArticleUpload() {
   const [pdfMessage, setPdfMessage] = useState("");
   const [pdfError, setPdfError] = useState(false);
   const paragraphCount = useMemo(() => {
-    const parsed = parseBbcArticlePaste(text);
+    const parsed = parseBbcArticlePaste(text, true);
     return typeof parsed === "string" ? undefined : splitBbcArticleParagraphs(parsed.english, "en").length;
   }, [text]);
   const audioJob = useRef<{ file: File; subtitleFile: File | null; sentenceKey: string; preparation?: AudioPreparation; objectPath?: string; uploaded: Map<number, string> } | null>(null);
@@ -75,9 +98,9 @@ export function AdminBbcArticleUpload() {
       setPdfQuiz(result.article.quiz ?? null); setPdfMessage("");
       setEditingId(id); setAudioFile(null); setSubtitleFile(null); setAudioProgress(0); setAudioStatus("waiting");
       audioJob.current = null;
-      setExistingAudio(result.article.fullAudioUrl ? { objectPath: result.objectPath } : null);
+      setExistingAudio(result.objectPath ? { objectPath: result.objectPath } : null);
       setPublishedHref(`/articles/${id}`);
-      setMessage("正在编辑已上传文章。修改正文后会自动重新分析时间轴；语法标注可在下方追加后由系统识别，也可在前端精读页面直接修改。");
+      setMessage("正在编辑已上传文章。可以直接发布修改，或先自动对齐音频。逐句时间点和语法标注可在前端精读页面校对。");
     } catch (cause) { setError(true); setMessage(cause instanceof Error ? cause.message : "文章无法读取。"); }
     finally { setBusy(false); }
   }
@@ -105,12 +128,91 @@ export function AdminBbcArticleUpload() {
     finally { setPdfBusy(false); }
   }
 
+  async function publishArticle() {
+    const parsed = parseBbcArticlePaste(text, true);
+    if (typeof parsed === "string") {
+      setError(true);
+      setMessage(parsed);
+      return;
+    }
+    const date = parseBbcArticleDateFromTitle(parsed.dateTitle)!;
+    if (editingId && date.id !== editingId) {
+      setError(true);
+      setMessage("修改已上传文章时，请保留原标题中的日期。");
+      return;
+    }
+
+    setBusy(true);
+    let objectPath = existingAudio?.objectPath ?? "";
+    let durationMs: number | undefined;
+    const warnings: string[] = [];
+    try {
+      if (audioFile) {
+        setAudioProgress(0);
+        setAudioStatus("uploading");
+        try {
+          if (!/\.mp3$/i.test(audioFile.name) || !audioFile.size || audioFile.size > 200 * 1024 * 1024) {
+            throw new Error("请选择不超过 200 MB 的 MP3 文件。");
+          }
+          setMessage("正在上传完整原声……");
+          const job = audioJob.current;
+          const uploadedPath = job?.file === audioFile ? job.objectPath : undefined;
+          if (uploadedPath?.startsWith(`bbc/${date.year}/${date.id}/`)) {
+            objectPath = uploadedPath;
+          } else {
+            const ticket = await adminRequest("/api/admin/bbc-articles", {
+              body: JSON.stringify({ action: "presign", filename: audioFile.name, size: audioFile.size, title: parsed.dateTitle }),
+              method: "POST",
+              signal: AbortSignal.timeout(15_000),
+            }) as UploadTicket;
+            await uploadToR2(ticket, audioFile, setAudioProgress, 180_000);
+            objectPath = ticket.objectPath;
+          }
+          durationMs = await readMp3DurationMs(audioFile).catch(() => undefined);
+          setAudioProgress(100);
+          setAudioStatus("uploaded");
+        } catch (cause) {
+          setAudioStatus("failed");
+          warnings.push(cause instanceof Error ? cause.message : "MP3 上传未完成。");
+        }
+      }
+      setMessage("正在发布文章……");
+      const payload = await adminRequest("/api/admin/bbc-articles", {
+        body: JSON.stringify({ text, objectPath, quiz: pdfQuiz, durationMs, publish: true }),
+        method: "PUT",
+      });
+      setEditingId(payload.articleId);
+      setExistingAudio(payload.objectPath ? { objectPath: payload.objectPath } : null);
+      if (!audioFile || payload.objectPath === objectPath && warnings.length === 0) setAudioFile(null);
+      setSubtitleFile(null);
+      audioJob.current = null;
+      setPublishedHref(payload.href);
+      const details = payload.audioIncluded
+        ? payload.timingsComplete ? "原声与逐句时间轴已保留。" : "完整原声可播放，逐句时间点可在前端精读页校对。"
+        : "已发布正文。可回到后台补传 MP3。";
+      warnings.push(...(payload.reviewWarnings ?? []));
+      if (payload.phraseVocabularyWarning) warnings.push(payload.phraseVocabularyWarning);
+      setMessage(`文章已发布。${details}${warnings.length ? "\n" + warnings.join("\n") : ""}`);
+      void loadArticles().catch(() => undefined);
+    } catch (cause) {
+      setError(true);
+      setMessage(cause instanceof Error ? cause.message : "文章发布失败，请稍后重试。");
+    } finally {
+      setBusy(false);
+    }
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (busy || pdfBusy) return;
     setMessage("");
     setPublishedHref("");
     setError(false);
-    if (pdfBusy) return;
+    const submitter = (event.nativeEvent as SubmitEvent | undefined)?.submitter;
+    if (submitter?.getAttribute("value") === "publish") {
+      await publishArticle();
+      return;
+    }
     if (pdfQuiz) {
       const issues = getBbcPdfQuizIssues(pdfQuiz, paragraphCount);
       if (issues.length) { setError(true); setMessage(issues.join("\n")); return; }
@@ -259,7 +361,7 @@ export function AdminBbcArticleUpload() {
         <div>
           <span>BBC · ARTICLE PUBLISHING</span>
           <h2>{editingId ? "修改 BBC 文章" : "上传 BBC 文章"}</h2>
-          <p>上传后自动整理中英文与词汇、完成词性和语法成分标注，并按字幕时间戳或原声识别切分独立小音频。添加练习 PDF 后会同时形成文章练习和口语复述的段落大意。新文章先保存为草稿，可预览后发布。</p>
+          <p>可直接发布正文与完整原声，再到前端精读页校对。也可先自动对齐音频，保存为草稿。</p>
         </div>
       </header>
 
@@ -285,7 +387,7 @@ export function AdminBbcArticleUpload() {
             rows={24}
             value={text}
           />
-          <small>首行是标题，英文与中文逐段对应，编号词条自动归入右侧词汇栏。粘贴带格式的原文会保留波浪线；纯文本也可用 ~~词语~~ 标记波浪线。可在文章内容后追加“# 全文逐句词性+句子成分标注”及“## 句1”格式的标注。已提供的标注会严格按原文映射；词句匹配失败时会提示并阻止保存，避免退回错误的自动标注。未提供标注的句子才由系统自动分析。</small>
+          <small>首行是标题，英文与中文逐段对应，编号词条自动归入右侧词汇栏。粘贴带格式的原文会保留波浪线；纯文本也可用 ~~词语~~ 标记波浪线。可在文章内容后追加“# 全文逐句词性+句子成分标注”及“## 句1”格式的标注。未匹配的语法标注会列入待校对提示。</small>
         </label>
         <label className={styles.full}>
           <span>文章练习 PDF（含题目与答案）</span>
@@ -297,16 +399,16 @@ export function AdminBbcArticleUpload() {
         <label className={styles.full}>
           <span>MP3 音频{existingAudio ? "（已有关联音频，可替换）" : ""}</span>
           <input accept=".mp3,audio/mpeg" disabled={busy} onChange={(event) => { setAudioFile(event.target.files?.[0] ?? null); audioJob.current = null; setAudioProgress(0); setAudioStatus("waiting"); }} type="file" />
-          <small>{audioFile ? `${audioFile.name} · ${(audioFile.size / 1024 / 1024).toFixed(1)} MB` : existingAudio ? "已关联原音频；只改词汇、中文或语法时保留原有小音频。修改英文句子后请重新选择 MP3。" : "最大 200 MB；自动按句间停顿切分 MP3，并逐句上传。"}</small>
+          <small>{audioFile ? `${audioFile.name} · ${(audioFile.size / 1024 / 1024).toFixed(1)} MB` : existingAudio ? "已关联原音频。英文句子没有改动时会保留原有时间轴。" : "最大 200 MB。直接发布时上传完整原声，音频暂缺也可发布正文。"}</small>
         </label>
         <label className={styles.full}>
           <span>时间戳字幕（可选）</span>
           <input accept=".srt,.vtt,.lrc,application/x-subrip,text/vtt,text/plain" disabled={busy} onChange={(event) => { setSubtitleFile(event.target.files?.[0] ?? null); audioJob.current = null; }} type="file" />
-          <small>{subtitleFile ? `${subtitleFile.name} · 优先使用字幕时间戳切分` : "支持 SRT/VTT/LRC；请与上方整篇 MP3 对应。系统会先按字幕切分，匹配不上时再自动识别。最大 5 MB。"}</small>
+          <small>{subtitleFile ? `${subtitleFile.name} · 优先使用字幕时间戳切分` : "用于自动对齐。支持与 MP3 对应的 SRT、VTT 或 LRC，最大 5 MB。"}</small>
         </label>
         {audioFile ? (
           <div aria-label="MP3 音频上传进度" aria-valuemax={100} aria-valuemin={0} aria-valuenow={audioProgress} className={styles.progress} role="progressbar">
-            <span>{audioStatus === "uploaded" ? "原声和独立小音频已上传" : audioStatus === "analyzing" ? subtitleFile ? "正在按字幕时间戳切分小音频" : "正在识别原声并切分小音频" : audioStatus === "analysis-failed" ? "自动对齐未完成，请查看下方原因" : audioStatus === "uploading" ? `音频上传中 ${audioProgress}%` : audioStatus === "failed" ? "音频上传失败，请重试" : "等待上传"}</span>
+            <span>{audioStatus === "uploaded" ? "音频已上传" : audioStatus === "analyzing" ? subtitleFile ? "正在按字幕时间戳切分小音频" : "正在识别原声并切分小音频" : audioStatus === "analysis-failed" ? "自动对齐未完成，请查看下方原因" : audioStatus === "uploading" ? `音频上传中 ${audioProgress}%` : audioStatus === "failed" ? "音频上传失败，请重试" : "等待上传"}</span>
             <div className={styles.progressTrack}><i style={{ width: `${audioProgress}%` }} /></div>
           </div>
         ) : null}
@@ -314,8 +416,9 @@ export function AdminBbcArticleUpload() {
         {publishedHref ? <Link className={`${styles.publishedLink} ${styles.full}`} href={publishedHref} target="_blank">{publishedHref.includes("preview=draft") ? "打开草稿前端校改 ↗" : "打开文章前端 ↗"}</Link> : null}
         <div className={`${styles.actions} ${styles.full}`}>
           {editingId ? <button className="button secondary" disabled={busy || pdfBusy} onClick={() => { setEditingId(null); setExistingAudio(null); setText(""); setAudioFile(null); setSubtitleFile(null); audioJob.current = null; setPdfQuiz(null); setPdfMessage(""); setMessage(""); setPublishedHref(""); }} type="button">新建文章</button> : null}
-          <button className="button primary" disabled={busy || pdfBusy || !text.trim()} type="submit">
-            {busy ? "解析并保存中…" : editingId ? "解析并保存修改" : "解析并保存为草稿"}
+          <button className="button primary" disabled={busy || pdfBusy || !text.trim()} type="submit" value="publish">直接发布</button>
+          <button className="button secondary" disabled={busy || pdfBusy || !text.trim()} type="submit" value="align">
+            {editingId ? "自动对齐并保存修改" : "自动对齐并保存草稿"}
           </button>
         </div>
       </form>

@@ -1134,7 +1134,8 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
       setModeSelectionVersion((current) => current + 1);
       activeSentenceNoRef.current = sentenceNo;
       setActiveSentenceNo(sentenceNo);
-      if ((mode === "listening" || continuePlayback) && (article.fullAudioUrl || article.sentences?.find((sentence) => sentence.sentenceNo === sentenceNo)?.audioUrl)) {
+      const sentence = article.sentences?.find((item) => item.sentenceNo === sentenceNo);
+      if ((mode === "listening" || continuePlayback) && sentence && (sentence.audioUrl || (article.fullAudioUrl && sentence.endMs > sentence.startMs))) {
         requestSentenceAutoPlay(sentenceNo);
       }
     }
@@ -1161,7 +1162,8 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
     setActiveSentencePosition(0);
     setIsSentenceAudioPlaying(false);
     setIsFullAudioPlaying(false);
-    if (shouldContinuePlayback && (article.fullAudioUrl || article.sentences?.find((sentence) => sentence.sentenceNo === sentenceNo)?.audioUrl)) {
+    const sentence = article.sentences?.find((item) => item.sentenceNo === sentenceNo);
+    if (shouldContinuePlayback && sentence && (sentence.audioUrl || (article.fullAudioUrl && sentence.endMs > sentence.startMs))) {
       requestSentenceAutoPlay(sentenceNo);
     } else {
       setSentenceAutoPlaySignals((current) => ({ ...current, [sentenceNo]: 0 }));
@@ -1447,7 +1449,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
     (article.sentences ?? []).findIndex((sentence) => sentence.sentenceNo === activeSentenceNo),
   );
   const activeStudySentence = article.sentences?.[activeStudySentenceIndex];
-  const mobileSentenceAudio = (isMobileAudioViewport || isRetellingPractice) && studyMode !== "general" && activeStudySentence && (activeStudySentence.audioUrl || article.fullAudioUrl)
+  const mobileSentenceAudio = (isMobileAudioViewport || isRetellingPractice) && studyMode !== "general" && activeStudySentence && (activeStudySentence.audioUrl || (article.fullAudioUrl && activeStudySentence.endMs > activeStudySentence.startMs))
     ? { ...activeStudySentence, audioUrl: activeStudySentence.audioUrl || article.fullAudioUrl }
     : null;
   const mobileSentenceRange = mobileSentenceAudio?.audioUrl === article.fullAudioUrl && mobileSentenceAudio
@@ -1652,11 +1654,11 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
         <aside className="bbc-draft-preview-banner" aria-label="BBC 草稿预览">
           <div>
             <strong>草稿预览 · 仅管理员可见</strong>
-            <span>请先在前端检查并修改词性、句子成分和音频时间；确认后再发布给用户。</span>
+            <span>发布后仍可在前端校对词性、句子成分和音频时间。</span>
             {draftPublishMessage ? <span aria-live="polite">{draftPublishMessage}</span> : null}
           </div>
           <button className="button primary" disabled={publishingDraft} onClick={() => void publishDraft()} type="button">
-            {publishingDraft ? "正在发布…" : "校改完成，发布文章"}
+            {publishingDraft ? "正在发布…" : "发布文章"}
           </button>
         </aside>
       ) : adminPreview && draftIsPublished && draftPublishMessage ? <p className="bbc-draft-publish-message" aria-live="polite">{draftPublishMessage}</p> : null}

@@ -52,6 +52,7 @@ export type ParsedBbcArticlePaste = {
   english: string;
   chinese: string;
   vocabulary: BbcVocabularyItem[];
+  vocabularyWarning?: string;
   syntaxAnnotations: PastedBbcSyntaxSentence[];
   syntaxRequested: boolean;
   syntaxWarning?: string;
@@ -179,7 +180,7 @@ function parsePastedVocabulary(lines: string[]): BbcVocabularyItem[] | string {
   return items;
 }
 
-export function parseBbcArticlePaste(value: string): ParsedBbcArticlePaste | string {
+export function parseBbcArticlePaste(value: string, allowIncomplete = false): ParsedBbcArticlePaste | string {
   let extracted: ReturnType<typeof parsePastedBbcSyntaxBlock>;
   try { extracted = parsePastedBbcSyntaxBlock(value); }
   catch (cause) { return cause instanceof Error ? cause.message : "语法标注格式无效。"; }
@@ -231,15 +232,15 @@ export function parseBbcArticlePaste(value: string): ParsedBbcArticlePaste | str
     activeParagraph.push(text);
   }
   flushParagraph();
-  if (!englishParagraphs.length || !chineseParagraphs.length) return "请在标题下粘贴英文正文和对应的中文翻译。";
-  if (englishParagraphs.length !== chineseParagraphs.length) {
+  if (!englishParagraphs.length) return "请在标题下粘贴英文正文。";
+  if (!allowIncomplete && englishParagraphs.length !== chineseParagraphs.length) {
     return `英文正文识别为 ${englishParagraphs.length} 段，中文翻译识别为 ${chineseParagraphs.length} 段，请逐段对应。`;
   }
 
   const vocabulary = vocabularyIndex < 0
     ? []
     : parsePastedVocabulary(contentLines.slice(vocabularyIndex + (VOCABULARY_HEADING.test(stripPasteMarkup(contentLines[vocabularyIndex])) ? 1 : 0)));
-  if (typeof vocabulary === "string") return vocabulary;
+  if (typeof vocabulary === "string" && !allowIncomplete) return vocabulary;
 
   return {
     dateTitle,
@@ -247,7 +248,8 @@ export function parseBbcArticlePaste(value: string): ParsedBbcArticlePaste | str
     titleChinese,
     english: englishParagraphs.join("\n\n"),
     chinese: chineseParagraphs.join("\n\n"),
-    vocabulary,
+    vocabulary: typeof vocabulary === "string" ? [] : vocabulary,
+    vocabularyWarning: typeof vocabulary === "string" ? vocabulary : undefined,
     syntaxAnnotations: extracted.sentences,
     syntaxRequested: extracted.syntaxRequested,
     syntaxWarning: extracted.syntaxWarning,

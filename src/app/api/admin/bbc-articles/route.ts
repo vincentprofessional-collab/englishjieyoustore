@@ -144,6 +144,7 @@ async function hasR2Object(objectPath: string) {
   try {
     const response = await fetch(`https://${host}${uri}`, {
       method: "HEAD",
+      signal: AbortSignal.timeout(5_000),
       headers: {
         "x-amz-content-sha256": payloadHash,
         "x-amz-date": amzDate,
@@ -196,7 +197,7 @@ function splitChineseSentences(paragraph: string) {
     .filter(Boolean);
 }
 
-function buildPracticeSentences(body: string[], chineseParagraphs: string[]) {
+function buildPracticeSentences(body: string[], chineseParagraphs: string[], reviewWarnings?: string[]) {
   let sentenceNo = 0;
   return body.flatMap((paragraph, paragraphIndex) => {
     const englishWave = extractBbcWaveText(paragraph);
@@ -204,13 +205,15 @@ function buildPracticeSentences(body: string[], chineseParagraphs: string[]) {
     const englishSentences = splitArticleSentences(englishWave.text).map(({ text }) => text.trim()).filter(Boolean);
     const chineseSentences = splitChineseSentences(chineseWave.text);
     const aligned = englishSentences.length === chineseSentences.length;
-    if (!aligned) throw new Error(`第 ${paragraphIndex + 1} 段有 ${englishSentences.length} 个英文句子、${chineseSentences.length} 个中文句子，请逐句对应后再发布。`);
-    const units = aligned
-      ? englishSentences.map((english, index) => ({ chinese: chineseSentences[index], english }))
-      : [{ chinese: chineseWave.text, english: englishWave.text }];
+    if (!aligned) {
+      const warning = `第 ${paragraphIndex + 1} 段有 ${englishSentences.length} 个英文句子、${chineseSentences.length} 个中文句子，逐句翻译待校对。`;
+      if (!reviewWarnings) throw new Error(warning);
+      if (chineseSentences.length) reviewWarnings.push(warning);
+    }
 
     let englishCursor = 0, chineseCursor = 0;
-    return units.map(({ chinese, english }) => {
+    return englishSentences.map((english, index) => {
+      const chinese = aligned ? chineseSentences[index] : "";
       const englishStart = englishWave.text.indexOf(english, englishCursor);
       const chineseStart = chineseWave.text.indexOf(chinese, chineseCursor);
       englishCursor = englishStart + english.length; chineseCursor = chineseStart + chinese.length;
@@ -251,7 +254,7 @@ function withoutSyntaxGuessing(text: string) {
   };
 }
 
-function buildArticle(payload: Record<string, unknown>, objectPath: string): BbcArticle | string {
+function buildArticle(payload: Record<string, unknown>, objectPath: string, allowIncomplete = false): BbcArticle | string {
   const titleResult = readText(payload.title, "英文标题", 180);
   if (titleResult.error) return titleResult.error;
   const title = titleResult.value!;
@@ -264,43 +267,52 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string): Bbc
   if (englishResult.error) return englishResult.error;
   const english = englishResult.value!;
   const chineseResult = readText(payload.chinese, "中文翻译", 500_000);
-  if (chineseResult.error) return chineseResult.error;
-  const chinese = chineseResult.value!;
+  if (chineseResult.error && !allowIncomplete) return chineseResult.error;
+  const chinese = typeof payload.chinese === "string" ? payload.chinese.trim() : "";
   const body = splitBbcArticleParagraphs(english, "en");
   const chineseParagraphs = splitBbcArticleParagraphs(chinese, "zh");
-  if (body.length !== chineseParagraphs.length) {
-    return `英文原文有 ${body.length} 段，中文翻译有 ${chineseParagraphs.length} 段。请按段落一一对应，并用空行分隔段落。`;
+  const reviewWarnings: string[] = [];
+  const paragraphsAligned = body.length === chineseParagraphs.length;
+  if (!paragraphsAligned) {
+    const warning = `英文原文有 ${body.length} 段，中文翻译有 ${chineseParagraphs.length} 段，译文段落待校对。`;
+    if (!allowIncomplete) return warning;
+    reviewWarnings.push(warning);
   }
 
-  const vocabulary = Array.isArray(payload.vocabulary)
+  const parsedVocabulary = Array.isArray(payload.vocabulary)
     ? payload.vocabulary as BbcVocabularyItem[]
     : parseVocabulary(payload.vocabulary);
-  if (typeof vocabulary === "string") return vocabulary;
-  if (vocabulary.length > 300 || vocabulary.some((item) => !item.term?.trim() || !item.entry?.trim())) {
-    return "词汇与短语内容格式无效或超过 300 条。";
+  const vocabularyWarning = typeof parsedVocabulary === "string"
+    ? parsedVocabulary
+    : parsedVocabulary.length > 300 || parsedVocabulary.some((item) => typeof item?.term !== "string" || !item.term.trim() || typeof item.entry !== "string" || !item.entry.trim())
+      ? "词汇与短语内容格式无效或超过 300 条。"
+      : payload.vocabularyWarning;
+  if (typeof vocabularyWarning === "string") {
+    if (!allowIncomplete) return vocabularyWarning;
+    reviewWarnings.push(vocabularyWarning);
   }
+  const vocabulary = typeof parsedVocabulary === "string" || vocabularyWarning ? [] : parsedVocabulary;
   const expectedPrefix = `bbc/${parsedDate.year}/${parsedDate.id}/`;
   if (objectPath && (!objectPath.startsWith(expectedPrefix) || !/^full(?:-[a-f0-9]{16})?\.mp3$/.test(objectPath.slice(expectedPrefix.length)))) return "音频存储路径与文章日期不匹配。";
 
   const fullAudioUrl = objectPath ? `/api/bbc-audio/${parsedDate.year}/${parsedDate.id}/${objectPath.slice(expectedPrefix.length)}` : undefined;
-  const sentences = buildPracticeSentences(body, chineseParagraphs);
+  const sentences = buildPracticeSentences(body, paragraphsAligned ? chineseParagraphs : [], allowIncomplete ? reviewWarnings : undefined);
   const syntaxAnnotations = Array.isArray(payload.syntaxAnnotations)
     ? payload.syntaxAnnotations as PastedBbcSyntaxSentence[]
     : [];
   const syntaxRequested = payload.syntaxRequested === true || syntaxAnnotations.length > 0;
-  const syntaxWarnings: string[] = [];
   if (typeof payload.syntaxWarning === "string" && payload.syntaxWarning.trim()) {
-    syntaxWarnings.push(payload.syntaxWarning.trim());
+    reviewWarnings.push(payload.syntaxWarning.trim());
   }
   const annotatedSentenceNos = new Set<number>();
   const validSyntaxAnnotations: PastedBbcSyntaxSentence[] = [];
   for (const annotation of syntaxAnnotations) {
-    if (!Number.isInteger(annotation.sentenceNo) || annotation.sentenceNo < 1 || annotation.sentenceNo > sentences.length) {
-      syntaxWarnings.push(`语法标注的句号 ${annotation.sentenceNo} 超出正文范围，已跳过该条标注。`);
+    if (!annotation || !Number.isInteger(annotation.sentenceNo) || annotation.sentenceNo < 1 || annotation.sentenceNo > sentences.length) {
+      reviewWarnings.push("有语法标注的句号无效，已跳过该条标注。");
       continue;
     }
     if (annotatedSentenceNos.has(annotation.sentenceNo)) {
-      syntaxWarnings.push(`第 ${annotation.sentenceNo} 句存在重复语法标注，已跳过重复条目。`);
+      reviewWarnings.push(`第 ${annotation.sentenceNo} 句存在重复语法标注，已跳过重复条目。`);
       continue;
     }
     annotatedSentenceNos.add(annotation.sentenceNo);
@@ -313,7 +325,7 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string): Bbc
     } catch (cause) {
       const reason = cause instanceof Error ? cause.message : "标注与正文无法匹配。";
       const hasInputAnnotation = validSyntaxAnnotations.some((annotation) => annotation.sentenceNo === sentence.sentenceNo);
-      syntaxWarnings.push(hasInputAnnotation
+      reviewWarnings.push(hasInputAnnotation
         ? `第 ${sentence.sentenceNo} 句的输入标注未应用：${reason} 文章仍可保存，该句暂不显示自动猜测的词性和句子成分。`
         : `第 ${sentence.sentenceNo} 句自动分词未能与原文字符位置对齐：${reason} 文章仍可保存，该句已留空供前端修改。`);
       return withoutSyntaxGuessing(sentence.english);
@@ -323,11 +335,11 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string): Bbc
     ...(fullAudioUrl ? { audioUrl: fullAudioUrl, fullAudioUrl } : {}),
     body: body.map((paragraph) => extractBbcWaveText(paragraph).text),
     chineseParagraphs: chineseParagraphs.map((paragraph) => extractBbcWaveText(paragraph).text),
-    paragraphUnderlines: body.map((paragraph, index) => ({ english: extractBbcWaveText(paragraph).ranges, chinese: extractBbcWaveText(chineseParagraphs[index]).ranges })),
+    paragraphUnderlines: body.map((paragraph, index) => ({ english: extractBbcWaveText(paragraph).ranges, chinese: extractBbcWaveText(chineseParagraphs[index] ?? "").ranges })),
     date: parsedDate.date,
     id: parsedDate.id,
     lead: titleChinese,
-    reviewWarnings: [...new Set(syntaxWarnings)],
+    reviewWarnings: [...new Set(reviewWarnings)],
     sentences,
     syntaxSentences,
     title,
@@ -457,14 +469,19 @@ export async function POST(request: NextRequest) {
   return NextResponse.json({ error: "请求类型不受支持。" }, { status: 400 });
 }
 
+function getStoredAudioPath(article: BbcArticle | null | undefined) {
+  if (!article?.fullAudioUrl) return "";
+  const prefix = `/api/bbc-audio/${article.year}/${article.id}/`;
+  if (!article.fullAudioUrl.startsWith(prefix) || !/^full(?:-[a-f0-9]{16})?\.mp3$/.test(article.fullAudioUrl.slice(prefix.length))) return "";
+  return article.fullAudioUrl.replace(/^\/api\/bbc-audio\//, "bbc/");
+}
+
 function reuseExistingBbcAudioTimings(article: BbcArticle, existing: BbcArticle | null, objectPath: string) {
-  const filename = existing?.fullAudioUrl?.split("/").at(-1);
-  if (!existing || !filename || !/^full(?:-[a-f0-9]{16})?\.mp3$/.test(filename)) return null;
-  const existingObjectPath = `bbc/${existing.year}/${existing.id}/${filename}`;
+  if (!existing || !objectPath || getStoredAudioPath(existing) !== objectPath) return null;
   const existingSentences = existing.sentences ?? [];
   const currentSentences = article.sentences ?? [];
   const durationMs = existing.audioDurationMs;
-  if (existingObjectPath !== objectPath || !Number.isInteger(durationMs) || !durationMs || existingSentences.length !== currentSentences.length) return null;
+  if (!Number.isInteger(durationMs) || !durationMs || existingSentences.length !== currentSentences.length) return null;
   if (existingSentences.some((sentence, index) => sentence.english !== currentSentences[index]?.english)) return null;
 
   return {
@@ -489,7 +506,8 @@ export async function PUT(request: NextRequest) {
   if (typeof payload.text === "string" && payload.text.length > 700_000) {
     return NextResponse.json({ error: "粘贴内容不能超过 700 KB。" }, { status: 413 });
   }
-  const parsedPaste = typeof payload.text === "string" ? parseBbcArticlePaste(payload.text) : null;
+  const publishNow = payload.publish === true;
+  const parsedPaste = typeof payload.text === "string" ? parseBbcArticlePaste(payload.text, publishNow) : null;
   if (typeof parsedPaste === "string") return NextResponse.json({ error: parsedPaste }, { status: 400 });
   const articlePayload = parsedPaste ? { ...parsedPaste } : payload;
   const title = typeof articlePayload.title === "string" ? articlePayload.title : "";
@@ -500,31 +518,62 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ error: `BBC 文章 ${articleDate.id} 已存在于内置文章库，不能从此处覆盖。` }, { status: 409 });
   }
 
-  const expectedAudioPath = `bbc/${articleDate.year}/${articleDate.id}/full.mp3`;
-  const objectPath = typeof payload.objectPath === "string"
+  const audioPrefix = `bbc/${articleDate.year}/${articleDate.id}/`;
+  const requestedAudioPath = typeof payload.objectPath === "string"
     ? payload.objectPath
-    : parsedPaste && await hasR2Object(expectedAudioPath) ? expectedAudioPath : "";
+    : !publishNow && parsedPaste ? `${audioPrefix}full.mp3` : "";
+  const validAudioPath = requestedAudioPath.startsWith(audioPrefix) && /^full(?:-[a-f0-9]{16})?\.mp3$/.test(requestedAudioPath.slice(audioPrefix.length));
   let article: BbcArticle | string;
-  try { article = buildArticle(articlePayload, objectPath); }
+  try { article = buildArticle(articlePayload, publishNow ? "" : requestedAudioPath, publishNow); }
   catch (cause) { return NextResponse.json({ error: cause instanceof Error ? cause.message : "文章分析失败。" }, { status: 400 }); }
   if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
-  if (!objectPath || !await hasR2Object(objectPath)) return NextResponse.json({ error: "请先上传本篇 MP3，完成时间轴分析后再发布。" }, { status: 400 });
   const existingArticleResult = await supabase.from("bbc_uploaded_articles").select("article,published,created_at").eq("id", article.id).maybeSingle();
   if (existingArticleResult.error) return NextResponse.json({ error: `保存前无法读取文章状态：${existingArticleResult.error.message}` }, { status: 503 });
   const existingArticle = existingArticleResult.data;
-  if (payload.quiz != null) {
-    const quiz = normalizeBbcPdfQuiz(payload.quiz, article.id, article.title, article.body.length);
-    if (typeof quiz === "string") return NextResponse.json({ error: quiz }, { status: 400 });
-    article.quiz = quiz;
-  } else if (payload.quiz === undefined && (existingArticle?.article as BbcArticle | undefined)?.quiz) {
-    const quiz = normalizeBbcPdfQuiz((existingArticle!.article as BbcArticle).quiz, article.id, article.title, article.body.length);
-    if (typeof quiz === "string") return NextResponse.json({ error: `原有 PDF 练习需要核对：${quiz}` }, { status: 400 });
-    article.quiz = quiz;
+  const previousArticle = existingArticle?.article as BbcArticle | undefined;
+  const previousAudioPath = getStoredAudioPath(previousArticle);
+  const audioAvailable = validAudioPath && (
+    (publishNow && requestedAudioPath === previousAudioPath) || await hasR2Object(requestedAudioPath)
+  );
+  if (!publishNow && !audioAvailable) {
+    return NextResponse.json({ error: "请先上传本篇 MP3，再保存自动对齐的草稿。" }, { status: 400 });
   }
-  let previousSyntax = (existingArticle?.article as BbcArticle | undefined)?.syntaxSentences ?? [];
+
+  const reviewWarnings = article.reviewWarnings ?? [];
+  const objectPath = audioAvailable ? requestedAudioPath : previousAudioPath;
+  if (publishNow) {
+    if (requestedAudioPath && !audioAvailable) {
+      reviewWarnings.push(previousAudioPath ? "新 MP3 暂未上传成功，已保留原有音频。" : "MP3 暂未上传成功，正文已发布。");
+    }
+    if (objectPath) {
+      article.audioUrl = article.fullAudioUrl = objectPath.replace(/^bbc\//, "/api/bbc-audio/");
+    }
+  }
+
+  const quizInput = payload.quiz === undefined ? previousArticle?.quiz : payload.quiz;
+  if (quizInput != null) {
+    const quiz = normalizeBbcPdfQuiz(quizInput, article.id, article.title, article.body.length);
+    if (typeof quiz === "string") {
+      if (!publishNow) return NextResponse.json({ error: quiz }, { status: 400 });
+      reviewWarnings.push(quiz);
+      if (previousArticle?.quiz && quizInput !== previousArticle.quiz) {
+        const previousQuiz = normalizeBbcPdfQuiz(previousArticle.quiz, article.id, article.title, article.body.length);
+        if (typeof previousQuiz !== "string") article.quiz = previousQuiz;
+      }
+    } else {
+      article.quiz = quiz;
+    }
+  }
+  let previousSyntax = previousArticle?.syntaxSentences ?? [];
+  let createdAt = new Date().toISOString();
   if (existingArticle && previousSyntax.length) {
     const overrides = await supabase.from("bbc_article_syntax_overrides").select("sentences,updated_at").eq("article_id", article.id).maybeSingle();
-    if (overrides.error && !["42P01", "PGRST205"].includes(overrides.error.code)) return NextResponse.json({ error: "暂时无法读取已保存的语法修改，请稍后重试，避免丢失标注。" }, { status: 503 });
+    if (overrides.error && !["42P01", "PGRST205"].includes(overrides.error.code)) {
+      const warning = "暂时无法读取前端保存的语法标注。";
+      if (!publishNow) return NextResponse.json({ error: warning }, { status: 503 });
+      reviewWarnings.push(warning);
+      createdAt = existingArticle.created_at;
+    }
     if (overrides.data && Date.parse(overrides.data.updated_at) >= Date.parse(existingArticle.created_at)) {
       previousSyntax = normalizeBbcSyntaxSentenceEdits(overrides.data.sentences, previousSyntax) ?? previousSyntax;
     }
@@ -534,44 +583,61 @@ export async function PUT(request: NextRequest) {
     for (let sentenceNo = 1; sentenceNo <= (article.syntaxSentences?.length ?? 0); sentenceNo++) doNotRetainSyntax.add(sentenceNo);
   }
   article.syntaxSentences = retainReviewedBbcSyntax(article.syntaxSentences ?? [], previousSyntax, doNotRetainSyntax);
-  let timings = payload.timings;
-  let durationMs = Number(payload.durationMs);
-  const reusingAudio = !Array.isArray(timings);
-  if (!Array.isArray(timings)) {
-    const reused = reuseExistingBbcAudioTimings(article, (existingArticle?.article as BbcArticle | null | undefined) ?? null, objectPath);
-    if (!reused) return NextResponse.json({ error: "正文句子已变化，无法沿用原音频时间轴；请重新选择本篇 MP3 后保存。" }, { status: 400 });
-    timings = reused.timings;
-    durationMs = reused.durationMs;
-  }
-  if (!Array.isArray(timings) || timings.length !== article.sentences!.length || !Number.isFinite(durationMs) || durationMs <= 0) {
-    return NextResponse.json({ error: "尚未生成完整的逐句原声时间轴。" }, { status: 400 });
-  }
-  const sentenceFiles = payload.sentenceAudioFiles === undefined ? undefined
-    : validateSentenceAudioFiles(payload.sentenceAudioFiles, objectPath, article.sentences!.length);
-  if (sentenceFiles === null) return NextResponse.json({ error: "独立小音频清单不完整或与本篇原声不匹配。" }, { status: 400 });
-  if (sentenceFiles) {
-    for (let first = 0; first < sentenceFiles.length; first += 8) {
-      const batch = sentenceFiles.slice(first, first + 8);
-      const complete = await Promise.all(batch.map((file) => hasR2Object(file.objectPath)));
-      const missing = complete.findIndex((exists) => !exists);
-      if (missing >= 0) return NextResponse.json({ error: `第 ${batch[missing].sentenceNo} 句小音频尚未上传完成，文章未保存。` }, { status: 400 });
+  if (publishNow) {
+    const suppliedDuration = Number(payload.durationMs);
+    const durationMs = previousAudioPath && objectPath === previousAudioPath
+      ? previousArticle?.audioDurationMs ?? suppliedDuration
+      : suppliedDuration;
+    const reused = reuseExistingBbcAudioTimings(article, previousArticle ?? null, objectPath);
+    if (objectPath && Number.isInteger(durationMs) && durationMs && durationMs > 0) {
+      article.audioDurationMs = durationMs;
     }
-  }
-  let previousEnd = 0;
-  for (let index = 0; index < timings.length; index++) {
-    const timing = timings[index] as Record<string, unknown>;
-    const startMs = Number(timing.startMs), endMs = Number(timing.endMs);
-    if (Number(timing.sentenceNo) !== index + 1 || !Number.isInteger(startMs) || !Number.isInteger(endMs) || startMs < previousEnd || endMs <= startMs || endMs > durationMs) {
-      return NextResponse.json({ error: `第 ${index + 1} 句时间轴无效。` }, { status: 400 });
+    reused?.timings.forEach(({ startMs, endMs, audioUrl }, index) => {
+      if (endMs > startMs) Object.assign(article.sentences![index], { startMs, endMs, audioUrl: audioUrl ?? article.fullAudioUrl });
+    });
+    if (article.sentences?.length && article.sentences.every((sentence) => sentence.endMs > sentence.startMs)) {
+      article.subtitleUrl = `/api/bbc-subtitles/${article.id}`;
     }
-    const audioUrl = sentenceFiles
-      ? sentenceFiles[index].objectPath.replace(/^bbc\//, "/api/bbc-audio/")
-      : reusingAudio && typeof timing.audioUrl === "string" ? timing.audioUrl : article.fullAudioUrl;
-    Object.assign(article.sentences![index], { startMs, endMs, audioUrl });
-    previousEnd = endMs;
+  } else {
+    let timings = payload.timings;
+    let durationMs = Number(payload.durationMs);
+    const reusingAudio = !Array.isArray(timings);
+    if (!Array.isArray(timings)) {
+      const reused = reuseExistingBbcAudioTimings(article, previousArticle ?? null, objectPath);
+      if (!reused) return NextResponse.json({ error: "正文句子已变化，无法沿用原音频时间轴；请重新选择本篇 MP3 后保存。" }, { status: 400 });
+      timings = reused.timings;
+      durationMs = reused.durationMs;
+    }
+    if (!Array.isArray(timings) || timings.length !== article.sentences!.length || !Number.isFinite(durationMs) || durationMs <= 0) {
+      return NextResponse.json({ error: "尚未生成完整的逐句原声时间轴。" }, { status: 400 });
+    }
+    const sentenceFiles = payload.sentenceAudioFiles === undefined ? undefined
+      : validateSentenceAudioFiles(payload.sentenceAudioFiles, objectPath, article.sentences!.length);
+    if (sentenceFiles === null) return NextResponse.json({ error: "独立小音频清单不完整或与本篇原声不匹配。" }, { status: 400 });
+    if (sentenceFiles) {
+      for (let first = 0; first < sentenceFiles.length; first += 8) {
+        const batch = sentenceFiles.slice(first, first + 8);
+        const complete = await Promise.all(batch.map((file) => hasR2Object(file.objectPath)));
+        const missing = complete.findIndex((exists) => !exists);
+        if (missing >= 0) return NextResponse.json({ error: `第 ${batch[missing].sentenceNo} 句小音频尚未上传完成，文章未保存。` }, { status: 400 });
+      }
+    }
+    let previousEnd = 0;
+    for (let index = 0; index < timings.length; index++) {
+      const timing = timings[index] as Record<string, unknown>;
+      const startMs = Number(timing.startMs), endMs = Number(timing.endMs);
+      if (Number(timing.sentenceNo) !== index + 1 || !Number.isInteger(startMs) || !Number.isInteger(endMs) || startMs < previousEnd || endMs <= startMs || endMs > durationMs) {
+        return NextResponse.json({ error: `第 ${index + 1} 句时间轴无效。` }, { status: 400 });
+      }
+      const audioUrl = sentenceFiles
+        ? sentenceFiles[index].objectPath.replace(/^bbc\//, "/api/bbc-audio/")
+        : reusingAudio && typeof timing.audioUrl === "string" ? timing.audioUrl : article.fullAudioUrl;
+      Object.assign(article.sentences![index], { startMs, endMs, audioUrl });
+      previousEnd = endMs;
+    }
+    article.subtitleUrl = `/api/bbc-subtitles/${article.id}`;
+    article.audioDurationMs = durationMs;
   }
-  article.subtitleUrl = `/api/bbc-subtitles/${article.id}`;
-  article.audioDurationMs = durationMs;
   const suppliedReviewWarnings = Array.isArray(payload.reviewWarnings)
     ? payload.reviewWarnings
       .filter((warning): warning is string => typeof warning === "string" && warning.trim().length > 0)
@@ -580,17 +646,17 @@ export async function PUT(request: NextRequest) {
   const unmatchedSyntaxSentenceNos = [...new Set((parsedPaste?.syntaxAnnotations ?? []).map((annotation) => annotation.sentenceNo))]
     .filter((sentenceNo) => article.syntaxSentences?.[sentenceNo - 1]?.status !== "reviewed");
   article.reviewWarnings = [...new Set([
-    ...(article.reviewWarnings ?? []),
+    ...reviewWarnings,
     ...suppliedReviewWarnings,
     ...(parsedPaste?.syntaxWarning ? [parsedPaste.syntaxWarning] : []),
     ...unmatchedSyntaxSentenceNos.map((sentenceNo) => `第 ${sentenceNo} 句语法标注与正文未完全匹配`),
   ])].slice(0, 30);
 
-  const published = existingArticle?.published === true;
+  const published = publishNow || existingArticle?.published === true;
 
   const { error } = await supabase.from("bbc_uploaded_articles").upsert({
     article,
-    created_at: new Date().toISOString(),
+    created_at: createdAt,
     id: article.id,
     month: articleDate.month,
     published,
@@ -616,7 +682,10 @@ export async function PUT(request: NextRequest) {
     href: `/articles/${article.id}`,
     published,
     month: articleDate.month,
+    objectPath: objectPath || null,
     ok: true,
+    reviewWarnings: article.reviewWarnings,
+    timingsComplete: Boolean(article.subtitleUrl),
     paragraphCount: article.body.length,
     vocabularyCount: article.vocabulary?.length ?? 0,
     sentenceCount: article.sentences?.length ?? 0,
@@ -642,7 +711,6 @@ export async function PATCH(request: NextRequest) {
     const existing = await supabase.from("bbc_uploaded_articles").select("article").eq("id", articleId).maybeSingle();
     if (existing.error || !existing.data) return NextResponse.json({ error: "草稿文章不存在。" }, { status: 404 });
     const article = existing.data.article as BbcArticle;
-    if (!article.fullAudioUrl || !article.sentences?.length) return NextResponse.json({ error: "草稿缺少文章音频或逐句时间轴，暂时不能发布。" }, { status: 400 });
     const { error } = await supabase.from("bbc_uploaded_articles").update({ published: true }).eq("id", articleId);
     if (error) return NextResponse.json({ error: `发布失败：${error.message}` }, { status: 500 });
     const phraseVocabulary = await syncPublishedPhraseVocabulary(supabase, admin.user.id, article);
@@ -676,13 +744,15 @@ export async function PATCH(request: NextRequest) {
   if (!article.fullAudioUrl || typeof durationMs !== "number" || !Number.isInteger(durationMs) || !sentences?.[index]) {
     return NextResponse.json({ error: "这篇文章没有可编辑的原声时间轴。" }, { status: 400 });
   }
-  const previous = sentences[index - 1];
-  const next = sentences[index + 1];
+  const isTimed = (sentence: (typeof sentences)[number]) => sentence.endMs > sentence.startMs;
+  const previous = sentences.slice(0, index).reverse().find(isTimed);
+  const next = sentences.slice(index + 1).find(isTimed);
   if (startMs < 0 || endMs <= startMs || endMs > durationMs
     || (previous && startMs < previous.endMs) || (next && endMs > next.startMs)) {
     return NextResponse.json({ error: "调整后的时间必须位于音频范围内，且不能与相邻句子重叠。" }, { status: 400 });
   }
   sentences[index] = { ...sentences[index], startMs, endMs, audioUrl: article.fullAudioUrl };
+  if (sentences.every(isTimed)) article.subtitleUrl = `/api/bbc-subtitles/${articleId}`;
   const { error } = await supabase.from("bbc_uploaded_articles").update({ article }).eq("id", articleId);
   if (error) return NextResponse.json({ error: `时间轴保存失败：${error.message}` }, { status: 500 });
   revalidatePath(`/articles/${articleId}`);
@@ -699,10 +769,7 @@ export async function GET(request: NextRequest) {
     const result = await supabase.from("bbc_uploaded_articles").select("article").eq("id", id).maybeSingle();
     if (result.error || !result.data) return NextResponse.json({ error: "上传文章不存在。" }, { status: 404 });
     const article = result.data.article as BbcArticle;
-    const filename = article.fullAudioUrl?.split("/").at(-1) ?? "full.mp3";
-    if (!/^full(?:-[a-f0-9]{16})?\.mp3$/.test(filename)) return NextResponse.json({ error: "文章音频路径无效。" }, { status: 400 });
-    const objectPath = `bbc/${article.year}/${article.id}/${filename}`;
-    return NextResponse.json({ article, objectPath });
+    return NextResponse.json({ article, objectPath: getStoredAudioPath(article) || null });
   }
   const result = await supabase.from("bbc_uploaded_articles").select("id,year,created_at,published,title:article->>title").order("created_at", { ascending: false }).limit(200);
   if (result.error) return NextResponse.json({ error: "文章列表暂时无法读取。" }, { status: 503 });

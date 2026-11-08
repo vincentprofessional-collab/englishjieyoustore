@@ -326,7 +326,14 @@ test("all mobile sentence training modes advance, repeat, and retain looping aft
     let timerId = 0;
     const context = vm.createContext({
       studyMode, isMobileAudioViewport: true, isSentenceAudioPlaying: true,
-      article: { fullAudioUrl: "/full.mp3", sentences: [1, 2, 3].map(sentenceNo => ({ sentenceNo })) },
+      article: {
+        fullAudioUrl: "/full.mp3",
+        sentences: [1, 2, 3].map(sentenceNo => ({
+          sentenceNo,
+          startMs: (sentenceNo - 1) * 2000,
+          endMs: sentenceNo * 2000,
+        })),
+      },
       activeSentenceNoRef: current, audioSettingsRef: settings, getNextSentenceNo, getSpeakingPracticeDelayMs,
       speakingCountdownRef: { current: null }, speakingAdvanceRef: { current: null },
       window: { setTimeout(fn) { timers.set(++timerId, fn); return timerId; }, clearTimeout(id) { timers.delete(id); }, setInterval() { return ++timerId; }, clearInterval() {} },

@@ -108,8 +108,9 @@ test("the real admin save boundary preserves, replaces and explicitly removes a 
   const route = ts.createSourceFile("route.ts", fs.readFileSync(new URL("../src/app/api/admin/bbc-articles/route.ts", import.meta.url), "utf8"), ts.ScriptTarget.Latest, true);
   const put = route.statements.find(node => ts.isFunctionDeclaration(node) && node.name?.text === "PUT");
   const post = route.statements.find(node => ts.isFunctionDeclaration(node) && node.name?.text === "POST");
-  assert.ok(put && post);
-  const code = ts.transpileModule([put, post].map(node => node.getText(route).replace(/^export\s+/, "")).join("\n"), { compilerOptions: { target: ts.ScriptTarget.ES2022 } }).outputText;
+  const getStoredAudioPath = route.statements.find(node => ts.isFunctionDeclaration(node) && node.name?.text === "getStoredAudioPath");
+  assert.ok(put && post && getStoredAudioPath);
+  const code = ts.transpileModule([put, post, getStoredAudioPath].map(node => node.getText(route).replace(/^export\s+/, "")).join("\n"), { compilerOptions: { target: ts.ScriptTarget.ES2022 } }).outputText;
   const parsed = imported(); parsed.matching = parsed.matching.slice(0, 4);
   const previous = schema.normalizeBbcPdfQuiz(parsed, "261001", "previous", 4);
   for (const action of ["preserve", "replace", "remove", "invalid"]) {

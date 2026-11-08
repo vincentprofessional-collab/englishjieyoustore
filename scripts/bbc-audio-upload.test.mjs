@@ -244,7 +244,7 @@ test("PUT presigns require the upload credential pair and never use playback cre
 });
 
 test("editing unchanged BBC text reuses its saved audio timing without downloading MP3", () => {
-  const reuse = loadFunctions("../src/app/api/admin/bbc-articles/route.ts", ["reuseExistingBbcAudioTimings"], {});
+  const reuse = loadFunctions("../src/app/api/admin/bbc-articles/route.ts", ["getStoredAudioPath", "reuseExistingBbcAudioTimings"], {});
   const article = {
     id: "260803", year: 2026,
     sentences: [{ sentenceNo: 1, english: "Today's youth are here.", chinese: "年轻人来了。", startMs: 0, endMs: 1800 }],
@@ -438,7 +438,7 @@ test("standalone clip paths belong to the same original recording revision", () 
 });
 
 test("editing vocabulary or syntax retains the original standalone sentence audio", () => {
-  const reuse = loadFunctions("../src/app/api/admin/bbc-articles/route.ts", ["reuseExistingBbcAudioTimings"], {});
+  const reuse = loadFunctions("../src/app/api/admin/bbc-articles/route.ts", ["getStoredAudioPath", "reuseExistingBbcAudioTimings"], {});
   const sentence = { sentenceNo: 1, english: "A sentence.", startMs: 400, endMs: 2200,
     audioUrl: "/api/bbc-audio/2026/260810/sentences/0123456789abcdef/260810-001.mp3" };
   const existing = { id: "260810", year: 2026, fullAudioUrl: "/api/bbc-audio/2026/260810/full-0123456789abcdef.mp3", audioDurationMs: 5000, sentences: [sentence] };
@@ -519,7 +519,7 @@ test("article save waits for every standalone clip and keeps new articles in dra
       sentences: [1, 2, 3].map((sentenceNo) => ({ sentenceNo, english: `Sentence ${sentenceNo}.` })) };
     const supabase = { from: () => ({ select() { return this; }, eq() { return this; }, maybeSingle: async () => ({ data: null, error: null }),
       upsert: async (value) => { saved.push(value); return { error: null }; } }) };
-    const put = loadFunctions("../src/app/api/admin/bbc-articles/route.ts", ["sentenceAudioPath", "validateSentenceAudioFiles", "reuseExistingBbcAudioTimings", "PUT"], {
+    const put = loadFunctions("../src/app/api/admin/bbc-articles/route.ts", ["sentenceAudioPath", "validateSentenceAudioFiles", "getStoredAudioPath", "reuseExistingBbcAudioTimings", "PUT"], {
       createServiceClient: () => supabase, requireAdmin: async () => ({ user: { id: "test-admin" } }),
       parseBbcArticleDateFromTitle: () => ({ year: 2026, month: 8, id: "260810" }), getBbcArticleById: () => null,
       buildArticle: () => structuredClone(article), retainReviewedBbcSyntax: (sentences) => sentences,
@@ -535,6 +535,54 @@ test("article save waits for every standalone clip and keeps new articles in dra
       assert.equal(result.data.sentenceAudioCount, 3);
       assert.equal(saved[0].article.sentences[1].audioUrl, "/api/bbc-audio/2026/260810/sentences/0123456789abcdef/260810-002.mp3");
     }
+  }
+});
+
+test("direct BBC publishing accepts missing translations and audio timings, which can be added on the article page", async () => {
+  const parseBbcArticlePaste = loadPasteParser();
+  const text = "260810-Test\nThe first sentence. The second sentence.";
+  assert.equal(typeof parseBbcArticlePaste(text), "string");
+  const objectPath = "bbc/2026/260810/full-0123456789abcdef.mp3";
+  const route = "../src/app/api/admin/bbc-articles/route.ts";
+  for (const audioAvailable of [true, false]) {
+    let saved;
+    const supabase = { from: () => ({
+      select() { return this; }, eq() { return this; },
+      maybeSingle: async () => ({ data: saved, error: null }),
+      upsert: async (value) => { saved = structuredClone(value); return { error: null }; },
+      update: (value) => ({ eq: async () => { Object.assign(saved, value); return { error: null }; } }),
+    }) };
+    const globals = {
+      createServiceClient: () => supabase, requireAdmin: async () => ({ user: { id: "test-admin" } }),
+      parseBbcArticlePaste, parseBbcArticleDateFromTitle: () => ({ year: 2026, month: 8, id: "260810" }),
+      getBbcArticleById: () => null,
+      buildArticle: ({ english, title }) => ({
+        id: "260810", year: 2026, title, body: [english], syntaxSentences: [],
+        sentences: english.match(/[^.]+\./g).map((sentence, index) => ({ sentenceNo: index + 1, english: sentence.trim(), startMs: 0, endMs: 0 })),
+      }),
+      retainReviewedBbcSyntax: (sentences) => sentences,
+      hasR2Object: async (path) => { assert.equal(path, objectPath); return audioAvailable; },
+      syncPublishedPhraseVocabulary: async () => ({ added: 0, updated: 0, warning: "" }),
+      revalidatePath() {}, NextResponse: { json: (data, options) => ({ data, status: options?.status ?? 200 }) },
+    };
+    const put = loadFunctions(route, ["getStoredAudioPath", "reuseExistingBbcAudioTimings", "PUT"], globals);
+    const result = await put({ json: async () => ({ text, objectPath, durationMs: 6000, timings: [], sentenceAudioFiles: [], publish: true }) });
+    assert.equal(result.status, 200);
+    assert.equal(saved.published, true);
+    assert.equal(saved.article.body[0], "The first sentence. The second sentence.");
+    assert.equal(result.data.audioIncluded, audioAvailable);
+    assert.equal(result.data.timingsComplete, false);
+    if (!audioAvailable) {
+      assert.match(result.data.reviewWarnings.join("\n"), /MP3 暂未上传成功/);
+      continue;
+    }
+    const patch = loadFunctions(route, ["PATCH"], globals);
+    const saveTiming = (sentenceNo, startMs, endMs) => patch({ json: async () => ({ articleId: "260810", sentenceNo, startMs, endMs }) });
+    assert.equal((await saveTiming(2, 2500, 4000)).status, 200);
+    assert.equal(saved.article.subtitleUrl, undefined);
+    assert.equal((await saveTiming(1, 100, 2300)).status, 200);
+    assert.equal(saved.article.subtitleUrl, "/api/bbc-subtitles/260810");
+    assert.equal(saved.published, true);
   }
 });
 
