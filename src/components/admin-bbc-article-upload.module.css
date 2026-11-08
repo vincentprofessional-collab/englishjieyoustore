@@ -46,13 +46,15 @@
 }
 
 .form input:not([type="file"]),
-.form textarea {
+.form textarea,
+.form select {
   background: #fffefa;
   border: 1px solid var(--line, #eadfc9);
   border-radius: 12px;
   color: var(--ink, #171717);
   font: inherit;
   min-height: 46px;
+  min-width: 0;
   padding: 12px 14px;
   width: 100%;
 }
@@ -70,7 +72,8 @@
 }
 
 .form input:focus,
-.form textarea:focus {
+.form textarea:focus,
+.form select:focus {
   border-color: #8dc9e4;
   outline: 3px solid rgba(141, 201, 228, 0.24);
 }
@@ -145,6 +148,11 @@
 .articleList { border-top: 1px solid #dce7e8; margin-top: 28px; padding-top: 18px; }
 .articleList > div { align-items: center; display: flex; flex-wrap: wrap; gap: 12px; padding: 12px 0; }
 .articleList > div > span { flex: 1; min-width: 200px; }
+
+.details { border: 1px solid var(--line, #eadfc9); border-radius: 16px; display: grid; gap: 14px; padding: 18px; scroll-margin-top: 24px; }
+.details h3, .details p { margin: 0; }
+.detailField { display: grid; gap: 8px; justify-items: start; min-width: 0; }
+.detailField label { width: 100%; }
 
 .pdfPreview { background: #f0f7fb; border: 1px solid #b6d9e8; border-radius: 16px; display: grid; gap: 14px; padding: 18px; }
 .pdfPreview > header { align-items: center; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; }

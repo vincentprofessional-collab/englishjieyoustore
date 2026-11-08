@@ -445,7 +445,7 @@ test("editing vocabulary or syntax retains the original standalone sentence audi
   assert.equal(reuse({ sentences: [sentence] }, existing, "bbc/2026/260810/full-0123456789abcdef.mp3").timings[0].audioUrl, sentence.audioUrl);
 });
 
-test("automatic upload resumes after a clip failure without repeating recognition, cutting, or completed uploads", async () => {
+test("a clip failure saves the article and full MP3, and retrying reuses completed work", async () => {
   const exports = {};
   const fixture = JSON.parse(readFileSync(new URL("./fixtures/bbc-audio-260810.json", import.meta.url), "utf8"));
   const original = new File([new Uint8Array(500)], "260810.mp3", { type: "audio/mpeg" });
@@ -477,18 +477,19 @@ test("automatic upload resumes after a clip failure without repeating recognitio
     if (body.action === "presign") return { objectPath, headers: {}, uploadUrl: "/original" };
     if (body.action === "presign-sentences") return { tickets: clips.map((clip) => ({ sentenceNo: clip.sentenceNo, headers: {},
       uploadUrl: `/clip/${clip.sentenceNo}`, objectPath: `${objectPath.slice(0, objectPath.lastIndexOf("/"))}/sentences/0123456789abcdef/260810-${String(clip.sentenceNo).padStart(3, "0")}.mp3` })) };
-    return { articleId: "260810", published: false, year: 2026, month: 8, sentenceCount: 21, paragraphCount: 5, vocabularyCount: 32, sentenceAudioCount: 21 };
+    return { articleId: "260810", article: { id: "260810", sentences: fixture.sentences }, href: "/articles/260810", objectPath, audioIncluded: true, published: false, year: 2026, month: 8, sentenceCount: 21, paragraphCount: 5, vocabularyCount: 32, sentenceAudioCount: 21 };
   };
   const code = ts.transpileModule(readFileSync(new URL("../src/components/admin-bbc-article-upload.tsx", import.meta.url), "utf8"), {
     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX },
   }).outputText;
   const jsx = (type, props) => ({ type, props });
-  runInNewContext(code, { exports, XMLHttpRequest: Request, File, require: (specifier) => {
+  runInNewContext(code, { exports, XMLHttpRequest: Request, File, AbortSignal, require: (specifier) => {
     if (specifier === "react") return react;
     if (specifier === "react/jsx-runtime") return { jsx, jsxs: jsx };
     if (specifier.includes("admin/request")) return { adminRequest };
     if (specifier === "@/lib/articles/bbc-article-upload") return {
       parseBbcArticlePaste: loadPasteParser(),
+      parseBbcArticleDateFromTitle: () => ({ id: "260810", year: 2026, month: 8 }),
       splitBbcArticleParagraphs: loadFunctions("../src/lib/articles/bbc-article-upload.ts", ["splitBbcArticleParagraphs"], {}),
     };
     if (specifier.includes("bbc-audio-alignment")) return { analyzeBbcAudio: async () => { analyses++; return { durationMs: 173418, timings: fixture.timings, reviewSentenceNos: [], clips }; } };
@@ -497,13 +498,17 @@ test("automatic upload resumes after a clip failure without repeating recognitio
   const tree = exports.AdminBbcArticleUpload();
   const form = tree.props.children.find((child) => child?.type === "form");
   await form.props.onSubmit({ preventDefault() {} });
-  assert.equal(requests.filter((request) => request.method === "PUT").length, 0);
+  const fallback = requests.filter((request) => request.method === "PUT");
+  assert.equal(fallback.length, 1);
+  assert.equal(fallback[0].body.allowIncomplete, true);
+  assert.equal(fallback[0].body.objectPath, objectPath);
+  assert.equal(fallback[0].body.sentenceAudioFiles, undefined);
   await form.props.onSubmit({ preventDefault() {} });
   assert.equal(analyses, 1);
   assert.equal(puts.filter((name) => name === "260810.mp3").length, 1);
   assert.equal(puts.filter((name) => name === "sentence-1.mp3").length, 1);
   assert.equal(puts.filter((name) => name === "sentence-2.mp3").length, 2);
-  const saved = requests.filter((request) => request.method === "PUT");
+  const saved = requests.filter((request) => request.method === "PUT" && request.body.sentenceAudioFiles);
   assert.equal(saved.length, 1);
   assert.equal(saved[0].body.sentenceAudioFiles.length, 21);
   assert.equal(new Set(saved[0].body.sentenceAudioFiles.map((file) => file.objectPath)).size, 21);
@@ -584,6 +589,26 @@ test("direct BBC publishing accepts missing translations and audio timings, whic
     assert.equal(saved.article.subtitleUrl, "/api/bbc-subtitles/260810");
     assert.equal(saved.published, true);
   }
+});
+
+test("deleting a repeated BBC sentence removes the selected occurrence and preserves surviving timing and annotations", () => {
+  const splitArticleSentences = loadFunctions("../src/lib/article-inline-annotations.ts", ["splitArticleSentences"], {});
+  const remove = loadFunctions("../src/app/api/admin/bbc-articles/route.ts", ["splitChineseSentences", "removeBbcSentence"], { splitArticleSentences });
+  const article = {
+    id: "260810", fullAudioUrl: "/full.mp3",
+    body: ["It works. It works. Keep this."], chineseParagraphs: ["成功了。再试一次。保留这句。"],
+    paragraphUnderlines: [{ english: [{ start: 20, end: 24 }], chinese: [{ start: 9, end: 13 }] }],
+    sentences: [["It works.", "成功了。"], ["It works.", "再试一次。"], ["Keep this.", "保留这句。"]].map(([english, chinese], i) => ({ english, chinese, sentenceNo: i + 1, audioUrl: `/clip-${i + 1}.mp3`, startMs: i * 1000, endMs: (i + 1) * 1000 })),
+    syntaxSentences: [{}, {}, { sourceAnnotation: "## 句 3\nKeep this." }],
+  };
+  assert.equal(remove(article, 1).length, 0);
+  const saved = structuredClone(article);
+  assert.deepEqual(saved.body, ["It works. Keep this."]);
+  assert.deepEqual(saved.chineseParagraphs, ["成功了。保留这句。"]);
+  assert.deepEqual(saved.paragraphUnderlines, [{ english: [{ start: 10, end: 14 }], chinese: [{ start: 4, end: 8 }] }]);
+  assert.deepEqual(saved.sentences.map(({ sentenceNo, audioUrl, startMs, endMs }) => [sentenceNo, audioUrl, startMs, endMs]), [[1, "/clip-1.mp3", 0, 1000], [2, "/clip-3.mp3", 2000, 3000]]);
+  assert.equal(saved.syntaxSentences[1].sourceAnnotation, "## 句 2\nKeep this.");
+  assert.equal(saved.subtitleUrl, "/api/bbc-subtitles/260810");
 });
 
 test("BBC word highlighting covers both pieces of spoken contractions", () => {

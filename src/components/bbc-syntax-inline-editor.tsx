@@ -20,6 +20,11 @@ import { adminRequest } from "@/lib/admin/request";
 import styles from "./bbc-syntax-inline-editor.module.css";
 
 const SYNTAX_LEVELS = [1, 2, 3, 4, 5] as const;
+const COMPONENT_OPTIONS = [
+  { group: "基本成分", labels: ["主语", "谓语", "宾语", "直接宾语", "间接宾语", "表语", "定语", "补语", "主语补足语", "宾语补足语", "同位语", "中心成分", "插入语"] },
+  { group: "状语", labels: ["状语", "时间状语", "地点状语", "方式状语", "原因状语", "目的状语", "结果状语", "条件状语", "让步状语", "程度状语", "频率状语", "伴随状语", "比较状语", "范围状语"] },
+  { group: "从句", labels: ["主语从句", "宾语从句", "表语从句", "定语从句", "同位语从句", "时间状语从句", "地点状语从句", "方式状语从句", "原因状语从句", "目的状语从句", "结果状语从句", "条件状语从句", "让步状语从句", "比较状语从句"] },
+];
 
 function layerKey(level: BbcSyntaxLevel): BbcSyntaxLayerKey {
   return `level${level}` as BbcSyntaxLayerKey;
@@ -460,7 +465,7 @@ export function BbcSyntaxInlineEditor({
             <>
               <div className={styles.selection}>
                 <span>当前选区</span>
-                <strong>{selection ? tokenRangeText(data, selection) : "拖选原文中的词汇或短语"}</strong>
+                <strong>{selection ? tokenRangeText(data, selection) : "拖选原文中的词汇或短语，再选择语法成分"}</strong>
               </div>
               <div className={styles.controls}>
                 <label>
@@ -492,7 +497,15 @@ export function BbcSyntaxInlineEditor({
                 </label>
                 <label className={styles.labelInput}>
                   <span>语法成分</span>
-                  <input onChange={(event) => setLabel(event.target.value)} value={label} />
+                  <select disabled={!selection} onChange={(event) => setLabel(event.target.value)} value={selection ? label : ""}>
+                    <option disabled value="">选择语法成分</option>
+                    {label && !COMPONENT_OPTIONS.some(({ labels }) => labels.includes(label)) ? <option value={label}>{label}</option> : null}
+                    {COMPONENT_OPTIONS.map(({ group, labels }) => (
+                      <optgroup key={group} label={group}>
+                        {labels.map((option) => <option key={option} value={option}>{option}</option>)}
+                      </optgroup>
+                    ))}
+                  </select>
                 </label>
                 <button disabled={!selection || !label.trim() || Boolean(editingSpan)} onClick={addComponent} type="button">添加成分</button>
                 <button disabled={!selection || !label.trim() || !editingSpan} onClick={modifyComponent} type="button">修改成分</button>

@@ -8,6 +8,7 @@ import { getBbcArticleById } from "@/lib/articles/bbc";
 import { parseBbcArticleDateFromTitle, parseBbcArticlePaste, splitBbcArticleParagraphs } from "@/lib/articles/bbc-article-upload";
 import type { BbcArticle, BbcVocabularyItem } from "@/lib/articles/bbc";
 import { extractBbcWaveText } from "@/lib/articles/bbc-paste-markup";
+import { normalizeBbcVocabularyTerm } from "@/lib/articles/bbc-vocabulary-merge";
 import { normalizeBbcSyntaxSentenceEdits } from "@/lib/bbc-syntax-annotation-edits";
 import { buildAutomaticBbcSyntax, buildUnclassifiedBbcSyntax } from "@/lib/articles/bbc-automatic-syntax";
 import { applyPastedBbcSyntax, retainReviewedBbcSyntax, type PastedBbcSyntaxSentence } from "@/lib/articles/bbc-pasted-syntax";
@@ -507,7 +508,8 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ error: "粘贴内容不能超过 700 KB。" }, { status: 413 });
   }
   const publishNow = payload.publish === true;
-  const parsedPaste = typeof payload.text === "string" ? parseBbcArticlePaste(payload.text, publishNow) : null;
+  const allowIncomplete = publishNow || payload.allowIncomplete === true;
+  const parsedPaste = typeof payload.text === "string" ? parseBbcArticlePaste(payload.text, allowIncomplete) : null;
   if (typeof parsedPaste === "string") return NextResponse.json({ error: parsedPaste }, { status: 400 });
   const articlePayload = parsedPaste ? { ...parsedPaste } : payload;
   const title = typeof articlePayload.title === "string" ? articlePayload.title : "";
@@ -521,10 +523,10 @@ export async function PUT(request: NextRequest) {
   const audioPrefix = `bbc/${articleDate.year}/${articleDate.id}/`;
   const requestedAudioPath = typeof payload.objectPath === "string"
     ? payload.objectPath
-    : !publishNow && parsedPaste ? `${audioPrefix}full.mp3` : "";
+    : !allowIncomplete && parsedPaste ? `${audioPrefix}full.mp3` : "";
   const validAudioPath = requestedAudioPath.startsWith(audioPrefix) && /^full(?:-[a-f0-9]{16})?\.mp3$/.test(requestedAudioPath.slice(audioPrefix.length));
   let article: BbcArticle | string;
-  try { article = buildArticle(articlePayload, publishNow ? "" : requestedAudioPath, publishNow); }
+  try { article = buildArticle(articlePayload, allowIncomplete ? "" : requestedAudioPath, allowIncomplete); }
   catch (cause) { return NextResponse.json({ error: cause instanceof Error ? cause.message : "文章分析失败。" }, { status: 400 }); }
   if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
   const existingArticleResult = await supabase.from("bbc_uploaded_articles").select("article,published,created_at").eq("id", article.id).maybeSingle();
@@ -533,17 +535,17 @@ export async function PUT(request: NextRequest) {
   const previousArticle = existingArticle?.article as BbcArticle | undefined;
   const previousAudioPath = getStoredAudioPath(previousArticle);
   const audioAvailable = validAudioPath && (
-    (publishNow && requestedAudioPath === previousAudioPath) || await hasR2Object(requestedAudioPath)
+    (allowIncomplete && requestedAudioPath === previousAudioPath) || await hasR2Object(requestedAudioPath)
   );
-  if (!publishNow && !audioAvailable) {
+  if (!allowIncomplete && !audioAvailable) {
     return NextResponse.json({ error: "请先上传本篇 MP3，再保存自动对齐的草稿。" }, { status: 400 });
   }
 
   const reviewWarnings = article.reviewWarnings ?? [];
   const objectPath = audioAvailable ? requestedAudioPath : previousAudioPath;
-  if (publishNow) {
+  if (allowIncomplete) {
     if (requestedAudioPath && !audioAvailable) {
-      reviewWarnings.push(previousAudioPath ? "新 MP3 暂未上传成功，已保留原有音频。" : "MP3 暂未上传成功，正文已发布。");
+      reviewWarnings.push(previousAudioPath ? "新 MP3 暂未上传成功，已保留原有音频。" : "MP3 暂未上传成功，可稍后补传。");
     }
     if (objectPath) {
       article.audioUrl = article.fullAudioUrl = objectPath.replace(/^bbc\//, "/api/bbc-audio/");
@@ -554,7 +556,7 @@ export async function PUT(request: NextRequest) {
   if (quizInput != null) {
     const quiz = normalizeBbcPdfQuiz(quizInput, article.id, article.title, article.body.length);
     if (typeof quiz === "string") {
-      if (!publishNow) return NextResponse.json({ error: quiz }, { status: 400 });
+      if (!allowIncomplete) return NextResponse.json({ error: quiz }, { status: 400 });
       reviewWarnings.push(quiz);
       if (previousArticle?.quiz && quizInput !== previousArticle.quiz) {
         const previousQuiz = normalizeBbcPdfQuiz(previousArticle.quiz, article.id, article.title, article.body.length);
@@ -570,7 +572,7 @@ export async function PUT(request: NextRequest) {
     const overrides = await supabase.from("bbc_article_syntax_overrides").select("sentences,updated_at").eq("article_id", article.id).maybeSingle();
     if (overrides.error && !["42P01", "PGRST205"].includes(overrides.error.code)) {
       const warning = "暂时无法读取前端保存的语法标注。";
-      if (!publishNow) return NextResponse.json({ error: warning }, { status: 503 });
+      if (!allowIncomplete) return NextResponse.json({ error: warning }, { status: 503 });
       reviewWarnings.push(warning);
       createdAt = existingArticle.created_at;
     }
@@ -583,7 +585,7 @@ export async function PUT(request: NextRequest) {
     for (let sentenceNo = 1; sentenceNo <= (article.syntaxSentences?.length ?? 0); sentenceNo++) doNotRetainSyntax.add(sentenceNo);
   }
   article.syntaxSentences = retainReviewedBbcSyntax(article.syntaxSentences ?? [], previousSyntax, doNotRetainSyntax);
-  if (publishNow) {
+  if (allowIncomplete) {
     const suppliedDuration = Number(payload.durationMs);
     const durationMs = previousAudioPath && objectPath === previousAudioPath
       ? previousArticle?.audioDurationMs ?? suppliedDuration
@@ -677,6 +679,7 @@ export async function PUT(request: NextRequest) {
     ? await syncPublishedPhraseVocabulary(supabase, admin.user.id, article)
     : { added: 0, updated: 0, warning: "" };
   return NextResponse.json({
+    article,
     articleId: article.id,
     audioIncluded: Boolean(article.fullAudioUrl),
     href: `/articles/${article.id}`,
@@ -697,6 +700,81 @@ export async function PUT(request: NextRequest) {
   });
 }
 
+function removeBbcSentence(article: BbcArticle, index: number) {
+  const sentences = article.sentences;
+  if (!sentences?.[index] || sentences.length < 2) return "一篇文章至少要保留一个句子。";
+
+  const body = [...article.body];
+  const chinese = [...(article.chineseParagraphs ?? [])];
+  const underlines = article.paragraphUnderlines?.map((row) => ({ ...row }));
+  const warnings: string[] = [];
+  const alignedParagraphs = chinese.length === body.length;
+  let offset = 0;
+  let found = false;
+
+  function cut(text: string, segments: { start: number; end: number }[], localIndex: number, ranges: { start: number; end: number }[] = []) {
+    const current = segments[localIndex];
+    const next = segments[localIndex + 1];
+    const previous = segments[localIndex - 1];
+    const start = next || !previous ? current.start : previous.end;
+    const end = next?.start ?? current.end;
+    const shift = (position: number) => position <= start ? position : Math.max(start, position - (end - start));
+    return {
+      text: text.slice(0, start) + text.slice(end),
+      ranges: ranges.map((range) => ({ start: shift(range.start), end: shift(range.end) })).filter((range) => range.start < range.end),
+    };
+  }
+
+  for (const [paragraphIndex, paragraph] of body.entries()) {
+    const english = splitArticleSentences(paragraph).filter((segment) => segment.text.trim());
+    const localIndex = index - offset;
+    offset += english.length;
+    if (!english[localIndex]) continue;
+    if (english[localIndex].text.trim() !== sentences[index].english) return "正文与句子列表不一致，请重新打开文章后再试。";
+    found = true;
+    if (english.length === 1) {
+      body.splice(paragraphIndex, 1);
+      underlines?.splice(paragraphIndex, 1);
+      if (alignedParagraphs) chinese.splice(paragraphIndex, 1);
+      else if (chinese.length) warnings.push("原文和译文段落数不一致，请检查译文。");
+      if (article.quiz) warnings.push("已移除整段正文，请核对 PDF 练习中的段落编号。");
+    } else {
+      const ranges = underlines?.[paragraphIndex];
+      const updated = cut(paragraph, english, localIndex, ranges?.english);
+      body[paragraphIndex] = updated.text;
+      if (ranges) ranges.english = updated.ranges;
+      const translation = alignedParagraphs ? chinese[paragraphIndex] : "";
+      const translations = splitChineseSentences(translation);
+      if (translations.length === english.length && translations[localIndex] === sentences[index].chinese) {
+        let cursor = 0;
+        const segments = translations.map((text) => {
+          const start = translation.indexOf(text, cursor);
+          cursor = start + text.length;
+          return { start, end: cursor };
+        });
+        const updatedChinese = cut(translation, segments, localIndex, ranges?.chinese);
+        chinese[paragraphIndex] = updatedChinese.text;
+        if (ranges) ranges.chinese = updatedChinese.ranges;
+      } else if (translation || (!alignedParagraphs && chinese.length)) {
+        warnings.push("这句没有可确认的对应译文，请检查译文。");
+      }
+    }
+    break;
+  }
+  if (!found) return "在正文中找不到这句话，请重新打开文章后再试。";
+
+  article.body = body;
+  article.chineseParagraphs = chinese;
+  article.paragraphUnderlines = underlines;
+  article.sentences = sentences.filter((_, position) => position !== index).map((sentence, position) => ({ ...sentence, sentenceNo: position + 1 }));
+  article.syntaxSentences = article.syntaxSentences?.filter((_, position) => position !== index).map((sentence, position) => sentence.sourceAnnotation
+    ? { ...sentence, sourceAnnotation: sentence.sourceAnnotation.replace(/^(##[ \t]*句[ \t]*)\d+/m, (_, heading) => `${heading}${position + 1}`) }
+    : sentence);
+  if (article.fullAudioUrl && article.sentences.every((sentence) => sentence.endMs > sentence.startMs)) article.subtitleUrl = `/api/bbc-subtitles/${article.id}`;
+  article.reviewWarnings = [...new Set([...warnings, ...(article.reviewWarnings ?? [])])].slice(0, 30);
+  return warnings;
+}
+
 export async function PATCH(request: NextRequest) {
   const supabase = createServiceClient();
   if (!supabase) return NextResponse.json({ error: "后台内容服务尚未配置。" }, { status: 500 });
@@ -704,6 +782,73 @@ export async function PATCH(request: NextRequest) {
   if ("response" in admin) return admin.response;
 
   const payload = await request.json().catch(() => null) as Record<string, unknown> | null;
+  const action = payload?.action;
+  if (payload && (action === "deleteSentence" || action === "deleteVocabulary" || action === "addVocabulary")) {
+    const articleId = typeof payload.articleId === "string" ? payload.articleId : "";
+    if (!/^\d{6}$/.test(articleId)) return NextResponse.json({ error: "文章编号无效。" }, { status: 400 });
+    if (getBbcArticleById(articleId)) return NextResponse.json({ error: "内置文章不能通过上传后台编辑。" }, { status: 409 });
+    const table = supabase.from("bbc_uploaded_articles");
+    const existing = await table.select("article,created_at").eq("id", articleId).maybeSingle();
+    if (existing.error) return NextResponse.json({ error: "暂时无法读取上传文章。" }, { status: 503 });
+    if (!existing.data) return NextResponse.json({ error: "上传文章不存在。" }, { status: 404 });
+    const article = existing.data.article as BbcArticle;
+    let warnings: string[] = [];
+    let createdAt: string | undefined;
+
+    if (action === "deleteSentence") {
+      const index = Number(payload.sentenceNo) - 1;
+      const sentence = article.sentences?.[index];
+      if (!Number.isInteger(index) || !sentence || sentence.english !== payload.english) {
+        return NextResponse.json({ error: "句子已变化，请重新打开文章后再试。" }, { status: 409 });
+      }
+      if (article.syntaxSentences?.length) {
+        const overrides = await supabase.from("bbc_article_syntax_overrides").select("sentences,updated_at").eq("article_id", articleId).maybeSingle();
+        if (overrides.error && !["42P01", "PGRST205"].includes(overrides.error.code)) {
+          return NextResponse.json({ error: "暂时无法读取前端语法标注，请稍后再试。" }, { status: 503 });
+        }
+        if (overrides.data && Date.parse(overrides.data.updated_at) >= Date.parse(existing.data.created_at)) {
+          article.syntaxSentences = normalizeBbcSyntaxSentenceEdits(overrides.data.sentences, article.syntaxSentences) ?? article.syntaxSentences;
+        }
+        // Any older override still contains the deleted sentence.
+        const latest = Math.max(Date.parse(existing.data.created_at), overrides.data ? Date.parse(overrides.data.updated_at) : 0);
+        createdAt = new Date(Math.max(Date.now(), latest + 1)).toISOString();
+      }
+      const removed = removeBbcSentence(article, index);
+      if (typeof removed === "string") return NextResponse.json({ error: removed }, { status: 400 });
+      warnings = removed;
+    } else {
+      const vocabulary = [...(article.vocabulary ?? [])];
+      if (action === "deleteVocabulary") {
+        const index = payload.index;
+        if (typeof index !== "number" || !Number.isInteger(index) || !vocabulary[index] || vocabulary[index].term !== payload.term) {
+          return NextResponse.json({ error: "词汇表已变化，请重新打开文章后再试。" }, { status: 409 });
+        }
+        vocabulary.splice(index, 1);
+      } else {
+        const term = readText(payload.term, "词汇或短语", 160);
+        const definition = readText(payload.definition, "释义", 600);
+        if ("error" in term || "error" in definition) return NextResponse.json({ error: term.error ?? definition.error }, { status: 400 });
+        const key = normalizeBbcVocabularyTerm(term.value);
+        if (!key || /[|\r\n\t]/.test(term.value) || /[\r\n]/.test(definition.value)) {
+          return NextResponse.json({ error: "请在同一行填写词汇和释义，词汇中不要使用竖线。" }, { status: 400 });
+        }
+        if (vocabulary.some((item) => normalizeBbcVocabularyTerm(item.lemma || item.term) === key)) {
+          return NextResponse.json({ error: "这条词汇已在词汇表中。" }, { status: 409 });
+        }
+        if (vocabulary.length >= 300) return NextResponse.json({ error: "一篇文章最多添加 300 条词汇或短语。" }, { status: 400 });
+        vocabulary.push({ entry: `${term.value} | ${definition.value}`, definition: definition.value, example: "", number: 0, term: term.value, translation: "" });
+      }
+      article.vocabulary = vocabulary.map((item, index) => ({ ...item, number: index + 1 }));
+    }
+
+    const result = await table.update({ article, ...(createdAt ? { created_at: createdAt } : {}) })
+      .eq("id", articleId).eq("created_at", existing.data.created_at).select("id").maybeSingle();
+    if (result.error) return NextResponse.json({ error: "文章修改未保存，请重试。" }, { status: 500 });
+    if (!result.data) return NextResponse.json({ error: "文章已变化，请重新打开后再试。" }, { status: 409 });
+    revalidatePath("/articles");
+    revalidatePath(`/articles/${articleId}`);
+    return NextResponse.json({ ok: true, article, warnings });
+  }
   if (payload?.action === "publish") {
     const articleId = typeof payload.articleId === "string" ? payload.articleId : "";
     if (!/^\d{6}$/.test(articleId)) return NextResponse.json({ error: "文章编号无效。" }, { status: 400 });
@@ -766,10 +911,10 @@ export async function GET(request: NextRequest) {
   if ("response" in admin) return admin.response;
   const id = request.nextUrl.searchParams.get("articleId");
   if (id) {
-    const result = await supabase.from("bbc_uploaded_articles").select("article").eq("id", id).maybeSingle();
+    const result = await supabase.from("bbc_uploaded_articles").select("article,published").eq("id", id).maybeSingle();
     if (result.error || !result.data) return NextResponse.json({ error: "上传文章不存在。" }, { status: 404 });
     const article = result.data.article as BbcArticle;
-    return NextResponse.json({ article, objectPath: getStoredAudioPath(article) || null });
+    return NextResponse.json({ article, published: result.data.published, objectPath: getStoredAudioPath(article) || null });
   }
   const result = await supabase.from("bbc_uploaded_articles").select("id,year,created_at,published,title:article->>title").order("created_at", { ascending: false }).limit(200);
   if (result.error) return NextResponse.json({ error: "文章列表暂时无法读取。" }, { status: 503 });

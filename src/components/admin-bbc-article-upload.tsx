@@ -72,6 +72,12 @@ export function AdminBbcArticleUpload() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
   const [publishedHref, setPublishedHref] = useState("");
+  const [saved, setSaved] = useState<{ article: BbcArticle; text: string } | null>(null);
+  const [sentenceChoice, setSentenceChoice] = useState("");
+  const [vocabularyChoice, setVocabularyChoice] = useState("");
+  const [newTerm, setNewTerm] = useState("");
+  const [newDefinition, setNewDefinition] = useState("");
+  const [detailMessage, setDetailMessage] = useState<{ text: string; error?: boolean } | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [existingAudio, setExistingAudio] = useState<{ objectPath: string } | null>(null);
   const [articles, setArticles] = useState<{ id: string; published: boolean; title: string; year: number }[]>([]);
@@ -79,45 +85,106 @@ export function AdminBbcArticleUpload() {
   const [pdfBusy, setPdfBusy] = useState(false);
   const [pdfMessage, setPdfMessage] = useState("");
   const [pdfError, setPdfError] = useState(false);
+  const detailsRef = useRef<HTMLElement>(null);
   const paragraphCount = useMemo(() => {
     const parsed = parseBbcArticlePaste(text, true);
     return typeof parsed === "string" ? undefined : splitBbcArticleParagraphs(parsed.english, "en").length;
   }, [text]);
   const audioJob = useRef<{ file: File; subtitleFile: File | null; sentenceKey: string; preparation?: AudioPreparation; objectPath?: string; uploaded: Map<number, string> } | null>(null);
+  const selectedSentence = saved?.article.sentences?.find((sentence) => String(sentence.sentenceNo) === sentenceChoice);
+  const selectedVocabulary = vocabularyChoice === "" ? undefined : saved?.article.vocabulary?.[Number(vocabularyChoice)];
+  const detailsDisabled = busy || pdfBusy || saved?.text !== text;
 
   async function loadArticles() {
     const result = await adminRequest("/api/admin/bbc-articles");
     setArticles(result.articles);
   }
   useEffect(() => { void loadArticles().catch(() => undefined); }, []);
+
+  function resetDetails() {
+    setSentenceChoice("");
+    setVocabularyChoice("");
+    setNewTerm("");
+    setNewDefinition("");
+    setDetailMessage(null);
+  }
+
   async function editArticle(id: string) {
     setBusy(true); setError(false); setMessage("");
     try {
       const result = await adminRequest(`/api/admin/bbc-articles?articleId=${encodeURIComponent(id)}`);
-      setText(serializeBbcArticlePaste(result.article));
+      const paste = serializeBbcArticlePaste(result.article);
+      setText(paste);
+      setSaved({ article: result.article, text: paste });
+      resetDetails();
       setPdfQuiz(result.article.quiz ?? null); setPdfMessage("");
       setEditingId(id); setAudioFile(null); setSubtitleFile(null); setAudioProgress(0); setAudioStatus("waiting");
       audioJob.current = null;
       setExistingAudio(result.objectPath ? { objectPath: result.objectPath } : null);
-      setPublishedHref(`/articles/${id}`);
-      setMessage("正在编辑已上传文章。可以直接发布修改，或先自动对齐音频。逐句时间点和语法标注可在前端精读页面校对。");
+      setPublishedHref(`/articles/${id}${result.published ? "" : "?preview=draft"}`);
+      setMessage("正文修改后可直接发布。逐句时间点和语法标注可在前端精读页校对。");
+      requestAnimationFrame(() => detailsRef.current?.scrollIntoView({ block: "start" }));
     } catch (cause) { setError(true); setMessage(cause instanceof Error ? cause.message : "文章无法读取。"); }
     finally { setBusy(false); }
+  }
+
+  async function editDetails(action: "deleteSentence" | "deleteVocabulary" | "addVocabulary") {
+    if (!saved || detailsDisabled) return;
+    let fields;
+    let success;
+    if (action === "deleteSentence") {
+      if (!selectedSentence || !window.confirm(`删除第 ${selectedSentence.sentenceNo} 句「${selectedSentence.english}」？`)) return;
+      fields = { sentenceNo: selectedSentence.sentenceNo, english: selectedSentence.english };
+      success = "已删除句子。";
+    } else if (action === "deleteVocabulary") {
+      if (!selectedVocabulary || !window.confirm(`从本篇文章删除「${selectedVocabulary.term}」？`)) return;
+      fields = { index: Number(vocabularyChoice), term: selectedVocabulary.term };
+      success = "已删除词汇。";
+    } else {
+      if (!newTerm.trim() || !newDefinition.trim()) return;
+      fields = { term: newTerm, definition: newDefinition };
+      success = "已添加词汇。";
+    }
+    setBusy(true);
+    setDetailMessage(null);
+    try {
+      const result = await adminRequest("/api/admin/bbc-articles", {
+        method: "PATCH",
+        body: JSON.stringify({ action, articleId: saved.article.id, ...fields }),
+      });
+      const paste = serializeBbcArticlePaste(result.article);
+      setText(paste);
+      setSaved({ article: result.article, text: paste });
+      if (action === "deleteSentence") setSentenceChoice("");
+      if (action === "deleteVocabulary") setVocabularyChoice("");
+      if (action === "addVocabulary") { setNewTerm(""); setNewDefinition(""); }
+      setDetailMessage({ text: [success, ...(result.warnings ?? [])].join(" ") });
+    } catch (cause) {
+      setDetailMessage({ error: true, text: cause instanceof Error ? cause.message : "修改未保存，请稍后再试。" });
+    } finally {
+      setBusy(false);
+    }
   }
 
   async function importPdf(file: File | undefined) {
     if (!file) return;
     setPdfBusy(true); setPdfError(false); setPdfMessage("正在读取 PDF……");
     try {
-      let quiz: BbcPdfQuiz;
+      let quiz: BbcPdfQuiz | undefined;
       if (file.size <= 4 * 1024 * 1024) {
         // Safari uses the same server reader as other browsers, without loading
         // a PDF worker or relying on newer browser iterator APIs.
         const body = new FormData();
         body.set("file", file);
         setPdfMessage("正在识别 PDF 题目与答案……");
-        quiz = (await adminRequest("/api/admin/bbc-pdf-quiz", { method: "POST", body })).quiz;
-      } else {
+        try {
+          quiz = (await adminRequest("/api/admin/bbc-pdf-quiz", { method: "POST", body, signal: AbortSignal.timeout(25_000) })).quiz;
+        } catch (cause) {
+          // A reader/transport failure can still be recovered by the local reader.
+          if (cause instanceof Error && /PDF 内容|PDF 练习|登录|权限/.test(cause.message)) throw cause;
+        }
+      }
+      if (!quiz) {
         const { readBbcPdf, parseBbcPdfQuiz } = await import("@/lib/admin/bbc-pdf-import");
         const { pages, pdfSha256 } = await readBbcPdf(file, (page, total) => setPdfMessage(`正在识别 PDF 第 ${page}/${total} 页……`));
         quiz = parseBbcPdfQuiz(pages, { pdf: file.name, pdfSha256 });
@@ -128,7 +195,7 @@ export function AdminBbcArticleUpload() {
     finally { setPdfBusy(false); }
   }
 
-  async function publishArticle() {
+  async function saveWithoutAlignment(publish: boolean, reviewWarnings: string[] = []) {
     const parsed = parseBbcArticlePaste(text, true);
     if (typeof parsed === "string") {
       setError(true);
@@ -145,7 +212,8 @@ export function AdminBbcArticleUpload() {
     setBusy(true);
     let objectPath = existingAudio?.objectPath ?? "";
     let durationMs: number | undefined;
-    const warnings: string[] = [];
+    const warnings = [...reviewWarnings];
+    let audioSaved = false;
     try {
       if (audioFile) {
         setAudioProgress(0);
@@ -167,8 +235,11 @@ export function AdminBbcArticleUpload() {
             }) as UploadTicket;
             await uploadToR2(ticket, audioFile, setAudioProgress, 180_000);
             objectPath = ticket.objectPath;
+            if (job?.file === audioFile) job.objectPath = objectPath;
           }
-          durationMs = await readMp3DurationMs(audioFile).catch(() => undefined);
+          audioSaved = true;
+          durationMs = job?.file === audioFile ? job.preparation?.durationMs : undefined;
+          durationMs ??= await readMp3DurationMs(audioFile).catch(() => undefined);
           setAudioProgress(100);
           setAudioStatus("uploaded");
         } catch (cause) {
@@ -176,27 +247,31 @@ export function AdminBbcArticleUpload() {
           warnings.push(cause instanceof Error ? cause.message : "MP3 上传未完成。");
         }
       }
-      setMessage("正在发布文章……");
+      setMessage(publish ? "正在发布文章……" : "正在保存正文和已上传的原声……");
       const payload = await adminRequest("/api/admin/bbc-articles", {
-        body: JSON.stringify({ text, objectPath, quiz: pdfQuiz, durationMs, publish: true }),
+        body: JSON.stringify({ text, objectPath, quiz: pdfQuiz, durationMs, publish, allowIncomplete: true, reviewWarnings: warnings }),
         method: "PUT",
       });
       setEditingId(payload.articleId);
+      setSaved({ article: payload.article, text });
+      setPdfQuiz(payload.article.quiz ?? null);
       setExistingAudio(payload.objectPath ? { objectPath: payload.objectPath } : null);
-      if (!audioFile || payload.objectPath === objectPath && warnings.length === 0) setAudioFile(null);
-      setSubtitleFile(null);
-      audioJob.current = null;
-      setPublishedHref(payload.href);
+      if (publish) {
+        if (audioSaved && payload.objectPath === objectPath) setAudioFile(null);
+        setSubtitleFile(null);
+        audioJob.current = null;
+      }
+      setPublishedHref(`${payload.href}${payload.published ? "" : "?preview=draft"}`);
       const details = payload.audioIncluded
         ? payload.timingsComplete ? "原声与逐句时间轴已保留。" : "完整原声可播放，逐句时间点可在前端精读页校对。"
-        : "已发布正文。可回到后台补传 MP3。";
+        : "可回到后台补传 MP3。";
       warnings.push(...(payload.reviewWarnings ?? []));
       if (payload.phraseVocabularyWarning) warnings.push(payload.phraseVocabularyWarning);
-      setMessage(`文章已发布。${details}${warnings.length ? "\n" + warnings.join("\n") : ""}`);
+      setMessage(`${payload.published ? "文章已发布。" : "草稿已保存，可直接发布。"}${details}${warnings.length ? "\n" + [...new Set(warnings)].join("\n") : ""}`);
       void loadArticles().catch(() => undefined);
     } catch (cause) {
       setError(true);
-      setMessage(cause instanceof Error ? cause.message : "文章发布失败，请稍后重试。");
+      setMessage(cause instanceof Error ? cause.message : "文章保存失败，请稍后重试。");
     } finally {
       setBusy(false);
     }
@@ -210,38 +285,18 @@ export function AdminBbcArticleUpload() {
     setError(false);
     const submitter = (event.nativeEvent as SubmitEvent | undefined)?.submitter;
     if (submitter?.getAttribute("value") === "publish") {
-      await publishArticle();
+      await saveWithoutAlignment(true);
       return;
     }
-    if (pdfQuiz) {
-      const issues = getBbcPdfQuizIssues(pdfQuiz, paragraphCount);
-      if (issues.length) { setError(true); setMessage(issues.join("\n")); return; }
+    const inputWarnings = pdfQuiz ? getBbcPdfQuizIssues(pdfQuiz, paragraphCount) : [];
+    if (subtitleFile && (!/\.(?:srt|vtt|lrc)$/i.test(subtitleFile.name) || subtitleFile.size > 5 * 1024 * 1024)) {
+      inputWarnings.push("字幕需为不超过 5 MB 的 SRT、VTT 或 LRC，可稍后重新上传。");
     }
-    if (!text.trim()) {
-      setError(true);
-      setMessage("请粘贴 BBC 文章全文。");
+    if (subtitleFile && !audioFile) inputWarnings.push("重新对齐字幕时请同时选择对应的 MP3。");
+    if (inputWarnings.length || audioFile && (!/\.mp3$/i.test(audioFile.name) || !audioFile.size || audioFile.size > 200 * 1024 * 1024) || !audioFile && !existingAudio) {
+      await saveWithoutAlignment(false, inputWarnings);
       return;
     }
-    if (audioFile && !/\.mp3$/i.test(audioFile.name)) {
-      setError(true);
-      setMessage("请选择 MP3 音频文件。");
-      return;
-    }
-    if (audioFile && audioFile.size > 200 * 1024 * 1024) {
-      setError(true);
-      setMessage("MP3 文件不能超过 200 MB。");
-      return;
-    }
-    if (subtitleFile && !/\.(?:srt|vtt|lrc)$/i.test(subtitleFile.name)) {
-      setError(true); setMessage("字幕文件请使用 SRT、VTT 或 LRC 格式。"); return;
-    }
-    if (subtitleFile && subtitleFile.size > 5 * 1024 * 1024) {
-      setError(true); setMessage("字幕文件不能超过 5 MB。"); return;
-    }
-    if (subtitleFile && !audioFile) {
-      setError(true); setMessage("请同时选择这份字幕对应的整篇 MP3，系统才能按时间戳重新切分。"); return;
-    }
-    if (!audioFile && !existingAudio) { setError(true); setMessage("请选择本篇 MP3，以自动切分逐句小音频。"); return; }
 
     setBusy(true);
     setAudioProgress(0);
@@ -273,10 +328,10 @@ export function AdminBbcArticleUpload() {
         setAudioStatus("uploading");
         if (!job.objectPath) {
           const ticket = await adminRequest("/api/admin/bbc-articles", {
-            body: JSON.stringify({ action: "presign", filename: audioFile.name, size: audioFile.size, title }), method: "POST",
+            body: JSON.stringify({ action: "presign", filename: audioFile.name, size: audioFile.size, title }), method: "POST", signal: AbortSignal.timeout(15_000),
           }) as UploadTicket;
           setMessage("正在上传完整原声……");
-          await uploadToR2(ticket, audioFile, (progress) => setAudioProgress(Math.round(progress * audioFile.size / totalBytes)));
+          await uploadToR2(ticket, audioFile, (progress) => setAudioProgress(Math.round(progress * audioFile.size / totalBytes)), 180_000);
           job.objectPath = ticket.objectPath;
         }
         objectPath = job.objectPath;
@@ -292,7 +347,7 @@ export function AdminBbcArticleUpload() {
           if (ticket.sentenceNo !== clip.sentenceNo) throw new Error("小音频顺序与正文不一致，请重试。");
           if (job.uploaded.get(clip.sentenceNo) === ticket.objectPath) continue;
           setMessage(`正在上传小音频 ${index + 1}/${alignment.clips.length}……`);
-          await uploadToR2(ticket, clip.file, (progress) => setAudioProgress(Math.round((completedBytes + clip.file.size * progress / 100) / totalBytes * 100)));
+          await uploadToR2(ticket, clip.file, (progress) => setAudioProgress(Math.round((completedBytes + clip.file.size * progress / 100) / totalBytes * 100)), 60_000);
           completedBytes += clip.file.size;
           job.uploaded.set(clip.sentenceNo, ticket.objectPath);
         }
@@ -314,7 +369,8 @@ export function AdminBbcArticleUpload() {
       });
 
       const articleId = typeof payload.articleId === "string" ? payload.articleId : prepared.article.id;
-      setPdfQuiz(prepared.article.quiz ?? null);
+      setSaved({ article: payload.article, text });
+      setPdfQuiz(payload.article.quiz ?? null);
       const isPublished = payload.published === true;
       setEditingId(articleId);
       if (objectPath) setExistingAudio({ objectPath });
@@ -347,9 +403,8 @@ export function AdminBbcArticleUpload() {
       );
       void loadArticles().catch(() => undefined);
     } catch (uploadError) {
-      setAudioStatus((status) => status === "uploading" ? "failed" : status === "analyzing" ? "analysis-failed" : status);
-      setError(true);
-      setMessage(uploadError instanceof Error ? uploadError.message : "发布失败，请稍后重试。");
+      setAudioStatus("analysis-failed");
+      await saveWithoutAlignment(false, [`自动对齐未完成：${uploadError instanceof Error ? uploadError.message : "请在精读页校对逐句时间。"}`]);
     } finally {
       setBusy(false);
     }
@@ -364,6 +419,49 @@ export function AdminBbcArticleUpload() {
           <p>可直接发布正文与完整原声，再到前端精读页校对。也可先自动对齐音频，保存为草稿。</p>
         </div>
       </header>
+
+      {saved ? (
+        <section className={styles.details} aria-label="句子与词汇" ref={detailsRef}>
+          <h3>句子与词汇</h3>
+          <p>{saved.text !== text ? "正文有未保存的修改，请先保存正文。" : "这里的修改会立即保存。已发布文章会同步更新。"}</p>
+          <div className={styles.form}>
+            <div className={styles.detailField}>
+              <label>
+                <span>选择要删除的句子</span>
+                <select disabled={detailsDisabled} value={sentenceChoice} onChange={(event) => setSentenceChoice(event.target.value)}>
+                  <option value="">选择句子</option>
+                  {saved.article.sentences?.map((sentence) => <option key={sentence.sentenceNo} value={sentence.sentenceNo}>{sentence.sentenceNo}. {sentence.english}</option>)}
+                </select>
+              </label>
+              <button className="button secondary" type="button" disabled={detailsDisabled || !selectedSentence} onClick={() => void editDetails("deleteSentence")}>删除句子</button>
+            </div>
+            <div className={styles.detailField}>
+              <label>
+                <span>选择要删除的词汇</span>
+                <select disabled={detailsDisabled} value={vocabularyChoice} onChange={(event) => setVocabularyChoice(event.target.value)}>
+                  <option value="">{saved.article.vocabulary?.length ? "选择词汇" : "本篇暂无词汇"}</option>
+                  {saved.article.vocabulary?.map((item, index) => <option key={index} value={index}>{item.term}</option>)}
+                </select>
+              </label>
+              <button className="button secondary" type="button" disabled={detailsDisabled || !selectedVocabulary} onClick={() => void editDetails("deleteVocabulary")}>删除词汇</button>
+            </div>
+          </div>
+          <form className={styles.form} onSubmit={(event) => { event.preventDefault(); void editDetails("addVocabulary"); }}>
+            <label>
+              <span>词汇或短语</span>
+              <input disabled={detailsDisabled} maxLength={160} value={newTerm} onChange={(event) => setNewTerm(event.target.value)} placeholder="例如：roller coaster" required />
+            </label>
+            <label>
+              <span>释义</span>
+              <input disabled={detailsDisabled} maxLength={600} value={newDefinition} onChange={(event) => setNewDefinition(event.target.value)} placeholder="例如：过山车" required />
+            </label>
+            <div className={`${styles.actions} ${styles.full}`}>
+              <button className="button secondary" type="submit" disabled={detailsDisabled || !newTerm.trim() || !newDefinition.trim()}>添加词汇</button>
+            </div>
+          </form>
+          {detailMessage ? <p aria-live="polite" className={`${styles.message} ${detailMessage.error ? styles.error : ""}`}>{detailMessage.text}</p> : null}
+        </section>
+      ) : null}
 
       <form className={styles.form} onSubmit={handleSubmit}>
         <label className={styles.full}>
@@ -415,14 +513,14 @@ export function AdminBbcArticleUpload() {
         {message ? <p aria-live="polite" className={`${styles.message} ${error ? styles.error : ""} ${styles.full}`}>{message}</p> : null}
         {publishedHref ? <Link className={`${styles.publishedLink} ${styles.full}`} href={publishedHref} target="_blank">{publishedHref.includes("preview=draft") ? "打开草稿前端校改 ↗" : "打开文章前端 ↗"}</Link> : null}
         <div className={`${styles.actions} ${styles.full}`}>
-          {editingId ? <button className="button secondary" disabled={busy || pdfBusy} onClick={() => { setEditingId(null); setExistingAudio(null); setText(""); setAudioFile(null); setSubtitleFile(null); audioJob.current = null; setPdfQuiz(null); setPdfMessage(""); setMessage(""); setPublishedHref(""); }} type="button">新建文章</button> : null}
+          {editingId ? <button className="button secondary" disabled={busy || pdfBusy} onClick={() => { setEditingId(null); setSaved(null); resetDetails(); setExistingAudio(null); setText(""); setAudioFile(null); setSubtitleFile(null); audioJob.current = null; setPdfQuiz(null); setPdfMessage(""); setMessage(""); setPublishedHref(""); }} type="button">新建文章</button> : null}
           <button className="button primary" disabled={busy || pdfBusy || !text.trim()} type="submit" value="publish">直接发布</button>
           <button className="button secondary" disabled={busy || pdfBusy || !text.trim()} type="submit" value="align">
             {editingId ? "自动对齐并保存修改" : "自动对齐并保存草稿"}
           </button>
         </div>
       </form>
-      {articles.length ? <section className={styles.articleList}><h3>已上传文章</h3>{articles.map((article) => <div key={article.id}><span>{article.id} · {article.title} · {article.published ? "已发布" : "草稿"}</span><button className="button secondary" disabled={busy || pdfBusy} onClick={() => void editArticle(article.id)} type="button">修改正文</button><Link className="button secondary" href={`/articles/${article.id}${article.published ? "" : "?preview=draft"}`} target="_blank">{article.published ? "打开前端 ↗" : "前端校改 ↗"}</Link></div>)}</section> : null}
+      {articles.length ? <section className={styles.articleList}><h3>已上传文章</h3>{articles.map((article) => <div key={article.id}><span>{article.id} · {article.title} · {article.published ? "已发布" : "草稿"}</span><button className="button secondary" disabled={busy || pdfBusy} onClick={() => void editArticle(article.id)} type="button">编辑文章</button><Link className="button secondary" href={`/articles/${article.id}${article.published ? "" : "?preview=draft"}`} target="_blank">{article.published ? "打开前端 ↗" : "前端校改 ↗"}</Link></div>)}</section> : null}
     </section>
   );
 }
