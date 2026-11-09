@@ -11,7 +11,7 @@ export function AdminBbcPdfQuizEditor({ quiz, onChange, disabled, paragraphCount
   }
   return <div className={`${styles.pdfPreview} ${styles.full}`}>
     <header><strong>{quiz.source.pdf}</strong><button className="button secondary" disabled={disabled} onClick={() => onChange(null)} type="button">移除 PDF 练习</button></header>
-    {issues.length ? <div className={styles.error} role="status"><strong>请核对以下内容后保存：</strong><ul>{issues.map((issue) => <li key={issue}>{issue}</li>)}</ul></div> : <p>题目与答案已整理完成。{quiz.matching?.length ? "段落主旨将用于口语复述练习。" : "原文未提供段落配对题，保留现有段落大意。"}</p>}
+    {issues.length ? <div role="status"><strong>待核对的题目可以先保存。完整的题目会显示在文章练习中。</strong><ul>{issues.map((issue) => <li key={issue}>{issue}</li>)}</ul></div> : <p>题目与答案已整理完成。{quiz.matching?.length ? "段落主旨将用于口语复述练习。" : "原文未提供段落配对题，保留现有段落大意。"}</p>}
     <details className={styles.pdfQuestions} open={Boolean(issues.length)}><summary>题目预览与修改 · {(quiz.summary?.length ?? 0) + (quiz.matching?.length ?? 0) + quiz.quiz.length + quiz.exercise.length} 题</summary>
       {([["summary", "总结句选择"], ["matching", "段落主旨配对"], ["quiz", "阅读理解"], ["exercise", "选词填空"]] as const).map(([kind, label]) => (quiz[kind]?.length ?? 0) > 0 ? <fieldset key={kind} disabled={disabled}><legend>{label}</legend>{quiz[kind]?.map((question, index) => <details key={`${kind}-${index}`} open={!question.answer}>
         <summary>第 {question.number} 题 · {question.prompt.length > 95 ? `${question.prompt.slice(0, 95)}…` : question.prompt}{!question.answer ? " · 缺少答案" : ""}</summary>

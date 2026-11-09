@@ -11,7 +11,7 @@ import { extractBbcWaveText } from "@/lib/articles/bbc-paste-markup";
 import { normalizeBbcVocabularyTerm } from "@/lib/articles/bbc-vocabulary-merge";
 import { normalizeBbcSyntaxSentenceEdits } from "@/lib/bbc-syntax-annotation-edits";
 import { buildAutomaticBbcSyntax, buildUnclassifiedBbcSyntax } from "@/lib/articles/bbc-automatic-syntax";
-import { applyPastedBbcSyntax, retainReviewedBbcSyntax, type PastedBbcSyntaxSentence } from "@/lib/articles/bbc-pasted-syntax";
+import { applyPastedBbcSyntax, matchPastedBbcSyntax, retainReviewedBbcSyntax, type PastedBbcSyntaxSentence } from "@/lib/articles/bbc-pasted-syntax";
 import { normalizeBbcPdfQuiz } from "@/lib/articles/bbc-quiz";
 import { syncBbcDashedPhrases } from "@/lib/vocabulary/bbc-dashed-phrase-sync";
 
@@ -123,7 +123,7 @@ function getPresignedPutUrl(objectPath: string, method = "PUT") {
   return `https://${host}${uri}?${canonicalQuery}&X-Amz-Signature=${signature}`;
 }
 
-async function hasR2Object(objectPath: string) {
+async function hasR2Object(objectPath: string, signal = AbortSignal.timeout(5_000)) {
   const accountId = process.env.R2_ACCOUNT_ID;
   const accessKeyId = process.env.R2_BBC_AUDIO_ACCESS_KEY_ID;
   const secretAccessKey = process.env.R2_BBC_AUDIO_SECRET_ACCESS_KEY;
@@ -145,7 +145,7 @@ async function hasR2Object(objectPath: string) {
   try {
     const response = await fetch(`https://${host}${uri}`, {
       method: "HEAD",
-      signal: AbortSignal.timeout(5_000),
+      signal,
       headers: {
         "x-amz-content-sha256": payloadHash,
         "x-amz-date": amzDate,
@@ -301,35 +301,26 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string, allo
   const syntaxAnnotations = Array.isArray(payload.syntaxAnnotations)
     ? payload.syntaxAnnotations as PastedBbcSyntaxSentence[]
     : [];
-  const syntaxRequested = payload.syntaxRequested === true || syntaxAnnotations.length > 0;
   if (typeof payload.syntaxWarning === "string" && payload.syntaxWarning.trim()) {
     reviewWarnings.push(payload.syntaxWarning.trim());
   }
-  const annotatedSentenceNos = new Set<number>();
-  const validSyntaxAnnotations: PastedBbcSyntaxSentence[] = [];
-  for (const annotation of syntaxAnnotations) {
-    if (!annotation || !Number.isInteger(annotation.sentenceNo) || annotation.sentenceNo < 1 || annotation.sentenceNo > sentences.length) {
-      reviewWarnings.push("有语法标注的句号无效，已跳过该条标注。");
-      continue;
-    }
-    if (annotatedSentenceNos.has(annotation.sentenceNo)) {
-      reviewWarnings.push(`第 ${annotation.sentenceNo} 句存在重复语法标注，已跳过重复条目。`);
-      continue;
-    }
-    annotatedSentenceNos.add(annotation.sentenceNo);
-    validSyntaxAnnotations.push(annotation);
-  }
-  const syntaxSentences = sentences.map((sentence) => {
-    if (syntaxRequested && validSyntaxAnnotations.length === 0) return withoutSyntaxGuessing(sentence.english);
+  const warn = (warning: string) => reviewWarnings.push(warning);
+  const matchingSyntax = matchPastedBbcSyntax(
+    syntaxAnnotations.filter((annotation) => annotation && typeof annotation.text === "string" && Array.isArray(annotation.items)),
+    sentences.map((sentence) => sentence.english),
+    warn,
+  );
+  const syntaxSentences = sentences.map((sentence, index) => {
+    const annotation = matchingSyntax.get(index);
     try {
-      return applyPastedBbcSyntax(buildAutomaticBbcSyntax(sentence.english), validSyntaxAnnotations, sentence.sentenceNo);
-    } catch (cause) {
-      const reason = cause instanceof Error ? cause.message : "标注与正文无法匹配。";
-      const hasInputAnnotation = validSyntaxAnnotations.some((annotation) => annotation.sentenceNo === sentence.sentenceNo);
-      reviewWarnings.push(hasInputAnnotation
-        ? `第 ${sentence.sentenceNo} 句的输入标注未应用：${reason} 文章仍可保存，该句暂不显示自动猜测的词性和句子成分。`
-        : `第 ${sentence.sentenceNo} 句自动分词未能与原文字符位置对齐：${reason} 文章仍可保存，该句已留空供前端修改。`);
-      return withoutSyntaxGuessing(sentence.english);
+      if (annotation) {
+        const annotated = applyPastedBbcSyntax(withoutSyntaxGuessing(sentence.english), [annotation], undefined, warn);
+        if (annotated.status === "reviewed" || annotated.notes?.length) return annotated;
+      }
+      return buildAutomaticBbcSyntax(sentence.english);
+    } catch {
+      warn(`第 ${sentence.sentenceNo} 句的语法标注待核对，可在后台编辑。`);
+      return buildUnclassifiedBbcSyntax(sentence.english);
     }
   });
   return {
@@ -350,10 +341,20 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string, allo
   };
 }
 
-function sentenceAudioPath(objectPath: string, sentenceNo: number) {
+type SentenceAudioRange = { startMs: number; endMs: number };
+
+function readSentenceAudioRange(value: unknown): SentenceAudioRange | null {
+  if (!value || typeof value !== "object") return null;
+  const { startMs, endMs } = value as Partial<SentenceAudioRange>;
+  return typeof startMs === "number" && typeof endMs === "number"
+    && Number.isSafeInteger(startMs) && Number.isSafeInteger(endMs) && startMs >= 0 && endMs > startMs
+    ? { startMs, endMs } : null;
+}
+
+function sentenceAudioPath(objectPath: string, sentenceNo: number, range?: SentenceAudioRange | null) {
   const match = /^(bbc\/(\d{4})\/(\d{6}))\/full-([a-f0-9]{16})\.mp3$/.exec(objectPath);
   if (!match || !Number.isInteger(sentenceNo) || sentenceNo < 1 || sentenceNo > 500) return null;
-  return `${match[1]}/sentences/${match[4]}/${match[3]}-${String(sentenceNo).padStart(3, "0")}.mp3`;
+  return `${match[1]}/sentences/${match[4]}/${match[3]}-${String(sentenceNo).padStart(3, "0")}${range ? `-${range.startMs}-${range.endMs}` : ""}.mp3`;
 }
 
 function validateSentenceAudioFiles(input: unknown, objectPath: string, count: number) {
@@ -377,10 +378,10 @@ export async function POST(request: NextRequest) {
   const payload = await request.json().catch(() => null) as Record<string, unknown> | null;
   if (payload?.action === "prepare") {
     if (typeof payload.text !== "string" || payload.text.length > 700_000) return NextResponse.json({ error: "文章内容无效或超过长度限制。" }, { status: 400 });
-    const parsed = parseBbcArticlePaste(payload.text);
+    const parsed = parseBbcArticlePaste(payload.text, payload.allowIncomplete === true);
     if (typeof parsed === "string") return NextResponse.json({ error: parsed }, { status: 400 });
     try {
-      const article = buildArticle(parsed, "");
+      const article = buildArticle(parsed, "", payload.allowIncomplete === true);
       if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
       if (getBbcArticleById(article.id)) return NextResponse.json({ error: "内置文章正文由原有内容库维护，语法标注请在前端精读页面修改。" }, { status: 409 });
       if (payload.quiz != null) {
@@ -388,20 +389,7 @@ export async function POST(request: NextRequest) {
         if (typeof quiz === "string") return NextResponse.json({ error: quiz }, { status: 400 });
         article.quiz = quiz;
       }
-      const syntaxSentences = article.syntaxSentences ?? [];
-      const parsedSyntaxSentenceNos = [...new Set(parsed.syntaxAnnotations.map((annotation) => annotation.sentenceNo))];
-      const unmatchedSyntaxSentenceNos = parsedSyntaxSentenceNos
-        .filter((sentenceNo) => syntaxSentences[sentenceNo - 1]?.status !== "reviewed");
-      const pastedSyntaxTotalCount = parsedSyntaxSentenceNos.length;
-      const pastedSyntaxCount = pastedSyntaxTotalCount - unmatchedSyntaxSentenceNos.length;
-      return NextResponse.json({
-        article,
-        pastedSyntaxCount,
-        pastedSyntaxTotalCount,
-        syntaxRequested: parsed.syntaxRequested,
-        syntaxWarning: parsed.syntaxWarning,
-        unmatchedSyntaxSentenceNos,
-      });
+      return NextResponse.json({ article });
     } catch (cause) { return NextResponse.json({ error: cause instanceof Error ? cause.message : "文章分析失败。" }, { status: 400 }); }
   }
   const title = typeof payload?.title === "string" ? payload.title : "";
@@ -420,18 +408,23 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "小音频的文章编号、原声路径或句子数量无效。" }, { status: 400 });
     }
     let totalBytes = 0;
-    for (let index = 0; index < files.length; index++) {
-      const size = Number(files[index]?.size);
-      if (files[index]?.sentenceNo !== index + 1 || !Number.isInteger(size) || size < 128 || size > maxAudioBytes) {
-        return NextResponse.json({ error: `第 ${index + 1} 句小音频无效。` }, { status: 400 });
+    const requested = new Map<number, string>();
+    for (const file of files) {
+      const sentenceNo = file?.sentenceNo;
+      const size = file?.size;
+      const range = readSentenceAudioRange(file);
+      const path = sentenceAudioPath(objectPath, sentenceNo, range);
+      if (!path || requested.has(sentenceNo) || !Number.isSafeInteger(size) || size < 128 || size > maxAudioBytes
+        || ((file?.startMs !== undefined || file?.endMs !== undefined) && !range)) {
+        return NextResponse.json({ error: "小音频的句号、时间或文件大小无效。" }, { status: 400 });
       }
+      requested.set(sentenceNo, path);
       totalBytes += size;
     }
     if (totalBytes > maxAudioBytes || !await hasR2Object(objectPath)) return NextResponse.json({ error: "小音频总量超过 200 MB，或原声尚未上传完成。" }, { status: 400 });
-    const tickets = files.map((_, index) => {
-      const path = sentenceAudioPath(objectPath, index + 1)!;
-      return { sentenceNo: index + 1, objectPath: path, headers: { "Content-Type": "audio/mpeg" }, uploadUrl: getPresignedPutUrl(path) };
-    });
+    const tickets = Array.from(requested, ([sentenceNo, path]) => ({
+      sentenceNo, objectPath: path, headers: { "Content-Type": "audio/mpeg" }, uploadUrl: getPresignedPutUrl(path),
+    }));
     if (tickets.some((ticket) => !ticket.uploadUrl)) return NextResponse.json({ error: "音频上传服务尚未配置。" }, { status: 503 });
     return NextResponse.json({ tickets });
   }
@@ -554,12 +547,12 @@ export async function PUT(request: NextRequest) {
 
   const quizInput = payload.quiz === undefined ? previousArticle?.quiz : payload.quiz;
   if (quizInput != null) {
-    const quiz = normalizeBbcPdfQuiz(quizInput, article.id, article.title, article.body.length);
+    const quiz = normalizeBbcPdfQuiz(quizInput, article.id, article.title, article.body.length, allowIncomplete);
     if (typeof quiz === "string") {
       if (!allowIncomplete) return NextResponse.json({ error: quiz }, { status: 400 });
       reviewWarnings.push(quiz);
       if (previousArticle?.quiz && quizInput !== previousArticle.quiz) {
-        const previousQuiz = normalizeBbcPdfQuiz(previousArticle.quiz, article.id, article.title, article.body.length);
+        const previousQuiz = normalizeBbcPdfQuiz(previousArticle.quiz, article.id, article.title, article.body.length, true);
         if (typeof previousQuiz !== "string") article.quiz = previousQuiz;
       }
     } else {
@@ -580,24 +573,52 @@ export async function PUT(request: NextRequest) {
       previousSyntax = normalizeBbcSyntaxSentenceEdits(overrides.data.sentences, previousSyntax) ?? previousSyntax;
     }
   }
-  const doNotRetainSyntax = new Set(parsedPaste?.syntaxAnnotations.map((annotation) => annotation.sentenceNo) ?? []);
-  if (parsedPaste?.syntaxRequested && parsedPaste.syntaxAnnotations.length === 0) {
-    for (let sentenceNo = 1; sentenceNo <= (article.syntaxSentences?.length ?? 0); sentenceNo++) doNotRetainSyntax.add(sentenceNo);
-  }
-  article.syntaxSentences = retainReviewedBbcSyntax(article.syntaxSentences ?? [], previousSyntax, doNotRetainSyntax);
+  article.syntaxSentences = retainReviewedBbcSyntax(article.syntaxSentences ?? [], previousSyntax);
   if (allowIncomplete) {
-    const suppliedDuration = Number(payload.durationMs);
-    const durationMs = previousAudioPath && objectPath === previousAudioPath
-      ? previousArticle?.audioDurationMs ?? suppliedDuration
-      : suppliedDuration;
+    const useSuppliedAudio = Boolean(objectPath && requestedAudioPath === objectPath && audioAvailable);
+    const suppliedDuration = useSuppliedAudio ? Number(payload.durationMs) : 0;
+    const durationMs = Number.isSafeInteger(suppliedDuration) && suppliedDuration > 0
+      ? suppliedDuration : objectPath === previousAudioPath ? previousArticle?.audioDurationMs : undefined;
+    if (durationMs && objectPath) article.audioDurationMs = durationMs;
+
+    const sentences = article.sentences ?? [];
     const reused = reuseExistingBbcAudioTimings(article, previousArticle ?? null, objectPath);
-    if (objectPath && Number.isInteger(durationMs) && durationMs && durationMs > 0) {
-      article.audioDurationMs = durationMs;
+    function acceptRange(row: unknown) {
+      const range = readSentenceAudioRange(row);
+      return range && (!durationMs || range.endMs <= durationMs) ? range : null;
     }
-    reused?.timings.forEach(({ startMs, endMs, audioUrl }, index) => {
-      if (endMs > startMs) Object.assign(article.sentences![index], { startMs, endMs, audioUrl: audioUrl ?? article.fullAudioUrl });
+    reused?.timings.forEach((row, index) => {
+      const range = acceptRange(row);
+      if (range) Object.assign(sentences[index], range, { audioUrl: row.audioUrl ?? article.fullAudioUrl });
     });
-    if (article.sentences?.length && article.sentences.every((sentence) => sentence.endMs > sentence.startMs)) {
+    if (useSuppliedAudio && Array.isArray(payload.timings)) {
+      const supplied = new Map<number, SentenceAudioRange>();
+      for (const row of payload.timings.slice(0, 500)) {
+        const range = acceptRange(row);
+        if (!range || !Number.isSafeInteger(row?.sentenceNo) || row.sentenceNo < 1 || row.sentenceNo > sentences.length) continue;
+        const sentence = sentences[row.sentenceNo - 1];
+        supplied.set(row.sentenceNo, range);
+        if (sentence.startMs !== range.startMs || sentence.endMs !== range.endMs) {
+          Object.assign(sentence, range, { audioUrl: article.fullAudioUrl });
+        }
+      }
+      const files = new Map<number, string>();
+      for (const row of Array.isArray(payload.sentenceAudioFiles) ? payload.sentenceAudioFiles.slice(0, 500) : []) {
+        const range = supplied.get(row?.sentenceNo);
+        if (!range) continue;
+        const path = sentenceAudioPath(objectPath, row.sentenceNo, range);
+        if (path && row.objectPath === path) files.set(row.sentenceNo, path);
+      }
+      const signal = AbortSignal.timeout(8_000);
+      const entries = [...files];
+      for (let first = 0; first < entries.length && !signal.aborted; first += 8) {
+        await Promise.all(entries.slice(first, first + 8).map(async ([sentenceNo, path]) => {
+          if (await hasR2Object(path, signal)) sentences[sentenceNo - 1].audioUrl = path.replace(/^bbc\//, "/api/bbc-audio/");
+        }));
+      }
+    }
+    if (sentences.length && sentences.every((sentence, index) => sentence.endMs > sentence.startMs
+      && (!index || sentence.startMs >= sentences[index - 1].endMs))) {
       article.subtitleUrl = `/api/bbc-subtitles/${article.id}`;
     }
   } else {
@@ -645,13 +666,9 @@ export async function PUT(request: NextRequest) {
       .filter((warning): warning is string => typeof warning === "string" && warning.trim().length > 0)
       .map((warning) => warning.trim().slice(0, 240))
     : [];
-  const unmatchedSyntaxSentenceNos = [...new Set((parsedPaste?.syntaxAnnotations ?? []).map((annotation) => annotation.sentenceNo))]
-    .filter((sentenceNo) => article.syntaxSentences?.[sentenceNo - 1]?.status !== "reviewed");
   article.reviewWarnings = [...new Set([
     ...reviewWarnings,
     ...suppliedReviewWarnings,
-    ...(parsedPaste?.syntaxWarning ? [parsedPaste.syntaxWarning] : []),
-    ...unmatchedSyntaxSentenceNos.map((sentenceNo) => `第 ${sentenceNo} 句语法标注与正文未完全匹配`),
   ])].slice(0, 30);
 
   const published = publishNow || existingArticle?.published === true;
@@ -692,6 +709,7 @@ export async function PUT(request: NextRequest) {
     paragraphCount: article.body.length,
     vocabularyCount: article.vocabulary?.length ?? 0,
     sentenceCount: article.sentences?.length ?? 0,
+    timedSentenceCount: article.sentences?.filter((sentence) => sentence.endMs > sentence.startMs).length ?? 0,
     sentenceAudioCount: article.sentences?.filter((sentence) => sentence.audioUrl && sentence.audioUrl !== article.fullAudioUrl).length ?? 0,
     phraseVocabularyAdded: phraseVocabulary.added,
     phraseVocabularyUpdated: phraseVocabulary.updated,

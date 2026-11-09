@@ -2,7 +2,7 @@ import "server-only";
 
 import { createClient } from "@supabase/supabase-js";
 import type { BbcArticle } from "@/lib/articles/bbc";
-import { normalizeBbcPdfQuiz } from "@/lib/articles/bbc-quiz";
+import { getPlayableBbcPdfQuiz, normalizeBbcPdfQuiz } from "@/lib/articles/bbc-quiz";
 
 export type UploadedBbcArticleRecord = {
   article: BbcArticle;
@@ -17,7 +17,7 @@ function createServiceClient() {
   return createClient(url, key, { auth: { autoRefreshToken: false, persistSession: false } });
 }
 
-function normalizeRecord(value: unknown, createdAt: unknown): UploadedBbcArticleRecord | null {
+function normalizeRecord(value: unknown, createdAt: unknown, keepPendingQuiz = false): UploadedBbcArticleRecord | null {
   if (!value || typeof value !== "object") return null;
   const article = value as BbcArticle;
   if (
@@ -36,7 +36,10 @@ function normalizeRecord(value: unknown, createdAt: unknown): UploadedBbcArticle
   }
 
   const fullAudioUrl = article.fullAudioUrl ?? article.audioUrl;
-  const quiz = article.quiz ? normalizeBbcPdfQuiz(article.quiz, article.id, article.title, article.body.length) : undefined;
+  const quiz = article.quiz ? normalizeBbcPdfQuiz(article.quiz, article.id, article.title, article.body.length, true) : undefined;
+  const readableQuiz = typeof quiz === "object"
+    ? keepPendingQuiz ? quiz : getPlayableBbcPdfQuiz(quiz, article.body.length) ?? undefined
+    : undefined;
   const normalizedArticle = fullAudioUrl
     ? {
         ...article,
@@ -51,7 +54,7 @@ function normalizeRecord(value: unknown, createdAt: unknown): UploadedBbcArticle
     : article;
 
   return {
-    article: { ...normalizedArticle, quiz: typeof quiz === "object" ? quiz : undefined, ...(typeof createdAt === "string" ? { contentUpdatedAt: createdAt } : {}) },
+    article: { ...normalizedArticle, quiz: readableQuiz, ...(typeof createdAt === "string" ? { contentUpdatedAt: createdAt } : {}) },
     createdAt: typeof createdAt === "string" ? createdAt : "",
   };
 }
@@ -99,6 +102,6 @@ export async function getUploadedBbcArticleForAdmin(articleId: string): Promise<
     .maybeSingle();
 
   if (error || !data) return null;
-  const record = normalizeRecord(data.article, data.created_at);
+  const record = normalizeRecord(data.article, data.created_at, true);
   return record ? { article: record.article, published: data.published === true } : null;
 }

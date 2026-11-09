@@ -27,7 +27,7 @@ function loadPastedSyntaxModule() {
   return exports;
 }
 
-test("prepare counts reviewed pasted sentence numbers correctly and deduplicates repeats", async () => {
+test("prepare accepts a publishable preview with incomplete annotations", async () => {
   const article = {
     id: "test-paste", title: "Test", body: ["One.", "Two.", "Three."],
     syntaxSentences: [{ status: "reviewed" }, { status: "draft" }, { status: "reviewed" }],
@@ -36,15 +36,13 @@ test("prepare counts reviewed pasted sentence numbers correctly and deduplicates
     createServiceClient: () => ({}),
     requireAdmin: async () => ({ user: { id: "test-admin" } }),
     parseBbcArticlePaste: () => ({ syntaxRequested: true, syntaxAnnotations: [1, 2, 1, 3].map(sentenceNo => ({ sentenceNo })) }),
-    buildArticle: () => article,
+    buildArticle: (_parsed, _audio, allowIncomplete) => { assert.equal(allowIncomplete, true); return article; },
     getBbcArticleById: () => null,
     NextResponse: { json: (data, options) => ({ data, status: options?.status ?? 200 }) },
   });
-  const result = await post({ json: async () => ({ action: "prepare", text: "Test paste" }) });
+  const result = await post({ json: async () => ({ action: "prepare", text: "Test paste", allowIncomplete: true }) });
   assert.equal(result.status, 200);
-  assert.equal(result.data.pastedSyntaxTotalCount, 3);
-  assert.equal(result.data.pastedSyntaxCount, 2);
-  assert.deepEqual(Array.from(result.data.unmatchedSyntaxSentenceNos), [2]);
+  assert.equal(result.data.article, article);
 });
 
 function loadAudioAlignment() {
@@ -449,13 +447,14 @@ test("a clip failure saves the article and full MP3, and retrying reuses complet
   const exports = {};
   const fixture = JSON.parse(readFileSync(new URL("./fixtures/bbc-audio-260810.json", import.meta.url), "utf8"));
   const original = new File([new Uint8Array(500)], "260810.mp3", { type: "audio/mpeg" });
+  const subtitles = new File(["[00:01.000]Example."], "260810.lrc");
   const clips = fixture.sentences.map((sentence) => ({ sentenceNo: sentence.sentenceNo,
     file: new File([new Uint8Array(200)], `sentence-${sentence.sentenceNo}.mp3`, { type: "audio/mpeg" }) }));
   const objectPath = "bbc/2026/260810/full-0123456789abcdef.mp3";
   const puts = [], requests = [];
   let hook = 0, analyses = 0, failSecondClip = true;
   const react = { useEffect() {}, useMemo: (calculate) => calculate(), useRef: () => ({ current: null }), useState(initial) {
-    const value = hook === 0 ? "260810-The art of farts 关于肠道排气的科学\nEnglish\n中文" : hook === 1 ? original : initial;
+    const value = hook === 0 ? "260810-The art of farts 关于肠道排气的科学\nEnglish\n中文" : hook === 1 ? original : hook === 2 ? subtitles : initial;
     hook++; return [value, () => {}];
   } };
   class Request {
@@ -475,7 +474,7 @@ test("a clip failure saves the article and full MP3, and retrying reuses complet
     const body = JSON.parse(options.body); requests.push({ method: options.method, body });
     if (body.action === "prepare") return { article: { id: "260810", sentences: fixture.sentences }, pastedSyntaxTotalCount: 21, pastedSyntaxCount: 21 };
     if (body.action === "presign") return { objectPath, headers: {}, uploadUrl: "/original" };
-    if (body.action === "presign-sentences") return { tickets: clips.map((clip) => ({ sentenceNo: clip.sentenceNo, headers: {},
+    if (body.action === "presign-sentences") return { tickets: body.files.map((clip) => ({ sentenceNo: clip.sentenceNo, headers: {},
       uploadUrl: `/clip/${clip.sentenceNo}`, objectPath: `${objectPath.slice(0, objectPath.lastIndexOf("/"))}/sentences/0123456789abcdef/260810-${String(clip.sentenceNo).padStart(3, "0")}.mp3` })) };
     return { articleId: "260810", article: { id: "260810", sentences: fixture.sentences }, href: "/articles/260810", objectPath, audioIncluded: true, published: false, year: 2026, month: 8, sentenceCount: 21, paragraphCount: 5, vocabularyCount: 32, sentenceAudioCount: 21 };
   };
@@ -492,54 +491,56 @@ test("a clip failure saves the article and full MP3, and retrying reuses complet
       parseBbcArticleDateFromTitle: () => ({ id: "260810", year: 2026, month: 8 }),
       splitBbcArticleParagraphs: loadFunctions("../src/lib/articles/bbc-article-upload.ts", ["splitBbcArticleParagraphs"], {}),
     };
-    if (specifier.includes("bbc-audio-alignment")) return { analyzeBbcAudio: async () => { analyses++; return { durationMs: 173418, timings: fixture.timings, reviewSentenceNos: [], clips }; } };
+    if (specifier.includes("bbc-audio-alignment")) return { analyzeBbcAudio: async (_file, _sentences, _progress, subtitle) => { assert.equal(subtitle, subtitles); analyses++; return { durationMs: 173418, timings: fixture.timings, reviewSentenceNos: [], clips }; } };
     return {};
   } });
   const tree = exports.AdminBbcArticleUpload();
   const form = tree.props.children.find((child) => child?.type === "form");
-  await form.props.onSubmit({ preventDefault() {} });
+  await form.props.onSubmit({ preventDefault() {}, nativeEvent: { submitter: { getAttribute: () => "align" } } });
   const fallback = requests.filter((request) => request.method === "PUT");
   assert.equal(fallback.length, 1);
   assert.equal(fallback[0].body.allowIncomplete, true);
   assert.equal(fallback[0].body.objectPath, objectPath);
-  assert.equal(fallback[0].body.sentenceAudioFiles, undefined);
-  await form.props.onSubmit({ preventDefault() {} });
+  assert.equal(fallback[0].body.timings.length, 21);
+  assert.equal(fallback[0].body.sentenceAudioFiles.length, 20);
+  assert.ok(!fallback[0].body.sentenceAudioFiles.some(({ sentenceNo }) => sentenceNo === 2));
+  await form.props.onSubmit({ preventDefault() {}, nativeEvent: { submitter: { getAttribute: () => "align" } } });
   assert.equal(analyses, 1);
   assert.equal(puts.filter((name) => name === "260810.mp3").length, 1);
   assert.equal(puts.filter((name) => name === "sentence-1.mp3").length, 1);
   assert.equal(puts.filter((name) => name === "sentence-2.mp3").length, 2);
   const saved = requests.filter((request) => request.method === "PUT" && request.body.sentenceAudioFiles);
-  assert.equal(saved.length, 1);
-  assert.equal(saved[0].body.sentenceAudioFiles.length, 21);
-  assert.equal(new Set(saved[0].body.sentenceAudioFiles.map((file) => file.objectPath)).size, 21);
-  assert.equal(saved[0].body.clips, undefined);
+  assert.equal(saved.length, 2);
+  assert.equal(saved[1].body.sentenceAudioFiles.length, 21);
+  assert.equal(new Set(saved[1].body.sentenceAudioFiles.map((file) => file.objectPath)).size, 21);
+  assert.equal(saved[1].body.clips, undefined);
 });
 
-test("article save waits for every standalone clip and keeps new articles in draft", async () => {
+test("article save retains valid ranges even when a standalone clip is missing", async () => {
   for (const missingClip of [2, null]) {
     const saved = [];
     const objectPath = "bbc/2026/260810/full-0123456789abcdef.mp3";
-    const files = [1, 2, 3].map((sentenceNo) => ({ sentenceNo, objectPath: `bbc/2026/260810/sentences/0123456789abcdef/260810-${String(sentenceNo).padStart(3, "0")}.mp3` }));
+    const files = [1, 2, 3].map((sentenceNo) => ({ sentenceNo, objectPath: `bbc/2026/260810/sentences/0123456789abcdef/260810-${String(sentenceNo).padStart(3, "0")}-${(sentenceNo - 1) * 1500}-${sentenceNo * 1500}.mp3` }));
     const article = { id: "260810", year: 2026, title: "Test", body: ["Test"], vocabulary: [], fullAudioUrl: "/api/bbc-audio/2026/260810/full-0123456789abcdef.mp3", syntaxSentences: [],
       sentences: [1, 2, 3].map((sentenceNo) => ({ sentenceNo, english: `Sentence ${sentenceNo}.` })) };
     const supabase = { from: () => ({ select() { return this; }, eq() { return this; }, maybeSingle: async () => ({ data: null, error: null }),
       upsert: async (value) => { saved.push(value); return { error: null }; } }) };
-    const put = loadFunctions("../src/app/api/admin/bbc-articles/route.ts", ["sentenceAudioPath", "validateSentenceAudioFiles", "getStoredAudioPath", "reuseExistingBbcAudioTimings", "PUT"], {
+    const put = loadFunctions("../src/app/api/admin/bbc-articles/route.ts", ["sentenceAudioPath", "readSentenceAudioRange", "getStoredAudioPath", "reuseExistingBbcAudioTimings", "PUT"], {
+      AbortSignal,
       createServiceClient: () => supabase, requireAdmin: async () => ({ user: { id: "test-admin" } }),
       parseBbcArticleDateFromTitle: () => ({ year: 2026, month: 8, id: "260810" }), getBbcArticleById: () => null,
       buildArticle: () => structuredClone(article), retainReviewedBbcSyntax: (sentences) => sentences,
       hasR2Object: async (path) => path !== files.find((file) => file.sentenceNo === missingClip)?.objectPath,
       revalidatePath() {}, NextResponse: { json: (data, options) => ({ data, status: options?.status ?? 200 }) },
     });
-    const result = await put({ json: async () => ({ title: "260810-Test", objectPath, durationMs: 6000,
+    const result = await put({ json: async () => ({ title: "260810-Test", objectPath, durationMs: 6000, allowIncomplete: true,
       sentenceAudioFiles: files, timings: [1, 2, 3].map((sentenceNo) => ({ sentenceNo, startMs: (sentenceNo - 1) * 1500, endMs: sentenceNo * 1500 })) }) });
-    assert.equal(result.status, missingClip ? 400 : 200);
-    assert.equal(saved.length, missingClip ? 0 : 1);
-    if (!missingClip) {
-      assert.equal(saved[0].published, false);
-      assert.equal(result.data.sentenceAudioCount, 3);
-      assert.equal(saved[0].article.sentences[1].audioUrl, "/api/bbc-audio/2026/260810/sentences/0123456789abcdef/260810-002.mp3");
-    }
+    assert.equal(result.status, 200);
+    assert.equal(saved.length, 1);
+    assert.equal(saved[0].published, false);
+    assert.equal(result.data.timedSentenceCount, 3);
+    assert.equal(result.data.sentenceAudioCount, missingClip ? 2 : 3);
+    assert.equal(saved[0].article.sentences[1].audioUrl, missingClip ? article.fullAudioUrl : files[1].objectPath.replace(/^bbc\//, "/api/bbc-audio/"));
   }
 });
 
@@ -558,6 +559,7 @@ test("direct BBC publishing accepts missing translations and audio timings, whic
       update: (value) => ({ eq: async () => { Object.assign(saved, value); return { error: null }; } }),
     }) };
     const globals = {
+      AbortSignal,
       createServiceClient: () => supabase, requireAdmin: async () => ({ user: { id: "test-admin" } }),
       parseBbcArticlePaste, parseBbcArticleDateFromTitle: () => ({ year: 2026, month: 8, id: "260810" }),
       getBbcArticleById: () => null,
@@ -631,4 +633,17 @@ test("BBC word highlighting covers both pieces of spoken contractions", () => {
   assert.equal((render(0).match(/wordText activePlaybackWord/g) ?? []).length, 2);
   assert.equal((render(1).match(/wordText activePlaybackWord/g) ?? []).length, 1);
   assert.equal((render(-1).match(/wordText activePlaybackWord/g) ?? []).length, 0);
+});
+
+test("all study modes can play either a standalone BBC clip or a full recording range", () => {
+  const playback = loadFunctions("../src/components/bbc-article-detail-page.tsx", ["getBbcSentenceAudio"], {});
+  const full = "/original.mp3";
+  const clip = playback({ audioUrl: "/clip.mp3", startMs: 0, endMs: 0 }, full);
+  assert.equal(clip.audioUrl, "/clip.mp3");
+  assert.equal(clip.range, null);
+  const range = playback({ audioUrl: full, startMs: 1100, endMs: 2400 }, full);
+  assert.equal(range.audioUrl, full);
+  assert.equal(range.range.startSeconds, 1.1);
+  assert.equal(range.range.endSeconds, 2.4);
+  assert.equal(playback({ audioUrl: full, startMs: 0, endMs: 0 }, full), null);
 });

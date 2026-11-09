@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
-import { parsePastedBbcSyntaxBlock, applyPastedBbcSyntax, retainReviewedBbcSyntax } from "../src/lib/articles/bbc-pasted-syntax.ts";
+import { parsePastedBbcSyntaxBlock, applyPastedBbcSyntax, matchPastedBbcSyntax, retainReviewedBbcSyntax } from "../src/lib/articles/bbc-pasted-syntax.ts";
 import { normalizeBbcSyntaxSentenceEdits } from "../src/lib/bbc-syntax-annotation-edits.ts";
 import { serializeBbcArticlePaste } from "../src/lib/articles/bbc-paste-markup.ts";
 import referenceData from "../src/data/bbc/2026-syntax.json" with { type: "json" };
@@ -148,4 +148,25 @@ test("numbered BBC annotations reject mismatched or missing words rather than si
   assert.throws(() => applyPastedBbcSyntax(numberedAutomatic[0], [mismatched], 1), /无法匹配原句/);
   const incomplete = { ...numberedAnnotations[0], items: numberedAnnotations[0].items.slice(0, -1) };
   assert.throws(() => applyPastedBbcSyntax(numberedAutomatic[0], [incomplete], 1), /标注不完整/);
+});
+
+test("assigns a misnumbered annotation by the full English sentence and locates the original text", () => {
+  const english = "As children, rollercoasters seem almost impossible to resist.";
+  const other = "A different sentence.";
+  const item = { sentenceNo: 1, text: english.toUpperCase().slice(0, -1), items: [], main: "rollercoasters【主语】 seem【谓语】 almost impossible to resist【表语】" };
+  const warnings = [];
+  const match = matchPastedBbcSyntax([item], [other, english], (warning) => warnings.push(warning));
+  assert.equal(match.get(1), item);
+  assert.ok(!match.has(0));
+  assert.equal(warnings.length, 0);
+  const automatic = buildAutomaticBbcSyntax(english);
+  assert.deepEqual(spans(automatic, 1), [
+    { label: "状语", text: "As children" },
+    { label: "主语", text: "rollercoasters" },
+    { label: "谓语", text: "seem" },
+    { label: "表语", text: "almost impossible to resist" },
+  ]);
+  const annotated = applyPastedBbcSyntax(automatic, [match.get(1)], undefined, (warning) => warnings.push(warning));
+  assert.deepEqual(spans(annotated, 1), spans(automatic, 1).slice(1));
+  assert.equal(warnings.length, 0);
 });

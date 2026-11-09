@@ -76,13 +76,17 @@ export async function readBbcPdf(
 }
 
 export function parseBbcPdfQuiz(pages: BbcPdfPage[], source: { pdf: string; pdfSha256: string }, articleId = "", articleTitle = ""): BbcPdfQuiz {
-  const start = pages.findIndex((page) => /(?:\bQuiz\b|测验|将标题和段落配对|根据文章内容选出正确)/i.test(page.text));
-  const answerStart = pages.findIndex((page) => /^(?:Answers?|答案)\s*$/im.test(page.text));
-  if (start < 0) throw new Error("PDF 中未找到 BBC 测验与练习页，请核对文件。");
-  if (answerStart < 0 || answerStart <= start) throw new Error("PDF 中未找到独立答案页，请上传包含题目和答案的完整 PDF。");
   const clean = (line: PdfAnswerLine) => !/Take Away English|Page \d+ of \d+|bbclearningenglish\.com|©British Broadcasting/i.test(line.full);
-  const questions = pages.slice(start, answerStart).flatMap((page) => page.lines.filter(clean).map((line) => line.full));
-  const answerLines = pages.slice(answerStart).flatMap((page) => page.lines.filter(clean));
+  const rows = pages.flatMap((page, index) => page.lines.filter(clean).map((line) => ({ line, page: index + 1 })));
+  const exerciseTitle = /^(?:Vocabulary )?(?:Exercise|练习)(?:\s*[:：]\s*.*)?$/i;
+  const start = rows.findIndex(({ line }) =>
+    /(?:^(?:Quiz|测验)\s*[:：]?|将标题和段落配对|根据文章内容选出正确)/i.test(line.full.trim()) || exerciseTitle.test(line.full.trim()));
+  if (start < 0) throw new Error("PDF 内容中未识别到练习题。");
+  const answerStart = rows.findIndex(({ line }, index) =>
+    index > start && /^(?:Answers?|Answer Key|(?:参考)?答案)\s*[:：]?$/i.test(line.full.trim()));
+  const questionRows = rows.slice(start, answerStart >= 0 ? answerStart : undefined);
+  const questions = questionRows.map(({ line }) => line.full);
+  const answerLines = answerStart >= 0 ? rows.slice(answerStart + 1).map(({ line }) => line) : [];
   const matching = parseMatchingSection(questions);
   const summaryChoice = parseSummaryChoice(questions);
   const sequences = findQuestionSequences(questions);
@@ -90,13 +94,16 @@ export function parseBbcPdfQuiz(pages: BbcPdfPage[], source: { pdf: string; pdfS
   const summaryStart = findSummaryHeadingIndex(questions);
   const exerciseHeading = questions.findIndex((line, index) => index > (sequences[0]?.at(-1)?.index ?? -1) && /(?:\bExercise\b|练习)/i.test(line));
   const end = [summaryStart, exerciseHeading, sequences[1]?.[0]?.index, questions.length].filter((index): index is number => index !== undefined && index >= 0).sort((left, right) => left - right)[0];
-  const quiz = sequences[0] ? parseQuestionGroup(questions, sequences[0], false, end) : [];
-  const exercise = summary.length ? summary : sequences[1] ? parseQuestionGroup(questions, sequences[1], true) : [];
-  const answerGroups = parseAnswerGroupsWithoutHeadings(answerLines, [quiz, exercise]);
+  const exerciseOnly = exerciseTitle.test(questions[0].trim());
+  const quiz = !exerciseOnly && sequences[0] ? parseQuestionGroup(questions, sequences[0], false, end) : [];
+  const exerciseSequence = sequences[exerciseOnly ? 0 : 1];
+  const exercise = summary.length ? summary : exerciseSequence ? parseQuestionGroup(questions, exerciseSequence, true) : [];
+  if (![matching, summaryChoice, quiz, exercise].some((group) => group.length)) throw new Error("PDF 内容中未识别到练习题。");
+  const answerGroups = parseAnswerGroupsWithoutHeadings(answerLines, [quiz, exercise].filter((group) => group.length));
   const quizAnswers = parseAnswerGroup(answerLines, /(?:\bQuiz\b|测验)/i, /(?:\bExercise\b|练习)/i, quiz);
   const exerciseAnswers = parseAnswerGroup(answerLines, /(?:\bExercise\b|练习)/i, undefined, exercise);
   const quizKey = quizAnswers.length === quiz.length ? quizAnswers : answerGroups[0] ?? quizAnswers;
-  const exerciseKey = summary.length ? extractSummaryAnswers(answerLines, summary[0]?.options ?? [], summary.length) : exerciseAnswers.length ? exerciseAnswers : answerGroups[1] ?? [];
+  const exerciseKey = summary.length ? extractSummaryAnswers(answerLines, summary[0]?.options ?? [], summary.length) : exerciseAnswers.length ? exerciseAnswers : answerGroups[quiz.length ? 1 : 0] ?? [];
   const matchingKey = extractMatchingAnswers(answerLines, matching);
   function answered(group: QuestionDraft[], key: { number: number; answer: string }[]): BbcQuizQuestion[] {
     return group.map((question) => {
@@ -107,7 +114,14 @@ export function parseBbcPdfQuiz(pages: BbcPdfPage[], source: { pdf: string; pdfS
   }
   const result: BbcPdfQuiz = {
     articleId, articleTitle, ...(summaryChoice.length ? { summary: answered(summaryChoice, extractSummaryChoiceAnswers(answerLines)) } : {}), matching: answered(matching, matchingKey), quiz: answered(quiz, quizKey), exercise: answered(exercise, exerciseKey), status: "ready",
-    source: { ...source, canonicalPageCount: pages.length, questionPage: start + 1, questionPageEnd: answerStart, answerPage: answerStart + 1, answerPageEnd: pages.length },
+    source: {
+      ...source,
+      canonicalPageCount: pages.length,
+      questionPage: rows[start].page,
+      questionPageEnd: questionRows.at(-1)!.page,
+      answerPage: answerStart >= 0 ? rows[answerStart].page : null,
+      answerPageEnd: answerStart >= 0 ? pages.length : null,
+    },
   };
   if (getBbcPdfQuizIssues(result).length) result.status = "review_required";
   return result;

@@ -59,6 +59,13 @@ type ArticlePageProps = {
   syntaxSentences?: BbcSyntaxSentenceData[];
 };
 
+function getBbcSentenceAudio(sentence: BbcArticleSentence, fullAudioUrl?: string) {
+  if (sentence.audioUrl && sentence.audioUrl !== fullAudioUrl) return { audioUrl: sentence.audioUrl, range: null };
+  if (!fullAudioUrl || !Number.isFinite(sentence.startMs) || !Number.isFinite(sentence.endMs)
+    || sentence.startMs < 0 || sentence.endMs <= sentence.startMs) return null;
+  return { audioUrl: fullAudioUrl, range: { startSeconds: sentence.startMs / 1000, endSeconds: sentence.endMs / 1000 } };
+}
+
 function StudyPlayerIcon({ kind }: { kind: "timer" | "rate" | "subtitle" }) {
   return <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     {kind === "timer" ? <><path d="M9 2h6M12 2v3M18 5l2 2" /><circle cx="12" cy="14" r="8" /><path d="M12 10v4l3 2" /></>
@@ -1135,7 +1142,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
       activeSentenceNoRef.current = sentenceNo;
       setActiveSentenceNo(sentenceNo);
       const sentence = article.sentences?.find((item) => item.sentenceNo === sentenceNo);
-      if ((mode === "listening" || continuePlayback) && sentence && (sentence.audioUrl || (article.fullAudioUrl && sentence.endMs > sentence.startMs))) {
+      if ((mode === "listening" || continuePlayback) && sentence && getBbcSentenceAudio(sentence, article.fullAudioUrl)) {
         requestSentenceAutoPlay(sentenceNo);
       }
     }
@@ -1163,7 +1170,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
     setIsSentenceAudioPlaying(false);
     setIsFullAudioPlaying(false);
     const sentence = article.sentences?.find((item) => item.sentenceNo === sentenceNo);
-    if (shouldContinuePlayback && sentence && (sentence.audioUrl || (article.fullAudioUrl && sentence.endMs > sentence.startMs))) {
+    if (shouldContinuePlayback && sentence && getBbcSentenceAudio(sentence, article.fullAudioUrl)) {
       requestSentenceAutoPlay(sentenceNo);
     } else {
       setSentenceAutoPlaySignals((current) => ({ ...current, [sentenceNo]: 0 }));
@@ -1449,12 +1456,12 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
     (article.sentences ?? []).findIndex((sentence) => sentence.sentenceNo === activeSentenceNo),
   );
   const activeStudySentence = article.sentences?.[activeStudySentenceIndex];
-  const mobileSentenceAudio = (isMobileAudioViewport || isRetellingPractice) && studyMode !== "general" && activeStudySentence && (activeStudySentence.audioUrl || (article.fullAudioUrl && activeStudySentence.endMs > activeStudySentence.startMs))
-    ? { ...activeStudySentence, audioUrl: activeStudySentence.audioUrl || article.fullAudioUrl }
+  const activeStudyAudio = activeStudySentence ? getBbcSentenceAudio(activeStudySentence, article.fullAudioUrl) : null;
+  const mobileSentenceAudio = (isMobileAudioViewport || isRetellingPractice) && studyMode !== "general" && activeStudySentence && activeStudyAudio
+    ? { ...activeStudySentence, ...activeStudyAudio }
     : null;
-  const mobileSentenceRange = mobileSentenceAudio?.audioUrl === article.fullAudioUrl && mobileSentenceAudio
-    ? { startSeconds: mobileSentenceAudio.startMs / 1000, endSeconds: mobileSentenceAudio.endMs / 1000 }
-    : null;
+  const mobileSentenceRange = mobileSentenceAudio?.range ?? null;
+  const footerAudioUrl = mobileSentenceAudio?.audioUrl ?? article.fullAudioUrl;
   const activeStudyWordIndex = activeStudySentence && isSentenceAudioPlaying && activeSentenceNo === activeStudySentence.sentenceNo
     ? getActiveWordIndex(activeStudySentence.english, activeSentencePosition, (activeStudySentence.endMs - activeStudySentence.startMs) / 1000)
     : null;
@@ -1852,7 +1859,8 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                   && (syntaxSentence?.status === "reviewed" || syntaxSentence?.status === "draft")
                   && syntaxSentence.text === sentence.english;
 
-                const sentencePlayer = !isMobileAudioViewport && (sentence.audioUrl ? (
+                const sentenceRange = activeStudyAudio?.range;
+                const sentencePlayer = !isMobileAudioViewport && (activeStudyAudio ? (
                       <AudioPlayer
                       key={`${modeSelectionVersion}-${sentence.sentenceNo}`}
                       autoPlaySignal={isMobileAudioViewport ? 0 : sentenceAutoPlaySignals[sentence.sentenceNo] ?? 0}
@@ -1872,17 +1880,17 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                       onEnded={() => handleSentenceEnded(sentence)}
                       onPlayingChange={(isPlaying) => handleSentencePlayingChange(sentence.sentenceNo, isPlaying)}
                       onSettingsChange={updateAudioSettings}
-                      onTimeChange={(positionSeconds) => handleSentenceTimeChange(sentence.sentenceNo, positionSeconds - (sentence.audioUrl === article.fullAudioUrl ? sentence.startMs / 1000 : 0))}
-                      seekRequest={sentenceRestoreSeekRequest?.sentenceNo === sentence.sentenceNo ? { ...sentenceRestoreSeekRequest, positionSeconds: sentenceRestoreSeekRequest.positionSeconds + (sentence.audioUrl === article.fullAudioUrl ? sentence.startMs / 1000 : 0) } : null}
+                      onTimeChange={(positionSeconds) => handleSentenceTimeChange(sentence.sentenceNo, positionSeconds - (sentenceRange?.startSeconds ?? 0))}
+                      seekRequest={sentenceRestoreSeekRequest?.sentenceNo === sentence.sentenceNo ? { ...sentenceRestoreSeekRequest, positionSeconds: sentenceRestoreSeekRequest.positionSeconds + (sentenceRange?.startSeconds ?? 0) } : null}
                       settings={audioSettings}
                       settingsPlacement="none"
                       deferSentenceLoop
                       skipSeconds={3}
-                      src={sentence.audioUrl}
-                      playbackRange={sentence.audioUrl === article.fullAudioUrl ? { startSeconds: sentence.startMs / 1000, endSeconds: sentence.endMs / 1000 } : null}
-                      startAtSeconds={sentence.audioUrl === article.fullAudioUrl ? sentence.startMs / 1000 : 0}
-                      stopAtSeconds={sentence.audioUrl === article.fullAudioUrl ? sentence.endMs / 1000 : null}
-                      onStopAtEnd={sentence.audioUrl === article.fullAudioUrl ? () => handleSentenceEnded(sentence) : undefined}
+                      src={activeStudyAudio.audioUrl}
+                      playbackRange={sentenceRange}
+                      startAtSeconds={sentenceRange?.startSeconds ?? 0}
+                      stopAtSeconds={sentenceRange?.endSeconds}
+                      onStopAtEnd={sentenceRange ? () => handleSentenceEnded(sentence) : undefined}
                       title={`第 ${sentence.sentenceNo} 句音频`}
                       trailingControls={(
                         <button
@@ -2141,7 +2149,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
 
         </div>
 
-        {article.fullAudioUrl ? (
+        {footerAudioUrl ? (
           <section className="bbc-full-audio-panel">
             <div className="bbc-full-audio">
               <AudioPlayer
@@ -2189,7 +2197,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                   ...sentenceRestoreSeekRequest,
                   positionSeconds: sentenceRestoreSeekRequest.positionSeconds + (mobileSentenceRange?.startSeconds ?? 0),
                 } : null}
-                src={mobileSentenceAudio?.audioUrl ?? article.fullAudioUrl}
+                src={footerAudioUrl}
                 startAtSeconds={mobileSentenceAudio ? (mobileSentenceRange?.startSeconds ?? 0) + activeSentencePosition : fullAudioPosition}
                 title={mobileSentenceAudio ? `第 ${mobileSentenceAudio.sentenceNo} 句音频` : `${article.title} 完整音频`}
               />

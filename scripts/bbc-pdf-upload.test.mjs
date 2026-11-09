@@ -6,10 +6,10 @@ import test from "node:test";
 import ts from "typescript";
 import * as parser from "../src/lib/articles/bbc-pdf-quiz-parser.mjs";
 const require = createRequire(import.meta.url);
-function loadTs(path, dependencies) {
+function loadTs(path, dependencies, globals = {}) {
   const exports = {};
   const code = ts.transpileModule(fs.readFileSync(new URL(path, import.meta.url), "utf8"), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX } }).outputText;
-  vm.runInNewContext(code, { exports, require: (name) => name in dependencies ? dependencies[name] : require(name) });
+  vm.runInNewContext(code, { exports, require: (name) => name in dependencies ? dependencies[name] : require(name), ...globals });
   return exports;
 }
 const schema = loadTs("../src/lib/articles/bbc-quiz.ts", {});
@@ -29,7 +29,7 @@ test("the actual 260824 PDF preserves all 11 source questions, including its sum
   assert.deepEqual([...quiz.exercise[0].options], ["balmy", "boost", "cosy", "fluctuate", "recalibrates", "regulate", "triggers"]);
   assert.equal(typeof schema.normalizeBbcPdfQuiz(quiz, "260824", "How seasons affect our moods", 5), "object");
   quiz.summary[0].answer = "";
-  assert.equal(typeof schema.normalizeBbcPdfQuiz(quiz, "260824", "title", 5), "string", "a missing summary answer blocks publication");
+  assert.equal(typeof schema.normalizeBbcPdfQuiz(quiz, "260824", "title", 5), "string", "strict validation requires a summary answer");
 });
 
 test("the original 260727 PDF yields the same 15 prompts and source answers as the reviewed catalog", () => {
@@ -44,6 +44,47 @@ test("the original 260727 PDF yields the same 15 prompts and source answers as t
   }
   assert.equal(quiz.source.questionPage, 2); assert.equal(quiz.source.answerPage, 5);
   assert.equal(quiz.source.pdfSha256, "6ff3b108811a508a569c51efc5a8044fcaebc285ddef28903e8b5c11f693b58d");
+});
+
+test("the question pages alone import all prompts for later review", () => {
+  const quiz = importer.parseBbcPdfQuiz(fixture.pages.slice(0, 4), fixture.source, "260727", "title");
+  assert.deepEqual([quiz.matching.length, quiz.quiz.length, quiz.exercise.length], [5, 5, 5]);
+  assert.equal(quiz.source.answerPage, null);
+  assert.equal(quiz.status, "review_required");
+  assert.ok([...quiz.matching, ...quiz.quiz, ...quiz.exercise].every(question => question.answer === ""));
+  const saved = schema.normalizeBbcPdfQuiz(quiz, "260727", "title", 5, true);
+  assert.equal(saved.quiz.length, 5);
+  assert.equal(schema.getPlayableBbcPdfQuiz(saved, 5), null);
+});
+
+test("a PDF can carry questions and answers on the same page", () => {
+  const rows = ["Quiz", "1. Which animal barks?", "a. A cat", "b. A dog", "Answer Key", "1. b."];
+  const quiz = importer.parseBbcPdfQuiz([{ text: rows.join("\n"), lines: rows.map(full => ({ full, bold: "" })) }], fixture.source, "260727", "title");
+  assert.equal(quiz.source.questionPage, 1);
+  assert.equal(quiz.source.answerPage, 1);
+  assert.equal(quiz.quiz[0].answer, "A dog");
+  assert.equal(schema.normalizeBbcPdfQuiz(quiz, "260727", "title", 5).status, "ready");
+});
+
+test("admin readback retains pending PDF questions and public readback exposes the completed ones", async () => {
+  const quiz = imported();
+  quiz.quiz[0].answer = "";
+  const article = { id: "260727", year: 2026, date: "2026-07-27", title: "title", body: ["1", "2", "3", "4", "5"], chineseParagraphs: [], sentences: [], vocabulary: [], quiz };
+  const query = {
+    select: () => query, eq: () => query,
+    maybeSingle: async () => ({ data: { article, created_at: "2026-07-27", published: true }, error: null }),
+  };
+  const reader = loadTs("../src/lib/articles/bbc-uploaded-content.ts", {
+    "server-only": {}, "@supabase/supabase-js": { createClient: () => ({ from: () => query }) }, "@/lib/articles/bbc-quiz": schema,
+  }, { process: { env: { NEXT_PUBLIC_SUPABASE_URL: "https://fixture.invalid", SUPABASE_SERVICE_ROLE_KEY: "fixture" } } });
+  const saved = (await reader.getUploadedBbcArticleForAdmin("260727")).article.quiz;
+  assert.equal(saved.status, "review_required");
+  assert.equal(saved.quiz.length, 5);
+  assert.equal(saved.quiz[0].answer, "");
+  const playable = (await reader.getUploadedBbcArticle("260727")).quiz;
+  assert.equal(playable.status, "ready");
+  assert.equal(playable.quiz.length, 4);
+  assert.equal(playable.exercise.length, 5);
 });
 
 test("missing or out-of-range paragraph answers cannot be labelled ready by the client", () => {

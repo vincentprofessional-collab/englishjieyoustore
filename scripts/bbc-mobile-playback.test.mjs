@@ -310,7 +310,7 @@ test("all mobile sentence training modes advance, repeat, and retain looping aft
   const { getNextSentenceNo, getSpeakingPracticeDelayMs } = await import("../src/lib/articles/bbc-speaking-training.mjs");
   const ast = ts.createSourceFile("article.tsx", fs.readFileSync(new URL("../src/components/bbc-article-detail-page.tsx", import.meta.url), "utf8"), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
   const functions = [];
-  const names = new Set(["playSentenceByMode", "handleSentenceEnded", "selectStudySentence", "startSpeakingPractice", "clearSpeakingPracticeTimers"]);
+  const names = new Set(["getBbcSentenceAudio", "playSentenceByMode", "handleSentenceEnded", "selectStudySentence", "startSpeakingPractice", "clearSpeakingPracticeTimers"]);
   function collect(node) {
     if (ts.isFunctionDeclaration(node) && names.has(node.name?.text)) functions.push(node.getText(ast));
     ts.forEachChild(node, collect);
