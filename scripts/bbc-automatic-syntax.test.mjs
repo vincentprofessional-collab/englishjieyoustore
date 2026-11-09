@@ -139,8 +139,17 @@ test("BBC edit clipboard round-trips every authored sentence and vocabulary-only
   assert.deepEqual(retainReviewedBbcSyntax(numberedAutomatic, numberedReviewed), numberedReviewed);
   const changed = { ...numberedAutomatic[0], text: "Different source sentence." };
   assert.equal(retainReviewedBbcSyntax([changed], numberedReviewed)[0], changed);
-  const explicit = { ...numberedReviewed[0], level1: [] };
-  assert.equal(retainReviewedBbcSyntax([explicit], numberedReviewed)[0], explicit);
+  const edited = [{ ...numberedReviewed[0], level1: [], level2: [], level3: [], level4: [], level5: [] }, numberedReviewed[1]];
+  const saved = normalizeBbcSyntaxSentenceEdits(edited, numberedReviewed.slice(0, 2));
+  assert.equal(saved[0].manuallyReviewed, true, "legacy edits to reviewed sentences are detected");
+  assert.equal(saved[1].manuallyReviewed, undefined, "untouched pasted syntax can be replaced");
+  const republished = retainReviewedBbcSyntax([changed, ...numberedReviewed.slice(0, 2)], saved);
+  assert.equal(republished[1], saved[0]);
+  assert.deepEqual(republished[1].level1, []);
+  assert.equal(republished[2], numberedReviewed[1]);
+  assert.equal(retainReviewedBbcSyntax(numberedReviewed, republished)[0], saved[0]);
+  const repeated = [numberedReviewed[0], numberedReviewed[0]];
+  assert.equal(retainReviewedBbcSyntax(repeated, [saved[0]])[1], repeated[1]);
 });
 
 test("numbered BBC annotations reject mismatched or missing words rather than silently publishing automatic syntax", () => {

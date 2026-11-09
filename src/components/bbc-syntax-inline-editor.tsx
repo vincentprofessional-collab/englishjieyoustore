@@ -406,7 +406,7 @@ export function BbcSyntaxInlineEditor({
         !inlineResponse.ok ? (inlinePayload?.error ?? "下划线保存失败") : "",
       ].filter(Boolean);
       if (errors.length) throw new Error(errors.join("；"));
-      onSentenceChange({ ...data, status: "reviewed" });
+      onSentenceChange({ ...data, status: "reviewed", manuallyReviewed: true });
       notifyArticleInlineAnnotationsUpdated("bbc", articleId);
       const phraseCount = Number(inlinePayload?.phraseVocabularyAdded ?? 0) + Number(inlinePayload?.phraseVocabularyUpdated ?? 0);
       setMessage(inlinePayload?.phraseVocabularyWarning

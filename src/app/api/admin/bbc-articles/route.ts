@@ -15,7 +15,7 @@ import { normalizeBbcSyntaxSentenceEdits } from "@/lib/bbc-syntax-annotation-edi
 import { buildAutomaticBbcSyntax, buildUnclassifiedBbcSyntax } from "@/lib/articles/bbc-automatic-syntax";
 import { applyPastedBbcSyntax, matchPastedBbcSyntax, retainReviewedBbcSyntax, type PastedBbcSyntaxSentence } from "@/lib/articles/bbc-pasted-syntax";
 import { normalizeBbcPdfQuiz } from "@/lib/articles/bbc-quiz";
-import { alignBbcSubtitleSentences, createBbcSubtitleSentenceMatcher, parseBbcSubtitleCues } from "@/lib/articles/bbc-subtitle-alignment";
+import { createBbcSubtitleSentenceMatcher, parseBbcSubtitleCues } from "@/lib/articles/bbc-subtitle-alignment";
 import { syncBbcDashedPhrases } from "@/lib/vocabulary/bbc-dashed-phrase-sync";
 
 export const runtime = "nodejs";
@@ -204,9 +204,9 @@ function splitChineseSentences(paragraph: string, keepEllipses = false) {
     .filter(Boolean);
 }
 
-function readBbcSubtitleCues(value: string) {
+function readBbcSubtitleTexts(value: string) {
   if (value.length > 750_000) return [];
-  try { return parseBbcSubtitleCues(value); }
+  try { return parseBbcSubtitleCues(value).map(({ text }) => text); }
   catch { return []; }
 }
 
@@ -423,8 +423,16 @@ export async function POST(request: NextRequest) {
     const parsed = parseBbcArticlePaste(payload.text, payload.allowIncomplete === true);
     if (typeof parsed === "string") return NextResponse.json({ error: parsed }, { status: 400 });
     try {
-      const cues = typeof payload.subtitleText === "string" ? readBbcSubtitleCues(payload.subtitleText) : [];
-      const article = buildArticle(parsed, "", payload.allowIncomplete === true, cues.map(({ text }) => text));
+      const articleDate = parseBbcArticleDateFromTitle(parsed.dateTitle);
+      if (!articleDate) return NextResponse.json({ error: "标题缺少有效日期。" }, { status: 400 });
+      const subtitleTexts = typeof payload.subtitleText === "string" ? readBbcSubtitleTexts(payload.subtitleText) : [];
+      if (!subtitleTexts.length) {
+        const existing = await supabase.from("bbc_uploaded_articles").select("article").eq("id", articleDate.id).maybeSingle();
+        if (existing.error) return NextResponse.json({ error: "暂时无法读取已保存的文章分句。" }, { status: 503 });
+        const previous = existing.data?.article as BbcArticle | undefined;
+        subtitleTexts.push(...(previous?.sentences ?? []).map(({ english }) => english));
+      }
+      const article = buildArticle(parsed, "", payload.allowIncomplete === true, subtitleTexts);
       if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
       if (getBbcArticleById(article.id)) return NextResponse.json({ error: "内置文章正文由原有内容库维护，语法标注请在前端精读页面修改。" }, { status: 409 });
       if (payload.quiz != null) {
@@ -565,12 +573,10 @@ export async function PUT(request: NextRequest) {
   if (existingArticleResult.error) return NextResponse.json({ error: `保存前无法读取文章状态：${existingArticleResult.error.message}` }, { status: 503 });
   const existingArticle = existingArticleResult.data;
   const previousArticle = existingArticle?.article as BbcArticle | undefined;
-  const cues = typeof payload.subtitleText === "string" ? readBbcSubtitleCues(payload.subtitleText) : [];
-  const subtitleTexts = cues.length
-    ? cues.map(({ text }) => text)
-    : Array.isArray(payload.timings) ? [] : (previousArticle?.sentences ?? []).map(({ english }) => english);
+  const subtitleTexts = typeof payload.subtitleText === "string" ? readBbcSubtitleTexts(payload.subtitleText) : [];
+  const sentenceTexts = subtitleTexts.length ? subtitleTexts : (previousArticle?.sentences ?? []).map(({ english }) => english);
   let article: BbcArticle | string;
-  try { article = buildArticle(articlePayload, allowIncomplete ? "" : requestedAudioPath, allowIncomplete, subtitleTexts); }
+  try { article = buildArticle(articlePayload, allowIncomplete ? "" : requestedAudioPath, allowIncomplete, sentenceTexts); }
   catch (cause) { return NextResponse.json({ error: cause instanceof Error ? cause.message : "文章分析失败。" }, { status: 400 }); }
   if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
   const previousAudioPath = getStoredAudioPath(previousArticle);
@@ -582,8 +588,8 @@ export async function PUT(request: NextRequest) {
   }
 
   const reviewWarnings = article.reviewWarnings ?? [];
-  if (typeof payload.subtitleText === "string" && !cues.length) {
-    reviewWarnings.push("字幕中没有可用的英文时间戳，可更换字幕后补做逐句切分。");
+  if (typeof payload.subtitleText === "string" && !subtitleTexts.length) {
+    reviewWarnings.push("字幕中没有可用的英文条目，已根据现有分句和文章正文处理。");
   }
   const objectPath = audioAvailable ? requestedAudioPath : previousAudioPath;
   if (allowIncomplete) {
@@ -609,21 +615,6 @@ export async function PUT(request: NextRequest) {
       article.quiz = quiz;
     }
   }
-  let previousSyntax = previousArticle?.syntaxSentences ?? [];
-  let createdAt = new Date().toISOString();
-  if (existingArticle && previousSyntax.length) {
-    const overrides = await supabase.from("bbc_article_syntax_overrides").select("sentences,updated_at").eq("article_id", article.id).maybeSingle();
-    if (overrides.error && !["42P01", "PGRST205"].includes(overrides.error.code)) {
-      const warning = "暂时无法读取前端保存的语法标注。";
-      if (!allowIncomplete) return NextResponse.json({ error: warning }, { status: 503 });
-      reviewWarnings.push(warning);
-      createdAt = existingArticle.created_at;
-    }
-    if (overrides.data && Date.parse(overrides.data.updated_at) >= Date.parse(existingArticle.created_at)) {
-      previousSyntax = normalizeBbcSyntaxSentenceEdits(overrides.data.sentences, previousSyntax) ?? previousSyntax;
-    }
-  }
-  article.syntaxSentences = retainReviewedBbcSyntax(article.syntaxSentences ?? [], previousSyntax);
   if (allowIncomplete) {
     const useSuppliedAudio = Boolean(objectPath && requestedAudioPath === objectPath && audioAvailable);
     const suppliedDuration = useSuppliedAudio ? Number(payload.durationMs) : 0;
@@ -641,16 +632,6 @@ export async function PUT(request: NextRequest) {
       const range = acceptRange(row);
       if (range) Object.assign(sentences[index], range, { audioUrl: row.audioUrl ?? article.fullAudioUrl });
     });
-    if (objectPath && cues.length && (useSuppliedAudio || !requestedAudioPath)) {
-      const { timings } = alignBbcSubtitleSentences(sentences, cues, durationMs ? durationMs / 1000 : Infinity);
-      for (const timing of timings) {
-        const range = acceptRange(timing);
-        const sentence = sentences[timing.sentenceNo - 1];
-        if (range && (sentence.startMs !== range.startMs || sentence.endMs !== range.endMs)) {
-          Object.assign(sentence, range, { audioUrl: article.fullAudioUrl });
-        }
-      }
-    }
     if (useSuppliedAudio && Array.isArray(payload.timings)) {
       const supplied = new Map<number, SentenceAudioRange>();
       for (const row of payload.timings.slice(0, 500)) {
@@ -721,6 +702,22 @@ export async function PUT(request: NextRequest) {
     article.subtitleUrl = `/api/bbc-subtitles/${article.id}`;
     article.audioDurationMs = durationMs;
   }
+  let previousSyntax = previousArticle?.syntaxSentences
+    ?? previousArticle?.sentences?.map(({ english }) => buildAutomaticBbcSyntax(english)) ?? [];
+  let createdAt = new Date().toISOString();
+  if (existingArticle && previousSyntax.length) {
+    const overrides = await supabase.from("bbc_article_syntax_overrides").select("sentences,updated_at").eq("article_id", article.id).maybeSingle();
+    if (overrides.error && !["42P01", "PGRST205"].includes(overrides.error.code)) {
+      const warning = "暂时无法读取前端保存的语法标注。";
+      if (!allowIncomplete) return NextResponse.json({ error: warning }, { status: 503 });
+      reviewWarnings.push(warning);
+      createdAt = existingArticle.created_at;
+    }
+    if (overrides.data && Date.parse(overrides.data.updated_at) >= Date.parse(existingArticle.created_at)) {
+      previousSyntax = normalizeBbcSyntaxSentenceEdits(overrides.data.sentences, previousSyntax) ?? previousSyntax;
+    }
+  }
+  article.syntaxSentences = retainReviewedBbcSyntax(article.syntaxSentences ?? [], previousSyntax);
   const suppliedReviewWarnings = Array.isArray(payload.reviewWarnings)
     ? payload.reviewWarnings
       .filter((warning): warning is string => typeof warning === "string" && warning.trim().length > 0)

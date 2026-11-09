@@ -1,5 +1,3 @@
-import type { BbcSentenceTiming } from "@/lib/articles/bbc-audio-alignment";
-
 export type BbcSubtitleCue = { text: string; start: number; end: number };
 
 function englishKey(text: string) {
@@ -108,42 +106,4 @@ export function parseBbcSubtitleCues(input: string, duration = Infinity): BbcSub
   }
   if (!cues.length) throw new Error("字幕中没有可用的英文句子和时间戳。");
   return cues.sort((a, b) => a.start - b.start);
-}
-
-export function alignBbcSubtitleSentences(
-  sentences: { sentenceNo: number; english: string }[],
-  cues: BbcSubtitleCue[],
-  duration: number,
-) {
-  const cuesByEnglish = new Map<string, BbcSubtitleCue[]>();
-  for (const cue of cues) {
-    if (!Number.isFinite(cue.start) || cue.start < 0 || cue.end <= cue.start || cue.start >= duration) continue;
-    // A bilingual cue can have its translation on a separate line or beside the English.
-    for (const key of cueEnglishKeys(cue.text)) {
-      if (!key) continue;
-      const matches = cuesByEnglish.get(key) ?? [];
-      if (matches.at(-1)?.start === cue.start) continue;
-      matches.push(cue);
-      cuesByEnglish.set(key, matches);
-    }
-  }
-  const used = new Set<BbcSubtitleCue>();
-  const timings: BbcSentenceTiming[] = [];
-  const reviewSentenceNos: number[] = [];
-  for (const sentence of sentences) {
-    const matches = cuesByEnglish.get(englishKey(sentence.english));
-    let cue = matches?.shift();
-    while (cue && used.has(cue)) cue = matches?.shift();
-    if (cue) {
-      used.add(cue);
-      const startMs = Math.round(cue.start * 1000);
-      const endMs = Math.round(Math.min(cue.end, duration) * 1000);
-      if (Number.isFinite(endMs) && endMs > startMs) {
-        timings.push({ sentenceNo: sentence.sentenceNo, startMs, endMs });
-        continue;
-      }
-    }
-    reviewSentenceNos.push(sentence.sentenceNo);
-  }
-  return { timings, reviewSentenceNos, autoAdjustedSentenceNos: [] as number[] };
 }

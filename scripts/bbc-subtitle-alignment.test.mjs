@@ -1,26 +1,21 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { parseBbcSubtitleCues, alignBbcSubtitleSentences, createBbcSubtitleSentenceMatcher } from "../src/lib/articles/bbc-subtitle-alignment.ts";
+import { parseBbcSubtitleCues, createBbcSubtitleSentenceMatcher } from "../src/lib/articles/bbc-subtitle-alignment.ts";
 
-test("bilingual LRC assigns complete English lines, keeps repeated cues in order, and never joins cues", () => {
-  const duration = 15;
+test("bilingual LRC retains English lines and repeated cues", () => {
   const cues = parseBbcSubtitleCues(`[00:02.00]WHY DON’T I LIKE ROLLERCOASTERS ANYMORE? 为什么我不再喜欢坐过山车了？
 [00:05.00]仅中文
 [00:06.00]Hello.
 [00:08.00]Hello.
 [00:10.00]I will
-[00:12.00]not match.`, duration);
-  const sentences = ["Why don't I like rollercoasters anymore?", "Hello.", "Hello.", "I will not match."].map((english, index) => ({ english, sentenceNo: index + 1 }));
-  const result = alignBbcSubtitleSentences(sentences, cues, duration);
-  assert.deepEqual(result.timings, [
-    { sentenceNo: 1, startMs: 2000, endMs: 5000 },
-    { sentenceNo: 2, startMs: 6000, endMs: 8000 },
-    { sentenceNo: 3, startMs: 8000, endMs: 10000 },
+[00:12.00]not match.`);
+  assert.deepEqual(cues.map(({ text }) => text), [
+    "WHY DON’T I LIKE ROLLERCOASTERS ANYMORE? 为什么我不再喜欢坐过山车了？",
+    "Hello.", "Hello.", "I will", "not match.",
   ]);
-  assert.deepEqual(result.reviewSentenceNos, [4]);
 });
 
-test("SRT explicit end timestamps preserve a gap between clips", () => {
+test("SRT cues provide English text for matching written sentences", () => {
   const cues = parseBbcSubtitleCues(`1
 00:00:01,250 --> 00:00:02,400
 A complete sentence.
@@ -30,8 +25,11 @@ A complete sentence.
 00:00:04,000 --> 00:00:05,750
 Another sentence.
 另一个句子。`);
-  const { timings } = alignBbcSubtitleSentences([{ sentenceNo: 1, english: "A complete sentence." }, { sentenceNo: 2, english: "Another sentence." }], cues, 6);
-  assert.deepEqual(timings, [{ sentenceNo: 1, startMs: 1250, endMs: 2400 }, { sentenceNo: 2, startMs: 4000, endMs: 5750 }]);
+  const paragraph = "A complete sentence. Another sentence.";
+  const match = createBbcSubtitleSentenceMatcher(cues.map(({ text }) => text));
+  assert.deepEqual(match(paragraph).map(({ start, end }) => paragraph.slice(start, end).trim()), [
+    "A complete sentence.", "Another sentence.",
+  ]);
 });
 
 test("subtitle boundaries retain ellipses, dashes, wrapped lines and opening quotes", () => {
@@ -49,8 +47,4 @@ it would stop — but it didn’t. 我以为它会停下，但没有。
   const english = match(paragraph).map(({ start, end }) => paragraph.slice(start, end).trim());
   assert.deepEqual(english, ["I thought... it would stop — but it didn't.", "“Really?”"]);
   assert.deepEqual(match("It would stop — but it didn't."), []);
-  assert.deepEqual(alignBbcSubtitleSentences(english.map((text, i) => ({ english: text, sentenceNo: i + 1 })), cues, 7).timings, [
-    { sentenceNo: 1, startMs: 1250, endMs: 4400 },
-    { sentenceNo: 2, startMs: 5000, endMs: 6750 },
-  ]);
 });

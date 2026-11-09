@@ -570,12 +570,26 @@ function parseNumberedSyntax(normalized: string) {
   return { articleText: [normalized.slice(0, start).trim(), normalized.slice(end).trim()].filter(Boolean).join("\n\n"), sentences };
 }
 
-/** Editing body/vocabulary alone must not erase previously reviewed sentences. */
+/** Keep frontend edits on matching sentences and carry reviewed syntax over automatic drafts. */
 export function retainReviewedBbcSyntax(
   next: BbcSyntaxSentenceData[],
   previous: BbcSyntaxSentenceData[] = [],
-  doNotRetainSentenceNos: ReadonlySet<number> = new Set(),
 ) {
-  return next.map((sentence, index) => !doNotRetainSentenceNos.has(index + 1) && sentence.status !== "reviewed" && previous[index]?.status === "reviewed"
-    && previous[index].text === sentence.text ? previous[index] : sentence);
+  const previousByText = new Map<string, BbcSyntaxSentenceData[]>();
+  for (const sentence of previous) {
+    const matches = previousByText.get(sentence.text);
+    if (matches) matches.push(sentence);
+    else previousByText.set(sentence.text, [sentence]);
+  }
+  const remainingByText = new Map<string, number>();
+  for (const { text } of next) {
+    remainingByText.set(text, (remainingByText.get(text) ?? 0) + 1);
+  }
+  return next.map((sentence) => {
+    const matches = previousByText.get(sentence.text);
+    if (!matches?.length || matches.length !== remainingByText.get(sentence.text)) return sentence;
+    const saved = matches.shift()!;
+    remainingByText.set(sentence.text, matches.length);
+    return saved.manuallyReviewed || (saved.status === "reviewed" && sentence.status === "draft") ? saved : sentence;
+  });
 }

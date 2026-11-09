@@ -91,7 +91,7 @@ export function AdminBbcArticleUpload() {
     const parsed = parseBbcArticlePaste(text, true);
     return typeof parsed === "string" ? undefined : splitBbcArticleParagraphs(parsed.english, "en").length;
   }, [text]);
-  const audioJob = useRef<{ file: File; subtitleFile: File | null; sentenceKey: string; preparation?: AudioPreparation; objectPath?: string; uploaded: Map<number, string> } | null>(null);
+  const audioJob = useRef<{ file: File; sentenceKey: string; preparation?: AudioPreparation; objectPath?: string; uploaded: Map<number, string> } | null>(null);
   const selectedSentence = saved?.article.sentences?.find((sentence) => String(sentence.sentenceNo) === sentenceChoice);
   const selectedVocabulary = vocabularyChoice === "" ? undefined : saved?.article.vocabulary?.[Number(vocabularyChoice)];
   const detailsDisabled = busy || pdfBusy || saved?.text !== text;
@@ -233,16 +233,16 @@ export function AdminBbcArticleUpload() {
       let subtitleText: string | undefined;
       if (subtitleFile) {
         if (subtitleFile.size > 750_000) {
-          reviewWarnings.push("字幕文件超过 750 KB，可稍后换文件补做切分。");
+          reviewWarnings.push("字幕文件超过 750 KB，已按文章内容分句。");
         } else {
           subtitleText = await subtitleFile.text().catch(() => undefined);
-          if (!subtitleText?.trim()) reviewWarnings.push("未读取到字幕，可重新选择文件补做切分。");
+          if (!subtitleText?.trim()) reviewWarnings.push("未读取到字幕，已按文章内容分句。");
         }
       }
       if (audioFile) {
         let job = audioJob.current;
         if (job?.file !== audioFile || (job.objectPath && !job.objectPath.startsWith(`bbc/${date.year}/${date.id}/`))) {
-          job = { file: audioFile, subtitleFile: null, sentenceKey: "", uploaded: new Map() };
+          job = { file: audioFile, sentenceKey: "", uploaded: new Map() };
           audioJob.current = job;
         }
         try {
@@ -269,7 +269,7 @@ export function AdminBbcArticleUpload() {
           reviewWarnings.push(cause instanceof Error ? cause.message : "原声暂未上传，可稍后补传。");
         }
 
-        if (job.objectPath && (subtitleText || (!subtitleFile && !publish))) {
+        if (job.objectPath && !publish) {
           try {
             setAudioStatus("analyzing");
             setMessage("正在读取文章句子……");
@@ -280,13 +280,12 @@ export function AdminBbcArticleUpload() {
             }) as { article: BbcArticle };
             const sentences = prepared.article.sentences ?? [];
             const sentenceKey = JSON.stringify(sentences.map((sentence) => sentence.english));
-            if (job.sentenceKey !== sentenceKey || job.subtitleFile !== subtitleFile) {
+            if (job.sentenceKey !== sentenceKey) {
               job.sentenceKey = sentenceKey;
-              job.subtitleFile = subtitleFile;
               job.preparation = undefined;
               job.uploaded.clear();
             }
-            alignment = job.preparation ??= await analyzeBbcAudio(audioFile, sentences, setMessage, subtitleFile ?? undefined);
+            alignment = job.preparation ??= await analyzeBbcAudio(audioFile, sentences, setMessage);
             if (alignment.reviewSentenceNos.length) {
               const numbers = alignment.reviewSentenceNos;
               reviewWarnings.push(`建议试听校对第 ${numbers.slice(0, 12).join("、")} 句${numbers.length > 12 ? `等 ${numbers.length} 句` : ""}。`);
@@ -321,8 +320,6 @@ export function AdminBbcArticleUpload() {
           setAudioStatus("uploaded");
         }
         if (job.objectPath) durationMs = alignment?.durationMs ?? await readMp3DurationMs(audioFile).catch(() => undefined);
-      } else if (subtitleFile && !objectPath) {
-        reviewWarnings.push("请同时选择本篇 MP3，便于按字幕补做逐句播放。");
       }
 
       setMessage(publish ? "正在发布文章……" : "正在保存文章……");
@@ -442,11 +439,11 @@ export function AdminBbcArticleUpload() {
         <label className={styles.full}>
           <span>时间戳字幕（可选）</span>
           <input accept=".srt,.vtt,.lrc,application/x-subrip,text/vtt,text/plain" disabled={busy} onChange={(event) => { setSubtitleFile(event.target.files?.[0] ?? null); }} type="file" />
-          <small>{subtitleFile ? `${subtitleFile.name} · 按英文字幕条目切句，并使用字幕时间戳切分音频` : "支持与 MP3 对应的 SRT、VTT 或 LRC，最大 750 KB。"}</small>
+            <small>{subtitleFile ? `${subtitleFile.name} · 使用英文字幕确定正文分句` : "支持 SRT、VTT 或 LRC，最大 750 KB。音频按 MP3 原声对齐。"}</small>
         </label>
         {audioFile ? (
           <div aria-label="MP3 音频上传进度" aria-valuemax={100} aria-valuemin={0} aria-valuenow={audioProgress} className={styles.progress} role="progressbar">
-            <span>{audioStatus === "uploaded" ? "音频已上传" : audioStatus === "analyzing" ? subtitleFile ? "正在按字幕时间戳切分小音频" : "正在识别原声并切分小音频" : audioStatus === "uploading" ? `音频上传中 ${audioProgress}%` : audioStatus === "failed" ? "音频上传失败，请重试" : "等待上传"}</span>
+            <span>{audioStatus === "uploaded" ? "音频已上传" : audioStatus === "analyzing" ? "正在识别原声并切分小音频" : audioStatus === "uploading" ? `音频上传中 ${audioProgress}%` : audioStatus === "failed" ? "音频上传失败，请重试" : "等待上传"}</span>
             <div className={styles.progressTrack}><i style={{ width: `${audioProgress}%` }} /></div>
           </div>
         ) : null}

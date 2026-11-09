@@ -7,7 +7,7 @@ import ts from "typescript";
 import React from "react";
 import * as jsxRuntime from "react/jsx-runtime";
 import { renderToStaticMarkup } from "react-dom/server";
-import { createBbcSubtitleSentenceMatcher } from "../src/lib/articles/bbc-subtitle-alignment.ts";
+import { createBbcSubtitleSentenceMatcher, parseBbcSubtitleCues } from "../src/lib/articles/bbc-subtitle-alignment.ts";
 import { getBbcArticleContentOverride } from "../src/lib/articles/bbc-content-overrides.ts";
 import { mergeBbcVocabularyItems, normalizeBbcVocabularyTerm } from "../src/lib/articles/bbc-vocabulary-merge.ts";
 
@@ -89,10 +89,18 @@ test("prepare accepts a publishable preview with incomplete annotations", async 
     syntaxSentences: [{ status: "reviewed" }, { status: "draft" }, { status: "reviewed" }],
   };
   const post = loadFunctions("../src/app/api/admin/bbc-articles/route.ts", ["POST"], {
-    createServiceClient: () => ({}),
+    createServiceClient: () => ({ from: () => ({
+      select() { return this; }, eq() { return this; },
+      maybeSingle: async () => ({ data: { article: { sentences: [{ english: "One... even now." }] } } }),
+    }) }),
     requireAdmin: async () => ({ user: { id: "test-admin" } }),
-    parseBbcArticlePaste: () => ({ syntaxRequested: true, syntaxAnnotations: [1, 2, 1, 3].map(sentenceNo => ({ sentenceNo })) }),
-    buildArticle: (_parsed, _audio, allowIncomplete) => { assert.equal(allowIncomplete, true); return article; },
+    parseBbcArticlePaste: () => ({ dateTitle: "260810-Test", syntaxRequested: true }),
+    parseBbcArticleDateFromTitle: () => ({ id: "260810" }),
+    buildArticle: (_parsed, _audio, allowIncomplete, subtitleTexts) => {
+      assert.equal(allowIncomplete, true);
+      assert.equal(subtitleTexts.join("|"), "One... even now.");
+      return article;
+    },
     getBbcArticleById: () => null,
     NextResponse: { json: (data, options) => ({ data, status: options?.status ?? 200 }) },
   });
@@ -532,7 +540,7 @@ test("a clip failure saves the article and full MP3, and retrying reuses complet
     if (body.action === "presign") return { objectPath, headers: {}, uploadUrl: "/original" };
     if (body.action === "presign-sentences") return { tickets: body.files.map((clip) => ({ sentenceNo: clip.sentenceNo, headers: {},
       uploadUrl: `/clip/${clip.sentenceNo}`, objectPath: `${objectPath.slice(0, objectPath.lastIndexOf("/"))}/sentences/0123456789abcdef/260810-${String(clip.sentenceNo).padStart(3, "0")}.mp3` })) };
-    return { articleId: "260810", article: { id: "260810", sentences: fixture.sentences }, href: "/articles/260810", objectPath, audioIncluded: true, published: false, year: 2026, month: 8, sentenceCount: 21, paragraphCount: 5, vocabularyCount: 32, sentenceAudioCount: 21 };
+    return { articleId: "260810", article: { id: "260810", sentences: fixture.sentences }, href: "/articles/260810", objectPath, audioIncluded: true, published: body.publish === true, year: 2026, month: 8, sentenceCount: 21, paragraphCount: 5, vocabularyCount: 32, sentenceAudioCount: 21 };
   };
   const code = ts.transpileModule(readFileSync(new URL("../src/components/admin-bbc-article-upload.tsx", import.meta.url), "utf8"), {
     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX },
@@ -547,7 +555,12 @@ test("a clip failure saves the article and full MP3, and retrying reuses complet
       parseBbcArticleDateFromTitle: () => ({ id: "260810", year: 2026, month: 8 }),
       splitBbcArticleParagraphs: loadFunctions("../src/lib/articles/bbc-article-upload.ts", ["splitBbcArticleParagraphs"], {}),
     };
-    if (specifier.includes("bbc-audio-alignment")) return { analyzeBbcAudio: async (_file, _sentences, _progress, subtitle) => { assert.equal(subtitle, subtitles); analyses++; return { durationMs: 173418, timings: fixture.timings, reviewSentenceNos: [], clips }; } };
+    if (specifier.includes("bbc-audio-alignment")) return { analyzeBbcAudio: async (...args) => {
+      assert.equal(args[0], original);
+      assert.equal(args.length, 3);
+      analyses++;
+      return { durationMs: 173418, timings: fixture.timings, reviewSentenceNos: [], clips };
+    } };
     return {};
   } });
   const tree = exports.AdminBbcArticleUpload();
@@ -555,6 +568,8 @@ test("a clip failure saves the article and full MP3, and retrying reuses complet
   await form.props.onSubmit({ preventDefault() {}, nativeEvent: { submitter: { getAttribute: () => "align" } } });
   const fallback = requests.filter((request) => request.method === "PUT");
   assert.equal(fallback.length, 1);
+  assert.equal(requests.find(({ body }) => body.action === "prepare").body.subtitleText, await subtitles.text());
+  assert.equal(fallback[0].body.subtitleText, await subtitles.text());
   assert.equal(fallback[0].body.allowIncomplete, true);
   assert.equal(fallback[0].body.objectPath, objectPath);
   assert.equal(fallback[0].body.timings.length, 21);
@@ -570,6 +585,14 @@ test("a clip failure saves the article and full MP3, and retrying reuses complet
   assert.equal(saved[1].body.sentenceAudioFiles.length, 21);
   assert.equal(new Set(saved[1].body.sentenceAudioFiles.map((file) => file.objectPath)).size, 21);
   assert.equal(saved[1].body.clips, undefined);
+  const uploadCount = puts.length;
+  const requestCount = requests.length;
+  await form.props.onSubmit({ preventDefault() {}, nativeEvent: { submitter: { getAttribute: () => "publish" } } });
+  assert.equal(analyses, 1);
+  assert.equal(puts.length, uploadCount);
+  assert.equal(requests.length, requestCount + 1);
+  assert.equal(requests.at(-1).body.publish, true);
+  assert.equal(requests.at(-1).body.timings, undefined);
 });
 
 test("article save retains valid ranges even when a standalone clip is missing", async () => {
@@ -606,6 +629,8 @@ test("direct BBC publishing accepts missing translations and audio timings, whic
   assert.equal(typeof parseBbcArticlePaste(text), "string");
   const objectPath = "bbc/2026/260810/full-0123456789abcdef.mp3";
   const route = "../src/app/api/admin/bbc-articles/route.ts";
+  const readBbcSubtitleTexts = loadFunctions(route, ["readBbcSubtitleTexts"], { parseBbcSubtitleCues });
+  const subtitleText = "[00:01.000]The first sentence.\n[00:02.000]The second sentence.\n[00:04.000]";
   for (const audioAvailable of [true, false]) {
     let saved;
     const supabase = { from: () => ({
@@ -619,22 +644,27 @@ test("direct BBC publishing accepts missing translations and audio timings, whic
       createServiceClient: () => supabase, requireAdmin: async () => ({ user: { id: "test-admin" } }),
       parseBbcArticlePaste, parseBbcArticleDateFromTitle: () => ({ year: 2026, month: 8, id: "260810" }),
       getBbcArticleById: () => null,
-      buildArticle: ({ english, title }) => ({
-        id: "260810", year: 2026, title, body: [english], syntaxSentences: [],
-        sentences: english.match(/[^.]+\./g).map((sentence, index) => ({ sentenceNo: index + 1, english: sentence.trim(), startMs: 0, endMs: 0 })),
-      }),
+      readBbcSubtitleTexts,
+      buildArticle: ({ english, title }, _audioPath, _allowIncomplete, subtitleTexts) => {
+        assert.equal(subtitleTexts.join("|"), "The first sentence.|The second sentence.");
+        return {
+          id: "260810", year: 2026, title, body: [english], syntaxSentences: [],
+          sentences: english.match(/[^.]+\./g).map((sentence, index) => ({ sentenceNo: index + 1, english: sentence.trim(), startMs: 0, endMs: 0 })),
+        };
+      },
       retainReviewedBbcSyntax: (sentences) => sentences,
       hasR2Object: async (path) => { assert.equal(path, objectPath); return audioAvailable; },
       syncPublishedPhraseVocabulary: async () => ({ added: 0, updated: 0, warning: "" }),
       revalidatePath() {}, NextResponse: { json: (data, options) => ({ data, status: options?.status ?? 200 }) },
     };
     const put = loadFunctions(route, ["getStoredAudioPath", "reuseExistingBbcAudioTimings", "PUT"], globals);
-    const result = await put({ json: async () => ({ text, objectPath, durationMs: 6000, timings: [], sentenceAudioFiles: [], publish: true }) });
+    const result = await put({ json: async () => ({ text, subtitleText, objectPath, durationMs: 6000, timings: [], sentenceAudioFiles: [], publish: true }) });
     assert.equal(result.status, 200);
     assert.equal(saved.published, true);
     assert.equal(saved.article.body[0], "The first sentence. The second sentence.");
     assert.equal(result.data.audioIncluded, audioAvailable);
     assert.equal(result.data.timingsComplete, false);
+    assert.equal(result.data.timedSentenceCount, 0);
     if (!audioAvailable) {
       assert.match(result.data.reviewWarnings.join("\n"), /MP3 暂未上传成功/);
       continue;

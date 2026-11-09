@@ -93,7 +93,15 @@ export function normalizeBbcSyntaxSentenceEdits(
       if (children.some((span) => !parents.some((parent) => span.start >= parent.start && span.end <= parent.end))) return null;
     }
 
-    result.push({ ...base, tokens, ...layers, status: item.status === "reviewed" ? "reviewed" : base.status });
+    const status = item.status === "reviewed" ? "reviewed" : base.status;
+    // Older frontend saves have no manual review flag, so compare their edits with the stored article.
+    const manuallyReviewed = base.manuallyReviewed || item.manuallyReviewed === true || status !== base.status
+      || tokens.some((token, index) => token.pos !== base.tokens[index].pos || token.posLabel !== base.tokens[index].posLabel)
+      || SYNTAX_LEVELS.some((level) => {
+        const key = layerKey(level);
+        return JSON.stringify(layers[key]) !== JSON.stringify(normalizeSpans(base[key] ?? [], base.tokens.length));
+      });
+    result.push({ ...base, tokens, ...layers, status, manuallyReviewed: manuallyReviewed ? true : undefined });
   }
 
   return result;

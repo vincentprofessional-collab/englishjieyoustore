@@ -48,7 +48,11 @@ export async function PUT(request: NextRequest) {
   const sentences = normalizeBbcSyntaxSentenceEdits(payload?.sentences, canonical.sentences);
   if (!sentences) return NextResponse.json({ error: "标注范围无效：请检查标签、词性和 1–5 级成分的嵌套范围。" }, { status: 400 });
   const reviewedSentenceNo = Number(payload?.reviewedSentenceNo);
-  if (Number.isInteger(reviewedSentenceNo) && reviewedSentenceNo > 0 && reviewedSentenceNo <= sentences.length) sentences[reviewedSentenceNo - 1].status = "reviewed";
+  if (Number.isInteger(reviewedSentenceNo) && reviewedSentenceNo > 0 && reviewedSentenceNo <= sentences.length) {
+    const reviewed = sentences[reviewedSentenceNo - 1];
+    reviewed.status = "reviewed";
+    reviewed.manuallyReviewed = true;
+  }
 
   const { error } = await supabase.from("bbc_article_syntax_overrides").upsert({
     article_id: articleId,

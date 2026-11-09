@@ -1,8 +1,7 @@
 import { alignBbcAudioSentences, findBbcAudioPauses, type BbcRecognizedWord } from "@/lib/articles/bbc-audio-alignment";
-import { alignBbcSubtitleSentences, parseBbcSubtitleCues } from "@/lib/articles/bbc-subtitle-alignment";
 import { createBbcSentenceAudio } from "@/lib/admin/bbc-sentence-audio";
 
-export async function analyzeBbcAudio(file: Blob, sentences: { sentenceNo: number; english: string }[], onProgress: (message: string) => void, subtitleFile?: Blob) {
+export async function analyzeBbcAudio(file: Blob, sentences: { sentenceNo: number; english: string }[], onProgress: (message: string) => void) {
   onProgress("正在读取 MP3……");
   const audioContext = new AudioContext();
   let decoded: AudioBuffer;
@@ -10,14 +9,6 @@ export async function analyzeBbcAudio(file: Blob, sentences: { sentenceNo: numbe
   finally { await audioContext.close().catch(() => undefined); }
   const duration = decoded.duration;
   const durationMs = Math.round(duration * 1000);
-  if (subtitleFile) {
-    onProgress("正在按字幕里的英文匹配文章句子……");
-    const cues = parseBbcSubtitleCues(await subtitleFile.text(), duration);
-    const alignment = alignBbcSubtitleSentences(sentences, cues, duration);
-    const clips = await createBbcSentenceAudio(file, alignment.timings, onProgress).catch(() => []);
-    return { durationMs, ...alignment, clips, alignmentSource: "subtitle" as const };
-  }
-
   const renderer = new OfflineAudioContext(1, Math.ceil(duration * 16_000), 16_000);
   const source = renderer.createBufferSource(); source.buffer = decoded; source.connect(renderer.destination); source.start();
   const audio = (await renderer.startRendering()).getChannelData(0);
@@ -42,5 +33,5 @@ export async function analyzeBbcAudio(file: Blob, sentences: { sentenceNo: numbe
   }
   const alignment = alignBbcAudioSentences(sentences, recognized, duration, pauses);
   const clips = await createBbcSentenceAudio(file, alignment.timings, onProgress).catch(() => []);
-  return { durationMs, ...alignment, clips, alignmentSource: "recognition" as const };
+  return { durationMs, ...alignment, clips };
 }

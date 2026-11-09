@@ -16,6 +16,7 @@ export type BbcSyntaxSentenceData = {
   level4?: BbcSyntaxSpan[];
   level5?: BbcSyntaxSpan[];
   status: "reviewed" | "draft";
+  manuallyReviewed?: true;
   notes?: string[];
   sourceAnnotation?: string;
 };
