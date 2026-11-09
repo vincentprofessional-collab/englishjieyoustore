@@ -7,6 +7,9 @@ import ts from "typescript";
 import React from "react";
 import * as jsxRuntime from "react/jsx-runtime";
 import { renderToStaticMarkup } from "react-dom/server";
+import { createBbcSubtitleSentenceMatcher } from "../src/lib/articles/bbc-subtitle-alignment.ts";
+import { getBbcArticleContentOverride } from "../src/lib/articles/bbc-content-overrides.ts";
+import { mergeBbcVocabularyItems, normalizeBbcVocabularyTerm } from "../src/lib/articles/bbc-vocabulary-merge.ts";
 
 function loadFunctions(path, names, globals, prefix = "") {
   const source = ts.createSourceFile(path, readFileSync(new URL(path, import.meta.url), "utf8"), ts.ScriptTarget.Latest, true);
@@ -26,6 +29,59 @@ function loadPastedSyntaxModule() {
   runInNewContext(code, { exports });
   return exports;
 }
+
+test("inline vocabulary edits persist, preserve page metadata and reject stale edits", async () => {
+  let row = null;
+  const table = {
+    select: () => ({ eq: () => ({ maybeSingle: async () => ({ data: row }) }) }),
+    insert: (value) => ({
+      select: () => ({ maybeSingle: async () => {
+        row = value;
+        return { data: { slug: row.slug } };
+      } }),
+    }),
+    update: (value) => {
+      const query = {
+        eq: () => query,
+        is: () => query,
+        select: () => ({ maybeSingle: async () => {
+          row = { ...row, ...value };
+          return { data: { slug: row.slug } };
+        } }),
+      };
+      return query;
+    },
+  };
+  const edit = loadFunctions("../src/app/api/admin/bbc-articles/route.ts", ["editPublishedVocabulary"], {
+    getBbcArticleById: () => ({ title: "Test", vocabulary: [] }),
+    getBbcEffectiveVocabularyById: () => [],
+    getBbcArticleContentOverride,
+    mergeBbcVocabularyItems,
+    normalizeBbcVocabularyTerm,
+    readText: (value) => ({ value }),
+    revalidatePath: () => {},
+    NextResponse: { json: (data, options) => ({ data, status: options?.status ?? 200 }) },
+  });
+  const save = (fields) => edit({ from: () => table }, { articleId: "260831", ...fields });
+  const added = await save({
+    operation: "save", index: -1, term: "ride", definition: "乘坐", selectedText: "rides",
+  });
+  assert.equal(added.status, 200);
+  assert.equal(row.status, "published");
+  const initial = getBbcArticleContentOverride(row.meta_json).vocabulary[0];
+  assert.equal(initial.highlightTerm, "rides");
+  row.meta_json.titleChinese = "保留的标题";
+  const changed = await save({
+    operation: "save", index: 0, previous: initial, term: "ride", definition: "游乐设施",
+  });
+  assert.equal(changed.status, 200);
+  assert.equal(row.meta_json.vocabulary[0].definition, "游乐设施");
+  assert.equal(row.meta_json.titleChinese, "保留的标题");
+  assert.equal((await save({ operation: "delete", index: 0, previous: initial })).status, 409);
+  const deleted = await save({ operation: "delete", index: 0, previous: changed.data.vocabulary[0] });
+  assert.equal(deleted.status, 200);
+  assert.equal(getBbcArticleContentOverride(row.meta_json).vocabulary.length, 0);
+});
 
 test("prepare accepts a publishable preview with incomplete annotations", async () => {
   const article = {
@@ -595,21 +651,23 @@ test("direct BBC publishing accepts missing translations and audio timings, whic
 
 test("deleting a repeated BBC sentence removes the selected occurrence and preserves surviving timing and annotations", () => {
   const splitArticleSentences = loadFunctions("../src/lib/article-inline-annotations.ts", ["splitArticleSentences"], {});
-  const remove = loadFunctions("../src/app/api/admin/bbc-articles/route.ts", ["splitChineseSentences", "removeBbcSentence"], { splitArticleSentences });
+  const remove = loadFunctions("../src/app/api/admin/bbc-articles/route.ts",
+    ["splitChineseSentences", "splitBbcPracticeParagraph", "removeBbcSentence"], { splitArticleSentences, createBbcSubtitleSentenceMatcher });
+  const lastSentence = "Keep this... — even now.";
   const article = {
     id: "260810", fullAudioUrl: "/full.mp3",
-    body: ["It works. It works. Keep this."], chineseParagraphs: ["成功了。再试一次。保留这句。"],
+    body: [`It works. It works. ${lastSentence}`], chineseParagraphs: ["成功了。再试一次。保留这句。"],
     paragraphUnderlines: [{ english: [{ start: 20, end: 24 }], chinese: [{ start: 9, end: 13 }] }],
-    sentences: [["It works.", "成功了。"], ["It works.", "再试一次。"], ["Keep this.", "保留这句。"]].map(([english, chinese], i) => ({ english, chinese, sentenceNo: i + 1, audioUrl: `/clip-${i + 1}.mp3`, startMs: i * 1000, endMs: (i + 1) * 1000 })),
-    syntaxSentences: [{}, {}, { sourceAnnotation: "## 句 3\nKeep this." }],
+    sentences: [["It works.", "成功了。"], ["It works.", "再试一次。"], [lastSentence, "保留这句。"]].map(([english, chinese], i) => ({ english, chinese, sentenceNo: i + 1, audioUrl: `/clip-${i + 1}.mp3`, startMs: i * 1000, endMs: (i + 1) * 1000 })),
+    syntaxSentences: [{}, {}, { sourceAnnotation: `## 句 3\n${lastSentence}` }],
   };
   assert.equal(remove(article, 1).length, 0);
   const saved = structuredClone(article);
-  assert.deepEqual(saved.body, ["It works. Keep this."]);
+  assert.deepEqual(saved.body, [`It works. ${lastSentence}`]);
   assert.deepEqual(saved.chineseParagraphs, ["成功了。保留这句。"]);
   assert.deepEqual(saved.paragraphUnderlines, [{ english: [{ start: 10, end: 14 }], chinese: [{ start: 4, end: 8 }] }]);
   assert.deepEqual(saved.sentences.map(({ sentenceNo, audioUrl, startMs, endMs }) => [sentenceNo, audioUrl, startMs, endMs]), [[1, "/clip-1.mp3", 0, 1000], [2, "/clip-3.mp3", 2000, 3000]]);
-  assert.equal(saved.syntaxSentences[1].sourceAnnotation, "## 句 2\nKeep this.");
+  assert.equal(saved.syntaxSentences[1].sourceAnnotation, `## 句 2\n${lastSentence}`);
   assert.equal(saved.subtitleUrl, "/api/bbc-subtitles/260810");
 });
 

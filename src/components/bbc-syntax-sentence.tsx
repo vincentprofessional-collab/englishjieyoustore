@@ -135,6 +135,7 @@ export function BbcSyntaxSentence({
   waveRanges,
   onTokenRangeSelect,
   onPosTokenClick,
+  onWordTokenClick,
   onSyntaxSpanClick,
   onInlineAnnotationClick,
 }: {
@@ -152,6 +153,7 @@ export function BbcSyntaxSentence({
   waveRanges?: { start: number; end: number }[];
   onTokenRangeSelect?: (range: BbcSyntaxTokenRange) => void;
   onPosTokenClick?: (tokenIndex: number) => void;
+  onWordTokenClick?: (tokenIndex: number) => void;
   onSyntaxSpanClick?: (level: BbcSyntaxLevel, span: BbcSyntaxSpan) => void;
   onInlineAnnotationClick?: (annotation: ArticleInlineAnnotation) => void;
 }) {
@@ -326,7 +328,13 @@ export function BbcSyntaxSentence({
     });
     return (
       <span className={`${styles.word} ${highlighted ? styles.highlight : ""} ${waved.has(index) ? styles.wave : ""}`} data-token-index={index} key={index} style={gapAfter ? { marginRight: `${gapAfter}em` } : undefined}>
-        <span className={`${styles.wordText} ${activePlayback ? styles.activePlaybackWord : ""}`} data-word-text>{token.text}</span>
+        <span
+          className={`${styles.wordText} ${activePlayback ? styles.activePlaybackWord : ""} ${onWordTokenClick && lexical.length > 0 ? styles.editableMark : ""}`}
+          data-word-text
+          onClick={onWordTokenClick && lexical.length > 0 ? () => {
+            if (window.getSelection()?.isCollapsed !== false) onWordTokenClick(index);
+          } : undefined}
+        >{token.text}</span>
         {showPos ? <span className={`${styles.pos} ${token.pos === "PUNCT" || lexical.length === 0 ? styles.posPlaceholder : ""} ${onPosTokenClick && token.pos !== "PUNCT" && lexical.length > 0 ? styles.editableMark : ""}`} onClick={() => onPosTokenClick?.(index)}>{token.pos === "PUNCT" || lexical.length === 0 ? "　" : token.posLabel === "系动词" || staticTracks.some((track) => track.spans.some((span) => /^(系|系动词)$/.test(span.label) && index >= span.start && index < span.end)) ? "动词" : token.posLabel ?? POS_LABELS[token.pos] ?? token.pos}</span> : null}
         {hasSentenceInlineAnnotations && showPos ? (
           <span className={styles.annotationPosTrack}>

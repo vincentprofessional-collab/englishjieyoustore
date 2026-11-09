@@ -16,6 +16,7 @@ import type { ArticleInlineAnnotation, ArticleInlineLineStyle } from "@/lib/arti
 import type { BbcVocabularyItem } from "@/lib/articles/bbc";
 import { supabase } from "@/lib/supabase/client";
 import { notifyArticleInlineAnnotationsUpdated } from "@/components/use-article-inline-annotations";
+import { BbcSelectedVocabularyEditor } from "./bbc-selected-vocabulary-editor";
 import { adminRequest } from "@/lib/admin/request";
 import styles from "./bbc-syntax-inline-editor.module.css";
 
@@ -37,6 +38,9 @@ type Props = {
   allSentences: BbcSyntaxSentenceData[];
   articleId: string;
   articleVocabulary: BbcVocabularyItem[];
+  getVocabularyDefinition: (item: BbcVocabularyItem) => string;
+  onVocabularyChange: (items: BbcVocabularyItem[]) => void;
+  vocabularyReady: boolean;
   unitId: string;
   isUploadedArticle?: boolean;
   timing?: { durationMs: number; endMs: number; startMs: number };
@@ -69,6 +73,9 @@ export function BbcSyntaxInlineEditor({
   allSentences,
   articleId,
   articleVocabulary,
+  getVocabularyDefinition,
+  onVocabularyChange,
+  vocabularyReady,
   unitId,
   isUploadedArticle = false,
   timing,
@@ -111,7 +118,7 @@ export function BbcSyntaxInlineEditor({
       if (active) setIsAdmin(profile?.role === "admin");
     }
     void check();
-    const { data: authListener } = supabase.auth.onAuthStateChange(() => void check());
+    const { data: authListener } = supabase.auth.onAuthStateChange(() => { setTimeout(() => { if (active) void check(); }, 0); });
     return () => {
       active = false;
       authListener.subscription.unsubscribe();
@@ -132,6 +139,9 @@ export function BbcSyntaxInlineEditor({
     setTimingEnd(timing ? (timing.endMs / 1_000).toFixed(3) : "");
   }, [sentenceNo, timing?.startMs, timing?.endMs]);
 
+  const selectedStart = selection ? data.tokens[selection.start]?.start : undefined;
+  const selectedEnd = selection ? data.tokens[selection.end - 1]?.end : undefined;
+
   const selectedPos = useMemo(() => {
     if (!selection) return "";
     const values = data.tokens.slice(selection.start, selection.end).filter((token) => token.pos !== "PUNCT").map((token) => token.pos);
@@ -141,6 +151,7 @@ export function BbcSyntaxInlineEditor({
     (data[layerKey(spanLevel)] ?? []).map((span) => ({ level: spanLevel, span }))), [data]);
 
   function selectRange(range: BbcSyntaxTokenRange) {
+    setEditing(true);
     setSelection(range);
     setSelectedInlineId("");
     setInlineLabel("");
@@ -159,9 +170,6 @@ export function BbcSyntaxInlineEditor({
   }
 
   function selectToken(tokenIndex: number) {
-    setEditing(true);
-    setEditingSpan(null);
-    setSelectedInlineId("");
     selectRange({ start: tokenIndex, end: tokenIndex + 1 });
   }
 
@@ -446,8 +454,9 @@ export function BbcSyntaxInlineEditor({
         inlineAnnotations={inlineAnnotations}
         onInlineAnnotationClick={isAdmin ? selectInlineAnnotation : undefined}
         onPosTokenClick={isAdmin ? selectToken : undefined}
+        onWordTokenClick={isAdmin ? selectToken : undefined}
         onSyntaxSpanClick={isAdmin ? selectComponent : undefined}
-        onTokenRangeSelect={isAdmin && editing ? selectRange : undefined}
+        onTokenRangeSelect={isAdmin ? selectRange : undefined}
         sentenceNo={sentenceNo}
         showPos={showPos}
         translation={translation}
@@ -467,6 +476,18 @@ export function BbcSyntaxInlineEditor({
                 <span>当前选区</span>
                 <strong>{selection ? tokenRangeText(data, selection) : "拖选原文中的词汇或短语，再选择语法成分"}</strong>
               </div>
+              {vocabularyReady && selectedStart !== undefined && selectedEnd !== undefined ? (
+                <BbcSelectedVocabularyEditor
+                  key={`${articleId}:${sentenceNo}:${selectedStart}:${selectedEnd}`}
+                  articleId={articleId}
+                  end={selectedEnd}
+                  getDefinition={getVocabularyDefinition}
+                  items={articleVocabulary}
+                  onChange={onVocabularyChange}
+                  sentence={data.text}
+                  start={selectedStart}
+                />
+              ) : null}
               <div className={styles.controls}>
                 <label>
                   <span>词性</span>

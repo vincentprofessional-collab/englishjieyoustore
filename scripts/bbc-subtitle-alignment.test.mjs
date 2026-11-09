@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { parseBbcSubtitleCues, alignBbcSubtitleSentences } from "../src/lib/articles/bbc-subtitle-alignment.ts";
+import { parseBbcSubtitleCues, alignBbcSubtitleSentences, createBbcSubtitleSentenceMatcher } from "../src/lib/articles/bbc-subtitle-alignment.ts";
 
 test("bilingual LRC assigns complete English lines, keeps repeated cues in order, and never joins cues", () => {
   const duration = 15;
@@ -32,4 +32,25 @@ Another sentence.
 另一个句子。`);
   const { timings } = alignBbcSubtitleSentences([{ sentenceNo: 1, english: "A complete sentence." }, { sentenceNo: 2, english: "Another sentence." }], cues, 6);
   assert.deepEqual(timings, [{ sentenceNo: 1, startMs: 1250, endMs: 2400 }, { sentenceNo: 2, startMs: 4000, endMs: 5750 }]);
+});
+
+test("subtitle boundaries retain ellipses, dashes, wrapped lines and opening quotes", () => {
+  const cues = parseBbcSubtitleCues(`1
+00:00:01,250 --> 00:00:04,400
+I thought...
+it would stop — but it didn’t. 我以为它会停下，但没有。
+
+2
+00:00:05,000 --> 00:00:06,750
+“Really?”
+“真的吗？”`);
+  const paragraph = "An unmatched introduction. I thought... it would stop — but it didn't. “Really?”";
+  const match = createBbcSubtitleSentenceMatcher(cues.map(({ text }) => text));
+  const english = match(paragraph).map(({ start, end }) => paragraph.slice(start, end).trim());
+  assert.deepEqual(english, ["I thought... it would stop — but it didn't.", "“Really?”"]);
+  assert.deepEqual(match("It would stop — but it didn't."), []);
+  assert.deepEqual(alignBbcSubtitleSentences(english.map((text, i) => ({ english: text, sentenceNo: i + 1 })), cues, 7).timings, [
+    { sentenceNo: 1, startMs: 1250, endMs: 4400 },
+    { sentenceNo: 2, startMs: 5000, endMs: 6750 },
+  ]);
 });

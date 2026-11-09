@@ -230,6 +230,15 @@ export function AdminBbcArticleUpload() {
     const api = "/api/admin/bbc-articles";
 
     try {
+      let subtitleText: string | undefined;
+      if (subtitleFile) {
+        if (subtitleFile.size > 750_000) {
+          reviewWarnings.push("字幕文件超过 750 KB，可稍后换文件补做切分。");
+        } else {
+          subtitleText = await subtitleFile.text().catch(() => undefined);
+          if (!subtitleText?.trim()) reviewWarnings.push("未读取到字幕，可重新选择文件补做切分。");
+        }
+      }
       if (audioFile) {
         let job = audioJob.current;
         if (job?.file !== audioFile || (job.objectPath && !job.objectPath.startsWith(`bbc/${date.year}/${date.id}/`))) {
@@ -260,15 +269,12 @@ export function AdminBbcArticleUpload() {
           reviewWarnings.push(cause instanceof Error ? cause.message : "原声暂未上传，可稍后补传。");
         }
 
-        if (job.objectPath && (subtitleFile || !publish)) {
+        if (job.objectPath && (subtitleText || (!subtitleFile && !publish))) {
           try {
-            if (subtitleFile && subtitleFile.size > 5 * 1024 * 1024) {
-              throw new Error("字幕文件超过 5 MB，可稍后换文件补做切分。");
-            }
             setAudioStatus("analyzing");
             setMessage("正在读取文章句子……");
             const prepared = await adminRequest(api, {
-              body: JSON.stringify({ action: "prepare", text, allowIncomplete: true }),
+              body: JSON.stringify({ action: "prepare", text, subtitleText, allowIncomplete: true }),
               method: "POST",
               signal: AbortSignal.timeout(15_000),
             }) as { article: BbcArticle };
@@ -311,18 +317,18 @@ export function AdminBbcArticleUpload() {
           } catch (cause) {
             reviewWarnings.push(cause instanceof Error ? cause.message : "逐句切分暂未完成，可稍后校对。");
           }
-          sentenceAudioFiles = [...job.uploaded].map(([sentenceNo, path]) => ({ sentenceNo, objectPath: path }));
+          if (alignment) sentenceAudioFiles = [...job.uploaded].map(([sentenceNo, path]) => ({ sentenceNo, objectPath: path }));
           setAudioStatus("uploaded");
         }
         if (job.objectPath) durationMs = alignment?.durationMs ?? await readMp3DurationMs(audioFile).catch(() => undefined);
-      } else if (subtitleFile) {
+      } else if (subtitleFile && !objectPath) {
         reviewWarnings.push("请同时选择本篇 MP3，便于按字幕补做逐句播放。");
       }
 
       setMessage(publish ? "正在发布文章……" : "正在保存文章……");
       const submittedQuiz = pdfQuizRef.current;
       const payload = await adminRequest(api, {
-        body: JSON.stringify({ text, objectPath, durationMs, timings: alignment?.timings, sentenceAudioFiles, quiz: submittedQuiz, allowIncomplete: true, publish, reviewWarnings }),
+        body: JSON.stringify({ text, objectPath, durationMs, subtitleText, timings: alignment?.timings, sentenceAudioFiles, quiz: submittedQuiz, allowIncomplete: true, publish, reviewWarnings }),
         method: "PUT",
       });
       if (audioJob.current?.objectPath && payload.objectPath !== audioJob.current.objectPath) audioJob.current = null;
@@ -436,7 +442,7 @@ export function AdminBbcArticleUpload() {
         <label className={styles.full}>
           <span>时间戳字幕（可选）</span>
           <input accept=".srt,.vtt,.lrc,application/x-subrip,text/vtt,text/plain" disabled={busy} onChange={(event) => { setSubtitleFile(event.target.files?.[0] ?? null); }} type="file" />
-          <small>{subtitleFile ? `${subtitleFile.name} · 按英文匹配，直接使用字幕时间戳切分` : "用于自动对齐。支持与 MP3 对应的 SRT、VTT 或 LRC，最大 5 MB。"}</small>
+          <small>{subtitleFile ? `${subtitleFile.name} · 按英文字幕条目切句，并使用字幕时间戳切分音频` : "支持与 MP3 对应的 SRT、VTT 或 LRC，最大 750 KB。"}</small>
         </label>
         {audioFile ? (
           <div aria-label="MP3 音频上传进度" aria-valuemax={100} aria-valuemin={0} aria-valuenow={audioProgress} className={styles.progress} role="progressbar">

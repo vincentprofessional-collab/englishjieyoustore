@@ -7,12 +7,15 @@ import { getArticleInlineSourceDocument } from "@/lib/article-inline-annotation-
 import { getBbcArticleById } from "@/lib/articles/bbc";
 import { parseBbcArticleDateFromTitle, parseBbcArticlePaste, splitBbcArticleParagraphs } from "@/lib/articles/bbc-article-upload";
 import type { BbcArticle, BbcVocabularyItem } from "@/lib/articles/bbc";
+import { getBbcArticleContentOverride } from "@/lib/articles/bbc-content-overrides";
 import { extractBbcWaveText } from "@/lib/articles/bbc-paste-markup";
-import { normalizeBbcVocabularyTerm } from "@/lib/articles/bbc-vocabulary-merge";
+import { getBbcEffectiveVocabularyById } from "@/lib/articles/bbc-vocabulary";
+import { mergeBbcVocabularyItems, normalizeBbcVocabularyTerm } from "@/lib/articles/bbc-vocabulary-merge";
 import { normalizeBbcSyntaxSentenceEdits } from "@/lib/bbc-syntax-annotation-edits";
 import { buildAutomaticBbcSyntax, buildUnclassifiedBbcSyntax } from "@/lib/articles/bbc-automatic-syntax";
 import { applyPastedBbcSyntax, matchPastedBbcSyntax, retainReviewedBbcSyntax, type PastedBbcSyntaxSentence } from "@/lib/articles/bbc-pasted-syntax";
 import { normalizeBbcPdfQuiz } from "@/lib/articles/bbc-quiz";
+import { alignBbcSubtitleSentences, createBbcSubtitleSentenceMatcher, parseBbcSubtitleCues } from "@/lib/articles/bbc-subtitle-alignment";
 import { syncBbcDashedPhrases } from "@/lib/vocabulary/bbc-dashed-phrase-sync";
 
 export const runtime = "nodejs";
@@ -192,19 +195,58 @@ function parseVocabulary(value: unknown): BbcVocabularyItem[] | string {
   return items;
 }
 
-function splitChineseSentences(paragraph: string) {
-  return (paragraph.match(/[^。！？!?…]+(?:[。！？!?…]+[”’"'」』）)]*)?|[^。！？!?…]+$/gu) ?? [])
+function splitChineseSentences(paragraph: string, keepEllipses = false) {
+  const boundary = keepEllipses
+    ? /[^。！？!?]+(?:[。！？!?]+[”’"'」』）)]*)?/gu
+    : /[^。！？!?…]+(?:[。！？!?…]+[”’"'」』）)]*)?/gu;
+  return (paragraph.match(boundary) ?? [])
     .map((sentence) => sentence.trim())
     .filter(Boolean);
 }
 
-function buildPracticeSentences(body: string[], chineseParagraphs: string[], reviewWarnings?: string[]) {
+function readBbcSubtitleCues(value: string) {
+  if (value.length > 750_000) return [];
+  try { return parseBbcSubtitleCues(value); }
+  catch { return []; }
+}
+
+function splitBbcPracticeParagraph(
+  paragraph: string,
+  matchSubtitle: ReturnType<typeof createBbcSubtitleSentenceMatcher>,
+) {
+  const matched = matchSubtitle(paragraph);
+  const segments: ReturnType<typeof splitArticleSentences> = [];
+  function appendGap(start: number, end: number) {
+    for (const segment of splitArticleSentences(paragraph.slice(start, end))) {
+      if (segment.text.trim()) segments.push({ ...segment, index: segments.length, start: start + segment.start, end: start + segment.end });
+    }
+  }
+
+  let cursor = 0;
+  for (const { start, end } of matched) {
+    appendGap(cursor, start);
+    const raw = paragraph.slice(start, end);
+    const text = raw.trim();
+    const trimmedStart = start + raw.search(/\S/u);
+    segments.push({ text, start: trimmedStart, end: trimmedStart + text.length, index: segments.length });
+    cursor = end;
+  }
+  appendGap(cursor, paragraph.length);
+  return segments;
+}
+
+function buildPracticeSentences(body: string[], chineseParagraphs: string[], reviewWarnings?: string[], subtitleTexts: string[] = []) {
   let sentenceNo = 0;
+  const matchSubtitle = createBbcSubtitleSentenceMatcher(subtitleTexts);
   return body.flatMap((paragraph, paragraphIndex) => {
     const englishWave = extractBbcWaveText(paragraph);
     const chineseWave = extractBbcWaveText(chineseParagraphs[paragraphIndex] ?? "");
-    const englishSentences = splitArticleSentences(englishWave.text).map(({ text }) => text.trim()).filter(Boolean);
-    const chineseSentences = splitChineseSentences(chineseWave.text);
+    const englishSentences = splitBbcPracticeParagraph(englishWave.text, matchSubtitle);
+    let chineseSentences = splitChineseSentences(chineseWave.text);
+    if (subtitleTexts.length && englishSentences.length !== chineseSentences.length) {
+      const joined = splitChineseSentences(chineseWave.text, true);
+      if (joined.length === englishSentences.length) chineseSentences = joined;
+    }
     const aligned = englishSentences.length === chineseSentences.length;
     if (!aligned) {
       const warning = `第 ${paragraphIndex + 1} 段有 ${englishSentences.length} 个英文句子、${chineseSentences.length} 个中文句子，逐句翻译待校对。`;
@@ -212,12 +254,12 @@ function buildPracticeSentences(body: string[], chineseParagraphs: string[], rev
       if (chineseSentences.length) reviewWarnings.push(warning);
     }
 
-    let englishCursor = 0, chineseCursor = 0;
-    return englishSentences.map((english, index) => {
+    let chineseCursor = 0;
+    return englishSentences.map(({ text, start: englishStart }, index) => {
+      const english = text.trim();
       const chinese = aligned ? chineseSentences[index] : "";
-      const englishStart = englishWave.text.indexOf(english, englishCursor);
       const chineseStart = chineseWave.text.indexOf(chinese, chineseCursor);
-      englishCursor = englishStart + english.length; chineseCursor = chineseStart + chinese.length;
+      chineseCursor = chineseStart + chinese.length;
       const localRanges = (ranges: { start: number; end: number }[], start: number, length: number) => ranges
         .filter((range) => range.start < start + length && range.end > start)
         .map((range) => ({ start: Math.max(0, range.start - start), end: Math.min(length, range.end - start) }));
@@ -255,7 +297,7 @@ function withoutSyntaxGuessing(text: string) {
   };
 }
 
-function buildArticle(payload: Record<string, unknown>, objectPath: string, allowIncomplete = false): BbcArticle | string {
+function buildArticle(payload: Record<string, unknown>, objectPath: string, allowIncomplete = false, subtitleTexts: string[] = []): BbcArticle | string {
   const titleResult = readText(payload.title, "英文标题", 180);
   if (titleResult.error) return titleResult.error;
   const title = titleResult.value!;
@@ -297,7 +339,7 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string, allo
   if (objectPath && (!objectPath.startsWith(expectedPrefix) || !/^full(?:-[a-f0-9]{16})?\.mp3$/.test(objectPath.slice(expectedPrefix.length)))) return "音频存储路径与文章日期不匹配。";
 
   const fullAudioUrl = objectPath ? `/api/bbc-audio/${parsedDate.year}/${parsedDate.id}/${objectPath.slice(expectedPrefix.length)}` : undefined;
-  const sentences = buildPracticeSentences(body, paragraphsAligned ? chineseParagraphs : [], allowIncomplete ? reviewWarnings : undefined);
+  const sentences = buildPracticeSentences(body, paragraphsAligned ? chineseParagraphs : [], allowIncomplete ? reviewWarnings : undefined, subtitleTexts);
   const syntaxAnnotations = Array.isArray(payload.syntaxAnnotations)
     ? payload.syntaxAnnotations as PastedBbcSyntaxSentence[]
     : [];
@@ -381,7 +423,8 @@ export async function POST(request: NextRequest) {
     const parsed = parseBbcArticlePaste(payload.text, payload.allowIncomplete === true);
     if (typeof parsed === "string") return NextResponse.json({ error: parsed }, { status: 400 });
     try {
-      const article = buildArticle(parsed, "", payload.allowIncomplete === true);
+      const cues = typeof payload.subtitleText === "string" ? readBbcSubtitleCues(payload.subtitleText) : [];
+      const article = buildArticle(parsed, "", payload.allowIncomplete === true, cues.map(({ text }) => text));
       if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
       if (getBbcArticleById(article.id)) return NextResponse.json({ error: "内置文章正文由原有内容库维护，语法标注请在前端精读页面修改。" }, { status: 409 });
       if (payload.quiz != null) {
@@ -518,14 +561,18 @@ export async function PUT(request: NextRequest) {
     ? payload.objectPath
     : !allowIncomplete && parsedPaste ? `${audioPrefix}full.mp3` : "";
   const validAudioPath = requestedAudioPath.startsWith(audioPrefix) && /^full(?:-[a-f0-9]{16})?\.mp3$/.test(requestedAudioPath.slice(audioPrefix.length));
-  let article: BbcArticle | string;
-  try { article = buildArticle(articlePayload, allowIncomplete ? "" : requestedAudioPath, allowIncomplete); }
-  catch (cause) { return NextResponse.json({ error: cause instanceof Error ? cause.message : "文章分析失败。" }, { status: 400 }); }
-  if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
-  const existingArticleResult = await supabase.from("bbc_uploaded_articles").select("article,published,created_at").eq("id", article.id).maybeSingle();
+  const existingArticleResult = await supabase.from("bbc_uploaded_articles").select("article,published,created_at").eq("id", articleDate.id).maybeSingle();
   if (existingArticleResult.error) return NextResponse.json({ error: `保存前无法读取文章状态：${existingArticleResult.error.message}` }, { status: 503 });
   const existingArticle = existingArticleResult.data;
   const previousArticle = existingArticle?.article as BbcArticle | undefined;
+  const cues = typeof payload.subtitleText === "string" ? readBbcSubtitleCues(payload.subtitleText) : [];
+  const subtitleTexts = cues.length
+    ? cues.map(({ text }) => text)
+    : Array.isArray(payload.timings) ? [] : (previousArticle?.sentences ?? []).map(({ english }) => english);
+  let article: BbcArticle | string;
+  try { article = buildArticle(articlePayload, allowIncomplete ? "" : requestedAudioPath, allowIncomplete, subtitleTexts); }
+  catch (cause) { return NextResponse.json({ error: cause instanceof Error ? cause.message : "文章分析失败。" }, { status: 400 }); }
+  if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
   const previousAudioPath = getStoredAudioPath(previousArticle);
   const audioAvailable = validAudioPath && (
     (allowIncomplete && requestedAudioPath === previousAudioPath) || await hasR2Object(requestedAudioPath)
@@ -535,6 +582,9 @@ export async function PUT(request: NextRequest) {
   }
 
   const reviewWarnings = article.reviewWarnings ?? [];
+  if (typeof payload.subtitleText === "string" && !cues.length) {
+    reviewWarnings.push("字幕中没有可用的英文时间戳，可更换字幕后补做逐句切分。");
+  }
   const objectPath = audioAvailable ? requestedAudioPath : previousAudioPath;
   if (allowIncomplete) {
     if (requestedAudioPath && !audioAvailable) {
@@ -591,6 +641,16 @@ export async function PUT(request: NextRequest) {
       const range = acceptRange(row);
       if (range) Object.assign(sentences[index], range, { audioUrl: row.audioUrl ?? article.fullAudioUrl });
     });
+    if (objectPath && cues.length && (useSuppliedAudio || !requestedAudioPath)) {
+      const { timings } = alignBbcSubtitleSentences(sentences, cues, durationMs ? durationMs / 1000 : Infinity);
+      for (const timing of timings) {
+        const range = acceptRange(timing);
+        const sentence = sentences[timing.sentenceNo - 1];
+        if (range && (sentence.startMs !== range.startMs || sentence.endMs !== range.endMs)) {
+          Object.assign(sentence, range, { audioUrl: article.fullAudioUrl });
+        }
+      }
+    }
     if (useSuppliedAudio && Array.isArray(payload.timings)) {
       const supplied = new Map<number, SentenceAudioRange>();
       for (const row of payload.timings.slice(0, 500)) {
@@ -721,6 +781,7 @@ export async function PUT(request: NextRequest) {
 function removeBbcSentence(article: BbcArticle, index: number) {
   const sentences = article.sentences;
   if (!sentences?.[index] || sentences.length < 2) return "一篇文章至少要保留一个句子。";
+  const matchSubtitle = createBbcSubtitleSentenceMatcher(sentences.map(({ english }) => english));
 
   const body = [...article.body];
   const chinese = [...(article.chineseParagraphs ?? [])];
@@ -744,7 +805,7 @@ function removeBbcSentence(article: BbcArticle, index: number) {
   }
 
   for (const [paragraphIndex, paragraph] of body.entries()) {
-    const english = splitArticleSentences(paragraph).filter((segment) => segment.text.trim());
+    const english = splitBbcPracticeParagraph(paragraph, matchSubtitle);
     const localIndex = index - offset;
     offset += english.length;
     if (!english[localIndex]) continue;
@@ -762,7 +823,8 @@ function removeBbcSentence(article: BbcArticle, index: number) {
       body[paragraphIndex] = updated.text;
       if (ranges) ranges.english = updated.ranges;
       const translation = alignedParagraphs ? chinese[paragraphIndex] : "";
-      const translations = splitChineseSentences(translation);
+      let translations = splitChineseSentences(translation);
+      if (translations.length !== english.length) translations = splitChineseSentences(translation, true);
       if (translations.length === english.length && translations[localIndex] === sentences[index].chinese) {
         let cursor = 0;
         const segments = translations.map((text) => {
@@ -793,6 +855,93 @@ function removeBbcSentence(article: BbcArticle, index: number) {
   return warnings;
 }
 
+async function editPublishedVocabulary(supabase: SupabaseClient, payload: Record<string, unknown>) {
+  const { articleId, operation, index } = payload;
+  if (typeof articleId !== "string" || !/^\d{6}$/.test(articleId) ||
+    (operation !== "save" && operation !== "delete") ||
+    typeof index !== "number" || !Number.isInteger(index) || index < -1 ||
+    (operation === "delete" && index < 0)) {
+    return NextResponse.json({ error: "词汇编辑请求无效。" }, { status: 400 });
+  }
+
+  let article = getBbcArticleById(articleId);
+  if (!article) {
+    const uploaded = await supabase.from("bbc_uploaded_articles")
+      .select("article").eq("id", articleId).eq("published", true).maybeSingle();
+    if (uploaded.error) return NextResponse.json({ error: "暂时无法读取文章。" }, { status: 503 });
+    article = uploaded.data?.article as BbcArticle | undefined;
+  }
+  if (!article) return NextResponse.json({ error: "已发布文章不存在。" }, { status: 404 });
+
+  const table = supabase.from("managed_content_pages");
+  const slug = `bbc-article-${articleId}`;
+  const { data: row, error: readError } = await table.select("meta_json,status,updated_at").eq("slug", slug).maybeSingle();
+  if (readError) return NextResponse.json({ error: "暂时无法读取词汇表。" }, { status: 503 });
+  if (row && row.status !== "published") {
+    return NextResponse.json({ error: "这篇文章有待发布的内容修改，请先处理该草稿。" }, { status: 409 });
+  }
+  const vocabulary = [...(getBbcArticleContentOverride(row?.meta_json)?.vocabulary ??
+    mergeBbcVocabularyItems(article.vocabulary, getBbcEffectiveVocabularyById(articleId) ?? []))];
+  const existing = vocabulary[index];
+  const previous = payload.previous as { term?: unknown; entry?: unknown; definition?: unknown } | null;
+  const conflict = () => NextResponse.json({ error: "词汇表已变化，请刷新文章后再试。" }, { status: 409 });
+  if (index >= 0 && (!existing || previous?.term !== existing.term || previous.entry !== existing.entry ||
+    previous.definition !== (existing.definition ?? ""))) return conflict();
+
+  if (operation === "delete") {
+    vocabulary.splice(index, 1);
+  } else {
+    if (index < 0 && vocabulary.length >= 300) {
+      return NextResponse.json({ error: "词汇表最多可保存 300 项。" }, { status: 400 });
+    }
+    const term = readText(payload.term, "词汇或短语", 160);
+    const definition = readText(payload.definition, "释义", 600);
+    if ("error" in term || "error" in definition) {
+      return NextResponse.json({ error: term.error ?? definition.error }, { status: 400 });
+    }
+    const key = normalizeBbcVocabularyTerm(term.value);
+    if (!key || /[|\r\n\t]/.test(term.value) || /[\r\n]/.test(definition.value)) {
+      return NextResponse.json({ error: "请在同一行填写词汇和释义，词汇中不要使用竖线。" }, { status: 400 });
+    }
+    if (vocabulary.some((item, itemIndex) => itemIndex !== index &&
+      (normalizeBbcVocabularyTerm(item.term) === key || normalizeBbcVocabularyTerm(item.lemma ?? "") === key))) {
+      return NextResponse.json({ error: "词汇表中已有这个词汇。" }, { status: 409 });
+    }
+    const selectedText = typeof payload.selectedText === "string" ? payload.selectedText.trim().slice(0, 160) : "";
+    const item: BbcVocabularyItem = {
+      ...existing,
+      number: existing?.number ?? vocabulary.length + 1,
+      term: term.value,
+      entry: existing?.term === term.value ? existing.entry : `${term.value} ${definition.value}`,
+      lemma: existing?.term === term.value ? existing.lemma : term.value,
+      highlight: existing?.highlight ?? true,
+      highlightTerm: existing?.highlightTerm || existing?.term || selectedText || term.value,
+      example: existing?.example ?? "",
+      definition: definition.value,
+      translation: definition.value,
+    };
+    if (index < 0) vocabulary.push(item);
+    else vocabulary[index] = item;
+  }
+
+  const updatedVocabulary = vocabulary.map((item, itemIndex) => ({ ...item, number: itemIndex + 1 }));
+  const meta_json = { ...row?.meta_json, vocabulary: updatedVocabulary };
+  const now = new Date(Math.max(Date.now(), (Date.parse(row?.updated_at ?? "") || 0) + 1)).toISOString();
+  const write = row
+    ? table.update({ meta_json, updated_at: now }).eq("slug", slug).eq("status", "published")
+    : table.insert({ slug, template_key: "foreign_article_page", module: "articles", title: article.title,
+      status: "published", published_at: now, meta_json });
+  if (row) {
+    if (row.updated_at == null) write.is("updated_at", null);
+    else write.eq("updated_at", row.updated_at);
+  }
+  const { data: saved, error: writeError } = await write.select("slug").maybeSingle();
+  if (writeError?.code === "23505" || (!writeError && !saved)) return conflict();
+  if (writeError) return NextResponse.json({ error: "词汇保存失败，请稍后再试。" }, { status: 503 });
+  revalidatePath(`/articles/${articleId}`);
+  return NextResponse.json({ ok: true, vocabulary: updatedVocabulary });
+}
+
 export async function PATCH(request: NextRequest) {
   const supabase = createServiceClient();
   if (!supabase) return NextResponse.json({ error: "后台内容服务尚未配置。" }, { status: 500 });
@@ -801,6 +950,7 @@ export async function PATCH(request: NextRequest) {
 
   const payload = await request.json().catch(() => null) as Record<string, unknown> | null;
   const action = payload?.action;
+  if (payload && action === "editVocabulary") return editPublishedVocabulary(supabase, payload);
   if (payload && (action === "deleteSentence" || action === "deleteVocabulary" || action === "addVocabulary")) {
     const articleId = typeof payload.articleId === "string" ? payload.articleId : "";
     if (!/^\d{6}$/.test(articleId)) return NextResponse.json({ error: "文章编号无效。" }, { status: 400 });

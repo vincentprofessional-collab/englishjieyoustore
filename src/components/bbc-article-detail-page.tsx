@@ -772,6 +772,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
   const [articleVocabulary, setArticleVocabulary] = useState<BbcVocabularyItem[]>(
     () => article?.vocabulary ?? [],
   );
+  const [vocabularyLoadedId, setVocabularyLoadedId] = useState("");
   const [sentenceAutoPlaySignals, setSentenceAutoPlaySignals] = useState<Record<number, number>>({});
   const [activeSentenceNo, setActiveSentenceNo] = useState<number | null>(null);
   const [activeSentencePosition, setActiveSentencePosition] = useState(0);
@@ -900,6 +901,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
     setArticleTitleChinese(article?.titleChinese ?? "");
     setArticleChineseParagraphs(article?.chineseParagraphs ?? []);
     setArticleVocabulary(article?.vocabulary ?? []);
+    setVocabularyLoadedId("");
 
     if (!article) {
       return () => {
@@ -911,7 +913,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
 
     async function loadBbcVocabulary() {
       const [automaticResponse, overrideResult] = await Promise.all([
-        fetch(`/api/bbc-vocabulary?articleId=${encodeURIComponent(currentArticle.id)}`),
+        fetch(`/api/bbc-vocabulary?articleId=${encodeURIComponent(currentArticle.id)}`).catch(() => null),
         supabase
           .from("managed_content_pages")
           .select("meta_json")
@@ -925,10 +927,11 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
       }
 
       let automaticVocabulary: BbcVocabularyItem[] = [];
-      if (automaticResponse.ok) {
-        const payload = (await automaticResponse.json()) as { vocabulary?: BbcVocabularyItem[] };
-        automaticVocabulary = payload.vocabulary ?? [];
+      if (automaticResponse?.ok) {
+        const payload = await automaticResponse.json().catch(() => null);
+        if (Array.isArray(payload?.vocabulary)) automaticVocabulary = payload.vocabulary;
       }
+      if (cancelled) return;
 
       const override = !overrideResult.error
         ? getBbcArticleContentOverride(overrideResult.data?.meta_json)
@@ -943,6 +946,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
       setArticleVocabulary(
         override?.vocabulary ?? mergeBbcVocabularyItems(currentArticle.vocabulary, automaticVocabulary),
       );
+      if (!overrideResult.error) setVocabularyLoadedId(currentArticle.id);
     }
 
     void loadBbcVocabulary();
@@ -1966,7 +1970,10 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                             allInlineAnnotations={editableInlineAnnotations}
                             allSentences={editableSyntaxSentences}
                             articleId={article.id}
-                            articleVocabulary={articleVocabularyForDisplay}
+                            articleVocabulary={articleVocabulary}
+                            getVocabularyDefinition={(item) => parseBbcVocabularyItem(item).definition}
+                            onVocabularyChange={setArticleVocabulary}
+                            vocabularyReady={vocabularyLoadedId === article.id}
                             isUploadedArticle={isUploadedArticle}
                             unitId={inlineUnit?.id ?? ""}
                             timing={article.audioDurationMs ? {

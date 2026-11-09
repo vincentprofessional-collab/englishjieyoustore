@@ -6,6 +6,54 @@ function englishKey(text: string) {
   return (text.normalize("NFKC").toLowerCase().replace(/['’‘ʼ]/g, "").match(/[a-z0-9]+/g) ?? []).join(" ");
 }
 
+function cueEnglishKeys(text: string) {
+  // Subtitle display wraps are part of the same cue. Strip each translated line or suffix together.
+  const englishLines = text.split("\n").map((line) => line.split(/[\u3400-\u9fff]/u, 1)[0]);
+  return new Set([englishKey(englishLines.join(" ")), englishKey(text)]);
+}
+
+export function createBbcSubtitleSentenceMatcher(cueTexts: string[]) {
+  const byFirstWord = new Map<string, string[][]>();
+  const keys = new Set(cueTexts.flatMap((text) => [...cueEnglishKeys(text)]));
+  for (const key of keys) {
+    if (!key) continue;
+    const words = key.split(" ");
+    const candidates = byFirstWord.get(words[0]) ?? [];
+    candidates.push(words);
+    byFirstWord.set(words[0], candidates);
+  }
+  for (const candidates of byFirstWord.values()) candidates.sort((left, right) => right.length - left.length);
+
+  return (paragraph: string) => {
+    if (!byFirstWord.size) return [];
+    const tokens = [...paragraph.matchAll(/[a-z0-9ａ-ｚ０-９]+(?:['’‘ʼ][a-z0-9ａ-ｚ０-９]+)*/giu)];
+    const words = tokens.map(([token]) => englishKey(token));
+    const ranges: { start: number; end: number }[] = [];
+
+    function boundary(index: number) {
+      if (index === 0) return 0;
+      if (index === tokens.length) return paragraph.length;
+      const current = tokens[index].index;
+      const previous = tokens[index - 1];
+      const gap = paragraph.slice(previous.index + previous[0].length, current);
+      const opening = gap.match(/\s+([(\[“‘"']+\s*)$/u)?.[1];
+      return current - (opening?.length ?? 0);
+    }
+
+    for (let index = 0; index < tokens.length;) {
+      const match = byFirstWord.get(words[index])?.find((candidate) =>
+        candidate.every((word, offset) => word === words[index + offset]));
+      if (!match) {
+        index += 1;
+        continue;
+      }
+      ranges.push({ start: boundary(index), end: boundary(index + match.length) });
+      index += match.length;
+    }
+    return ranges;
+  };
+}
+
 function timeToSeconds(value: string) {
   const match = value.trim().match(/^(?:(\d+):)?(\d{2}):([0-5]\d)[.,](\d{3})$/);
   if (!match) return null;
@@ -71,8 +119,7 @@ export function alignBbcSubtitleSentences(
   for (const cue of cues) {
     if (!Number.isFinite(cue.start) || cue.start < 0 || cue.end <= cue.start || cue.start >= duration) continue;
     // A bilingual cue can have its translation on a separate line or beside the English.
-    const keys = new Set([englishKey(cue.text), ...cue.text.split(/\n|[\u3400-\u9fff]+/).map(englishKey)]);
-    for (const key of keys) {
+    for (const key of cueEnglishKeys(cue.text)) {
       if (!key) continue;
       const matches = cuesByEnglish.get(key) ?? [];
       if (matches.at(-1)?.start === cue.start) continue;
@@ -91,7 +138,7 @@ export function alignBbcSubtitleSentences(
       used.add(cue);
       const startMs = Math.round(cue.start * 1000);
       const endMs = Math.round(Math.min(cue.end, duration) * 1000);
-      if (endMs > startMs) {
+      if (Number.isFinite(endMs) && endMs > startMs) {
         timings.push({ sentenceNo: sentence.sentenceNo, startMs, endMs });
         continue;
       }
