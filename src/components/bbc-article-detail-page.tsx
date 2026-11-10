@@ -1860,8 +1860,7 @@ export default function ArticleDetailPage({ article, adminPreview = false, draft
                   : [];
                 const hasBackendGrammarAnnotations = sentenceAnnotations.length > 0;
                 const hasReviewedSyntax = studyMode === "intensive"
-                  && (syntaxSentence?.status === "reviewed" || syntaxSentence?.status === "draft")
-                  && syntaxSentence.text === sentence.english;
+                  && (syntaxSentence?.status === "reviewed" || syntaxSentence?.status === "draft");
 
                 const sentenceRange = activeStudyAudio?.range;
                 const sentencePlayer = !isMobileAudioViewport && (activeStudyAudio ? (

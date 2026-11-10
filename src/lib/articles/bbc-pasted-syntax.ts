@@ -50,25 +50,16 @@ function sentenceWordKey(value: string) {
   return (value.toLowerCase().replace(/[‘’]/g, "'").match(/[a-z0-9]+(?:'[a-z0-9]+)*/g) ?? []).join(" ");
 }
 
-/** Prefer the supplied number only if its English agrees with the article. */
+/** Use the numbered syntax section as the canonical sentence source. */
 export function matchPastedBbcSyntax(annotations: PastedBbcSyntaxSentence[], sentences: string[], warn: (message: string) => void) {
-  const indexesByText = new Map<string, number[]>();
-  sentences.forEach((sentence, index) => {
-    const key = sentenceWordKey(sentence);
-    if (key) indexesByText.set(key, [...(indexesByText.get(key) ?? []), index]);
-  });
   const matched = new Map<number, PastedBbcSyntaxSentence>();
-  const moved: PastedBbcSyntaxSentence[] = [];
   for (const annotation of annotations) {
     const index = annotation.sentenceNo - 1;
-    if (indexesByText.get(sentenceWordKey(annotation.text))?.includes(index) && !matched.has(index)) matched.set(index, annotation);
-    else moved.push(annotation);
-  }
-  for (const annotation of moved) {
-    const candidates = indexesByText.get(sentenceWordKey(annotation.text)) ?? [];
-    const index = candidates.length === 1 ? candidates[0] : undefined;
-    if (index !== undefined && !matched.has(index)) matched.set(index, annotation);
-    else warn(`语法标注第 ${annotation.sentenceNo} 句与正文未能唯一对应，请在编辑器核对。`);
+    if (!Number.isInteger(annotation.sentenceNo) || index < 0 || index >= sentences.length || matched.has(index)) {
+      warn(`语法标注第 ${annotation.sentenceNo} 句编号无效或重复，请在编辑器核对。`);
+      continue;
+    }
+    matched.set(index, annotation);
   }
   return matched;
 }
@@ -122,15 +113,13 @@ function posLabel(description: string) {
 
 function appendSummarySpans(tokens: BbcSyntaxSentenceData["tokens"], main: string, sentenceNo: number, warn?: SyntaxWarning) {
   const spans: BbcSyntaxSpan[] = [];
-  let cursor = 0;
   for (const { phrase, label } of markedComponents(main)) {
     const matches = phraseMatches(tokens, phrase, { start: 0, end: tokens.length }, hasEllipsis(phrase));
-    const match = matches.find((item) => item.start >= cursor) ?? (matches.length === 1 ? matches[0] : undefined);
+    const match = matches[0];
     if (!match) {
       syntaxIssue(warn, `第 ${sentenceNo} 句的主干标注“${phrase}”无法匹配原句，请核对句子成分。`);
       continue;
     }
-    cursor = match.end;
     spans.push(...runsForMatch(match, tokens, rolesIn(label)[0] ?? label));
   }
   return spans.sort((a, b) => a.start - b.start || b.end - a.end);
@@ -234,7 +223,7 @@ export function applyPastedBbcSyntax(
     ? annotations.find((item) => sentenceWordKey(item.text) === sentenceWordKey(automatic.text))
     : annotations.find((item) => item.sentenceNo === sentenceNo);
   if (!annotation) return automatic;
-  if (sentenceWordKey(annotation.text) !== sentenceWordKey(automatic.text)) {
+  if (sentenceNo == null && sentenceWordKey(annotation.text) !== sentenceWordKey(automatic.text)) {
     syntaxIssue(warn, `第 ${annotation.sentenceNo} 句语法标注中的英文原句与正文不一致，请核对输入框内容。`);
     return automatic;
   }
@@ -248,14 +237,13 @@ export function applyPastedBbcSyntax(
     : { ...token, pos: "X", posLabel: "待补标" });
   const componentRows: { label: string; start: number; end: number }[] = [];
   const labelledTokens = new Set<number>();
-  let cursor = 0;
   for (const item of annotation.items) {
-    const match = phraseMatches(tokens, item.term, { start: cursor, end: tokens.length })[0];
+    const match = phraseMatches(tokens, item.term, { start: 0, end: tokens.length })
+      .find((candidate) => candidate.indexes.every((index) => !labelledTokens.has(index)));
     if (!match) {
       syntaxIssue(warn, `第 ${annotation.sentenceNo} 句的标注词语“${item.term}”无法匹配原句。`);
       continue;
     }
-    cursor = match.end;
     const indexes = match.indexes;
     const code = posCode(item.description);
     if (code) indexes.forEach((index) => {
@@ -370,21 +358,86 @@ function runsForMatch(match: PhraseMatch, tokens: BbcSyntaxSentenceData["tokens"
   return runs;
 }
 
+type MappedComponent = { phrase: string; label: string; scope: TokenRange; depth: number; excludeRange?: TokenRange };
+
+/** Match all components before placing them, so nested phrases can be layered
+ * by their source ranges even when the author listed them in another order. */
+function placeMarkedComponents(
+  tokens: BbcSyntaxSentenceData["tokens"],
+  components: MappedComponent[],
+  layers: BbcSyntaxSpan[][],
+  warn: SyntaxWarning | undefined,
+  sentenceNo: number,
+) {
+  const candidates = components.map((component, order) => ({
+    ...component,
+    order,
+    words: wordParts(component.phrase.replace(/[（(][^）)]*[）)]/g, "")).length,
+  })).filter((component) => component.words > 0)
+    .sort((a, b) => b.words - a.words || a.order - b.order);
+  const mapped: Array<(typeof candidates)[number] & { match: PhraseMatch; finalDepth: number }> = [];
+
+  for (const component of candidates) {
+    const matches = phraseMatches(tokens, component.phrase, component.scope, !warn || hasEllipsis(component.phrase));
+    const match = matches.find((candidate) => {
+      if (component.excludeRange && candidate.start < component.excludeRange.end && component.excludeRange.start < candidate.end) return false;
+      return mapped.every(({ match: other }) => {
+      const overlaps = candidate.start < other.end && other.start < candidate.end;
+      return !overlaps || (candidate.start <= other.start && candidate.end >= other.end)
+        || (other.start <= candidate.start && other.end >= candidate.end);
+      });
+    });
+    if (!match) {
+      syntaxIssue(warn, `第 ${sentenceNo} 句的句子成分“${component.phrase}【${component.label}】”无法匹配原句。`);
+      continue;
+    }
+    mapped.push({ ...component, match, finalDepth: component.depth });
+  }
+
+  // Larger enclosing phrases sit on the outer layer. Equal ranges follow the
+  // supplied order, while strict containment follows the English token order.
+  mapped.sort((a, b) => (b.match.end - b.match.start) - (a.match.end - a.match.start)
+    || a.match.start - b.match.start || a.order - b.order);
+  for (let index = 0; index < mapped.length; index++) {
+    const child = mapped[index];
+    const parents = mapped.slice(0, index).filter((parent) =>
+      parent.match.start <= child.match.start && parent.match.end >= child.match.end);
+    child.finalDepth = Math.max(child.depth, ...parents.map((parent) => parent.finalDepth + 1));
+    if (child.finalDepth > 4) {
+      syntaxIssue(warn, `第 ${sentenceNo} 句的标注嵌套超过五层。`);
+      child.finalDepth = -1;
+    }
+  }
+
+  for (const component of mapped) {
+    if (component.finalDepth < 0) continue;
+    let spans = runsForMatch(component.match, tokens, component.label);
+    const nestedChildren = mapped.filter((child) => child.finalDepth > component.finalDepth
+      && child.match.start >= component.match.start && child.match.end <= component.match.end);
+    if (nestedChildren.some((child) => !spans.some((span) => span.start <= child.match.start && span.end >= child.match.end))) {
+      spans = [{ label: component.label, start: component.match.start, end: component.match.end }];
+    }
+    for (const span of spans) {
+      if (layers[component.finalDepth].some((existing) => existing.start === span.start && existing.end === span.end && existing.label === span.label)) continue;
+      layers[component.finalDepth].push(span);
+    }
+  }
+}
+
 function applyNumberedSyntax(automatic: BbcSyntaxSentenceData, annotation: PastedBbcSyntaxSentence, warn?: SyntaxWarning): BbcSyntaxSentenceData {
   const hasPos = annotation.items.length > 0;
   const tokens = automatic.tokens.map((token) => warn && hasPos && token.pos !== "PUNCT"
     ? { ...token, pos: "X", posLabel: "待补标" } : { ...token });
   const whole = { start: 0, end: tokens.length - (tokens.at(-1)?.pos === "PUNCT" ? 1 : 0) };
-  let cursor = 0;
   const labelled = new Set<number>();
   for (const item of annotation.items) {
-    const match = phraseMatches(tokens, item.term, { start: cursor, end: whole.end })[0];
+    const match = phraseMatches(tokens, item.term, { start: 0, end: whole.end })
+      .find((candidate) => candidate.indexes.every((index) => !labelled.has(index)));
     const code = posCode(item.description);
     if (!match || !code) {
       syntaxIssue(warn, `第 ${annotation.sentenceNo} 句的词性标注“${item.term}：${item.description}”无法匹配原句。`);
       continue;
     }
-    cursor = match.end;
     for (const index of match.indexes) {
       Object.assign(tokens[index], { pos: code, posLabel: posLabel(item.description) });
       labelled.add(index);
@@ -398,7 +451,6 @@ function applyNumberedSyntax(automatic: BbcSyntaxSentenceData, annotation: Paste
   const layers: BbcSyntaxSpan[][] = [[], [], [], [], []];
   const notes: string[] = [];
   const contexts: { label: string; scope: TokenRange; depth: number }[] = [];
-  let mainStart = 0;
   const leadingClause = summaries.map((summary) => summary.label.match(/^(While|if|whilst|when)/i)?.[1]).filter(Boolean)
     .map((connective) => tokens.findIndex((token) => token.text.toLowerCase() === connective!.toLowerCase()))
     .find((index) => index >= 0 && index <= 3);
@@ -443,27 +495,15 @@ function applyNumberedSyntax(automatic: BbcSyntaxSentenceData, annotation: Paste
       syntaxIssue(warn, `第 ${annotation.sentenceNo} 句的标注嵌套超过五层。`);
       continue;
     }
-    let subjectStart = nested ? scope.start : mainStart;
+    const placements: MappedComponent[] = [];
     for (const component of components) {
       const omitted = [...component.phrase.matchAll(/[（(]([^）)]+)[）)]/g)].map((match) => match[1]);
       for (const word of omitted) notes.push(`省略${/主语/.test(component.label) ? "主语" : "词语"}：${word}`);
       if (!wordParts(component.phrase.replace(/[（(][^）)]*[）)]/g, "")).length) continue;
-      let matches = phraseMatches(tokens, component.phrase, scope, !warn || hasEllipsis(component.phrase));
-      if (!nested && leadingClause !== undefined && leadingEnd >= 0) matches = matches.filter((match) => match.end <= leadingClause || match.start > leadingEnd);
-      if (/主语|形式主语/.test(component.label)) matches = matches.filter((match) => match.start >= subjectStart);
-      else if (/谓语|系动词|宾语|宾补|表语|真正主语/.test(component.label)) {
-        const afterSubject = matches.filter((match) => match.start >= subjectStart);
-        if (afterSubject.length) matches = afterSubject;
-      }
-      const match = matches[0];
-      if (!match) {
-        syntaxIssue(warn, `第 ${annotation.sentenceNo} 句的句子成分“${component.phrase}【${component.label}】”无法匹配原句。`);
-        continue;
-      }
-      if (/主语|形式主语/.test(component.label)) subjectStart = match.start;
-      layers[depth].push(...runsForMatch(match, tokens, component.label));
-      if (!nested) mainStart = Math.max(mainStart, match.end);
+      placements.push({ phrase: component.phrase, label: component.label, scope, depth,
+        excludeRange: !nested && leadingClause !== undefined && leadingEnd >= 0 ? { start: leadingClause, end: leadingEnd + 1 } : undefined });
     }
+    placeMarkedComponents(tokens, placements, layers, warn, annotation.sentenceNo);
   }
   for (const spans of layers) spans.sort((a, b) => a.start - b.start || b.end - a.end);
   return { ...automatic, tokens, level1: layers[0], level2: layers[1], level3: layers[2], level4: layers[3], level5: layers[4], notes: [...new Set(notes)], sourceAnnotation: annotation.source, status: labelled.size || layers.some((spans) => spans.length) ? "reviewed" : "draft" };
@@ -499,33 +539,44 @@ function applyInlineNumberedSyntax(automatic: BbcSyntaxSentenceData, annotation:
   const layers: [BbcSyntaxSpan[], BbcSyntaxSpan[], BbcSyntaxSpan[], BbcSyntaxSpan[], BbcSyntaxSpan[]] = [result.level1, result.level2, result.level3 ?? [], result.level4 ?? [], result.level5 ?? []];
   const notes = [...(result.notes ?? [])];
   const whole = { start: 0, end: result.tokens.length };
+  const pending: Array<{ phrase: string; label: string; context?: string; contextKind?: string }> = [];
   for (const fragment of annotation.inlineComponents!.split(/[；;]/)) {
     const components = markedComponents(fragment);
     if (!components.length) { if (fragment.trim()) notes.push(fragment.trim()); continue; }
     const context = fragment.match(/^\s*(.*?(?:从句|真正主语))中\s*/)?.[1];
-    const contextKind = context?.match(/主语从句|宾语从句|定语从句|表语从句|状语从句|真正主语/)?.[0];
-    const parent = contextKind ? layers.flatMap((spans, depth) => spans.filter((span) => span.label.includes(contextKind)).map((span) => ({ ...span, depth }))).at(-1) : undefined;
-    if (warn && context && !parent) {
-      warn(`第 ${annotation.sentenceNo} 句的“${context}”无法确认范围。`);
-      continue;
-    }
-    const depth = context ? Math.min(4, parent ? parent.depth + 1 : 1) : 0;
-    const scope = parent ?? whole;
-    let cursor = scope.start;
+    const contextKind = context?.trim().replace(/^[A-Za-z]+\s+/, "");
     for (const component of components) {
       const phrase = component.phrase.replace(/^.*[\u3400-\u9fff]\s*(?=[A-Za-z0-9"“'‘])/, "");
       if (!wordParts(phrase).length) { notes.push(`${component.phrase}【${component.label}】`); continue; }
-      const matches = phraseMatches(result.tokens, phrase, scope, !warn || hasEllipsis(phrase));
-      const match = matches.find((item) => item.start >= cursor) ?? matches[0];
-      if (!match) {
-        syntaxIssue(warn, `第 ${annotation.sentenceNo} 句的句子成分“${component.phrase}【${component.label}】”无法匹配原句。`);
-        continue;
-      }
-      cursor = match.end;
-      for (const span of runsForMatch(match, result.tokens, component.label)) {
-        if (!layers[depth].some((existing) => existing.start === span.start && existing.end === span.end && existing.label === span.label)) layers[depth].push(span);
-      }
+      pending.push({ phrase, label: component.label, context, contextKind });
     }
+  }
+
+  // Resolve unscoped components first. They may define clause spans that later
+  // fragments refer to, regardless of the order in which those fragments were written.
+  for (let pass = 0; pending.length && pass < 5; pass++) {
+    const placements: MappedComponent[] = [];
+    const unresolved: typeof pending = [];
+    for (const component of pending) {
+      const parent = component.contextKind
+        ? (() => {
+          const matches = layers.flatMap((spans, depth) => spans
+            .filter((span) => span.label.includes(component.contextKind!))
+            .map((span) => ({ ...span, depth })));
+          const exactMatches = matches.filter((span) => span.label === component.contextKind);
+          return (exactMatches.length ? exactMatches : matches)
+            .sort((a, b) => (a.end - a.start) - (b.end - b.start))[0];
+        })()
+        : undefined;
+      if (component.contextKind && !parent) { unresolved.push(component); continue; }
+      placements.push({ phrase: component.phrase, label: component.label, scope: parent ?? whole, depth: parent ? parent.depth + 1 : 0 });
+    }
+    if (!placements.length) {
+      for (const component of unresolved) syntaxIssue(warn, `第 ${annotation.sentenceNo} 句的“${component.context}”无法确认范围。`);
+      break;
+    }
+    placeMarkedComponents(result.tokens, placements, layers, warn, annotation.sentenceNo);
+    pending.splice(0, pending.length, ...unresolved);
   }
   for (const layer of layers) layer.sort((a, b) => a.start - b.start || b.end - a.end);
   return { ...result, level3: layers[2], level4: layers[3], level5: layers[4], notes, status: layers.some((layer) => layer.length) ? "reviewed" : result.status };

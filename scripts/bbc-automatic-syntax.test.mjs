@@ -159,23 +159,29 @@ test("numbered BBC annotations reject mismatched or missing words rather than si
   assert.throws(() => applyPastedBbcSyntax(numberedAutomatic[0], [incomplete], 1), /标注不完整/);
 });
 
-test("assigns a misnumbered annotation by the full English sentence and locates the original text", () => {
+test("uses the numbered syntax sentence and orders nested components by source position", () => {
   const english = "As children, rollercoasters seem almost impossible to resist.";
   const other = "A different sentence.";
-  const item = { sentenceNo: 1, text: english.toUpperCase().slice(0, -1), items: [], main: "rollercoasters【主语】 seem【谓语】 almost impossible to resist【表语】" };
+  const item = {
+    sentenceNo: 1,
+    text: english,
+    items: [],
+    main: "As children【状语】； rollercoasters【主语】； seem【系动词】； almost impossible to resist【表语】； almost【状语】",
+    summaries: [{ label: "主干", text: "As children【状语】； rollercoasters【主语】； seem【系动词】； almost impossible to resist【表语】； almost【状语】" }],
+  };
   const warnings = [];
   const match = matchPastedBbcSyntax([item], [other, english], (warning) => warnings.push(warning));
-  assert.equal(match.get(1), item);
-  assert.ok(!match.has(0));
+  assert.equal(match.get(0), item);
+  assert.ok(!match.has(1));
   assert.equal(warnings.length, 0);
   const automatic = buildAutomaticBbcSyntax(english);
-  assert.deepEqual(spans(automatic, 1), [
+  const annotated = applyPastedBbcSyntax(automatic, [match.get(0)], 1, (warning) => warnings.push(warning));
+  assert.deepEqual(spans(annotated, 1), [
     { label: "状语", text: "As children" },
     { label: "主语", text: "rollercoasters" },
-    { label: "谓语", text: "seem" },
+    { label: "系动词", text: "seem" },
     { label: "表语", text: "almost impossible to resist" },
   ]);
-  const annotated = applyPastedBbcSyntax(automatic, [match.get(1)], undefined, (warning) => warnings.push(warning));
-  assert.deepEqual(spans(annotated, 1), spans(automatic, 1).slice(1));
+  assert.deepEqual(spans(annotated, 2), [{ label: "状语", text: "almost" }]);
   assert.equal(warnings.length, 0);
 });

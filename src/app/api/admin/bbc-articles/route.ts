@@ -15,7 +15,6 @@ import { normalizeBbcSyntaxSentenceEdits } from "@/lib/bbc-syntax-annotation-edi
 import { buildAutomaticBbcSyntax, buildUnclassifiedBbcSyntax } from "@/lib/articles/bbc-automatic-syntax";
 import { applyPastedBbcSyntax, matchPastedBbcSyntax, retainReviewedBbcSyntax, type PastedBbcSyntaxSentence } from "@/lib/articles/bbc-pasted-syntax";
 import { normalizeBbcPdfQuiz } from "@/lib/articles/bbc-quiz";
-import { createBbcSubtitleSentenceMatcher, parseBbcSubtitleCues } from "@/lib/articles/bbc-subtitle-alignment";
 import { syncBbcDashedPhrases } from "@/lib/vocabulary/bbc-dashed-phrase-sync";
 
 export const runtime = "nodejs";
@@ -204,49 +203,13 @@ function splitChineseSentences(paragraph: string, keepEllipses = false) {
     .filter(Boolean);
 }
 
-function readBbcSubtitleTexts(value: string) {
-  if (value.length > 750_000) return [];
-  try { return parseBbcSubtitleCues(value).map(({ text }) => text); }
-  catch { return []; }
-}
-
-function splitBbcPracticeParagraph(
-  paragraph: string,
-  matchSubtitle: ReturnType<typeof createBbcSubtitleSentenceMatcher>,
-) {
-  const matched = matchSubtitle(paragraph);
-  const segments: ReturnType<typeof splitArticleSentences> = [];
-  function appendGap(start: number, end: number) {
-    for (const segment of splitArticleSentences(paragraph.slice(start, end))) {
-      if (segment.text.trim()) segments.push({ ...segment, index: segments.length, start: start + segment.start, end: start + segment.end });
-    }
-  }
-
-  let cursor = 0;
-  for (const { start, end } of matched) {
-    appendGap(cursor, start);
-    const raw = paragraph.slice(start, end);
-    const text = raw.trim();
-    const trimmedStart = start + raw.search(/\S/u);
-    segments.push({ text, start: trimmedStart, end: trimmedStart + text.length, index: segments.length });
-    cursor = end;
-  }
-  appendGap(cursor, paragraph.length);
-  return segments;
-}
-
-function buildPracticeSentences(body: string[], chineseParagraphs: string[], reviewWarnings?: string[], subtitleTexts: string[] = []) {
+function buildPracticeSentences(body: string[], chineseParagraphs: string[], reviewWarnings?: string[]) {
   let sentenceNo = 0;
-  const matchSubtitle = createBbcSubtitleSentenceMatcher(subtitleTexts);
   return body.flatMap((paragraph, paragraphIndex) => {
     const englishWave = extractBbcWaveText(paragraph);
     const chineseWave = extractBbcWaveText(chineseParagraphs[paragraphIndex] ?? "");
-    const englishSentences = splitBbcPracticeParagraph(englishWave.text, matchSubtitle);
-    let chineseSentences = splitChineseSentences(chineseWave.text);
-    if (subtitleTexts.length && englishSentences.length !== chineseSentences.length) {
-      const joined = splitChineseSentences(chineseWave.text, true);
-      if (joined.length === englishSentences.length) chineseSentences = joined;
-    }
+    const englishSentences = splitArticleSentences(englishWave.text);
+    const chineseSentences = splitChineseSentences(chineseWave.text);
     const aligned = englishSentences.length === chineseSentences.length;
     if (!aligned) {
       const warning = `第 ${paragraphIndex + 1} 段有 ${englishSentences.length} 个英文句子、${chineseSentences.length} 个中文句子，逐句翻译待校对。`;
@@ -297,7 +260,7 @@ function withoutSyntaxGuessing(text: string) {
   };
 }
 
-function buildArticle(payload: Record<string, unknown>, objectPath: string, allowIncomplete = false, subtitleTexts: string[] = []): BbcArticle | string {
+function buildArticle(payload: Record<string, unknown>, objectPath: string, allowIncomplete = false): BbcArticle | string {
   const titleResult = readText(payload.title, "英文标题", 180);
   if (titleResult.error) return titleResult.error;
   const title = titleResult.value!;
@@ -339,7 +302,7 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string, allo
   if (objectPath && (!objectPath.startsWith(expectedPrefix) || !/^full(?:-[a-f0-9]{16})?\.mp3$/.test(objectPath.slice(expectedPrefix.length)))) return "音频存储路径与文章日期不匹配。";
 
   const fullAudioUrl = objectPath ? `/api/bbc-audio/${parsedDate.year}/${parsedDate.id}/${objectPath.slice(expectedPrefix.length)}` : undefined;
-  const sentences = buildPracticeSentences(body, paragraphsAligned ? chineseParagraphs : [], allowIncomplete ? reviewWarnings : undefined, subtitleTexts);
+  const sentences = buildPracticeSentences(body, paragraphsAligned ? chineseParagraphs : [], allowIncomplete ? reviewWarnings : undefined);
   const syntaxAnnotations = Array.isArray(payload.syntaxAnnotations)
     ? payload.syntaxAnnotations as PastedBbcSyntaxSentence[]
     : [];
@@ -356,7 +319,8 @@ function buildArticle(payload: Record<string, unknown>, objectPath: string, allo
     const annotation = matchingSyntax.get(index);
     try {
       if (annotation) {
-        const annotated = applyPastedBbcSyntax(withoutSyntaxGuessing(sentence.english), [annotation], undefined, warn);
+        const annotationText = annotation.text.trim();
+        const annotated = applyPastedBbcSyntax(withoutSyntaxGuessing(annotationText), [annotation], annotation.sentenceNo, warn);
         if (annotated.status === "reviewed" || annotated.notes?.length) return annotated;
       }
       return buildAutomaticBbcSyntax(sentence.english);
@@ -425,14 +389,7 @@ export async function POST(request: NextRequest) {
     try {
       const articleDate = parseBbcArticleDateFromTitle(parsed.dateTitle);
       if (!articleDate) return NextResponse.json({ error: "标题缺少有效日期。" }, { status: 400 });
-      const subtitleTexts = typeof payload.subtitleText === "string" ? readBbcSubtitleTexts(payload.subtitleText) : [];
-      if (!subtitleTexts.length) {
-        const existing = await supabase.from("bbc_uploaded_articles").select("article").eq("id", articleDate.id).maybeSingle();
-        if (existing.error) return NextResponse.json({ error: "暂时无法读取已保存的文章分句。" }, { status: 503 });
-        const previous = existing.data?.article as BbcArticle | undefined;
-        subtitleTexts.push(...(previous?.sentences ?? []).map(({ english }) => english));
-      }
-      const article = buildArticle(parsed, "", payload.allowIncomplete === true, subtitleTexts);
+      const article = buildArticle(parsed, "", payload.allowIncomplete === true);
       if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
       if (getBbcArticleById(article.id)) return NextResponse.json({ error: "内置文章正文由原有内容库维护，语法标注请在前端精读页面修改。" }, { status: 409 });
       if (payload.quiz != null) {
@@ -573,10 +530,8 @@ export async function PUT(request: NextRequest) {
   if (existingArticleResult.error) return NextResponse.json({ error: `保存前无法读取文章状态：${existingArticleResult.error.message}` }, { status: 503 });
   const existingArticle = existingArticleResult.data;
   const previousArticle = existingArticle?.article as BbcArticle | undefined;
-  const subtitleTexts = typeof payload.subtitleText === "string" ? readBbcSubtitleTexts(payload.subtitleText) : [];
-  const sentenceTexts = subtitleTexts.length ? subtitleTexts : (previousArticle?.sentences ?? []).map(({ english }) => english);
   let article: BbcArticle | string;
-  try { article = buildArticle(articlePayload, allowIncomplete ? "" : requestedAudioPath, allowIncomplete, sentenceTexts); }
+  try { article = buildArticle(articlePayload, allowIncomplete ? "" : requestedAudioPath, allowIncomplete); }
   catch (cause) { return NextResponse.json({ error: cause instanceof Error ? cause.message : "文章分析失败。" }, { status: 400 }); }
   if (typeof article === "string") return NextResponse.json({ error: article }, { status: 400 });
   const previousAudioPath = getStoredAudioPath(previousArticle);
@@ -588,9 +543,6 @@ export async function PUT(request: NextRequest) {
   }
 
   const reviewWarnings = article.reviewWarnings ?? [];
-  if (typeof payload.subtitleText === "string" && !subtitleTexts.length) {
-    reviewWarnings.push("字幕中没有可用的英文条目，已根据现有分句和文章正文处理。");
-  }
   const objectPath = audioAvailable ? requestedAudioPath : previousAudioPath;
   if (allowIncomplete) {
     if (requestedAudioPath && !audioAvailable) {
@@ -778,8 +730,6 @@ export async function PUT(request: NextRequest) {
 function removeBbcSentence(article: BbcArticle, index: number) {
   const sentences = article.sentences;
   if (!sentences?.[index] || sentences.length < 2) return "一篇文章至少要保留一个句子。";
-  const matchSubtitle = createBbcSubtitleSentenceMatcher(sentences.map(({ english }) => english));
-
   const body = [...article.body];
   const chinese = [...(article.chineseParagraphs ?? [])];
   const underlines = article.paragraphUnderlines?.map((row) => ({ ...row }));
@@ -802,7 +752,7 @@ function removeBbcSentence(article: BbcArticle, index: number) {
   }
 
   for (const [paragraphIndex, paragraph] of body.entries()) {
-    const english = splitBbcPracticeParagraph(paragraph, matchSubtitle);
+    const english = splitArticleSentences(paragraph);
     const localIndex = index - offset;
     offset += english.length;
     if (!english[localIndex]) continue;

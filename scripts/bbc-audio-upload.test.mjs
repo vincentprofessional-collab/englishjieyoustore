@@ -7,7 +7,6 @@ import ts from "typescript";
 import React from "react";
 import * as jsxRuntime from "react/jsx-runtime";
 import { renderToStaticMarkup } from "react-dom/server";
-import { createBbcSubtitleSentenceMatcher, parseBbcSubtitleCues } from "../src/lib/articles/bbc-subtitle-alignment.ts";
 import { getBbcArticleContentOverride } from "../src/lib/articles/bbc-content-overrides.ts";
 import { mergeBbcVocabularyItems, normalizeBbcVocabularyTerm } from "../src/lib/articles/bbc-vocabulary-merge.ts";
 
@@ -96,9 +95,10 @@ test("prepare accepts a publishable preview with incomplete annotations", async 
     requireAdmin: async () => ({ user: { id: "test-admin" } }),
     parseBbcArticlePaste: () => ({ dateTitle: "260810-Test", syntaxRequested: true }),
     parseBbcArticleDateFromTitle: () => ({ id: "260810" }),
-    buildArticle: (_parsed, _audio, allowIncomplete, subtitleTexts) => {
+    buildArticle: (...args) => {
+      const [, , allowIncomplete] = args;
+      assert.equal(args.length, 3);
       assert.equal(allowIncomplete, true);
-      assert.equal(subtitleTexts.join("|"), "One... even now.");
       return article;
     },
     getBbcArticleById: () => null,
@@ -511,14 +511,13 @@ test("a clip failure saves the article and full MP3, and retrying reuses complet
   const exports = {};
   const fixture = JSON.parse(readFileSync(new URL("./fixtures/bbc-audio-260810.json", import.meta.url), "utf8"));
   const original = new File([new Uint8Array(500)], "260810.mp3", { type: "audio/mpeg" });
-  const subtitles = new File(["[00:01.000]Example."], "260810.lrc");
   const clips = fixture.sentences.map((sentence) => ({ sentenceNo: sentence.sentenceNo,
     file: new File([new Uint8Array(200)], `sentence-${sentence.sentenceNo}.mp3`, { type: "audio/mpeg" }) }));
   const objectPath = "bbc/2026/260810/full-0123456789abcdef.mp3";
   const puts = [], requests = [];
   let hook = 0, analyses = 0, failSecondClip = true;
   const react = { useEffect() {}, useMemo: (calculate) => calculate(), useRef: () => ({ current: null }), useState(initial) {
-    const value = hook === 0 ? "260810-The art of farts 关于肠道排气的科学\nEnglish\n中文" : hook === 1 ? original : hook === 2 ? subtitles : initial;
+    const value = hook === 0 ? "260810-The art of farts 关于肠道排气的科学\nEnglish\n中文" : hook === 1 ? original : initial;
     hook++; return [value, () => {}];
   } };
   class Request {
@@ -568,8 +567,8 @@ test("a clip failure saves the article and full MP3, and retrying reuses complet
   await form.props.onSubmit({ preventDefault() {}, nativeEvent: { submitter: { getAttribute: () => "align" } } });
   const fallback = requests.filter((request) => request.method === "PUT");
   assert.equal(fallback.length, 1);
-  assert.equal(requests.find(({ body }) => body.action === "prepare").body.subtitleText, await subtitles.text());
-  assert.equal(fallback[0].body.subtitleText, await subtitles.text());
+  assert.equal(Object.hasOwn(requests.find(({ body }) => body.action === "prepare").body, "subtitleText"), false);
+  assert.equal(Object.hasOwn(fallback[0].body, "subtitleText"), false);
   assert.equal(fallback[0].body.allowIncomplete, true);
   assert.equal(fallback[0].body.objectPath, objectPath);
   assert.equal(fallback[0].body.timings.length, 21);
@@ -629,8 +628,6 @@ test("direct BBC publishing accepts missing translations and audio timings, whic
   assert.equal(typeof parseBbcArticlePaste(text), "string");
   const objectPath = "bbc/2026/260810/full-0123456789abcdef.mp3";
   const route = "../src/app/api/admin/bbc-articles/route.ts";
-  const readBbcSubtitleTexts = loadFunctions(route, ["readBbcSubtitleTexts"], { parseBbcSubtitleCues });
-  const subtitleText = "[00:01.000]The first sentence.\n[00:02.000]The second sentence.\n[00:04.000]";
   for (const audioAvailable of [true, false]) {
     let saved;
     const supabase = { from: () => ({
@@ -644,9 +641,7 @@ test("direct BBC publishing accepts missing translations and audio timings, whic
       createServiceClient: () => supabase, requireAdmin: async () => ({ user: { id: "test-admin" } }),
       parseBbcArticlePaste, parseBbcArticleDateFromTitle: () => ({ year: 2026, month: 8, id: "260810" }),
       getBbcArticleById: () => null,
-      readBbcSubtitleTexts,
-      buildArticle: ({ english, title }, _audioPath, _allowIncomplete, subtitleTexts) => {
-        assert.equal(subtitleTexts.join("|"), "The first sentence.|The second sentence.");
+      buildArticle: ({ english, title }, _audioPath, _allowIncomplete) => {
         return {
           id: "260810", year: 2026, title, body: [english], syntaxSentences: [],
           sentences: english.match(/[^.]+\./g).map((sentence, index) => ({ sentenceNo: index + 1, english: sentence.trim(), startMs: 0, endMs: 0 })),
@@ -658,7 +653,7 @@ test("direct BBC publishing accepts missing translations and audio timings, whic
       revalidatePath() {}, NextResponse: { json: (data, options) => ({ data, status: options?.status ?? 200 }) },
     };
     const put = loadFunctions(route, ["getStoredAudioPath", "reuseExistingBbcAudioTimings", "PUT"], globals);
-    const result = await put({ json: async () => ({ text, subtitleText, objectPath, durationMs: 6000, timings: [], sentenceAudioFiles: [], publish: true }) });
+    const result = await put({ json: async () => ({ text, objectPath, durationMs: 6000, timings: [], sentenceAudioFiles: [], publish: true }) });
     assert.equal(result.status, 200);
     assert.equal(saved.published, true);
     assert.equal(saved.article.body[0], "The first sentence. The second sentence.");
@@ -682,8 +677,8 @@ test("direct BBC publishing accepts missing translations and audio timings, whic
 test("deleting a repeated BBC sentence removes the selected occurrence and preserves surviving timing and annotations", () => {
   const splitArticleSentences = loadFunctions("../src/lib/article-inline-annotations.ts", ["splitArticleSentences"], {});
   const remove = loadFunctions("../src/app/api/admin/bbc-articles/route.ts",
-    ["splitChineseSentences", "splitBbcPracticeParagraph", "removeBbcSentence"], { splitArticleSentences, createBbcSubtitleSentenceMatcher });
-  const lastSentence = "Keep this... — even now.";
+    ["splitChineseSentences", "removeBbcSentence"], { splitArticleSentences });
+  const lastSentence = "Keep this for now.";
   const article = {
     id: "260810", fullAudioUrl: "/full.mp3",
     body: [`It works. It works. ${lastSentence}`], chineseParagraphs: ["成功了。再试一次。保留这句。"],

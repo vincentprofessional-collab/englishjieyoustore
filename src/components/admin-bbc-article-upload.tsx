@@ -63,7 +63,6 @@ function readMp3DurationMs(file: File) {
 export function AdminBbcArticleUpload() {
   const [text, setText] = useState("");
   const [audioFile, setAudioFile] = useState<File | null>(null);
-  const [subtitleFile, setSubtitleFile] = useState<File | null>(null);
   const [audioProgress, setAudioProgress] = useState(0);
   const [audioStatus, setAudioStatus] = useState<
     "waiting" | "analyzing" | "uploading" | "uploaded" | "failed"
@@ -125,7 +124,7 @@ export function AdminBbcArticleUpload() {
       setSaved({ article: result.article, text: paste });
       resetDetails();
       updatePdfQuiz(result.article.quiz ?? null); setPdfMessage("");
-      setEditingId(id); setAudioFile(null); setSubtitleFile(null); setAudioProgress(0); setAudioStatus("waiting");
+      setEditingId(id); setAudioFile(null); setAudioProgress(0); setAudioStatus("waiting");
       audioJob.current = null;
       setExistingAudio(result.objectPath ? { objectPath: result.objectPath } : null);
       setPublishedHref(`/articles/${id}${result.published ? "" : "?preview=draft"}`);
@@ -230,15 +229,6 @@ export function AdminBbcArticleUpload() {
     const api = "/api/admin/bbc-articles";
 
     try {
-      let subtitleText: string | undefined;
-      if (subtitleFile) {
-        if (subtitleFile.size > 750_000) {
-          reviewWarnings.push("字幕文件超过 750 KB，已按文章内容分句。");
-        } else {
-          subtitleText = await subtitleFile.text().catch(() => undefined);
-          if (!subtitleText?.trim()) reviewWarnings.push("未读取到字幕，已按文章内容分句。");
-        }
-      }
       if (audioFile) {
         let job = audioJob.current;
         if (job?.file !== audioFile || (job.objectPath && !job.objectPath.startsWith(`bbc/${date.year}/${date.id}/`))) {
@@ -274,7 +264,7 @@ export function AdminBbcArticleUpload() {
             setAudioStatus("analyzing");
             setMessage("正在读取文章句子……");
             const prepared = await adminRequest(api, {
-              body: JSON.stringify({ action: "prepare", text, subtitleText, allowIncomplete: true }),
+              body: JSON.stringify({ action: "prepare", text, allowIncomplete: true }),
               method: "POST",
               signal: AbortSignal.timeout(15_000),
             }) as { article: BbcArticle };
@@ -325,7 +315,7 @@ export function AdminBbcArticleUpload() {
       setMessage(publish ? "正在发布文章……" : "正在保存文章……");
       const submittedQuiz = pdfQuizRef.current;
       const payload = await adminRequest(api, {
-        body: JSON.stringify({ text, objectPath, durationMs, subtitleText, timings: alignment?.timings, sentenceAudioFiles, quiz: submittedQuiz, allowIncomplete: true, publish, reviewWarnings }),
+        body: JSON.stringify({ text, objectPath, durationMs, timings: alignment?.timings, sentenceAudioFiles, quiz: submittedQuiz, allowIncomplete: true, publish, reviewWarnings }),
         method: "PUT",
       });
       if (audioJob.current?.objectPath && payload.objectPath !== audioJob.current.objectPath) audioJob.current = null;
@@ -434,12 +424,7 @@ export function AdminBbcArticleUpload() {
         <label className={styles.full}>
           <span>MP3 音频{existingAudio ? "（已有关联音频，可替换）" : ""}</span>
           <input accept=".mp3,audio/mpeg" disabled={busy} onChange={(event) => { setAudioFile(event.target.files?.[0] ?? null); audioJob.current = null; setAudioProgress(0); setAudioStatus("waiting"); }} type="file" />
-          <small>{audioFile ? `${audioFile.name} · ${(audioFile.size / 1024 / 1024).toFixed(1)} MB` : existingAudio ? "已关联原音频。英文句子没有改动时会保留原有时间轴。" : "最大 200 MB。选择字幕后，发布时会按字幕为匹配到的英文句子生成单句播放。"}</small>
-        </label>
-        <label className={styles.full}>
-          <span>时间戳字幕（可选）</span>
-          <input accept=".srt,.vtt,.lrc,application/x-subrip,text/vtt,text/plain" disabled={busy} onChange={(event) => { setSubtitleFile(event.target.files?.[0] ?? null); }} type="file" />
-            <small>{subtitleFile ? `${subtitleFile.name} · 使用英文字幕确定正文分句` : "支持 SRT、VTT 或 LRC，最大 750 KB。音频按 MP3 原声对齐。"}</small>
+          <small>{audioFile ? `${audioFile.name} · ${(audioFile.size / 1024 / 1024).toFixed(1)} MB` : existingAudio ? "已关联原音频。英文句子没有改动时会保留原有时间轴。" : "最大 200 MB。上传 MP3 后会根据文章句子和原声自动切分单句小音频，无需字幕文件。"}</small>
         </label>
         {audioFile ? (
           <div aria-label="MP3 音频上传进度" aria-valuemax={100} aria-valuemin={0} aria-valuenow={audioProgress} className={styles.progress} role="progressbar">
@@ -450,7 +435,7 @@ export function AdminBbcArticleUpload() {
         {message ? <p aria-live="polite" className={`${styles.message} ${error ? styles.error : ""} ${styles.full}`}>{message}</p> : null}
         {publishedHref ? <Link className={`${styles.publishedLink} ${styles.full}`} href={publishedHref} target="_blank">{publishedHref.includes("preview=draft") ? "打开草稿前端校改 ↗" : "打开文章前端 ↗"}</Link> : null}
         <div className={`${styles.actions} ${styles.full}`}>
-          {editingId ? <button className="button secondary" disabled={busy || pdfBusy} onClick={() => { setEditingId(null); setSaved(null); resetDetails(); setExistingAudio(null); setText(""); setAudioFile(null); setSubtitleFile(null); audioJob.current = null; updatePdfQuiz(null); setPdfMessage(""); setMessage(""); setPublishedHref(""); }} type="button">新建文章</button> : null}
+          {editingId ? <button className="button secondary" disabled={busy || pdfBusy} onClick={() => { setEditingId(null); setSaved(null); resetDetails(); setExistingAudio(null); setText(""); setAudioFile(null); audioJob.current = null; updatePdfQuiz(null); setPdfMessage(""); setMessage(""); setPublishedHref(""); }} type="button">新建文章</button> : null}
           <button className="button primary" disabled={busy || !text.trim()} type="submit" value="publish">直接发布</button>
           <button className="button secondary" disabled={busy || !text.trim()} type="submit" value="align">
             {editingId ? "自动对齐并保存修改" : "自动对齐并保存草稿"}
